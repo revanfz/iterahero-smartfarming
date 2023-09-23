@@ -20,6 +20,9 @@ dependencies:
   bcrypt:
     specifier: ^5.1.1
     version: 5.1.1
+  dotenv:
+    specifier: ^16.3.1
+    version: 16.3.1
   mongoose:
     specifier: ^7.5.2
     version: 7.5.2
@@ -46,9 +49,6 @@ devDependencies:
   chai:
     specifier: ^4.3.8
     version: 4.3.8
-  dotenv:
-    specifier: ^16.3.1
-    version: 16.3.1
   mocha:
     specifier: ^10.2.0
     version: 10.2.0
@@ -934,7 +934,7 @@ packages:
   /dotenv@16.3.1:
     resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
     engines: {node: '>=12'}
-    dev: true
+    dev: false
 
   /duplexify@4.1.2:
     resolution: {integrity: sha512-fz3OjcNCHmRP12MJoZMPglx8m4rrFP8rovnk4vT8Fs+aonZoCwGg10dSsQsfP/E62eZcPTMSMP6686fu9Qlqtw==}

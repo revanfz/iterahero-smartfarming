@@ -1,6 +1,7 @@
 'use strict';
 
 import { Server } from "@hapi/hapi";
+import "dotenv/config";
 import { routes } from "./routes/routes";
 
 let server: Server;

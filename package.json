@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node dist/index.js",
     "dev:tsc": "tsc --watch -p .",
-    "dev:serve": "nodemon -r dotenv/config -e js -w lib dist/index.js",
+    "dev:serve": "nodemon -r -e js -w lib dist/index.js",
     "dev": "run-p dev:*",
     "test": "set NODE_ENV=test & mocha -r ts-node/register test/**/*.test.ts"
   },
@@ -19,6 +19,7 @@
     "@prisma/client": "5.3.1",
     "axios": "^1.5.0",
     "bcrypt": "^5.1.1",
+    "dotenv": "^16.3.1",
     "mongoose": "^7.5.2",
     "mqtt": "^5.0.5",
     "node-schedule": "^2.1.1"
@@ -29,7 +30,6 @@
     "@types/mocha": "^10.0.1",
     "@types/node": "^20.6.3",
     "chai": "^4.3.8",
-    "dotenv": "^16.3.1",
     "mocha": "^10.2.0",
     "nodemon": "^3.0.1",
     "npm-run-all": "^4.1.5",
