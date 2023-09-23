@@ -9,7 +9,7 @@ let server: Server;
 export const init = async function(): Promise<Server> {
     server = new Server({
         port: process.env.PORT || 3000,
-        host: process.env.host || "localhost"
+        host: process.env.HOST || "localhost"
     });
 
     server.route(routes);
