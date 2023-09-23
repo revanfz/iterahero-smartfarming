@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.start = exports.init = void 0;
 const hapi_1 = require("@hapi/hapi");
 const routes_1 = require("./routes/routes");
+require("dotenv/config");
 let server;
 const init = function () {
     return __awaiter(this, void 0, void 0, function* () {
