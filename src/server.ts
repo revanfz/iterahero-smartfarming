@@ -13,6 +13,7 @@ export const init = async function(): Promise<Server> {
     });
 
     server.route(routes);
+    
     return server;
 }
 
