@@ -20,6 +20,7 @@ const init = function () {
             port: process.env.PORT || 3000,
             host: process.env.host || "localhost"
         });
+        console.log(process.env);
         server.route(routes_1.routes);
         return server;
     });

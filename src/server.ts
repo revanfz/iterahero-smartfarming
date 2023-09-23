@@ -4,7 +4,6 @@ import { Server } from "@hapi/hapi";
 import "dotenv/config";
 import { routes } from "./routes/routes";
 
-
 let server: Server;
 
 export const init = async function(): Promise<Server> {
@@ -13,7 +12,7 @@ export const init = async function(): Promise<Server> {
         host: process.env.host || "localhost"
     });
 
-    server.route(routes)
+    server.route(routes);
     return server;
 }
 
