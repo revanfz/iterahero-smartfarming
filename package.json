@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/index.js",
     "dev:tsc": "tsc --watch -p .",
     "dev:serve": "nodemon -e js -w lib dist/index.js",
     "dev": "run-p dev:*",
