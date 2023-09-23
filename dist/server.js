@@ -18,7 +18,7 @@ const init = function () {
     return __awaiter(this, void 0, void 0, function* () {
         server = new hapi_1.Server({
             port: process.env.PORT || 3000,
-            host: process.env.host || "localhost"
+            host: process.env.HOST || "localhost"
         });
         server.route(routes_1.routes);
         return server;
