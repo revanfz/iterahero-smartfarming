@@ -36,9 +36,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       .code(200);
   } catch (e) {
     if (e instanceof Error) {
-      Boom.internal(e.message);
-    } else {
-      Boom.internal("Terjadi kesalahan dari server.");
+      return Boom.internal(e.message);
     }
   }
   prisma.$disconnect();
@@ -63,9 +61,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       .code(200);
   } catch (e) {
     if (e instanceof Error) {
-      Boom.internal(e.message);
-    } else {
-      return Boom.internal("Terjadi kesalahan server.");
+      return Boom.internal(e.message);
     }
   }
   prisma.$disconnect();
