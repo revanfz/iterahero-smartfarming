@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.login = void 0;
+exports.loginRoute = void 0;
 const login_1 = require("../controllers/login");
-exports.login = [
+const prefix_1 = require("../utils/prefix");
+const path = `${prefix_1.prefix}/login`;
+exports.loginRoute = [
     {
         method: "POST",
-        path: "/login",
+        path,
         options: {
             auth: false
         },
@@ -13,7 +15,7 @@ exports.login = [
     },
     {
         method: "GET",
-        path: "/login",
+        path,
         options: {
             auth: false
         },

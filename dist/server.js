@@ -1,4 +1,4 @@
-'use strict';
+"use strict";
 var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
     if (k2 === undefined) k2 = k;
     var desc = Object.getOwnPropertyDescriptor(m, k);
@@ -35,8 +35,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.start = exports.init = void 0;
 const hapi_1 = require("@hapi/hapi");
 const routes_1 = require("./routes/routes");
-const Jwt = __importStar(require("@hapi/jwt"));
+const JWT = __importStar(require("@hapi/jwt"));
 require("dotenv/config");
+const roleAuth_1 = require("./middleware/roleAuth");
 let server;
 const init = function () {
     return __awaiter(this, void 0, void 0, function* () {
@@ -45,11 +46,11 @@ const init = function () {
             host: process.env.HOST || "localhost",
             routes: {
                 cors: {
-                    origin: ["*"]
+                    origin: ["*"],
                 }
-            }
+            },
         });
-        yield server.register(Jwt);
+        yield server.register(JWT);
         server.route(routes_1.routes);
         server.auth.strategy("jwt", "jwt", {
             keys: process.env.JWT_SECRET,
@@ -63,13 +64,15 @@ const init = function () {
                 timeSkewSec: 20,
             },
             validate: (artifacts, request, h) => {
+                const user = artifacts.payload;
                 return {
                     isValid: true,
-                    credentials: { user: artifacts.decoded }
+                    credentials: user
                 };
             }
         });
         server.auth.default("jwt");
+        server.ext('onPreHandler', roleAuth_1.userAuthorization);
         return server;
     });
 };
@@ -81,7 +84,7 @@ const start = function () {
     });
 };
 exports.start = start;
-process.on('unhandledRejection', (err) => {
+process.on("unhandledRejection", (err) => {
     console.error(err);
     process.exit(1);
 });

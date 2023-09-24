@@ -1,10 +1,13 @@
 import { ServerRoute } from "@hapi/hapi";
 import { getHandler, postHandler } from "../controllers/login";
+import { prefix } from "../utils/prefix";
 
-export const login: ServerRoute[] = [
+const path = `${prefix}/login`;
+
+export const loginRoute: ServerRoute[] = [
     {
         method: "POST",
-        path: "/login",
+        path,
         options: {
             auth: false
         },
@@ -12,7 +15,7 @@ export const login: ServerRoute[] = [
     },
     {
         method: "GET",
-        path: "/login",
+        path,
         options: {
             auth: false
         },

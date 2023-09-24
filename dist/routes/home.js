@@ -5,7 +5,7 @@ const home_1 = require("../controllers/home");
 exports.home = [
     {
         method: "GET",
-        path: "/",
+        path: "/{path*}",
         handler: home_1.getHandler
     }
 ];

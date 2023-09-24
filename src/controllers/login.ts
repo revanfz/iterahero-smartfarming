@@ -1,6 +1,15 @@
-import { Request, ResponseToolkit } from "@hapi/hapi";
-import jwt, { Secret } from "jsonwebtoken"
+import { Request, ResponseObject, ResponseToolkit } from "@hapi/hapi";
+import jwt from "jsonwebtoken"
 import "dotenv/config";
+import { prisma } from "../config/prisma";
+import Boom from "@hapi/boom"
+import bcrypt from "bcrypt"
+
+interface LoginInput {
+    email: string,
+    username?: string,
+    password: string
+}
 
 export const getHandler = (request: Request, h: ResponseToolkit) => {
     return h.response({
@@ -9,17 +18,32 @@ export const getHandler = (request: Request, h: ResponseToolkit) => {
     }).code(200)
 }
 
-export const postHandler = (request: Request, h: ResponseToolkit) => {
+export const postHandler = async (request: Request, h: ResponseToolkit) => {
     try {
+        const { email, password } = request.payload as LoginInput;
+        const user = await prisma.user.findUnique({
+            where: {
+                email
+            }
+        })
+
+        if (!user) {
+            return Boom.unauthorized(`Username dengan ${email} tidak terdaftar`);
+        }
+        const correctPassword = await bcrypt.compare(password, user.password);
+        if (!correctPassword) {
+            return Boom.unauthorized("Username tidak terdaftar")
+        }
+
         const payloadJwt = {
-            username: "wkwkw",
-            password: "wkwkwk",
+            email,
+            role: user.role,
             aud: process.env.JWT_AUD,
             iss: process.env.JWT_ISS,
             sub: process.env.JWT_SUB
         }
         const jwtSecret = process.env.JWT_SECRET || '';
-        const token = jwt.sign(payloadJwt, jwtSecret);
+        const token = jwt.sign(payloadJwt, jwtSecret, { expiresIn: "12h" });
 
         return h.response({
             status: 'success',
@@ -27,6 +51,9 @@ export const postHandler = (request: Request, h: ResponseToolkit) => {
         }).code(200);    
     }
     catch (e) {
-        console.error(e);
+        if (e instanceof Error) {
+            Boom.internal(e.message);
+        }
     }
+    prisma.$disconnect();
 }

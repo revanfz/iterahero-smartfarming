@@ -4,7 +4,7 @@ import { getHandler } from "../controllers/home";
 export const home: ServerRoute[] = [
     {
         method: "GET",
-        path:  "/",
+        path:  "/{path*}",
         handler: getHandler
     }
 ]

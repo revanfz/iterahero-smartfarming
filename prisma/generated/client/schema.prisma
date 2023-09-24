@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         Int          @id @default(autoincrement())
+  username   String
+  email      String       @unique
+  password   String
+  role       String
+  greenhouse Greenhouse[]
+  created_at DateTime     @default(now())
+  updated_at DateTime?    @updatedAt
+}
+
+model Greenhouse {
+  id        Int         @id @default(autoincrement())
+  nama      String
+  user      User[]
+  peracikan Peracikan[]
+}
+
+model Peracikan {
+  id           Int           @id @default(autoincrement())
+  ppm          Int
+  ph           Float
+  nama         String
+  greenhouse   Greenhouse    @relation(fields: [greenhouseId], references: [id])
+  greenhouseId Int
+  penjadwalan  Penjadwalan[]
+}
+
+model Penjadwalan {
+  id          Int       @id @default(autoincrement())
+  waktu       String
+  peracikan   Peracikan @relation(fields: [peracikanId], references: [id])
+  peracikanId Int
+  // user  User  @relation(fields: [userId], references: [id])
+  // userId  Int
+}
