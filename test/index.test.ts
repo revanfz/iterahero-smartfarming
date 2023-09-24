@@ -17,9 +17,11 @@ describe("smoke test", async () => {
     it('index responds', async () => {
         const res = await server.inject({
             method: "GET",
-            url: "/"
+            url: "/",
         });
         expect(res.statusCode).to.equal(200);
-        expect(res.result).to.equal("Hello! Nice to meet you.");
+        expect(res.result).to.equal({
+
+        });
     })
 })
