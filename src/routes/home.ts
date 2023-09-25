@@ -5,6 +5,9 @@ export const home: ServerRoute[] = [
     {
         method: "GET",
         path:  "/{path*}",
+        options: {
+            auth: false
+        },
         handler: getHandler
     }
 ]
