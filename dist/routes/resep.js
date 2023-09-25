@@ -24,7 +24,7 @@ exports.resepRoute = [
         path,
         handler: resep_1.postHandler,
         options: {
-            tags: ['api', 'resep'],
+            tags: ['api'],
             validate: {
                 payload: postValidator
             }
