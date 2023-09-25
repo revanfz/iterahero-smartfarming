@@ -1,36 +1,35 @@
 import * as schedule from "node-schedule";
+import axios from "axios";
 
-interface InputPeracikan {
-    startHour: number,
-    startMinute: number,
-    iterasi: number,
-    interval: number
-}
-
-const schedulePeracikan = (x: InputPeracikan) => {
+export const schedulePeracikan = (token: string, resep:string, jam: number, menit: number, iterasi: number, interval: number) => {
     let counter = 0;
-    const arr = [x.startHour];
-    for ( let i = 0; i < x.iterasi-1; i++ ) {
-        arr.push(x.startHour + x.interval);
+    const arr = [jam];
+    for ( let i = 0; i < iterasi-1; i++ ) {
+        arr.push(jam + interval * (i + 1));
     }
-    const jam = arr.join(', ');
-    console.log(schedule);
+    const target = arr.join(',');
+    console.log(`${menit} ${target} * * *`);
 
-    const jadwal = schedule.scheduleJob(`* ${jam} * * *`, () => {
-        if (counter < x.iterasi) {
-            console.log(`Peracikan ke ${counter}`)
-            counter++;
-            if (counter >= x.iterasi) {
-                jadwal.cancel()
+    const jadwal = schedule.scheduleJob(`${menit} ${jam} * * *`, async () => {
+        try {
+            if (counter < iterasi) {
+                console.log(`Peracikan ke ${counter+1}`)
+                const peracikan = await axios.post("/api/v1/peracikan", {
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+                })
+                counter++;
+                if (counter >= iterasi) {
+                    jadwal.cancel()
+                }
+            }
+        }
+        catch(e) {
+            if (e instanceof Error) {
+                console.error(e);
+                jadwal.cancel();
             }
         }
     });
 }
-
-const input: InputPeracikan = {
-    startHour: 12,
-    startMinute: 0,
-    interval: 2,
-    iterasi: 3
-}
-schedulePeracikan(input);

@@ -64,10 +64,9 @@ const plugins = [
       request: Request,
       h: ResponseToolkit
     ) => {
-        const user = artifacts.payload;
         return {
             isValid: true,
-            credentials: user
+            credentials: artifacts.token
         }
     }
   });

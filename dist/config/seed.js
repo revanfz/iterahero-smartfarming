@@ -40,7 +40,20 @@ function main() {
                 role: "operator"
             }
         });
-        console.log({ admin, operator });
+        const resep = yield prisma_1.prisma.resep.create({
+            data: {
+                nama: "melon",
+                ppm: 1000,
+                ph: 7.2
+            }
+        });
+        const tandon = yield prisma_1.prisma.tandon.create({
+            data: {
+                nama: "Tandon Peracikan",
+                userId: 1
+            }
+        });
+        console.log({ admin, operator, resep, tandon });
     });
 }
 main()

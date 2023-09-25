@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteHandler = exports.postHandler = exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
+const schedule_1 = require("../utils/schedule");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield prisma_1.prisma.penjadwalan.findMany();
@@ -36,30 +37,44 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
 exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const input = request.payload;
-        const target = yield prisma_1.prisma.resep.findFirst({
-            where: {
-                nama: input.resep
-            }
-        });
-        if (!target) {
-            return boom_1.default.notFound("Tidak ada resep yang sesuai");
-        }
-        for (const waktu in input.waktu) {
-            yield prisma_1.prisma.penjadwalan.create({
-                data: {
-                    resepId: target.id,
-                    waktu,
-                    tandonId: input.id_tandon
+        const { resep, id_tandon, waktu, iterasi, interval } = request.payload;
+        const waktuParsed = waktu.split(":");
+        const jam = waktuParsed[0];
+        const menit = waktuParsed[1];
+        const isAuth = request.auth.credentials;
+        if (isAuth) {
+            const input = request.payload;
+            const target = yield prisma_1.prisma.resep.findFirst({
+                where: {
+                    nama: resep
                 }
             });
+            if (!target) {
+                return boom_1.default.notFound("Tidak ada resep yang sesuai");
+            }
+            for (let i = 0; i < iterasi; i++) {
+                const uniqueTime = (parseInt(waktu) * interval * (i + 1)).toString();
+                yield prisma_1.prisma.penjadwalan.upsert({
+                    where: {
+                        waktu: uniqueTime
+                    },
+                    update: {},
+                    create: {
+                        resepId: target.id,
+                        waktu: uniqueTime,
+                        tandonId: input.id_tandon
+                    }
+                });
+            }
+            (0, schedule_1.schedulePeracikan)(isAuth.toString(), resep, parseInt(jam), parseInt(menit), iterasi, interval);
+            return h.response({
+                status: 'success',
+                message: 'Penjadwalan telah dibuat'
+            }).code(201);
         }
-        return h.response({
-            status: 'success',
-            message: 'Penjadwalan telah dibuat'
-        }).code(201);
     }
     catch (e) {
+        console.log(e);
         if (e instanceof Error) {
             return boom_1.default.internal(e.message);
         }

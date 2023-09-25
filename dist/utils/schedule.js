@@ -22,30 +22,51 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.schedulePeracikan = void 0;
 const schedule = __importStar(require("node-schedule"));
-const schedulePeracikan = (x) => {
+const axios_1 = __importDefault(require("axios"));
+const schedulePeracikan = (token, resep, jam, menit, iterasi, interval) => {
     let counter = 0;
-    const arr = [x.startHour];
-    for (let i = 0; i < x.iterasi - 1; i++) {
-        arr.push(x.startHour + x.interval);
+    const arr = [jam];
+    for (let i = 0; i < iterasi - 1; i++) {
+        arr.push(jam + interval * (i + 1));
     }
-    const jam = arr.join(', ');
-    console.log(schedule);
-    const jadwal = schedule.scheduleJob(`* ${jam} * * *`, () => {
-        if (counter < x.iterasi) {
-            console.log(`Peracikan ke ${counter}`);
-            counter++;
-            if (counter >= x.iterasi) {
+    const target = arr.join(',');
+    console.log(`${menit} ${target} * * *`);
+    const jadwal = schedule.scheduleJob(`${menit} ${jam} * * *`, () => __awaiter(void 0, void 0, void 0, function* () {
+        try {
+            if (counter < iterasi) {
+                console.log(`Peracikan ke ${counter + 1}`);
+                const peracikan = yield axios_1.default.post("/api/v1/peracikan", {
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+                });
+                counter++;
+                if (counter >= iterasi) {
+                    jadwal.cancel();
+                }
+            }
+        }
+        catch (e) {
+            if (e instanceof Error) {
+                console.error(e);
                 jadwal.cancel();
             }
         }
-    });
+    }));
 };
-const input = {
-    startHour: 12,
-    startMinute: 0,
-    interval: 2,
-    iterasi: 3
-};
-schedulePeracikan(input);
+exports.schedulePeracikan = schedulePeracikan;

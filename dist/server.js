@@ -85,10 +85,9 @@ const init = function () {
                 timeSkewSec: 20,
             },
             validate: (artifacts, request, h) => {
-                const user = artifacts.payload;
                 return {
                     isValid: true,
-                    credentials: user
+                    credentials: artifacts.token
                 };
             }
         });
