@@ -7,7 +7,8 @@ exports.home = [
         method: "GET",
         path: "/{path*}",
         options: {
-            auth: false
+            auth: false,
+            tags: ['api'],
         },
         handler: home_1.getHandler
     }

@@ -14,6 +14,7 @@ exports.peracikanRoute = [
         path,
         handler: peracikan_1.postHandler,
         options: {
+            tags: ['api'],
             validate: {
                 payload: joi_1.default.object({
                     nama: joi_1.default.string().required()

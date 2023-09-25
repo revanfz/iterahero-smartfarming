@@ -1,7 +1,7 @@
 import { ServerRoute } from "@hapi/hapi";
-import { getHandler, postHandler } from "../controllers/resep";
 import Joi from 'joi'
 import { prefix } from "../utils/prefix";
+import { getHandler, postHandler } from "../controllers/resep";
 
 const path = `${prefix}/resep`;
 
@@ -22,6 +22,7 @@ export const resepRoute: ServerRoute[] = [
         path,
         handler: postHandler,
         options: {
+            tags: ['api'],
             validate: {
                 payload: postValidator
             }

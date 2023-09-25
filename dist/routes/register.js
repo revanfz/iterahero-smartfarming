@@ -18,6 +18,7 @@ exports.registerRoute = [
         method: "POST",
         path,
         options: {
+            tags: ['api'],
             validate: {
                 payload: registerValidator,
             },

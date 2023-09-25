@@ -9,7 +9,8 @@ export const loginRoute: ServerRoute[] = [
         method: "POST",
         path,
         options: {
-            auth: false
+            auth: false,
+            tags: ['api'],
         },
         handler: postHandler
     },
@@ -17,7 +18,8 @@ export const loginRoute: ServerRoute[] = [
         method: "GET",
         path,
         options: {
-            auth: false
+            auth: false,
+            tags: ['api'],
         },
         handler: getHandler
 

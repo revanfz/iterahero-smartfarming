@@ -1,6 +1,9 @@
 "use strict";
 
 import * as JWT from "@hapi/jwt";
+import * as HapiSwagger from "hapi-swagger";
+import * as Inert from "@hapi/inert";
+import * as Vision from "@hapi/vision";
 import "dotenv/config";
 import { Server, AuthArtifacts, Request, ResponseToolkit } from "@hapi/hapi";
 import { routes } from "./routes/routes";
@@ -18,8 +21,30 @@ export const init = async function (): Promise<Server> {
       }
     },
   });
+  
+const swaggerOptions: HapiSwagger.RegisterOptions = {
+  info: {
+    title: "Test API Documentation"
+  }
+}
 
-  await server.register(JWT);
+const plugins = [
+  {
+    plugin: JWT
+  },
+  {
+    plugin: Inert,
+  }, {
+    plugin: Vision
+  }, {
+    plugin: HapiSwagger,
+    options: swaggerOptions
+  }
+]
+
+  await server.register(
+    plugins
+  );
 
   server.route(routes);
 

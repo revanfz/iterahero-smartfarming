@@ -34,6 +34,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.start = exports.init = void 0;
 const JWT = __importStar(require("@hapi/jwt"));
+const HapiSwagger = __importStar(require("hapi-swagger"));
+const Inert = __importStar(require("@hapi/inert"));
+const Vision = __importStar(require("@hapi/vision"));
 require("dotenv/config");
 const hapi_1 = require("@hapi/hapi");
 const routes_1 = require("./routes/routes");
@@ -50,7 +53,25 @@ const init = function () {
                 }
             },
         });
-        yield server.register(JWT);
+        const swaggerOptions = {
+            info: {
+                title: "Test API Documentation"
+            }
+        };
+        const plugins = [
+            {
+                plugin: JWT
+            },
+            {
+                plugin: Inert,
+            }, {
+                plugin: Vision
+            }, {
+                plugin: HapiSwagger,
+                options: swaggerOptions
+            }
+        ];
+        yield server.register(plugins);
         server.route(routes_1.routes);
         server.auth.strategy("jwt", "jwt", {
             keys: process.env.JWT_SECRET,

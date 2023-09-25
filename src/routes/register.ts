@@ -16,6 +16,7 @@ export const registerRoute: ServerRoute[] = [
     method: "POST",
     path,
     options: {
+      tags: ['api'],
       validate: {
         payload: registerValidator,
       },

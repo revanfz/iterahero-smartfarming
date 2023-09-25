@@ -9,7 +9,8 @@ exports.loginRoute = [
         method: "POST",
         path,
         options: {
-            auth: false
+            auth: false,
+            tags: ['api'],
         },
         handler: login_1.postHandler
     },
@@ -17,7 +18,8 @@ exports.loginRoute = [
         method: "GET",
         path,
         options: {
-            auth: false
+            auth: false,
+            tags: ['api'],
         },
         handler: login_1.getHandler
     }

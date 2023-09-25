@@ -1,4 +1,4 @@
-import { Request, ResponseToolkit } from "hapi";
+import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom"
 
