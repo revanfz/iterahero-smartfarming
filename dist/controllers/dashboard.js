@@ -12,33 +12,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postHandler = void 0;
+exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
-const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { username, password, email } = request.payload;
-        const isRegistered = yield prisma_1.prisma.user.findUnique({
-            where: {
-                email
-            }
-        });
-        if (isRegistered) {
-            return boom_1.default.forbidden("Username sudah terdaftar");
+        let peracikan = yield prisma_1.prisma.peracikan.findMany();
+        if (!peracikan) {
+            return boom_1.default.notFound("Tidak ada peracikan");
         }
-        yield prisma_1.prisma.user.create({
-            data: {
-                username,
-                password: yield bcrypt_1.default.hash(password, 10),
-                email,
-                role: "operator",
-            }
-        });
         return h.response({
             status: 'success',
-            message: `Akun ${email} berhasil didaftarkan`
-        }).code(201);
+            peracikan
+        }).code(200);
     }
     catch (e) {
         if (e instanceof Error) {
@@ -47,4 +33,4 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     }
     prisma_1.prisma.$disconnect();
 });
-exports.postHandler = postHandler;
+exports.getHandler = getHandler;

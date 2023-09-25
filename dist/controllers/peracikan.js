@@ -41,10 +41,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     }
     catch (e) {
         if (e instanceof Error) {
-            boom_1.default.internal(e.message);
-        }
-        else {
-            boom_1.default.internal("Terjadi kesalahan dari server.");
+            return boom_1.default.internal(e.message);
         }
     }
     prisma_1.prisma.$disconnect();
@@ -70,10 +67,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     }
     catch (e) {
         if (e instanceof Error) {
-            boom_1.default.internal(e.message);
-        }
-        else {
-            return boom_1.default.internal("Terjadi kesalahan server.");
+            return boom_1.default.internal(e.message);
         }
     }
     prisma_1.prisma.$disconnect();

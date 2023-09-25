@@ -1,9 +1,9 @@
 "use strict";
 
-import { Server, AuthArtifacts, Request, ResponseToolkit } from "@hapi/hapi";
-import { routes } from "./routes/routes";
 import * as JWT from "@hapi/jwt";
 import "dotenv/config";
+import { Server, AuthArtifacts, Request, ResponseToolkit } from "@hapi/hapi";
+import { routes } from "./routes/routes";
 import { userAuthorization } from "./middleware/roleAuth";
 
 let server: Server;

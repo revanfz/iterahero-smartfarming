@@ -18,6 +18,7 @@ model User {
   password   String
   role       String
   greenhouse Greenhouse[]
+  tandon     Tandon[]
   created_at DateTime     @default(now())
   updated_at DateTime?    @updatedAt
 }
@@ -26,24 +27,65 @@ model Greenhouse {
   id        Int         @id @default(autoincrement())
   nama      String
   user      User[]
-  peracikan Peracikan[]
+  selenoid  Selenoid[]
 }
 
-model Peracikan {
+model Resep {
   id           Int           @id @default(autoincrement())
   ppm          Int
   ph           Float
   nama         String
-  greenhouse   Greenhouse    @relation(fields: [greenhouseId], references: [id])
-  greenhouseId Int
   penjadwalan  Penjadwalan[]
 }
 
 model Penjadwalan {
   id          Int       @id @default(autoincrement())
-  waktu       String
-  peracikan   Peracikan @relation(fields: [peracikanId], references: [id])
-  peracikanId Int
-  // user  User  @relation(fields: [userId], references: [id])
-  // userId  Int
+  waktu       String    @unique
+  resep   Resep @relation(fields: [resepId], references: [id])
+  resepId Int
+  tandon      Tandon    @relation(fields: [tandonId], references: [id])
+  tandonId    Int
+}
+
+model Sensor {
+  id            Int          @id @default(autoincrement())
+  nama          String
+  persamaan     String
+  merek         String
+  satuan        String
+  status        Boolean
+  tandon        Tandon?      @relation(fields: [tandonId], references: [id])
+  tandonId      Int
+  tandonBahan   TandonBahan? @relation(fields: [tandonBahanId], references: [id])
+  tandonBahanId Int
+}
+
+model Selenoid {
+  id           Int        @id @default(autoincrement())
+  nama         String
+  merek        String
+  status       Boolean
+  tandon       Tandon     @relation(fields: [tandonId], references: [id])
+  tandonId     Int
+  greenhouse   Greenhouse @relation(fields: [greenhouseId], references: [id])
+  greenhouseId Int
+}
+
+model TandonBahan {
+  id       Int      @id @default(autoincrement())
+  nama     String
+  sensor   Sensor[]
+  tandon   Tandon   @relation(fields: [tandonId], references: [id])
+  tandonId Int
+}
+
+model Tandon {
+  id          Int           @id @default(autoincrement())
+  nama        String
+  user        User          @relation(fields: [userId], references: [id])
+  userId      Int
+  sensor      Sensor[]
+  selenoid    Selenoid[]
+  tandonBahan TandonBahan[]
+  penjadwalan Penjadwalan[]
 }

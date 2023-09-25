@@ -33,10 +33,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.start = exports.init = void 0;
-const hapi_1 = require("@hapi/hapi");
-const routes_1 = require("./routes/routes");
 const JWT = __importStar(require("@hapi/jwt"));
 require("dotenv/config");
+const hapi_1 = require("@hapi/hapi");
+const routes_1 = require("./routes/routes");
 const roleAuth_1 = require("./middleware/roleAuth");
 let server;
 const init = function () {

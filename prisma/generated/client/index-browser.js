@@ -122,18 +122,50 @@ exports.Prisma.GreenhouseScalarFieldEnum = {
   nama: 'nama'
 };
 
-exports.Prisma.PeracikanScalarFieldEnum = {
+exports.Prisma.ResepScalarFieldEnum = {
   id: 'id',
   ppm: 'ppm',
   ph: 'ph',
-  nama: 'nama',
-  greenhouseId: 'greenhouseId'
+  nama: 'nama'
 };
 
 exports.Prisma.PenjadwalanScalarFieldEnum = {
   id: 'id',
   waktu: 'waktu',
-  peracikanId: 'peracikanId'
+  resepId: 'resepId',
+  tandonId: 'tandonId'
+};
+
+exports.Prisma.SensorScalarFieldEnum = {
+  id: 'id',
+  nama: 'nama',
+  persamaan: 'persamaan',
+  merek: 'merek',
+  satuan: 'satuan',
+  status: 'status',
+  tandonId: 'tandonId',
+  tandonBahanId: 'tandonBahanId'
+};
+
+exports.Prisma.SelenoidScalarFieldEnum = {
+  id: 'id',
+  nama: 'nama',
+  merek: 'merek',
+  status: 'status',
+  tandonId: 'tandonId',
+  greenhouseId: 'greenhouseId'
+};
+
+exports.Prisma.TandonBahanScalarFieldEnum = {
+  id: 'id',
+  nama: 'nama',
+  tandonId: 'tandonId'
+};
+
+exports.Prisma.TandonScalarFieldEnum = {
+  id: 'id',
+  nama: 'nama',
+  userId: 'userId'
 };
 
 exports.Prisma.SortOrder = {
@@ -155,8 +187,12 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Greenhouse: 'Greenhouse',
-  Peracikan: 'Peracikan',
-  Penjadwalan: 'Penjadwalan'
+  Resep: 'Resep',
+  Penjadwalan: 'Penjadwalan',
+  Sensor: 'Sensor',
+  Selenoid: 'Selenoid',
+  TandonBahan: 'TandonBahan',
+  Tandon: 'Tandon'
 };
 
 /**

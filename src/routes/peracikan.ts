@@ -1,37 +1,20 @@
-import { ServerRoute } from "@hapi/hapi";
-import { getHandler, postHandler } from "../controllers/peracikan";
-import Joi from 'joi'
+import { postHandler } from "../controllers/peracikan";
+import Joi from "joi";
 import { prefix } from "../utils/prefix";
+import { ServerRoute } from "@hapi/hapi";
 
-const path = `${prefix}/peracikan`;
-
-const postValidator = Joi.object({
-    id_greenhouse: Joi.number().required(),
-    ppm: Joi.number().required(),
-    ph: Joi.number().required(),
-    nama: Joi.string().optional()
-})
+const path = `${prefix}/peracikan`
 
 export const peracikanRoute: ServerRoute[] = [
-    {
-        method: "GET",
-        path,
-        handler: getHandler,
-        options: {
-            validate: {
-                query: Joi.object({
-                    id_greenhouse: Joi.number().required()
-                })
-            },
-        },
-    },
     {
         method: "POST",
         path,
         handler: postHandler,
         options: {
             validate: {
-                payload: postValidator
+                payload: Joi.object({
+                    nama: Joi.string().required()
+                })
             }
         }
     }

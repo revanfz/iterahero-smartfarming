@@ -1,3 +1,7 @@
 import { init, start } from "./server";
+import { connectMqtt } from "./config/mqtt";
 
-init().then(() => start());
+init().then(() => {
+    start();
+    connectMqtt();
+});
