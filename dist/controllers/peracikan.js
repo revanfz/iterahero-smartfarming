@@ -24,9 +24,9 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 nama
             }
         });
-        if (!data) {
-            return boom_1.default.notFound(`Tidak ada resep dengan nama: ${nama}`);
-        }
+        // if (!data) {
+        //     return Boom.notFound(`Tidak ada resep dengan nama: ${nama}`);
+        // }
         (0, mqtt_1.publishData)("iterahero/peracikan", JSON.stringify(data));
         return h.response({
             status: 'success',

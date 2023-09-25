@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, it } from "mocha";
 import { init } from "../src/server";
 import { bearer } from "./auth";
 
-describe("Home", async () => {
+describe("Data test", async () => {
   let server: Server;
 
   beforeEach((done) => {
@@ -18,27 +18,33 @@ describe("Home", async () => {
     server.stop().then(() => done());
   });
 
-  it("GET Home", async () => {
+  it("get resep", async () => {
     const res = await server.inject({
       method: "GET",
-      url: "/",
+      url: "/api/v1/resep",
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
     });
     expect(res.statusCode).to.equal(200);
     expect(res.result).to.deep.equal({
       status: "success",
-      message: "Welcome to iterahero2023 API",
+      data: [],
     });
   });
 
-  it("login responds", async () => {
+  it("get jadwal", async () => {
     const res = await server.inject({
       method: "GET",
-      url: "/api/v1/login",
+      url: "/api/v1/penjadwalan",
+      headers: {
+        Authorization: `Bearer ${bearer}`,
+      },
     });
     expect(res.statusCode).to.equal(200);
     expect(res.result).to.deep.equal({
       status: "success",
-      message: "Api login",
+      data: [],
     });
   });
 });
