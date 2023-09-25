@@ -73,6 +73,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.6.3
     version: 20.6.3
+  '@types/node-schedule':
+    specifier: ^2.1.1
+    version: 2.1.1
   chai:
     specifier: ^4.3.8
     version: 4.3.8
@@ -579,6 +582,12 @@ packages:
 
   /@types/mocha@10.0.1:
     resolution: {integrity: sha512-/fvYntiO1GeICvqbQ3doGDIP97vWmvFt83GKguJ6prmQM2iXZfFcq6YE8KteFyRtX2/h5Hf91BYvPodJKFYv5Q==}
+    dev: true
+
+  /@types/node-schedule@2.1.1:
+    resolution: {integrity: sha512-FaqkbBizA+DinA0XWtAhdbEXykUkkqzBWT4BSnhn71z9C+vvcDgNcHvTP59nBhMg3o39E/ZY8zB/AQ6/HGuRag==}
+    dependencies:
+      '@types/node': 20.6.3
     dev: true
 
   /@types/node@20.6.3:
