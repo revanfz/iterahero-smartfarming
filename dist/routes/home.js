@@ -6,6 +6,9 @@ exports.home = [
     {
         method: "GET",
         path: "/{path*}",
+        options: {
+            auth: false
+        },
         handler: home_1.getHandler
     }
 ];

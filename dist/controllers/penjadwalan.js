@@ -17,9 +17,9 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield prisma_1.prisma.peracikan.findMany();
+        const data = yield prisma_1.prisma.penjadwalan.findMany();
         if (!data) {
-            return boom_1.default.notFound("Tidak ada data peracikan");
+            return boom_1.default.notFound("Tidak ada data penjadwalan");
         }
         return h.response({
             status: 'success',
@@ -37,7 +37,7 @@ exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const input = request.payload;
-        const target = yield prisma_1.prisma.peracikan.findFirst({
+        const target = yield prisma_1.prisma.resep.findFirst({
             where: {
                 nama: input.resep
             }
@@ -48,8 +48,9 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         for (const waktu in input.waktu) {
             yield prisma_1.prisma.penjadwalan.create({
                 data: {
+                    resepId: target.id,
                     waktu,
-                    peracikanId: target.id,
+                    tandonId: input.id_tandon
                 }
             });
         }

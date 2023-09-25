@@ -17,7 +17,7 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        let peracikan = yield prisma_1.prisma.peracikan.findMany();
+        let peracikan = yield prisma_1.prisma.resep.findMany();
         if (!peracikan) {
             return boom_1.default.notFound("Tidak ada peracikan");
         }

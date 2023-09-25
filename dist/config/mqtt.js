@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.connectMqtt = void 0;
+exports.publishData = exports.connectMqtt = void 0;
 const mqtt = __importStar(require("mqtt"));
 const clientId = `Iterahero2023_${Math.random().toString().slice(4)}`;
 let broker;
@@ -48,6 +48,15 @@ function connectMqtt() {
     });
 }
 exports.connectMqtt = connectMqtt;
+function publishData(topic, message) {
+    if (broker) {
+        broker.publish(topic, message);
+    }
+    else {
+        console.error("MQTT is not connected");
+    }
+}
+exports.publishData = publishData;
 process.on('SIGINT', () => {
     broker.end();
 });

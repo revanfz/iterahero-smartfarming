@@ -3,18 +3,17 @@ import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 
 interface InputPenjadwalan {
-    resep?: string, 
+    resep: string,
+    id_tandon: number,
     waktu: string[],
-    interval: number,
-    iterasi: number
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const data = await prisma.peracikan.findMany();
+        const data = await prisma.penjadwalan.findMany();
 
         if (!data) {
-            return Boom.notFound("Tidak ada data peracikan")
+            return Boom.notFound("Tidak ada data penjadwalan")
         }
         return h.response({
             status: 'success',
@@ -32,7 +31,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
     try {
         const input = request.payload as InputPenjadwalan;
-        const target = await prisma.peracikan.findFirst({
+        const target = await prisma.resep.findFirst({
             where: {
                 nama: input.resep
             }
@@ -45,8 +44,9 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         for (const waktu in input.waktu) {
             await prisma.penjadwalan.create({
                 data: {
+                    resepId: target.id,
                     waktu,
-                    peracikanId: target.id,
+                    tandonId: input.id_tandon
                 }
             })
         }

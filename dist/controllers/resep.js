@@ -12,26 +12,42 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postHandler = void 0;
-const boom_1 = __importDefault(require("@hapi/boom"));
+exports.postHandler = exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
-const mqtt_1 = require("../config/mqtt");
-const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+const boom_1 = __importDefault(require("@hapi/boom"));
+const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { nama } = request.payload;
-        const data = yield prisma_1.prisma.resep.findFirst({
-            where: {
-                nama
-            }
-        });
+        const data = yield prisma_1.prisma.resep.findMany();
         if (!data) {
-            return boom_1.default.notFound(`Tidak ada resep dengan nama: ${nama}`);
+            return boom_1.default.notFound("Tidak ada resep tersimpan");
         }
-        (0, mqtt_1.publishData)("iterahero/peracikan", JSON.stringify(data));
         return h.response({
             status: 'success',
-            message: data
+            data
         }).code(200);
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            return boom_1.default.internal(e.message);
+        }
+    }
+    prisma_1.prisma.$disconnect();
+});
+exports.getHandler = getHandler;
+const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { nama, ppm, ph } = request.payload;
+        yield prisma_1.prisma.resep.create({
+            data: {
+                nama,
+                ppm,
+                ph,
+            }
+        });
+        return h.response({
+            status: 'success',
+            message: `Resep ${nama} berhasil ditambahkan`
+        }).code(201);
     }
     catch (e) {
         if (e instanceof Error) {
