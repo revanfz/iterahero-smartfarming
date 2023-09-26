@@ -55,10 +55,11 @@ model Sensor {
   merek         String
   satuan        String
   status        Boolean
+  nilai         Int
   tandon        Tandon?      @relation(fields: [tandonId], references: [id])
-  tandonId      Int
+  tandonId      Int?
   tandonBahan   TandonBahan? @relation(fields: [tandonBahanId], references: [id])
-  tandonBahanId Int
+  tandonBahanId Int?
 }
 
 model Selenoid {

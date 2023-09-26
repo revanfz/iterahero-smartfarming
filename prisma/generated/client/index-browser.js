@@ -143,6 +143,7 @@ exports.Prisma.SensorScalarFieldEnum = {
   merek: 'merek',
   satuan: 'satuan',
   status: 'status',
+  nilai: 'nilai',
   tandonId: 'tandonId',
   tandonBahanId: 'tandonBahanId'
 };

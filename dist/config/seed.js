@@ -53,7 +53,80 @@ function main() {
                 userId: 1
             }
         });
-        console.log({ admin, operator, resep, tandon });
+        const tandonBahan = yield prisma_1.prisma.tandonBahan.createMany({
+            data: [
+                {
+                    nama: "Nutrisi A",
+                    tandonId: 1,
+                },
+                {
+                    nama: "Nutrisi B",
+                    tandonId: 1,
+                },
+                {
+                    nama: "Air",
+                    tandonId: 1,
+                },
+                {
+                    nama: "Asam",
+                    tandonId: 1
+                },
+                {
+                    nama: "Basa",
+                    tandonId: 1
+                }
+            ]
+        });
+        const sensor = yield prisma_1.prisma.sensor.createMany({
+            data: [
+                {
+                    nama: "Sensor Ketinggian",
+                    merek: "Adidas",
+                    satuan: "meter",
+                    persamaan: "y = mx + b",
+                    status: true,
+                    tandonBahanId: 1,
+                    nilai: 10,
+                },
+                {
+                    nama: "Sensor Ketinggian",
+                    merek: "Nike",
+                    satuan: "meter",
+                    persamaan: "y = mx + b",
+                    status: true,
+                    tandonBahanId: 2,
+                    nilai: 20,
+                },
+                {
+                    nama: "Sensor Ketinggian",
+                    merek: "Wkwkwk",
+                    satuan: "meter",
+                    persamaan: "y = mx + b",
+                    status: true,
+                    tandonBahanId: 3,
+                    nilai: 30,
+                },
+                {
+                    nama: "Sensor pH",
+                    merek: "Asus",
+                    satuan: "pH",
+                    persamaan: "c^2 = a^2 + b^2",
+                    status: true,
+                    tandonBahanId: 4,
+                    nilai: 7,
+                },
+                {
+                    nama: "Sensor pH",
+                    merek: "Toshiba",
+                    satuan: "pH",
+                    persamaan: "c^2 = a^2 + b^2",
+                    status: true,
+                    tandonBahanId: 5,
+                    nilai: 11,
+                }
+            ]
+        });
+        console.log({ admin, operator, resep, tandon, tandonBahan, sensor });
     });
 }
 main()

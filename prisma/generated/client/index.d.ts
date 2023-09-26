@@ -5584,12 +5584,14 @@ export namespace Prisma {
 
   export type SensorAvgAggregateOutputType = {
     id: number | null
+    nilai: number | null
     tandonId: number | null
     tandonBahanId: number | null
   }
 
   export type SensorSumAggregateOutputType = {
     id: number | null
+    nilai: number | null
     tandonId: number | null
     tandonBahanId: number | null
   }
@@ -5601,6 +5603,7 @@ export namespace Prisma {
     merek: string | null
     satuan: string | null
     status: boolean | null
+    nilai: number | null
     tandonId: number | null
     tandonBahanId: number | null
   }
@@ -5612,6 +5615,7 @@ export namespace Prisma {
     merek: string | null
     satuan: string | null
     status: boolean | null
+    nilai: number | null
     tandonId: number | null
     tandonBahanId: number | null
   }
@@ -5623,6 +5627,7 @@ export namespace Prisma {
     merek: number
     satuan: number
     status: number
+    nilai: number
     tandonId: number
     tandonBahanId: number
     _all: number
@@ -5631,12 +5636,14 @@ export namespace Prisma {
 
   export type SensorAvgAggregateInputType = {
     id?: true
+    nilai?: true
     tandonId?: true
     tandonBahanId?: true
   }
 
   export type SensorSumAggregateInputType = {
     id?: true
+    nilai?: true
     tandonId?: true
     tandonBahanId?: true
   }
@@ -5648,6 +5655,7 @@ export namespace Prisma {
     merek?: true
     satuan?: true
     status?: true
+    nilai?: true
     tandonId?: true
     tandonBahanId?: true
   }
@@ -5659,6 +5667,7 @@ export namespace Prisma {
     merek?: true
     satuan?: true
     status?: true
+    nilai?: true
     tandonId?: true
     tandonBahanId?: true
   }
@@ -5670,6 +5679,7 @@ export namespace Prisma {
     merek?: true
     satuan?: true
     status?: true
+    nilai?: true
     tandonId?: true
     tandonBahanId?: true
     _all?: true
@@ -5768,8 +5778,9 @@ export namespace Prisma {
     merek: string
     satuan: string
     status: boolean
-    tandonId: number
-    tandonBahanId: number
+    nilai: number
+    tandonId: number | null
+    tandonBahanId: number | null
     _count: SensorCountAggregateOutputType | null
     _avg: SensorAvgAggregateOutputType | null
     _sum: SensorSumAggregateOutputType | null
@@ -5798,6 +5809,7 @@ export namespace Prisma {
     merek?: boolean
     satuan?: boolean
     status?: boolean
+    nilai?: boolean
     tandonId?: boolean
     tandonBahanId?: boolean
     tandon?: boolean | Sensor$tandonArgs<ExtArgs>
@@ -5811,6 +5823,7 @@ export namespace Prisma {
     merek?: boolean
     satuan?: boolean
     status?: boolean
+    nilai?: boolean
     tandonId?: boolean
     tandonBahanId?: boolean
   }
@@ -5834,8 +5847,9 @@ export namespace Prisma {
       merek: string
       satuan: string
       status: boolean
-      tandonId: number
-      tandonBahanId: number
+      nilai: number
+      tandonId: number | null
+      tandonBahanId: number | null
     }, ExtArgs["result"]["sensor"]>
     composites: {}
   }
@@ -6239,6 +6253,7 @@ export namespace Prisma {
     readonly merek: FieldRef<"Sensor", 'String'>
     readonly satuan: FieldRef<"Sensor", 'String'>
     readonly status: FieldRef<"Sensor", 'Boolean'>
+    readonly nilai: FieldRef<"Sensor", 'Int'>
     readonly tandonId: FieldRef<"Sensor", 'Int'>
     readonly tandonBahanId: FieldRef<"Sensor", 'Int'>
   }
@@ -9640,6 +9655,7 @@ export namespace Prisma {
     merek: 'merek',
     satuan: 'satuan',
     status: 'status',
+    nilai: 'nilai',
     tandonId: 'tandonId',
     tandonBahanId: 'tandonBahanId'
   };
@@ -10004,8 +10020,9 @@ export namespace Prisma {
     merek?: StringFilter<"Sensor"> | string
     satuan?: StringFilter<"Sensor"> | string
     status?: BoolFilter<"Sensor"> | boolean
-    tandonId?: IntFilter<"Sensor"> | number
-    tandonBahanId?: IntFilter<"Sensor"> | number
+    nilai?: IntFilter<"Sensor"> | number
+    tandonId?: IntNullableFilter<"Sensor"> | number | null
+    tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
     tandon?: XOR<TandonNullableRelationFilter, TandonWhereInput> | null
     tandonBahan?: XOR<TandonBahanNullableRelationFilter, TandonBahanWhereInput> | null
   }
@@ -10017,8 +10034,9 @@ export namespace Prisma {
     merek?: SortOrder
     satuan?: SortOrder
     status?: SortOrder
-    tandonId?: SortOrder
-    tandonBahanId?: SortOrder
+    nilai?: SortOrder
+    tandonId?: SortOrderInput | SortOrder
+    tandonBahanId?: SortOrderInput | SortOrder
     tandon?: TandonOrderByWithRelationInput
     tandonBahan?: TandonBahanOrderByWithRelationInput
   }
@@ -10033,8 +10051,9 @@ export namespace Prisma {
     merek?: StringFilter<"Sensor"> | string
     satuan?: StringFilter<"Sensor"> | string
     status?: BoolFilter<"Sensor"> | boolean
-    tandonId?: IntFilter<"Sensor"> | number
-    tandonBahanId?: IntFilter<"Sensor"> | number
+    nilai?: IntFilter<"Sensor"> | number
+    tandonId?: IntNullableFilter<"Sensor"> | number | null
+    tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
     tandon?: XOR<TandonNullableRelationFilter, TandonWhereInput> | null
     tandonBahan?: XOR<TandonBahanNullableRelationFilter, TandonBahanWhereInput> | null
   }, "id">
@@ -10046,8 +10065,9 @@ export namespace Prisma {
     merek?: SortOrder
     satuan?: SortOrder
     status?: SortOrder
-    tandonId?: SortOrder
-    tandonBahanId?: SortOrder
+    nilai?: SortOrder
+    tandonId?: SortOrderInput | SortOrder
+    tandonBahanId?: SortOrderInput | SortOrder
     _count?: SensorCountOrderByAggregateInput
     _avg?: SensorAvgOrderByAggregateInput
     _max?: SensorMaxOrderByAggregateInput
@@ -10065,8 +10085,9 @@ export namespace Prisma {
     merek?: StringWithAggregatesFilter<"Sensor"> | string
     satuan?: StringWithAggregatesFilter<"Sensor"> | string
     status?: BoolWithAggregatesFilter<"Sensor"> | boolean
-    tandonId?: IntWithAggregatesFilter<"Sensor"> | number
-    tandonBahanId?: IntWithAggregatesFilter<"Sensor"> | number
+    nilai?: IntWithAggregatesFilter<"Sensor"> | number
+    tandonId?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
+    tandonBahanId?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
   }
 
   export type SelenoidWhereInput = {
@@ -10458,6 +10479,7 @@ export namespace Prisma {
     merek: string
     satuan: string
     status: boolean
+    nilai: number
     tandon?: TandonCreateNestedOneWithoutSensorInput
     tandonBahan?: TandonBahanCreateNestedOneWithoutSensorInput
   }
@@ -10469,8 +10491,9 @@ export namespace Prisma {
     merek: string
     satuan: string
     status: boolean
-    tandonId: number
-    tandonBahanId: number
+    nilai: number
+    tandonId?: number | null
+    tandonBahanId?: number | null
   }
 
   export type SensorUpdateInput = {
@@ -10479,6 +10502,7 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    nilai?: IntFieldUpdateOperationsInput | number
     tandon?: TandonUpdateOneWithoutSensorNestedInput
     tandonBahan?: TandonBahanUpdateOneWithoutSensorNestedInput
   }
@@ -10490,8 +10514,9 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    tandonId?: IntFieldUpdateOperationsInput | number
-    tandonBahanId?: IntFieldUpdateOperationsInput | number
+    nilai?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SensorCreateManyInput = {
@@ -10501,8 +10526,9 @@ export namespace Prisma {
     merek: string
     satuan: string
     status: boolean
-    tandonId: number
-    tandonBahanId: number
+    nilai: number
+    tandonId?: number | null
+    tandonBahanId?: number | null
   }
 
   export type SensorUpdateManyMutationInput = {
@@ -10511,6 +10537,7 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    nilai?: IntFieldUpdateOperationsInput | number
   }
 
   export type SensorUncheckedUpdateManyInput = {
@@ -10520,8 +10547,9 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    tandonId?: IntFieldUpdateOperationsInput | number
-    tandonBahanId?: IntFieldUpdateOperationsInput | number
+    nilai?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SelenoidCreateInput = {
@@ -11012,6 +11040,17 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type TandonNullableRelationFilter = {
     is?: TandonWhereInput | null
     isNot?: TandonWhereInput | null
@@ -11029,12 +11068,14 @@ export namespace Prisma {
     merek?: SortOrder
     satuan?: SortOrder
     status?: SortOrder
+    nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
   }
 
   export type SensorAvgOrderByAggregateInput = {
     id?: SortOrder
+    nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
   }
@@ -11046,6 +11087,7 @@ export namespace Prisma {
     merek?: SortOrder
     satuan?: SortOrder
     status?: SortOrder
+    nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
   }
@@ -11057,12 +11099,14 @@ export namespace Prisma {
     merek?: SortOrder
     satuan?: SortOrder
     status?: SortOrder
+    nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
   }
 
   export type SensorSumOrderByAggregateInput = {
     id?: SortOrder
+    nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
   }
@@ -11073,6 +11117,22 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type GreenhouseRelationFilter = {
@@ -11492,6 +11552,14 @@ export namespace Prisma {
     delete?: TandonBahanWhereInput | boolean
     connect?: TandonBahanWhereUniqueInput
     update?: XOR<XOR<TandonBahanUpdateToOneWithWhereWithoutSensorInput, TandonBahanUpdateWithoutSensorInput>, TandonBahanUncheckedUpdateWithoutSensorInput>
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type TandonCreateNestedOneWithoutSelenoidInput = {
@@ -11917,6 +11985,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type GreenhouseCreateWithoutUserInput = {
@@ -12440,6 +12535,7 @@ export namespace Prisma {
     merek: string
     satuan: string
     status: boolean
+    nilai: number
     tandon?: TandonCreateNestedOneWithoutSensorInput
   }
 
@@ -12450,7 +12546,8 @@ export namespace Prisma {
     merek: string
     satuan: string
     status: boolean
-    tandonId: number
+    nilai: number
+    tandonId?: number | null
   }
 
   export type SensorCreateOrConnectWithoutTandonBahanInput = {
@@ -12511,8 +12608,9 @@ export namespace Prisma {
     merek?: StringFilter<"Sensor"> | string
     satuan?: StringFilter<"Sensor"> | string
     status?: BoolFilter<"Sensor"> | boolean
-    tandonId?: IntFilter<"Sensor"> | number
-    tandonBahanId?: IntFilter<"Sensor"> | number
+    nilai?: IntFilter<"Sensor"> | number
+    tandonId?: IntNullableFilter<"Sensor"> | number | null
+    tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
   }
 
   export type TandonUpsertWithoutTandonBahanInput = {
@@ -12575,6 +12673,7 @@ export namespace Prisma {
     merek: string
     satuan: string
     status: boolean
+    nilai: number
     tandonBahan?: TandonBahanCreateNestedOneWithoutSensorInput
   }
 
@@ -12585,7 +12684,8 @@ export namespace Prisma {
     merek: string
     satuan: string
     status: boolean
-    tandonBahanId: number
+    nilai: number
+    tandonBahanId?: number | null
   }
 
   export type SensorCreateOrConnectWithoutTandonInput = {
@@ -12905,7 +13005,8 @@ export namespace Prisma {
     merek: string
     satuan: string
     status: boolean
-    tandonId: number
+    nilai: number
+    tandonId?: number | null
   }
 
   export type SensorUpdateWithoutTandonBahanInput = {
@@ -12914,6 +13015,7 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    nilai?: IntFieldUpdateOperationsInput | number
     tandon?: TandonUpdateOneWithoutSensorNestedInput
   }
 
@@ -12924,7 +13026,8 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    tandonId?: IntFieldUpdateOperationsInput | number
+    nilai?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SensorUncheckedUpdateManyWithoutTandonBahanInput = {
@@ -12934,7 +13037,8 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    tandonId?: IntFieldUpdateOperationsInput | number
+    nilai?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SensorCreateManyTandonInput = {
@@ -12944,7 +13048,8 @@ export namespace Prisma {
     merek: string
     satuan: string
     status: boolean
-    tandonBahanId: number
+    nilai: number
+    tandonBahanId?: number | null
   }
 
   export type SelenoidCreateManyTandonInput = {
@@ -12972,6 +13077,7 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    nilai?: IntFieldUpdateOperationsInput | number
     tandonBahan?: TandonBahanUpdateOneWithoutSensorNestedInput
   }
 
@@ -12982,7 +13088,8 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    tandonBahanId?: IntFieldUpdateOperationsInput | number
+    nilai?: IntFieldUpdateOperationsInput | number
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SensorUncheckedUpdateManyWithoutTandonInput = {
@@ -12992,7 +13099,8 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    tandonBahanId?: IntFieldUpdateOperationsInput | number
+    nilai?: IntFieldUpdateOperationsInput | number
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type SelenoidUpdateWithoutTandonInput = {
