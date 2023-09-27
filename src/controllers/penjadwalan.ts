@@ -17,7 +17,11 @@ interface Identifier {
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const data = await prisma.penjadwalan.findMany();
+        const data = await prisma.penjadwalan.findMany({
+            include: {
+                resep: true
+            }
+        });
 
         if (!data) {
             return Boom.notFound("Tidak ada data penjadwalan")
@@ -93,10 +97,9 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
 
         const data = await prisma.penjadwalan.delete({
             where: {
-                id: parseInt(id),
+                id: parseInt(id)
             }
         })
-
         if (!data) {
             return Boom.notFound("Tidak ada penjadwalan terkait")
         }

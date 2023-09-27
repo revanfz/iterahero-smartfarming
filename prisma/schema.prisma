@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider      = "prisma-client-js"
-  output        = "./generated/client"
+  provider = "prisma-client-js"
+  output   = "./generated/client"
   // binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -40,11 +40,12 @@ model Resep {
 }
 
 model Penjadwalan {
-  id       Int    @id @default(autoincrement())
-  waktu    String @unique
-  resep    Resep  @relation(fields: [resepId], references: [id])
+  id       Int     @id @default(autoincrement())
+  waktu    String  @unique
+  isActive Boolean
+  resep    Resep   @relation(fields: [resepId], references: [id])
   resepId  Int
-  tandon   Tandon @relation(fields: [tandonId], references: [id])
+  tandon   Tandon  @relation(fields: [tandonId], references: [id])
   tandonId Int
 }
 

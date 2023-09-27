@@ -18,7 +18,11 @@ const boom_1 = __importDefault(require("@hapi/boom"));
 const schedule_1 = require("../utils/schedule");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield prisma_1.prisma.penjadwalan.findMany();
+        const data = yield prisma_1.prisma.penjadwalan.findMany({
+            include: {
+                resep: true
+            }
+        });
         if (!data) {
             return boom_1.default.notFound("Tidak ada data penjadwalan");
         }
@@ -87,7 +91,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         const { id } = request.query;
         const data = yield prisma_1.prisma.penjadwalan.delete({
             where: {
-                id: parseInt(id),
+                id: parseInt(id)
             }
         });
         if (!data) {
