@@ -69,7 +69,8 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
                     create: {
                         resepId: target.id,
                         waktu: uniqueTime,
-                        tandonId: input.id_tandon
+                        tandonId: input.id_tandon,
+                        isActive: true
                     }
                 })
             }
