@@ -50,7 +50,9 @@ function main() {
         const tandon = yield prisma_1.prisma.tandon.create({
             data: {
                 nama: "Tandon Peracikan",
-                userId: 1
+                userId: 1,
+                isOnline: true,
+                status: "Idle"
             }
         });
         const tandonBahan = yield prisma_1.prisma.tandonBahan.createMany({
@@ -82,7 +84,7 @@ function main() {
                 {
                     nama: "Sensor Ketinggian",
                     merek: "Adidas",
-                    satuan: "meter",
+                    satuan: "m",
                     persamaan: "y = mx + b",
                     status: true,
                     tandonBahanId: 1,
@@ -91,7 +93,7 @@ function main() {
                 {
                     nama: "Sensor Ketinggian",
                     merek: "Nike",
-                    satuan: "meter",
+                    satuan: "m",
                     persamaan: "y = mx + b",
                     status: true,
                     tandonBahanId: 2,
@@ -100,26 +102,26 @@ function main() {
                 {
                     nama: "Sensor Ketinggian",
                     merek: "Wkwkwk",
-                    satuan: "meter",
+                    satuan: "m",
                     persamaan: "y = mx + b",
                     status: true,
                     tandonBahanId: 3,
                     nilai: 30,
                 },
                 {
-                    nama: "Sensor pH",
+                    nama: "Sensor Ketinggian",
                     merek: "Asus",
-                    satuan: "pH",
-                    persamaan: "c^2 = a^2 + b^2",
+                    satuan: "m",
+                    persamaan: "y = mx + b",
                     status: true,
                     tandonBahanId: 4,
                     nilai: 7,
                 },
                 {
-                    nama: "Sensor pH",
+                    nama: "Sensor Ketinggian",
                     merek: "Toshiba",
-                    satuan: "pH",
-                    persamaan: "c^2 = a^2 + b^2",
+                    satuan: "m",
+                    persamaan: "y = mx + b",
                     status: true,
                     tandonBahanId: 5,
                     nilai: 11,

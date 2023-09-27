@@ -8579,18 +8579,24 @@ export namespace Prisma {
     id: number | null
     nama: string | null
     userId: number | null
+    status: string | null
+    isOnline: boolean | null
   }
 
   export type TandonMaxAggregateOutputType = {
     id: number | null
     nama: string | null
     userId: number | null
+    status: string | null
+    isOnline: boolean | null
   }
 
   export type TandonCountAggregateOutputType = {
     id: number
     nama: number
     userId: number
+    status: number
+    isOnline: number
     _all: number
   }
 
@@ -8609,18 +8615,24 @@ export namespace Prisma {
     id?: true
     nama?: true
     userId?: true
+    status?: true
+    isOnline?: true
   }
 
   export type TandonMaxAggregateInputType = {
     id?: true
     nama?: true
     userId?: true
+    status?: true
+    isOnline?: true
   }
 
   export type TandonCountAggregateInputType = {
     id?: true
     nama?: true
     userId?: true
+    status?: true
+    isOnline?: true
     _all?: true
   }
 
@@ -8714,6 +8726,8 @@ export namespace Prisma {
     id: number
     nama: string
     userId: number
+    status: string
+    isOnline: boolean
     _count: TandonCountAggregateOutputType | null
     _avg: TandonAvgAggregateOutputType | null
     _sum: TandonSumAggregateOutputType | null
@@ -8739,6 +8753,8 @@ export namespace Prisma {
     id?: boolean
     nama?: boolean
     userId?: boolean
+    status?: boolean
+    isOnline?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     sensor?: boolean | Tandon$sensorArgs<ExtArgs>
     selenoid?: boolean | Tandon$selenoidArgs<ExtArgs>
@@ -8751,6 +8767,8 @@ export namespace Prisma {
     id?: boolean
     nama?: boolean
     userId?: boolean
+    status?: boolean
+    isOnline?: boolean
   }
 
   export type TandonInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -8776,6 +8794,8 @@ export namespace Prisma {
       id: number
       nama: string
       userId: number
+      status: string
+      isOnline: boolean
     }, ExtArgs["result"]["tandon"]>
     composites: {}
   }
@@ -9182,6 +9202,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Tandon", 'Int'>
     readonly nama: FieldRef<"Tandon", 'String'>
     readonly userId: FieldRef<"Tandon", 'Int'>
+    readonly status: FieldRef<"Tandon", 'String'>
+    readonly isOnline: FieldRef<"Tandon", 'Boolean'>
   }
     
 
@@ -9687,7 +9709,9 @@ export namespace Prisma {
   export const TandonScalarFieldEnum: {
     id: 'id',
     nama: 'nama',
-    userId: 'userId'
+    userId: 'userId',
+    status: 'status',
+    isOnline: 'isOnline'
   };
 
   export type TandonScalarFieldEnum = (typeof TandonScalarFieldEnum)[keyof typeof TandonScalarFieldEnum]
@@ -10212,6 +10236,8 @@ export namespace Prisma {
     id?: IntFilter<"Tandon"> | number
     nama?: StringFilter<"Tandon"> | string
     userId?: IntFilter<"Tandon"> | number
+    status?: StringFilter<"Tandon"> | string
+    isOnline?: BoolFilter<"Tandon"> | boolean
     user?: XOR<UserRelationFilter, UserWhereInput>
     sensor?: SensorListRelationFilter
     selenoid?: SelenoidListRelationFilter
@@ -10223,6 +10249,8 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     userId?: SortOrder
+    status?: SortOrder
+    isOnline?: SortOrder
     user?: UserOrderByWithRelationInput
     sensor?: SensorOrderByRelationAggregateInput
     selenoid?: SelenoidOrderByRelationAggregateInput
@@ -10237,6 +10265,8 @@ export namespace Prisma {
     NOT?: TandonWhereInput | TandonWhereInput[]
     nama?: StringFilter<"Tandon"> | string
     userId?: IntFilter<"Tandon"> | number
+    status?: StringFilter<"Tandon"> | string
+    isOnline?: BoolFilter<"Tandon"> | boolean
     user?: XOR<UserRelationFilter, UserWhereInput>
     sensor?: SensorListRelationFilter
     selenoid?: SelenoidListRelationFilter
@@ -10248,6 +10278,8 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     userId?: SortOrder
+    status?: SortOrder
+    isOnline?: SortOrder
     _count?: TandonCountOrderByAggregateInput
     _avg?: TandonAvgOrderByAggregateInput
     _max?: TandonMaxOrderByAggregateInput
@@ -10262,6 +10294,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Tandon"> | number
     nama?: StringWithAggregatesFilter<"Tandon"> | string
     userId?: IntWithAggregatesFilter<"Tandon"> | number
+    status?: StringWithAggregatesFilter<"Tandon"> | string
+    isOnline?: BoolWithAggregatesFilter<"Tandon"> | boolean
   }
 
   export type UserCreateInput = {
@@ -10654,6 +10688,8 @@ export namespace Prisma {
 
   export type TandonCreateInput = {
     nama: string
+    status: string
+    isOnline: boolean
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidCreateNestedManyWithoutTandonInput
@@ -10665,6 +10701,8 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
+    status: string
+    isOnline: boolean
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
@@ -10673,6 +10711,8 @@ export namespace Prisma {
 
   export type TandonUpdateInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
@@ -10684,6 +10724,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
@@ -10694,16 +10736,22 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
+    status: string
+    isOnline: boolean
   }
 
   export type TandonUpdateManyMutationInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type TandonUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -11236,6 +11284,8 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     userId?: SortOrder
+    status?: SortOrder
+    isOnline?: SortOrder
   }
 
   export type TandonAvgOrderByAggregateInput = {
@@ -11247,12 +11297,16 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     userId?: SortOrder
+    status?: SortOrder
+    isOnline?: SortOrder
   }
 
   export type TandonMinOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
     userId?: SortOrder
+    status?: SortOrder
+    isOnline?: SortOrder
   }
 
   export type TandonSumOrderByAggregateInput = {
@@ -12032,6 +12086,8 @@ export namespace Prisma {
 
   export type TandonCreateWithoutUserInput = {
     nama: string
+    status: string
+    isOnline: boolean
     sensor?: SensorCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
@@ -12041,6 +12097,8 @@ export namespace Prisma {
   export type TandonUncheckedCreateWithoutUserInput = {
     id?: number
     nama: string
+    status: string
+    isOnline: boolean
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
@@ -12104,6 +12162,8 @@ export namespace Prisma {
     id?: IntFilter<"Tandon"> | number
     nama?: StringFilter<"Tandon"> | string
     userId?: IntFilter<"Tandon"> | number
+    status?: StringFilter<"Tandon"> | string
+    isOnline?: BoolFilter<"Tandon"> | boolean
   }
 
   export type UserCreateWithoutGreenhouseInput = {
@@ -12281,6 +12341,8 @@ export namespace Prisma {
 
   export type TandonCreateWithoutPenjadwalanInput = {
     nama: string
+    status: string
+    isOnline: boolean
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidCreateNestedManyWithoutTandonInput
@@ -12291,6 +12353,8 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
+    status: string
+    isOnline: boolean
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
@@ -12338,6 +12402,8 @@ export namespace Prisma {
 
   export type TandonUpdateWithoutPenjadwalanInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
@@ -12348,6 +12414,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
@@ -12355,6 +12423,8 @@ export namespace Prisma {
 
   export type TandonCreateWithoutSensorInput = {
     nama: string
+    status: string
+    isOnline: boolean
     user: UserCreateNestedOneWithoutTandonInput
     selenoid?: SelenoidCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
@@ -12365,6 +12435,8 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
+    status: string
+    isOnline: boolean
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
@@ -12404,6 +12476,8 @@ export namespace Prisma {
 
   export type TandonUpdateWithoutSensorInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
@@ -12414,6 +12488,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
@@ -12443,6 +12519,8 @@ export namespace Prisma {
 
   export type TandonCreateWithoutSelenoidInput = {
     nama: string
+    status: string
+    isOnline: boolean
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
@@ -12453,6 +12531,8 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
+    status: string
+    isOnline: boolean
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
@@ -12492,6 +12572,8 @@ export namespace Prisma {
 
   export type TandonUpdateWithoutSelenoidInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
@@ -12502,6 +12584,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
@@ -12562,6 +12646,8 @@ export namespace Prisma {
 
   export type TandonCreateWithoutTandonBahanInput = {
     nama: string
+    status: string
+    isOnline: boolean
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidCreateNestedManyWithoutTandonInput
@@ -12572,6 +12658,8 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
+    status: string
+    isOnline: boolean
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
@@ -12626,6 +12714,8 @@ export namespace Prisma {
 
   export type TandonUpdateWithoutTandonBahanInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
@@ -12636,6 +12726,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
@@ -12873,6 +12965,8 @@ export namespace Prisma {
   export type TandonCreateManyUserInput = {
     id?: number
     nama: string
+    status: string
+    isOnline: boolean
   }
 
   export type GreenhouseUpdateWithoutUserInput = {
@@ -12893,6 +12987,8 @@ export namespace Prisma {
 
   export type TandonUpdateWithoutUserInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
@@ -12902,6 +12998,8 @@ export namespace Prisma {
   export type TandonUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
@@ -12911,6 +13009,8 @@ export namespace Prisma {
   export type TandonUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type SelenoidCreateManyGreenhouseInput = {

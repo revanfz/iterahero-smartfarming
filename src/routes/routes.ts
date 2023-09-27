@@ -6,6 +6,7 @@ import { registerRoute } from "./register";
 import { penjadwalanRoute } from "./penjadwalan";
 import { peracikanRoute } from "./peracikan";
 import { bahanRoute } from "./bahan";
+import { tandonUtamaRoute } from "./tandonUtama";
 
 export const routes: ServerRoute[] = [
   ...home,
@@ -14,5 +15,6 @@ export const routes: ServerRoute[] = [
   ...penjadwalanRoute,
   ...registerRoute,
   ...peracikanRoute,
-  ...bahanRoute
+  ...bahanRoute,
+  ...tandonUtamaRoute
 ];

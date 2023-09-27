@@ -166,7 +166,9 @@ exports.Prisma.TandonBahanScalarFieldEnum = {
 exports.Prisma.TandonScalarFieldEnum = {
   id: 'id',
   nama: 'nama',
-  userId: 'userId'
+  userId: 'userId',
+  status: 'status',
+  isOnline: 'isOnline'
 };
 
 exports.Prisma.SortOrder = {
