@@ -84,10 +84,10 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
 exports.postHandler = postHandler;
 const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id_penjadwalan } = request.params;
+        const { id } = request.query;
         const data = yield prisma_1.prisma.penjadwalan.delete({
             where: {
-                id: id_penjadwalan
+                id: parseInt(id),
             }
         });
         if (!data) {

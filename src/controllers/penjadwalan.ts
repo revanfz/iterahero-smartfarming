@@ -11,6 +11,10 @@ interface InputPenjadwalan {
     interval: number
 }
 
+interface Identifier {
+    id: number
+}
+
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
     try {
         const data = await prisma.penjadwalan.findMany();
@@ -85,11 +89,11 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { id_penjadwalan } = request.params as { id_penjadwalan: number };
+        const { id } = request.query;
 
         const data = await prisma.penjadwalan.delete({
             where: {
-                id: id_penjadwalan
+                id: parseInt(id),
             }
         })
 
