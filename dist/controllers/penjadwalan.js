@@ -66,7 +66,8 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     create: {
                         resepId: target.id,
                         waktu: uniqueTime,
-                        tandonId: input.id_tandon
+                        tandonId: input.id_tandon,
+                        isActive: true
                     }
                 });
             }

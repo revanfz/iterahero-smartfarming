@@ -132,6 +132,7 @@ exports.Prisma.ResepScalarFieldEnum = {
 exports.Prisma.PenjadwalanScalarFieldEnum = {
   id: 'id',
   waktu: 'waktu',
+  isActive: 'isActive',
   resepId: 'resepId',
   tandonId: 'tandonId'
 };

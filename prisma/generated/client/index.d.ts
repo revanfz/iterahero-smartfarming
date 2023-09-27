@@ -4643,6 +4643,7 @@ export namespace Prisma {
   export type PenjadwalanMinAggregateOutputType = {
     id: number | null
     waktu: string | null
+    isActive: boolean | null
     resepId: number | null
     tandonId: number | null
   }
@@ -4650,6 +4651,7 @@ export namespace Prisma {
   export type PenjadwalanMaxAggregateOutputType = {
     id: number | null
     waktu: string | null
+    isActive: boolean | null
     resepId: number | null
     tandonId: number | null
   }
@@ -4657,6 +4659,7 @@ export namespace Prisma {
   export type PenjadwalanCountAggregateOutputType = {
     id: number
     waktu: number
+    isActive: number
     resepId: number
     tandonId: number
     _all: number
@@ -4678,6 +4681,7 @@ export namespace Prisma {
   export type PenjadwalanMinAggregateInputType = {
     id?: true
     waktu?: true
+    isActive?: true
     resepId?: true
     tandonId?: true
   }
@@ -4685,6 +4689,7 @@ export namespace Prisma {
   export type PenjadwalanMaxAggregateInputType = {
     id?: true
     waktu?: true
+    isActive?: true
     resepId?: true
     tandonId?: true
   }
@@ -4692,6 +4697,7 @@ export namespace Prisma {
   export type PenjadwalanCountAggregateInputType = {
     id?: true
     waktu?: true
+    isActive?: true
     resepId?: true
     tandonId?: true
     _all?: true
@@ -4786,6 +4792,7 @@ export namespace Prisma {
   export type PenjadwalanGroupByOutputType = {
     id: number
     waktu: string
+    isActive: boolean
     resepId: number
     tandonId: number
     _count: PenjadwalanCountAggregateOutputType | null
@@ -4812,6 +4819,7 @@ export namespace Prisma {
   export type PenjadwalanSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     waktu?: boolean
+    isActive?: boolean
     resepId?: boolean
     tandonId?: boolean
     resep?: boolean | ResepDefaultArgs<ExtArgs>
@@ -4821,6 +4829,7 @@ export namespace Prisma {
   export type PenjadwalanSelectScalar = {
     id?: boolean
     waktu?: boolean
+    isActive?: boolean
     resepId?: boolean
     tandonId?: boolean
   }
@@ -4840,6 +4849,7 @@ export namespace Prisma {
     scalars: $Extensions.GetResult<{
       id: number
       waktu: string
+      isActive: boolean
       resepId: number
       tandonId: number
     }, ExtArgs["result"]["penjadwalan"]>
@@ -5241,6 +5251,7 @@ export namespace Prisma {
   interface PenjadwalanFieldRefs {
     readonly id: FieldRef<"Penjadwalan", 'Int'>
     readonly waktu: FieldRef<"Penjadwalan", 'String'>
+    readonly isActive: FieldRef<"Penjadwalan", 'Boolean'>
     readonly resepId: FieldRef<"Penjadwalan", 'Int'>
     readonly tandonId: FieldRef<"Penjadwalan", 'Int'>
   }
@@ -9663,6 +9674,7 @@ export namespace Prisma {
   export const PenjadwalanScalarFieldEnum: {
     id: 'id',
     waktu: 'waktu',
+    isActive: 'isActive',
     resepId: 'resepId',
     tandonId: 'tandonId'
   };
@@ -9985,6 +9997,7 @@ export namespace Prisma {
     NOT?: PenjadwalanWhereInput | PenjadwalanWhereInput[]
     id?: IntFilter<"Penjadwalan"> | number
     waktu?: StringFilter<"Penjadwalan"> | string
+    isActive?: BoolFilter<"Penjadwalan"> | boolean
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
     resep?: XOR<ResepRelationFilter, ResepWhereInput>
@@ -9994,6 +10007,7 @@ export namespace Prisma {
   export type PenjadwalanOrderByWithRelationInput = {
     id?: SortOrder
     waktu?: SortOrder
+    isActive?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
     resep?: ResepOrderByWithRelationInput
@@ -10006,6 +10020,7 @@ export namespace Prisma {
     AND?: PenjadwalanWhereInput | PenjadwalanWhereInput[]
     OR?: PenjadwalanWhereInput[]
     NOT?: PenjadwalanWhereInput | PenjadwalanWhereInput[]
+    isActive?: BoolFilter<"Penjadwalan"> | boolean
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
     resep?: XOR<ResepRelationFilter, ResepWhereInput>
@@ -10015,6 +10030,7 @@ export namespace Prisma {
   export type PenjadwalanOrderByWithAggregationInput = {
     id?: SortOrder
     waktu?: SortOrder
+    isActive?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
     _count?: PenjadwalanCountOrderByAggregateInput
@@ -10030,6 +10046,7 @@ export namespace Prisma {
     NOT?: PenjadwalanScalarWhereWithAggregatesInput | PenjadwalanScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Penjadwalan"> | number
     waktu?: StringWithAggregatesFilter<"Penjadwalan"> | string
+    isActive?: BoolWithAggregatesFilter<"Penjadwalan"> | boolean
     resepId?: IntWithAggregatesFilter<"Penjadwalan"> | number
     tandonId?: IntWithAggregatesFilter<"Penjadwalan"> | number
   }
@@ -10465,6 +10482,7 @@ export namespace Prisma {
 
   export type PenjadwalanCreateInput = {
     waktu: string
+    isActive: boolean
     resep: ResepCreateNestedOneWithoutPenjadwalanInput
     tandon: TandonCreateNestedOneWithoutPenjadwalanInput
   }
@@ -10472,12 +10490,14 @@ export namespace Prisma {
   export type PenjadwalanUncheckedCreateInput = {
     id?: number
     waktu: string
+    isActive: boolean
     resepId: number
     tandonId: number
   }
 
   export type PenjadwalanUpdateInput = {
     waktu?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     resep?: ResepUpdateOneRequiredWithoutPenjadwalanNestedInput
     tandon?: TandonUpdateOneRequiredWithoutPenjadwalanNestedInput
   }
@@ -10485,6 +10505,7 @@ export namespace Prisma {
   export type PenjadwalanUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     resepId?: IntFieldUpdateOperationsInput | number
     tandonId?: IntFieldUpdateOperationsInput | number
   }
@@ -10492,17 +10513,20 @@ export namespace Prisma {
   export type PenjadwalanCreateManyInput = {
     id?: number
     waktu: string
+    isActive: boolean
     resepId: number
     tandonId: number
   }
 
   export type PenjadwalanUpdateManyMutationInput = {
     waktu?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
   }
 
   export type PenjadwalanUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     resepId?: IntFieldUpdateOperationsInput | number
     tandonId?: IntFieldUpdateOperationsInput | number
   }
@@ -11040,6 +11064,11 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
   export type ResepRelationFilter = {
     is?: ResepWhereInput
     isNot?: ResepWhereInput
@@ -11053,6 +11082,7 @@ export namespace Prisma {
   export type PenjadwalanCountOrderByAggregateInput = {
     id?: SortOrder
     waktu?: SortOrder
+    isActive?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
   }
@@ -11066,6 +11096,7 @@ export namespace Prisma {
   export type PenjadwalanMaxOrderByAggregateInput = {
     id?: SortOrder
     waktu?: SortOrder
+    isActive?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
   }
@@ -11073,6 +11104,7 @@ export namespace Prisma {
   export type PenjadwalanMinOrderByAggregateInput = {
     id?: SortOrder
     waktu?: SortOrder
+    isActive?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
   }
@@ -11083,9 +11115,12 @@ export namespace Prisma {
     tandonId?: SortOrder
   }
 
-  export type BoolFilter<$PrismaModel = never> = {
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type IntNullableFilter<$PrismaModel = never> = {
@@ -11157,14 +11192,6 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
-  }
-
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -11556,6 +11583,10 @@ export namespace Prisma {
     connect?: TandonWhereUniqueInput
   }
 
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
   export type ResepUpdateOneRequiredWithoutPenjadwalanNestedInput = {
     create?: XOR<ResepCreateWithoutPenjadwalanInput, ResepUncheckedCreateWithoutPenjadwalanInput>
     connectOrCreate?: ResepCreateOrConnectWithoutPenjadwalanInput
@@ -11582,10 +11613,6 @@ export namespace Prisma {
     create?: XOR<TandonBahanCreateWithoutSensorInput, TandonBahanUncheckedCreateWithoutSensorInput>
     connectOrCreate?: TandonBahanCreateOrConnectWithoutSensorInput
     connect?: TandonBahanWhereUniqueInput
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type TandonUpdateOneWithoutSensorNestedInput = {
@@ -12276,12 +12303,14 @@ export namespace Prisma {
 
   export type PenjadwalanCreateWithoutResepInput = {
     waktu: string
+    isActive: boolean
     tandon: TandonCreateNestedOneWithoutPenjadwalanInput
   }
 
   export type PenjadwalanUncheckedCreateWithoutResepInput = {
     id?: number
     waktu: string
+    isActive: boolean
     tandonId: number
   }
 
@@ -12317,6 +12346,7 @@ export namespace Prisma {
     NOT?: PenjadwalanScalarWhereInput | PenjadwalanScalarWhereInput[]
     id?: IntFilter<"Penjadwalan"> | number
     waktu?: StringFilter<"Penjadwalan"> | string
+    isActive?: BoolFilter<"Penjadwalan"> | boolean
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
   }
@@ -12838,12 +12868,14 @@ export namespace Prisma {
 
   export type PenjadwalanCreateWithoutTandonInput = {
     waktu: string
+    isActive: boolean
     resep: ResepCreateNestedOneWithoutPenjadwalanInput
   }
 
   export type PenjadwalanUncheckedCreateWithoutTandonInput = {
     id?: number
     waktu: string
+    isActive: boolean
     resepId: number
   }
 
@@ -13078,23 +13110,27 @@ export namespace Prisma {
   export type PenjadwalanCreateManyResepInput = {
     id?: number
     waktu: string
+    isActive: boolean
     tandonId: number
   }
 
   export type PenjadwalanUpdateWithoutResepInput = {
     waktu?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     tandon?: TandonUpdateOneRequiredWithoutPenjadwalanNestedInput
   }
 
   export type PenjadwalanUncheckedUpdateWithoutResepInput = {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     tandonId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PenjadwalanUncheckedUpdateManyWithoutResepInput = {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     tandonId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13168,6 +13204,7 @@ export namespace Prisma {
   export type PenjadwalanCreateManyTandonInput = {
     id?: number
     waktu: string
+    isActive: boolean
     resepId: number
   }
 
@@ -13244,18 +13281,21 @@ export namespace Prisma {
 
   export type PenjadwalanUpdateWithoutTandonInput = {
     waktu?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     resep?: ResepUpdateOneRequiredWithoutPenjadwalanNestedInput
   }
 
   export type PenjadwalanUncheckedUpdateWithoutTandonInput = {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     resepId?: IntFieldUpdateOperationsInput | number
   }
 
   export type PenjadwalanUncheckedUpdateManyWithoutTandonInput = {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
+    isActive?: BoolFieldUpdateOperationsInput | boolean
     resepId?: IntFieldUpdateOperationsInput | number
   }
 
