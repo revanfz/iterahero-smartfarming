@@ -85,7 +85,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { id_penjadwalan } = request.payload as { id_penjadwalan: number };
+        const { id_penjadwalan } = request.params as { id_penjadwalan: number };
 
         const data = await prisma.penjadwalan.delete({
             where: {
@@ -104,6 +104,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     }
     catch (e) {
         if (e instanceof Error) {
+            console.log(e);
             return Boom.internal(e.message)
         }
     }

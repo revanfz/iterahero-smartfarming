@@ -84,7 +84,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
 exports.postHandler = postHandler;
 const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id_penjadwalan } = request.payload;
+        const { id_penjadwalan } = request.params;
         const data = yield prisma_1.prisma.penjadwalan.delete({
             where: {
                 id: id_penjadwalan
@@ -100,6 +100,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
     }
     catch (e) {
         if (e instanceof Error) {
+            console.log(e);
             return boom_1.default.internal(e.message);
         }
     }
