@@ -57,9 +57,11 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             }
 
             const arrJam = [jam];
-            
+            let menit = resepTarget.interval % 60;
+
             for (let i = 0; i < iterasi - 1; i++) {
-                arrJam.push( jam + resepTarget.interval * (i + 1));
+                let intervalToHour = Math.floor(resepTarget.interval / 60);
+                arrJam.push( jam + intervalToHour * (i + 1));
             }
 
             const isJadwalExist = await prisma.penjadwalan.findFirst({
