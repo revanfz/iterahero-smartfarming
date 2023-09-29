@@ -37,6 +37,7 @@ const JWT = __importStar(require("@hapi/jwt"));
 const HapiSwagger = __importStar(require("hapi-swagger"));
 const Inert = __importStar(require("@hapi/inert"));
 const Vision = __importStar(require("@hapi/vision"));
+const Qs = __importStar(require("qs"));
 require("dotenv/config");
 const hapi_1 = require("@hapi/hapi");
 const routes_1 = require("./routes/routes");
@@ -47,6 +48,9 @@ const init = function () {
         server = new hapi_1.Server({
             port: process.env.PORT || 3000,
             host: process.env.HOST || "localhost",
+            query: {
+                parser: (query) => Qs.parse(query),
+            },
             routes: {
                 cors: {
                     origin: ["*"],

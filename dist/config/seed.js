@@ -44,7 +44,8 @@ function main() {
             data: {
                 nama: "melon",
                 ppm: 1000,
-                ph: 7.2
+                ph: 7.2,
+                interval: 120
             }
         });
         const tandon = yield prisma_1.prisma.tandon.create({
@@ -52,7 +53,7 @@ function main() {
                 nama: "Tandon Peracikan",
                 userId: 1,
                 isOnline: true,
-                status: "Idle"
+                status: "Menyiram"
             }
         });
         const tandonBahan = yield prisma_1.prisma.tandonBahan.createMany({
@@ -125,6 +126,31 @@ function main() {
                     status: true,
                     tandonBahanId: 5,
                     nilai: 11,
+                },
+                {
+                    nama: "Sensor pH",
+                    merek: "Endreess-Hauser",
+                    satuan: "pH",
+                    persamaan: "e = mc^2",
+                    status: true,
+                    tandonId: 1,
+                    nilai: 6.2
+                }, {
+                    nama: "Sensor Suhu",
+                    merek: "Allianz",
+                    satuan: "Kelvin",
+                    persamaan: "y = ax^2 + bx + c",
+                    status: true,
+                    tandonId: 1,
+                    nilai: 299.15
+                }, {
+                    nama: "Sensor TDS",
+                    merek: "Carlsberg",
+                    satuan: "PPM",
+                    persamaan: " 1/ D * Inv (x)",
+                    status: true,
+                    tandonId: 1,
+                    nilai: 1200
                 }
             ]
         });

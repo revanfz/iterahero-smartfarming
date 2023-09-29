@@ -39,34 +39,19 @@ exports.schedulePeracikan = void 0;
 const schedule = __importStar(require("node-schedule"));
 const axios_1 = __importDefault(require("axios"));
 const schedulePeracikan = (token, resep, jam, menit, iterasi, interval) => {
-    let counter = 0;
-    const arr = [jam];
-    for (let i = 0; i < iterasi - 1; i++) {
-        arr.push(jam + interval * (i + 1));
-    }
-    const target = arr.join(',');
-    console.log(`${menit} ${target} * * *`);
-    const jadwal = schedule.scheduleJob(`${menit} ${jam} * * *`, () => __awaiter(void 0, void 0, void 0, function* () {
-        try {
-            if (counter < iterasi) {
-                console.log(`Peracikan ke ${counter + 1}`);
-                const peracikan = yield axios_1.default.post("/api/v1/peracikan", {
-                    headers: {
-                        Authorization: "Bearer " + token
-                    }
-                });
-                counter++;
-                if (counter >= iterasi) {
-                    jadwal.cancel();
-                }
+    const rule = new schedule.RecurrenceRule();
+    rule.hour = jam;
+    rule.minute = menit;
+    rule.tz = "Etc/GMT-7";
+    const job = schedule.scheduleJob(rule, () => __awaiter(void 0, void 0, void 0, function* () {
+        console.log("Peracikan");
+        yield axios_1.default.post("/api/v1/peracikan", {
+            nama: resep
+        }, {
+            headers: {
+                Authorization: "Bearer " + token
             }
-        }
-        catch (e) {
-            if (e instanceof Error) {
-                console.error(e);
-                jadwal.cancel();
-            }
-        }
+        });
     }));
 };
 exports.schedulePeracikan = schedulePeracikan;

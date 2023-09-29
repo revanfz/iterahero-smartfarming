@@ -1,10 +1,7 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
-
-interface FindTandon {
-    id_tandon: number
-}
+import Identifier from "../models/Identifier";
 
 interface CreateTandon {
     nama: string,
@@ -12,10 +9,10 @@ interface CreateTandon {
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { id_tandon } = request.query as FindTandon;
+        const { id } = request.query as Identifier;
         const data = await prisma.tandon.findFirst({
             where: {
-                id: id_tandon
+                id
             },
             include: {
                 sensor: true,

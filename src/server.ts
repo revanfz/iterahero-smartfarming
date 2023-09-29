@@ -4,6 +4,7 @@ import * as JWT from "@hapi/jwt";
 import * as HapiSwagger from "hapi-swagger";
 import * as Inert from "@hapi/inert";
 import * as Vision from "@hapi/vision";
+import * as Qs from "qs";
 import "dotenv/config";
 import { Server, AuthArtifacts, Request, ResponseToolkit } from "@hapi/hapi";
 import { routes } from "./routes/routes";
@@ -15,6 +16,9 @@ export const init = async function (): Promise<Server> {
   server = new Server({
     port: process.env.PORT || 3000,
     host: process.env.HOST || "localhost",
+    query: {
+      parser: (query) => Qs.parse(query),
+    },
     routes: {
       cors: {
         origin: ["*"],

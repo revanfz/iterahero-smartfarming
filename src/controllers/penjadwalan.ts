@@ -2,6 +2,7 @@ import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 import { schedulePeracikan } from "../utils/schedule";
+import Identifier from "../models/Identifier";
 
 interface InputPenjadwalan {
     resep: string,
@@ -9,10 +10,6 @@ interface InputPenjadwalan {
     waktu: string,
     iterasi: number,
     interval: number
-}
-
-interface Identifier {
-    id: number
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
@@ -42,40 +39,53 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
     try {
         const { resep, id_tandon, waktu, iterasi, interval } = request.payload as InputPenjadwalan;
-        const waktuParsed = waktu.split(":");
-        const jam = waktuParsed[0];
-        const menit = waktuParsed[1];
+        const _splitTime = waktu.split(":");
+        const jam = parseInt(_splitTime[0]);
+        const menit = parseInt(_splitTime[1]);
         const isAuth = request.auth.credentials;
 
         if (isAuth) {
             const input = request.payload as InputPenjadwalan;
-            const target = await prisma.resep.findFirst({
+            const resepTarget = await prisma.resep.findFirst({
                 where: {
                     nama: resep
                 }
             })
     
-            if (!target) {
+            if (!resepTarget) {
                 return Boom.notFound("Tidak ada resep yang sesuai")
             }
+
+            const arrJam = [jam];
+            
+            for (let i = 0; i < iterasi - 1; i++) {
+                arrJam.push( jam + resepTarget.interval * (i + 1));
+            }
+
+            const isJadwalExist = await prisma.penjadwalan.findFirst({
+                where: {
+                    waktu: {
+                        in: arrJam
+                    }
+                }
+            });
+
+            if (isJadwalExist) {
+                return Boom.badRequest(`Sudah ada peracikan di jam ${isJadwalExist.waktu}`)
+            }
     
-            for (let i = 0; i< iterasi; i++) {
-                const uniqueTime = (parseInt(waktu) * interval * (i + 1)).toString();
-                await prisma.penjadwalan.upsert({
-                    where: {
-                        waktu: uniqueTime
-                    },
-                    update: {},
-                    create: {
-                        resepId: target.id,
-                        waktu: uniqueTime,
-                        tandonId: input.id_tandon,
+            arrJam.forEach(async (item, index) => {
+                await prisma.penjadwalan.create({
+                    data: {
+                        resepId: resepTarget.id,
+                        waktu: item,
+                        tandonId: id_tandon,
                         isActive: true
                     }
                 })
-            }
+            });
 
-            schedulePeracikan(isAuth.toString(), resep, parseInt(jam), parseInt(menit), iterasi, interval)
+            schedulePeracikan(isAuth.toString(), resep, arrJam, menit, iterasi, interval)
     
             return h.response({
                 status: 'success',
@@ -94,11 +104,11 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { id } = request.query;
+        const { id } = request.query as Identifier;
 
         const data = await prisma.penjadwalan.delete({
             where: {
-                id: parseInt(id)
+                id
             }
         })
         if (!data) {
@@ -114,6 +124,33 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
         if (e instanceof Error) {
             console.log(e);
             return Boom.internal(e.message)
+        }
+    }
+    prisma.$disconnect();
+}
+
+export const patchHandler = async (request: Request, h: ResponseToolkit) => {
+    try {
+        const { id } = request.query as Identifier;
+        const targetWaktu = await prisma.penjadwalan.update({
+            where: { id },
+            data: {
+                isActive: false
+            }
+        });
+
+        if (!targetWaktu) {
+            return Boom.notFound("Tidak ada penjadwalan terkait.");
+        }
+
+        return h.response({
+            status: 'success',
+            message: 'Penjadwalan berhasil di-nonaktifkan'
+        }).code(201)
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            return Boom.internal(e.message);
         }
     }
     prisma.$disconnect();

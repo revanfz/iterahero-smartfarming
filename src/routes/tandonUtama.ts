@@ -14,7 +14,7 @@ export const tandonUtamaRoute: ServerRoute[] = [
             tags: ['api'],
             validate: { 
                 query: Joi.object({
-                    id_tandon: Joi.number().required()
+                    id: Joi.number().required()
                 })
             }
         }

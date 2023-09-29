@@ -36,12 +36,13 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
 exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { nama, ppm, ph } = request.payload;
+        const { nama, ppm, ph, interval } = request.payload;
         yield prisma_1.prisma.resep.create({
             data: {
                 nama,
                 ppm,
                 ph,
+                interval
             }
         });
         return h.response({

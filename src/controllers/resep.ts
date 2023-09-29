@@ -6,6 +6,7 @@ interface InputResep {
     nama: string,
     ppm: number,
     ph: number,
+    interval: number
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
@@ -31,13 +32,14 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { nama, ppm, ph } = request.payload as InputResep;
+        const { nama, ppm, ph, interval } = request.payload as InputResep;
 
         await prisma.resep.create({
             data: {
                 nama,
                 ppm,
                 ph,
+                interval
             }
         });
 

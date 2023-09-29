@@ -36,12 +36,13 @@ model Resep {
   ppm         Int
   ph          Float
   nama        String
+  interval    Int
   penjadwalan Penjadwalan[]
 }
 
 model Penjadwalan {
   id       Int     @id @default(autoincrement())
-  waktu    String  @unique
+  waktu    Int  @unique
   isActive Boolean
   resep    Resep   @relation(fields: [resepId], references: [id])
   resepId  Int

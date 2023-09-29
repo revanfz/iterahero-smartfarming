@@ -126,7 +126,8 @@ exports.Prisma.ResepScalarFieldEnum = {
   id: 'id',
   ppm: 'ppm',
   ph: 'ph',
-  nama: 'nama'
+  nama: 'nama',
+  interval: 'interval'
 };
 
 exports.Prisma.PenjadwalanScalarFieldEnum = {
