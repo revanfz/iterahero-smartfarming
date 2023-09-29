@@ -19,7 +19,14 @@ export const penjadwalanRoute: ServerRoute[] = [
     {
         method: "DELETE",
         path,
-        handler: deleteHandler
+        handler: deleteHandler,
+        options: {
+            validate: {
+                query: Joi.object({
+                    id: Joi.number().required()
+                })
+            }
+        }
     },
     {
         method: "PATCH",

@@ -22,7 +22,14 @@ exports.penjadwalanRoute = [
     {
         method: "DELETE",
         path,
-        handler: penjadwalan_1.deleteHandler
+        handler: penjadwalan_1.deleteHandler,
+        options: {
+            validate: {
+                query: joi_1.default.object({
+                    id: joi_1.default.number().required()
+                })
+            }
+        }
     },
     {
         method: "PATCH",
