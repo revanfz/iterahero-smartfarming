@@ -18,7 +18,10 @@ export function connectMqtt() {
 
   broker.on("connect", () => {
     console.log("Connected to MQTT");
-    broker.subscribe("iterahero/dashboard");
+    broker.subscribe("iterahero2023/dashboard");
+    broker.subscribe("iterahero2023/peracikan");
+    broker.subscribe("iterahero2023/penjadwalan");
+    broker.subscribe("iterahero2023/sensor/#");
   });
 
   broker.on("message", (topic, payload, packet) => {
@@ -38,4 +41,3 @@ export function publishData(topic: string, message: string) {
 process.on('SIGINT', () => {
     broker.end();
 })
-// export default mqttClient;
