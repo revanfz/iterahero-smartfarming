@@ -2,28 +2,20 @@ import * as schedule from "node-schedule";
 import axios from "axios";
 import { prisma } from "../config/prisma";
 
-export const schedulePeracikan = (
-  token: string,
-  resep: string,
-  jam: number[],
-  menit: number,
-  iterasi: number,
-  interval: number
-) => {
-  const rule = new schedule.RecurrenceRule();
-  rule.hour = jam;
-  rule.minute = menit
-  rule.tz = "Etc/GMT-7"
+export const schedulePeracikan = (jam: string[]) => {
+  const mappedTime = jam.map((item) => {
+    const waktu = item.split(":");
+    return { hour: parseInt(waktu[0]), minute: parseInt(waktu[1]) };
+  });
+  console.log(mappedTime);
 
-  const job = schedule.scheduleJob(rule, async () => {
-    console.log("Peracikan");
-    await axios.post("/api/v1/peracikan",
-      {
-        nama: resep
-      }, {
-      headers: {
-        Authorization: "Bearer " + token
-      }
+  mappedTime.forEach((waktu) => {
+    const rule = new schedule.RecurrenceRule();
+    rule.hour = waktu.hour;
+    rule.minute = waktu.minute;
+    console.log("skedul baru");
+    schedule.scheduleJob(rule, () => {
+      console.log(`Schedule ${waktu.hour}:${waktu.minute}`);
     });
   });
 };

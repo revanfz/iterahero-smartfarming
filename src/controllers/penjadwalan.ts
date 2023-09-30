@@ -5,8 +5,8 @@ import { schedulePeracikan } from "../utils/schedule";
 import Identifier from "../models/Identifier";
 
 interface InputPenjadwalan {
-    resep: string,
     id_tandon: number,
+    resep: string,
     waktu: string,
     iterasi: number,
     interval: number
@@ -32,8 +32,9 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         if (e instanceof Error) {
             return Boom.internal(e.message)
         }
+    } finally {
+        prisma.$disconnect();
     }
-    prisma.$disconnect();
 }
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
@@ -45,7 +46,6 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         const isAuth = request.auth.credentials;
 
         if (isAuth) {
-            const input = request.payload as InputPenjadwalan;
             const resepTarget = await prisma.resep.findFirst({
                 where: {
                     nama: resep
@@ -56,18 +56,24 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
                 return Boom.notFound("Tidak ada resep yang sesuai")
             }
 
-            const arrJam = [jam];
-            let menit = resepTarget.interval % 60;
+            const arrJam: object[] = [{ hour: jam, minute: menit }];
+            const arrValidasi: string[] = [`${jam}:${menit}`];
 
-            for (let i = 0; i < iterasi - 1; i++) {
-                let intervalToHour = Math.floor(resepTarget.interval / 60);
-                arrJam.push( jam + intervalToHour * (i + 1));
+            for (let i = 0; i < iterasi-1; i++) {
+                const intervalJam = Math.floor(resepTarget.interval / 60);
+                const intervalMenit = resepTarget.interval % 60;
+                let jamJadwal = jam + intervalJam * (i + 1);
+                let menitJadwal = menit + intervalMenit * (i + 1);
+                jamJadwal += Math.floor(menitJadwal / 60);
+                menitJadwal %= 60;
+                arrValidasi.push(`${jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
+                arrJam.push({ hour: jamJadwal, minute: menitJadwal })
             }
 
             const isJadwalExist = await prisma.penjadwalan.findFirst({
                 where: {
                     waktu: {
-                        in: arrJam
+                        in: arrValidasi
                     }
                 }
             });
@@ -76,18 +82,18 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
                 return Boom.badRequest(`Sudah ada peracikan di jam ${isJadwalExist.waktu}`)
             }
     
-            arrJam.forEach(async (item, index) => {
+            arrValidasi.forEach(async (item, index) => {
                 await prisma.penjadwalan.create({
                     data: {
                         resepId: resepTarget.id,
                         waktu: item,
                         tandonId: id_tandon,
-                        isActive: true
+                        isActive: true,
                     }
                 })
             });
 
-            schedulePeracikan(isAuth.toString(), resep, arrJam, menit, iterasi, interval)
+            schedulePeracikan(arrValidasi);
     
             return h.response({
                 status: 'success',
@@ -96,26 +102,28 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         }
     }
     catch (e) {
-        console.log(e);
         if (e instanceof Error) {
             return Boom.internal(e.message)
         }
     }
-    prisma.$disconnect();
+    finally {
+        prisma.$disconnect();
+    }
 }
 
 export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     try {
         const { id } = request.query as Identifier;
 
-        const data = await prisma.penjadwalan.delete({
+        await prisma.penjadwalan.delete({
             where: {
                 id
-            }
-        })
-        if (!data) {
-            return Boom.notFound("Tidak ada penjadwalan terkait")
-        }
+            },
+        });
+
+        const data = await prisma.penjadwalan.findMany();
+        const jadwal = data.map(item => item.waktu);
+        schedulePeracikan(jadwal);
 
         return h.response({
             status: 'success',
@@ -124,36 +132,49 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     }
     catch (e) {
         if (e instanceof Error) {
-            console.log(e);
-            return Boom.internal(e.message)
+            return Boom.notFound("Tidak ada penjadwalan dengan id tersebut")
         }
+    } finally {
+        prisma.$disconnect();
     }
-    prisma.$disconnect();
 }
 
 export const patchHandler = async (request: Request, h: ResponseToolkit) => {
     try {
         const { id } = request.query as Identifier;
-        const targetWaktu = await prisma.penjadwalan.update({
+        const targetWaktu = await prisma.penjadwalan.findUnique({
             where: { id },
-            data: {
-                isActive: false
-            }
         });
 
-        if (!targetWaktu) {
-            return Boom.notFound("Tidak ada penjadwalan terkait.");
+        if (targetWaktu) {
+            await prisma.penjadwalan.update({
+                where: { id },
+                data: {
+                    isActive: !targetWaktu.isActive
+                }
+            })
+        } else {
+            return Boom.notFound("Penjadwalan terpilih tidak ditemukan");
         }
+
+        const data = await prisma.penjadwalan.findMany({
+            where: {
+                isActive: true
+            }
+        });
+        const jadwal = data.map(item => item.waktu);
+        schedulePeracikan(jadwal);
 
         return h.response({
             status: 'success',
             message: 'Penjadwalan berhasil di-nonaktifkan'
-        }).code(201)
+        }).code(204);
     }
     catch (e) {
         if (e instanceof Error) {
             return Boom.internal(e.message);
         }
+    } finally {
+        prisma.$disconnect();
     }
-    prisma.$disconnect();
 }

@@ -8,7 +8,8 @@ const path = `${prefix}/resep`;
 const postValidator = Joi.object({
     ppm: Joi.number().required(),
     ph: Joi.number().required(),
-    nama: Joi.string().required()
+    nama: Joi.string().required(),
+    interval: Joi.number().required()
 })
 
 export const resepRoute: ServerRoute[] = [

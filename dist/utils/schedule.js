@@ -22,36 +22,23 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.schedulePeracikan = void 0;
 const schedule = __importStar(require("node-schedule"));
-const axios_1 = __importDefault(require("axios"));
-const schedulePeracikan = (token, resep, jam, menit, iterasi, interval) => {
-    const rule = new schedule.RecurrenceRule();
-    rule.hour = jam;
-    rule.minute = menit;
-    rule.tz = "Etc/GMT-7";
-    const job = schedule.scheduleJob(rule, () => __awaiter(void 0, void 0, void 0, function* () {
-        console.log("Peracikan");
-        yield axios_1.default.post("/api/v1/peracikan", {
-            nama: resep
-        }, {
-            headers: {
-                Authorization: "Bearer " + token
-            }
+const schedulePeracikan = (jam) => {
+    const mappedTime = jam.map((item) => {
+        const waktu = item.split(":");
+        return { hour: parseInt(waktu[0]), minute: parseInt(waktu[1]) };
+    });
+    console.log(mappedTime);
+    mappedTime.forEach((waktu) => {
+        const rule = new schedule.RecurrenceRule();
+        rule.hour = waktu.hour;
+        rule.minute = waktu.minute;
+        console.log("skedul baru");
+        schedule.scheduleJob(rule, () => {
+            console.log(`Schedule ${waktu.hour}:${waktu.minute}`);
         });
-    }));
+    });
 };
 exports.schedulePeracikan = schedulePeracikan;
