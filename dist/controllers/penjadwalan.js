@@ -16,6 +16,7 @@ exports.patchHandler = exports.deleteHandler = exports.postHandler = exports.get
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const schedule_1 = require("../utils/schedule");
+const mqtt_1 = require("../config/mqtt");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield prisma_1.prisma.penjadwalan.findMany({
@@ -90,6 +91,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 });
             }));
             (0, schedule_1.schedulePeracikan)(arrValidasi);
+            (0, mqtt_1.publishData)("iterahero2023/peracikan", `{ data: ${arrValidasi}} }`);
             return h.response({
                 status: 'success',
                 message: 'Penjadwalan telah dibuat'

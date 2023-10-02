@@ -3,6 +3,7 @@ import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 import { schedulePeracikan } from "../utils/schedule";
 import Identifier from "../models/Identifier";
+import { publishData } from "../config/mqtt";
 
 interface InputPenjadwalan {
     id_tandon: number,
@@ -94,6 +95,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             });
 
             schedulePeracikan(arrValidasi);
+            publishData("iterahero2023/peracikan", `{ data: ${arrValidasi}} }`)
     
             return h.response({
                 status: 'success',

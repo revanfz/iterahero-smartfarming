@@ -1,32 +1,35 @@
 import * as mqtt from "mqtt";
+import "dotenv/config";
 
 const clientId = `Iterahero2023_${Math.random().toString().slice(4)}`;
 
 let broker: mqtt.MqttClient;
 
 export function connectMqtt() {
-  broker = mqtt.connect("ws://broker.hivemq.com:8000/mqtt", {
+  broker = mqtt.connect({
+    host: "c401972c13f24e59b71daf85c5f5a712.s2.eu.hivemq.cloud",
+    port: 8883,
+    username: process.env.MQTT_USERNAME,
+    password: process.env.MQTT_PASSWORD,
+    protocol: "mqtts",
     clientId,
-    keepalive: 30,
-    protocolId: "MQTT",
-    protocolVersion: 4,
-    clean: true,
-    connectTimeout: 30 * 1000,
-    rejectUnauthorized: false,
-    reconnectPeriod: 1000,
   });
 
   broker.on("connect", () => {
     console.log("Connected to MQTT");
-    broker.subscribe("iterahero2023/dashboard");
     broker.subscribe("iterahero2023/peracikan");
     broker.subscribe("iterahero2023/penjadwalan");
-    broker.subscribe("iterahero2023/sensor/#");
+    broker.subscribe("iterahero2023/+/sensor");
   });
 
   broker.on("message", (topic, payload, packet) => {
-    const data = JSON.parse(payload.toString());
-    console.log(data);
+    try {
+      const data = JSON.parse(payload.toString());
+      console.log(data);
+    }
+    catch (e) {
+      if (e instanceof Error) console.log(e.message);
+    }
   });
 }
 

@@ -25,6 +25,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.schedulePeracikan = void 0;
 const schedule = __importStar(require("node-schedule"));
+const mqtt_1 = require("../config/mqtt");
 const schedulePeracikan = (jam) => {
     const mappedTime = jam.map((item) => {
         const waktu = item.split(":");
@@ -35,9 +36,11 @@ const schedulePeracikan = (jam) => {
         const rule = new schedule.RecurrenceRule();
         rule.hour = waktu.hour;
         rule.minute = waktu.minute;
-        console.log("skedul baru");
         schedule.scheduleJob(rule, () => {
             console.log(`Schedule ${waktu.hour}:${waktu.minute}`);
+            (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
+                peracikan: true,
+            }));
         });
     });
 };
