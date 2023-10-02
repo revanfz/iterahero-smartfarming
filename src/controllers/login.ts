@@ -4,6 +4,7 @@ import "dotenv/config";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom"
 import bcrypt from "bcrypt"
+import { publishData } from "../config/mqtt";
 
 interface LoginInput {
     email: string,
@@ -44,7 +45,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         }
         const jwtSecret = process.env.JWT_SECRET || '';
         const token = jwt.sign(payloadJwt, jwtSecret, { expiresIn: "12h" });
-
+        
         return h.response({
             status: 'success',
             accessToken: token,

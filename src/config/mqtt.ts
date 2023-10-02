@@ -12,11 +12,12 @@ export function connectMqtt() {
     username: process.env.MQTT_USERNAME,
     password: process.env.MQTT_PASSWORD,
     protocol: "mqtts",
-    clientId,
+    clientId
   });
 
   broker.on("connect", () => {
     console.log("Connected to MQTT");
+    broker.subscribe("iterahero2023/led")
     broker.subscribe("iterahero2023/peracikan");
     broker.subscribe("iterahero2023/penjadwalan");
     broker.subscribe("iterahero2023/+/sensor");
