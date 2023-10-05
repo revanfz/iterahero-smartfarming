@@ -4645,12 +4645,14 @@ export namespace Prisma {
 
   export type PenjadwalanAvgAggregateOutputType = {
     id: number | null
+    hari: number | null
     resepId: number | null
     tandonId: number | null
   }
 
   export type PenjadwalanSumAggregateOutputType = {
     id: number | null
+    hari: number[]
     resepId: number | null
     tandonId: number | null
   }
@@ -4675,6 +4677,7 @@ export namespace Prisma {
     id: number
     waktu: number
     isActive: number
+    hari: number
     resepId: number
     tandonId: number
     _all: number
@@ -4683,12 +4686,14 @@ export namespace Prisma {
 
   export type PenjadwalanAvgAggregateInputType = {
     id?: true
+    hari?: true
     resepId?: true
     tandonId?: true
   }
 
   export type PenjadwalanSumAggregateInputType = {
     id?: true
+    hari?: true
     resepId?: true
     tandonId?: true
   }
@@ -4713,6 +4718,7 @@ export namespace Prisma {
     id?: true
     waktu?: true
     isActive?: true
+    hari?: true
     resepId?: true
     tandonId?: true
     _all?: true
@@ -4808,6 +4814,7 @@ export namespace Prisma {
     id: number
     waktu: string
     isActive: boolean
+    hari: number[]
     resepId: number
     tandonId: number
     _count: PenjadwalanCountAggregateOutputType | null
@@ -4835,6 +4842,7 @@ export namespace Prisma {
     id?: boolean
     waktu?: boolean
     isActive?: boolean
+    hari?: boolean
     resepId?: boolean
     tandonId?: boolean
     resep?: boolean | ResepDefaultArgs<ExtArgs>
@@ -4845,6 +4853,7 @@ export namespace Prisma {
     id?: boolean
     waktu?: boolean
     isActive?: boolean
+    hari?: boolean
     resepId?: boolean
     tandonId?: boolean
   }
@@ -4865,6 +4874,7 @@ export namespace Prisma {
       id: number
       waktu: string
       isActive: boolean
+      hari: number[]
       resepId: number
       tandonId: number
     }, ExtArgs["result"]["penjadwalan"]>
@@ -5267,6 +5277,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Penjadwalan", 'Int'>
     readonly waktu: FieldRef<"Penjadwalan", 'String'>
     readonly isActive: FieldRef<"Penjadwalan", 'Boolean'>
+    readonly hari: FieldRef<"Penjadwalan", 'Int[]'>
     readonly resepId: FieldRef<"Penjadwalan", 'Int'>
     readonly tandonId: FieldRef<"Penjadwalan", 'Int'>
   }
@@ -9691,6 +9702,7 @@ export namespace Prisma {
     id: 'id',
     waktu: 'waktu',
     isActive: 'isActive',
+    hari: 'hari',
     resepId: 'resepId',
     tandonId: 'tandonId'
   };
@@ -10019,6 +10031,7 @@ export namespace Prisma {
     id?: IntFilter<"Penjadwalan"> | number
     waktu?: StringFilter<"Penjadwalan"> | string
     isActive?: BoolFilter<"Penjadwalan"> | boolean
+    hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
     resep?: XOR<ResepRelationFilter, ResepWhereInput>
@@ -10029,6 +10042,7 @@ export namespace Prisma {
     id?: SortOrder
     waktu?: SortOrder
     isActive?: SortOrder
+    hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
     resep?: ResepOrderByWithRelationInput
@@ -10037,21 +10051,23 @@ export namespace Prisma {
 
   export type PenjadwalanWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    waktu?: string
     AND?: PenjadwalanWhereInput | PenjadwalanWhereInput[]
     OR?: PenjadwalanWhereInput[]
     NOT?: PenjadwalanWhereInput | PenjadwalanWhereInput[]
+    waktu?: StringFilter<"Penjadwalan"> | string
     isActive?: BoolFilter<"Penjadwalan"> | boolean
+    hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
     resep?: XOR<ResepRelationFilter, ResepWhereInput>
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
-  }, "id" | "waktu">
+  }, "id">
 
   export type PenjadwalanOrderByWithAggregationInput = {
     id?: SortOrder
     waktu?: SortOrder
     isActive?: SortOrder
+    hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
     _count?: PenjadwalanCountOrderByAggregateInput
@@ -10068,6 +10084,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Penjadwalan"> | number
     waktu?: StringWithAggregatesFilter<"Penjadwalan"> | string
     isActive?: BoolWithAggregatesFilter<"Penjadwalan"> | boolean
+    hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntWithAggregatesFilter<"Penjadwalan"> | number
     tandonId?: IntWithAggregatesFilter<"Penjadwalan"> | number
   }
@@ -10511,6 +10528,7 @@ export namespace Prisma {
   export type PenjadwalanCreateInput = {
     waktu: string
     isActive: boolean
+    hari?: PenjadwalanCreatehariInput | number[]
     resep: ResepCreateNestedOneWithoutPenjadwalanInput
     tandon: TandonCreateNestedOneWithoutPenjadwalanInput
   }
@@ -10519,6 +10537,7 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
     tandonId: number
   }
@@ -10526,6 +10545,7 @@ export namespace Prisma {
   export type PenjadwalanUpdateInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    hari?: PenjadwalanUpdatehariInput | number[]
     resep?: ResepUpdateOneRequiredWithoutPenjadwalanNestedInput
     tandon?: TandonUpdateOneRequiredWithoutPenjadwalanNestedInput
   }
@@ -10534,6 +10554,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
     tandonId?: IntFieldUpdateOperationsInput | number
   }
@@ -10542,6 +10563,7 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
     tandonId: number
   }
@@ -10549,12 +10571,14 @@ export namespace Prisma {
   export type PenjadwalanUpdateManyMutationInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    hari?: PenjadwalanUpdatehariInput | number[]
   }
 
   export type PenjadwalanUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
     tandonId?: IntFieldUpdateOperationsInput | number
   }
@@ -11102,6 +11126,14 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type IntNullableListFilter<$PrismaModel = never> = {
+    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    has?: number | IntFieldRefInput<$PrismaModel> | null
+    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
+    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type ResepRelationFilter = {
     is?: ResepWhereInput
     isNot?: ResepWhereInput
@@ -11116,12 +11148,14 @@ export namespace Prisma {
     id?: SortOrder
     waktu?: SortOrder
     isActive?: SortOrder
+    hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
   }
 
   export type PenjadwalanAvgOrderByAggregateInput = {
     id?: SortOrder
+    hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
   }
@@ -11144,6 +11178,7 @@ export namespace Prisma {
 
   export type PenjadwalanSumOrderByAggregateInput = {
     id?: SortOrder
+    hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
   }
@@ -11604,6 +11639,10 @@ export namespace Prisma {
     deleteMany?: PenjadwalanScalarWhereInput | PenjadwalanScalarWhereInput[]
   }
 
+  export type PenjadwalanCreatehariInput = {
+    set: number[]
+  }
+
   export type ResepCreateNestedOneWithoutPenjadwalanInput = {
     create?: XOR<ResepCreateWithoutPenjadwalanInput, ResepUncheckedCreateWithoutPenjadwalanInput>
     connectOrCreate?: ResepCreateOrConnectWithoutPenjadwalanInput
@@ -11618,6 +11657,11 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type PenjadwalanUpdatehariInput = {
+    set?: number[]
+    push?: number | number[]
   }
 
   export type ResepUpdateOneRequiredWithoutPenjadwalanNestedInput = {
@@ -12337,6 +12381,7 @@ export namespace Prisma {
   export type PenjadwalanCreateWithoutResepInput = {
     waktu: string
     isActive: boolean
+    hari?: PenjadwalanCreatehariInput | number[]
     tandon: TandonCreateNestedOneWithoutPenjadwalanInput
   }
 
@@ -12344,6 +12389,7 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    hari?: PenjadwalanCreatehariInput | number[]
     tandonId: number
   }
 
@@ -12380,6 +12426,7 @@ export namespace Prisma {
     id?: IntFilter<"Penjadwalan"> | number
     waktu?: StringFilter<"Penjadwalan"> | string
     isActive?: BoolFilter<"Penjadwalan"> | boolean
+    hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
   }
@@ -12906,6 +12953,7 @@ export namespace Prisma {
   export type PenjadwalanCreateWithoutTandonInput = {
     waktu: string
     isActive: boolean
+    hari?: PenjadwalanCreatehariInput | number[]
     resep: ResepCreateNestedOneWithoutPenjadwalanInput
   }
 
@@ -12913,6 +12961,7 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
   }
 
@@ -13148,12 +13197,14 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    hari?: PenjadwalanCreatehariInput | number[]
     tandonId: number
   }
 
   export type PenjadwalanUpdateWithoutResepInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    hari?: PenjadwalanUpdatehariInput | number[]
     tandon?: TandonUpdateOneRequiredWithoutPenjadwalanNestedInput
   }
 
@@ -13161,6 +13212,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    hari?: PenjadwalanUpdatehariInput | number[]
     tandonId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13168,6 +13220,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    hari?: PenjadwalanUpdatehariInput | number[]
     tandonId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13242,6 +13295,7 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
   }
 
@@ -13319,6 +13373,7 @@ export namespace Prisma {
   export type PenjadwalanUpdateWithoutTandonInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    hari?: PenjadwalanUpdatehariInput | number[]
     resep?: ResepUpdateOneRequiredWithoutPenjadwalanNestedInput
   }
 
@@ -13326,6 +13381,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
   }
 
@@ -13333,6 +13389,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
   }
 

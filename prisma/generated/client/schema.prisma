@@ -42,8 +42,9 @@ model Resep {
 
 model Penjadwalan {
   id       Int     @id @default(autoincrement())
-  waktu    String  @unique
+  waktu    String  
   isActive Boolean
+  hari      Int[]
   resep    Resep   @relation(fields: [resepId], references: [id])
   resepId  Int
   tandon   Tandon  @relation(fields: [tandonId], references: [id])

@@ -22,26 +22,67 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.schedulePeracikan = void 0;
-const schedule = __importStar(require("node-schedule"));
-const mqtt_1 = require("../config/mqtt");
-const schedulePeracikan = (jam) => {
-    const mappedTime = jam.map((item) => {
-        const waktu = item.split(":");
-        return { hour: parseInt(waktu[0]), minute: parseInt(waktu[1]) };
-    });
-    console.log(mappedTime);
-    mappedTime.forEach((waktu) => {
-        const rule = new schedule.RecurrenceRule();
-        rule.hour = waktu.hour;
-        rule.minute = waktu.minute;
-        schedule.scheduleJob(rule, () => {
-            console.log(`Schedule ${waktu.hour}:${waktu.minute}`);
-            (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
-                peracikan: true,
-            }));
-        });
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.schedulePeracikan = exports.onOffPeracikan = exports.initPeracikan = void 0;
+const schedule = __importStar(require("node-schedule"));
+const mqtt_1 = require("../config/mqtt");
+const prisma_1 = require("../config/prisma");
+const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
+    const data = yield prisma_1.prisma.penjadwalan.findMany({
+        orderBy: {
+            id: "asc",
+        },
+    });
+    data.filter(item => item.isActive).forEach((item) => (0, exports.schedulePeracikan)(item.id, item.waktu, item.hari, item.resepId));
+    prisma_1.prisma.$disconnect();
+});
+exports.initPeracikan = initPeracikan;
+const onOffPeracikan = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = yield prisma_1.prisma.penjadwalan.findUnique({
+        where: {
+            id
+        }
+    });
+    if (data) {
+        if (data.isActive) {
+            schedule.scheduledJobs[`iterahero2023-peracikan-${id}`].cancel();
+        }
+        else {
+            (0, exports.schedulePeracikan)(data.id, data.waktu, data.hari, data.resepId);
+        }
+    }
+});
+exports.onOffPeracikan = onOffPeracikan;
+const schedulePeracikan = (id, jam, hari, resep) => __awaiter(void 0, void 0, void 0, function* () {
+    const waktu = jam.split(":");
+    const hour = parseInt(waktu[0]);
+    const minute = parseInt(waktu[1]);
+    const rule = new schedule.RecurrenceRule();
+    rule.hour = hour;
+    rule.minute = minute;
+    rule.dayOfWeek = hari;
+    const komposisi = yield prisma_1.prisma.resep.findUnique({
+        where: {
+            id: resep,
+        },
+    });
+    if (komposisi) {
+        schedule.scheduleJob(`iterahero2023-peracikan-${id}`, rule, function (resep) {
+            console.log(`Schedule ${hour}:${waktu}`);
+            (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
+                peracikan: true,
+                komposisi: resep
+            }));
+        }.bind(null, komposisi));
+    }
+});
 exports.schedulePeracikan = schedulePeracikan;

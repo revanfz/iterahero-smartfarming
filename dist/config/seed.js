@@ -18,43 +18,79 @@ function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const admin = yield prisma_1.prisma.user.upsert({
             where: {
-                email: "iterahero2022@gmail.com"
+                email: "iterahero2022@gmail.com",
             },
             update: {},
             create: {
                 email: "iterahero2022@gmail.com",
                 username: "iterahero",
                 password: yield bcrypt_1.default.hash("iterahero2022", 10),
-                role: "admin"
-            }
+                role: "admin",
+                greenhouse: {
+                    connectOrCreate: {
+                        where: {
+                            id: 1
+                        },
+                        create: {
+                            nama: "Greenhouse Kebun Raya"
+                        }
+                    }
+                }
+            },
         });
         const operator = yield prisma_1.prisma.user.upsert({
             where: {
-                email: "mitraiterahero@gmail.com"
+                email: "mitraiterahero@gmail.com",
             },
             update: {},
             create: {
                 email: "mitraiterahero@gmail.com",
                 username: "mitraiterahero",
                 password: yield bcrypt_1.default.hash("mitraiterahero", 10),
-                role: "operator"
-            }
+                role: "operator",
+                greenhouse: {
+                    connectOrCreate: {
+                        where: {
+                            id: 2
+                        },
+                        create: {
+                            nama: "Greenhouse Wanayasa"
+                        }
+                    }
+                }
+            },
         });
-        const resep = yield prisma_1.prisma.resep.create({
-            data: {
-                nama: "melon",
-                ppm: 1000,
-                ph: 7.2,
-                interval: 120
-            }
+        const resep = yield prisma_1.prisma.resep.createMany({
+            data: [
+                {
+                    nama: "melon",
+                    ppm: 1000,
+                    ph: 7.2,
+                    interval: 120,
+                },
+                {
+                    nama: "Semangka",
+                    ppm: 1200,
+                    ph: 6.4,
+                    interval: 95,
+                },
+            ],
         });
-        const tandon = yield prisma_1.prisma.tandon.create({
-            data: {
-                nama: "Tandon Peracikan",
-                userId: 1,
-                isOnline: true,
-                status: "Menyiram"
-            }
+        const tandon = yield prisma_1.prisma.tandon.createMany({
+            data: [
+                {
+                    nama: "Tandon Peracikan - Kebun Raya",
+                    userId: 1,
+                    isOnline: true,
+                    status: "Menyiram",
+                },
+                {
+                    nama: "Tandon Peracikan - Mitra",
+                    userId: 2,
+                    isOnline: true,
+                    status: "Idle",
+                },
+            ],
         });
         const tandonBahan = yield prisma_1.prisma.tandonBahan.createMany({
             data: [
@@ -72,13 +108,33 @@ function main() {
                 },
                 {
                     nama: "Asam",
-                    tandonId: 1
+                    tandonId: 1,
                 },
                 {
                     nama: "Basa",
-                    tandonId: 1
-                }
-            ]
+                    tandonId: 1,
+                },
+                {
+                    nama: "Nutrisi A",
+                    tandonId: 2,
+                },
+                {
+                    nama: "Nutrisi B",
+                    tandonId: 2,
+                },
+                {
+                    nama: "Air",
+                    tandonId: 2,
+                },
+                {
+                    nama: "Asam",
+                    tandonId: 2,
+                },
+                {
+                    nama: "Basa",
+                    tandonId: 2,
+                },
+            ],
         });
         const sensor = yield prisma_1.prisma.sensor.createMany({
             data: [
@@ -134,25 +190,99 @@ function main() {
                     persamaan: "e = mc^2",
                     status: true,
                     tandonId: 1,
-                    nilai: 6.2
-                }, {
+                    nilai: 6.2,
+                },
+                {
                     nama: "Sensor Suhu",
                     merek: "Allianz",
                     satuan: "Kelvin",
                     persamaan: "y = ax^2 + bx + c",
                     status: true,
                     tandonId: 1,
-                    nilai: 299.15
-                }, {
+                    nilai: 299.15,
+                },
+                {
                     nama: "Sensor TDS",
                     merek: "Carlsberg",
                     satuan: "PPM",
                     persamaan: " 1/ D * Inv (x)",
                     status: true,
                     tandonId: 1,
-                    nilai: 1200
-                }
-            ]
+                    nilai: 1200,
+                },
+                {
+                    nama: "Sensor Ketinggian",
+                    merek: "Adidas",
+                    satuan: "m",
+                    persamaan: "y = mx + b",
+                    status: true,
+                    tandonBahanId: 6,
+                    nilai: 10,
+                },
+                {
+                    nama: "Sensor Ketinggian",
+                    merek: "Nike",
+                    satuan: "m",
+                    persamaan: "y = mx + b",
+                    status: true,
+                    tandonBahanId: 7,
+                    nilai: 20,
+                },
+                {
+                    nama: "Sensor Ketinggian",
+                    merek: "Wkwkwk",
+                    satuan: "m",
+                    persamaan: "y = mx + b",
+                    status: true,
+                    tandonBahanId: 8,
+                    nilai: 30,
+                },
+                {
+                    nama: "Sensor Ketinggian",
+                    merek: "Asus",
+                    satuan: "m",
+                    persamaan: "y = mx + b",
+                    status: true,
+                    tandonBahanId: 9,
+                    nilai: 7,
+                },
+                {
+                    nama: "Sensor Ketinggian",
+                    merek: "Toshiba",
+                    satuan: "m",
+                    persamaan: "y = mx + b",
+                    status: true,
+                    tandonBahanId: 10,
+                    nilai: 11,
+                },
+                {
+                    nama: "Sensor pH",
+                    merek: "Endreess-Hauser",
+                    satuan: "pH",
+                    persamaan: "e = mc^2",
+                    status: true,
+                    tandonId: 2,
+                    nilai: 6.2,
+                },
+                {
+                    nama: "Sensor Suhu",
+                    merek: "Allianz",
+                    satuan: "Kelvin",
+                    persamaan: "y = ax^2 + bx + c",
+                    status: true,
+                    tandonId: 2,
+                    nilai: 299.15,
+                },
+                {
+                    nama: "Sensor TDS",
+                    merek: "Carlsberg",
+                    satuan: "PPM",
+                    persamaan: " 1/ D * Inv (x)",
+                    status: true,
+                    tandonId: 2,
+                    nilai: 1200,
+                },
+            ],
         });
         console.log({ admin, operator, resep, tandon, tandonBahan, sensor });
     });

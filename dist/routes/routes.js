@@ -9,6 +9,7 @@ const penjadwalan_1 = require("./penjadwalan");
 const peracikan_1 = require("./peracikan");
 const bahan_1 = require("./bahan");
 const tandonUtama_1 = require("./tandonUtama");
+const dashboard_1 = require("./dashboard");
 exports.routes = [
     ...home_1.home,
     ...login_1.loginRoute,
@@ -17,5 +18,6 @@ exports.routes = [
     ...register_1.registerRoute,
     ...peracikan_1.peracikanRoute,
     ...bahan_1.bahanRoute,
-    ...tandonUtama_1.tandonUtamaRoute
+    ...tandonUtama_1.tandonUtamaRoute,
+    ...dashboard_1.dashboardRoute
 ];

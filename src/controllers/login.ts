@@ -38,6 +38,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 
         const payloadJwt = {
             email,
+            id_user: user.id,
             role: user.role,
             aud: process.env.JWT_AUD,
             iss: process.env.JWT_ISS,

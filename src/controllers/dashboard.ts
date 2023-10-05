@@ -1,18 +1,46 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
+import jwt from "jsonwebtoken";
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        let peracikan = await prisma.resep.findMany();
+        const token = request.auth.credentials;
+        const { email, role } = jwt.decode(token.toString()) as {
+            email: string,
+            role: string
+        };
 
-        if (!peracikan) {
+        const target = await prisma.user.findUnique({
+            where: {
+                email
+            },
+            select: {
+                greenhouse: {
+                    include: {
+                        selenoid: true
+                    }
+                },
+                tandon: {
+                    include: {
+                        selenoid: true,
+                        tandonBahan: {
+                            include: {
+                                sensor: true,
+                            }
+                        },
+                    }
+                }
+            }
+        })
+
+        if (!target) {
             return Boom.notFound("Tidak ada peracikan")
         }
 
         return h.response({
             status: 'success',
-            peracikan
+            target
         }).code(200);
     }
     catch (e) {

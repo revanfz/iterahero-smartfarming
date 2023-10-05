@@ -1,7 +1,7 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
-import { schedulePeracikan } from "../utils/schedule";
+import { initPeracikan, onOffPeracikan, schedulePeracikan } from "../utils/schedule";
 import Identifier from "../models/Identifier";
 import { publishData } from "../config/mqtt";
 
@@ -10,7 +10,7 @@ interface InputPenjadwalan {
     resep: string,
     waktu: string,
     iterasi: number,
-    interval: number
+    hari: number[]
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
@@ -40,7 +40,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { resep, id_tandon, waktu, iterasi, interval } = request.payload as InputPenjadwalan;
+        const { resep, id_tandon, waktu, iterasi, hari } = request.payload as InputPenjadwalan;
         const _splitTime = waktu.split(":");
         const jam = parseInt(_splitTime[0]);
         const menit = parseInt(_splitTime[1]);
@@ -67,35 +67,41 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
                 let menitJadwal = menit + intervalMenit * (i + 1);
                 jamJadwal += Math.floor(menitJadwal / 60);
                 menitJadwal %= 60;
+                if (jamJadwal > 24) {
+                    return Boom.badRequest("Peracikan dengan skema tersebut tidak dapat dilakukan.")
+                }
                 arrValidasi.push(`${jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
-                arrJam.push({ hour: jamJadwal, minute: menitJadwal })
+                arrJam.push({ hour: jamJadwal % 24, minute: menitJadwal })
             }
 
             const isJadwalExist = await prisma.penjadwalan.findFirst({
                 where: {
                     waktu: {
                         in: arrValidasi
+                    },
+                    hari: {
+                        hasSome: hari
                     }
                 }
             });
 
             if (isJadwalExist) {
-                return Boom.badRequest(`Sudah ada peracikan di jam ${isJadwalExist.waktu}`)
+                const error = Boom.badRequest(`Sudah ada peracikan di jam ${isJadwalExist.waktu}`)
+                error.output.payload.data = { status: isJadwalExist.isActive ? 'enabled' : 'disabled', hari}
+                return error;
             }
     
             arrValidasi.forEach(async (item, index) => {
-                await prisma.penjadwalan.create({
+                const data = await prisma.penjadwalan.create({
                     data: {
                         resepId: resepTarget.id,
                         waktu: item,
                         tandonId: id_tandon,
                         isActive: true,
+                        hari
                     }
                 })
             });
-
-            schedulePeracikan(arrValidasi);
-            publishData("iterahero2023/peracikan", `{ data: ${arrValidasi}} }`)
     
             return h.response({
                 status: 'success',
@@ -109,6 +115,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         }
     }
     finally {
+        initPeracikan();
         prisma.$disconnect();
     }
 }
@@ -125,7 +132,6 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
 
         const data = await prisma.penjadwalan.findMany();
         const jadwal = data.map(item => item.waktu);
-        schedulePeracikan(jadwal);
 
         return h.response({
             status: 'success',
@@ -137,6 +143,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
             return Boom.notFound("Tidak ada penjadwalan dengan id tersebut")
         }
     } finally {
+        initPeracikan();
         prisma.$disconnect();
     }
 }
@@ -159,18 +166,12 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
             return Boom.notFound("Penjadwalan terpilih tidak ditemukan");
         }
 
-        const data = await prisma.penjadwalan.findMany({
-            where: {
-                isActive: true
-            }
-        });
-        const jadwal = data.map(item => item.waktu);
-        schedulePeracikan(jadwal);
+        onOffPeracikan(id)
 
         return h.response({
             status: 'success',
             message: 'Penjadwalan berhasil di-nonaktifkan'
-        }).code(204);
+        }).code(200);
     }
     catch (e) {
         if (e instanceof Error) {

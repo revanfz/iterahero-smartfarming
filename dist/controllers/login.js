@@ -42,6 +42,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         }
         const payloadJwt = {
             email,
+            id_user: user.id,
             role: user.role,
             aud: process.env.JWT_AUD,
             iss: process.env.JWT_ISS,
