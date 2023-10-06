@@ -73,7 +73,7 @@ const plugins = [
       const { exp } = jwt.decode(token) as {
         exp: number
       };
-      if (exp > Date.now()) {
+      if (exp > Date.now() / 1000) {
         return {
             isValid: true,
             credentials: artifacts.token

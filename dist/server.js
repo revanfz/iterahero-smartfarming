@@ -92,7 +92,7 @@ const init = function () {
             validate: (artifacts, request, h) => {
                 const token = artifacts.token;
                 const { exp } = jwt.decode(token);
-                if (exp > Date.now()) {
+                if (exp > Date.now() / 1000) {
                     return {
                         isValid: true,
                         credentials: artifacts.token
