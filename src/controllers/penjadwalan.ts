@@ -3,7 +3,6 @@ import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 import { initPeracikan, onOffPeracikan, schedulePeracikan } from "../utils/schedule";
 import Identifier from "../models/Identifier";
-import { publishData } from "../config/mqtt";
 
 interface InputPenjadwalan {
     id_tandon: number,
@@ -89,7 +88,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         }
 
         arrValidasi.forEach(async (item, index) => {
-            const data = await prisma.penjadwalan.create({
+            await prisma.penjadwalan.create({
                 data: {
                     resepId: resepTarget.id,
                     waktu: item,
@@ -99,6 +98,8 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
                 }
             })
         });
+
+        initPeracikan();
 
         return h.response({
             status: 'success',
@@ -112,7 +113,6 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         }
     }
     finally {
-        initPeracikan();
         prisma.$disconnect();
     }
 }
@@ -127,8 +127,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
             },
         });
 
-        const data = await prisma.penjadwalan.findMany();
-        const jadwal = data.map(item => item.waktu);
+        initPeracikan();
 
         return h.response({
             status: 'success',
@@ -140,7 +139,6 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
             return Boom.notFound("Tidak ada penjadwalan dengan id tersebut")
         }
     } finally {
-        initPeracikan();
         prisma.$disconnect();
     }
 }

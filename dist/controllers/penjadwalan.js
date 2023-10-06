@@ -86,7 +86,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             return error;
         }
         arrValidasi.forEach((item, index) => __awaiter(void 0, void 0, void 0, function* () {
-            const data = yield prisma_1.prisma.penjadwalan.create({
+            yield prisma_1.prisma.penjadwalan.create({
                 data: {
                     resepId: resepTarget.id,
                     waktu: item,
@@ -96,6 +96,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 }
             });
         }));
+        (0, schedule_1.initPeracikan)();
         return h.response({
             status: 'success',
             message: 'Penjadwalan telah dibuat'
@@ -108,7 +109,6 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         }
     }
     finally {
-        (0, schedule_1.initPeracikan)();
         prisma_1.prisma.$disconnect();
     }
 });
@@ -121,8 +121,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
                 id
             },
         });
-        const data = yield prisma_1.prisma.penjadwalan.findMany();
-        const jadwal = data.map(item => item.waktu);
+        (0, schedule_1.initPeracikan)();
         return h.response({
             status: 'success',
             message: 'Penjadwalan berhasil dihapus'
@@ -134,7 +133,6 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         }
     }
     finally {
-        (0, schedule_1.initPeracikan)();
         prisma_1.prisma.$disconnect();
     }
 });
