@@ -32,26 +32,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.schedulePeracikan = exports.onOffPeracikan = exports.initPeracikan = void 0;
+exports.schedulePeracikan = exports.deletePeracikan = exports.onOffPeracikan = exports.initPeracikan = void 0;
 const schedule = __importStar(require("node-schedule"));
 const mqtt_1 = require("../config/mqtt");
 const prisma_1 = require("../config/prisma");
 const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield schedule.gracefulShutdown();
     const data = yield prisma_1.prisma.penjadwalan.findMany({
         orderBy: {
             id: "asc",
         },
     });
-    data.filter(item => item.isActive).forEach((item) => (0, exports.schedulePeracikan)(item.id, item.waktu, item.hari, item.resepId));
+    data
+        .filter((item) => item.isActive)
+        .forEach((item) => (0, exports.schedulePeracikan)(item.id, item.waktu, item.hari, item.resepId));
     prisma_1.prisma.$disconnect();
 });
 exports.initPeracikan = initPeracikan;
 const onOffPeracikan = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const data = yield prisma_1.prisma.penjadwalan.findUnique({
         where: {
-            id
-        }
+            id,
+        },
     });
     if (data) {
         if (data.isActive) {
@@ -63,6 +64,10 @@ const onOffPeracikan = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.onOffPeracikan = onOffPeracikan;
+const deletePeracikan = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    schedule.scheduledJobs[`iterahero2023-peracikan-${id}`].cancel();
+});
+exports.deletePeracikan = deletePeracikan;
 const schedulePeracikan = (id, jam, hari, resep) => __awaiter(void 0, void 0, void 0, function* () {
     const waktu = jam.split(":");
     const hour = parseInt(waktu[0]);
@@ -81,7 +86,7 @@ const schedulePeracikan = (id, jam, hari, resep) => __awaiter(void 0, void 0, vo
             console.log(`Schedule ${hour}:${waktu}`);
             (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
                 peracikan: true,
-                komposisi: resep
+                komposisi: resep,
             }));
         }.bind(null, komposisi));
     }

@@ -1,7 +1,7 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
-import { initPeracikan, onOffPeracikan, schedulePeracikan } from "../utils/schedule";
+import { deletePeracikan, onOffPeracikan, schedulePeracikan } from "../utils/schedule";
 import Identifier from "../models/Identifier";
 
 interface InputPenjadwalan {
@@ -66,7 +66,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             if (jamJadwal > 24) {
                 return Boom.badRequest("Peracikan dengan skema tersebut tidak dapat dilakukan.")
             }
-            arrValidasi.push(`${jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
+            arrValidasi.push(`${jamJadwal < 10 ? '0' + jamJadwal : jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
             arrJam.push({ hour: jamJadwal % 24, minute: menitJadwal })
         }
 
@@ -88,7 +88,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         }
 
         arrValidasi.forEach(async (item, index) => {
-            await prisma.penjadwalan.create({
+            const data = await prisma.penjadwalan.create({
                 data: {
                     resepId: resepTarget.id,
                     waktu: item,
@@ -97,9 +97,8 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
                     hari
                 }
             })
+            schedulePeracikan(data.id, data.waktu, data.hari, data.resepId)
         });
-
-        initPeracikan();
 
         return h.response({
             status: 'success',
@@ -127,7 +126,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
             },
         });
 
-        initPeracikan();
+        deletePeracikan(id);
 
         return h.response({
             status: 'success',

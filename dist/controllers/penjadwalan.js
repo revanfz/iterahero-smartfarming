@@ -67,7 +67,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             if (jamJadwal > 24) {
                 return boom_1.default.badRequest("Peracikan dengan skema tersebut tidak dapat dilakukan.");
             }
-            arrValidasi.push(`${jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
+            arrValidasi.push(`${jamJadwal < 10 ? '0' + jamJadwal : jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
             arrJam.push({ hour: jamJadwal % 24, minute: menitJadwal });
         }
         const isJadwalExist = yield prisma_1.prisma.penjadwalan.findFirst({
@@ -86,7 +86,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             return error;
         }
         arrValidasi.forEach((item, index) => __awaiter(void 0, void 0, void 0, function* () {
-            yield prisma_1.prisma.penjadwalan.create({
+            const data = yield prisma_1.prisma.penjadwalan.create({
                 data: {
                     resepId: resepTarget.id,
                     waktu: item,
@@ -95,8 +95,8 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     hari
                 }
             });
+            (0, schedule_1.schedulePeracikan)(data.id, data.waktu, data.hari, data.resepId);
         }));
-        (0, schedule_1.initPeracikan)();
         return h.response({
             status: 'success',
             message: 'Penjadwalan telah dibuat'
@@ -121,7 +121,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
                 id
             },
         });
-        (0, schedule_1.initPeracikan)();
+        (0, schedule_1.deletePeracikan)(id);
         return h.response({
             status: 'success',
             message: 'Penjadwalan berhasil dihapus'
