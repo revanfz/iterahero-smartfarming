@@ -21,7 +21,15 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         const data = yield prisma_1.prisma.penjadwalan.findMany({
             include: {
                 resep: true
-            }
+            },
+            orderBy: [
+                {
+                    waktu: "asc"
+                },
+                {
+                    hari: "asc"
+                }
+            ]
         });
         if (!data) {
             return boom_1.default.notFound("Tidak ada data penjadwalan");

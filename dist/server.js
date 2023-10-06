@@ -112,3 +112,7 @@ process.on("unhandledRejection", (err) => {
     console.error(err);
     process.exit(1);
 });
+process.on("SIGINT", () => {
+    console.log("Stopping server");
+    server.stop({ timeout: 1000 }).then(() => process.exit(1));
+});

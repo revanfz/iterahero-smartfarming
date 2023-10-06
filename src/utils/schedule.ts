@@ -3,18 +3,23 @@ import { publishData } from "../config/mqtt";
 import { prisma } from "../config/prisma";
 
 export const initPeracikan = async () => {
-  const data = await prisma.penjadwalan.findMany({
-    orderBy: {
-      id: "asc",
-    },
-  });
-
-  data
-    .filter((item) => item.isActive)
-    .forEach((item) =>
+  try {
+   const data = await prisma.penjadwalan.findMany({
+      orderBy: {
+        id: "asc",
+      },
+    });
+    data.filter(item => item.isActive === true).forEach(item => {
       schedulePeracikan(item.id, item.waktu, item.hari, item.resepId)
+    } 
     );
-  prisma.$disconnect();
+
+  }
+  catch (e) {
+      console.log(e);
+  } finally {
+    prisma.$disconnect();
+  }
 };
 
 export const onOffPeracikan = async (id: number) => {
@@ -32,7 +37,7 @@ export const onOffPeracikan = async (id: number) => {
   }
 };
 
-export const deletePeracikan = async (id: number) => {
+export const deletePeracikan = (id: number) => {
   schedule.scheduledJobs[`iterahero2023-peracikan-${id}`].cancel();
 };
 

@@ -17,7 +17,15 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         const data = await prisma.penjadwalan.findMany({
             include: {
                 resep: true
-            }
+            },
+            orderBy: [
+                {
+                    waktu: "asc"
+                },
+                {
+                    hari: "asc"
+                }
+            ]
         });
 
         if (!data) {
