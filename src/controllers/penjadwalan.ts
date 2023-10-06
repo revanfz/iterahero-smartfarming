@@ -107,6 +107,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
     }
     catch (e) {
         if (e instanceof Error) {
+            console.log(e);
             return Boom.internal(e.message)
         }
     }
