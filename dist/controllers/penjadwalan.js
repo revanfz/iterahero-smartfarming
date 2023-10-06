@@ -94,7 +94,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             return error;
         }
         arrValidasi.forEach((item, index) => __awaiter(void 0, void 0, void 0, function* () {
-            const data = yield prisma_1.prisma.penjadwalan.create({
+            yield prisma_1.prisma.penjadwalan.create({
                 data: {
                     resepId: resepTarget.id,
                     waktu: item,
@@ -103,8 +103,8 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     hari
                 }
             });
-            (0, schedule_1.schedulePeracikan)(data.id, data.waktu, data.hari, data.resepId);
         }));
+        (0, schedule_1.initPeracikan)();
         return h.response({
             status: 'success',
             message: 'Penjadwalan telah dibuat'

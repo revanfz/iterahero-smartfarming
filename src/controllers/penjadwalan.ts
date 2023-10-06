@@ -1,7 +1,7 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
-import { deletePeracikan, onOffPeracikan, schedulePeracikan } from "../utils/schedule";
+import { deletePeracikan, initPeracikan, onOffPeracikan } from "../utils/schedule";
 import Identifier from "../models/Identifier";
 
 interface InputPenjadwalan {
@@ -96,7 +96,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         }
 
         arrValidasi.forEach(async (item, index) => {
-            const data = await prisma.penjadwalan.create({
+            await prisma.penjadwalan.create({
                 data: {
                     resepId: resepTarget.id,
                     waktu: item,
@@ -105,8 +105,9 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
                     hari
                 }
             })
-            schedulePeracikan(data.id, data.waktu, data.hari, data.resepId)
         });
+
+        initPeracikan()
 
         return h.response({
             status: 'success',
