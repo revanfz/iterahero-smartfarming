@@ -39,7 +39,16 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
                 selenoid: true,
                 sensor: true,
               },
-            }
+            },
+            tandonBahan: {
+                select: {
+                    _count: {
+                        select: {
+                            sensor: true
+                        }
+                    }
+                }
+            },
           },
         },
       },
@@ -48,7 +57,8 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
     if (!target) {
       return Boom.notFound("Tidak ada peracikan");
     }
-    console.log(JSON.stringify(target));
+    // console.log(JSON.stringify(target));
+    
     const jumlahTandon = target.tandon.reduce(
       (temp, a) => temp + a._count.tandonBahan,
       0
@@ -57,16 +67,21 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       (temp, a) => temp + a._count.selenoid,
       0
     );
+    const jumlahSensor = target.tandon.reduce(
+        (temp, a) => temp + a._count.sensor,
+        0
+    ) + target.tandon.reduce((temp, a) => temp + a.tandonBahan.length, 0);
 
     return h
       .response({
         status: "success",
-        target
-        // data: {
-        //   greenhouse: target._count.greenhouse,
-        //   tandon: jumlahTandon,
-        //   selenoid: jumlahSelenoid,
-        // },
+        data: {
+          greenhouse: target._count.greenhouse,
+          tandonBahan: jumlahTandon,
+          selenoid: jumlahSelenoid,
+          tandonPeracikan: target._count.tandon,
+          sensor: jumlahSensor
+        },
       })
       .code(200);
   } catch (e) {
