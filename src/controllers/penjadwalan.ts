@@ -44,70 +44,66 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         const _splitTime = waktu.split(":");
         const jam = parseInt(_splitTime[0]);
         const menit = parseInt(_splitTime[1]);
-        const isAuth = request.auth.credentials;
+        const resepTarget = await prisma.resep.findFirst({
+            where: {
+                nama: resep
+            }
+        })
 
-        if (isAuth) {
-            const resepTarget = await prisma.resep.findFirst({
-                where: {
-                    nama: resep
+        if (!resepTarget) {
+            return Boom.notFound("Tidak ada resep yang sesuai")
+        }
+
+        const arrJam: object[] = [{ hour: jam, minute: menit }];
+        const arrValidasi: string[] = [`${jam}:${menit}`];
+
+        for (let i = 0; i < iterasi-1; i++) {
+            const intervalJam = Math.floor(resepTarget.interval / 60);
+            const intervalMenit = resepTarget.interval % 60;
+            let jamJadwal = jam + intervalJam * (i + 1);
+            let menitJadwal = menit + intervalMenit * (i + 1);
+            jamJadwal += Math.floor(menitJadwal / 60);
+            menitJadwal %= 60;
+            if (jamJadwal > 24) {
+                return Boom.badRequest("Peracikan dengan skema tersebut tidak dapat dilakukan.")
+            }
+            arrValidasi.push(`${jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
+            arrJam.push({ hour: jamJadwal % 24, minute: menitJadwal })
+        }
+
+        const isJadwalExist = await prisma.penjadwalan.findFirst({
+            where: {
+                waktu: {
+                    in: arrValidasi
+                },
+                hari: {
+                    hasSome: hari
+                }
+            }
+        });
+
+        if (isJadwalExist) {
+            const error = Boom.badRequest(`Sudah ada peracikan di jam ${isJadwalExist.waktu}`)
+            error.output.payload.data = { status: isJadwalExist.isActive ? 'enabled' : 'disabled', hari}
+            return error;
+        }
+
+        arrValidasi.forEach(async (item, index) => {
+            const data = await prisma.penjadwalan.create({
+                data: {
+                    resepId: resepTarget.id,
+                    waktu: item,
+                    tandonId: id_tandon,
+                    isActive: true,
+                    hari
                 }
             })
-    
-            if (!resepTarget) {
-                return Boom.notFound("Tidak ada resep yang sesuai")
-            }
+        });
 
-            const arrJam: object[] = [{ hour: jam, minute: menit }];
-            const arrValidasi: string[] = [`${jam}:${menit}`];
-
-            for (let i = 0; i < iterasi-1; i++) {
-                const intervalJam = Math.floor(resepTarget.interval / 60);
-                const intervalMenit = resepTarget.interval % 60;
-                let jamJadwal = jam + intervalJam * (i + 1);
-                let menitJadwal = menit + intervalMenit * (i + 1);
-                jamJadwal += Math.floor(menitJadwal / 60);
-                menitJadwal %= 60;
-                if (jamJadwal > 24) {
-                    return Boom.badRequest("Peracikan dengan skema tersebut tidak dapat dilakukan.")
-                }
-                arrValidasi.push(`${jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
-                arrJam.push({ hour: jamJadwal % 24, minute: menitJadwal })
-            }
-
-            const isJadwalExist = await prisma.penjadwalan.findFirst({
-                where: {
-                    waktu: {
-                        in: arrValidasi
-                    },
-                    hari: {
-                        hasSome: hari
-                    }
-                }
-            });
-
-            if (isJadwalExist) {
-                const error = Boom.badRequest(`Sudah ada peracikan di jam ${isJadwalExist.waktu}`)
-                error.output.payload.data = { status: isJadwalExist.isActive ? 'enabled' : 'disabled', hari}
-                return error;
-            }
-    
-            arrValidasi.forEach(async (item, index) => {
-                const data = await prisma.penjadwalan.create({
-                    data: {
-                        resepId: resepTarget.id,
-                        waktu: item,
-                        tandonId: id_tandon,
-                        isActive: true,
-                        hari
-                    }
-                })
-            });
-    
-            return h.response({
-                status: 'success',
-                message: 'Penjadwalan telah dibuat'
-            }).code(201);
-        }
+        return h.response({
+            status: 'success',
+            message: 'Penjadwalan telah dibuat'
+        }).code(201);
     }
     catch (e) {
         if (e instanceof Error) {
@@ -166,7 +162,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
             return Boom.notFound("Penjadwalan terpilih tidak ditemukan");
         }
 
-        onOffPeracikan(id)
+        onOffPeracikan(id);
 
         return h.response({
             status: 'success',

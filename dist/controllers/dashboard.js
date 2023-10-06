@@ -22,33 +22,54 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         const { email, role } = jsonwebtoken_1.default.decode(token.toString());
         const target = yield prisma_1.prisma.user.findUnique({
             where: {
-                email
+                email,
             },
             select: {
+                _count: {
+                    select: {
+                        greenhouse: true,
+                        tandon: true,
+                    },
+                },
                 greenhouse: {
-                    include: {
-                        selenoid: true
-                    }
+                    select: {
+                        _count: {
+                            select: {
+                                selenoid: true,
+                            },
+                        },
+                    },
                 },
                 tandon: {
-                    include: {
-                        selenoid: true,
-                        tandonBahan: {
-                            include: {
+                    select: {
+                        _count: {
+                            select: {
+                                tandonBahan: true,
+                                selenoid: true,
                                 sensor: true,
-                            }
-                        },
-                    }
-                }
-            }
+                            },
+                        }
+                    },
+                },
+            },
         });
         if (!target) {
             return boom_1.default.notFound("Tidak ada peracikan");
         }
-        return h.response({
-            status: 'success',
+        console.log(JSON.stringify(target));
+        const jumlahTandon = target.tandon.reduce((temp, a) => temp + a._count.tandonBahan, 0);
+        const jumlahSelenoid = target.tandon.reduce((temp, a) => temp + a._count.selenoid, 0);
+        return h
+            .response({
+            status: "success",
             target
-        }).code(200);
+            // data: {
+            //   greenhouse: target._count.greenhouse,
+            //   tandon: jumlahTandon,
+            //   selenoid: jumlahSelenoid,
+            // },
+        })
+            .code(200);
     }
     catch (e) {
         if (e instanceof Error) {
