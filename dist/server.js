@@ -38,6 +38,7 @@ const HapiSwagger = __importStar(require("hapi-swagger"));
 const Inert = __importStar(require("@hapi/inert"));
 const Vision = __importStar(require("@hapi/vision"));
 const Qs = __importStar(require("qs"));
+const jwt = __importStar(require("jsonwebtoken"));
 require("dotenv/config");
 const hapi_1 = require("@hapi/hapi");
 const routes_1 = require("./routes/routes");
@@ -89,10 +90,19 @@ const init = function () {
                 timeSkewSec: 20,
             },
             validate: (artifacts, request, h) => {
-                return {
-                    isValid: true,
-                    credentials: artifacts.token
-                };
+                const token = artifacts.token;
+                const { exp } = jwt.decode(token);
+                if (exp > Date.now()) {
+                    return {
+                        isValid: true,
+                        credentials: artifacts.token
+                    };
+                }
+                else {
+                    return {
+                        isValid: false
+                    };
+                }
             }
         });
         server.auth.default("jwt");

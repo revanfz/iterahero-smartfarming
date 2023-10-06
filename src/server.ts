@@ -5,6 +5,7 @@ import * as HapiSwagger from "hapi-swagger";
 import * as Inert from "@hapi/inert";
 import * as Vision from "@hapi/vision";
 import * as Qs from "qs";
+import * as jwt from "jsonwebtoken";
 import "dotenv/config";
 import { Server, AuthArtifacts, Request, ResponseToolkit } from "@hapi/hapi";
 import { routes } from "./routes/routes";
@@ -68,10 +69,20 @@ const plugins = [
       request: Request,
       h: ResponseToolkit
     ) => {
+      const token = artifacts.token as string;
+      const { exp } = jwt.decode(token) as {
+        exp: number
+      };
+      if (exp > Date.now()) {
         return {
             isValid: true,
             credentials: artifacts.token
         }
+      } else {
+        return {
+          isValid: false
+        }
+      }
     }
   });
 
