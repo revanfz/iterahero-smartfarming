@@ -37,7 +37,7 @@ const schedule = __importStar(require("node-schedule"));
 const mqtt_1 = require("../config/mqtt");
 const prisma_1 = require("../config/prisma");
 const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
-    schedule.gracefulShutdown();
+    yield schedule.gracefulShutdown();
     const data = yield prisma_1.prisma.penjadwalan.findMany({
         orderBy: {
             id: "asc",
