@@ -2700,18 +2700,24 @@ export namespace Prisma {
     id: number | null
     nama: string | null
     thumbnail: string | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type GreenhouseMaxAggregateOutputType = {
     id: number | null
     nama: string | null
     thumbnail: string | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type GreenhouseCountAggregateOutputType = {
     id: number
     nama: number
     thumbnail: number
+    created_at: number
+    updated_at: number
     _all: number
   }
 
@@ -2728,18 +2734,24 @@ export namespace Prisma {
     id?: true
     nama?: true
     thumbnail?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type GreenhouseMaxAggregateInputType = {
     id?: true
     nama?: true
     thumbnail?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type GreenhouseCountAggregateInputType = {
     id?: true
     nama?: true
     thumbnail?: true
+    created_at?: true
+    updated_at?: true
     _all?: true
   }
 
@@ -2833,6 +2845,8 @@ export namespace Prisma {
     id: number
     nama: string
     thumbnail: string
+    created_at: Date
+    updated_at: Date | null
     _count: GreenhouseCountAggregateOutputType | null
     _avg: GreenhouseAvgAggregateOutputType | null
     _sum: GreenhouseSumAggregateOutputType | null
@@ -2858,6 +2872,8 @@ export namespace Prisma {
     id?: boolean
     nama?: boolean
     thumbnail?: boolean
+    created_at?: boolean
+    updated_at?: boolean
     user?: boolean | Greenhouse$userArgs<ExtArgs>
     selenoid?: boolean | Greenhouse$selenoidArgs<ExtArgs>
     _count?: boolean | GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
@@ -2867,6 +2883,8 @@ export namespace Prisma {
     id?: boolean
     nama?: boolean
     thumbnail?: boolean
+    created_at?: boolean
+    updated_at?: boolean
   }
 
   export type GreenhouseInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -2886,6 +2904,8 @@ export namespace Prisma {
       id: number
       nama: string
       thumbnail: string
+      created_at: Date
+      updated_at: Date | null
     }, ExtArgs["result"]["greenhouse"]>
     composites: {}
   }
@@ -3286,6 +3306,8 @@ export namespace Prisma {
     readonly id: FieldRef<"Greenhouse", 'Int'>
     readonly nama: FieldRef<"Greenhouse", 'String'>
     readonly thumbnail: FieldRef<"Greenhouse", 'String'>
+    readonly created_at: FieldRef<"Greenhouse", 'DateTime'>
+    readonly updated_at: FieldRef<"Greenhouse", 'DateTime'>
   }
     
 
@@ -3687,6 +3709,8 @@ export namespace Prisma {
     ph: number | null
     nama: string | null
     interval: number | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type ResepMaxAggregateOutputType = {
@@ -3695,6 +3719,8 @@ export namespace Prisma {
     ph: number | null
     nama: string | null
     interval: number | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type ResepCountAggregateOutputType = {
@@ -3703,6 +3729,8 @@ export namespace Prisma {
     ph: number
     nama: number
     interval: number
+    created_at: number
+    updated_at: number
     _all: number
   }
 
@@ -3727,6 +3755,8 @@ export namespace Prisma {
     ph?: true
     nama?: true
     interval?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type ResepMaxAggregateInputType = {
@@ -3735,6 +3765,8 @@ export namespace Prisma {
     ph?: true
     nama?: true
     interval?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type ResepCountAggregateInputType = {
@@ -3743,6 +3775,8 @@ export namespace Prisma {
     ph?: true
     nama?: true
     interval?: true
+    created_at?: true
+    updated_at?: true
     _all?: true
   }
 
@@ -3838,6 +3872,8 @@ export namespace Prisma {
     ph: number
     nama: string
     interval: number
+    created_at: Date
+    updated_at: Date | null
     _count: ResepCountAggregateOutputType | null
     _avg: ResepAvgAggregateOutputType | null
     _sum: ResepSumAggregateOutputType | null
@@ -3865,6 +3901,8 @@ export namespace Prisma {
     ph?: boolean
     nama?: boolean
     interval?: boolean
+    created_at?: boolean
+    updated_at?: boolean
     penjadwalan?: boolean | Resep$penjadwalanArgs<ExtArgs>
     _count?: boolean | ResepCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resep"]>
@@ -3875,6 +3913,8 @@ export namespace Prisma {
     ph?: boolean
     nama?: boolean
     interval?: boolean
+    created_at?: boolean
+    updated_at?: boolean
   }
 
   export type ResepInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -3894,6 +3934,8 @@ export namespace Prisma {
       ph: number
       nama: string
       interval: number
+      created_at: Date
+      updated_at: Date | null
     }, ExtArgs["result"]["resep"]>
     composites: {}
   }
@@ -4294,6 +4336,8 @@ export namespace Prisma {
     readonly ph: FieldRef<"Resep", 'Float'>
     readonly nama: FieldRef<"Resep", 'String'>
     readonly interval: FieldRef<"Resep", 'Int'>
+    readonly created_at: FieldRef<"Resep", 'DateTime'>
+    readonly updated_at: FieldRef<"Resep", 'DateTime'>
   }
     
 
@@ -4674,6 +4718,8 @@ export namespace Prisma {
     isActive: boolean | null
     resepId: number | null
     tandonId: number | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type PenjadwalanMaxAggregateOutputType = {
@@ -4682,6 +4728,8 @@ export namespace Prisma {
     isActive: boolean | null
     resepId: number | null
     tandonId: number | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type PenjadwalanCountAggregateOutputType = {
@@ -4691,6 +4739,8 @@ export namespace Prisma {
     hari: number
     resepId: number
     tandonId: number
+    created_at: number
+    updated_at: number
     _all: number
   }
 
@@ -4715,6 +4765,8 @@ export namespace Prisma {
     isActive?: true
     resepId?: true
     tandonId?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type PenjadwalanMaxAggregateInputType = {
@@ -4723,6 +4775,8 @@ export namespace Prisma {
     isActive?: true
     resepId?: true
     tandonId?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type PenjadwalanCountAggregateInputType = {
@@ -4732,6 +4786,8 @@ export namespace Prisma {
     hari?: true
     resepId?: true
     tandonId?: true
+    created_at?: true
+    updated_at?: true
     _all?: true
   }
 
@@ -4828,6 +4884,8 @@ export namespace Prisma {
     hari: number[]
     resepId: number
     tandonId: number
+    created_at: Date
+    updated_at: Date | null
     _count: PenjadwalanCountAggregateOutputType | null
     _avg: PenjadwalanAvgAggregateOutputType | null
     _sum: PenjadwalanSumAggregateOutputType | null
@@ -4856,6 +4914,8 @@ export namespace Prisma {
     hari?: boolean
     resepId?: boolean
     tandonId?: boolean
+    created_at?: boolean
+    updated_at?: boolean
     resep?: boolean | ResepDefaultArgs<ExtArgs>
     tandon?: boolean | TandonDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["penjadwalan"]>
@@ -4867,6 +4927,8 @@ export namespace Prisma {
     hari?: boolean
     resepId?: boolean
     tandonId?: boolean
+    created_at?: boolean
+    updated_at?: boolean
   }
 
   export type PenjadwalanInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -4888,6 +4950,8 @@ export namespace Prisma {
       hari: number[]
       resepId: number
       tandonId: number
+      created_at: Date
+      updated_at: Date | null
     }, ExtArgs["result"]["penjadwalan"]>
     composites: {}
   }
@@ -5291,6 +5355,8 @@ export namespace Prisma {
     readonly hari: FieldRef<"Penjadwalan", 'Int[]'>
     readonly resepId: FieldRef<"Penjadwalan", 'Int'>
     readonly tandonId: FieldRef<"Penjadwalan", 'Int'>
+    readonly created_at: FieldRef<"Penjadwalan", 'DateTime'>
+    readonly updated_at: FieldRef<"Penjadwalan", 'DateTime'>
   }
     
 
@@ -5654,6 +5720,8 @@ export namespace Prisma {
     nilai: number | null
     tandonId: number | null
     tandonBahanId: number | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type SensorMaxAggregateOutputType = {
@@ -5666,6 +5734,8 @@ export namespace Prisma {
     nilai: number | null
     tandonId: number | null
     tandonBahanId: number | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type SensorCountAggregateOutputType = {
@@ -5678,6 +5748,8 @@ export namespace Prisma {
     nilai: number
     tandonId: number
     tandonBahanId: number
+    created_at: number
+    updated_at: number
     _all: number
   }
 
@@ -5706,6 +5778,8 @@ export namespace Prisma {
     nilai?: true
     tandonId?: true
     tandonBahanId?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type SensorMaxAggregateInputType = {
@@ -5718,6 +5792,8 @@ export namespace Prisma {
     nilai?: true
     tandonId?: true
     tandonBahanId?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type SensorCountAggregateInputType = {
@@ -5730,6 +5806,8 @@ export namespace Prisma {
     nilai?: true
     tandonId?: true
     tandonBahanId?: true
+    created_at?: true
+    updated_at?: true
     _all?: true
   }
 
@@ -5829,6 +5907,8 @@ export namespace Prisma {
     nilai: number
     tandonId: number | null
     tandonBahanId: number | null
+    created_at: Date
+    updated_at: Date | null
     _count: SensorCountAggregateOutputType | null
     _avg: SensorAvgAggregateOutputType | null
     _sum: SensorSumAggregateOutputType | null
@@ -5860,6 +5940,8 @@ export namespace Prisma {
     nilai?: boolean
     tandonId?: boolean
     tandonBahanId?: boolean
+    created_at?: boolean
+    updated_at?: boolean
     tandon?: boolean | Sensor$tandonArgs<ExtArgs>
     tandonBahan?: boolean | Sensor$tandonBahanArgs<ExtArgs>
   }, ExtArgs["result"]["sensor"]>
@@ -5874,6 +5956,8 @@ export namespace Prisma {
     nilai?: boolean
     tandonId?: boolean
     tandonBahanId?: boolean
+    created_at?: boolean
+    updated_at?: boolean
   }
 
   export type SensorInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -5898,6 +5982,8 @@ export namespace Prisma {
       nilai: number
       tandonId: number | null
       tandonBahanId: number | null
+      created_at: Date
+      updated_at: Date | null
     }, ExtArgs["result"]["sensor"]>
     composites: {}
   }
@@ -6304,6 +6390,8 @@ export namespace Prisma {
     readonly nilai: FieldRef<"Sensor", 'Int'>
     readonly tandonId: FieldRef<"Sensor", 'Int'>
     readonly tandonBahanId: FieldRef<"Sensor", 'Int'>
+    readonly created_at: FieldRef<"Sensor", 'DateTime'>
+    readonly updated_at: FieldRef<"Sensor", 'DateTime'>
   }
     
 
@@ -6694,6 +6782,8 @@ export namespace Prisma {
     status: boolean | null
     tandonId: number | null
     greenhouseId: number | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type SelenoidMaxAggregateOutputType = {
@@ -6703,6 +6793,8 @@ export namespace Prisma {
     status: boolean | null
     tandonId: number | null
     greenhouseId: number | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type SelenoidCountAggregateOutputType = {
@@ -6712,6 +6804,8 @@ export namespace Prisma {
     status: number
     tandonId: number
     greenhouseId: number
+    created_at: number
+    updated_at: number
     _all: number
   }
 
@@ -6735,6 +6829,8 @@ export namespace Prisma {
     status?: true
     tandonId?: true
     greenhouseId?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type SelenoidMaxAggregateInputType = {
@@ -6744,6 +6840,8 @@ export namespace Prisma {
     status?: true
     tandonId?: true
     greenhouseId?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type SelenoidCountAggregateInputType = {
@@ -6753,6 +6851,8 @@ export namespace Prisma {
     status?: true
     tandonId?: true
     greenhouseId?: true
+    created_at?: true
+    updated_at?: true
     _all?: true
   }
 
@@ -6849,6 +6949,8 @@ export namespace Prisma {
     status: boolean
     tandonId: number
     greenhouseId: number
+    created_at: Date
+    updated_at: Date | null
     _count: SelenoidCountAggregateOutputType | null
     _avg: SelenoidAvgAggregateOutputType | null
     _sum: SelenoidSumAggregateOutputType | null
@@ -6877,6 +6979,8 @@ export namespace Prisma {
     status?: boolean
     tandonId?: boolean
     greenhouseId?: boolean
+    created_at?: boolean
+    updated_at?: boolean
     tandon?: boolean | TandonDefaultArgs<ExtArgs>
     greenhouse?: boolean | GreenhouseDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["selenoid"]>
@@ -6888,6 +6992,8 @@ export namespace Prisma {
     status?: boolean
     tandonId?: boolean
     greenhouseId?: boolean
+    created_at?: boolean
+    updated_at?: boolean
   }
 
   export type SelenoidInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -6909,6 +7015,8 @@ export namespace Prisma {
       status: boolean
       tandonId: number
       greenhouseId: number
+      created_at: Date
+      updated_at: Date | null
     }, ExtArgs["result"]["selenoid"]>
     composites: {}
   }
@@ -7312,6 +7420,8 @@ export namespace Prisma {
     readonly status: FieldRef<"Selenoid", 'Boolean'>
     readonly tandonId: FieldRef<"Selenoid", 'Int'>
     readonly greenhouseId: FieldRef<"Selenoid", 'Int'>
+    readonly created_at: FieldRef<"Selenoid", 'DateTime'>
+    readonly updated_at: FieldRef<"Selenoid", 'DateTime'>
   }
     
 
@@ -7665,18 +7775,24 @@ export namespace Prisma {
     id: number | null
     nama: string | null
     tandonId: number | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type TandonBahanMaxAggregateOutputType = {
     id: number | null
     nama: string | null
     tandonId: number | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type TandonBahanCountAggregateOutputType = {
     id: number
     nama: number
     tandonId: number
+    created_at: number
+    updated_at: number
     _all: number
   }
 
@@ -7695,18 +7811,24 @@ export namespace Prisma {
     id?: true
     nama?: true
     tandonId?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type TandonBahanMaxAggregateInputType = {
     id?: true
     nama?: true
     tandonId?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type TandonBahanCountAggregateInputType = {
     id?: true
     nama?: true
     tandonId?: true
+    created_at?: true
+    updated_at?: true
     _all?: true
   }
 
@@ -7800,6 +7922,8 @@ export namespace Prisma {
     id: number
     nama: string
     tandonId: number
+    created_at: Date
+    updated_at: Date | null
     _count: TandonBahanCountAggregateOutputType | null
     _avg: TandonBahanAvgAggregateOutputType | null
     _sum: TandonBahanSumAggregateOutputType | null
@@ -7825,6 +7949,8 @@ export namespace Prisma {
     id?: boolean
     nama?: boolean
     tandonId?: boolean
+    created_at?: boolean
+    updated_at?: boolean
     sensor?: boolean | TandonBahan$sensorArgs<ExtArgs>
     tandon?: boolean | TandonDefaultArgs<ExtArgs>
     _count?: boolean | TandonBahanCountOutputTypeDefaultArgs<ExtArgs>
@@ -7834,6 +7960,8 @@ export namespace Prisma {
     id?: boolean
     nama?: boolean
     tandonId?: boolean
+    created_at?: boolean
+    updated_at?: boolean
   }
 
   export type TandonBahanInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -7853,6 +7981,8 @@ export namespace Prisma {
       id: number
       nama: string
       tandonId: number
+      created_at: Date
+      updated_at: Date | null
     }, ExtArgs["result"]["tandonBahan"]>
     composites: {}
   }
@@ -8253,6 +8383,8 @@ export namespace Prisma {
     readonly id: FieldRef<"TandonBahan", 'Int'>
     readonly nama: FieldRef<"TandonBahan", 'String'>
     readonly tandonId: FieldRef<"TandonBahan", 'Int'>
+    readonly created_at: FieldRef<"TandonBahan", 'DateTime'>
+    readonly updated_at: FieldRef<"TandonBahan", 'DateTime'>
   }
     
 
@@ -8629,6 +8761,8 @@ export namespace Prisma {
     userId: number | null
     status: string | null
     isOnline: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type TandonMaxAggregateOutputType = {
@@ -8637,6 +8771,8 @@ export namespace Prisma {
     userId: number | null
     status: string | null
     isOnline: boolean | null
+    created_at: Date | null
+    updated_at: Date | null
   }
 
   export type TandonCountAggregateOutputType = {
@@ -8645,6 +8781,8 @@ export namespace Prisma {
     userId: number
     status: number
     isOnline: number
+    created_at: number
+    updated_at: number
     _all: number
   }
 
@@ -8665,6 +8803,8 @@ export namespace Prisma {
     userId?: true
     status?: true
     isOnline?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type TandonMaxAggregateInputType = {
@@ -8673,6 +8813,8 @@ export namespace Prisma {
     userId?: true
     status?: true
     isOnline?: true
+    created_at?: true
+    updated_at?: true
   }
 
   export type TandonCountAggregateInputType = {
@@ -8681,6 +8823,8 @@ export namespace Prisma {
     userId?: true
     status?: true
     isOnline?: true
+    created_at?: true
+    updated_at?: true
     _all?: true
   }
 
@@ -8776,6 +8920,8 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    created_at: Date
+    updated_at: Date | null
     _count: TandonCountAggregateOutputType | null
     _avg: TandonAvgAggregateOutputType | null
     _sum: TandonSumAggregateOutputType | null
@@ -8803,6 +8949,8 @@ export namespace Prisma {
     userId?: boolean
     status?: boolean
     isOnline?: boolean
+    created_at?: boolean
+    updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     sensor?: boolean | Tandon$sensorArgs<ExtArgs>
     selenoid?: boolean | Tandon$selenoidArgs<ExtArgs>
@@ -8817,6 +8965,8 @@ export namespace Prisma {
     userId?: boolean
     status?: boolean
     isOnline?: boolean
+    created_at?: boolean
+    updated_at?: boolean
   }
 
   export type TandonInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -8844,6 +8994,8 @@ export namespace Prisma {
       userId: number
       status: string
       isOnline: boolean
+      created_at: Date
+      updated_at: Date | null
     }, ExtArgs["result"]["tandon"]>
     composites: {}
   }
@@ -9252,6 +9404,8 @@ export namespace Prisma {
     readonly userId: FieldRef<"Tandon", 'Int'>
     readonly status: FieldRef<"Tandon", 'String'>
     readonly isOnline: FieldRef<"Tandon", 'Boolean'>
+    readonly created_at: FieldRef<"Tandon", 'DateTime'>
+    readonly updated_at: FieldRef<"Tandon", 'DateTime'>
   }
     
 
@@ -9693,7 +9847,9 @@ export namespace Prisma {
   export const GreenhouseScalarFieldEnum: {
     id: 'id',
     nama: 'nama',
-    thumbnail: 'thumbnail'
+    thumbnail: 'thumbnail',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
   };
 
   export type GreenhouseScalarFieldEnum = (typeof GreenhouseScalarFieldEnum)[keyof typeof GreenhouseScalarFieldEnum]
@@ -9704,7 +9860,9 @@ export namespace Prisma {
     ppm: 'ppm',
     ph: 'ph',
     nama: 'nama',
-    interval: 'interval'
+    interval: 'interval',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
   };
 
   export type ResepScalarFieldEnum = (typeof ResepScalarFieldEnum)[keyof typeof ResepScalarFieldEnum]
@@ -9716,7 +9874,9 @@ export namespace Prisma {
     isActive: 'isActive',
     hari: 'hari',
     resepId: 'resepId',
-    tandonId: 'tandonId'
+    tandonId: 'tandonId',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
   };
 
   export type PenjadwalanScalarFieldEnum = (typeof PenjadwalanScalarFieldEnum)[keyof typeof PenjadwalanScalarFieldEnum]
@@ -9731,7 +9891,9 @@ export namespace Prisma {
     status: 'status',
     nilai: 'nilai',
     tandonId: 'tandonId',
-    tandonBahanId: 'tandonBahanId'
+    tandonBahanId: 'tandonBahanId',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
   };
 
   export type SensorScalarFieldEnum = (typeof SensorScalarFieldEnum)[keyof typeof SensorScalarFieldEnum]
@@ -9743,7 +9905,9 @@ export namespace Prisma {
     merek: 'merek',
     status: 'status',
     tandonId: 'tandonId',
-    greenhouseId: 'greenhouseId'
+    greenhouseId: 'greenhouseId',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
   };
 
   export type SelenoidScalarFieldEnum = (typeof SelenoidScalarFieldEnum)[keyof typeof SelenoidScalarFieldEnum]
@@ -9752,7 +9916,9 @@ export namespace Prisma {
   export const TandonBahanScalarFieldEnum: {
     id: 'id',
     nama: 'nama',
-    tandonId: 'tandonId'
+    tandonId: 'tandonId',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
   };
 
   export type TandonBahanScalarFieldEnum = (typeof TandonBahanScalarFieldEnum)[keyof typeof TandonBahanScalarFieldEnum]
@@ -9763,7 +9929,9 @@ export namespace Prisma {
     nama: 'nama',
     userId: 'userId',
     status: 'status',
-    isOnline: 'isOnline'
+    isOnline: 'isOnline',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
   };
 
   export type TandonScalarFieldEnum = (typeof TandonScalarFieldEnum)[keyof typeof TandonScalarFieldEnum]
@@ -9941,6 +10109,8 @@ export namespace Prisma {
     id?: IntFilter<"Greenhouse"> | number
     nama?: StringFilter<"Greenhouse"> | string
     thumbnail?: StringFilter<"Greenhouse"> | string
+    created_at?: DateTimeFilter<"Greenhouse"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
     user?: UserListRelationFilter
     selenoid?: SelenoidListRelationFilter
   }
@@ -9949,6 +10119,8 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     thumbnail?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     user?: UserOrderByRelationAggregateInput
     selenoid?: SelenoidOrderByRelationAggregateInput
   }
@@ -9960,6 +10132,8 @@ export namespace Prisma {
     NOT?: GreenhouseWhereInput | GreenhouseWhereInput[]
     nama?: StringFilter<"Greenhouse"> | string
     thumbnail?: StringFilter<"Greenhouse"> | string
+    created_at?: DateTimeFilter<"Greenhouse"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
     user?: UserListRelationFilter
     selenoid?: SelenoidListRelationFilter
   }, "id">
@@ -9968,6 +10142,8 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     thumbnail?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: GreenhouseCountOrderByAggregateInput
     _avg?: GreenhouseAvgOrderByAggregateInput
     _max?: GreenhouseMaxOrderByAggregateInput
@@ -9982,6 +10158,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Greenhouse"> | number
     nama?: StringWithAggregatesFilter<"Greenhouse"> | string
     thumbnail?: StringWithAggregatesFilter<"Greenhouse"> | string
+    created_at?: DateTimeWithAggregatesFilter<"Greenhouse"> | Date | string
+    updated_at?: DateTimeNullableWithAggregatesFilter<"Greenhouse"> | Date | string | null
   }
 
   export type ResepWhereInput = {
@@ -9993,6 +10171,8 @@ export namespace Prisma {
     ph?: FloatFilter<"Resep"> | number
     nama?: StringFilter<"Resep"> | string
     interval?: IntFilter<"Resep"> | number
+    created_at?: DateTimeFilter<"Resep"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Resep"> | Date | string | null
     penjadwalan?: PenjadwalanListRelationFilter
   }
 
@@ -10002,6 +10182,8 @@ export namespace Prisma {
     ph?: SortOrder
     nama?: SortOrder
     interval?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     penjadwalan?: PenjadwalanOrderByRelationAggregateInput
   }
 
@@ -10014,6 +10196,8 @@ export namespace Prisma {
     ph?: FloatFilter<"Resep"> | number
     nama?: StringFilter<"Resep"> | string
     interval?: IntFilter<"Resep"> | number
+    created_at?: DateTimeFilter<"Resep"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Resep"> | Date | string | null
     penjadwalan?: PenjadwalanListRelationFilter
   }, "id">
 
@@ -10023,6 +10207,8 @@ export namespace Prisma {
     ph?: SortOrder
     nama?: SortOrder
     interval?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: ResepCountOrderByAggregateInput
     _avg?: ResepAvgOrderByAggregateInput
     _max?: ResepMaxOrderByAggregateInput
@@ -10039,6 +10225,8 @@ export namespace Prisma {
     ph?: FloatWithAggregatesFilter<"Resep"> | number
     nama?: StringWithAggregatesFilter<"Resep"> | string
     interval?: IntWithAggregatesFilter<"Resep"> | number
+    created_at?: DateTimeWithAggregatesFilter<"Resep"> | Date | string
+    updated_at?: DateTimeNullableWithAggregatesFilter<"Resep"> | Date | string | null
   }
 
   export type PenjadwalanWhereInput = {
@@ -10051,6 +10239,8 @@ export namespace Prisma {
     hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
+    created_at?: DateTimeFilter<"Penjadwalan"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Penjadwalan"> | Date | string | null
     resep?: XOR<ResepRelationFilter, ResepWhereInput>
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
   }
@@ -10062,6 +10252,8 @@ export namespace Prisma {
     hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     resep?: ResepOrderByWithRelationInput
     tandon?: TandonOrderByWithRelationInput
   }
@@ -10076,6 +10268,8 @@ export namespace Prisma {
     hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
+    created_at?: DateTimeFilter<"Penjadwalan"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Penjadwalan"> | Date | string | null
     resep?: XOR<ResepRelationFilter, ResepWhereInput>
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
   }, "id">
@@ -10087,6 +10281,8 @@ export namespace Prisma {
     hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: PenjadwalanCountOrderByAggregateInput
     _avg?: PenjadwalanAvgOrderByAggregateInput
     _max?: PenjadwalanMaxOrderByAggregateInput
@@ -10104,6 +10300,8 @@ export namespace Prisma {
     hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntWithAggregatesFilter<"Penjadwalan"> | number
     tandonId?: IntWithAggregatesFilter<"Penjadwalan"> | number
+    created_at?: DateTimeWithAggregatesFilter<"Penjadwalan"> | Date | string
+    updated_at?: DateTimeNullableWithAggregatesFilter<"Penjadwalan"> | Date | string | null
   }
 
   export type SensorWhereInput = {
@@ -10119,6 +10317,8 @@ export namespace Prisma {
     nilai?: IntFilter<"Sensor"> | number
     tandonId?: IntNullableFilter<"Sensor"> | number | null
     tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
+    created_at?: DateTimeFilter<"Sensor"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Sensor"> | Date | string | null
     tandon?: XOR<TandonNullableRelationFilter, TandonWhereInput> | null
     tandonBahan?: XOR<TandonBahanNullableRelationFilter, TandonBahanWhereInput> | null
   }
@@ -10133,6 +10333,8 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrderInput | SortOrder
     tandonBahanId?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     tandon?: TandonOrderByWithRelationInput
     tandonBahan?: TandonBahanOrderByWithRelationInput
   }
@@ -10150,6 +10352,8 @@ export namespace Prisma {
     nilai?: IntFilter<"Sensor"> | number
     tandonId?: IntNullableFilter<"Sensor"> | number | null
     tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
+    created_at?: DateTimeFilter<"Sensor"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Sensor"> | Date | string | null
     tandon?: XOR<TandonNullableRelationFilter, TandonWhereInput> | null
     tandonBahan?: XOR<TandonBahanNullableRelationFilter, TandonBahanWhereInput> | null
   }, "id">
@@ -10164,6 +10368,8 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrderInput | SortOrder
     tandonBahanId?: SortOrderInput | SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: SensorCountOrderByAggregateInput
     _avg?: SensorAvgOrderByAggregateInput
     _max?: SensorMaxOrderByAggregateInput
@@ -10184,6 +10390,8 @@ export namespace Prisma {
     nilai?: IntWithAggregatesFilter<"Sensor"> | number
     tandonId?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
     tandonBahanId?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
+    created_at?: DateTimeWithAggregatesFilter<"Sensor"> | Date | string
+    updated_at?: DateTimeNullableWithAggregatesFilter<"Sensor"> | Date | string | null
   }
 
   export type SelenoidWhereInput = {
@@ -10196,6 +10404,8 @@ export namespace Prisma {
     status?: BoolFilter<"Selenoid"> | boolean
     tandonId?: IntFilter<"Selenoid"> | number
     greenhouseId?: IntFilter<"Selenoid"> | number
+    created_at?: DateTimeFilter<"Selenoid"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Selenoid"> | Date | string | null
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
     greenhouse?: XOR<GreenhouseRelationFilter, GreenhouseWhereInput>
   }
@@ -10207,6 +10417,8 @@ export namespace Prisma {
     status?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     tandon?: TandonOrderByWithRelationInput
     greenhouse?: GreenhouseOrderByWithRelationInput
   }
@@ -10221,6 +10433,8 @@ export namespace Prisma {
     status?: BoolFilter<"Selenoid"> | boolean
     tandonId?: IntFilter<"Selenoid"> | number
     greenhouseId?: IntFilter<"Selenoid"> | number
+    created_at?: DateTimeFilter<"Selenoid"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Selenoid"> | Date | string | null
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
     greenhouse?: XOR<GreenhouseRelationFilter, GreenhouseWhereInput>
   }, "id">
@@ -10232,6 +10446,8 @@ export namespace Prisma {
     status?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: SelenoidCountOrderByAggregateInput
     _avg?: SelenoidAvgOrderByAggregateInput
     _max?: SelenoidMaxOrderByAggregateInput
@@ -10249,6 +10465,8 @@ export namespace Prisma {
     status?: BoolWithAggregatesFilter<"Selenoid"> | boolean
     tandonId?: IntWithAggregatesFilter<"Selenoid"> | number
     greenhouseId?: IntWithAggregatesFilter<"Selenoid"> | number
+    created_at?: DateTimeWithAggregatesFilter<"Selenoid"> | Date | string
+    updated_at?: DateTimeNullableWithAggregatesFilter<"Selenoid"> | Date | string | null
   }
 
   export type TandonBahanWhereInput = {
@@ -10258,6 +10476,8 @@ export namespace Prisma {
     id?: IntFilter<"TandonBahan"> | number
     nama?: StringFilter<"TandonBahan"> | string
     tandonId?: IntFilter<"TandonBahan"> | number
+    created_at?: DateTimeFilter<"TandonBahan"> | Date | string
+    updated_at?: DateTimeNullableFilter<"TandonBahan"> | Date | string | null
     sensor?: SensorListRelationFilter
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
   }
@@ -10266,6 +10486,8 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     tandonId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     sensor?: SensorOrderByRelationAggregateInput
     tandon?: TandonOrderByWithRelationInput
   }
@@ -10277,6 +10499,8 @@ export namespace Prisma {
     NOT?: TandonBahanWhereInput | TandonBahanWhereInput[]
     nama?: StringFilter<"TandonBahan"> | string
     tandonId?: IntFilter<"TandonBahan"> | number
+    created_at?: DateTimeFilter<"TandonBahan"> | Date | string
+    updated_at?: DateTimeNullableFilter<"TandonBahan"> | Date | string | null
     sensor?: SensorListRelationFilter
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
   }, "id">
@@ -10285,6 +10509,8 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     tandonId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: TandonBahanCountOrderByAggregateInput
     _avg?: TandonBahanAvgOrderByAggregateInput
     _max?: TandonBahanMaxOrderByAggregateInput
@@ -10299,6 +10525,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"TandonBahan"> | number
     nama?: StringWithAggregatesFilter<"TandonBahan"> | string
     tandonId?: IntWithAggregatesFilter<"TandonBahan"> | number
+    created_at?: DateTimeWithAggregatesFilter<"TandonBahan"> | Date | string
+    updated_at?: DateTimeNullableWithAggregatesFilter<"TandonBahan"> | Date | string | null
   }
 
   export type TandonWhereInput = {
@@ -10310,6 +10538,8 @@ export namespace Prisma {
     userId?: IntFilter<"Tandon"> | number
     status?: StringFilter<"Tandon"> | string
     isOnline?: BoolFilter<"Tandon"> | boolean
+    created_at?: DateTimeFilter<"Tandon"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Tandon"> | Date | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     sensor?: SensorListRelationFilter
     selenoid?: SelenoidListRelationFilter
@@ -10323,6 +10553,8 @@ export namespace Prisma {
     userId?: SortOrder
     status?: SortOrder
     isOnline?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     sensor?: SensorOrderByRelationAggregateInput
     selenoid?: SelenoidOrderByRelationAggregateInput
@@ -10339,6 +10571,8 @@ export namespace Prisma {
     userId?: IntFilter<"Tandon"> | number
     status?: StringFilter<"Tandon"> | string
     isOnline?: BoolFilter<"Tandon"> | boolean
+    created_at?: DateTimeFilter<"Tandon"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Tandon"> | Date | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     sensor?: SensorListRelationFilter
     selenoid?: SelenoidListRelationFilter
@@ -10352,6 +10586,8 @@ export namespace Prisma {
     userId?: SortOrder
     status?: SortOrder
     isOnline?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
     _count?: TandonCountOrderByAggregateInput
     _avg?: TandonAvgOrderByAggregateInput
     _max?: TandonMaxOrderByAggregateInput
@@ -10368,6 +10604,8 @@ export namespace Prisma {
     userId?: IntWithAggregatesFilter<"Tandon"> | number
     status?: StringWithAggregatesFilter<"Tandon"> | string
     isOnline?: BoolWithAggregatesFilter<"Tandon"> | boolean
+    created_at?: DateTimeWithAggregatesFilter<"Tandon"> | Date | string
+    updated_at?: DateTimeNullableWithAggregatesFilter<"Tandon"> | Date | string | null
   }
 
   export type UserCreateInput = {
@@ -10448,6 +10686,8 @@ export namespace Prisma {
   export type GreenhouseCreateInput = {
     nama: string
     thumbnail: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
     user?: UserCreateNestedManyWithoutGreenhouseInput
     selenoid?: SelenoidCreateNestedManyWithoutGreenhouseInput
   }
@@ -10456,6 +10696,8 @@ export namespace Prisma {
     id?: number
     nama: string
     thumbnail: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutGreenhouseInput
   }
@@ -10463,6 +10705,8 @@ export namespace Prisma {
   export type GreenhouseUpdateInput = {
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateManyWithoutGreenhouseNestedInput
     selenoid?: SelenoidUpdateManyWithoutGreenhouseNestedInput
   }
@@ -10471,6 +10715,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
     selenoid?: SelenoidUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
@@ -10479,17 +10725,23 @@ export namespace Prisma {
     id?: number
     nama: string
     thumbnail: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type GreenhouseUpdateManyMutationInput = {
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type GreenhouseUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ResepCreateInput = {
@@ -10497,6 +10749,8 @@ export namespace Prisma {
     ph: number
     nama: string
     interval: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
     penjadwalan?: PenjadwalanCreateNestedManyWithoutResepInput
   }
 
@@ -10506,6 +10760,8 @@ export namespace Prisma {
     ph: number
     nama: string
     interval: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutResepInput
   }
 
@@ -10514,6 +10770,8 @@ export namespace Prisma {
     ph?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     interval?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     penjadwalan?: PenjadwalanUpdateManyWithoutResepNestedInput
   }
 
@@ -10523,6 +10781,8 @@ export namespace Prisma {
     ph?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     interval?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutResepNestedInput
   }
 
@@ -10532,6 +10792,8 @@ export namespace Prisma {
     ph: number
     nama: string
     interval: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type ResepUpdateManyMutationInput = {
@@ -10539,6 +10801,8 @@ export namespace Prisma {
     ph?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     interval?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ResepUncheckedUpdateManyInput = {
@@ -10547,12 +10811,16 @@ export namespace Prisma {
     ph?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     interval?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PenjadwalanCreateInput = {
     waktu: string
     isActive: boolean
     hari?: PenjadwalanCreatehariInput | number[]
+    created_at?: Date | string
+    updated_at?: Date | string | null
     resep: ResepCreateNestedOneWithoutPenjadwalanInput
     tandon: TandonCreateNestedOneWithoutPenjadwalanInput
   }
@@ -10564,12 +10832,16 @@ export namespace Prisma {
     hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
     tandonId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type PenjadwalanUpdateInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     hari?: PenjadwalanUpdatehariInput | number[]
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resep?: ResepUpdateOneRequiredWithoutPenjadwalanNestedInput
     tandon?: TandonUpdateOneRequiredWithoutPenjadwalanNestedInput
   }
@@ -10581,6 +10853,8 @@ export namespace Prisma {
     hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
     tandonId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PenjadwalanCreateManyInput = {
@@ -10590,12 +10864,16 @@ export namespace Prisma {
     hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
     tandonId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type PenjadwalanUpdateManyMutationInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     hari?: PenjadwalanUpdatehariInput | number[]
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PenjadwalanUncheckedUpdateManyInput = {
@@ -10605,6 +10883,8 @@ export namespace Prisma {
     hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
     tandonId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SensorCreateInput = {
@@ -10614,6 +10894,8 @@ export namespace Prisma {
     satuan: string
     status: boolean
     nilai: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
     tandon?: TandonCreateNestedOneWithoutSensorInput
     tandonBahan?: TandonBahanCreateNestedOneWithoutSensorInput
   }
@@ -10628,6 +10910,8 @@ export namespace Prisma {
     nilai: number
     tandonId?: number | null
     tandonBahanId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type SensorUpdateInput = {
@@ -10637,6 +10921,8 @@ export namespace Prisma {
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneWithoutSensorNestedInput
     tandonBahan?: TandonBahanUpdateOneWithoutSensorNestedInput
   }
@@ -10651,6 +10937,8 @@ export namespace Prisma {
     nilai?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SensorCreateManyInput = {
@@ -10663,6 +10951,8 @@ export namespace Prisma {
     nilai: number
     tandonId?: number | null
     tandonBahanId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type SensorUpdateManyMutationInput = {
@@ -10672,6 +10962,8 @@ export namespace Prisma {
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SensorUncheckedUpdateManyInput = {
@@ -10684,12 +10976,16 @@ export namespace Prisma {
     nilai?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SelenoidCreateInput = {
     nama: string
     merek: string
     status: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     tandon: TandonCreateNestedOneWithoutSelenoidInput
     greenhouse: GreenhouseCreateNestedOneWithoutSelenoidInput
   }
@@ -10701,12 +10997,16 @@ export namespace Prisma {
     status: boolean
     tandonId: number
     greenhouseId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type SelenoidUpdateInput = {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneRequiredWithoutSelenoidNestedInput
     greenhouse?: GreenhouseUpdateOneRequiredWithoutSelenoidNestedInput
   }
@@ -10718,6 +11018,8 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     tandonId?: IntFieldUpdateOperationsInput | number
     greenhouseId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SelenoidCreateManyInput = {
@@ -10727,12 +11029,16 @@ export namespace Prisma {
     status: boolean
     tandonId: number
     greenhouseId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type SelenoidUpdateManyMutationInput = {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SelenoidUncheckedUpdateManyInput = {
@@ -10742,10 +11048,14 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     tandonId?: IntFieldUpdateOperationsInput | number
     greenhouseId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TandonBahanCreateInput = {
     nama: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
     sensor?: SensorCreateNestedManyWithoutTandonBahanInput
     tandon: TandonCreateNestedOneWithoutTandonBahanInput
   }
@@ -10754,11 +11064,15 @@ export namespace Prisma {
     id?: number
     nama: string
     tandonId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonBahanInput
   }
 
   export type TandonBahanUpdateInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUpdateManyWithoutTandonBahanNestedInput
     tandon?: TandonUpdateOneRequiredWithoutTandonBahanNestedInput
   }
@@ -10767,6 +11081,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     tandonId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonBahanNestedInput
   }
 
@@ -10774,22 +11090,30 @@ export namespace Prisma {
     id?: number
     nama: string
     tandonId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type TandonBahanUpdateManyMutationInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TandonBahanUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     tandonId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TandonCreateInput = {
     nama: string
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidCreateNestedManyWithoutTandonInput
@@ -10803,6 +11127,8 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
@@ -10813,6 +11139,8 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
@@ -10826,6 +11154,8 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
@@ -10838,12 +11168,16 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type TandonUpdateManyMutationInput = {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TandonUncheckedUpdateManyInput = {
@@ -10852,6 +11186,8 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -11051,6 +11387,8 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     thumbnail?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type GreenhouseAvgOrderByAggregateInput = {
@@ -11061,12 +11399,16 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     thumbnail?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type GreenhouseMinOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
     thumbnail?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type GreenhouseSumOrderByAggregateInput = {
@@ -11100,6 +11442,8 @@ export namespace Prisma {
     ph?: SortOrder
     nama?: SortOrder
     interval?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type ResepAvgOrderByAggregateInput = {
@@ -11115,6 +11459,8 @@ export namespace Prisma {
     ph?: SortOrder
     nama?: SortOrder
     interval?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type ResepMinOrderByAggregateInput = {
@@ -11123,6 +11469,8 @@ export namespace Prisma {
     ph?: SortOrder
     nama?: SortOrder
     interval?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type ResepSumOrderByAggregateInput = {
@@ -11178,6 +11526,8 @@ export namespace Prisma {
     hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type PenjadwalanAvgOrderByAggregateInput = {
@@ -11193,6 +11543,8 @@ export namespace Prisma {
     isActive?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type PenjadwalanMinOrderByAggregateInput = {
@@ -11201,6 +11553,8 @@ export namespace Prisma {
     isActive?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type PenjadwalanSumOrderByAggregateInput = {
@@ -11249,6 +11603,8 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type SensorAvgOrderByAggregateInput = {
@@ -11268,6 +11624,8 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type SensorMinOrderByAggregateInput = {
@@ -11280,6 +11638,8 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type SensorSumOrderByAggregateInput = {
@@ -11317,6 +11677,8 @@ export namespace Prisma {
     status?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type SelenoidAvgOrderByAggregateInput = {
@@ -11332,6 +11694,8 @@ export namespace Prisma {
     status?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type SelenoidMinOrderByAggregateInput = {
@@ -11341,6 +11705,8 @@ export namespace Prisma {
     status?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type SelenoidSumOrderByAggregateInput = {
@@ -11363,6 +11729,8 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     tandonId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type TandonBahanAvgOrderByAggregateInput = {
@@ -11374,12 +11742,16 @@ export namespace Prisma {
     id?: SortOrder
     nama?: SortOrder
     tandonId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type TandonBahanMinOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
     tandonId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type TandonBahanSumOrderByAggregateInput = {
@@ -11408,6 +11780,8 @@ export namespace Prisma {
     userId?: SortOrder
     status?: SortOrder
     isOnline?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type TandonAvgOrderByAggregateInput = {
@@ -11421,6 +11795,8 @@ export namespace Prisma {
     userId?: SortOrder
     status?: SortOrder
     isOnline?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type TandonMinOrderByAggregateInput = {
@@ -11429,6 +11805,8 @@ export namespace Prisma {
     userId?: SortOrder
     status?: SortOrder
     isOnline?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
   }
 
   export type TandonSumOrderByAggregateInput = {
@@ -12202,6 +12580,8 @@ export namespace Prisma {
   export type GreenhouseCreateWithoutUserInput = {
     nama: string
     thumbnail: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
     selenoid?: SelenoidCreateNestedManyWithoutGreenhouseInput
   }
 
@@ -12209,6 +12589,8 @@ export namespace Prisma {
     id?: number
     nama: string
     thumbnail: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
@@ -12221,6 +12603,8 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     sensor?: SensorCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
@@ -12232,6 +12616,8 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
@@ -12271,6 +12657,8 @@ export namespace Prisma {
     id?: IntFilter<"Greenhouse"> | number
     nama?: StringFilter<"Greenhouse"> | string
     thumbnail?: StringFilter<"Greenhouse"> | string
+    created_at?: DateTimeFilter<"Greenhouse"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
   }
 
   export type TandonUpsertWithWhereUniqueWithoutUserInput = {
@@ -12298,6 +12686,8 @@ export namespace Prisma {
     userId?: IntFilter<"Tandon"> | number
     status?: StringFilter<"Tandon"> | string
     isOnline?: BoolFilter<"Tandon"> | boolean
+    created_at?: DateTimeFilter<"Tandon"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Tandon"> | Date | string | null
   }
 
   export type UserCreateWithoutGreenhouseInput = {
@@ -12330,6 +12720,8 @@ export namespace Prisma {
     nama: string
     merek: string
     status: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     tandon: TandonCreateNestedOneWithoutSelenoidInput
   }
 
@@ -12339,6 +12731,8 @@ export namespace Prisma {
     merek: string
     status: boolean
     tandonId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type SelenoidCreateOrConnectWithoutGreenhouseInput = {
@@ -12406,12 +12800,16 @@ export namespace Prisma {
     status?: BoolFilter<"Selenoid"> | boolean
     tandonId?: IntFilter<"Selenoid"> | number
     greenhouseId?: IntFilter<"Selenoid"> | number
+    created_at?: DateTimeFilter<"Selenoid"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Selenoid"> | Date | string | null
   }
 
   export type PenjadwalanCreateWithoutResepInput = {
     waktu: string
     isActive: boolean
     hari?: PenjadwalanCreatehariInput | number[]
+    created_at?: Date | string
+    updated_at?: Date | string | null
     tandon: TandonCreateNestedOneWithoutPenjadwalanInput
   }
 
@@ -12421,6 +12819,8 @@ export namespace Prisma {
     isActive: boolean
     hari?: PenjadwalanCreatehariInput | number[]
     tandonId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type PenjadwalanCreateOrConnectWithoutResepInput = {
@@ -12459,6 +12859,8 @@ export namespace Prisma {
     hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
+    created_at?: DateTimeFilter<"Penjadwalan"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Penjadwalan"> | Date | string | null
   }
 
   export type ResepCreateWithoutPenjadwalanInput = {
@@ -12466,6 +12868,8 @@ export namespace Prisma {
     ph: number
     nama: string
     interval: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type ResepUncheckedCreateWithoutPenjadwalanInput = {
@@ -12474,6 +12878,8 @@ export namespace Prisma {
     ph: number
     nama: string
     interval: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type ResepCreateOrConnectWithoutPenjadwalanInput = {
@@ -12485,6 +12891,8 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidCreateNestedManyWithoutTandonInput
@@ -12497,6 +12905,8 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
@@ -12523,6 +12933,8 @@ export namespace Prisma {
     ph?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     interval?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ResepUncheckedUpdateWithoutPenjadwalanInput = {
@@ -12531,6 +12943,8 @@ export namespace Prisma {
     ph?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     interval?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TandonUpsertWithoutPenjadwalanInput = {
@@ -12548,6 +12962,8 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
@@ -12560,6 +12976,8 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
@@ -12569,6 +12987,8 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
     selenoid?: SelenoidCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
@@ -12581,6 +13001,8 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
@@ -12593,6 +13015,8 @@ export namespace Prisma {
 
   export type TandonBahanCreateWithoutSensorInput = {
     nama: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
     tandon: TandonCreateNestedOneWithoutTandonBahanInput
   }
 
@@ -12600,6 +13024,8 @@ export namespace Prisma {
     id?: number
     nama: string
     tandonId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type TandonBahanCreateOrConnectWithoutSensorInput = {
@@ -12622,6 +13048,8 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
@@ -12634,6 +13062,8 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
@@ -12652,6 +13082,8 @@ export namespace Prisma {
 
   export type TandonBahanUpdateWithoutSensorInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneRequiredWithoutTandonBahanNestedInput
   }
 
@@ -12659,12 +13091,16 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     tandonId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TandonCreateWithoutSelenoidInput = {
     nama: string
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
@@ -12677,6 +13113,8 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
@@ -12690,6 +13128,8 @@ export namespace Prisma {
   export type GreenhouseCreateWithoutSelenoidInput = {
     nama: string
     thumbnail: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
     user?: UserCreateNestedManyWithoutGreenhouseInput
   }
 
@@ -12697,6 +13137,8 @@ export namespace Prisma {
     id?: number
     nama: string
     thumbnail: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
@@ -12720,6 +13162,8 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
@@ -12732,6 +13176,8 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
@@ -12751,6 +13197,8 @@ export namespace Prisma {
   export type GreenhouseUpdateWithoutSelenoidInput = {
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateManyWithoutGreenhouseNestedInput
   }
 
@@ -12758,6 +13206,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
@@ -12768,6 +13218,8 @@ export namespace Prisma {
     satuan: string
     status: boolean
     nilai: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
     tandon?: TandonCreateNestedOneWithoutSensorInput
   }
 
@@ -12780,6 +13232,8 @@ export namespace Prisma {
     status: boolean
     nilai: number
     tandonId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type SensorCreateOrConnectWithoutTandonBahanInput = {
@@ -12796,6 +13250,8 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidCreateNestedManyWithoutTandonInput
@@ -12808,6 +13264,8 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
@@ -12847,6 +13305,8 @@ export namespace Prisma {
     nilai?: IntFilter<"Sensor"> | number
     tandonId?: IntNullableFilter<"Sensor"> | number | null
     tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
+    created_at?: DateTimeFilter<"Sensor"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Sensor"> | Date | string | null
   }
 
   export type TandonUpsertWithoutTandonBahanInput = {
@@ -12864,6 +13324,8 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
@@ -12876,6 +13338,8 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
@@ -12914,6 +13378,8 @@ export namespace Prisma {
     satuan: string
     status: boolean
     nilai: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
     tandonBahan?: TandonBahanCreateNestedOneWithoutSensorInput
   }
 
@@ -12926,6 +13392,8 @@ export namespace Prisma {
     status: boolean
     nilai: number
     tandonBahanId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type SensorCreateOrConnectWithoutTandonInput = {
@@ -12942,6 +13410,8 @@ export namespace Prisma {
     nama: string
     merek: string
     status: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
     greenhouse: GreenhouseCreateNestedOneWithoutSelenoidInput
   }
 
@@ -12951,6 +13421,8 @@ export namespace Prisma {
     merek: string
     status: boolean
     greenhouseId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type SelenoidCreateOrConnectWithoutTandonInput = {
@@ -12965,12 +13437,16 @@ export namespace Prisma {
 
   export type TandonBahanCreateWithoutTandonInput = {
     nama: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
     sensor?: SensorCreateNestedManyWithoutTandonBahanInput
   }
 
   export type TandonBahanUncheckedCreateWithoutTandonInput = {
     id?: number
     nama: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonBahanInput
   }
 
@@ -12988,6 +13464,8 @@ export namespace Prisma {
     waktu: string
     isActive: boolean
     hari?: PenjadwalanCreatehariInput | number[]
+    created_at?: Date | string
+    updated_at?: Date | string | null
     resep: ResepCreateNestedOneWithoutPenjadwalanInput
   }
 
@@ -12997,6 +13475,8 @@ export namespace Prisma {
     isActive: boolean
     hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type PenjadwalanCreateOrConnectWithoutTandonInput = {
@@ -13096,6 +13576,8 @@ export namespace Prisma {
     id?: IntFilter<"TandonBahan"> | number
     nama?: StringFilter<"TandonBahan"> | string
     tandonId?: IntFilter<"TandonBahan"> | number
+    created_at?: DateTimeFilter<"TandonBahan"> | Date | string
+    updated_at?: DateTimeNullableFilter<"TandonBahan"> | Date | string | null
   }
 
   export type PenjadwalanUpsertWithWhereUniqueWithoutTandonInput = {
@@ -13119,11 +13601,15 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type GreenhouseUpdateWithoutUserInput = {
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     selenoid?: SelenoidUpdateManyWithoutGreenhouseNestedInput
   }
 
@@ -13131,6 +13617,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     selenoid?: SelenoidUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
@@ -13138,12 +13626,16 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TandonUpdateWithoutUserInput = {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
@@ -13155,6 +13647,8 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
@@ -13166,6 +13660,8 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SelenoidCreateManyGreenhouseInput = {
@@ -13174,6 +13670,8 @@ export namespace Prisma {
     merek: string
     status: boolean
     tandonId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type UserUpdateWithoutGreenhouseInput = {
@@ -13211,6 +13709,8 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneRequiredWithoutSelenoidNestedInput
   }
 
@@ -13220,6 +13720,8 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     tandonId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SelenoidUncheckedUpdateManyWithoutGreenhouseInput = {
@@ -13228,6 +13730,8 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     tandonId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PenjadwalanCreateManyResepInput = {
@@ -13236,12 +13740,16 @@ export namespace Prisma {
     isActive: boolean
     hari?: PenjadwalanCreatehariInput | number[]
     tandonId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type PenjadwalanUpdateWithoutResepInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     hari?: PenjadwalanUpdatehariInput | number[]
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneRequiredWithoutPenjadwalanNestedInput
   }
 
@@ -13251,6 +13759,8 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     hari?: PenjadwalanUpdatehariInput | number[]
     tandonId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PenjadwalanUncheckedUpdateManyWithoutResepInput = {
@@ -13259,6 +13769,8 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     hari?: PenjadwalanUpdatehariInput | number[]
     tandonId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SensorCreateManyTandonBahanInput = {
@@ -13270,6 +13782,8 @@ export namespace Prisma {
     status: boolean
     nilai: number
     tandonId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type SensorUpdateWithoutTandonBahanInput = {
@@ -13279,6 +13793,8 @@ export namespace Prisma {
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneWithoutSensorNestedInput
   }
 
@@ -13291,6 +13807,8 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SensorUncheckedUpdateManyWithoutTandonBahanInput = {
@@ -13302,6 +13820,8 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SensorCreateManyTandonInput = {
@@ -13313,6 +13833,8 @@ export namespace Prisma {
     status: boolean
     nilai: number
     tandonBahanId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type SelenoidCreateManyTandonInput = {
@@ -13321,11 +13843,15 @@ export namespace Prisma {
     merek: string
     status: boolean
     greenhouseId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type TandonBahanCreateManyTandonInput = {
     id?: number
     nama: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type PenjadwalanCreateManyTandonInput = {
@@ -13334,6 +13860,8 @@ export namespace Prisma {
     isActive: boolean
     hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
   }
 
   export type SensorUpdateWithoutTandonInput = {
@@ -13343,6 +13871,8 @@ export namespace Prisma {
     satuan?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandonBahan?: TandonBahanUpdateOneWithoutSensorNestedInput
   }
 
@@ -13355,6 +13885,8 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SensorUncheckedUpdateManyWithoutTandonInput = {
@@ -13366,12 +13898,16 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SelenoidUpdateWithoutTandonInput = {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     greenhouse?: GreenhouseUpdateOneRequiredWithoutSelenoidNestedInput
   }
 
@@ -13381,6 +13917,8 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     greenhouseId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SelenoidUncheckedUpdateManyWithoutTandonInput = {
@@ -13389,28 +13927,38 @@ export namespace Prisma {
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     greenhouseId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type TandonBahanUpdateWithoutTandonInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUpdateManyWithoutTandonBahanNestedInput
   }
 
   export type TandonBahanUncheckedUpdateWithoutTandonInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonBahanNestedInput
   }
 
   export type TandonBahanUncheckedUpdateManyWithoutTandonInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PenjadwalanUpdateWithoutTandonInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
     hari?: PenjadwalanUpdatehariInput | number[]
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     resep?: ResepUpdateOneRequiredWithoutPenjadwalanNestedInput
   }
 
@@ -13420,6 +13968,8 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type PenjadwalanUncheckedUpdateManyWithoutTandonInput = {
@@ -13428,6 +13978,8 @@ export namespace Prisma {
     isActive?: BoolFieldUpdateOperationsInput | boolean
     hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
 

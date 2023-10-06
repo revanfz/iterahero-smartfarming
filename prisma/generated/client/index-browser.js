@@ -120,7 +120,9 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.GreenhouseScalarFieldEnum = {
   id: 'id',
   nama: 'nama',
-  thumbnail: 'thumbnail'
+  thumbnail: 'thumbnail',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.ResepScalarFieldEnum = {
@@ -128,7 +130,9 @@ exports.Prisma.ResepScalarFieldEnum = {
   ppm: 'ppm',
   ph: 'ph',
   nama: 'nama',
-  interval: 'interval'
+  interval: 'interval',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.PenjadwalanScalarFieldEnum = {
@@ -137,7 +141,9 @@ exports.Prisma.PenjadwalanScalarFieldEnum = {
   isActive: 'isActive',
   hari: 'hari',
   resepId: 'resepId',
-  tandonId: 'tandonId'
+  tandonId: 'tandonId',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.SensorScalarFieldEnum = {
@@ -149,7 +155,9 @@ exports.Prisma.SensorScalarFieldEnum = {
   status: 'status',
   nilai: 'nilai',
   tandonId: 'tandonId',
-  tandonBahanId: 'tandonBahanId'
+  tandonBahanId: 'tandonBahanId',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.SelenoidScalarFieldEnum = {
@@ -158,13 +166,17 @@ exports.Prisma.SelenoidScalarFieldEnum = {
   merek: 'merek',
   status: 'status',
   tandonId: 'tandonId',
-  greenhouseId: 'greenhouseId'
+  greenhouseId: 'greenhouseId',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.TandonBahanScalarFieldEnum = {
   id: 'id',
   nama: 'nama',
-  tandonId: 'tandonId'
+  tandonId: 'tandonId',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.TandonScalarFieldEnum = {
@@ -172,7 +184,9 @@ exports.Prisma.TandonScalarFieldEnum = {
   nama: 'nama',
   userId: 'userId',
   status: 'status',
-  isOnline: 'isOnline'
+  isOnline: 'isOnline',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.SortOrder = {
