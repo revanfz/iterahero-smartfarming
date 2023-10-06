@@ -32,7 +32,8 @@ function main() {
                             id: 1
                         },
                         create: {
-                            nama: "Greenhouse Kebun Raya"
+                            nama: "Greenhouse Kebun Raya",
+                            thumbnail: ""
                         }
                     }
                 }
@@ -54,7 +55,8 @@ function main() {
                             id: 2
                         },
                         create: {
-                            nama: "Greenhouse Wanayasa"
+                            nama: "Greenhouse Wanayasa",
+                            thumbnail: ""
                         }
                     }
                 }

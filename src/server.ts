@@ -76,7 +76,7 @@ const plugins = [
       if (exp > Date.now() / 1000) {
         return {
             isValid: true,
-            credentials: artifacts.token
+            credentials: jwt.decode(artifacts.token as string)
         }
       } else {
         return {

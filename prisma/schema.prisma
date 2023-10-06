@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "./generated/client"
+  provider      = "prisma-client-js"
+  output        = "./generated/client"
   binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -25,10 +25,11 @@ model User {
 }
 
 model Greenhouse {
-  id       Int        @id @default(autoincrement())
-  nama     String
-  user     User[]
-  selenoid Selenoid[]
+  id        Int        @id @default(autoincrement())
+  nama      String
+  thumbnail String
+  user      User[]
+  selenoid  Selenoid[]
 }
 
 model Resep {
@@ -42,9 +43,9 @@ model Resep {
 
 model Penjadwalan {
   id       Int     @id @default(autoincrement())
-  waktu    String  
+  waktu    String
   isActive Boolean
-  hari      Int[]
+  hari     Int[]
   resep    Resep   @relation(fields: [resepId], references: [id])
   resepId  Int
   tandon   Tandon  @relation(fields: [tandonId], references: [id])

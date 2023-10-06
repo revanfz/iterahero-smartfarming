@@ -10,6 +10,7 @@ const peracikan_1 = require("./peracikan");
 const bahan_1 = require("./bahan");
 const tandonUtama_1 = require("./tandonUtama");
 const dashboard_1 = require("./dashboard");
+const greenhouse_1 = require("./greenhouse");
 exports.routes = [
     ...home_1.home,
     ...login_1.loginRoute,
@@ -19,5 +20,6 @@ exports.routes = [
     ...peracikan_1.peracikanRoute,
     ...bahan_1.bahanRoute,
     ...tandonUtama_1.tandonUtamaRoute,
-    ...dashboard_1.dashboardRoute
+    ...dashboard_1.dashboardRoute,
+    ...greenhouse_1.greenhouseRoute
 ];

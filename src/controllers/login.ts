@@ -45,7 +45,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             sub: process.env.JWT_SUB
         }
         const jwtSecret = process.env.JWT_SECRET || '';
-        const token = jwt.sign(payloadJwt, jwtSecret, { expiresIn: "12h" });
+        const token = jwt.sign(payloadJwt, jwtSecret, { expiresIn: "3d" });
         
         return h.response({
             status: 'success',

@@ -2699,16 +2699,19 @@ export namespace Prisma {
   export type GreenhouseMinAggregateOutputType = {
     id: number | null
     nama: string | null
+    thumbnail: string | null
   }
 
   export type GreenhouseMaxAggregateOutputType = {
     id: number | null
     nama: string | null
+    thumbnail: string | null
   }
 
   export type GreenhouseCountAggregateOutputType = {
     id: number
     nama: number
+    thumbnail: number
     _all: number
   }
 
@@ -2724,16 +2727,19 @@ export namespace Prisma {
   export type GreenhouseMinAggregateInputType = {
     id?: true
     nama?: true
+    thumbnail?: true
   }
 
   export type GreenhouseMaxAggregateInputType = {
     id?: true
     nama?: true
+    thumbnail?: true
   }
 
   export type GreenhouseCountAggregateInputType = {
     id?: true
     nama?: true
+    thumbnail?: true
     _all?: true
   }
 
@@ -2826,6 +2832,7 @@ export namespace Prisma {
   export type GreenhouseGroupByOutputType = {
     id: number
     nama: string
+    thumbnail: string
     _count: GreenhouseCountAggregateOutputType | null
     _avg: GreenhouseAvgAggregateOutputType | null
     _sum: GreenhouseSumAggregateOutputType | null
@@ -2850,6 +2857,7 @@ export namespace Prisma {
   export type GreenhouseSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nama?: boolean
+    thumbnail?: boolean
     user?: boolean | Greenhouse$userArgs<ExtArgs>
     selenoid?: boolean | Greenhouse$selenoidArgs<ExtArgs>
     _count?: boolean | GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
@@ -2858,6 +2866,7 @@ export namespace Prisma {
   export type GreenhouseSelectScalar = {
     id?: boolean
     nama?: boolean
+    thumbnail?: boolean
   }
 
   export type GreenhouseInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -2876,6 +2885,7 @@ export namespace Prisma {
     scalars: $Extensions.GetResult<{
       id: number
       nama: string
+      thumbnail: string
     }, ExtArgs["result"]["greenhouse"]>
     composites: {}
   }
@@ -3275,6 +3285,7 @@ export namespace Prisma {
   interface GreenhouseFieldRefs {
     readonly id: FieldRef<"Greenhouse", 'Int'>
     readonly nama: FieldRef<"Greenhouse", 'String'>
+    readonly thumbnail: FieldRef<"Greenhouse", 'String'>
   }
     
 
@@ -9681,7 +9692,8 @@ export namespace Prisma {
 
   export const GreenhouseScalarFieldEnum: {
     id: 'id',
-    nama: 'nama'
+    nama: 'nama',
+    thumbnail: 'thumbnail'
   };
 
   export type GreenhouseScalarFieldEnum = (typeof GreenhouseScalarFieldEnum)[keyof typeof GreenhouseScalarFieldEnum]
@@ -9928,6 +9940,7 @@ export namespace Prisma {
     NOT?: GreenhouseWhereInput | GreenhouseWhereInput[]
     id?: IntFilter<"Greenhouse"> | number
     nama?: StringFilter<"Greenhouse"> | string
+    thumbnail?: StringFilter<"Greenhouse"> | string
     user?: UserListRelationFilter
     selenoid?: SelenoidListRelationFilter
   }
@@ -9935,6 +9948,7 @@ export namespace Prisma {
   export type GreenhouseOrderByWithRelationInput = {
     id?: SortOrder
     nama?: SortOrder
+    thumbnail?: SortOrder
     user?: UserOrderByRelationAggregateInput
     selenoid?: SelenoidOrderByRelationAggregateInput
   }
@@ -9945,6 +9959,7 @@ export namespace Prisma {
     OR?: GreenhouseWhereInput[]
     NOT?: GreenhouseWhereInput | GreenhouseWhereInput[]
     nama?: StringFilter<"Greenhouse"> | string
+    thumbnail?: StringFilter<"Greenhouse"> | string
     user?: UserListRelationFilter
     selenoid?: SelenoidListRelationFilter
   }, "id">
@@ -9952,6 +9967,7 @@ export namespace Prisma {
   export type GreenhouseOrderByWithAggregationInput = {
     id?: SortOrder
     nama?: SortOrder
+    thumbnail?: SortOrder
     _count?: GreenhouseCountOrderByAggregateInput
     _avg?: GreenhouseAvgOrderByAggregateInput
     _max?: GreenhouseMaxOrderByAggregateInput
@@ -9965,6 +9981,7 @@ export namespace Prisma {
     NOT?: GreenhouseScalarWhereWithAggregatesInput | GreenhouseScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Greenhouse"> | number
     nama?: StringWithAggregatesFilter<"Greenhouse"> | string
+    thumbnail?: StringWithAggregatesFilter<"Greenhouse"> | string
   }
 
   export type ResepWhereInput = {
@@ -10430,6 +10447,7 @@ export namespace Prisma {
 
   export type GreenhouseCreateInput = {
     nama: string
+    thumbnail: string
     user?: UserCreateNestedManyWithoutGreenhouseInput
     selenoid?: SelenoidCreateNestedManyWithoutGreenhouseInput
   }
@@ -10437,12 +10455,14 @@ export namespace Prisma {
   export type GreenhouseUncheckedCreateInput = {
     id?: number
     nama: string
+    thumbnail: string
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUpdateInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateManyWithoutGreenhouseNestedInput
     selenoid?: SelenoidUpdateManyWithoutGreenhouseNestedInput
   }
@@ -10450,6 +10470,7 @@ export namespace Prisma {
   export type GreenhouseUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
     user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
     selenoid?: SelenoidUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
@@ -10457,15 +10478,18 @@ export namespace Prisma {
   export type GreenhouseCreateManyInput = {
     id?: number
     nama: string
+    thumbnail: string
   }
 
   export type GreenhouseUpdateManyMutationInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
   }
 
   export type GreenhouseUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
   }
 
   export type ResepCreateInput = {
@@ -11026,6 +11050,7 @@ export namespace Prisma {
   export type GreenhouseCountOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
+    thumbnail?: SortOrder
   }
 
   export type GreenhouseAvgOrderByAggregateInput = {
@@ -11035,11 +11060,13 @@ export namespace Prisma {
   export type GreenhouseMaxOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
+    thumbnail?: SortOrder
   }
 
   export type GreenhouseMinOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
+    thumbnail?: SortOrder
   }
 
   export type GreenhouseSumOrderByAggregateInput = {
@@ -12174,12 +12201,14 @@ export namespace Prisma {
 
   export type GreenhouseCreateWithoutUserInput = {
     nama: string
+    thumbnail: string
     selenoid?: SelenoidCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateWithoutUserInput = {
     id?: number
     nama: string
+    thumbnail: string
     selenoid?: SelenoidUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
@@ -12241,6 +12270,7 @@ export namespace Prisma {
     NOT?: GreenhouseScalarWhereInput | GreenhouseScalarWhereInput[]
     id?: IntFilter<"Greenhouse"> | number
     nama?: StringFilter<"Greenhouse"> | string
+    thumbnail?: StringFilter<"Greenhouse"> | string
   }
 
   export type TandonUpsertWithWhereUniqueWithoutUserInput = {
@@ -12659,12 +12689,14 @@ export namespace Prisma {
 
   export type GreenhouseCreateWithoutSelenoidInput = {
     nama: string
+    thumbnail: string
     user?: UserCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateWithoutSelenoidInput = {
     id?: number
     nama: string
+    thumbnail: string
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
@@ -12718,12 +12750,14 @@ export namespace Prisma {
 
   export type GreenhouseUpdateWithoutSelenoidInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
     user?: UserUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateWithoutSelenoidInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
     user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
@@ -13089,18 +13123,21 @@ export namespace Prisma {
 
   export type GreenhouseUpdateWithoutUserInput = {
     nama?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
     selenoid?: SelenoidUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
     selenoid?: SelenoidUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
   }
 
   export type TandonUpdateWithoutUserInput = {

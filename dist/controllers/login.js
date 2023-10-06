@@ -49,7 +49,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             sub: process.env.JWT_SUB
         };
         const jwtSecret = process.env.JWT_SECRET || '';
-        const token = jsonwebtoken_1.default.sign(payloadJwt, jwtSecret, { expiresIn: "12h" });
+        const token = jsonwebtoken_1.default.sign(payloadJwt, jwtSecret, { expiresIn: "3d" });
         return h.response({
             status: 'success',
             accessToken: token,

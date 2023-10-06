@@ -119,7 +119,8 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.GreenhouseScalarFieldEnum = {
   id: 'id',
-  nama: 'nama'
+  nama: 'nama',
+  thumbnail: 'thumbnail'
 };
 
 exports.Prisma.ResepScalarFieldEnum = {
