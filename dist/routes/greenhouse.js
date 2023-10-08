@@ -9,5 +9,20 @@ exports.greenhouseRoute = [
         method: "GET",
         path,
         handler: greenhouse_1.getHandler
+    },
+    {
+        method: "POST",
+        path,
+        handler: greenhouse_1.postHandler,
+        options: {
+            payload: {
+                parse: true,
+                allow: "multipart/form-data",
+                multipart: {
+                    output: "stream"
+                },
+                maxBytes: 1000 * 1000 * 5 // 5 Mb
+            },
+        }
     }
 ];

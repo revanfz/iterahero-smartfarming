@@ -27,7 +27,8 @@ exports.resepRoute = [
         options: {
             tags: ['api'],
             validate: {
-                payload: postValidator
+                payload: postValidator,
+                failAction: "error"
             }
         }
     }

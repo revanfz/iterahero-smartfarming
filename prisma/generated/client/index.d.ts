@@ -10127,16 +10127,16 @@ export namespace Prisma {
 
   export type GreenhouseWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    nama?: string
     AND?: GreenhouseWhereInput | GreenhouseWhereInput[]
     OR?: GreenhouseWhereInput[]
     NOT?: GreenhouseWhereInput | GreenhouseWhereInput[]
-    nama?: StringFilter<"Greenhouse"> | string
     thumbnail?: StringFilter<"Greenhouse"> | string
     created_at?: DateTimeFilter<"Greenhouse"> | Date | string
     updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
     user?: UserListRelationFilter
     selenoid?: SelenoidListRelationFilter
-  }, "id">
+  }, "id" | "nama">
 
   export type GreenhouseOrderByWithAggregationInput = {
     id?: SortOrder

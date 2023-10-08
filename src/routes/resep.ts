@@ -25,7 +25,8 @@ export const resepRoute: ServerRoute[] = [
         options: {
             tags: ['api'],
             validate: {
-                payload: postValidator
+                payload: postValidator,
+                failAction: "error"
             }
         }
     }
