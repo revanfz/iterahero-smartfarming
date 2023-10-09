@@ -33,7 +33,7 @@ function main() {
                         },
                         create: {
                             nama: "Greenhouse Kebun Raya",
-                            thumbnail: ""
+                            thumbnail: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg"
                         }
                     }
                 }

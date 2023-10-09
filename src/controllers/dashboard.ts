@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
   try {
     const token = request.auth.credentials;
-    const { email, role } = jwt.decode(token.toString()) as {
+    const { email, role } = token as {
       email: string;
       role: string;
     };
@@ -85,6 +85,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
+    console.log(e);
     if (e instanceof Error) {
       return Boom.internal(e.message);
     }

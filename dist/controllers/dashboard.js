@@ -15,11 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const token = request.auth.credentials;
-        const { email, role } = jsonwebtoken_1.default.decode(token.toString());
+        const { email, role } = token;
         const target = yield prisma_1.prisma.user.findUnique({
             where: {
                 email,
@@ -83,6 +82,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             .code(200);
     }
     catch (e) {
+        console.log(e);
         if (e instanceof Error) {
             return boom_1.default.internal(e.message);
         }
