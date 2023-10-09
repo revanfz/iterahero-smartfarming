@@ -160,7 +160,7 @@ exports.Prisma.SensorScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
-exports.Prisma.SelenoidScalarFieldEnum = {
+exports.Prisma.ActuatorScalarFieldEnum = {
   id: 'id',
   nama: 'nama',
   merek: 'merek',
@@ -211,7 +211,7 @@ exports.Prisma.ModelName = {
   Resep: 'Resep',
   Penjadwalan: 'Penjadwalan',
   Sensor: 'Sensor',
-  Selenoid: 'Selenoid',
+  Actuator: 'Actuator',
   TandonBahan: 'TandonBahan',
   Tandon: 'Tandon'
 };

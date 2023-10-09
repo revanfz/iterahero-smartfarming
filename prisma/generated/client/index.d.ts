@@ -39,10 +39,10 @@ export type Penjadwalan = $Result.DefaultSelection<Prisma.$PenjadwalanPayload>
  */
 export type Sensor = $Result.DefaultSelection<Prisma.$SensorPayload>
 /**
- * Model Selenoid
+ * Model Actuator
  * 
  */
-export type Selenoid = $Result.DefaultSelection<Prisma.$SelenoidPayload>
+export type Actuator = $Result.DefaultSelection<Prisma.$ActuatorPayload>
 /**
  * Model TandonBahan
  * 
@@ -227,14 +227,14 @@ export class PrismaClient<
   get sensor(): Prisma.SensorDelegate<ExtArgs>;
 
   /**
-   * `prisma.selenoid`: Exposes CRUD operations for the **Selenoid** model.
+   * `prisma.actuator`: Exposes CRUD operations for the **Actuator** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Selenoids
-    * const selenoids = await prisma.selenoid.findMany()
+    * // Fetch zero or more Actuators
+    * const actuators = await prisma.actuator.findMany()
     * ```
     */
-  get selenoid(): Prisma.SelenoidDelegate<ExtArgs>;
+  get actuator(): Prisma.ActuatorDelegate<ExtArgs>;
 
   /**
    * `prisma.tandonBahan`: Exposes CRUD operations for the **TandonBahan** model.
@@ -730,7 +730,7 @@ export namespace Prisma {
     Resep: 'Resep',
     Penjadwalan: 'Penjadwalan',
     Sensor: 'Sensor',
-    Selenoid: 'Selenoid',
+    Actuator: 'Actuator',
     TandonBahan: 'TandonBahan',
     Tandon: 'Tandon'
   };
@@ -749,7 +749,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'greenhouse' | 'resep' | 'penjadwalan' | 'sensor' | 'selenoid' | 'tandonBahan' | 'tandon'
+      modelProps: 'user' | 'greenhouse' | 'resep' | 'penjadwalan' | 'sensor' | 'actuator' | 'tandonBahan' | 'tandon'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1083,69 +1083,69 @@ export namespace Prisma {
           }
         }
       }
-      Selenoid: {
-        payload: Prisma.$SelenoidPayload<ExtArgs>
-        fields: Prisma.SelenoidFieldRefs
+      Actuator: {
+        payload: Prisma.$ActuatorPayload<ExtArgs>
+        fields: Prisma.ActuatorFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.SelenoidFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SelenoidPayload> | null
+            args: Prisma.ActuatorFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.SelenoidFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SelenoidPayload>
+            args: Prisma.ActuatorFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
           }
           findFirst: {
-            args: Prisma.SelenoidFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SelenoidPayload> | null
+            args: Prisma.ActuatorFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.SelenoidFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SelenoidPayload>
+            args: Prisma.ActuatorFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
           }
           findMany: {
-            args: Prisma.SelenoidFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SelenoidPayload>[]
+            args: Prisma.ActuatorFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>[]
           }
           create: {
-            args: Prisma.SelenoidCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SelenoidPayload>
+            args: Prisma.ActuatorCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
           }
           createMany: {
-            args: Prisma.SelenoidCreateManyArgs<ExtArgs>,
+            args: Prisma.ActuatorCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           delete: {
-            args: Prisma.SelenoidDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SelenoidPayload>
+            args: Prisma.ActuatorDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
           }
           update: {
-            args: Prisma.SelenoidUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SelenoidPayload>
+            args: Prisma.ActuatorUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
           }
           deleteMany: {
-            args: Prisma.SelenoidDeleteManyArgs<ExtArgs>,
+            args: Prisma.ActuatorDeleteManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.SelenoidUpdateManyArgs<ExtArgs>,
+            args: Prisma.ActuatorUpdateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.SelenoidUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$SelenoidPayload>
+            args: Prisma.ActuatorUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
           }
           aggregate: {
-            args: Prisma.SelenoidAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateSelenoid>
+            args: Prisma.ActuatorAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateActuator>
           }
           groupBy: {
-            args: Prisma.SelenoidGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<SelenoidGroupByOutputType>[]
+            args: Prisma.ActuatorGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<ActuatorGroupByOutputType>[]
           }
           count: {
-            args: Prisma.SelenoidCountArgs<ExtArgs>,
-            result: $Utils.Optional<SelenoidCountAggregateOutputType> | number
+            args: Prisma.ActuatorCountArgs<ExtArgs>,
+            result: $Utils.Optional<ActuatorCountAggregateOutputType> | number
           }
         }
       }
@@ -1479,12 +1479,12 @@ export namespace Prisma {
 
   export type GreenhouseCountOutputType = {
     user: number
-    selenoid: number
+    actuator: number
   }
 
   export type GreenhouseCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     user?: boolean | GreenhouseCountOutputTypeCountUserArgs
-    selenoid?: boolean | GreenhouseCountOutputTypeCountSelenoidArgs
+    actuator?: boolean | GreenhouseCountOutputTypeCountActuatorArgs
   }
 
   // Custom InputTypes
@@ -1511,8 +1511,8 @@ export namespace Prisma {
   /**
    * GreenhouseCountOutputType without action
    */
-  export type GreenhouseCountOutputTypeCountSelenoidArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: SelenoidWhereInput
+  export type GreenhouseCountOutputTypeCountActuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: ActuatorWhereInput
   }
 
 
@@ -1591,14 +1591,14 @@ export namespace Prisma {
 
   export type TandonCountOutputType = {
     sensor: number
-    selenoid: number
+    actuator: number
     tandonBahan: number
     penjadwalan: number
   }
 
   export type TandonCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     sensor?: boolean | TandonCountOutputTypeCountSensorArgs
-    selenoid?: boolean | TandonCountOutputTypeCountSelenoidArgs
+    actuator?: boolean | TandonCountOutputTypeCountActuatorArgs
     tandonBahan?: boolean | TandonCountOutputTypeCountTandonBahanArgs
     penjadwalan?: boolean | TandonCountOutputTypeCountPenjadwalanArgs
   }
@@ -1627,8 +1627,8 @@ export namespace Prisma {
   /**
    * TandonCountOutputType without action
    */
-  export type TandonCountOutputTypeCountSelenoidArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: SelenoidWhereInput
+  export type TandonCountOutputTypeCountActuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: ActuatorWhereInput
   }
 
 
@@ -2875,7 +2875,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | Greenhouse$userArgs<ExtArgs>
-    selenoid?: boolean | Greenhouse$selenoidArgs<ExtArgs>
+    actuator?: boolean | Greenhouse$actuatorArgs<ExtArgs>
     _count?: boolean | GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["greenhouse"]>
 
@@ -2889,7 +2889,7 @@ export namespace Prisma {
 
   export type GreenhouseInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     user?: boolean | Greenhouse$userArgs<ExtArgs>
-    selenoid?: boolean | Greenhouse$selenoidArgs<ExtArgs>
+    actuator?: boolean | Greenhouse$actuatorArgs<ExtArgs>
     _count?: boolean | GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2898,7 +2898,7 @@ export namespace Prisma {
     name: "Greenhouse"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>[]
-      selenoid: Prisma.$SelenoidPayload<ExtArgs>[]
+      actuator: Prisma.$ActuatorPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetResult<{
       id: number
@@ -3273,7 +3273,7 @@ export namespace Prisma {
 
     user<T extends Greenhouse$userArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$userArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    selenoid<T extends Greenhouse$selenoidArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$selenoidArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SelenoidPayload<ExtArgs>, T, 'findMany'> | Null>;
+    actuator<T extends Greenhouse$actuatorArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$actuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3641,23 +3641,23 @@ export namespace Prisma {
 
 
   /**
-   * Greenhouse.selenoid
+   * Greenhouse.actuator
    */
-  export type Greenhouse$selenoidArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type Greenhouse$actuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
-    where?: SelenoidWhereInput
-    orderBy?: SelenoidOrderByWithRelationInput | SelenoidOrderByWithRelationInput[]
-    cursor?: SelenoidWhereUniqueInput
+    include?: ActuatorInclude<ExtArgs> | null
+    where?: ActuatorWhereInput
+    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
+    cursor?: ActuatorWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SelenoidScalarFieldEnum | SelenoidScalarFieldEnum[]
+    distinct?: ActuatorScalarFieldEnum | ActuatorScalarFieldEnum[]
   }
 
 
@@ -6752,41 +6752,30 @@ export namespace Prisma {
 
 
   /**
-   * Model Selenoid
+   * Model Actuator
    */
 
-  export type AggregateSelenoid = {
-    _count: SelenoidCountAggregateOutputType | null
-    _avg: SelenoidAvgAggregateOutputType | null
-    _sum: SelenoidSumAggregateOutputType | null
-    _min: SelenoidMinAggregateOutputType | null
-    _max: SelenoidMaxAggregateOutputType | null
+  export type AggregateActuator = {
+    _count: ActuatorCountAggregateOutputType | null
+    _avg: ActuatorAvgAggregateOutputType | null
+    _sum: ActuatorSumAggregateOutputType | null
+    _min: ActuatorMinAggregateOutputType | null
+    _max: ActuatorMaxAggregateOutputType | null
   }
 
-  export type SelenoidAvgAggregateOutputType = {
+  export type ActuatorAvgAggregateOutputType = {
     id: number | null
     tandonId: number | null
     greenhouseId: number | null
   }
 
-  export type SelenoidSumAggregateOutputType = {
+  export type ActuatorSumAggregateOutputType = {
     id: number | null
     tandonId: number | null
     greenhouseId: number | null
   }
 
-  export type SelenoidMinAggregateOutputType = {
-    id: number | null
-    nama: string | null
-    merek: string | null
-    status: boolean | null
-    tandonId: number | null
-    greenhouseId: number | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type SelenoidMaxAggregateOutputType = {
+  export type ActuatorMinAggregateOutputType = {
     id: number | null
     nama: string | null
     merek: string | null
@@ -6797,7 +6786,18 @@ export namespace Prisma {
     updated_at: Date | null
   }
 
-  export type SelenoidCountAggregateOutputType = {
+  export type ActuatorMaxAggregateOutputType = {
+    id: number | null
+    nama: string | null
+    merek: string | null
+    status: boolean | null
+    tandonId: number | null
+    greenhouseId: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type ActuatorCountAggregateOutputType = {
     id: number
     nama: number
     merek: number
@@ -6810,30 +6810,19 @@ export namespace Prisma {
   }
 
 
-  export type SelenoidAvgAggregateInputType = {
+  export type ActuatorAvgAggregateInputType = {
     id?: true
     tandonId?: true
     greenhouseId?: true
   }
 
-  export type SelenoidSumAggregateInputType = {
+  export type ActuatorSumAggregateInputType = {
     id?: true
     tandonId?: true
     greenhouseId?: true
   }
 
-  export type SelenoidMinAggregateInputType = {
-    id?: true
-    nama?: true
-    merek?: true
-    status?: true
-    tandonId?: true
-    greenhouseId?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type SelenoidMaxAggregateInputType = {
+  export type ActuatorMinAggregateInputType = {
     id?: true
     nama?: true
     merek?: true
@@ -6844,7 +6833,18 @@ export namespace Prisma {
     updated_at?: true
   }
 
-  export type SelenoidCountAggregateInputType = {
+  export type ActuatorMaxAggregateInputType = {
+    id?: true
+    nama?: true
+    merek?: true
+    status?: true
+    tandonId?: true
+    greenhouseId?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type ActuatorCountAggregateInputType = {
     id?: true
     nama?: true
     merek?: true
@@ -6856,93 +6856,93 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type SelenoidAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Selenoid to aggregate.
+     * Filter which Actuator to aggregate.
      */
-    where?: SelenoidWhereInput
+    where?: ActuatorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Selenoids to fetch.
+     * Determine the order of Actuators to fetch.
      */
-    orderBy?: SelenoidOrderByWithRelationInput | SelenoidOrderByWithRelationInput[]
+    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: SelenoidWhereUniqueInput
+    cursor?: ActuatorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Selenoids from the position of the cursor.
+     * Take `±n` Actuators from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Selenoids.
+     * Skip the first `n` Actuators.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Selenoids
+     * Count returned Actuators
     **/
-    _count?: true | SelenoidCountAggregateInputType
+    _count?: true | ActuatorCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: SelenoidAvgAggregateInputType
+    _avg?: ActuatorAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: SelenoidSumAggregateInputType
+    _sum?: ActuatorSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: SelenoidMinAggregateInputType
+    _min?: ActuatorMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: SelenoidMaxAggregateInputType
+    _max?: ActuatorMaxAggregateInputType
   }
 
-  export type GetSelenoidAggregateType<T extends SelenoidAggregateArgs> = {
-        [P in keyof T & keyof AggregateSelenoid]: P extends '_count' | 'count'
+  export type GetActuatorAggregateType<T extends ActuatorAggregateArgs> = {
+        [P in keyof T & keyof AggregateActuator]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateSelenoid[P]>
-      : GetScalarType<T[P], AggregateSelenoid[P]>
+        : GetScalarType<T[P], AggregateActuator[P]>
+      : GetScalarType<T[P], AggregateActuator[P]>
   }
 
 
 
 
-  export type SelenoidGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: SelenoidWhereInput
-    orderBy?: SelenoidOrderByWithAggregationInput | SelenoidOrderByWithAggregationInput[]
-    by: SelenoidScalarFieldEnum[] | SelenoidScalarFieldEnum
-    having?: SelenoidScalarWhereWithAggregatesInput
+  export type ActuatorGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: ActuatorWhereInput
+    orderBy?: ActuatorOrderByWithAggregationInput | ActuatorOrderByWithAggregationInput[]
+    by: ActuatorScalarFieldEnum[] | ActuatorScalarFieldEnum
+    having?: ActuatorScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: SelenoidCountAggregateInputType | true
-    _avg?: SelenoidAvgAggregateInputType
-    _sum?: SelenoidSumAggregateInputType
-    _min?: SelenoidMinAggregateInputType
-    _max?: SelenoidMaxAggregateInputType
+    _count?: ActuatorCountAggregateInputType | true
+    _avg?: ActuatorAvgAggregateInputType
+    _sum?: ActuatorSumAggregateInputType
+    _min?: ActuatorMinAggregateInputType
+    _max?: ActuatorMaxAggregateInputType
   }
 
-  export type SelenoidGroupByOutputType = {
+  export type ActuatorGroupByOutputType = {
     id: number
     nama: string
     merek: string
@@ -6951,28 +6951,28 @@ export namespace Prisma {
     greenhouseId: number
     created_at: Date
     updated_at: Date | null
-    _count: SelenoidCountAggregateOutputType | null
-    _avg: SelenoidAvgAggregateOutputType | null
-    _sum: SelenoidSumAggregateOutputType | null
-    _min: SelenoidMinAggregateOutputType | null
-    _max: SelenoidMaxAggregateOutputType | null
+    _count: ActuatorCountAggregateOutputType | null
+    _avg: ActuatorAvgAggregateOutputType | null
+    _sum: ActuatorSumAggregateOutputType | null
+    _min: ActuatorMinAggregateOutputType | null
+    _max: ActuatorMaxAggregateOutputType | null
   }
 
-  type GetSelenoidGroupByPayload<T extends SelenoidGroupByArgs> = Prisma.PrismaPromise<
+  type GetActuatorGroupByPayload<T extends ActuatorGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<SelenoidGroupByOutputType, T['by']> &
+      PickEnumerable<ActuatorGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof SelenoidGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof ActuatorGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], SelenoidGroupByOutputType[P]>
-            : GetScalarType<T[P], SelenoidGroupByOutputType[P]>
+              : GetScalarType<T[P], ActuatorGroupByOutputType[P]>
+            : GetScalarType<T[P], ActuatorGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type SelenoidSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type ActuatorSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nama?: boolean
     merek?: boolean
@@ -6983,9 +6983,9 @@ export namespace Prisma {
     updated_at?: boolean
     tandon?: boolean | TandonDefaultArgs<ExtArgs>
     greenhouse?: boolean | GreenhouseDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["selenoid"]>
+  }, ExtArgs["result"]["actuator"]>
 
-  export type SelenoidSelectScalar = {
+  export type ActuatorSelectScalar = {
     id?: boolean
     nama?: boolean
     merek?: boolean
@@ -6996,14 +6996,14 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type SelenoidInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     tandon?: boolean | TandonDefaultArgs<ExtArgs>
     greenhouse?: boolean | GreenhouseDefaultArgs<ExtArgs>
   }
 
 
-  export type $SelenoidPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Selenoid"
+  export type $ActuatorPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    name: "Actuator"
     objects: {
       tandon: Prisma.$TandonPayload<ExtArgs>
       greenhouse: Prisma.$GreenhousePayload<ExtArgs>
@@ -7017,160 +7017,160 @@ export namespace Prisma {
       greenhouseId: number
       created_at: Date
       updated_at: Date | null
-    }, ExtArgs["result"]["selenoid"]>
+    }, ExtArgs["result"]["actuator"]>
     composites: {}
   }
 
 
-  type SelenoidGetPayload<S extends boolean | null | undefined | SelenoidDefaultArgs> = $Result.GetResult<Prisma.$SelenoidPayload, S>
+  type ActuatorGetPayload<S extends boolean | null | undefined | ActuatorDefaultArgs> = $Result.GetResult<Prisma.$ActuatorPayload, S>
 
-  type SelenoidCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
-    Omit<SelenoidFindManyArgs, 'select' | 'include'> & {
-      select?: SelenoidCountAggregateInputType | true
+  type ActuatorCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
+    Omit<ActuatorFindManyArgs, 'select' | 'include'> & {
+      select?: ActuatorCountAggregateInputType | true
     }
 
-  export interface SelenoidDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Selenoid'], meta: { name: 'Selenoid' } }
+  export interface ActuatorDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Actuator'], meta: { name: 'Actuator' } }
     /**
-     * Find zero or one Selenoid that matches the filter.
-     * @param {SelenoidFindUniqueArgs} args - Arguments to find a Selenoid
+     * Find zero or one Actuator that matches the filter.
+     * @param {ActuatorFindUniqueArgs} args - Arguments to find a Actuator
      * @example
-     * // Get one Selenoid
-     * const selenoid = await prisma.selenoid.findUnique({
+     * // Get one Actuator
+     * const actuator = await prisma.actuator.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends SelenoidFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, SelenoidFindUniqueArgs<ExtArgs>>
-    ): Prisma__SelenoidClient<$Result.GetResult<Prisma.$SelenoidPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    findUnique<T extends ActuatorFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, ActuatorFindUniqueArgs<ExtArgs>>
+    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Selenoid that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one Actuator that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {SelenoidFindUniqueOrThrowArgs} args - Arguments to find a Selenoid
+     * @param {ActuatorFindUniqueOrThrowArgs} args - Arguments to find a Actuator
      * @example
-     * // Get one Selenoid
-     * const selenoid = await prisma.selenoid.findUniqueOrThrow({
+     * // Get one Actuator
+     * const actuator = await prisma.actuator.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends SelenoidFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, SelenoidFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__SelenoidClient<$Result.GetResult<Prisma.$SelenoidPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    findUniqueOrThrow<T extends ActuatorFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ActuatorFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
 
     /**
-     * Find the first Selenoid that matches the filter.
+     * Find the first Actuator that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SelenoidFindFirstArgs} args - Arguments to find a Selenoid
+     * @param {ActuatorFindFirstArgs} args - Arguments to find a Actuator
      * @example
-     * // Get one Selenoid
-     * const selenoid = await prisma.selenoid.findFirst({
+     * // Get one Actuator
+     * const actuator = await prisma.actuator.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends SelenoidFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, SelenoidFindFirstArgs<ExtArgs>>
-    ): Prisma__SelenoidClient<$Result.GetResult<Prisma.$SelenoidPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    findFirst<T extends ActuatorFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, ActuatorFindFirstArgs<ExtArgs>>
+    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
 
     /**
-     * Find the first Selenoid that matches the filter or
+     * Find the first Actuator that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SelenoidFindFirstOrThrowArgs} args - Arguments to find a Selenoid
+     * @param {ActuatorFindFirstOrThrowArgs} args - Arguments to find a Actuator
      * @example
-     * // Get one Selenoid
-     * const selenoid = await prisma.selenoid.findFirstOrThrow({
+     * // Get one Actuator
+     * const actuator = await prisma.actuator.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends SelenoidFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, SelenoidFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__SelenoidClient<$Result.GetResult<Prisma.$SelenoidPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    findFirstOrThrow<T extends ActuatorFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, ActuatorFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
 
     /**
-     * Find zero or more Selenoids that matches the filter.
+     * Find zero or more Actuators that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SelenoidFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {ActuatorFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Selenoids
-     * const selenoids = await prisma.selenoid.findMany()
+     * // Get all Actuators
+     * const actuators = await prisma.actuator.findMany()
      * 
-     * // Get first 10 Selenoids
-     * const selenoids = await prisma.selenoid.findMany({ take: 10 })
+     * // Get first 10 Actuators
+     * const actuators = await prisma.actuator.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const selenoidWithIdOnly = await prisma.selenoid.findMany({ select: { id: true } })
+     * const actuatorWithIdOnly = await prisma.actuator.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends SelenoidFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SelenoidFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SelenoidPayload<ExtArgs>, T, 'findMany'>>
+    findMany<T extends ActuatorFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ActuatorFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findMany'>>
 
     /**
-     * Create a Selenoid.
-     * @param {SelenoidCreateArgs} args - Arguments to create a Selenoid.
+     * Create a Actuator.
+     * @param {ActuatorCreateArgs} args - Arguments to create a Actuator.
      * @example
-     * // Create one Selenoid
-     * const Selenoid = await prisma.selenoid.create({
+     * // Create one Actuator
+     * const Actuator = await prisma.actuator.create({
      *   data: {
-     *     // ... data to create a Selenoid
+     *     // ... data to create a Actuator
      *   }
      * })
      * 
     **/
-    create<T extends SelenoidCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, SelenoidCreateArgs<ExtArgs>>
-    ): Prisma__SelenoidClient<$Result.GetResult<Prisma.$SelenoidPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    create<T extends ActuatorCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, ActuatorCreateArgs<ExtArgs>>
+    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
 
     /**
-     * Create many Selenoids.
-     *     @param {SelenoidCreateManyArgs} args - Arguments to create many Selenoids.
+     * Create many Actuators.
+     *     @param {ActuatorCreateManyArgs} args - Arguments to create many Actuators.
      *     @example
-     *     // Create many Selenoids
-     *     const selenoid = await prisma.selenoid.createMany({
+     *     // Create many Actuators
+     *     const actuator = await prisma.actuator.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends SelenoidCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SelenoidCreateManyArgs<ExtArgs>>
+    createMany<T extends ActuatorCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ActuatorCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Selenoid.
-     * @param {SelenoidDeleteArgs} args - Arguments to delete one Selenoid.
+     * Delete a Actuator.
+     * @param {ActuatorDeleteArgs} args - Arguments to delete one Actuator.
      * @example
-     * // Delete one Selenoid
-     * const Selenoid = await prisma.selenoid.delete({
+     * // Delete one Actuator
+     * const Actuator = await prisma.actuator.delete({
      *   where: {
-     *     // ... filter to delete one Selenoid
+     *     // ... filter to delete one Actuator
      *   }
      * })
      * 
     **/
-    delete<T extends SelenoidDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, SelenoidDeleteArgs<ExtArgs>>
-    ): Prisma__SelenoidClient<$Result.GetResult<Prisma.$SelenoidPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    delete<T extends ActuatorDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, ActuatorDeleteArgs<ExtArgs>>
+    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
 
     /**
-     * Update one Selenoid.
-     * @param {SelenoidUpdateArgs} args - Arguments to update one Selenoid.
+     * Update one Actuator.
+     * @param {ActuatorUpdateArgs} args - Arguments to update one Actuator.
      * @example
-     * // Update one Selenoid
-     * const selenoid = await prisma.selenoid.update({
+     * // Update one Actuator
+     * const actuator = await prisma.actuator.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7180,34 +7180,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends SelenoidUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, SelenoidUpdateArgs<ExtArgs>>
-    ): Prisma__SelenoidClient<$Result.GetResult<Prisma.$SelenoidPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    update<T extends ActuatorUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, ActuatorUpdateArgs<ExtArgs>>
+    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
 
     /**
-     * Delete zero or more Selenoids.
-     * @param {SelenoidDeleteManyArgs} args - Arguments to filter Selenoids to delete.
+     * Delete zero or more Actuators.
+     * @param {ActuatorDeleteManyArgs} args - Arguments to filter Actuators to delete.
      * @example
-     * // Delete a few Selenoids
-     * const { count } = await prisma.selenoid.deleteMany({
+     * // Delete a few Actuators
+     * const { count } = await prisma.actuator.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends SelenoidDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, SelenoidDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends ActuatorDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, ActuatorDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Selenoids.
+     * Update zero or more Actuators.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SelenoidUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {ActuatorUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Selenoids
-     * const selenoid = await prisma.selenoid.updateMany({
+     * // Update many Actuators
+     * const actuator = await prisma.actuator.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7217,59 +7217,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends SelenoidUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, SelenoidUpdateManyArgs<ExtArgs>>
+    updateMany<T extends ActuatorUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, ActuatorUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Selenoid.
-     * @param {SelenoidUpsertArgs} args - Arguments to update or create a Selenoid.
+     * Create or update one Actuator.
+     * @param {ActuatorUpsertArgs} args - Arguments to update or create a Actuator.
      * @example
-     * // Update or create a Selenoid
-     * const selenoid = await prisma.selenoid.upsert({
+     * // Update or create a Actuator
+     * const actuator = await prisma.actuator.upsert({
      *   create: {
-     *     // ... data to create a Selenoid
+     *     // ... data to create a Actuator
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Selenoid we want to update
+     *     // ... the filter for the Actuator we want to update
      *   }
      * })
     **/
-    upsert<T extends SelenoidUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, SelenoidUpsertArgs<ExtArgs>>
-    ): Prisma__SelenoidClient<$Result.GetResult<Prisma.$SelenoidPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    upsert<T extends ActuatorUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, ActuatorUpsertArgs<ExtArgs>>
+    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
 
     /**
-     * Count the number of Selenoids.
+     * Count the number of Actuators.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SelenoidCountArgs} args - Arguments to filter Selenoids to count.
+     * @param {ActuatorCountArgs} args - Arguments to filter Actuators to count.
      * @example
-     * // Count the number of Selenoids
-     * const count = await prisma.selenoid.count({
+     * // Count the number of Actuators
+     * const count = await prisma.actuator.count({
      *   where: {
-     *     // ... the filter for the Selenoids we want to count
+     *     // ... the filter for the Actuators we want to count
      *   }
      * })
     **/
-    count<T extends SelenoidCountArgs>(
-      args?: Subset<T, SelenoidCountArgs>,
+    count<T extends ActuatorCountArgs>(
+      args?: Subset<T, ActuatorCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], SelenoidCountAggregateOutputType>
+          : GetScalarType<T['select'], ActuatorCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Selenoid.
+     * Allows you to perform aggregations operations on a Actuator.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SelenoidAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {ActuatorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -7289,13 +7289,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends SelenoidAggregateArgs>(args: Subset<T, SelenoidAggregateArgs>): Prisma.PrismaPromise<GetSelenoidAggregateType<T>>
+    aggregate<T extends ActuatorAggregateArgs>(args: Subset<T, ActuatorAggregateArgs>): Prisma.PrismaPromise<GetActuatorAggregateType<T>>
 
     /**
-     * Group by Selenoid.
+     * Group by Actuator.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {SelenoidGroupByArgs} args - Group by arguments.
+     * @param {ActuatorGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -7310,14 +7310,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends SelenoidGroupByArgs,
+      T extends ActuatorGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SelenoidGroupByArgs['orderBy'] }
-        : { orderBy?: SelenoidGroupByArgs['orderBy'] },
+        ? { orderBy: ActuatorGroupByArgs['orderBy'] }
+        : { orderBy?: ActuatorGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -7366,20 +7366,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, SelenoidGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSelenoidGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, ActuatorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActuatorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Selenoid model
+   * Fields of the Actuator model
    */
-  readonly fields: SelenoidFieldRefs;
+  readonly fields: ActuatorFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Selenoid.
+   * The delegate class that acts as a "Promise-like" for Actuator.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__SelenoidClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__ActuatorClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
     tandon<T extends TandonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TandonDefaultArgs<ExtArgs>>): Prisma__TandonClient<$Result.GetResult<Prisma.$TandonPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
@@ -7411,340 +7411,340 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Selenoid model
+   * Fields of the Actuator model
    */ 
-  interface SelenoidFieldRefs {
-    readonly id: FieldRef<"Selenoid", 'Int'>
-    readonly nama: FieldRef<"Selenoid", 'String'>
-    readonly merek: FieldRef<"Selenoid", 'String'>
-    readonly status: FieldRef<"Selenoid", 'Boolean'>
-    readonly tandonId: FieldRef<"Selenoid", 'Int'>
-    readonly greenhouseId: FieldRef<"Selenoid", 'Int'>
-    readonly created_at: FieldRef<"Selenoid", 'DateTime'>
-    readonly updated_at: FieldRef<"Selenoid", 'DateTime'>
+  interface ActuatorFieldRefs {
+    readonly id: FieldRef<"Actuator", 'Int'>
+    readonly nama: FieldRef<"Actuator", 'String'>
+    readonly merek: FieldRef<"Actuator", 'String'>
+    readonly status: FieldRef<"Actuator", 'Boolean'>
+    readonly tandonId: FieldRef<"Actuator", 'Int'>
+    readonly greenhouseId: FieldRef<"Actuator", 'Int'>
+    readonly created_at: FieldRef<"Actuator", 'DateTime'>
+    readonly updated_at: FieldRef<"Actuator", 'DateTime'>
   }
     
 
   // Custom InputTypes
 
   /**
-   * Selenoid findUnique
+   * Actuator findUnique
    */
-  export type SelenoidFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
+    include?: ActuatorInclude<ExtArgs> | null
     /**
-     * Filter, which Selenoid to fetch.
+     * Filter, which Actuator to fetch.
      */
-    where: SelenoidWhereUniqueInput
+    where: ActuatorWhereUniqueInput
   }
 
 
   /**
-   * Selenoid findUniqueOrThrow
+   * Actuator findUniqueOrThrow
    */
-  export type SelenoidFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
+    include?: ActuatorInclude<ExtArgs> | null
     /**
-     * Filter, which Selenoid to fetch.
+     * Filter, which Actuator to fetch.
      */
-    where: SelenoidWhereUniqueInput
+    where: ActuatorWhereUniqueInput
   }
 
 
   /**
-   * Selenoid findFirst
+   * Actuator findFirst
    */
-  export type SelenoidFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
+    include?: ActuatorInclude<ExtArgs> | null
     /**
-     * Filter, which Selenoid to fetch.
+     * Filter, which Actuator to fetch.
      */
-    where?: SelenoidWhereInput
+    where?: ActuatorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Selenoids to fetch.
+     * Determine the order of Actuators to fetch.
      */
-    orderBy?: SelenoidOrderByWithRelationInput | SelenoidOrderByWithRelationInput[]
+    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Selenoids.
+     * Sets the position for searching for Actuators.
      */
-    cursor?: SelenoidWhereUniqueInput
+    cursor?: ActuatorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Selenoids from the position of the cursor.
+     * Take `±n` Actuators from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Selenoids.
+     * Skip the first `n` Actuators.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Selenoids.
+     * Filter by unique combinations of Actuators.
      */
-    distinct?: SelenoidScalarFieldEnum | SelenoidScalarFieldEnum[]
+    distinct?: ActuatorScalarFieldEnum | ActuatorScalarFieldEnum[]
   }
 
 
   /**
-   * Selenoid findFirstOrThrow
+   * Actuator findFirstOrThrow
    */
-  export type SelenoidFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
+    include?: ActuatorInclude<ExtArgs> | null
     /**
-     * Filter, which Selenoid to fetch.
+     * Filter, which Actuator to fetch.
      */
-    where?: SelenoidWhereInput
+    where?: ActuatorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Selenoids to fetch.
+     * Determine the order of Actuators to fetch.
      */
-    orderBy?: SelenoidOrderByWithRelationInput | SelenoidOrderByWithRelationInput[]
+    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Selenoids.
+     * Sets the position for searching for Actuators.
      */
-    cursor?: SelenoidWhereUniqueInput
+    cursor?: ActuatorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Selenoids from the position of the cursor.
+     * Take `±n` Actuators from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Selenoids.
+     * Skip the first `n` Actuators.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Selenoids.
+     * Filter by unique combinations of Actuators.
      */
-    distinct?: SelenoidScalarFieldEnum | SelenoidScalarFieldEnum[]
+    distinct?: ActuatorScalarFieldEnum | ActuatorScalarFieldEnum[]
   }
 
 
   /**
-   * Selenoid findMany
+   * Actuator findMany
    */
-  export type SelenoidFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
+    include?: ActuatorInclude<ExtArgs> | null
     /**
-     * Filter, which Selenoids to fetch.
+     * Filter, which Actuators to fetch.
      */
-    where?: SelenoidWhereInput
+    where?: ActuatorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Selenoids to fetch.
+     * Determine the order of Actuators to fetch.
      */
-    orderBy?: SelenoidOrderByWithRelationInput | SelenoidOrderByWithRelationInput[]
+    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Selenoids.
+     * Sets the position for listing Actuators.
      */
-    cursor?: SelenoidWhereUniqueInput
+    cursor?: ActuatorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Selenoids from the position of the cursor.
+     * Take `±n` Actuators from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Selenoids.
+     * Skip the first `n` Actuators.
      */
     skip?: number
-    distinct?: SelenoidScalarFieldEnum | SelenoidScalarFieldEnum[]
+    distinct?: ActuatorScalarFieldEnum | ActuatorScalarFieldEnum[]
   }
 
 
   /**
-   * Selenoid create
+   * Actuator create
    */
-  export type SelenoidCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
+    include?: ActuatorInclude<ExtArgs> | null
     /**
-     * The data needed to create a Selenoid.
+     * The data needed to create a Actuator.
      */
-    data: XOR<SelenoidCreateInput, SelenoidUncheckedCreateInput>
+    data: XOR<ActuatorCreateInput, ActuatorUncheckedCreateInput>
   }
 
 
   /**
-   * Selenoid createMany
+   * Actuator createMany
    */
-  export type SelenoidCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Selenoids.
+     * The data used to create many Actuators.
      */
-    data: SelenoidCreateManyInput | SelenoidCreateManyInput[]
+    data: ActuatorCreateManyInput | ActuatorCreateManyInput[]
     skipDuplicates?: boolean
   }
 
 
   /**
-   * Selenoid update
+   * Actuator update
    */
-  export type SelenoidUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
+    include?: ActuatorInclude<ExtArgs> | null
     /**
-     * The data needed to update a Selenoid.
+     * The data needed to update a Actuator.
      */
-    data: XOR<SelenoidUpdateInput, SelenoidUncheckedUpdateInput>
+    data: XOR<ActuatorUpdateInput, ActuatorUncheckedUpdateInput>
     /**
-     * Choose, which Selenoid to update.
+     * Choose, which Actuator to update.
      */
-    where: SelenoidWhereUniqueInput
+    where: ActuatorWhereUniqueInput
   }
 
 
   /**
-   * Selenoid updateMany
+   * Actuator updateMany
    */
-  export type SelenoidUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Selenoids.
+     * The data used to update Actuators.
      */
-    data: XOR<SelenoidUpdateManyMutationInput, SelenoidUncheckedUpdateManyInput>
+    data: XOR<ActuatorUpdateManyMutationInput, ActuatorUncheckedUpdateManyInput>
     /**
-     * Filter which Selenoids to update
+     * Filter which Actuators to update
      */
-    where?: SelenoidWhereInput
+    where?: ActuatorWhereInput
   }
 
 
   /**
-   * Selenoid upsert
+   * Actuator upsert
    */
-  export type SelenoidUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
+    include?: ActuatorInclude<ExtArgs> | null
     /**
-     * The filter to search for the Selenoid to update in case it exists.
+     * The filter to search for the Actuator to update in case it exists.
      */
-    where: SelenoidWhereUniqueInput
+    where: ActuatorWhereUniqueInput
     /**
-     * In case the Selenoid found by the `where` argument doesn't exist, create a new Selenoid with this data.
+     * In case the Actuator found by the `where` argument doesn't exist, create a new Actuator with this data.
      */
-    create: XOR<SelenoidCreateInput, SelenoidUncheckedCreateInput>
+    create: XOR<ActuatorCreateInput, ActuatorUncheckedCreateInput>
     /**
-     * In case the Selenoid was found with the provided `where` argument, update it with this data.
+     * In case the Actuator was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<SelenoidUpdateInput, SelenoidUncheckedUpdateInput>
+    update: XOR<ActuatorUpdateInput, ActuatorUncheckedUpdateInput>
   }
 
 
   /**
-   * Selenoid delete
+   * Actuator delete
    */
-  export type SelenoidDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
+    include?: ActuatorInclude<ExtArgs> | null
     /**
-     * Filter which Selenoid to delete.
+     * Filter which Actuator to delete.
      */
-    where: SelenoidWhereUniqueInput
+    where: ActuatorWhereUniqueInput
   }
 
 
   /**
-   * Selenoid deleteMany
+   * Actuator deleteMany
    */
-  export type SelenoidDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Selenoids to delete
+     * Filter which Actuators to delete
      */
-    where?: SelenoidWhereInput
+    where?: ActuatorWhereInput
   }
 
 
   /**
-   * Selenoid without action
+   * Actuator without action
    */
-  export type SelenoidDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type ActuatorDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
+    include?: ActuatorInclude<ExtArgs> | null
   }
 
 
@@ -8953,7 +8953,7 @@ export namespace Prisma {
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     sensor?: boolean | Tandon$sensorArgs<ExtArgs>
-    selenoid?: boolean | Tandon$selenoidArgs<ExtArgs>
+    actuator?: boolean | Tandon$actuatorArgs<ExtArgs>
     tandonBahan?: boolean | Tandon$tandonBahanArgs<ExtArgs>
     penjadwalan?: boolean | Tandon$penjadwalanArgs<ExtArgs>
     _count?: boolean | TandonCountOutputTypeDefaultArgs<ExtArgs>
@@ -8972,7 +8972,7 @@ export namespace Prisma {
   export type TandonInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     sensor?: boolean | Tandon$sensorArgs<ExtArgs>
-    selenoid?: boolean | Tandon$selenoidArgs<ExtArgs>
+    actuator?: boolean | Tandon$actuatorArgs<ExtArgs>
     tandonBahan?: boolean | Tandon$tandonBahanArgs<ExtArgs>
     penjadwalan?: boolean | Tandon$penjadwalanArgs<ExtArgs>
     _count?: boolean | TandonCountOutputTypeDefaultArgs<ExtArgs>
@@ -8984,7 +8984,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       sensor: Prisma.$SensorPayload<ExtArgs>[]
-      selenoid: Prisma.$SelenoidPayload<ExtArgs>[]
+      actuator: Prisma.$ActuatorPayload<ExtArgs>[]
       tandonBahan: Prisma.$TandonBahanPayload<ExtArgs>[]
       penjadwalan: Prisma.$PenjadwalanPayload<ExtArgs>[]
     }
@@ -9365,7 +9365,7 @@ export namespace Prisma {
 
     sensor<T extends Tandon$sensorArgs<ExtArgs> = {}>(args?: Subset<T, Tandon$sensorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    selenoid<T extends Tandon$selenoidArgs<ExtArgs> = {}>(args?: Subset<T, Tandon$selenoidArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SelenoidPayload<ExtArgs>, T, 'findMany'> | Null>;
+    actuator<T extends Tandon$actuatorArgs<ExtArgs> = {}>(args?: Subset<T, Tandon$actuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     tandonBahan<T extends Tandon$tandonBahanArgs<ExtArgs> = {}>(args?: Subset<T, Tandon$tandonBahanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TandonBahanPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -9739,23 +9739,23 @@ export namespace Prisma {
 
 
   /**
-   * Tandon.selenoid
+   * Tandon.actuator
    */
-  export type Tandon$selenoidArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type Tandon$actuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Selenoid
+     * Select specific fields to fetch from the Actuator
      */
-    select?: SelenoidSelect<ExtArgs> | null
+    select?: ActuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: SelenoidInclude<ExtArgs> | null
-    where?: SelenoidWhereInput
-    orderBy?: SelenoidOrderByWithRelationInput | SelenoidOrderByWithRelationInput[]
-    cursor?: SelenoidWhereUniqueInput
+    include?: ActuatorInclude<ExtArgs> | null
+    where?: ActuatorWhereInput
+    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
+    cursor?: ActuatorWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: SelenoidScalarFieldEnum | SelenoidScalarFieldEnum[]
+    distinct?: ActuatorScalarFieldEnum | ActuatorScalarFieldEnum[]
   }
 
 
@@ -9899,7 +9899,7 @@ export namespace Prisma {
   export type SensorScalarFieldEnum = (typeof SensorScalarFieldEnum)[keyof typeof SensorScalarFieldEnum]
 
 
-  export const SelenoidScalarFieldEnum: {
+  export const ActuatorScalarFieldEnum: {
     id: 'id',
     nama: 'nama',
     merek: 'merek',
@@ -9910,7 +9910,7 @@ export namespace Prisma {
     updated_at: 'updated_at'
   };
 
-  export type SelenoidScalarFieldEnum = (typeof SelenoidScalarFieldEnum)[keyof typeof SelenoidScalarFieldEnum]
+  export type ActuatorScalarFieldEnum = (typeof ActuatorScalarFieldEnum)[keyof typeof ActuatorScalarFieldEnum]
 
 
   export const TandonBahanScalarFieldEnum: {
@@ -10112,7 +10112,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Greenhouse"> | Date | string
     updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
     user?: UserListRelationFilter
-    selenoid?: SelenoidListRelationFilter
+    actuator?: ActuatorListRelationFilter
   }
 
   export type GreenhouseOrderByWithRelationInput = {
@@ -10122,7 +10122,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     user?: UserOrderByRelationAggregateInput
-    selenoid?: SelenoidOrderByRelationAggregateInput
+    actuator?: ActuatorOrderByRelationAggregateInput
   }
 
   export type GreenhouseWhereUniqueInput = Prisma.AtLeast<{
@@ -10135,7 +10135,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Greenhouse"> | Date | string
     updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
     user?: UserListRelationFilter
-    selenoid?: SelenoidListRelationFilter
+    actuator?: ActuatorListRelationFilter
   }, "id" | "nama">
 
   export type GreenhouseOrderByWithAggregationInput = {
@@ -10394,23 +10394,23 @@ export namespace Prisma {
     updated_at?: DateTimeNullableWithAggregatesFilter<"Sensor"> | Date | string | null
   }
 
-  export type SelenoidWhereInput = {
-    AND?: SelenoidWhereInput | SelenoidWhereInput[]
-    OR?: SelenoidWhereInput[]
-    NOT?: SelenoidWhereInput | SelenoidWhereInput[]
-    id?: IntFilter<"Selenoid"> | number
-    nama?: StringFilter<"Selenoid"> | string
-    merek?: StringFilter<"Selenoid"> | string
-    status?: BoolFilter<"Selenoid"> | boolean
-    tandonId?: IntFilter<"Selenoid"> | number
-    greenhouseId?: IntFilter<"Selenoid"> | number
-    created_at?: DateTimeFilter<"Selenoid"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Selenoid"> | Date | string | null
+  export type ActuatorWhereInput = {
+    AND?: ActuatorWhereInput | ActuatorWhereInput[]
+    OR?: ActuatorWhereInput[]
+    NOT?: ActuatorWhereInput | ActuatorWhereInput[]
+    id?: IntFilter<"Actuator"> | number
+    nama?: StringFilter<"Actuator"> | string
+    merek?: StringFilter<"Actuator"> | string
+    status?: BoolFilter<"Actuator"> | boolean
+    tandonId?: IntFilter<"Actuator"> | number
+    greenhouseId?: IntFilter<"Actuator"> | number
+    created_at?: DateTimeFilter<"Actuator"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Actuator"> | Date | string | null
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
     greenhouse?: XOR<GreenhouseRelationFilter, GreenhouseWhereInput>
   }
 
-  export type SelenoidOrderByWithRelationInput = {
+  export type ActuatorOrderByWithRelationInput = {
     id?: SortOrder
     nama?: SortOrder
     merek?: SortOrder
@@ -10423,23 +10423,23 @@ export namespace Prisma {
     greenhouse?: GreenhouseOrderByWithRelationInput
   }
 
-  export type SelenoidWhereUniqueInput = Prisma.AtLeast<{
+  export type ActuatorWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: SelenoidWhereInput | SelenoidWhereInput[]
-    OR?: SelenoidWhereInput[]
-    NOT?: SelenoidWhereInput | SelenoidWhereInput[]
-    nama?: StringFilter<"Selenoid"> | string
-    merek?: StringFilter<"Selenoid"> | string
-    status?: BoolFilter<"Selenoid"> | boolean
-    tandonId?: IntFilter<"Selenoid"> | number
-    greenhouseId?: IntFilter<"Selenoid"> | number
-    created_at?: DateTimeFilter<"Selenoid"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Selenoid"> | Date | string | null
+    AND?: ActuatorWhereInput | ActuatorWhereInput[]
+    OR?: ActuatorWhereInput[]
+    NOT?: ActuatorWhereInput | ActuatorWhereInput[]
+    nama?: StringFilter<"Actuator"> | string
+    merek?: StringFilter<"Actuator"> | string
+    status?: BoolFilter<"Actuator"> | boolean
+    tandonId?: IntFilter<"Actuator"> | number
+    greenhouseId?: IntFilter<"Actuator"> | number
+    created_at?: DateTimeFilter<"Actuator"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Actuator"> | Date | string | null
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
     greenhouse?: XOR<GreenhouseRelationFilter, GreenhouseWhereInput>
   }, "id">
 
-  export type SelenoidOrderByWithAggregationInput = {
+  export type ActuatorOrderByWithAggregationInput = {
     id?: SortOrder
     nama?: SortOrder
     merek?: SortOrder
@@ -10448,25 +10448,25 @@ export namespace Prisma {
     greenhouseId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
-    _count?: SelenoidCountOrderByAggregateInput
-    _avg?: SelenoidAvgOrderByAggregateInput
-    _max?: SelenoidMaxOrderByAggregateInput
-    _min?: SelenoidMinOrderByAggregateInput
-    _sum?: SelenoidSumOrderByAggregateInput
+    _count?: ActuatorCountOrderByAggregateInput
+    _avg?: ActuatorAvgOrderByAggregateInput
+    _max?: ActuatorMaxOrderByAggregateInput
+    _min?: ActuatorMinOrderByAggregateInput
+    _sum?: ActuatorSumOrderByAggregateInput
   }
 
-  export type SelenoidScalarWhereWithAggregatesInput = {
-    AND?: SelenoidScalarWhereWithAggregatesInput | SelenoidScalarWhereWithAggregatesInput[]
-    OR?: SelenoidScalarWhereWithAggregatesInput[]
-    NOT?: SelenoidScalarWhereWithAggregatesInput | SelenoidScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Selenoid"> | number
-    nama?: StringWithAggregatesFilter<"Selenoid"> | string
-    merek?: StringWithAggregatesFilter<"Selenoid"> | string
-    status?: BoolWithAggregatesFilter<"Selenoid"> | boolean
-    tandonId?: IntWithAggregatesFilter<"Selenoid"> | number
-    greenhouseId?: IntWithAggregatesFilter<"Selenoid"> | number
-    created_at?: DateTimeWithAggregatesFilter<"Selenoid"> | Date | string
-    updated_at?: DateTimeNullableWithAggregatesFilter<"Selenoid"> | Date | string | null
+  export type ActuatorScalarWhereWithAggregatesInput = {
+    AND?: ActuatorScalarWhereWithAggregatesInput | ActuatorScalarWhereWithAggregatesInput[]
+    OR?: ActuatorScalarWhereWithAggregatesInput[]
+    NOT?: ActuatorScalarWhereWithAggregatesInput | ActuatorScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Actuator"> | number
+    nama?: StringWithAggregatesFilter<"Actuator"> | string
+    merek?: StringWithAggregatesFilter<"Actuator"> | string
+    status?: BoolWithAggregatesFilter<"Actuator"> | boolean
+    tandonId?: IntWithAggregatesFilter<"Actuator"> | number
+    greenhouseId?: IntWithAggregatesFilter<"Actuator"> | number
+    created_at?: DateTimeWithAggregatesFilter<"Actuator"> | Date | string
+    updated_at?: DateTimeNullableWithAggregatesFilter<"Actuator"> | Date | string | null
   }
 
   export type TandonBahanWhereInput = {
@@ -10542,7 +10542,7 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"Tandon"> | Date | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     sensor?: SensorListRelationFilter
-    selenoid?: SelenoidListRelationFilter
+    actuator?: ActuatorListRelationFilter
     tandonBahan?: TandonBahanListRelationFilter
     penjadwalan?: PenjadwalanListRelationFilter
   }
@@ -10557,7 +10557,7 @@ export namespace Prisma {
     updated_at?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     sensor?: SensorOrderByRelationAggregateInput
-    selenoid?: SelenoidOrderByRelationAggregateInput
+    actuator?: ActuatorOrderByRelationAggregateInput
     tandonBahan?: TandonBahanOrderByRelationAggregateInput
     penjadwalan?: PenjadwalanOrderByRelationAggregateInput
   }
@@ -10575,7 +10575,7 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"Tandon"> | Date | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     sensor?: SensorListRelationFilter
-    selenoid?: SelenoidListRelationFilter
+    actuator?: ActuatorListRelationFilter
     tandonBahan?: TandonBahanListRelationFilter
     penjadwalan?: PenjadwalanListRelationFilter
   }, "id">
@@ -10689,7 +10689,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     user?: UserCreateNestedManyWithoutGreenhouseInput
-    selenoid?: SelenoidCreateNestedManyWithoutGreenhouseInput
+    actuator?: ActuatorCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateInput = {
@@ -10699,7 +10699,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
-    selenoid?: SelenoidUncheckedCreateNestedManyWithoutGreenhouseInput
+    actuator?: ActuatorUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUpdateInput = {
@@ -10708,7 +10708,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateManyWithoutGreenhouseNestedInput
-    selenoid?: SelenoidUpdateManyWithoutGreenhouseNestedInput
+    actuator?: ActuatorUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateInput = {
@@ -10718,7 +10718,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
-    selenoid?: SelenoidUncheckedUpdateManyWithoutGreenhouseNestedInput
+    actuator?: ActuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseCreateManyInput = {
@@ -10980,17 +10980,17 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type SelenoidCreateInput = {
+  export type ActuatorCreateInput = {
     nama: string
     merek: string
     status: boolean
     created_at?: Date | string
     updated_at?: Date | string | null
-    tandon: TandonCreateNestedOneWithoutSelenoidInput
-    greenhouse: GreenhouseCreateNestedOneWithoutSelenoidInput
+    tandon: TandonCreateNestedOneWithoutActuatorInput
+    greenhouse: GreenhouseCreateNestedOneWithoutActuatorInput
   }
 
-  export type SelenoidUncheckedCreateInput = {
+  export type ActuatorUncheckedCreateInput = {
     id?: number
     nama: string
     merek: string
@@ -11001,17 +11001,17 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type SelenoidUpdateInput = {
+  export type ActuatorUpdateInput = {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tandon?: TandonUpdateOneRequiredWithoutSelenoidNestedInput
-    greenhouse?: GreenhouseUpdateOneRequiredWithoutSelenoidNestedInput
+    tandon?: TandonUpdateOneRequiredWithoutActuatorNestedInput
+    greenhouse?: GreenhouseUpdateOneRequiredWithoutActuatorNestedInput
   }
 
-  export type SelenoidUncheckedUpdateInput = {
+  export type ActuatorUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -11022,7 +11022,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type SelenoidCreateManyInput = {
+  export type ActuatorCreateManyInput = {
     id?: number
     nama: string
     merek: string
@@ -11033,7 +11033,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type SelenoidUpdateManyMutationInput = {
+  export type ActuatorUpdateManyMutationInput = {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -11041,7 +11041,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type SelenoidUncheckedUpdateManyInput = {
+  export type ActuatorUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -11116,7 +11116,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
-    selenoid?: SelenoidCreateNestedManyWithoutTandonInput
+    actuator?: ActuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
   }
@@ -11130,7 +11130,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
-    selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
+    actuator?: ActuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
   }
@@ -11143,7 +11143,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
-    selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
+    actuator?: ActuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
   }
@@ -11157,7 +11157,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
-    selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
+    actuator?: ActuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
   }
@@ -11369,17 +11369,17 @@ export namespace Prisma {
     none?: UserWhereInput
   }
 
-  export type SelenoidListRelationFilter = {
-    every?: SelenoidWhereInput
-    some?: SelenoidWhereInput
-    none?: SelenoidWhereInput
+  export type ActuatorListRelationFilter = {
+    every?: ActuatorWhereInput
+    some?: ActuatorWhereInput
+    none?: ActuatorWhereInput
   }
 
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type SelenoidOrderByRelationAggregateInput = {
+  export type ActuatorOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11670,7 +11670,7 @@ export namespace Prisma {
     isNot?: GreenhouseWhereInput
   }
 
-  export type SelenoidCountOrderByAggregateInput = {
+  export type ActuatorCountOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
     merek?: SortOrder
@@ -11681,24 +11681,13 @@ export namespace Prisma {
     updated_at?: SortOrder
   }
 
-  export type SelenoidAvgOrderByAggregateInput = {
+  export type ActuatorAvgOrderByAggregateInput = {
     id?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
   }
 
-  export type SelenoidMaxOrderByAggregateInput = {
-    id?: SortOrder
-    nama?: SortOrder
-    merek?: SortOrder
-    status?: SortOrder
-    tandonId?: SortOrder
-    greenhouseId?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type SelenoidMinOrderByAggregateInput = {
+  export type ActuatorMaxOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
     merek?: SortOrder
@@ -11709,7 +11698,18 @@ export namespace Prisma {
     updated_at?: SortOrder
   }
 
-  export type SelenoidSumOrderByAggregateInput = {
+  export type ActuatorMinOrderByAggregateInput = {
+    id?: SortOrder
+    nama?: SortOrder
+    merek?: SortOrder
+    status?: SortOrder
+    tandonId?: SortOrder
+    greenhouseId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type ActuatorSumOrderByAggregateInput = {
     id?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
@@ -11920,11 +11920,11 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
-  export type SelenoidCreateNestedManyWithoutGreenhouseInput = {
-    create?: XOR<SelenoidCreateWithoutGreenhouseInput, SelenoidUncheckedCreateWithoutGreenhouseInput> | SelenoidCreateWithoutGreenhouseInput[] | SelenoidUncheckedCreateWithoutGreenhouseInput[]
-    connectOrCreate?: SelenoidCreateOrConnectWithoutGreenhouseInput | SelenoidCreateOrConnectWithoutGreenhouseInput[]
-    createMany?: SelenoidCreateManyGreenhouseInputEnvelope
-    connect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
+  export type ActuatorCreateNestedManyWithoutGreenhouseInput = {
+    create?: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput> | ActuatorCreateWithoutGreenhouseInput[] | ActuatorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: ActuatorCreateOrConnectWithoutGreenhouseInput | ActuatorCreateOrConnectWithoutGreenhouseInput[]
+    createMany?: ActuatorCreateManyGreenhouseInputEnvelope
+    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
   }
 
   export type UserUncheckedCreateNestedManyWithoutGreenhouseInput = {
@@ -11933,11 +11933,11 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
-  export type SelenoidUncheckedCreateNestedManyWithoutGreenhouseInput = {
-    create?: XOR<SelenoidCreateWithoutGreenhouseInput, SelenoidUncheckedCreateWithoutGreenhouseInput> | SelenoidCreateWithoutGreenhouseInput[] | SelenoidUncheckedCreateWithoutGreenhouseInput[]
-    connectOrCreate?: SelenoidCreateOrConnectWithoutGreenhouseInput | SelenoidCreateOrConnectWithoutGreenhouseInput[]
-    createMany?: SelenoidCreateManyGreenhouseInputEnvelope
-    connect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
+  export type ActuatorUncheckedCreateNestedManyWithoutGreenhouseInput = {
+    create?: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput> | ActuatorCreateWithoutGreenhouseInput[] | ActuatorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: ActuatorCreateOrConnectWithoutGreenhouseInput | ActuatorCreateOrConnectWithoutGreenhouseInput[]
+    createMany?: ActuatorCreateManyGreenhouseInputEnvelope
+    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
   }
 
   export type UserUpdateManyWithoutGreenhouseNestedInput = {
@@ -11953,18 +11953,18 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
-  export type SelenoidUpdateManyWithoutGreenhouseNestedInput = {
-    create?: XOR<SelenoidCreateWithoutGreenhouseInput, SelenoidUncheckedCreateWithoutGreenhouseInput> | SelenoidCreateWithoutGreenhouseInput[] | SelenoidUncheckedCreateWithoutGreenhouseInput[]
-    connectOrCreate?: SelenoidCreateOrConnectWithoutGreenhouseInput | SelenoidCreateOrConnectWithoutGreenhouseInput[]
-    upsert?: SelenoidUpsertWithWhereUniqueWithoutGreenhouseInput | SelenoidUpsertWithWhereUniqueWithoutGreenhouseInput[]
-    createMany?: SelenoidCreateManyGreenhouseInputEnvelope
-    set?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    disconnect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    delete?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    connect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    update?: SelenoidUpdateWithWhereUniqueWithoutGreenhouseInput | SelenoidUpdateWithWhereUniqueWithoutGreenhouseInput[]
-    updateMany?: SelenoidUpdateManyWithWhereWithoutGreenhouseInput | SelenoidUpdateManyWithWhereWithoutGreenhouseInput[]
-    deleteMany?: SelenoidScalarWhereInput | SelenoidScalarWhereInput[]
+  export type ActuatorUpdateManyWithoutGreenhouseNestedInput = {
+    create?: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput> | ActuatorCreateWithoutGreenhouseInput[] | ActuatorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: ActuatorCreateOrConnectWithoutGreenhouseInput | ActuatorCreateOrConnectWithoutGreenhouseInput[]
+    upsert?: ActuatorUpsertWithWhereUniqueWithoutGreenhouseInput | ActuatorUpsertWithWhereUniqueWithoutGreenhouseInput[]
+    createMany?: ActuatorCreateManyGreenhouseInputEnvelope
+    set?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    disconnect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    delete?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    update?: ActuatorUpdateWithWhereUniqueWithoutGreenhouseInput | ActuatorUpdateWithWhereUniqueWithoutGreenhouseInput[]
+    updateMany?: ActuatorUpdateManyWithWhereWithoutGreenhouseInput | ActuatorUpdateManyWithWhereWithoutGreenhouseInput[]
+    deleteMany?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
   }
 
   export type UserUncheckedUpdateManyWithoutGreenhouseNestedInput = {
@@ -11980,18 +11980,18 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
-  export type SelenoidUncheckedUpdateManyWithoutGreenhouseNestedInput = {
-    create?: XOR<SelenoidCreateWithoutGreenhouseInput, SelenoidUncheckedCreateWithoutGreenhouseInput> | SelenoidCreateWithoutGreenhouseInput[] | SelenoidUncheckedCreateWithoutGreenhouseInput[]
-    connectOrCreate?: SelenoidCreateOrConnectWithoutGreenhouseInput | SelenoidCreateOrConnectWithoutGreenhouseInput[]
-    upsert?: SelenoidUpsertWithWhereUniqueWithoutGreenhouseInput | SelenoidUpsertWithWhereUniqueWithoutGreenhouseInput[]
-    createMany?: SelenoidCreateManyGreenhouseInputEnvelope
-    set?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    disconnect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    delete?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    connect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    update?: SelenoidUpdateWithWhereUniqueWithoutGreenhouseInput | SelenoidUpdateWithWhereUniqueWithoutGreenhouseInput[]
-    updateMany?: SelenoidUpdateManyWithWhereWithoutGreenhouseInput | SelenoidUpdateManyWithWhereWithoutGreenhouseInput[]
-    deleteMany?: SelenoidScalarWhereInput | SelenoidScalarWhereInput[]
+  export type ActuatorUncheckedUpdateManyWithoutGreenhouseNestedInput = {
+    create?: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput> | ActuatorCreateWithoutGreenhouseInput[] | ActuatorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: ActuatorCreateOrConnectWithoutGreenhouseInput | ActuatorCreateOrConnectWithoutGreenhouseInput[]
+    upsert?: ActuatorUpsertWithWhereUniqueWithoutGreenhouseInput | ActuatorUpsertWithWhereUniqueWithoutGreenhouseInput[]
+    createMany?: ActuatorCreateManyGreenhouseInputEnvelope
+    set?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    disconnect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    delete?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    update?: ActuatorUpdateWithWhereUniqueWithoutGreenhouseInput | ActuatorUpdateWithWhereUniqueWithoutGreenhouseInput[]
+    updateMany?: ActuatorUpdateManyWithWhereWithoutGreenhouseInput | ActuatorUpdateManyWithWhereWithoutGreenhouseInput[]
+    deleteMany?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
   }
 
   export type PenjadwalanCreateNestedManyWithoutResepInput = {
@@ -12125,32 +12125,32 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type TandonCreateNestedOneWithoutSelenoidInput = {
-    create?: XOR<TandonCreateWithoutSelenoidInput, TandonUncheckedCreateWithoutSelenoidInput>
-    connectOrCreate?: TandonCreateOrConnectWithoutSelenoidInput
+  export type TandonCreateNestedOneWithoutActuatorInput = {
+    create?: XOR<TandonCreateWithoutActuatorInput, TandonUncheckedCreateWithoutActuatorInput>
+    connectOrCreate?: TandonCreateOrConnectWithoutActuatorInput
     connect?: TandonWhereUniqueInput
   }
 
-  export type GreenhouseCreateNestedOneWithoutSelenoidInput = {
-    create?: XOR<GreenhouseCreateWithoutSelenoidInput, GreenhouseUncheckedCreateWithoutSelenoidInput>
-    connectOrCreate?: GreenhouseCreateOrConnectWithoutSelenoidInput
+  export type GreenhouseCreateNestedOneWithoutActuatorInput = {
+    create?: XOR<GreenhouseCreateWithoutActuatorInput, GreenhouseUncheckedCreateWithoutActuatorInput>
+    connectOrCreate?: GreenhouseCreateOrConnectWithoutActuatorInput
     connect?: GreenhouseWhereUniqueInput
   }
 
-  export type TandonUpdateOneRequiredWithoutSelenoidNestedInput = {
-    create?: XOR<TandonCreateWithoutSelenoidInput, TandonUncheckedCreateWithoutSelenoidInput>
-    connectOrCreate?: TandonCreateOrConnectWithoutSelenoidInput
-    upsert?: TandonUpsertWithoutSelenoidInput
+  export type TandonUpdateOneRequiredWithoutActuatorNestedInput = {
+    create?: XOR<TandonCreateWithoutActuatorInput, TandonUncheckedCreateWithoutActuatorInput>
+    connectOrCreate?: TandonCreateOrConnectWithoutActuatorInput
+    upsert?: TandonUpsertWithoutActuatorInput
     connect?: TandonWhereUniqueInput
-    update?: XOR<XOR<TandonUpdateToOneWithWhereWithoutSelenoidInput, TandonUpdateWithoutSelenoidInput>, TandonUncheckedUpdateWithoutSelenoidInput>
+    update?: XOR<XOR<TandonUpdateToOneWithWhereWithoutActuatorInput, TandonUpdateWithoutActuatorInput>, TandonUncheckedUpdateWithoutActuatorInput>
   }
 
-  export type GreenhouseUpdateOneRequiredWithoutSelenoidNestedInput = {
-    create?: XOR<GreenhouseCreateWithoutSelenoidInput, GreenhouseUncheckedCreateWithoutSelenoidInput>
-    connectOrCreate?: GreenhouseCreateOrConnectWithoutSelenoidInput
-    upsert?: GreenhouseUpsertWithoutSelenoidInput
+  export type GreenhouseUpdateOneRequiredWithoutActuatorNestedInput = {
+    create?: XOR<GreenhouseCreateWithoutActuatorInput, GreenhouseUncheckedCreateWithoutActuatorInput>
+    connectOrCreate?: GreenhouseCreateOrConnectWithoutActuatorInput
+    upsert?: GreenhouseUpsertWithoutActuatorInput
     connect?: GreenhouseWhereUniqueInput
-    update?: XOR<XOR<GreenhouseUpdateToOneWithWhereWithoutSelenoidInput, GreenhouseUpdateWithoutSelenoidInput>, GreenhouseUncheckedUpdateWithoutSelenoidInput>
+    update?: XOR<XOR<GreenhouseUpdateToOneWithWhereWithoutActuatorInput, GreenhouseUpdateWithoutActuatorInput>, GreenhouseUncheckedUpdateWithoutActuatorInput>
   }
 
   export type SensorCreateNestedManyWithoutTandonBahanInput = {
@@ -12222,11 +12222,11 @@ export namespace Prisma {
     connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
   }
 
-  export type SelenoidCreateNestedManyWithoutTandonInput = {
-    create?: XOR<SelenoidCreateWithoutTandonInput, SelenoidUncheckedCreateWithoutTandonInput> | SelenoidCreateWithoutTandonInput[] | SelenoidUncheckedCreateWithoutTandonInput[]
-    connectOrCreate?: SelenoidCreateOrConnectWithoutTandonInput | SelenoidCreateOrConnectWithoutTandonInput[]
-    createMany?: SelenoidCreateManyTandonInputEnvelope
-    connect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
+  export type ActuatorCreateNestedManyWithoutTandonInput = {
+    create?: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput> | ActuatorCreateWithoutTandonInput[] | ActuatorUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: ActuatorCreateOrConnectWithoutTandonInput | ActuatorCreateOrConnectWithoutTandonInput[]
+    createMany?: ActuatorCreateManyTandonInputEnvelope
+    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
   }
 
   export type TandonBahanCreateNestedManyWithoutTandonInput = {
@@ -12250,11 +12250,11 @@ export namespace Prisma {
     connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
   }
 
-  export type SelenoidUncheckedCreateNestedManyWithoutTandonInput = {
-    create?: XOR<SelenoidCreateWithoutTandonInput, SelenoidUncheckedCreateWithoutTandonInput> | SelenoidCreateWithoutTandonInput[] | SelenoidUncheckedCreateWithoutTandonInput[]
-    connectOrCreate?: SelenoidCreateOrConnectWithoutTandonInput | SelenoidCreateOrConnectWithoutTandonInput[]
-    createMany?: SelenoidCreateManyTandonInputEnvelope
-    connect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
+  export type ActuatorUncheckedCreateNestedManyWithoutTandonInput = {
+    create?: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput> | ActuatorCreateWithoutTandonInput[] | ActuatorUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: ActuatorCreateOrConnectWithoutTandonInput | ActuatorCreateOrConnectWithoutTandonInput[]
+    createMany?: ActuatorCreateManyTandonInputEnvelope
+    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
   }
 
   export type TandonBahanUncheckedCreateNestedManyWithoutTandonInput = {
@@ -12293,18 +12293,18 @@ export namespace Prisma {
     deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
   }
 
-  export type SelenoidUpdateManyWithoutTandonNestedInput = {
-    create?: XOR<SelenoidCreateWithoutTandonInput, SelenoidUncheckedCreateWithoutTandonInput> | SelenoidCreateWithoutTandonInput[] | SelenoidUncheckedCreateWithoutTandonInput[]
-    connectOrCreate?: SelenoidCreateOrConnectWithoutTandonInput | SelenoidCreateOrConnectWithoutTandonInput[]
-    upsert?: SelenoidUpsertWithWhereUniqueWithoutTandonInput | SelenoidUpsertWithWhereUniqueWithoutTandonInput[]
-    createMany?: SelenoidCreateManyTandonInputEnvelope
-    set?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    disconnect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    delete?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    connect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    update?: SelenoidUpdateWithWhereUniqueWithoutTandonInput | SelenoidUpdateWithWhereUniqueWithoutTandonInput[]
-    updateMany?: SelenoidUpdateManyWithWhereWithoutTandonInput | SelenoidUpdateManyWithWhereWithoutTandonInput[]
-    deleteMany?: SelenoidScalarWhereInput | SelenoidScalarWhereInput[]
+  export type ActuatorUpdateManyWithoutTandonNestedInput = {
+    create?: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput> | ActuatorCreateWithoutTandonInput[] | ActuatorUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: ActuatorCreateOrConnectWithoutTandonInput | ActuatorCreateOrConnectWithoutTandonInput[]
+    upsert?: ActuatorUpsertWithWhereUniqueWithoutTandonInput | ActuatorUpsertWithWhereUniqueWithoutTandonInput[]
+    createMany?: ActuatorCreateManyTandonInputEnvelope
+    set?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    disconnect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    delete?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    update?: ActuatorUpdateWithWhereUniqueWithoutTandonInput | ActuatorUpdateWithWhereUniqueWithoutTandonInput[]
+    updateMany?: ActuatorUpdateManyWithWhereWithoutTandonInput | ActuatorUpdateManyWithWhereWithoutTandonInput[]
+    deleteMany?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
   }
 
   export type TandonBahanUpdateManyWithoutTandonNestedInput = {
@@ -12349,18 +12349,18 @@ export namespace Prisma {
     deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
   }
 
-  export type SelenoidUncheckedUpdateManyWithoutTandonNestedInput = {
-    create?: XOR<SelenoidCreateWithoutTandonInput, SelenoidUncheckedCreateWithoutTandonInput> | SelenoidCreateWithoutTandonInput[] | SelenoidUncheckedCreateWithoutTandonInput[]
-    connectOrCreate?: SelenoidCreateOrConnectWithoutTandonInput | SelenoidCreateOrConnectWithoutTandonInput[]
-    upsert?: SelenoidUpsertWithWhereUniqueWithoutTandonInput | SelenoidUpsertWithWhereUniqueWithoutTandonInput[]
-    createMany?: SelenoidCreateManyTandonInputEnvelope
-    set?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    disconnect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    delete?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    connect?: SelenoidWhereUniqueInput | SelenoidWhereUniqueInput[]
-    update?: SelenoidUpdateWithWhereUniqueWithoutTandonInput | SelenoidUpdateWithWhereUniqueWithoutTandonInput[]
-    updateMany?: SelenoidUpdateManyWithWhereWithoutTandonInput | SelenoidUpdateManyWithWhereWithoutTandonInput[]
-    deleteMany?: SelenoidScalarWhereInput | SelenoidScalarWhereInput[]
+  export type ActuatorUncheckedUpdateManyWithoutTandonNestedInput = {
+    create?: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput> | ActuatorCreateWithoutTandonInput[] | ActuatorUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: ActuatorCreateOrConnectWithoutTandonInput | ActuatorCreateOrConnectWithoutTandonInput[]
+    upsert?: ActuatorUpsertWithWhereUniqueWithoutTandonInput | ActuatorUpsertWithWhereUniqueWithoutTandonInput[]
+    createMany?: ActuatorCreateManyTandonInputEnvelope
+    set?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    disconnect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    delete?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+    update?: ActuatorUpdateWithWhereUniqueWithoutTandonInput | ActuatorUpdateWithWhereUniqueWithoutTandonInput[]
+    updateMany?: ActuatorUpdateManyWithWhereWithoutTandonInput | ActuatorUpdateManyWithWhereWithoutTandonInput[]
+    deleteMany?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
   }
 
   export type TandonBahanUncheckedUpdateManyWithoutTandonNestedInput = {
@@ -12582,7 +12582,7 @@ export namespace Prisma {
     thumbnail: string
     created_at?: Date | string
     updated_at?: Date | string | null
-    selenoid?: SelenoidCreateNestedManyWithoutGreenhouseInput
+    actuator?: ActuatorCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateWithoutUserInput = {
@@ -12591,7 +12591,7 @@ export namespace Prisma {
     thumbnail: string
     created_at?: Date | string
     updated_at?: Date | string | null
-    selenoid?: SelenoidUncheckedCreateNestedManyWithoutGreenhouseInput
+    actuator?: ActuatorUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseCreateOrConnectWithoutUserInput = {
@@ -12606,7 +12606,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorCreateNestedManyWithoutTandonInput
-    selenoid?: SelenoidCreateNestedManyWithoutTandonInput
+    actuator?: ActuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
   }
@@ -12619,7 +12619,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
-    selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
+    actuator?: ActuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
   }
@@ -12716,16 +12716,16 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutGreenhouseInput, UserUncheckedCreateWithoutGreenhouseInput>
   }
 
-  export type SelenoidCreateWithoutGreenhouseInput = {
+  export type ActuatorCreateWithoutGreenhouseInput = {
     nama: string
     merek: string
     status: boolean
     created_at?: Date | string
     updated_at?: Date | string | null
-    tandon: TandonCreateNestedOneWithoutSelenoidInput
+    tandon: TandonCreateNestedOneWithoutActuatorInput
   }
 
-  export type SelenoidUncheckedCreateWithoutGreenhouseInput = {
+  export type ActuatorUncheckedCreateWithoutGreenhouseInput = {
     id?: number
     nama: string
     merek: string
@@ -12735,13 +12735,13 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type SelenoidCreateOrConnectWithoutGreenhouseInput = {
-    where: SelenoidWhereUniqueInput
-    create: XOR<SelenoidCreateWithoutGreenhouseInput, SelenoidUncheckedCreateWithoutGreenhouseInput>
+  export type ActuatorCreateOrConnectWithoutGreenhouseInput = {
+    where: ActuatorWhereUniqueInput
+    create: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput>
   }
 
-  export type SelenoidCreateManyGreenhouseInputEnvelope = {
-    data: SelenoidCreateManyGreenhouseInput | SelenoidCreateManyGreenhouseInput[]
+  export type ActuatorCreateManyGreenhouseInputEnvelope = {
+    data: ActuatorCreateManyGreenhouseInput | ActuatorCreateManyGreenhouseInput[]
     skipDuplicates?: boolean
   }
 
@@ -12774,34 +12774,34 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"User"> | Date | string | null
   }
 
-  export type SelenoidUpsertWithWhereUniqueWithoutGreenhouseInput = {
-    where: SelenoidWhereUniqueInput
-    update: XOR<SelenoidUpdateWithoutGreenhouseInput, SelenoidUncheckedUpdateWithoutGreenhouseInput>
-    create: XOR<SelenoidCreateWithoutGreenhouseInput, SelenoidUncheckedCreateWithoutGreenhouseInput>
+  export type ActuatorUpsertWithWhereUniqueWithoutGreenhouseInput = {
+    where: ActuatorWhereUniqueInput
+    update: XOR<ActuatorUpdateWithoutGreenhouseInput, ActuatorUncheckedUpdateWithoutGreenhouseInput>
+    create: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput>
   }
 
-  export type SelenoidUpdateWithWhereUniqueWithoutGreenhouseInput = {
-    where: SelenoidWhereUniqueInput
-    data: XOR<SelenoidUpdateWithoutGreenhouseInput, SelenoidUncheckedUpdateWithoutGreenhouseInput>
+  export type ActuatorUpdateWithWhereUniqueWithoutGreenhouseInput = {
+    where: ActuatorWhereUniqueInput
+    data: XOR<ActuatorUpdateWithoutGreenhouseInput, ActuatorUncheckedUpdateWithoutGreenhouseInput>
   }
 
-  export type SelenoidUpdateManyWithWhereWithoutGreenhouseInput = {
-    where: SelenoidScalarWhereInput
-    data: XOR<SelenoidUpdateManyMutationInput, SelenoidUncheckedUpdateManyWithoutGreenhouseInput>
+  export type ActuatorUpdateManyWithWhereWithoutGreenhouseInput = {
+    where: ActuatorScalarWhereInput
+    data: XOR<ActuatorUpdateManyMutationInput, ActuatorUncheckedUpdateManyWithoutGreenhouseInput>
   }
 
-  export type SelenoidScalarWhereInput = {
-    AND?: SelenoidScalarWhereInput | SelenoidScalarWhereInput[]
-    OR?: SelenoidScalarWhereInput[]
-    NOT?: SelenoidScalarWhereInput | SelenoidScalarWhereInput[]
-    id?: IntFilter<"Selenoid"> | number
-    nama?: StringFilter<"Selenoid"> | string
-    merek?: StringFilter<"Selenoid"> | string
-    status?: BoolFilter<"Selenoid"> | boolean
-    tandonId?: IntFilter<"Selenoid"> | number
-    greenhouseId?: IntFilter<"Selenoid"> | number
-    created_at?: DateTimeFilter<"Selenoid"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Selenoid"> | Date | string | null
+  export type ActuatorScalarWhereInput = {
+    AND?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
+    OR?: ActuatorScalarWhereInput[]
+    NOT?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
+    id?: IntFilter<"Actuator"> | number
+    nama?: StringFilter<"Actuator"> | string
+    merek?: StringFilter<"Actuator"> | string
+    status?: BoolFilter<"Actuator"> | boolean
+    tandonId?: IntFilter<"Actuator"> | number
+    greenhouseId?: IntFilter<"Actuator"> | number
+    created_at?: DateTimeFilter<"Actuator"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Actuator"> | Date | string | null
   }
 
   export type PenjadwalanCreateWithoutResepInput = {
@@ -12895,7 +12895,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
-    selenoid?: SelenoidCreateNestedManyWithoutTandonInput
+    actuator?: ActuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
   }
 
@@ -12908,7 +12908,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
-    selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
+    actuator?: ActuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
   }
 
@@ -12966,7 +12966,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
-    selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
+    actuator?: ActuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
   }
 
@@ -12979,7 +12979,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
-    selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
+    actuator?: ActuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
   }
 
@@ -12990,7 +12990,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
-    selenoid?: SelenoidCreateNestedManyWithoutTandonInput
+    actuator?: ActuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
   }
@@ -13003,7 +13003,7 @@ export namespace Prisma {
     isOnline: boolean
     created_at?: Date | string
     updated_at?: Date | string | null
-    selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
+    actuator?: ActuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
   }
@@ -13051,7 +13051,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
-    selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
+    actuator?: ActuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
   }
@@ -13064,7 +13064,7 @@ export namespace Prisma {
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
+    actuator?: ActuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
   }
@@ -13095,7 +13095,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type TandonCreateWithoutSelenoidInput = {
+  export type TandonCreateWithoutActuatorInput = {
     nama: string
     status: string
     isOnline: boolean
@@ -13107,7 +13107,7 @@ export namespace Prisma {
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
   }
 
-  export type TandonUncheckedCreateWithoutSelenoidInput = {
+  export type TandonUncheckedCreateWithoutActuatorInput = {
     id?: number
     nama: string
     userId: number
@@ -13120,12 +13120,12 @@ export namespace Prisma {
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
   }
 
-  export type TandonCreateOrConnectWithoutSelenoidInput = {
+  export type TandonCreateOrConnectWithoutActuatorInput = {
     where: TandonWhereUniqueInput
-    create: XOR<TandonCreateWithoutSelenoidInput, TandonUncheckedCreateWithoutSelenoidInput>
+    create: XOR<TandonCreateWithoutActuatorInput, TandonUncheckedCreateWithoutActuatorInput>
   }
 
-  export type GreenhouseCreateWithoutSelenoidInput = {
+  export type GreenhouseCreateWithoutActuatorInput = {
     nama: string
     thumbnail: string
     created_at?: Date | string
@@ -13133,7 +13133,7 @@ export namespace Prisma {
     user?: UserCreateNestedManyWithoutGreenhouseInput
   }
 
-  export type GreenhouseUncheckedCreateWithoutSelenoidInput = {
+  export type GreenhouseUncheckedCreateWithoutActuatorInput = {
     id?: number
     nama: string
     thumbnail: string
@@ -13142,23 +13142,23 @@ export namespace Prisma {
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
-  export type GreenhouseCreateOrConnectWithoutSelenoidInput = {
+  export type GreenhouseCreateOrConnectWithoutActuatorInput = {
     where: GreenhouseWhereUniqueInput
-    create: XOR<GreenhouseCreateWithoutSelenoidInput, GreenhouseUncheckedCreateWithoutSelenoidInput>
+    create: XOR<GreenhouseCreateWithoutActuatorInput, GreenhouseUncheckedCreateWithoutActuatorInput>
   }
 
-  export type TandonUpsertWithoutSelenoidInput = {
-    update: XOR<TandonUpdateWithoutSelenoidInput, TandonUncheckedUpdateWithoutSelenoidInput>
-    create: XOR<TandonCreateWithoutSelenoidInput, TandonUncheckedCreateWithoutSelenoidInput>
+  export type TandonUpsertWithoutActuatorInput = {
+    update: XOR<TandonUpdateWithoutActuatorInput, TandonUncheckedUpdateWithoutActuatorInput>
+    create: XOR<TandonCreateWithoutActuatorInput, TandonUncheckedCreateWithoutActuatorInput>
     where?: TandonWhereInput
   }
 
-  export type TandonUpdateToOneWithWhereWithoutSelenoidInput = {
+  export type TandonUpdateToOneWithWhereWithoutActuatorInput = {
     where?: TandonWhereInput
-    data: XOR<TandonUpdateWithoutSelenoidInput, TandonUncheckedUpdateWithoutSelenoidInput>
+    data: XOR<TandonUpdateWithoutActuatorInput, TandonUncheckedUpdateWithoutActuatorInput>
   }
 
-  export type TandonUpdateWithoutSelenoidInput = {
+  export type TandonUpdateWithoutActuatorInput = {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
@@ -13170,7 +13170,7 @@ export namespace Prisma {
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
   }
 
-  export type TandonUncheckedUpdateWithoutSelenoidInput = {
+  export type TandonUncheckedUpdateWithoutActuatorInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -13183,18 +13183,18 @@ export namespace Prisma {
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
   }
 
-  export type GreenhouseUpsertWithoutSelenoidInput = {
-    update: XOR<GreenhouseUpdateWithoutSelenoidInput, GreenhouseUncheckedUpdateWithoutSelenoidInput>
-    create: XOR<GreenhouseCreateWithoutSelenoidInput, GreenhouseUncheckedCreateWithoutSelenoidInput>
+  export type GreenhouseUpsertWithoutActuatorInput = {
+    update: XOR<GreenhouseUpdateWithoutActuatorInput, GreenhouseUncheckedUpdateWithoutActuatorInput>
+    create: XOR<GreenhouseCreateWithoutActuatorInput, GreenhouseUncheckedCreateWithoutActuatorInput>
     where?: GreenhouseWhereInput
   }
 
-  export type GreenhouseUpdateToOneWithWhereWithoutSelenoidInput = {
+  export type GreenhouseUpdateToOneWithWhereWithoutActuatorInput = {
     where?: GreenhouseWhereInput
-    data: XOR<GreenhouseUpdateWithoutSelenoidInput, GreenhouseUncheckedUpdateWithoutSelenoidInput>
+    data: XOR<GreenhouseUpdateWithoutActuatorInput, GreenhouseUncheckedUpdateWithoutActuatorInput>
   }
 
-  export type GreenhouseUpdateWithoutSelenoidInput = {
+  export type GreenhouseUpdateWithoutActuatorInput = {
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13202,7 +13202,7 @@ export namespace Prisma {
     user?: UserUpdateManyWithoutGreenhouseNestedInput
   }
 
-  export type GreenhouseUncheckedUpdateWithoutSelenoidInput = {
+  export type GreenhouseUncheckedUpdateWithoutActuatorInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
@@ -13254,7 +13254,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
-    selenoid?: SelenoidCreateNestedManyWithoutTandonInput
+    actuator?: ActuatorCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
   }
 
@@ -13267,7 +13267,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
-    selenoid?: SelenoidUncheckedCreateNestedManyWithoutTandonInput
+    actuator?: ActuatorUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
   }
 
@@ -13328,7 +13328,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
-    selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
+    actuator?: ActuatorUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
   }
 
@@ -13341,7 +13341,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
-    selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
+    actuator?: ActuatorUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
   }
 
@@ -13406,16 +13406,16 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type SelenoidCreateWithoutTandonInput = {
+  export type ActuatorCreateWithoutTandonInput = {
     nama: string
     merek: string
     status: boolean
     created_at?: Date | string
     updated_at?: Date | string | null
-    greenhouse: GreenhouseCreateNestedOneWithoutSelenoidInput
+    greenhouse: GreenhouseCreateNestedOneWithoutActuatorInput
   }
 
-  export type SelenoidUncheckedCreateWithoutTandonInput = {
+  export type ActuatorUncheckedCreateWithoutTandonInput = {
     id?: number
     nama: string
     merek: string
@@ -13425,13 +13425,13 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type SelenoidCreateOrConnectWithoutTandonInput = {
-    where: SelenoidWhereUniqueInput
-    create: XOR<SelenoidCreateWithoutTandonInput, SelenoidUncheckedCreateWithoutTandonInput>
+  export type ActuatorCreateOrConnectWithoutTandonInput = {
+    where: ActuatorWhereUniqueInput
+    create: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput>
   }
 
-  export type SelenoidCreateManyTandonInputEnvelope = {
-    data: SelenoidCreateManyTandonInput | SelenoidCreateManyTandonInput[]
+  export type ActuatorCreateManyTandonInputEnvelope = {
+    data: ActuatorCreateManyTandonInput | ActuatorCreateManyTandonInput[]
     skipDuplicates?: boolean
   }
 
@@ -13537,20 +13537,20 @@ export namespace Prisma {
     data: XOR<SensorUpdateManyMutationInput, SensorUncheckedUpdateManyWithoutTandonInput>
   }
 
-  export type SelenoidUpsertWithWhereUniqueWithoutTandonInput = {
-    where: SelenoidWhereUniqueInput
-    update: XOR<SelenoidUpdateWithoutTandonInput, SelenoidUncheckedUpdateWithoutTandonInput>
-    create: XOR<SelenoidCreateWithoutTandonInput, SelenoidUncheckedCreateWithoutTandonInput>
+  export type ActuatorUpsertWithWhereUniqueWithoutTandonInput = {
+    where: ActuatorWhereUniqueInput
+    update: XOR<ActuatorUpdateWithoutTandonInput, ActuatorUncheckedUpdateWithoutTandonInput>
+    create: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput>
   }
 
-  export type SelenoidUpdateWithWhereUniqueWithoutTandonInput = {
-    where: SelenoidWhereUniqueInput
-    data: XOR<SelenoidUpdateWithoutTandonInput, SelenoidUncheckedUpdateWithoutTandonInput>
+  export type ActuatorUpdateWithWhereUniqueWithoutTandonInput = {
+    where: ActuatorWhereUniqueInput
+    data: XOR<ActuatorUpdateWithoutTandonInput, ActuatorUncheckedUpdateWithoutTandonInput>
   }
 
-  export type SelenoidUpdateManyWithWhereWithoutTandonInput = {
-    where: SelenoidScalarWhereInput
-    data: XOR<SelenoidUpdateManyMutationInput, SelenoidUncheckedUpdateManyWithoutTandonInput>
+  export type ActuatorUpdateManyWithWhereWithoutTandonInput = {
+    where: ActuatorScalarWhereInput
+    data: XOR<ActuatorUpdateManyMutationInput, ActuatorUncheckedUpdateManyWithoutTandonInput>
   }
 
   export type TandonBahanUpsertWithWhereUniqueWithoutTandonInput = {
@@ -13610,7 +13610,7 @@ export namespace Prisma {
     thumbnail?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    selenoid?: SelenoidUpdateManyWithoutGreenhouseNestedInput
+    actuator?: ActuatorUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateWithoutUserInput = {
@@ -13619,7 +13619,7 @@ export namespace Prisma {
     thumbnail?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    selenoid?: SelenoidUncheckedUpdateManyWithoutGreenhouseNestedInput
+    actuator?: ActuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateManyWithoutUserInput = {
@@ -13637,7 +13637,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUpdateManyWithoutTandonNestedInput
-    selenoid?: SelenoidUpdateManyWithoutTandonNestedInput
+    actuator?: ActuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
   }
@@ -13650,7 +13650,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
-    selenoid?: SelenoidUncheckedUpdateManyWithoutTandonNestedInput
+    actuator?: ActuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
   }
@@ -13664,7 +13664,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type SelenoidCreateManyGreenhouseInput = {
+  export type ActuatorCreateManyGreenhouseInput = {
     id?: number
     nama: string
     merek: string
@@ -13705,16 +13705,16 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type SelenoidUpdateWithoutGreenhouseInput = {
+  export type ActuatorUpdateWithoutGreenhouseInput = {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tandon?: TandonUpdateOneRequiredWithoutSelenoidNestedInput
+    tandon?: TandonUpdateOneRequiredWithoutActuatorNestedInput
   }
 
-  export type SelenoidUncheckedUpdateWithoutGreenhouseInput = {
+  export type ActuatorUncheckedUpdateWithoutGreenhouseInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -13724,7 +13724,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type SelenoidUncheckedUpdateManyWithoutGreenhouseInput = {
+  export type ActuatorUncheckedUpdateManyWithoutGreenhouseInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -13837,7 +13837,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type SelenoidCreateManyTandonInput = {
+  export type ActuatorCreateManyTandonInput = {
     id?: number
     nama: string
     merek: string
@@ -13902,16 +13902,16 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type SelenoidUpdateWithoutTandonInput = {
+  export type ActuatorUpdateWithoutTandonInput = {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    greenhouse?: GreenhouseUpdateOneRequiredWithoutSelenoidNestedInput
+    greenhouse?: GreenhouseUpdateOneRequiredWithoutActuatorNestedInput
   }
 
-  export type SelenoidUncheckedUpdateWithoutTandonInput = {
+  export type ActuatorUncheckedUpdateWithoutTandonInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -13921,7 +13921,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type SelenoidUncheckedUpdateManyWithoutTandonInput = {
+  export type ActuatorUncheckedUpdateManyWithoutTandonInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -14028,9 +14028,9 @@ export namespace Prisma {
      */
     export type SensorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = SensorDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use SelenoidDefaultArgs instead
+     * @deprecated Use ActuatorDefaultArgs instead
      */
-    export type SelenoidArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = SelenoidDefaultArgs<ExtArgs>
+    export type ActuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = ActuatorDefaultArgs<ExtArgs>
     /**
      * @deprecated Use TandonBahanDefaultArgs instead
      */

@@ -26,7 +26,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
           select: {
             _count: {
               select: {
-                selenoid: true,
+                actuator: true,
               },
             },
           },
@@ -36,7 +36,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
             _count: {
               select: {
                 tandonBahan: true,
-                selenoid: true,
+                actuator: true,
                 sensor: true,
               },
             },
@@ -63,8 +63,8 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       (temp, a) => temp + a._count.tandonBahan,
       0
     );
-    const jumlahSelenoid = target.tandon.reduce(
-      (temp, a) => temp + a._count.selenoid,
+    const jumlahActuator = target.tandon.reduce(
+      (temp, a) => temp + a._count.actuator,
       0
     );
     const jumlahSensor = target.tandon.reduce(
@@ -78,7 +78,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         data: {
           greenhouse: target._count.greenhouse,
           tandonBahan: jumlahTandon,
-          selenoid: jumlahSelenoid,
+          actuator: jumlahActuator,
           tandonPeracikan: target._count.tandon,
           sensor: jumlahSensor
         },
