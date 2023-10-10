@@ -11,6 +11,8 @@ const bahan_1 = require("./bahan");
 const tandonUtama_1 = require("./tandonUtama");
 const dashboard_1 = require("./dashboard");
 const greenhouse_1 = require("./greenhouse");
+const aktuator_1 = require("./aktuator");
+const sensor_1 = require("./sensor");
 exports.routes = [
     ...home_1.home,
     ...login_1.loginRoute,
@@ -21,5 +23,7 @@ exports.routes = [
     ...bahan_1.bahanRoute,
     ...tandonUtama_1.tandonUtamaRoute,
     ...dashboard_1.dashboardRoute,
-    ...greenhouse_1.greenhouseRoute
+    ...greenhouse_1.greenhouseRoute,
+    ...aktuator_1.aktuatorRoute,
+    ...sensor_1.sensorRoute
 ];

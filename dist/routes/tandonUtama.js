@@ -17,7 +17,7 @@ exports.tandonUtamaRoute = [
             tags: ['api'],
             validate: {
                 query: joi_1.default.object({
-                    id: joi_1.default.number().required()
+                    id: joi_1.default.number().required().optional()
                 })
             }
         }

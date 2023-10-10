@@ -17,48 +17,19 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id_user } = request.auth.credentials;
         const { id } = request.query;
-        let data;
-        if (id) {
-            data = yield prisma_1.prisma.tandon.findFirst({
-                where: {
-                    id
-                },
-                include: {
-                    sensor: true,
-                    penjadwalan: true,
-                    tandonBahan: {
-                        include: {
-                            sensor: true,
-                        }
-                    },
-                }
-            });
-        }
-        else {
-            data = yield prisma_1.prisma.tandon.findMany({
-                where: {
-                    userId: id_user
-                },
-                include: {
-                    sensor: true,
-                    penjadwalan: true,
-                    tandonBahan: {
-                        include: {
-                            sensor: true
-                        }
-                    }
-                }
-            });
-        }
+        const data = yield prisma_1.prisma.sensor.findMany({
+            where: {
+                tandonId: id
+            }
+        });
         if (!data) {
-            return boom_1.default.notFound("Tidak ada tandon terpilih");
+            return boom_1.default.notFound("Tidak ada sensor");
         }
         return h.response({
-            status: 'success',
+            status: "success",
             data
-        }).code(200);
+        });
     }
     catch (e) {
         if (e instanceof Error) {
@@ -66,6 +37,8 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             return boom_1.default.internal(e.message);
         }
     }
-    prisma_1.prisma.$disconnect();
+    finally {
+        prisma_1.prisma.$disconnect();
+    }
 });
 exports.getHandler = getHandler;

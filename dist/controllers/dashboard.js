@@ -34,7 +34,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                     select: {
                         _count: {
                             select: {
-                                actuator: true,
+                                aktuator: true,
                             },
                         },
                     },
@@ -44,7 +44,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                         _count: {
                             select: {
                                 tandonBahan: true,
-                                actuator: true,
+                                aktuator: true,
                                 sensor: true,
                             },
                         },
@@ -66,7 +66,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         }
         // console.log(JSON.stringify(target));
         const jumlahTandon = target.tandon.reduce((temp, a) => temp + a._count.tandonBahan, 0);
-        const jumlahActuator = target.tandon.reduce((temp, a) => temp + a._count.actuator, 0);
+        const jumlahAktuator = target.tandon.reduce((temp, a) => temp + a._count.aktuator, 0);
         const jumlahSensor = target.tandon.reduce((temp, a) => temp + a._count.sensor, 0) + target.tandon.reduce((temp, a) => temp + a.tandonBahan.length, 0);
         return h
             .response({
@@ -74,7 +74,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             data: {
                 greenhouse: target._count.greenhouse,
                 tandonBahan: jumlahTandon,
-                actuator: jumlahActuator,
+                actuator: jumlahAktuator,
                 tandonPeracikan: target._count.tandon,
                 sensor: jumlahSensor
             },

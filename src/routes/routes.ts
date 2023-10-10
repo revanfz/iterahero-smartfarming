@@ -9,6 +9,8 @@ import { bahanRoute } from "./bahan";
 import { tandonUtamaRoute } from "./tandonUtama";
 import { dashboardRoute } from "./dashboard";
 import { greenhouseRoute } from "./greenhouse";
+import { aktuatorRoute } from "./aktuator";
+import { sensorRoute } from "./sensor";
 
 export const routes: ServerRoute[] = [
   ...home,
@@ -20,5 +22,7 @@ export const routes: ServerRoute[] = [
   ...bahanRoute,
   ...tandonUtamaRoute,
   ...dashboardRoute,
-  ...greenhouseRoute
+  ...greenhouseRoute,
+  ...aktuatorRoute,
+  ...sensorRoute
 ];

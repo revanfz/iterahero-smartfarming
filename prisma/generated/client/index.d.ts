@@ -39,10 +39,10 @@ export type Penjadwalan = $Result.DefaultSelection<Prisma.$PenjadwalanPayload>
  */
 export type Sensor = $Result.DefaultSelection<Prisma.$SensorPayload>
 /**
- * Model Actuator
+ * Model Aktuator
  * 
  */
-export type Actuator = $Result.DefaultSelection<Prisma.$ActuatorPayload>
+export type Aktuator = $Result.DefaultSelection<Prisma.$AktuatorPayload>
 /**
  * Model TandonBahan
  * 
@@ -227,14 +227,14 @@ export class PrismaClient<
   get sensor(): Prisma.SensorDelegate<ExtArgs>;
 
   /**
-   * `prisma.actuator`: Exposes CRUD operations for the **Actuator** model.
+   * `prisma.aktuator`: Exposes CRUD operations for the **Aktuator** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Actuators
-    * const actuators = await prisma.actuator.findMany()
+    * // Fetch zero or more Aktuators
+    * const aktuators = await prisma.aktuator.findMany()
     * ```
     */
-  get actuator(): Prisma.ActuatorDelegate<ExtArgs>;
+  get aktuator(): Prisma.AktuatorDelegate<ExtArgs>;
 
   /**
    * `prisma.tandonBahan`: Exposes CRUD operations for the **TandonBahan** model.
@@ -730,7 +730,7 @@ export namespace Prisma {
     Resep: 'Resep',
     Penjadwalan: 'Penjadwalan',
     Sensor: 'Sensor',
-    Actuator: 'Actuator',
+    Aktuator: 'Aktuator',
     TandonBahan: 'TandonBahan',
     Tandon: 'Tandon'
   };
@@ -749,7 +749,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'greenhouse' | 'resep' | 'penjadwalan' | 'sensor' | 'actuator' | 'tandonBahan' | 'tandon'
+      modelProps: 'user' | 'greenhouse' | 'resep' | 'penjadwalan' | 'sensor' | 'aktuator' | 'tandonBahan' | 'tandon'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -1083,69 +1083,69 @@ export namespace Prisma {
           }
         }
       }
-      Actuator: {
-        payload: Prisma.$ActuatorPayload<ExtArgs>
-        fields: Prisma.ActuatorFieldRefs
+      Aktuator: {
+        payload: Prisma.$AktuatorPayload<ExtArgs>
+        fields: Prisma.AktuatorFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.ActuatorFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload> | null
+            args: Prisma.AktuatorFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AktuatorPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.ActuatorFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
+            args: Prisma.AktuatorFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AktuatorPayload>
           }
           findFirst: {
-            args: Prisma.ActuatorFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload> | null
+            args: Prisma.AktuatorFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AktuatorPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.ActuatorFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
+            args: Prisma.AktuatorFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AktuatorPayload>
           }
           findMany: {
-            args: Prisma.ActuatorFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>[]
+            args: Prisma.AktuatorFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AktuatorPayload>[]
           }
           create: {
-            args: Prisma.ActuatorCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
+            args: Prisma.AktuatorCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AktuatorPayload>
           }
           createMany: {
-            args: Prisma.ActuatorCreateManyArgs<ExtArgs>,
+            args: Prisma.AktuatorCreateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           delete: {
-            args: Prisma.ActuatorDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
+            args: Prisma.AktuatorDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AktuatorPayload>
           }
           update: {
-            args: Prisma.ActuatorUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
+            args: Prisma.AktuatorUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AktuatorPayload>
           }
           deleteMany: {
-            args: Prisma.ActuatorDeleteManyArgs<ExtArgs>,
+            args: Prisma.AktuatorDeleteManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           updateMany: {
-            args: Prisma.ActuatorUpdateManyArgs<ExtArgs>,
+            args: Prisma.AktuatorUpdateManyArgs<ExtArgs>,
             result: Prisma.BatchPayload
           }
           upsert: {
-            args: Prisma.ActuatorUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$ActuatorPayload>
+            args: Prisma.AktuatorUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$AktuatorPayload>
           }
           aggregate: {
-            args: Prisma.ActuatorAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateActuator>
+            args: Prisma.AktuatorAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateAktuator>
           }
           groupBy: {
-            args: Prisma.ActuatorGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<ActuatorGroupByOutputType>[]
+            args: Prisma.AktuatorGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<AktuatorGroupByOutputType>[]
           }
           count: {
-            args: Prisma.ActuatorCountArgs<ExtArgs>,
-            result: $Utils.Optional<ActuatorCountAggregateOutputType> | number
+            args: Prisma.AktuatorCountArgs<ExtArgs>,
+            result: $Utils.Optional<AktuatorCountAggregateOutputType> | number
           }
         }
       }
@@ -1479,12 +1479,12 @@ export namespace Prisma {
 
   export type GreenhouseCountOutputType = {
     user: number
-    actuator: number
+    aktuator: number
   }
 
   export type GreenhouseCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     user?: boolean | GreenhouseCountOutputTypeCountUserArgs
-    actuator?: boolean | GreenhouseCountOutputTypeCountActuatorArgs
+    aktuator?: boolean | GreenhouseCountOutputTypeCountAktuatorArgs
   }
 
   // Custom InputTypes
@@ -1511,8 +1511,8 @@ export namespace Prisma {
   /**
    * GreenhouseCountOutputType without action
    */
-  export type GreenhouseCountOutputTypeCountActuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: ActuatorWhereInput
+  export type GreenhouseCountOutputTypeCountAktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: AktuatorWhereInput
   }
 
 
@@ -1591,14 +1591,14 @@ export namespace Prisma {
 
   export type TandonCountOutputType = {
     sensor: number
-    actuator: number
+    aktuator: number
     tandonBahan: number
     penjadwalan: number
   }
 
   export type TandonCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     sensor?: boolean | TandonCountOutputTypeCountSensorArgs
-    actuator?: boolean | TandonCountOutputTypeCountActuatorArgs
+    aktuator?: boolean | TandonCountOutputTypeCountAktuatorArgs
     tandonBahan?: boolean | TandonCountOutputTypeCountTandonBahanArgs
     penjadwalan?: boolean | TandonCountOutputTypeCountPenjadwalanArgs
   }
@@ -1627,8 +1627,8 @@ export namespace Prisma {
   /**
    * TandonCountOutputType without action
    */
-  export type TandonCountOutputTypeCountActuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: ActuatorWhereInput
+  export type TandonCountOutputTypeCountAktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: AktuatorWhereInput
   }
 
 
@@ -2875,7 +2875,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | Greenhouse$userArgs<ExtArgs>
-    actuator?: boolean | Greenhouse$actuatorArgs<ExtArgs>
+    aktuator?: boolean | Greenhouse$aktuatorArgs<ExtArgs>
     _count?: boolean | GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["greenhouse"]>
 
@@ -2889,7 +2889,7 @@ export namespace Prisma {
 
   export type GreenhouseInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     user?: boolean | Greenhouse$userArgs<ExtArgs>
-    actuator?: boolean | Greenhouse$actuatorArgs<ExtArgs>
+    aktuator?: boolean | Greenhouse$aktuatorArgs<ExtArgs>
     _count?: boolean | GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2898,7 +2898,7 @@ export namespace Prisma {
     name: "Greenhouse"
     objects: {
       user: Prisma.$UserPayload<ExtArgs>[]
-      actuator: Prisma.$ActuatorPayload<ExtArgs>[]
+      aktuator: Prisma.$AktuatorPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetResult<{
       id: number
@@ -3273,7 +3273,7 @@ export namespace Prisma {
 
     user<T extends Greenhouse$userArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$userArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    actuator<T extends Greenhouse$actuatorArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$actuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
+    aktuator<T extends Greenhouse$aktuatorArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$aktuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3641,23 +3641,23 @@ export namespace Prisma {
 
 
   /**
-   * Greenhouse.actuator
+   * Greenhouse.aktuator
    */
-  export type Greenhouse$actuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type Greenhouse$aktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
-    where?: ActuatorWhereInput
-    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
-    cursor?: ActuatorWhereUniqueInput
+    include?: AktuatorInclude<ExtArgs> | null
+    where?: AktuatorWhereInput
+    orderBy?: AktuatorOrderByWithRelationInput | AktuatorOrderByWithRelationInput[]
+    cursor?: AktuatorWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ActuatorScalarFieldEnum | ActuatorScalarFieldEnum[]
+    distinct?: AktuatorScalarFieldEnum | AktuatorScalarFieldEnum[]
   }
 
 
@@ -6752,41 +6752,30 @@ export namespace Prisma {
 
 
   /**
-   * Model Actuator
+   * Model Aktuator
    */
 
-  export type AggregateActuator = {
-    _count: ActuatorCountAggregateOutputType | null
-    _avg: ActuatorAvgAggregateOutputType | null
-    _sum: ActuatorSumAggregateOutputType | null
-    _min: ActuatorMinAggregateOutputType | null
-    _max: ActuatorMaxAggregateOutputType | null
+  export type AggregateAktuator = {
+    _count: AktuatorCountAggregateOutputType | null
+    _avg: AktuatorAvgAggregateOutputType | null
+    _sum: AktuatorSumAggregateOutputType | null
+    _min: AktuatorMinAggregateOutputType | null
+    _max: AktuatorMaxAggregateOutputType | null
   }
 
-  export type ActuatorAvgAggregateOutputType = {
+  export type AktuatorAvgAggregateOutputType = {
     id: number | null
     tandonId: number | null
     greenhouseId: number | null
   }
 
-  export type ActuatorSumAggregateOutputType = {
+  export type AktuatorSumAggregateOutputType = {
     id: number | null
     tandonId: number | null
     greenhouseId: number | null
   }
 
-  export type ActuatorMinAggregateOutputType = {
-    id: number | null
-    nama: string | null
-    merek: string | null
-    status: boolean | null
-    tandonId: number | null
-    greenhouseId: number | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type ActuatorMaxAggregateOutputType = {
+  export type AktuatorMinAggregateOutputType = {
     id: number | null
     nama: string | null
     merek: string | null
@@ -6797,7 +6786,18 @@ export namespace Prisma {
     updated_at: Date | null
   }
 
-  export type ActuatorCountAggregateOutputType = {
+  export type AktuatorMaxAggregateOutputType = {
+    id: number | null
+    nama: string | null
+    merek: string | null
+    status: boolean | null
+    tandonId: number | null
+    greenhouseId: number | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type AktuatorCountAggregateOutputType = {
     id: number
     nama: number
     merek: number
@@ -6810,30 +6810,19 @@ export namespace Prisma {
   }
 
 
-  export type ActuatorAvgAggregateInputType = {
+  export type AktuatorAvgAggregateInputType = {
     id?: true
     tandonId?: true
     greenhouseId?: true
   }
 
-  export type ActuatorSumAggregateInputType = {
+  export type AktuatorSumAggregateInputType = {
     id?: true
     tandonId?: true
     greenhouseId?: true
   }
 
-  export type ActuatorMinAggregateInputType = {
-    id?: true
-    nama?: true
-    merek?: true
-    status?: true
-    tandonId?: true
-    greenhouseId?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type ActuatorMaxAggregateInputType = {
+  export type AktuatorMinAggregateInputType = {
     id?: true
     nama?: true
     merek?: true
@@ -6844,7 +6833,18 @@ export namespace Prisma {
     updated_at?: true
   }
 
-  export type ActuatorCountAggregateInputType = {
+  export type AktuatorMaxAggregateInputType = {
+    id?: true
+    nama?: true
+    merek?: true
+    status?: true
+    tandonId?: true
+    greenhouseId?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type AktuatorCountAggregateInputType = {
     id?: true
     nama?: true
     merek?: true
@@ -6856,93 +6856,93 @@ export namespace Prisma {
     _all?: true
   }
 
-  export type ActuatorAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Actuator to aggregate.
+     * Filter which Aktuator to aggregate.
      */
-    where?: ActuatorWhereInput
+    where?: AktuatorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Actuators to fetch.
+     * Determine the order of Aktuators to fetch.
      */
-    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
+    orderBy?: AktuatorOrderByWithRelationInput | AktuatorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: ActuatorWhereUniqueInput
+    cursor?: AktuatorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Actuators from the position of the cursor.
+     * Take `±n` Aktuators from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Actuators.
+     * Skip the first `n` Aktuators.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned Actuators
+     * Count returned Aktuators
     **/
-    _count?: true | ActuatorCountAggregateInputType
+    _count?: true | AktuatorCountAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to average
     **/
-    _avg?: ActuatorAvgAggregateInputType
+    _avg?: AktuatorAvgAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to sum
     **/
-    _sum?: ActuatorSumAggregateInputType
+    _sum?: AktuatorSumAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the minimum value
     **/
-    _min?: ActuatorMinAggregateInputType
+    _min?: AktuatorMinAggregateInputType
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
      * Select which fields to find the maximum value
     **/
-    _max?: ActuatorMaxAggregateInputType
+    _max?: AktuatorMaxAggregateInputType
   }
 
-  export type GetActuatorAggregateType<T extends ActuatorAggregateArgs> = {
-        [P in keyof T & keyof AggregateActuator]: P extends '_count' | 'count'
+  export type GetAktuatorAggregateType<T extends AktuatorAggregateArgs> = {
+        [P in keyof T & keyof AggregateAktuator]: P extends '_count' | 'count'
       ? T[P] extends true
         ? number
-        : GetScalarType<T[P], AggregateActuator[P]>
-      : GetScalarType<T[P], AggregateActuator[P]>
+        : GetScalarType<T[P], AggregateAktuator[P]>
+      : GetScalarType<T[P], AggregateAktuator[P]>
   }
 
 
 
 
-  export type ActuatorGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: ActuatorWhereInput
-    orderBy?: ActuatorOrderByWithAggregationInput | ActuatorOrderByWithAggregationInput[]
-    by: ActuatorScalarFieldEnum[] | ActuatorScalarFieldEnum
-    having?: ActuatorScalarWhereWithAggregatesInput
+  export type AktuatorGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: AktuatorWhereInput
+    orderBy?: AktuatorOrderByWithAggregationInput | AktuatorOrderByWithAggregationInput[]
+    by: AktuatorScalarFieldEnum[] | AktuatorScalarFieldEnum
+    having?: AktuatorScalarWhereWithAggregatesInput
     take?: number
     skip?: number
-    _count?: ActuatorCountAggregateInputType | true
-    _avg?: ActuatorAvgAggregateInputType
-    _sum?: ActuatorSumAggregateInputType
-    _min?: ActuatorMinAggregateInputType
-    _max?: ActuatorMaxAggregateInputType
+    _count?: AktuatorCountAggregateInputType | true
+    _avg?: AktuatorAvgAggregateInputType
+    _sum?: AktuatorSumAggregateInputType
+    _min?: AktuatorMinAggregateInputType
+    _max?: AktuatorMaxAggregateInputType
   }
 
-  export type ActuatorGroupByOutputType = {
+  export type AktuatorGroupByOutputType = {
     id: number
     nama: string
     merek: string
@@ -6951,28 +6951,28 @@ export namespace Prisma {
     greenhouseId: number
     created_at: Date
     updated_at: Date | null
-    _count: ActuatorCountAggregateOutputType | null
-    _avg: ActuatorAvgAggregateOutputType | null
-    _sum: ActuatorSumAggregateOutputType | null
-    _min: ActuatorMinAggregateOutputType | null
-    _max: ActuatorMaxAggregateOutputType | null
+    _count: AktuatorCountAggregateOutputType | null
+    _avg: AktuatorAvgAggregateOutputType | null
+    _sum: AktuatorSumAggregateOutputType | null
+    _min: AktuatorMinAggregateOutputType | null
+    _max: AktuatorMaxAggregateOutputType | null
   }
 
-  type GetActuatorGroupByPayload<T extends ActuatorGroupByArgs> = Prisma.PrismaPromise<
+  type GetAktuatorGroupByPayload<T extends AktuatorGroupByArgs> = Prisma.PrismaPromise<
     Array<
-      PickEnumerable<ActuatorGroupByOutputType, T['by']> &
+      PickEnumerable<AktuatorGroupByOutputType, T['by']> &
         {
-          [P in ((keyof T) & (keyof ActuatorGroupByOutputType))]: P extends '_count'
+          [P in ((keyof T) & (keyof AktuatorGroupByOutputType))]: P extends '_count'
             ? T[P] extends boolean
               ? number
-              : GetScalarType<T[P], ActuatorGroupByOutputType[P]>
-            : GetScalarType<T[P], ActuatorGroupByOutputType[P]>
+              : GetScalarType<T[P], AktuatorGroupByOutputType[P]>
+            : GetScalarType<T[P], AktuatorGroupByOutputType[P]>
         }
       >
     >
 
 
-  export type ActuatorSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type AktuatorSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     nama?: boolean
     merek?: boolean
@@ -6983,9 +6983,9 @@ export namespace Prisma {
     updated_at?: boolean
     tandon?: boolean | TandonDefaultArgs<ExtArgs>
     greenhouse?: boolean | GreenhouseDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["actuator"]>
+  }, ExtArgs["result"]["aktuator"]>
 
-  export type ActuatorSelectScalar = {
+  export type AktuatorSelectScalar = {
     id?: boolean
     nama?: boolean
     merek?: boolean
@@ -6996,14 +6996,14 @@ export namespace Prisma {
     updated_at?: boolean
   }
 
-  export type ActuatorInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     tandon?: boolean | TandonDefaultArgs<ExtArgs>
     greenhouse?: boolean | GreenhouseDefaultArgs<ExtArgs>
   }
 
 
-  export type $ActuatorPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Actuator"
+  export type $AktuatorPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    name: "Aktuator"
     objects: {
       tandon: Prisma.$TandonPayload<ExtArgs>
       greenhouse: Prisma.$GreenhousePayload<ExtArgs>
@@ -7017,160 +7017,160 @@ export namespace Prisma {
       greenhouseId: number
       created_at: Date
       updated_at: Date | null
-    }, ExtArgs["result"]["actuator"]>
+    }, ExtArgs["result"]["aktuator"]>
     composites: {}
   }
 
 
-  type ActuatorGetPayload<S extends boolean | null | undefined | ActuatorDefaultArgs> = $Result.GetResult<Prisma.$ActuatorPayload, S>
+  type AktuatorGetPayload<S extends boolean | null | undefined | AktuatorDefaultArgs> = $Result.GetResult<Prisma.$AktuatorPayload, S>
 
-  type ActuatorCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
-    Omit<ActuatorFindManyArgs, 'select' | 'include'> & {
-      select?: ActuatorCountAggregateInputType | true
+  type AktuatorCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
+    Omit<AktuatorFindManyArgs, 'select' | 'include'> & {
+      select?: AktuatorCountAggregateInputType | true
     }
 
-  export interface ActuatorDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Actuator'], meta: { name: 'Actuator' } }
+  export interface AktuatorDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Aktuator'], meta: { name: 'Aktuator' } }
     /**
-     * Find zero or one Actuator that matches the filter.
-     * @param {ActuatorFindUniqueArgs} args - Arguments to find a Actuator
+     * Find zero or one Aktuator that matches the filter.
+     * @param {AktuatorFindUniqueArgs} args - Arguments to find a Aktuator
      * @example
-     * // Get one Actuator
-     * const actuator = await prisma.actuator.findUnique({
+     * // Get one Aktuator
+     * const aktuator = await prisma.aktuator.findUnique({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUnique<T extends ActuatorFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, ActuatorFindUniqueArgs<ExtArgs>>
-    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+    findUnique<T extends AktuatorFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, AktuatorFindUniqueArgs<ExtArgs>>
+    ): Prisma__AktuatorClient<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
 
     /**
-     * Find one Actuator that matches the filter or throw an error  with `error.code='P2025'` 
+     * Find one Aktuator that matches the filter or throw an error  with `error.code='P2025'` 
      *     if no matches were found.
-     * @param {ActuatorFindUniqueOrThrowArgs} args - Arguments to find a Actuator
+     * @param {AktuatorFindUniqueOrThrowArgs} args - Arguments to find a Aktuator
      * @example
-     * // Get one Actuator
-     * const actuator = await prisma.actuator.findUniqueOrThrow({
+     * // Get one Aktuator
+     * const aktuator = await prisma.aktuator.findUniqueOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findUniqueOrThrow<T extends ActuatorFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, ActuatorFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+    findUniqueOrThrow<T extends AktuatorFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, AktuatorFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__AktuatorClient<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
 
     /**
-     * Find the first Actuator that matches the filter.
+     * Find the first Aktuator that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ActuatorFindFirstArgs} args - Arguments to find a Actuator
+     * @param {AktuatorFindFirstArgs} args - Arguments to find a Aktuator
      * @example
-     * // Get one Actuator
-     * const actuator = await prisma.actuator.findFirst({
+     * // Get one Aktuator
+     * const aktuator = await prisma.aktuator.findFirst({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirst<T extends ActuatorFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, ActuatorFindFirstArgs<ExtArgs>>
-    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+    findFirst<T extends AktuatorFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, AktuatorFindFirstArgs<ExtArgs>>
+    ): Prisma__AktuatorClient<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
 
     /**
-     * Find the first Actuator that matches the filter or
+     * Find the first Aktuator that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ActuatorFindFirstOrThrowArgs} args - Arguments to find a Actuator
+     * @param {AktuatorFindFirstOrThrowArgs} args - Arguments to find a Aktuator
      * @example
-     * // Get one Actuator
-     * const actuator = await prisma.actuator.findFirstOrThrow({
+     * // Get one Aktuator
+     * const aktuator = await prisma.aktuator.findFirstOrThrow({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
     **/
-    findFirstOrThrow<T extends ActuatorFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, ActuatorFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+    findFirstOrThrow<T extends AktuatorFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, AktuatorFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__AktuatorClient<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
 
     /**
-     * Find zero or more Actuators that matches the filter.
+     * Find zero or more Aktuators that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ActuatorFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @param {AktuatorFindManyArgs=} args - Arguments to filter and select certain fields only.
      * @example
-     * // Get all Actuators
-     * const actuators = await prisma.actuator.findMany()
+     * // Get all Aktuators
+     * const aktuators = await prisma.aktuator.findMany()
      * 
-     * // Get first 10 Actuators
-     * const actuators = await prisma.actuator.findMany({ take: 10 })
+     * // Get first 10 Aktuators
+     * const aktuators = await prisma.aktuator.findMany({ take: 10 })
      * 
      * // Only select the `id`
-     * const actuatorWithIdOnly = await prisma.actuator.findMany({ select: { id: true } })
+     * const aktuatorWithIdOnly = await prisma.aktuator.findMany({ select: { id: true } })
      * 
     **/
-    findMany<T extends ActuatorFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ActuatorFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findMany'>>
+    findMany<T extends AktuatorFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AktuatorFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findMany'>>
 
     /**
-     * Create a Actuator.
-     * @param {ActuatorCreateArgs} args - Arguments to create a Actuator.
+     * Create a Aktuator.
+     * @param {AktuatorCreateArgs} args - Arguments to create a Aktuator.
      * @example
-     * // Create one Actuator
-     * const Actuator = await prisma.actuator.create({
+     * // Create one Aktuator
+     * const Aktuator = await prisma.aktuator.create({
      *   data: {
-     *     // ... data to create a Actuator
+     *     // ... data to create a Aktuator
      *   }
      * })
      * 
     **/
-    create<T extends ActuatorCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, ActuatorCreateArgs<ExtArgs>>
-    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+    create<T extends AktuatorCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, AktuatorCreateArgs<ExtArgs>>
+    ): Prisma__AktuatorClient<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
 
     /**
-     * Create many Actuators.
-     *     @param {ActuatorCreateManyArgs} args - Arguments to create many Actuators.
+     * Create many Aktuators.
+     *     @param {AktuatorCreateManyArgs} args - Arguments to create many Aktuators.
      *     @example
-     *     // Create many Actuators
-     *     const actuator = await prisma.actuator.createMany({
+     *     // Create many Aktuators
+     *     const aktuator = await prisma.aktuator.createMany({
      *       data: {
      *         // ... provide data here
      *       }
      *     })
      *     
     **/
-    createMany<T extends ActuatorCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ActuatorCreateManyArgs<ExtArgs>>
+    createMany<T extends AktuatorCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AktuatorCreateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Delete a Actuator.
-     * @param {ActuatorDeleteArgs} args - Arguments to delete one Actuator.
+     * Delete a Aktuator.
+     * @param {AktuatorDeleteArgs} args - Arguments to delete one Aktuator.
      * @example
-     * // Delete one Actuator
-     * const Actuator = await prisma.actuator.delete({
+     * // Delete one Aktuator
+     * const Aktuator = await prisma.aktuator.delete({
      *   where: {
-     *     // ... filter to delete one Actuator
+     *     // ... filter to delete one Aktuator
      *   }
      * })
      * 
     **/
-    delete<T extends ActuatorDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, ActuatorDeleteArgs<ExtArgs>>
-    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+    delete<T extends AktuatorDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, AktuatorDeleteArgs<ExtArgs>>
+    ): Prisma__AktuatorClient<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
 
     /**
-     * Update one Actuator.
-     * @param {ActuatorUpdateArgs} args - Arguments to update one Actuator.
+     * Update one Aktuator.
+     * @param {AktuatorUpdateArgs} args - Arguments to update one Aktuator.
      * @example
-     * // Update one Actuator
-     * const actuator = await prisma.actuator.update({
+     * // Update one Aktuator
+     * const aktuator = await prisma.aktuator.update({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7180,34 +7180,34 @@ export namespace Prisma {
      * })
      * 
     **/
-    update<T extends ActuatorUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, ActuatorUpdateArgs<ExtArgs>>
-    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+    update<T extends AktuatorUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, AktuatorUpdateArgs<ExtArgs>>
+    ): Prisma__AktuatorClient<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
 
     /**
-     * Delete zero or more Actuators.
-     * @param {ActuatorDeleteManyArgs} args - Arguments to filter Actuators to delete.
+     * Delete zero or more Aktuators.
+     * @param {AktuatorDeleteManyArgs} args - Arguments to filter Aktuators to delete.
      * @example
-     * // Delete a few Actuators
-     * const { count } = await prisma.actuator.deleteMany({
+     * // Delete a few Aktuators
+     * const { count } = await prisma.aktuator.deleteMany({
      *   where: {
      *     // ... provide filter here
      *   }
      * })
      * 
     **/
-    deleteMany<T extends ActuatorDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, ActuatorDeleteManyArgs<ExtArgs>>
+    deleteMany<T extends AktuatorDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, AktuatorDeleteManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Update zero or more Actuators.
+     * Update zero or more Aktuators.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ActuatorUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {AktuatorUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
-     * // Update many Actuators
-     * const actuator = await prisma.actuator.updateMany({
+     * // Update many Aktuators
+     * const aktuator = await prisma.aktuator.updateMany({
      *   where: {
      *     // ... provide filter here
      *   },
@@ -7217,59 +7217,59 @@ export namespace Prisma {
      * })
      * 
     **/
-    updateMany<T extends ActuatorUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, ActuatorUpdateManyArgs<ExtArgs>>
+    updateMany<T extends AktuatorUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, AktuatorUpdateManyArgs<ExtArgs>>
     ): Prisma.PrismaPromise<BatchPayload>
 
     /**
-     * Create or update one Actuator.
-     * @param {ActuatorUpsertArgs} args - Arguments to update or create a Actuator.
+     * Create or update one Aktuator.
+     * @param {AktuatorUpsertArgs} args - Arguments to update or create a Aktuator.
      * @example
-     * // Update or create a Actuator
-     * const actuator = await prisma.actuator.upsert({
+     * // Update or create a Aktuator
+     * const aktuator = await prisma.aktuator.upsert({
      *   create: {
-     *     // ... data to create a Actuator
+     *     // ... data to create a Aktuator
      *   },
      *   update: {
      *     // ... in case it already exists, update
      *   },
      *   where: {
-     *     // ... the filter for the Actuator we want to update
+     *     // ... the filter for the Aktuator we want to update
      *   }
      * })
     **/
-    upsert<T extends ActuatorUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, ActuatorUpsertArgs<ExtArgs>>
-    ): Prisma__ActuatorClient<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+    upsert<T extends AktuatorUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, AktuatorUpsertArgs<ExtArgs>>
+    ): Prisma__AktuatorClient<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
 
     /**
-     * Count the number of Actuators.
+     * Count the number of Aktuators.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ActuatorCountArgs} args - Arguments to filter Actuators to count.
+     * @param {AktuatorCountArgs} args - Arguments to filter Aktuators to count.
      * @example
-     * // Count the number of Actuators
-     * const count = await prisma.actuator.count({
+     * // Count the number of Aktuators
+     * const count = await prisma.aktuator.count({
      *   where: {
-     *     // ... the filter for the Actuators we want to count
+     *     // ... the filter for the Aktuators we want to count
      *   }
      * })
     **/
-    count<T extends ActuatorCountArgs>(
-      args?: Subset<T, ActuatorCountArgs>,
+    count<T extends AktuatorCountArgs>(
+      args?: Subset<T, AktuatorCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
           ? number
-          : GetScalarType<T['select'], ActuatorCountAggregateOutputType>
+          : GetScalarType<T['select'], AktuatorCountAggregateOutputType>
         : number
     >
 
     /**
-     * Allows you to perform aggregations operations on a Actuator.
+     * Allows you to perform aggregations operations on a Aktuator.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ActuatorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @param {AktuatorAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
      * @example
      * // Ordered by age ascending
      * // Where email contains prisma.io
@@ -7289,13 +7289,13 @@ export namespace Prisma {
      *   take: 10,
      * })
     **/
-    aggregate<T extends ActuatorAggregateArgs>(args: Subset<T, ActuatorAggregateArgs>): Prisma.PrismaPromise<GetActuatorAggregateType<T>>
+    aggregate<T extends AktuatorAggregateArgs>(args: Subset<T, AktuatorAggregateArgs>): Prisma.PrismaPromise<GetAktuatorAggregateType<T>>
 
     /**
-     * Group by Actuator.
+     * Group by Aktuator.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {ActuatorGroupByArgs} args - Group by arguments.
+     * @param {AktuatorGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -7310,14 +7310,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends ActuatorGroupByArgs,
+      T extends AktuatorGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: ActuatorGroupByArgs['orderBy'] }
-        : { orderBy?: ActuatorGroupByArgs['orderBy'] },
+        ? { orderBy: AktuatorGroupByArgs['orderBy'] }
+        : { orderBy?: AktuatorGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -7366,20 +7366,20 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, ActuatorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetActuatorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, AktuatorGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetAktuatorGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the Actuator model
+   * Fields of the Aktuator model
    */
-  readonly fields: ActuatorFieldRefs;
+  readonly fields: AktuatorFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for Actuator.
+   * The delegate class that acts as a "Promise-like" for Aktuator.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__ActuatorClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__AktuatorClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
     tandon<T extends TandonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TandonDefaultArgs<ExtArgs>>): Prisma__TandonClient<$Result.GetResult<Prisma.$TandonPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
@@ -7411,340 +7411,340 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the Actuator model
+   * Fields of the Aktuator model
    */ 
-  interface ActuatorFieldRefs {
-    readonly id: FieldRef<"Actuator", 'Int'>
-    readonly nama: FieldRef<"Actuator", 'String'>
-    readonly merek: FieldRef<"Actuator", 'String'>
-    readonly status: FieldRef<"Actuator", 'Boolean'>
-    readonly tandonId: FieldRef<"Actuator", 'Int'>
-    readonly greenhouseId: FieldRef<"Actuator", 'Int'>
-    readonly created_at: FieldRef<"Actuator", 'DateTime'>
-    readonly updated_at: FieldRef<"Actuator", 'DateTime'>
+  interface AktuatorFieldRefs {
+    readonly id: FieldRef<"Aktuator", 'Int'>
+    readonly nama: FieldRef<"Aktuator", 'String'>
+    readonly merek: FieldRef<"Aktuator", 'String'>
+    readonly status: FieldRef<"Aktuator", 'Boolean'>
+    readonly tandonId: FieldRef<"Aktuator", 'Int'>
+    readonly greenhouseId: FieldRef<"Aktuator", 'Int'>
+    readonly created_at: FieldRef<"Aktuator", 'DateTime'>
+    readonly updated_at: FieldRef<"Aktuator", 'DateTime'>
   }
     
 
   // Custom InputTypes
 
   /**
-   * Actuator findUnique
+   * Aktuator findUnique
    */
-  export type ActuatorFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
+    include?: AktuatorInclude<ExtArgs> | null
     /**
-     * Filter, which Actuator to fetch.
+     * Filter, which Aktuator to fetch.
      */
-    where: ActuatorWhereUniqueInput
+    where: AktuatorWhereUniqueInput
   }
 
 
   /**
-   * Actuator findUniqueOrThrow
+   * Aktuator findUniqueOrThrow
    */
-  export type ActuatorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
+    include?: AktuatorInclude<ExtArgs> | null
     /**
-     * Filter, which Actuator to fetch.
+     * Filter, which Aktuator to fetch.
      */
-    where: ActuatorWhereUniqueInput
+    where: AktuatorWhereUniqueInput
   }
 
 
   /**
-   * Actuator findFirst
+   * Aktuator findFirst
    */
-  export type ActuatorFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
+    include?: AktuatorInclude<ExtArgs> | null
     /**
-     * Filter, which Actuator to fetch.
+     * Filter, which Aktuator to fetch.
      */
-    where?: ActuatorWhereInput
+    where?: AktuatorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Actuators to fetch.
+     * Determine the order of Aktuators to fetch.
      */
-    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
+    orderBy?: AktuatorOrderByWithRelationInput | AktuatorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Actuators.
+     * Sets the position for searching for Aktuators.
      */
-    cursor?: ActuatorWhereUniqueInput
+    cursor?: AktuatorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Actuators from the position of the cursor.
+     * Take `±n` Aktuators from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Actuators.
+     * Skip the first `n` Aktuators.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Actuators.
+     * Filter by unique combinations of Aktuators.
      */
-    distinct?: ActuatorScalarFieldEnum | ActuatorScalarFieldEnum[]
+    distinct?: AktuatorScalarFieldEnum | AktuatorScalarFieldEnum[]
   }
 
 
   /**
-   * Actuator findFirstOrThrow
+   * Aktuator findFirstOrThrow
    */
-  export type ActuatorFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
+    include?: AktuatorInclude<ExtArgs> | null
     /**
-     * Filter, which Actuator to fetch.
+     * Filter, which Aktuator to fetch.
      */
-    where?: ActuatorWhereInput
+    where?: AktuatorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Actuators to fetch.
+     * Determine the order of Aktuators to fetch.
      */
-    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
+    orderBy?: AktuatorOrderByWithRelationInput | AktuatorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for Actuators.
+     * Sets the position for searching for Aktuators.
      */
-    cursor?: ActuatorWhereUniqueInput
+    cursor?: AktuatorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Actuators from the position of the cursor.
+     * Take `±n` Aktuators from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Actuators.
+     * Skip the first `n` Aktuators.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of Actuators.
+     * Filter by unique combinations of Aktuators.
      */
-    distinct?: ActuatorScalarFieldEnum | ActuatorScalarFieldEnum[]
+    distinct?: AktuatorScalarFieldEnum | AktuatorScalarFieldEnum[]
   }
 
 
   /**
-   * Actuator findMany
+   * Aktuator findMany
    */
-  export type ActuatorFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
+    include?: AktuatorInclude<ExtArgs> | null
     /**
-     * Filter, which Actuators to fetch.
+     * Filter, which Aktuators to fetch.
      */
-    where?: ActuatorWhereInput
+    where?: AktuatorWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of Actuators to fetch.
+     * Determine the order of Aktuators to fetch.
      */
-    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
+    orderBy?: AktuatorOrderByWithRelationInput | AktuatorOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing Actuators.
+     * Sets the position for listing Aktuators.
      */
-    cursor?: ActuatorWhereUniqueInput
+    cursor?: AktuatorWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` Actuators from the position of the cursor.
+     * Take `±n` Aktuators from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` Actuators.
+     * Skip the first `n` Aktuators.
      */
     skip?: number
-    distinct?: ActuatorScalarFieldEnum | ActuatorScalarFieldEnum[]
+    distinct?: AktuatorScalarFieldEnum | AktuatorScalarFieldEnum[]
   }
 
 
   /**
-   * Actuator create
+   * Aktuator create
    */
-  export type ActuatorCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
+    include?: AktuatorInclude<ExtArgs> | null
     /**
-     * The data needed to create a Actuator.
+     * The data needed to create a Aktuator.
      */
-    data: XOR<ActuatorCreateInput, ActuatorUncheckedCreateInput>
+    data: XOR<AktuatorCreateInput, AktuatorUncheckedCreateInput>
   }
 
 
   /**
-   * Actuator createMany
+   * Aktuator createMany
    */
-  export type ActuatorCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many Actuators.
+     * The data used to create many Aktuators.
      */
-    data: ActuatorCreateManyInput | ActuatorCreateManyInput[]
+    data: AktuatorCreateManyInput | AktuatorCreateManyInput[]
     skipDuplicates?: boolean
   }
 
 
   /**
-   * Actuator update
+   * Aktuator update
    */
-  export type ActuatorUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
+    include?: AktuatorInclude<ExtArgs> | null
     /**
-     * The data needed to update a Actuator.
+     * The data needed to update a Aktuator.
      */
-    data: XOR<ActuatorUpdateInput, ActuatorUncheckedUpdateInput>
+    data: XOR<AktuatorUpdateInput, AktuatorUncheckedUpdateInput>
     /**
-     * Choose, which Actuator to update.
+     * Choose, which Aktuator to update.
      */
-    where: ActuatorWhereUniqueInput
+    where: AktuatorWhereUniqueInput
   }
 
 
   /**
-   * Actuator updateMany
+   * Aktuator updateMany
    */
-  export type ActuatorUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update Actuators.
+     * The data used to update Aktuators.
      */
-    data: XOR<ActuatorUpdateManyMutationInput, ActuatorUncheckedUpdateManyInput>
+    data: XOR<AktuatorUpdateManyMutationInput, AktuatorUncheckedUpdateManyInput>
     /**
-     * Filter which Actuators to update
+     * Filter which Aktuators to update
      */
-    where?: ActuatorWhereInput
+    where?: AktuatorWhereInput
   }
 
 
   /**
-   * Actuator upsert
+   * Aktuator upsert
    */
-  export type ActuatorUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
+    include?: AktuatorInclude<ExtArgs> | null
     /**
-     * The filter to search for the Actuator to update in case it exists.
+     * The filter to search for the Aktuator to update in case it exists.
      */
-    where: ActuatorWhereUniqueInput
+    where: AktuatorWhereUniqueInput
     /**
-     * In case the Actuator found by the `where` argument doesn't exist, create a new Actuator with this data.
+     * In case the Aktuator found by the `where` argument doesn't exist, create a new Aktuator with this data.
      */
-    create: XOR<ActuatorCreateInput, ActuatorUncheckedCreateInput>
+    create: XOR<AktuatorCreateInput, AktuatorUncheckedCreateInput>
     /**
-     * In case the Actuator was found with the provided `where` argument, update it with this data.
+     * In case the Aktuator was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<ActuatorUpdateInput, ActuatorUncheckedUpdateInput>
+    update: XOR<AktuatorUpdateInput, AktuatorUncheckedUpdateInput>
   }
 
 
   /**
-   * Actuator delete
+   * Aktuator delete
    */
-  export type ActuatorDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
+    include?: AktuatorInclude<ExtArgs> | null
     /**
-     * Filter which Actuator to delete.
+     * Filter which Aktuator to delete.
      */
-    where: ActuatorWhereUniqueInput
+    where: AktuatorWhereUniqueInput
   }
 
 
   /**
-   * Actuator deleteMany
+   * Aktuator deleteMany
    */
-  export type ActuatorDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Filter which Actuators to delete
+     * Filter which Aktuators to delete
      */
-    where?: ActuatorWhereInput
+    where?: AktuatorWhereInput
   }
 
 
   /**
-   * Actuator without action
+   * Aktuator without action
    */
-  export type ActuatorDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type AktuatorDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
+    include?: AktuatorInclude<ExtArgs> | null
   }
 
 
@@ -8953,7 +8953,7 @@ export namespace Prisma {
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
     sensor?: boolean | Tandon$sensorArgs<ExtArgs>
-    actuator?: boolean | Tandon$actuatorArgs<ExtArgs>
+    aktuator?: boolean | Tandon$aktuatorArgs<ExtArgs>
     tandonBahan?: boolean | Tandon$tandonBahanArgs<ExtArgs>
     penjadwalan?: boolean | Tandon$penjadwalanArgs<ExtArgs>
     _count?: boolean | TandonCountOutputTypeDefaultArgs<ExtArgs>
@@ -8972,7 +8972,7 @@ export namespace Prisma {
   export type TandonInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
     sensor?: boolean | Tandon$sensorArgs<ExtArgs>
-    actuator?: boolean | Tandon$actuatorArgs<ExtArgs>
+    aktuator?: boolean | Tandon$aktuatorArgs<ExtArgs>
     tandonBahan?: boolean | Tandon$tandonBahanArgs<ExtArgs>
     penjadwalan?: boolean | Tandon$penjadwalanArgs<ExtArgs>
     _count?: boolean | TandonCountOutputTypeDefaultArgs<ExtArgs>
@@ -8984,7 +8984,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>
       sensor: Prisma.$SensorPayload<ExtArgs>[]
-      actuator: Prisma.$ActuatorPayload<ExtArgs>[]
+      aktuator: Prisma.$AktuatorPayload<ExtArgs>[]
       tandonBahan: Prisma.$TandonBahanPayload<ExtArgs>[]
       penjadwalan: Prisma.$PenjadwalanPayload<ExtArgs>[]
     }
@@ -9365,7 +9365,7 @@ export namespace Prisma {
 
     sensor<T extends Tandon$sensorArgs<ExtArgs> = {}>(args?: Subset<T, Tandon$sensorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, 'findMany'> | Null>;
 
-    actuator<T extends Tandon$actuatorArgs<ExtArgs> = {}>(args?: Subset<T, Tandon$actuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ActuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
+    aktuator<T extends Tandon$aktuatorArgs<ExtArgs> = {}>(args?: Subset<T, Tandon$aktuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     tandonBahan<T extends Tandon$tandonBahanArgs<ExtArgs> = {}>(args?: Subset<T, Tandon$tandonBahanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TandonBahanPayload<ExtArgs>, T, 'findMany'> | Null>;
 
@@ -9739,23 +9739,23 @@ export namespace Prisma {
 
 
   /**
-   * Tandon.actuator
+   * Tandon.aktuator
    */
-  export type Tandon$actuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+  export type Tandon$aktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the Actuator
+     * Select specific fields to fetch from the Aktuator
      */
-    select?: ActuatorSelect<ExtArgs> | null
+    select?: AktuatorSelect<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well.
      */
-    include?: ActuatorInclude<ExtArgs> | null
-    where?: ActuatorWhereInput
-    orderBy?: ActuatorOrderByWithRelationInput | ActuatorOrderByWithRelationInput[]
-    cursor?: ActuatorWhereUniqueInput
+    include?: AktuatorInclude<ExtArgs> | null
+    where?: AktuatorWhereInput
+    orderBy?: AktuatorOrderByWithRelationInput | AktuatorOrderByWithRelationInput[]
+    cursor?: AktuatorWhereUniqueInput
     take?: number
     skip?: number
-    distinct?: ActuatorScalarFieldEnum | ActuatorScalarFieldEnum[]
+    distinct?: AktuatorScalarFieldEnum | AktuatorScalarFieldEnum[]
   }
 
 
@@ -9899,7 +9899,7 @@ export namespace Prisma {
   export type SensorScalarFieldEnum = (typeof SensorScalarFieldEnum)[keyof typeof SensorScalarFieldEnum]
 
 
-  export const ActuatorScalarFieldEnum: {
+  export const AktuatorScalarFieldEnum: {
     id: 'id',
     nama: 'nama',
     merek: 'merek',
@@ -9910,7 +9910,7 @@ export namespace Prisma {
     updated_at: 'updated_at'
   };
 
-  export type ActuatorScalarFieldEnum = (typeof ActuatorScalarFieldEnum)[keyof typeof ActuatorScalarFieldEnum]
+  export type AktuatorScalarFieldEnum = (typeof AktuatorScalarFieldEnum)[keyof typeof AktuatorScalarFieldEnum]
 
 
   export const TandonBahanScalarFieldEnum: {
@@ -10112,7 +10112,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Greenhouse"> | Date | string
     updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
     user?: UserListRelationFilter
-    actuator?: ActuatorListRelationFilter
+    aktuator?: AktuatorListRelationFilter
   }
 
   export type GreenhouseOrderByWithRelationInput = {
@@ -10122,7 +10122,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     user?: UserOrderByRelationAggregateInput
-    actuator?: ActuatorOrderByRelationAggregateInput
+    aktuator?: AktuatorOrderByRelationAggregateInput
   }
 
   export type GreenhouseWhereUniqueInput = Prisma.AtLeast<{
@@ -10135,7 +10135,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"Greenhouse"> | Date | string
     updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
     user?: UserListRelationFilter
-    actuator?: ActuatorListRelationFilter
+    aktuator?: AktuatorListRelationFilter
   }, "id" | "nama">
 
   export type GreenhouseOrderByWithAggregationInput = {
@@ -10394,23 +10394,23 @@ export namespace Prisma {
     updated_at?: DateTimeNullableWithAggregatesFilter<"Sensor"> | Date | string | null
   }
 
-  export type ActuatorWhereInput = {
-    AND?: ActuatorWhereInput | ActuatorWhereInput[]
-    OR?: ActuatorWhereInput[]
-    NOT?: ActuatorWhereInput | ActuatorWhereInput[]
-    id?: IntFilter<"Actuator"> | number
-    nama?: StringFilter<"Actuator"> | string
-    merek?: StringFilter<"Actuator"> | string
-    status?: BoolFilter<"Actuator"> | boolean
-    tandonId?: IntFilter<"Actuator"> | number
-    greenhouseId?: IntFilter<"Actuator"> | number
-    created_at?: DateTimeFilter<"Actuator"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Actuator"> | Date | string | null
+  export type AktuatorWhereInput = {
+    AND?: AktuatorWhereInput | AktuatorWhereInput[]
+    OR?: AktuatorWhereInput[]
+    NOT?: AktuatorWhereInput | AktuatorWhereInput[]
+    id?: IntFilter<"Aktuator"> | number
+    nama?: StringFilter<"Aktuator"> | string
+    merek?: StringFilter<"Aktuator"> | string
+    status?: BoolFilter<"Aktuator"> | boolean
+    tandonId?: IntFilter<"Aktuator"> | number
+    greenhouseId?: IntFilter<"Aktuator"> | number
+    created_at?: DateTimeFilter<"Aktuator"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Aktuator"> | Date | string | null
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
     greenhouse?: XOR<GreenhouseRelationFilter, GreenhouseWhereInput>
   }
 
-  export type ActuatorOrderByWithRelationInput = {
+  export type AktuatorOrderByWithRelationInput = {
     id?: SortOrder
     nama?: SortOrder
     merek?: SortOrder
@@ -10423,23 +10423,23 @@ export namespace Prisma {
     greenhouse?: GreenhouseOrderByWithRelationInput
   }
 
-  export type ActuatorWhereUniqueInput = Prisma.AtLeast<{
+  export type AktuatorWhereUniqueInput = Prisma.AtLeast<{
     id?: number
-    AND?: ActuatorWhereInput | ActuatorWhereInput[]
-    OR?: ActuatorWhereInput[]
-    NOT?: ActuatorWhereInput | ActuatorWhereInput[]
-    nama?: StringFilter<"Actuator"> | string
-    merek?: StringFilter<"Actuator"> | string
-    status?: BoolFilter<"Actuator"> | boolean
-    tandonId?: IntFilter<"Actuator"> | number
-    greenhouseId?: IntFilter<"Actuator"> | number
-    created_at?: DateTimeFilter<"Actuator"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Actuator"> | Date | string | null
+    AND?: AktuatorWhereInput | AktuatorWhereInput[]
+    OR?: AktuatorWhereInput[]
+    NOT?: AktuatorWhereInput | AktuatorWhereInput[]
+    nama?: StringFilter<"Aktuator"> | string
+    merek?: StringFilter<"Aktuator"> | string
+    status?: BoolFilter<"Aktuator"> | boolean
+    tandonId?: IntFilter<"Aktuator"> | number
+    greenhouseId?: IntFilter<"Aktuator"> | number
+    created_at?: DateTimeFilter<"Aktuator"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Aktuator"> | Date | string | null
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
     greenhouse?: XOR<GreenhouseRelationFilter, GreenhouseWhereInput>
   }, "id">
 
-  export type ActuatorOrderByWithAggregationInput = {
+  export type AktuatorOrderByWithAggregationInput = {
     id?: SortOrder
     nama?: SortOrder
     merek?: SortOrder
@@ -10448,25 +10448,25 @@ export namespace Prisma {
     greenhouseId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
-    _count?: ActuatorCountOrderByAggregateInput
-    _avg?: ActuatorAvgOrderByAggregateInput
-    _max?: ActuatorMaxOrderByAggregateInput
-    _min?: ActuatorMinOrderByAggregateInput
-    _sum?: ActuatorSumOrderByAggregateInput
+    _count?: AktuatorCountOrderByAggregateInput
+    _avg?: AktuatorAvgOrderByAggregateInput
+    _max?: AktuatorMaxOrderByAggregateInput
+    _min?: AktuatorMinOrderByAggregateInput
+    _sum?: AktuatorSumOrderByAggregateInput
   }
 
-  export type ActuatorScalarWhereWithAggregatesInput = {
-    AND?: ActuatorScalarWhereWithAggregatesInput | ActuatorScalarWhereWithAggregatesInput[]
-    OR?: ActuatorScalarWhereWithAggregatesInput[]
-    NOT?: ActuatorScalarWhereWithAggregatesInput | ActuatorScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Actuator"> | number
-    nama?: StringWithAggregatesFilter<"Actuator"> | string
-    merek?: StringWithAggregatesFilter<"Actuator"> | string
-    status?: BoolWithAggregatesFilter<"Actuator"> | boolean
-    tandonId?: IntWithAggregatesFilter<"Actuator"> | number
-    greenhouseId?: IntWithAggregatesFilter<"Actuator"> | number
-    created_at?: DateTimeWithAggregatesFilter<"Actuator"> | Date | string
-    updated_at?: DateTimeNullableWithAggregatesFilter<"Actuator"> | Date | string | null
+  export type AktuatorScalarWhereWithAggregatesInput = {
+    AND?: AktuatorScalarWhereWithAggregatesInput | AktuatorScalarWhereWithAggregatesInput[]
+    OR?: AktuatorScalarWhereWithAggregatesInput[]
+    NOT?: AktuatorScalarWhereWithAggregatesInput | AktuatorScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Aktuator"> | number
+    nama?: StringWithAggregatesFilter<"Aktuator"> | string
+    merek?: StringWithAggregatesFilter<"Aktuator"> | string
+    status?: BoolWithAggregatesFilter<"Aktuator"> | boolean
+    tandonId?: IntWithAggregatesFilter<"Aktuator"> | number
+    greenhouseId?: IntWithAggregatesFilter<"Aktuator"> | number
+    created_at?: DateTimeWithAggregatesFilter<"Aktuator"> | Date | string
+    updated_at?: DateTimeNullableWithAggregatesFilter<"Aktuator"> | Date | string | null
   }
 
   export type TandonBahanWhereInput = {
@@ -10542,7 +10542,7 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"Tandon"> | Date | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     sensor?: SensorListRelationFilter
-    actuator?: ActuatorListRelationFilter
+    aktuator?: AktuatorListRelationFilter
     tandonBahan?: TandonBahanListRelationFilter
     penjadwalan?: PenjadwalanListRelationFilter
   }
@@ -10557,7 +10557,7 @@ export namespace Prisma {
     updated_at?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     sensor?: SensorOrderByRelationAggregateInput
-    actuator?: ActuatorOrderByRelationAggregateInput
+    aktuator?: AktuatorOrderByRelationAggregateInput
     tandonBahan?: TandonBahanOrderByRelationAggregateInput
     penjadwalan?: PenjadwalanOrderByRelationAggregateInput
   }
@@ -10575,7 +10575,7 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"Tandon"> | Date | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
     sensor?: SensorListRelationFilter
-    actuator?: ActuatorListRelationFilter
+    aktuator?: AktuatorListRelationFilter
     tandonBahan?: TandonBahanListRelationFilter
     penjadwalan?: PenjadwalanListRelationFilter
   }, "id">
@@ -10689,7 +10689,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     user?: UserCreateNestedManyWithoutGreenhouseInput
-    actuator?: ActuatorCreateNestedManyWithoutGreenhouseInput
+    aktuator?: AktuatorCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateInput = {
@@ -10699,7 +10699,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
-    actuator?: ActuatorUncheckedCreateNestedManyWithoutGreenhouseInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUpdateInput = {
@@ -10708,7 +10708,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateManyWithoutGreenhouseNestedInput
-    actuator?: ActuatorUpdateManyWithoutGreenhouseNestedInput
+    aktuator?: AktuatorUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateInput = {
@@ -10718,7 +10718,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
-    actuator?: ActuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseCreateManyInput = {
@@ -10980,17 +10980,17 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type ActuatorCreateInput = {
+  export type AktuatorCreateInput = {
     nama: string
     merek: string
     status: boolean
     created_at?: Date | string
     updated_at?: Date | string | null
-    tandon: TandonCreateNestedOneWithoutActuatorInput
-    greenhouse: GreenhouseCreateNestedOneWithoutActuatorInput
+    tandon: TandonCreateNestedOneWithoutAktuatorInput
+    greenhouse: GreenhouseCreateNestedOneWithoutAktuatorInput
   }
 
-  export type ActuatorUncheckedCreateInput = {
+  export type AktuatorUncheckedCreateInput = {
     id?: number
     nama: string
     merek: string
@@ -11001,17 +11001,17 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type ActuatorUpdateInput = {
+  export type AktuatorUpdateInput = {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tandon?: TandonUpdateOneRequiredWithoutActuatorNestedInput
-    greenhouse?: GreenhouseUpdateOneRequiredWithoutActuatorNestedInput
+    tandon?: TandonUpdateOneRequiredWithoutAktuatorNestedInput
+    greenhouse?: GreenhouseUpdateOneRequiredWithoutAktuatorNestedInput
   }
 
-  export type ActuatorUncheckedUpdateInput = {
+  export type AktuatorUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -11022,7 +11022,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type ActuatorCreateManyInput = {
+  export type AktuatorCreateManyInput = {
     id?: number
     nama: string
     merek: string
@@ -11033,7 +11033,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type ActuatorUpdateManyMutationInput = {
+  export type AktuatorUpdateManyMutationInput = {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -11041,7 +11041,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type ActuatorUncheckedUpdateManyInput = {
+  export type AktuatorUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -11116,7 +11116,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
-    actuator?: ActuatorCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
   }
@@ -11130,7 +11130,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
-    actuator?: ActuatorUncheckedCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
   }
@@ -11143,7 +11143,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
-    actuator?: ActuatorUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
   }
@@ -11157,7 +11157,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
-    actuator?: ActuatorUncheckedUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
   }
@@ -11369,17 +11369,17 @@ export namespace Prisma {
     none?: UserWhereInput
   }
 
-  export type ActuatorListRelationFilter = {
-    every?: ActuatorWhereInput
-    some?: ActuatorWhereInput
-    none?: ActuatorWhereInput
+  export type AktuatorListRelationFilter = {
+    every?: AktuatorWhereInput
+    some?: AktuatorWhereInput
+    none?: AktuatorWhereInput
   }
 
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
-  export type ActuatorOrderByRelationAggregateInput = {
+  export type AktuatorOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11670,7 +11670,7 @@ export namespace Prisma {
     isNot?: GreenhouseWhereInput
   }
 
-  export type ActuatorCountOrderByAggregateInput = {
+  export type AktuatorCountOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
     merek?: SortOrder
@@ -11681,24 +11681,13 @@ export namespace Prisma {
     updated_at?: SortOrder
   }
 
-  export type ActuatorAvgOrderByAggregateInput = {
+  export type AktuatorAvgOrderByAggregateInput = {
     id?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
   }
 
-  export type ActuatorMaxOrderByAggregateInput = {
-    id?: SortOrder
-    nama?: SortOrder
-    merek?: SortOrder
-    status?: SortOrder
-    tandonId?: SortOrder
-    greenhouseId?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type ActuatorMinOrderByAggregateInput = {
+  export type AktuatorMaxOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
     merek?: SortOrder
@@ -11709,7 +11698,18 @@ export namespace Prisma {
     updated_at?: SortOrder
   }
 
-  export type ActuatorSumOrderByAggregateInput = {
+  export type AktuatorMinOrderByAggregateInput = {
+    id?: SortOrder
+    nama?: SortOrder
+    merek?: SortOrder
+    status?: SortOrder
+    tandonId?: SortOrder
+    greenhouseId?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type AktuatorSumOrderByAggregateInput = {
     id?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
@@ -11920,11 +11920,11 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
-  export type ActuatorCreateNestedManyWithoutGreenhouseInput = {
-    create?: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput> | ActuatorCreateWithoutGreenhouseInput[] | ActuatorUncheckedCreateWithoutGreenhouseInput[]
-    connectOrCreate?: ActuatorCreateOrConnectWithoutGreenhouseInput | ActuatorCreateOrConnectWithoutGreenhouseInput[]
-    createMany?: ActuatorCreateManyGreenhouseInputEnvelope
-    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+  export type AktuatorCreateNestedManyWithoutGreenhouseInput = {
+    create?: XOR<AktuatorCreateWithoutGreenhouseInput, AktuatorUncheckedCreateWithoutGreenhouseInput> | AktuatorCreateWithoutGreenhouseInput[] | AktuatorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutGreenhouseInput | AktuatorCreateOrConnectWithoutGreenhouseInput[]
+    createMany?: AktuatorCreateManyGreenhouseInputEnvelope
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
   }
 
   export type UserUncheckedCreateNestedManyWithoutGreenhouseInput = {
@@ -11933,11 +11933,11 @@ export namespace Prisma {
     connect?: UserWhereUniqueInput | UserWhereUniqueInput[]
   }
 
-  export type ActuatorUncheckedCreateNestedManyWithoutGreenhouseInput = {
-    create?: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput> | ActuatorCreateWithoutGreenhouseInput[] | ActuatorUncheckedCreateWithoutGreenhouseInput[]
-    connectOrCreate?: ActuatorCreateOrConnectWithoutGreenhouseInput | ActuatorCreateOrConnectWithoutGreenhouseInput[]
-    createMany?: ActuatorCreateManyGreenhouseInputEnvelope
-    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+  export type AktuatorUncheckedCreateNestedManyWithoutGreenhouseInput = {
+    create?: XOR<AktuatorCreateWithoutGreenhouseInput, AktuatorUncheckedCreateWithoutGreenhouseInput> | AktuatorCreateWithoutGreenhouseInput[] | AktuatorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutGreenhouseInput | AktuatorCreateOrConnectWithoutGreenhouseInput[]
+    createMany?: AktuatorCreateManyGreenhouseInputEnvelope
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
   }
 
   export type UserUpdateManyWithoutGreenhouseNestedInput = {
@@ -11953,18 +11953,18 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
-  export type ActuatorUpdateManyWithoutGreenhouseNestedInput = {
-    create?: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput> | ActuatorCreateWithoutGreenhouseInput[] | ActuatorUncheckedCreateWithoutGreenhouseInput[]
-    connectOrCreate?: ActuatorCreateOrConnectWithoutGreenhouseInput | ActuatorCreateOrConnectWithoutGreenhouseInput[]
-    upsert?: ActuatorUpsertWithWhereUniqueWithoutGreenhouseInput | ActuatorUpsertWithWhereUniqueWithoutGreenhouseInput[]
-    createMany?: ActuatorCreateManyGreenhouseInputEnvelope
-    set?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    disconnect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    delete?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    update?: ActuatorUpdateWithWhereUniqueWithoutGreenhouseInput | ActuatorUpdateWithWhereUniqueWithoutGreenhouseInput[]
-    updateMany?: ActuatorUpdateManyWithWhereWithoutGreenhouseInput | ActuatorUpdateManyWithWhereWithoutGreenhouseInput[]
-    deleteMany?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
+  export type AktuatorUpdateManyWithoutGreenhouseNestedInput = {
+    create?: XOR<AktuatorCreateWithoutGreenhouseInput, AktuatorUncheckedCreateWithoutGreenhouseInput> | AktuatorCreateWithoutGreenhouseInput[] | AktuatorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutGreenhouseInput | AktuatorCreateOrConnectWithoutGreenhouseInput[]
+    upsert?: AktuatorUpsertWithWhereUniqueWithoutGreenhouseInput | AktuatorUpsertWithWhereUniqueWithoutGreenhouseInput[]
+    createMany?: AktuatorCreateManyGreenhouseInputEnvelope
+    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    update?: AktuatorUpdateWithWhereUniqueWithoutGreenhouseInput | AktuatorUpdateWithWhereUniqueWithoutGreenhouseInput[]
+    updateMany?: AktuatorUpdateManyWithWhereWithoutGreenhouseInput | AktuatorUpdateManyWithWhereWithoutGreenhouseInput[]
+    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
   }
 
   export type UserUncheckedUpdateManyWithoutGreenhouseNestedInput = {
@@ -11980,18 +11980,18 @@ export namespace Prisma {
     deleteMany?: UserScalarWhereInput | UserScalarWhereInput[]
   }
 
-  export type ActuatorUncheckedUpdateManyWithoutGreenhouseNestedInput = {
-    create?: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput> | ActuatorCreateWithoutGreenhouseInput[] | ActuatorUncheckedCreateWithoutGreenhouseInput[]
-    connectOrCreate?: ActuatorCreateOrConnectWithoutGreenhouseInput | ActuatorCreateOrConnectWithoutGreenhouseInput[]
-    upsert?: ActuatorUpsertWithWhereUniqueWithoutGreenhouseInput | ActuatorUpsertWithWhereUniqueWithoutGreenhouseInput[]
-    createMany?: ActuatorCreateManyGreenhouseInputEnvelope
-    set?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    disconnect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    delete?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    update?: ActuatorUpdateWithWhereUniqueWithoutGreenhouseInput | ActuatorUpdateWithWhereUniqueWithoutGreenhouseInput[]
-    updateMany?: ActuatorUpdateManyWithWhereWithoutGreenhouseInput | ActuatorUpdateManyWithWhereWithoutGreenhouseInput[]
-    deleteMany?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
+  export type AktuatorUncheckedUpdateManyWithoutGreenhouseNestedInput = {
+    create?: XOR<AktuatorCreateWithoutGreenhouseInput, AktuatorUncheckedCreateWithoutGreenhouseInput> | AktuatorCreateWithoutGreenhouseInput[] | AktuatorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutGreenhouseInput | AktuatorCreateOrConnectWithoutGreenhouseInput[]
+    upsert?: AktuatorUpsertWithWhereUniqueWithoutGreenhouseInput | AktuatorUpsertWithWhereUniqueWithoutGreenhouseInput[]
+    createMany?: AktuatorCreateManyGreenhouseInputEnvelope
+    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    update?: AktuatorUpdateWithWhereUniqueWithoutGreenhouseInput | AktuatorUpdateWithWhereUniqueWithoutGreenhouseInput[]
+    updateMany?: AktuatorUpdateManyWithWhereWithoutGreenhouseInput | AktuatorUpdateManyWithWhereWithoutGreenhouseInput[]
+    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
   }
 
   export type PenjadwalanCreateNestedManyWithoutResepInput = {
@@ -12125,32 +12125,32 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type TandonCreateNestedOneWithoutActuatorInput = {
-    create?: XOR<TandonCreateWithoutActuatorInput, TandonUncheckedCreateWithoutActuatorInput>
-    connectOrCreate?: TandonCreateOrConnectWithoutActuatorInput
+  export type TandonCreateNestedOneWithoutAktuatorInput = {
+    create?: XOR<TandonCreateWithoutAktuatorInput, TandonUncheckedCreateWithoutAktuatorInput>
+    connectOrCreate?: TandonCreateOrConnectWithoutAktuatorInput
     connect?: TandonWhereUniqueInput
   }
 
-  export type GreenhouseCreateNestedOneWithoutActuatorInput = {
-    create?: XOR<GreenhouseCreateWithoutActuatorInput, GreenhouseUncheckedCreateWithoutActuatorInput>
-    connectOrCreate?: GreenhouseCreateOrConnectWithoutActuatorInput
+  export type GreenhouseCreateNestedOneWithoutAktuatorInput = {
+    create?: XOR<GreenhouseCreateWithoutAktuatorInput, GreenhouseUncheckedCreateWithoutAktuatorInput>
+    connectOrCreate?: GreenhouseCreateOrConnectWithoutAktuatorInput
     connect?: GreenhouseWhereUniqueInput
   }
 
-  export type TandonUpdateOneRequiredWithoutActuatorNestedInput = {
-    create?: XOR<TandonCreateWithoutActuatorInput, TandonUncheckedCreateWithoutActuatorInput>
-    connectOrCreate?: TandonCreateOrConnectWithoutActuatorInput
-    upsert?: TandonUpsertWithoutActuatorInput
+  export type TandonUpdateOneRequiredWithoutAktuatorNestedInput = {
+    create?: XOR<TandonCreateWithoutAktuatorInput, TandonUncheckedCreateWithoutAktuatorInput>
+    connectOrCreate?: TandonCreateOrConnectWithoutAktuatorInput
+    upsert?: TandonUpsertWithoutAktuatorInput
     connect?: TandonWhereUniqueInput
-    update?: XOR<XOR<TandonUpdateToOneWithWhereWithoutActuatorInput, TandonUpdateWithoutActuatorInput>, TandonUncheckedUpdateWithoutActuatorInput>
+    update?: XOR<XOR<TandonUpdateToOneWithWhereWithoutAktuatorInput, TandonUpdateWithoutAktuatorInput>, TandonUncheckedUpdateWithoutAktuatorInput>
   }
 
-  export type GreenhouseUpdateOneRequiredWithoutActuatorNestedInput = {
-    create?: XOR<GreenhouseCreateWithoutActuatorInput, GreenhouseUncheckedCreateWithoutActuatorInput>
-    connectOrCreate?: GreenhouseCreateOrConnectWithoutActuatorInput
-    upsert?: GreenhouseUpsertWithoutActuatorInput
+  export type GreenhouseUpdateOneRequiredWithoutAktuatorNestedInput = {
+    create?: XOR<GreenhouseCreateWithoutAktuatorInput, GreenhouseUncheckedCreateWithoutAktuatorInput>
+    connectOrCreate?: GreenhouseCreateOrConnectWithoutAktuatorInput
+    upsert?: GreenhouseUpsertWithoutAktuatorInput
     connect?: GreenhouseWhereUniqueInput
-    update?: XOR<XOR<GreenhouseUpdateToOneWithWhereWithoutActuatorInput, GreenhouseUpdateWithoutActuatorInput>, GreenhouseUncheckedUpdateWithoutActuatorInput>
+    update?: XOR<XOR<GreenhouseUpdateToOneWithWhereWithoutAktuatorInput, GreenhouseUpdateWithoutAktuatorInput>, GreenhouseUncheckedUpdateWithoutAktuatorInput>
   }
 
   export type SensorCreateNestedManyWithoutTandonBahanInput = {
@@ -12222,11 +12222,11 @@ export namespace Prisma {
     connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
   }
 
-  export type ActuatorCreateNestedManyWithoutTandonInput = {
-    create?: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput> | ActuatorCreateWithoutTandonInput[] | ActuatorUncheckedCreateWithoutTandonInput[]
-    connectOrCreate?: ActuatorCreateOrConnectWithoutTandonInput | ActuatorCreateOrConnectWithoutTandonInput[]
-    createMany?: ActuatorCreateManyTandonInputEnvelope
-    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+  export type AktuatorCreateNestedManyWithoutTandonInput = {
+    create?: XOR<AktuatorCreateWithoutTandonInput, AktuatorUncheckedCreateWithoutTandonInput> | AktuatorCreateWithoutTandonInput[] | AktuatorUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonInput | AktuatorCreateOrConnectWithoutTandonInput[]
+    createMany?: AktuatorCreateManyTandonInputEnvelope
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
   }
 
   export type TandonBahanCreateNestedManyWithoutTandonInput = {
@@ -12250,11 +12250,11 @@ export namespace Prisma {
     connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
   }
 
-  export type ActuatorUncheckedCreateNestedManyWithoutTandonInput = {
-    create?: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput> | ActuatorCreateWithoutTandonInput[] | ActuatorUncheckedCreateWithoutTandonInput[]
-    connectOrCreate?: ActuatorCreateOrConnectWithoutTandonInput | ActuatorCreateOrConnectWithoutTandonInput[]
-    createMany?: ActuatorCreateManyTandonInputEnvelope
-    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
+  export type AktuatorUncheckedCreateNestedManyWithoutTandonInput = {
+    create?: XOR<AktuatorCreateWithoutTandonInput, AktuatorUncheckedCreateWithoutTandonInput> | AktuatorCreateWithoutTandonInput[] | AktuatorUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonInput | AktuatorCreateOrConnectWithoutTandonInput[]
+    createMany?: AktuatorCreateManyTandonInputEnvelope
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
   }
 
   export type TandonBahanUncheckedCreateNestedManyWithoutTandonInput = {
@@ -12293,18 +12293,18 @@ export namespace Prisma {
     deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
   }
 
-  export type ActuatorUpdateManyWithoutTandonNestedInput = {
-    create?: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput> | ActuatorCreateWithoutTandonInput[] | ActuatorUncheckedCreateWithoutTandonInput[]
-    connectOrCreate?: ActuatorCreateOrConnectWithoutTandonInput | ActuatorCreateOrConnectWithoutTandonInput[]
-    upsert?: ActuatorUpsertWithWhereUniqueWithoutTandonInput | ActuatorUpsertWithWhereUniqueWithoutTandonInput[]
-    createMany?: ActuatorCreateManyTandonInputEnvelope
-    set?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    disconnect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    delete?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    update?: ActuatorUpdateWithWhereUniqueWithoutTandonInput | ActuatorUpdateWithWhereUniqueWithoutTandonInput[]
-    updateMany?: ActuatorUpdateManyWithWhereWithoutTandonInput | ActuatorUpdateManyWithWhereWithoutTandonInput[]
-    deleteMany?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
+  export type AktuatorUpdateManyWithoutTandonNestedInput = {
+    create?: XOR<AktuatorCreateWithoutTandonInput, AktuatorUncheckedCreateWithoutTandonInput> | AktuatorCreateWithoutTandonInput[] | AktuatorUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonInput | AktuatorCreateOrConnectWithoutTandonInput[]
+    upsert?: AktuatorUpsertWithWhereUniqueWithoutTandonInput | AktuatorUpsertWithWhereUniqueWithoutTandonInput[]
+    createMany?: AktuatorCreateManyTandonInputEnvelope
+    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    update?: AktuatorUpdateWithWhereUniqueWithoutTandonInput | AktuatorUpdateWithWhereUniqueWithoutTandonInput[]
+    updateMany?: AktuatorUpdateManyWithWhereWithoutTandonInput | AktuatorUpdateManyWithWhereWithoutTandonInput[]
+    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
   }
 
   export type TandonBahanUpdateManyWithoutTandonNestedInput = {
@@ -12349,18 +12349,18 @@ export namespace Prisma {
     deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
   }
 
-  export type ActuatorUncheckedUpdateManyWithoutTandonNestedInput = {
-    create?: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput> | ActuatorCreateWithoutTandonInput[] | ActuatorUncheckedCreateWithoutTandonInput[]
-    connectOrCreate?: ActuatorCreateOrConnectWithoutTandonInput | ActuatorCreateOrConnectWithoutTandonInput[]
-    upsert?: ActuatorUpsertWithWhereUniqueWithoutTandonInput | ActuatorUpsertWithWhereUniqueWithoutTandonInput[]
-    createMany?: ActuatorCreateManyTandonInputEnvelope
-    set?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    disconnect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    delete?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    connect?: ActuatorWhereUniqueInput | ActuatorWhereUniqueInput[]
-    update?: ActuatorUpdateWithWhereUniqueWithoutTandonInput | ActuatorUpdateWithWhereUniqueWithoutTandonInput[]
-    updateMany?: ActuatorUpdateManyWithWhereWithoutTandonInput | ActuatorUpdateManyWithWhereWithoutTandonInput[]
-    deleteMany?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
+  export type AktuatorUncheckedUpdateManyWithoutTandonNestedInput = {
+    create?: XOR<AktuatorCreateWithoutTandonInput, AktuatorUncheckedCreateWithoutTandonInput> | AktuatorCreateWithoutTandonInput[] | AktuatorUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonInput | AktuatorCreateOrConnectWithoutTandonInput[]
+    upsert?: AktuatorUpsertWithWhereUniqueWithoutTandonInput | AktuatorUpsertWithWhereUniqueWithoutTandonInput[]
+    createMany?: AktuatorCreateManyTandonInputEnvelope
+    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    update?: AktuatorUpdateWithWhereUniqueWithoutTandonInput | AktuatorUpdateWithWhereUniqueWithoutTandonInput[]
+    updateMany?: AktuatorUpdateManyWithWhereWithoutTandonInput | AktuatorUpdateManyWithWhereWithoutTandonInput[]
+    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
   }
 
   export type TandonBahanUncheckedUpdateManyWithoutTandonNestedInput = {
@@ -12582,7 +12582,7 @@ export namespace Prisma {
     thumbnail: string
     created_at?: Date | string
     updated_at?: Date | string | null
-    actuator?: ActuatorCreateNestedManyWithoutGreenhouseInput
+    aktuator?: AktuatorCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateWithoutUserInput = {
@@ -12591,7 +12591,7 @@ export namespace Prisma {
     thumbnail: string
     created_at?: Date | string
     updated_at?: Date | string | null
-    actuator?: ActuatorUncheckedCreateNestedManyWithoutGreenhouseInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseCreateOrConnectWithoutUserInput = {
@@ -12606,7 +12606,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorCreateNestedManyWithoutTandonInput
-    actuator?: ActuatorCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
   }
@@ -12619,7 +12619,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
-    actuator?: ActuatorUncheckedCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
   }
@@ -12716,16 +12716,16 @@ export namespace Prisma {
     create: XOR<UserCreateWithoutGreenhouseInput, UserUncheckedCreateWithoutGreenhouseInput>
   }
 
-  export type ActuatorCreateWithoutGreenhouseInput = {
+  export type AktuatorCreateWithoutGreenhouseInput = {
     nama: string
     merek: string
     status: boolean
     created_at?: Date | string
     updated_at?: Date | string | null
-    tandon: TandonCreateNestedOneWithoutActuatorInput
+    tandon: TandonCreateNestedOneWithoutAktuatorInput
   }
 
-  export type ActuatorUncheckedCreateWithoutGreenhouseInput = {
+  export type AktuatorUncheckedCreateWithoutGreenhouseInput = {
     id?: number
     nama: string
     merek: string
@@ -12735,13 +12735,13 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type ActuatorCreateOrConnectWithoutGreenhouseInput = {
-    where: ActuatorWhereUniqueInput
-    create: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput>
+  export type AktuatorCreateOrConnectWithoutGreenhouseInput = {
+    where: AktuatorWhereUniqueInput
+    create: XOR<AktuatorCreateWithoutGreenhouseInput, AktuatorUncheckedCreateWithoutGreenhouseInput>
   }
 
-  export type ActuatorCreateManyGreenhouseInputEnvelope = {
-    data: ActuatorCreateManyGreenhouseInput | ActuatorCreateManyGreenhouseInput[]
+  export type AktuatorCreateManyGreenhouseInputEnvelope = {
+    data: AktuatorCreateManyGreenhouseInput | AktuatorCreateManyGreenhouseInput[]
     skipDuplicates?: boolean
   }
 
@@ -12774,34 +12774,34 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"User"> | Date | string | null
   }
 
-  export type ActuatorUpsertWithWhereUniqueWithoutGreenhouseInput = {
-    where: ActuatorWhereUniqueInput
-    update: XOR<ActuatorUpdateWithoutGreenhouseInput, ActuatorUncheckedUpdateWithoutGreenhouseInput>
-    create: XOR<ActuatorCreateWithoutGreenhouseInput, ActuatorUncheckedCreateWithoutGreenhouseInput>
+  export type AktuatorUpsertWithWhereUniqueWithoutGreenhouseInput = {
+    where: AktuatorWhereUniqueInput
+    update: XOR<AktuatorUpdateWithoutGreenhouseInput, AktuatorUncheckedUpdateWithoutGreenhouseInput>
+    create: XOR<AktuatorCreateWithoutGreenhouseInput, AktuatorUncheckedCreateWithoutGreenhouseInput>
   }
 
-  export type ActuatorUpdateWithWhereUniqueWithoutGreenhouseInput = {
-    where: ActuatorWhereUniqueInput
-    data: XOR<ActuatorUpdateWithoutGreenhouseInput, ActuatorUncheckedUpdateWithoutGreenhouseInput>
+  export type AktuatorUpdateWithWhereUniqueWithoutGreenhouseInput = {
+    where: AktuatorWhereUniqueInput
+    data: XOR<AktuatorUpdateWithoutGreenhouseInput, AktuatorUncheckedUpdateWithoutGreenhouseInput>
   }
 
-  export type ActuatorUpdateManyWithWhereWithoutGreenhouseInput = {
-    where: ActuatorScalarWhereInput
-    data: XOR<ActuatorUpdateManyMutationInput, ActuatorUncheckedUpdateManyWithoutGreenhouseInput>
+  export type AktuatorUpdateManyWithWhereWithoutGreenhouseInput = {
+    where: AktuatorScalarWhereInput
+    data: XOR<AktuatorUpdateManyMutationInput, AktuatorUncheckedUpdateManyWithoutGreenhouseInput>
   }
 
-  export type ActuatorScalarWhereInput = {
-    AND?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
-    OR?: ActuatorScalarWhereInput[]
-    NOT?: ActuatorScalarWhereInput | ActuatorScalarWhereInput[]
-    id?: IntFilter<"Actuator"> | number
-    nama?: StringFilter<"Actuator"> | string
-    merek?: StringFilter<"Actuator"> | string
-    status?: BoolFilter<"Actuator"> | boolean
-    tandonId?: IntFilter<"Actuator"> | number
-    greenhouseId?: IntFilter<"Actuator"> | number
-    created_at?: DateTimeFilter<"Actuator"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Actuator"> | Date | string | null
+  export type AktuatorScalarWhereInput = {
+    AND?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
+    OR?: AktuatorScalarWhereInput[]
+    NOT?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
+    id?: IntFilter<"Aktuator"> | number
+    nama?: StringFilter<"Aktuator"> | string
+    merek?: StringFilter<"Aktuator"> | string
+    status?: BoolFilter<"Aktuator"> | boolean
+    tandonId?: IntFilter<"Aktuator"> | number
+    greenhouseId?: IntFilter<"Aktuator"> | number
+    created_at?: DateTimeFilter<"Aktuator"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Aktuator"> | Date | string | null
   }
 
   export type PenjadwalanCreateWithoutResepInput = {
@@ -12895,7 +12895,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
-    actuator?: ActuatorCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
   }
 
@@ -12908,7 +12908,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
-    actuator?: ActuatorUncheckedCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
   }
 
@@ -12966,7 +12966,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
-    actuator?: ActuatorUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
   }
 
@@ -12979,7 +12979,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
-    actuator?: ActuatorUncheckedUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
   }
 
@@ -12990,7 +12990,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
-    actuator?: ActuatorCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
   }
@@ -13003,7 +13003,7 @@ export namespace Prisma {
     isOnline: boolean
     created_at?: Date | string
     updated_at?: Date | string | null
-    actuator?: ActuatorUncheckedCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
   }
@@ -13051,7 +13051,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
-    actuator?: ActuatorUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
   }
@@ -13064,7 +13064,7 @@ export namespace Prisma {
     isOnline?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    actuator?: ActuatorUncheckedUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
   }
@@ -13095,7 +13095,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type TandonCreateWithoutActuatorInput = {
+  export type TandonCreateWithoutAktuatorInput = {
     nama: string
     status: string
     isOnline: boolean
@@ -13107,7 +13107,7 @@ export namespace Prisma {
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
   }
 
-  export type TandonUncheckedCreateWithoutActuatorInput = {
+  export type TandonUncheckedCreateWithoutAktuatorInput = {
     id?: number
     nama: string
     userId: number
@@ -13120,12 +13120,12 @@ export namespace Prisma {
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
   }
 
-  export type TandonCreateOrConnectWithoutActuatorInput = {
+  export type TandonCreateOrConnectWithoutAktuatorInput = {
     where: TandonWhereUniqueInput
-    create: XOR<TandonCreateWithoutActuatorInput, TandonUncheckedCreateWithoutActuatorInput>
+    create: XOR<TandonCreateWithoutAktuatorInput, TandonUncheckedCreateWithoutAktuatorInput>
   }
 
-  export type GreenhouseCreateWithoutActuatorInput = {
+  export type GreenhouseCreateWithoutAktuatorInput = {
     nama: string
     thumbnail: string
     created_at?: Date | string
@@ -13133,7 +13133,7 @@ export namespace Prisma {
     user?: UserCreateNestedManyWithoutGreenhouseInput
   }
 
-  export type GreenhouseUncheckedCreateWithoutActuatorInput = {
+  export type GreenhouseUncheckedCreateWithoutAktuatorInput = {
     id?: number
     nama: string
     thumbnail: string
@@ -13142,23 +13142,23 @@ export namespace Prisma {
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
-  export type GreenhouseCreateOrConnectWithoutActuatorInput = {
+  export type GreenhouseCreateOrConnectWithoutAktuatorInput = {
     where: GreenhouseWhereUniqueInput
-    create: XOR<GreenhouseCreateWithoutActuatorInput, GreenhouseUncheckedCreateWithoutActuatorInput>
+    create: XOR<GreenhouseCreateWithoutAktuatorInput, GreenhouseUncheckedCreateWithoutAktuatorInput>
   }
 
-  export type TandonUpsertWithoutActuatorInput = {
-    update: XOR<TandonUpdateWithoutActuatorInput, TandonUncheckedUpdateWithoutActuatorInput>
-    create: XOR<TandonCreateWithoutActuatorInput, TandonUncheckedCreateWithoutActuatorInput>
+  export type TandonUpsertWithoutAktuatorInput = {
+    update: XOR<TandonUpdateWithoutAktuatorInput, TandonUncheckedUpdateWithoutAktuatorInput>
+    create: XOR<TandonCreateWithoutAktuatorInput, TandonUncheckedCreateWithoutAktuatorInput>
     where?: TandonWhereInput
   }
 
-  export type TandonUpdateToOneWithWhereWithoutActuatorInput = {
+  export type TandonUpdateToOneWithWhereWithoutAktuatorInput = {
     where?: TandonWhereInput
-    data: XOR<TandonUpdateWithoutActuatorInput, TandonUncheckedUpdateWithoutActuatorInput>
+    data: XOR<TandonUpdateWithoutAktuatorInput, TandonUncheckedUpdateWithoutAktuatorInput>
   }
 
-  export type TandonUpdateWithoutActuatorInput = {
+  export type TandonUpdateWithoutAktuatorInput = {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
@@ -13170,7 +13170,7 @@ export namespace Prisma {
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
   }
 
-  export type TandonUncheckedUpdateWithoutActuatorInput = {
+  export type TandonUncheckedUpdateWithoutAktuatorInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     userId?: IntFieldUpdateOperationsInput | number
@@ -13183,18 +13183,18 @@ export namespace Prisma {
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
   }
 
-  export type GreenhouseUpsertWithoutActuatorInput = {
-    update: XOR<GreenhouseUpdateWithoutActuatorInput, GreenhouseUncheckedUpdateWithoutActuatorInput>
-    create: XOR<GreenhouseCreateWithoutActuatorInput, GreenhouseUncheckedCreateWithoutActuatorInput>
+  export type GreenhouseUpsertWithoutAktuatorInput = {
+    update: XOR<GreenhouseUpdateWithoutAktuatorInput, GreenhouseUncheckedUpdateWithoutAktuatorInput>
+    create: XOR<GreenhouseCreateWithoutAktuatorInput, GreenhouseUncheckedCreateWithoutAktuatorInput>
     where?: GreenhouseWhereInput
   }
 
-  export type GreenhouseUpdateToOneWithWhereWithoutActuatorInput = {
+  export type GreenhouseUpdateToOneWithWhereWithoutAktuatorInput = {
     where?: GreenhouseWhereInput
-    data: XOR<GreenhouseUpdateWithoutActuatorInput, GreenhouseUncheckedUpdateWithoutActuatorInput>
+    data: XOR<GreenhouseUpdateWithoutAktuatorInput, GreenhouseUncheckedUpdateWithoutAktuatorInput>
   }
 
-  export type GreenhouseUpdateWithoutActuatorInput = {
+  export type GreenhouseUpdateWithoutAktuatorInput = {
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -13202,7 +13202,7 @@ export namespace Prisma {
     user?: UserUpdateManyWithoutGreenhouseNestedInput
   }
 
-  export type GreenhouseUncheckedUpdateWithoutActuatorInput = {
+  export type GreenhouseUncheckedUpdateWithoutAktuatorInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     thumbnail?: StringFieldUpdateOperationsInput | string
@@ -13254,7 +13254,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
     sensor?: SensorCreateNestedManyWithoutTandonInput
-    actuator?: ActuatorCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
   }
 
@@ -13267,7 +13267,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
-    actuator?: ActuatorUncheckedCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
   }
 
@@ -13328,7 +13328,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
     sensor?: SensorUpdateManyWithoutTandonNestedInput
-    actuator?: ActuatorUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
   }
 
@@ -13341,7 +13341,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
-    actuator?: ActuatorUncheckedUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
   }
 
@@ -13406,16 +13406,16 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type ActuatorCreateWithoutTandonInput = {
+  export type AktuatorCreateWithoutTandonInput = {
     nama: string
     merek: string
     status: boolean
     created_at?: Date | string
     updated_at?: Date | string | null
-    greenhouse: GreenhouseCreateNestedOneWithoutActuatorInput
+    greenhouse: GreenhouseCreateNestedOneWithoutAktuatorInput
   }
 
-  export type ActuatorUncheckedCreateWithoutTandonInput = {
+  export type AktuatorUncheckedCreateWithoutTandonInput = {
     id?: number
     nama: string
     merek: string
@@ -13425,13 +13425,13 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type ActuatorCreateOrConnectWithoutTandonInput = {
-    where: ActuatorWhereUniqueInput
-    create: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput>
+  export type AktuatorCreateOrConnectWithoutTandonInput = {
+    where: AktuatorWhereUniqueInput
+    create: XOR<AktuatorCreateWithoutTandonInput, AktuatorUncheckedCreateWithoutTandonInput>
   }
 
-  export type ActuatorCreateManyTandonInputEnvelope = {
-    data: ActuatorCreateManyTandonInput | ActuatorCreateManyTandonInput[]
+  export type AktuatorCreateManyTandonInputEnvelope = {
+    data: AktuatorCreateManyTandonInput | AktuatorCreateManyTandonInput[]
     skipDuplicates?: boolean
   }
 
@@ -13537,20 +13537,20 @@ export namespace Prisma {
     data: XOR<SensorUpdateManyMutationInput, SensorUncheckedUpdateManyWithoutTandonInput>
   }
 
-  export type ActuatorUpsertWithWhereUniqueWithoutTandonInput = {
-    where: ActuatorWhereUniqueInput
-    update: XOR<ActuatorUpdateWithoutTandonInput, ActuatorUncheckedUpdateWithoutTandonInput>
-    create: XOR<ActuatorCreateWithoutTandonInput, ActuatorUncheckedCreateWithoutTandonInput>
+  export type AktuatorUpsertWithWhereUniqueWithoutTandonInput = {
+    where: AktuatorWhereUniqueInput
+    update: XOR<AktuatorUpdateWithoutTandonInput, AktuatorUncheckedUpdateWithoutTandonInput>
+    create: XOR<AktuatorCreateWithoutTandonInput, AktuatorUncheckedCreateWithoutTandonInput>
   }
 
-  export type ActuatorUpdateWithWhereUniqueWithoutTandonInput = {
-    where: ActuatorWhereUniqueInput
-    data: XOR<ActuatorUpdateWithoutTandonInput, ActuatorUncheckedUpdateWithoutTandonInput>
+  export type AktuatorUpdateWithWhereUniqueWithoutTandonInput = {
+    where: AktuatorWhereUniqueInput
+    data: XOR<AktuatorUpdateWithoutTandonInput, AktuatorUncheckedUpdateWithoutTandonInput>
   }
 
-  export type ActuatorUpdateManyWithWhereWithoutTandonInput = {
-    where: ActuatorScalarWhereInput
-    data: XOR<ActuatorUpdateManyMutationInput, ActuatorUncheckedUpdateManyWithoutTandonInput>
+  export type AktuatorUpdateManyWithWhereWithoutTandonInput = {
+    where: AktuatorScalarWhereInput
+    data: XOR<AktuatorUpdateManyMutationInput, AktuatorUncheckedUpdateManyWithoutTandonInput>
   }
 
   export type TandonBahanUpsertWithWhereUniqueWithoutTandonInput = {
@@ -13610,7 +13610,7 @@ export namespace Prisma {
     thumbnail?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    actuator?: ActuatorUpdateManyWithoutGreenhouseNestedInput
+    aktuator?: AktuatorUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateWithoutUserInput = {
@@ -13619,7 +13619,7 @@ export namespace Prisma {
     thumbnail?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    actuator?: ActuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateManyWithoutUserInput = {
@@ -13637,7 +13637,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUpdateManyWithoutTandonNestedInput
-    actuator?: ActuatorUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
   }
@@ -13650,7 +13650,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
-    actuator?: ActuatorUncheckedUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
   }
@@ -13664,7 +13664,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type ActuatorCreateManyGreenhouseInput = {
+  export type AktuatorCreateManyGreenhouseInput = {
     id?: number
     nama: string
     merek: string
@@ -13705,16 +13705,16 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type ActuatorUpdateWithoutGreenhouseInput = {
+  export type AktuatorUpdateWithoutGreenhouseInput = {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tandon?: TandonUpdateOneRequiredWithoutActuatorNestedInput
+    tandon?: TandonUpdateOneRequiredWithoutAktuatorNestedInput
   }
 
-  export type ActuatorUncheckedUpdateWithoutGreenhouseInput = {
+  export type AktuatorUncheckedUpdateWithoutGreenhouseInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -13724,7 +13724,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type ActuatorUncheckedUpdateManyWithoutGreenhouseInput = {
+  export type AktuatorUncheckedUpdateManyWithoutGreenhouseInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -13837,7 +13837,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
-  export type ActuatorCreateManyTandonInput = {
+  export type AktuatorCreateManyTandonInput = {
     id?: number
     nama: string
     merek: string
@@ -13902,16 +13902,16 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type ActuatorUpdateWithoutTandonInput = {
+  export type AktuatorUpdateWithoutTandonInput = {
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    greenhouse?: GreenhouseUpdateOneRequiredWithoutActuatorNestedInput
+    greenhouse?: GreenhouseUpdateOneRequiredWithoutAktuatorNestedInput
   }
 
-  export type ActuatorUncheckedUpdateWithoutTandonInput = {
+  export type AktuatorUncheckedUpdateWithoutTandonInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -13921,7 +13921,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type ActuatorUncheckedUpdateManyWithoutTandonInput = {
+  export type AktuatorUncheckedUpdateManyWithoutTandonInput = {
     id?: IntFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
     merek?: StringFieldUpdateOperationsInput | string
@@ -14028,9 +14028,9 @@ export namespace Prisma {
      */
     export type SensorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = SensorDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use ActuatorDefaultArgs instead
+     * @deprecated Use AktuatorDefaultArgs instead
      */
-    export type ActuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = ActuatorDefaultArgs<ExtArgs>
+    export type AktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = AktuatorDefaultArgs<ExtArgs>
     /**
      * @deprecated Use TandonBahanDefaultArgs instead
      */

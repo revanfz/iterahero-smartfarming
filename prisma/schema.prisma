@@ -4,7 +4,7 @@
 generator client {
   provider      = "prisma-client-js"
   output        = "./generated/client"
-  // binaryTargets = ["native", "debian-openssl-3.0.x"]
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -29,7 +29,7 @@ model Greenhouse {
   nama      String      @unique
   thumbnail String
   user      User[]
-  actuator  Actuator[]
+  aktuator  Aktuator[]
   created_at  DateTime  @default(now())
   updated_at  DateTime? @updatedAt
 }
@@ -74,7 +74,7 @@ model Sensor {
   updated_at  DateTime? @updatedAt
 }
 
-model Actuator {
+model Aktuator {
   id           Int        @id @default(autoincrement())
   nama         String
   merek        String
@@ -105,7 +105,7 @@ model Tandon {
   status      String
   isOnline    Boolean
   sensor      Sensor[]
-  actuator    Actuator[]
+  aktuator    Aktuator[]
   tandonBahan TandonBahan[]
   penjadwalan Penjadwalan[]
   created_at  DateTime  @default(now())
