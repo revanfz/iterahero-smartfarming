@@ -18,15 +18,11 @@ const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id_user } = request.auth.credentials;
-        const { id } = request.query;
-        let data;
-        if (id) {
-            data = yield prisma_1.prisma.tandon.findFirst({
-                where: {
-                    id
-                },
-            });
-        }
+        const data = yield prisma_1.prisma.tandon.findFirst({
+            where: {
+                userId: id_user
+            },
+        });
         if (!data) {
             return boom_1.default.notFound("Tidak ada tandon terpilih");
         }

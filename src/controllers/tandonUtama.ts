@@ -3,27 +3,19 @@ import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 import Identifier from "../models/Identifier";
 
-interface CreateTandon {
-    nama: string,
-}
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
     try {
         const { id_user } = request.auth.credentials as {
             id_user: number
         }
-        const { id } = request.query as {
-            id?: number
-        };
 
-        let data;
-        if (id) {
-            data = await prisma.tandon.findFirst({
+        const data = await prisma.tandon.findFirst({
                 where: {
-                    id
+                    userId: id_user
                 },
             });
-        }
+
         if (!data) {
             return Boom.notFound("Tidak ada tandon terpilih");
         }
