@@ -31,11 +31,11 @@ exports.greenhouseRoute = [
     },
     {
         method: "GET",
-        path: path + "/sensor",
+        path: path + "/{id}/sensor",
         handler: greenhouse_1.sensorByGreenhouseHandler,
         options: {
             validate: {
-                query: joi_1.default.object({
+                params: joi_1.default.object({
                     id: joi_1.default.number().required(),
                 }),
             },
@@ -43,11 +43,11 @@ exports.greenhouseRoute = [
     },
     {
         method: "GET",
-        path: path + "/actuator",
+        path: path + "/{id}/actuator",
         handler: greenhouse_1.actuatorByGreenhouseHandler,
         options: {
             validate: {
-                query: joi_1.default.object({
+                params: joi_1.default.object({
                     id: joi_1.default.number().required(),
                 }),
             },

@@ -96,8 +96,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const sensorByGreenhouseHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const id = parseInt(request.query.id);
-
+        const id = parseInt(request.params.id);
         const data = await prisma.sensor.findMany({
             where: {
                 greenhouseId: id
@@ -110,6 +109,7 @@ export const sensorByGreenhouseHandler = async (request: Request, h: ResponseToo
 
         return h.response({
             status: "success",
+            data
         }).code(200)
     }
     catch (e) {
@@ -125,7 +125,7 @@ export const sensorByGreenhouseHandler = async (request: Request, h: ResponseToo
 
 export const actuatorByGreenhouseHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const id = parseInt(request.query.id);
+        const id = parseInt(request.params.id);
         const data = await prisma.aktuator.findMany({
             where: {
                 greenhouseId: id

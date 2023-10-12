@@ -44,7 +44,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const sensorByTandonHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const id = parseInt(request.query.id);
+        const id = parseInt(request.params.id);
         const data = await prisma.tandon.findMany({
             where: {
                 id
@@ -81,7 +81,7 @@ export const sensorByTandonHandler = async (request: Request, h: ResponseToolkit
 
 export const actuatorByTandonHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const id = parseInt(request.query.id);
+        const id = parseInt(request.params.id);
         const data = await prisma.aktuator.findMany({
             where: {
                 tandonId: id

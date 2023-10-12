@@ -93,7 +93,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
 exports.postHandler = postHandler;
 const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = parseInt(request.query.id);
+        const id = parseInt(request.params.id);
         const data = yield prisma_1.prisma.sensor.findMany({
             where: {
                 greenhouseId: id
@@ -104,6 +104,7 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
         }
         return h.response({
             status: "success",
+            data
         }).code(200);
     }
     catch (e) {
@@ -119,7 +120,7 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
 exports.sensorByGreenhouseHandler = sensorByGreenhouseHandler;
 const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = parseInt(request.query.id);
+        const id = parseInt(request.params.id);
         const data = yield prisma_1.prisma.aktuator.findMany({
             where: {
                 greenhouseId: id

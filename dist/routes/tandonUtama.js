@@ -24,11 +24,11 @@ exports.tandonUtamaRoute = [
     },
     {
         method: "GET",
-        path: path + "/sensor",
+        path: path + "/{id}/sensor",
         handler: tandonUtama_1.sensorByTandonHandler,
         options: {
             validate: {
-                query: joi_1.default.object({
+                params: joi_1.default.object({
                     id: joi_1.default.number().required(),
                 }),
             },
@@ -36,11 +36,11 @@ exports.tandonUtamaRoute = [
     },
     {
         method: "GET",
-        path: path + "/actuator",
+        path: path + "/{id}/actuator",
         handler: tandonUtama_1.actuatorByTandonHandler,
         options: {
             validate: {
-                query: joi_1.default.object({
+                params: joi_1.default.object({
                     id: joi_1.default.number().required(),
                 }),
             },

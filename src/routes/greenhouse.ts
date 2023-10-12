@@ -33,11 +33,11 @@ export const greenhouseRoute: ServerRoute[] = [
   },
   {
     method: "GET",
-    path: path + "/sensor",
+    path: path + "/{id}/sensor",
     handler: sensorByGreenhouseHandler,
     options: {
       validate: {
-        query: Joi.object({
+        params: Joi.object({
           id: Joi.number().required(),
         }),
       },
@@ -45,11 +45,11 @@ export const greenhouseRoute: ServerRoute[] = [
   },
   {
     method: "GET",
-    path: path + "/actuator",
+    path: path + "/{id}/actuator",
     handler: actuatorByGreenhouseHandler,
     options: {
       validate: {
-        query: Joi.object({
+        params: Joi.object({
           id: Joi.number().required(),
         }),
       },

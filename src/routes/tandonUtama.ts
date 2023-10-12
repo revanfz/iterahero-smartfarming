@@ -25,11 +25,11 @@ export const tandonUtamaRoute: ServerRoute[] = [
   },
   {
     method: "GET",
-    path: path + "/sensor",
+    path: path + "/{id}/sensor",
     handler: sensorByTandonHandler,
     options: {
       validate: {
-        query: Joi.object({
+        params: Joi.object({
           id: Joi.number().required(),
         }),
       },
@@ -37,11 +37,11 @@ export const tandonUtamaRoute: ServerRoute[] = [
   },
   {
     method: "GET",
-    path: path + "/actuator",
+    path: path + "/{id}/actuator",
     handler: actuatorByTandonHandler,
     options: {
       validate: {
-        query: Joi.object({
+        params: Joi.object({
           id: Joi.number().required(),
         }),
       },

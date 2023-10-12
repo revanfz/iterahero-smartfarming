@@ -46,7 +46,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
 exports.getHandler = getHandler;
 const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = parseInt(request.query.id);
+        const id = parseInt(request.params.id);
         const data = yield prisma_1.prisma.tandon.findMany({
             where: {
                 id
@@ -81,7 +81,7 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
 exports.sensorByTandonHandler = sensorByTandonHandler;
 const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = parseInt(request.query.id);
+        const id = parseInt(request.params.id);
         const data = yield prisma_1.prisma.aktuator.findMany({
             where: {
                 tandonId: id
