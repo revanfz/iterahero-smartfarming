@@ -5,13 +5,25 @@ import Boom from "@hapi/boom";
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { id } = request.query as Identifier;
+        const id = parseInt(request.query.id);
+        let data;
 
-        const data = await prisma.aktuator.findMany({
-            where: {
-                tandonId: id
-            }
-        });
+        if (id) {
+            data = await prisma.sensor.findMany({
+                where: {
+                    tandonId: id,
+                },
+                include: {
+                    tandonBahan: true
+                }
+            })
+        } else {
+            data = await prisma.aktuator.findMany({
+                where: {
+                    tandonId: id
+                }
+            });
+        }
 
         if (!data) {
             return Boom.notFound("Tidak ada aktuator")
@@ -29,6 +41,6 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         }
     }
     finally {
-        prisma.$disconnect();
+        await prisma.$disconnect();
     }
 }

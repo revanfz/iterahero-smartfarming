@@ -45,6 +45,6 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             return boom_1.default.internal(e.message);
         }
     }
-    prisma_1.prisma.$disconnect();
+    yield prisma_1.prisma.$disconnect();
 });
 exports.postHandler = postHandler;

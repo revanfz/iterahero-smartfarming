@@ -22,33 +22,8 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
                 where: {
                     id
                 },
-                include: {
-                    sensor: true,
-                    penjadwalan: true,
-                    tandonBahan: {
-                        include: {
-                            sensor: true,
-                        }
-                    },
-                }
-            });
-        } else {
-            data = await prisma.tandon.findMany({
-                where: {
-                    userId: id_user
-                },
-                include: {
-                    sensor: true,
-                    penjadwalan: true,
-                    tandonBahan: {
-                        include: {
-                            sensor: true
-                        }
-                    }
-                }
             });
         }
-        
         if (!data) {
             return Boom.notFound("Tidak ada tandon terpilih");
         }
@@ -64,5 +39,71 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
             return Boom.internal(e.message)
         }
     }
-    prisma.$disconnect();
+    await prisma.$disconnect();
+}
+
+export const sensorByTandonHandler = async (request: Request, h: ResponseToolkit) => {
+    try {
+        const id = parseInt(request.query.id);
+        const data = await prisma.tandon.findMany({
+            where: {
+                id
+            },
+            select: {
+                sensor: true,
+                tandonBahan: {
+                    select: {
+                        sensor: true
+                    }
+                }
+            }
+        })
+
+        if (!data) {
+            return Boom.notFound("Tidak ada sensor")
+        }
+
+        return h.response({
+            status: "success",
+            data
+        })
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.error(e)
+            return Boom.internal(e.message)
+        }
+    }
+    finally {
+        await prisma.$disconnect()
+    }
+}
+
+export const actuatorByTandonHandler = async (request: Request, h: ResponseToolkit) => {
+    try {
+        const id = parseInt(request.query.id);
+        const data = await prisma.aktuator.findMany({
+            where: {
+                tandonId: id
+            }
+        })
+
+        if (!data) {
+            return Boom.notFound("Tidak ada aktuator")
+        }
+
+        return h.response({
+            status: "success",
+            data
+        }).code(200)
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.error(e);
+            return Boom.internal(e.message)
+        }
+    }
+    finally {
+        await prisma.$disconnect();
+    }
 }

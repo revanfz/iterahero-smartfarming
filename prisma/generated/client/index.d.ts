@@ -1480,11 +1480,13 @@ export namespace Prisma {
   export type GreenhouseCountOutputType = {
     user: number
     aktuator: number
+    sensor: number
   }
 
   export type GreenhouseCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     user?: boolean | GreenhouseCountOutputTypeCountUserArgs
     aktuator?: boolean | GreenhouseCountOutputTypeCountAktuatorArgs
+    sensor?: boolean | GreenhouseCountOutputTypeCountSensorArgs
   }
 
   // Custom InputTypes
@@ -1513,6 +1515,14 @@ export namespace Prisma {
    */
   export type GreenhouseCountOutputTypeCountAktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: AktuatorWhereInput
+  }
+
+
+  /**
+   * GreenhouseCountOutputType without action
+   */
+  export type GreenhouseCountOutputTypeCountSensorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: SensorWhereInput
   }
 
 
@@ -2876,6 +2886,7 @@ export namespace Prisma {
     updated_at?: boolean
     user?: boolean | Greenhouse$userArgs<ExtArgs>
     aktuator?: boolean | Greenhouse$aktuatorArgs<ExtArgs>
+    sensor?: boolean | Greenhouse$sensorArgs<ExtArgs>
     _count?: boolean | GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["greenhouse"]>
 
@@ -2890,6 +2901,7 @@ export namespace Prisma {
   export type GreenhouseInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     user?: boolean | Greenhouse$userArgs<ExtArgs>
     aktuator?: boolean | Greenhouse$aktuatorArgs<ExtArgs>
+    sensor?: boolean | Greenhouse$sensorArgs<ExtArgs>
     _count?: boolean | GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -2899,6 +2911,7 @@ export namespace Prisma {
     objects: {
       user: Prisma.$UserPayload<ExtArgs>[]
       aktuator: Prisma.$AktuatorPayload<ExtArgs>[]
+      sensor: Prisma.$SensorPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetResult<{
       id: number
@@ -3274,6 +3287,8 @@ export namespace Prisma {
     user<T extends Greenhouse$userArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$userArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     aktuator<T extends Greenhouse$aktuatorArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$aktuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    sensor<T extends Greenhouse$sensorArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$sensorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3658,6 +3673,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: AktuatorScalarFieldEnum | AktuatorScalarFieldEnum[]
+  }
+
+
+  /**
+   * Greenhouse.sensor
+   */
+  export type Greenhouse$sensorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SensorInclude<ExtArgs> | null
+    where?: SensorWhereInput
+    orderBy?: SensorOrderByWithRelationInput | SensorOrderByWithRelationInput[]
+    cursor?: SensorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SensorScalarFieldEnum | SensorScalarFieldEnum[]
   }
 
 
@@ -5701,6 +5737,7 @@ export namespace Prisma {
     nilai: number | null
     tandonId: number | null
     tandonBahanId: number | null
+    greenhouseId: number | null
   }
 
   export type SensorSumAggregateOutputType = {
@@ -5708,6 +5745,7 @@ export namespace Prisma {
     nilai: number | null
     tandonId: number | null
     tandonBahanId: number | null
+    greenhouseId: number | null
   }
 
   export type SensorMinAggregateOutputType = {
@@ -5720,6 +5758,7 @@ export namespace Prisma {
     nilai: number | null
     tandonId: number | null
     tandonBahanId: number | null
+    greenhouseId: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -5734,6 +5773,7 @@ export namespace Prisma {
     nilai: number | null
     tandonId: number | null
     tandonBahanId: number | null
+    greenhouseId: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -5748,6 +5788,7 @@ export namespace Prisma {
     nilai: number
     tandonId: number
     tandonBahanId: number
+    greenhouseId: number
     created_at: number
     updated_at: number
     _all: number
@@ -5759,6 +5800,7 @@ export namespace Prisma {
     nilai?: true
     tandonId?: true
     tandonBahanId?: true
+    greenhouseId?: true
   }
 
   export type SensorSumAggregateInputType = {
@@ -5766,6 +5808,7 @@ export namespace Prisma {
     nilai?: true
     tandonId?: true
     tandonBahanId?: true
+    greenhouseId?: true
   }
 
   export type SensorMinAggregateInputType = {
@@ -5778,6 +5821,7 @@ export namespace Prisma {
     nilai?: true
     tandonId?: true
     tandonBahanId?: true
+    greenhouseId?: true
     created_at?: true
     updated_at?: true
   }
@@ -5792,6 +5836,7 @@ export namespace Prisma {
     nilai?: true
     tandonId?: true
     tandonBahanId?: true
+    greenhouseId?: true
     created_at?: true
     updated_at?: true
   }
@@ -5806,6 +5851,7 @@ export namespace Prisma {
     nilai?: true
     tandonId?: true
     tandonBahanId?: true
+    greenhouseId?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -5907,6 +5953,7 @@ export namespace Prisma {
     nilai: number
     tandonId: number | null
     tandonBahanId: number | null
+    greenhouseId: number | null
     created_at: Date
     updated_at: Date | null
     _count: SensorCountAggregateOutputType | null
@@ -5940,10 +5987,12 @@ export namespace Prisma {
     nilai?: boolean
     tandonId?: boolean
     tandonBahanId?: boolean
+    greenhouseId?: boolean
     created_at?: boolean
     updated_at?: boolean
     tandon?: boolean | Sensor$tandonArgs<ExtArgs>
     tandonBahan?: boolean | Sensor$tandonBahanArgs<ExtArgs>
+    greenhouse?: boolean | Sensor$greenhouseArgs<ExtArgs>
   }, ExtArgs["result"]["sensor"]>
 
   export type SensorSelectScalar = {
@@ -5956,6 +6005,7 @@ export namespace Prisma {
     nilai?: boolean
     tandonId?: boolean
     tandonBahanId?: boolean
+    greenhouseId?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
@@ -5963,6 +6013,7 @@ export namespace Prisma {
   export type SensorInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     tandon?: boolean | Sensor$tandonArgs<ExtArgs>
     tandonBahan?: boolean | Sensor$tandonBahanArgs<ExtArgs>
+    greenhouse?: boolean | Sensor$greenhouseArgs<ExtArgs>
   }
 
 
@@ -5971,6 +6022,7 @@ export namespace Prisma {
     objects: {
       tandon: Prisma.$TandonPayload<ExtArgs> | null
       tandonBahan: Prisma.$TandonBahanPayload<ExtArgs> | null
+      greenhouse: Prisma.$GreenhousePayload<ExtArgs> | null
     }
     scalars: $Extensions.GetResult<{
       id: number
@@ -5982,6 +6034,7 @@ export namespace Prisma {
       nilai: number
       tandonId: number | null
       tandonBahanId: number | null
+      greenhouseId: number | null
       created_at: Date
       updated_at: Date | null
     }, ExtArgs["result"]["sensor"]>
@@ -6353,6 +6406,8 @@ export namespace Prisma {
 
     tandonBahan<T extends Sensor$tandonBahanArgs<ExtArgs> = {}>(args?: Subset<T, Sensor$tandonBahanArgs<ExtArgs>>): Prisma__TandonBahanClient<$Result.GetResult<Prisma.$TandonBahanPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
+    greenhouse<T extends Sensor$greenhouseArgs<ExtArgs> = {}>(args?: Subset<T, Sensor$greenhouseArgs<ExtArgs>>): Prisma__GreenhouseClient<$Result.GetResult<Prisma.$GreenhousePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6390,6 +6445,7 @@ export namespace Prisma {
     readonly nilai: FieldRef<"Sensor", 'Int'>
     readonly tandonId: FieldRef<"Sensor", 'Int'>
     readonly tandonBahanId: FieldRef<"Sensor", 'Int'>
+    readonly greenhouseId: FieldRef<"Sensor", 'Int'>
     readonly created_at: FieldRef<"Sensor", 'DateTime'>
     readonly updated_at: FieldRef<"Sensor", 'DateTime'>
   }
@@ -6732,6 +6788,22 @@ export namespace Prisma {
      */
     include?: TandonBahanInclude<ExtArgs> | null
     where?: TandonBahanWhereInput
+  }
+
+
+  /**
+   * Sensor.greenhouse
+   */
+  export type Sensor$greenhouseArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Greenhouse
+     */
+    select?: GreenhouseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GreenhouseInclude<ExtArgs> | null
+    where?: GreenhouseWhereInput
   }
 
 
@@ -9892,6 +9964,7 @@ export namespace Prisma {
     nilai: 'nilai',
     tandonId: 'tandonId',
     tandonBahanId: 'tandonBahanId',
+    greenhouseId: 'greenhouseId',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -10113,6 +10186,7 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
     user?: UserListRelationFilter
     aktuator?: AktuatorListRelationFilter
+    sensor?: SensorListRelationFilter
   }
 
   export type GreenhouseOrderByWithRelationInput = {
@@ -10123,6 +10197,7 @@ export namespace Prisma {
     updated_at?: SortOrderInput | SortOrder
     user?: UserOrderByRelationAggregateInput
     aktuator?: AktuatorOrderByRelationAggregateInput
+    sensor?: SensorOrderByRelationAggregateInput
   }
 
   export type GreenhouseWhereUniqueInput = Prisma.AtLeast<{
@@ -10136,6 +10211,7 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
     user?: UserListRelationFilter
     aktuator?: AktuatorListRelationFilter
+    sensor?: SensorListRelationFilter
   }, "id" | "nama">
 
   export type GreenhouseOrderByWithAggregationInput = {
@@ -10317,10 +10393,12 @@ export namespace Prisma {
     nilai?: IntFilter<"Sensor"> | number
     tandonId?: IntNullableFilter<"Sensor"> | number | null
     tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
+    greenhouseId?: IntNullableFilter<"Sensor"> | number | null
     created_at?: DateTimeFilter<"Sensor"> | Date | string
     updated_at?: DateTimeNullableFilter<"Sensor"> | Date | string | null
     tandon?: XOR<TandonNullableRelationFilter, TandonWhereInput> | null
     tandonBahan?: XOR<TandonBahanNullableRelationFilter, TandonBahanWhereInput> | null
+    greenhouse?: XOR<GreenhouseNullableRelationFilter, GreenhouseWhereInput> | null
   }
 
   export type SensorOrderByWithRelationInput = {
@@ -10333,10 +10411,12 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrderInput | SortOrder
     tandonBahanId?: SortOrderInput | SortOrder
+    greenhouseId?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     tandon?: TandonOrderByWithRelationInput
     tandonBahan?: TandonBahanOrderByWithRelationInput
+    greenhouse?: GreenhouseOrderByWithRelationInput
   }
 
   export type SensorWhereUniqueInput = Prisma.AtLeast<{
@@ -10352,10 +10432,12 @@ export namespace Prisma {
     nilai?: IntFilter<"Sensor"> | number
     tandonId?: IntNullableFilter<"Sensor"> | number | null
     tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
+    greenhouseId?: IntNullableFilter<"Sensor"> | number | null
     created_at?: DateTimeFilter<"Sensor"> | Date | string
     updated_at?: DateTimeNullableFilter<"Sensor"> | Date | string | null
     tandon?: XOR<TandonNullableRelationFilter, TandonWhereInput> | null
     tandonBahan?: XOR<TandonBahanNullableRelationFilter, TandonBahanWhereInput> | null
+    greenhouse?: XOR<GreenhouseNullableRelationFilter, GreenhouseWhereInput> | null
   }, "id">
 
   export type SensorOrderByWithAggregationInput = {
@@ -10368,6 +10450,7 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrderInput | SortOrder
     tandonBahanId?: SortOrderInput | SortOrder
+    greenhouseId?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     _count?: SensorCountOrderByAggregateInput
@@ -10390,6 +10473,7 @@ export namespace Prisma {
     nilai?: IntWithAggregatesFilter<"Sensor"> | number
     tandonId?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
     tandonBahanId?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
+    greenhouseId?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
     created_at?: DateTimeWithAggregatesFilter<"Sensor"> | Date | string
     updated_at?: DateTimeNullableWithAggregatesFilter<"Sensor"> | Date | string | null
   }
@@ -10690,6 +10774,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user?: UserCreateNestedManyWithoutGreenhouseInput
     aktuator?: AktuatorCreateNestedManyWithoutGreenhouseInput
+    sensor?: SensorCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateInput = {
@@ -10700,6 +10785,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
     aktuator?: AktuatorUncheckedCreateNestedManyWithoutGreenhouseInput
+    sensor?: SensorUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUpdateInput = {
@@ -10709,6 +10795,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateManyWithoutGreenhouseNestedInput
     aktuator?: AktuatorUpdateManyWithoutGreenhouseNestedInput
+    sensor?: SensorUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateInput = {
@@ -10719,6 +10806,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
     aktuator?: AktuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
+    sensor?: SensorUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseCreateManyInput = {
@@ -10898,6 +10986,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     tandon?: TandonCreateNestedOneWithoutSensorInput
     tandonBahan?: TandonBahanCreateNestedOneWithoutSensorInput
+    greenhouse?: GreenhouseCreateNestedOneWithoutSensorInput
   }
 
   export type SensorUncheckedCreateInput = {
@@ -10910,6 +10999,7 @@ export namespace Prisma {
     nilai: number
     tandonId?: number | null
     tandonBahanId?: number | null
+    greenhouseId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -10925,6 +11015,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneWithoutSensorNestedInput
     tandonBahan?: TandonBahanUpdateOneWithoutSensorNestedInput
+    greenhouse?: GreenhouseUpdateOneWithoutSensorNestedInput
   }
 
   export type SensorUncheckedUpdateInput = {
@@ -10937,6 +11028,7 @@ export namespace Prisma {
     nilai?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -10951,6 +11043,7 @@ export namespace Prisma {
     nilai: number
     tandonId?: number | null
     tandonBahanId?: number | null
+    greenhouseId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -10976,6 +11069,7 @@ export namespace Prisma {
     nilai?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -11375,11 +11469,21 @@ export namespace Prisma {
     none?: AktuatorWhereInput
   }
 
+  export type SensorListRelationFilter = {
+    every?: SensorWhereInput
+    some?: SensorWhereInput
+    none?: SensorWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type AktuatorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SensorOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11593,6 +11697,11 @@ export namespace Prisma {
     isNot?: TandonBahanWhereInput | null
   }
 
+  export type GreenhouseNullableRelationFilter = {
+    is?: GreenhouseWhereInput | null
+    isNot?: GreenhouseWhereInput | null
+  }
+
   export type SensorCountOrderByAggregateInput = {
     id?: SortOrder
     nama?: SortOrder
@@ -11603,6 +11712,7 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
+    greenhouseId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11612,6 +11722,7 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
+    greenhouseId?: SortOrder
   }
 
   export type SensorMaxOrderByAggregateInput = {
@@ -11624,6 +11735,7 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
+    greenhouseId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11638,6 +11750,7 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
+    greenhouseId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11647,6 +11760,7 @@ export namespace Prisma {
     nilai?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
+    greenhouseId?: SortOrder
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -11713,16 +11827,6 @@ export namespace Prisma {
     id?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
-  }
-
-  export type SensorListRelationFilter = {
-    every?: SensorWhereInput
-    some?: SensorWhereInput
-    none?: SensorWhereInput
-  }
-
-  export type SensorOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type TandonBahanCountOrderByAggregateInput = {
@@ -11927,6 +12031,13 @@ export namespace Prisma {
     connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
   }
 
+  export type SensorCreateNestedManyWithoutGreenhouseInput = {
+    create?: XOR<SensorCreateWithoutGreenhouseInput, SensorUncheckedCreateWithoutGreenhouseInput> | SensorCreateWithoutGreenhouseInput[] | SensorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutGreenhouseInput | SensorCreateOrConnectWithoutGreenhouseInput[]
+    createMany?: SensorCreateManyGreenhouseInputEnvelope
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutGreenhouseInput = {
     create?: XOR<UserCreateWithoutGreenhouseInput, UserUncheckedCreateWithoutGreenhouseInput> | UserCreateWithoutGreenhouseInput[] | UserUncheckedCreateWithoutGreenhouseInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGreenhouseInput | UserCreateOrConnectWithoutGreenhouseInput[]
@@ -11938,6 +12049,13 @@ export namespace Prisma {
     connectOrCreate?: AktuatorCreateOrConnectWithoutGreenhouseInput | AktuatorCreateOrConnectWithoutGreenhouseInput[]
     createMany?: AktuatorCreateManyGreenhouseInputEnvelope
     connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+  }
+
+  export type SensorUncheckedCreateNestedManyWithoutGreenhouseInput = {
+    create?: XOR<SensorCreateWithoutGreenhouseInput, SensorUncheckedCreateWithoutGreenhouseInput> | SensorCreateWithoutGreenhouseInput[] | SensorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutGreenhouseInput | SensorCreateOrConnectWithoutGreenhouseInput[]
+    createMany?: SensorCreateManyGreenhouseInputEnvelope
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
   }
 
   export type UserUpdateManyWithoutGreenhouseNestedInput = {
@@ -11967,6 +12085,20 @@ export namespace Prisma {
     deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
   }
 
+  export type SensorUpdateManyWithoutGreenhouseNestedInput = {
+    create?: XOR<SensorCreateWithoutGreenhouseInput, SensorUncheckedCreateWithoutGreenhouseInput> | SensorCreateWithoutGreenhouseInput[] | SensorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutGreenhouseInput | SensorCreateOrConnectWithoutGreenhouseInput[]
+    upsert?: SensorUpsertWithWhereUniqueWithoutGreenhouseInput | SensorUpsertWithWhereUniqueWithoutGreenhouseInput[]
+    createMany?: SensorCreateManyGreenhouseInputEnvelope
+    set?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    disconnect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    delete?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    update?: SensorUpdateWithWhereUniqueWithoutGreenhouseInput | SensorUpdateWithWhereUniqueWithoutGreenhouseInput[]
+    updateMany?: SensorUpdateManyWithWhereWithoutGreenhouseInput | SensorUpdateManyWithWhereWithoutGreenhouseInput[]
+    deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutGreenhouseNestedInput = {
     create?: XOR<UserCreateWithoutGreenhouseInput, UserUncheckedCreateWithoutGreenhouseInput> | UserCreateWithoutGreenhouseInput[] | UserUncheckedCreateWithoutGreenhouseInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGreenhouseInput | UserCreateOrConnectWithoutGreenhouseInput[]
@@ -11992,6 +12124,20 @@ export namespace Prisma {
     update?: AktuatorUpdateWithWhereUniqueWithoutGreenhouseInput | AktuatorUpdateWithWhereUniqueWithoutGreenhouseInput[]
     updateMany?: AktuatorUpdateManyWithWhereWithoutGreenhouseInput | AktuatorUpdateManyWithWhereWithoutGreenhouseInput[]
     deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
+  }
+
+  export type SensorUncheckedUpdateManyWithoutGreenhouseNestedInput = {
+    create?: XOR<SensorCreateWithoutGreenhouseInput, SensorUncheckedCreateWithoutGreenhouseInput> | SensorCreateWithoutGreenhouseInput[] | SensorUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutGreenhouseInput | SensorCreateOrConnectWithoutGreenhouseInput[]
+    upsert?: SensorUpsertWithWhereUniqueWithoutGreenhouseInput | SensorUpsertWithWhereUniqueWithoutGreenhouseInput[]
+    createMany?: SensorCreateManyGreenhouseInputEnvelope
+    set?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    disconnect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    delete?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    update?: SensorUpdateWithWhereUniqueWithoutGreenhouseInput | SensorUpdateWithWhereUniqueWithoutGreenhouseInput[]
+    updateMany?: SensorUpdateManyWithWhereWithoutGreenhouseInput | SensorUpdateManyWithWhereWithoutGreenhouseInput[]
+    deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
   }
 
   export type PenjadwalanCreateNestedManyWithoutResepInput = {
@@ -12097,6 +12243,12 @@ export namespace Prisma {
     connect?: TandonBahanWhereUniqueInput
   }
 
+  export type GreenhouseCreateNestedOneWithoutSensorInput = {
+    create?: XOR<GreenhouseCreateWithoutSensorInput, GreenhouseUncheckedCreateWithoutSensorInput>
+    connectOrCreate?: GreenhouseCreateOrConnectWithoutSensorInput
+    connect?: GreenhouseWhereUniqueInput
+  }
+
   export type TandonUpdateOneWithoutSensorNestedInput = {
     create?: XOR<TandonCreateWithoutSensorInput, TandonUncheckedCreateWithoutSensorInput>
     connectOrCreate?: TandonCreateOrConnectWithoutSensorInput
@@ -12115,6 +12267,16 @@ export namespace Prisma {
     delete?: TandonBahanWhereInput | boolean
     connect?: TandonBahanWhereUniqueInput
     update?: XOR<XOR<TandonBahanUpdateToOneWithWhereWithoutSensorInput, TandonBahanUpdateWithoutSensorInput>, TandonBahanUncheckedUpdateWithoutSensorInput>
+  }
+
+  export type GreenhouseUpdateOneWithoutSensorNestedInput = {
+    create?: XOR<GreenhouseCreateWithoutSensorInput, GreenhouseUncheckedCreateWithoutSensorInput>
+    connectOrCreate?: GreenhouseCreateOrConnectWithoutSensorInput
+    upsert?: GreenhouseUpsertWithoutSensorInput
+    disconnect?: GreenhouseWhereInput | boolean
+    delete?: GreenhouseWhereInput | boolean
+    connect?: GreenhouseWhereUniqueInput
+    update?: XOR<XOR<GreenhouseUpdateToOneWithWhereWithoutSensorInput, GreenhouseUpdateWithoutSensorInput>, GreenhouseUncheckedUpdateWithoutSensorInput>
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -12583,6 +12745,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     aktuator?: AktuatorCreateNestedManyWithoutGreenhouseInput
+    sensor?: SensorCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateWithoutUserInput = {
@@ -12592,6 +12755,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     aktuator?: AktuatorUncheckedCreateNestedManyWithoutGreenhouseInput
+    sensor?: SensorUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseCreateOrConnectWithoutUserInput = {
@@ -12745,6 +12909,43 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type SensorCreateWithoutGreenhouseInput = {
+    nama: string
+    persamaan: string
+    merek: string
+    satuan: string
+    status: boolean
+    nilai: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    tandon?: TandonCreateNestedOneWithoutSensorInput
+    tandonBahan?: TandonBahanCreateNestedOneWithoutSensorInput
+  }
+
+  export type SensorUncheckedCreateWithoutGreenhouseInput = {
+    id?: number
+    nama: string
+    persamaan: string
+    merek: string
+    satuan: string
+    status: boolean
+    nilai: number
+    tandonId?: number | null
+    tandonBahanId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type SensorCreateOrConnectWithoutGreenhouseInput = {
+    where: SensorWhereUniqueInput
+    create: XOR<SensorCreateWithoutGreenhouseInput, SensorUncheckedCreateWithoutGreenhouseInput>
+  }
+
+  export type SensorCreateManyGreenhouseInputEnvelope = {
+    data: SensorCreateManyGreenhouseInput | SensorCreateManyGreenhouseInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithWhereUniqueWithoutGreenhouseInput = {
     where: UserWhereUniqueInput
     update: XOR<UserUpdateWithoutGreenhouseInput, UserUncheckedUpdateWithoutGreenhouseInput>
@@ -12802,6 +13003,40 @@ export namespace Prisma {
     greenhouseId?: IntFilter<"Aktuator"> | number
     created_at?: DateTimeFilter<"Aktuator"> | Date | string
     updated_at?: DateTimeNullableFilter<"Aktuator"> | Date | string | null
+  }
+
+  export type SensorUpsertWithWhereUniqueWithoutGreenhouseInput = {
+    where: SensorWhereUniqueInput
+    update: XOR<SensorUpdateWithoutGreenhouseInput, SensorUncheckedUpdateWithoutGreenhouseInput>
+    create: XOR<SensorCreateWithoutGreenhouseInput, SensorUncheckedCreateWithoutGreenhouseInput>
+  }
+
+  export type SensorUpdateWithWhereUniqueWithoutGreenhouseInput = {
+    where: SensorWhereUniqueInput
+    data: XOR<SensorUpdateWithoutGreenhouseInput, SensorUncheckedUpdateWithoutGreenhouseInput>
+  }
+
+  export type SensorUpdateManyWithWhereWithoutGreenhouseInput = {
+    where: SensorScalarWhereInput
+    data: XOR<SensorUpdateManyMutationInput, SensorUncheckedUpdateManyWithoutGreenhouseInput>
+  }
+
+  export type SensorScalarWhereInput = {
+    AND?: SensorScalarWhereInput | SensorScalarWhereInput[]
+    OR?: SensorScalarWhereInput[]
+    NOT?: SensorScalarWhereInput | SensorScalarWhereInput[]
+    id?: IntFilter<"Sensor"> | number
+    nama?: StringFilter<"Sensor"> | string
+    persamaan?: StringFilter<"Sensor"> | string
+    merek?: StringFilter<"Sensor"> | string
+    satuan?: StringFilter<"Sensor"> | string
+    status?: BoolFilter<"Sensor"> | boolean
+    nilai?: IntFilter<"Sensor"> | number
+    tandonId?: IntNullableFilter<"Sensor"> | number | null
+    tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
+    greenhouseId?: IntNullableFilter<"Sensor"> | number | null
+    created_at?: DateTimeFilter<"Sensor"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Sensor"> | Date | string | null
   }
 
   export type PenjadwalanCreateWithoutResepInput = {
@@ -13033,6 +13268,30 @@ export namespace Prisma {
     create: XOR<TandonBahanCreateWithoutSensorInput, TandonBahanUncheckedCreateWithoutSensorInput>
   }
 
+  export type GreenhouseCreateWithoutSensorInput = {
+    nama: string
+    thumbnail: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    user?: UserCreateNestedManyWithoutGreenhouseInput
+    aktuator?: AktuatorCreateNestedManyWithoutGreenhouseInput
+  }
+
+  export type GreenhouseUncheckedCreateWithoutSensorInput = {
+    id?: number
+    nama: string
+    thumbnail: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutGreenhouseInput
+  }
+
+  export type GreenhouseCreateOrConnectWithoutSensorInput = {
+    where: GreenhouseWhereUniqueInput
+    create: XOR<GreenhouseCreateWithoutSensorInput, GreenhouseUncheckedCreateWithoutSensorInput>
+  }
+
   export type TandonUpsertWithoutSensorInput = {
     update: XOR<TandonUpdateWithoutSensorInput, TandonUncheckedUpdateWithoutSensorInput>
     create: XOR<TandonCreateWithoutSensorInput, TandonUncheckedCreateWithoutSensorInput>
@@ -13095,6 +13354,36 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type GreenhouseUpsertWithoutSensorInput = {
+    update: XOR<GreenhouseUpdateWithoutSensorInput, GreenhouseUncheckedUpdateWithoutSensorInput>
+    create: XOR<GreenhouseCreateWithoutSensorInput, GreenhouseUncheckedCreateWithoutSensorInput>
+    where?: GreenhouseWhereInput
+  }
+
+  export type GreenhouseUpdateToOneWithWhereWithoutSensorInput = {
+    where?: GreenhouseWhereInput
+    data: XOR<GreenhouseUpdateWithoutSensorInput, GreenhouseUncheckedUpdateWithoutSensorInput>
+  }
+
+  export type GreenhouseUpdateWithoutSensorInput = {
+    nama?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateManyWithoutGreenhouseNestedInput
+    aktuator?: AktuatorUpdateManyWithoutGreenhouseNestedInput
+  }
+
+  export type GreenhouseUncheckedUpdateWithoutSensorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    thumbnail?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
+  }
+
   export type TandonCreateWithoutAktuatorInput = {
     nama: string
     status: string
@@ -13131,6 +13420,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     user?: UserCreateNestedManyWithoutGreenhouseInput
+    sensor?: SensorCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateWithoutAktuatorInput = {
@@ -13140,6 +13430,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
+    sensor?: SensorUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseCreateOrConnectWithoutAktuatorInput = {
@@ -13200,6 +13491,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateManyWithoutGreenhouseNestedInput
+    sensor?: SensorUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateWithoutAktuatorInput = {
@@ -13209,6 +13501,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
+    sensor?: SensorUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type SensorCreateWithoutTandonBahanInput = {
@@ -13221,6 +13514,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     tandon?: TandonCreateNestedOneWithoutSensorInput
+    greenhouse?: GreenhouseCreateNestedOneWithoutSensorInput
   }
 
   export type SensorUncheckedCreateWithoutTandonBahanInput = {
@@ -13232,6 +13526,7 @@ export namespace Prisma {
     status: boolean
     nilai: number
     tandonId?: number | null
+    greenhouseId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -13290,23 +13585,6 @@ export namespace Prisma {
   export type SensorUpdateManyWithWhereWithoutTandonBahanInput = {
     where: SensorScalarWhereInput
     data: XOR<SensorUpdateManyMutationInput, SensorUncheckedUpdateManyWithoutTandonBahanInput>
-  }
-
-  export type SensorScalarWhereInput = {
-    AND?: SensorScalarWhereInput | SensorScalarWhereInput[]
-    OR?: SensorScalarWhereInput[]
-    NOT?: SensorScalarWhereInput | SensorScalarWhereInput[]
-    id?: IntFilter<"Sensor"> | number
-    nama?: StringFilter<"Sensor"> | string
-    persamaan?: StringFilter<"Sensor"> | string
-    merek?: StringFilter<"Sensor"> | string
-    satuan?: StringFilter<"Sensor"> | string
-    status?: BoolFilter<"Sensor"> | boolean
-    nilai?: IntFilter<"Sensor"> | number
-    tandonId?: IntNullableFilter<"Sensor"> | number | null
-    tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
-    created_at?: DateTimeFilter<"Sensor"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Sensor"> | Date | string | null
   }
 
   export type TandonUpsertWithoutTandonBahanInput = {
@@ -13381,6 +13659,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     tandonBahan?: TandonBahanCreateNestedOneWithoutSensorInput
+    greenhouse?: GreenhouseCreateNestedOneWithoutSensorInput
   }
 
   export type SensorUncheckedCreateWithoutTandonInput = {
@@ -13392,6 +13671,7 @@ export namespace Prisma {
     status: boolean
     nilai: number
     tandonBahanId?: number | null
+    greenhouseId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -13611,6 +13891,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aktuator?: AktuatorUpdateManyWithoutGreenhouseNestedInput
+    sensor?: SensorUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateWithoutUserInput = {
@@ -13620,6 +13901,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aktuator?: AktuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
+    sensor?: SensorUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateManyWithoutUserInput = {
@@ -13670,6 +13952,20 @@ export namespace Prisma {
     merek: string
     status: boolean
     tandonId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type SensorCreateManyGreenhouseInput = {
+    id?: number
+    nama: string
+    persamaan: string
+    merek: string
+    satuan: string
+    status: boolean
+    nilai: number
+    tandonId?: number | null
+    tandonBahanId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -13734,6 +14030,47 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type SensorUpdateWithoutGreenhouseInput = {
+    nama?: StringFieldUpdateOperationsInput | string
+    persamaan?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    satuan?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    nilai?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tandon?: TandonUpdateOneWithoutSensorNestedInput
+    tandonBahan?: TandonBahanUpdateOneWithoutSensorNestedInput
+  }
+
+  export type SensorUncheckedUpdateWithoutGreenhouseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    persamaan?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    satuan?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    nilai?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SensorUncheckedUpdateManyWithoutGreenhouseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    persamaan?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    satuan?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    nilai?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type PenjadwalanCreateManyResepInput = {
     id?: number
     waktu: string
@@ -13782,6 +14119,7 @@ export namespace Prisma {
     status: boolean
     nilai: number
     tandonId?: number | null
+    greenhouseId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -13796,6 +14134,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneWithoutSensorNestedInput
+    greenhouse?: GreenhouseUpdateOneWithoutSensorNestedInput
   }
 
   export type SensorUncheckedUpdateWithoutTandonBahanInput = {
@@ -13807,6 +14146,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -13820,6 +14160,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -13833,6 +14174,7 @@ export namespace Prisma {
     status: boolean
     nilai: number
     tandonBahanId?: number | null
+    greenhouseId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -13874,6 +14216,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandonBahan?: TandonBahanUpdateOneWithoutSensorNestedInput
+    greenhouse?: GreenhouseUpdateOneWithoutSensorNestedInput
   }
 
   export type SensorUncheckedUpdateWithoutTandonInput = {
@@ -13885,6 +14228,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -13898,6 +14242,7 @@ export namespace Prisma {
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }

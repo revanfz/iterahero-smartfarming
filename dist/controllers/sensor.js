@@ -38,7 +38,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         }
     }
     finally {
-        prisma_1.prisma.$disconnect();
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.getHandler = getHandler;

@@ -45,7 +45,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         }
     }
     finally {
-        prisma_1.prisma.$disconnect();
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.getHandler = getHandler;
@@ -117,7 +117,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         }
     }
     finally {
-        prisma_1.prisma.$disconnect();
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.postHandler = postHandler;
@@ -141,7 +141,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         }
     }
     finally {
-        prisma_1.prisma.$disconnect();
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.deleteHandler = deleteHandler;
@@ -174,7 +174,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         }
     }
     finally {
-        prisma_1.prisma.$disconnect();
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.patchHandler = patchHandler;

@@ -14,12 +14,36 @@ exports.tandonUtamaRoute = [
         path,
         handler: tandonUtama_1.getHandler,
         options: {
-            tags: ['api'],
+            tags: ["api"],
             validate: {
                 query: joi_1.default.object({
-                    id: joi_1.default.number().required().optional()
-                })
-            }
-        }
-    }
+                    id: joi_1.default.number().required().optional(),
+                }),
+            },
+        },
+    },
+    {
+        method: "GET",
+        path: path + "/sensor",
+        handler: tandonUtama_1.sensorByTandonHandler,
+        options: {
+            validate: {
+                query: joi_1.default.object({
+                    id: joi_1.default.number().required(),
+                }),
+            },
+        },
+    },
+    {
+        method: "GET",
+        path: path + "/actuator",
+        handler: tandonUtama_1.actuatorByTandonHandler,
+        options: {
+            validate: {
+                query: joi_1.default.object({
+                    id: joi_1.default.number().required(),
+                }),
+            },
+        },
+    },
 ];

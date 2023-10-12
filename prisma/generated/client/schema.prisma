@@ -30,6 +30,7 @@ model Greenhouse {
   thumbnail String
   user      User[]
   aktuator  Aktuator[]
+  sensor  Sensor[]
   created_at  DateTime  @default(now())
   updated_at  DateTime? @updatedAt
 }
@@ -70,6 +71,8 @@ model Sensor {
   tandonId      Int?
   tandonBahan   TandonBahan? @relation(fields: [tandonBahanId], references: [id])
   tandonBahanId Int?
+  greenhouseId  Int?
+  greenhouse  Greenhouse? @relation(fields: [greenhouseId], references: [id])
   created_at  DateTime  @default(now())
   updated_at  DateTime? @updatedAt
 }

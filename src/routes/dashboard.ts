@@ -9,5 +9,5 @@ export const dashboardRoute: ServerRoute[] = [
         method: "GET",
         path,
         handler: getHandler,
-    }
+    },
 ];

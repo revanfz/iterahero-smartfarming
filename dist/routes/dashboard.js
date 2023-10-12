@@ -9,5 +9,5 @@ exports.dashboardRoute = [
         method: "GET",
         path,
         handler: dashboard_1.getHandler,
-    }
+    },
 ];

@@ -17,12 +17,25 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id } = request.query;
-        const data = yield prisma_1.prisma.aktuator.findMany({
-            where: {
-                tandonId: id
-            }
-        });
+        const id = parseInt(request.query.id);
+        let data;
+        if (id) {
+            data = yield prisma_1.prisma.sensor.findMany({
+                where: {
+                    tandonId: id,
+                },
+                include: {
+                    tandonBahan: true
+                }
+            });
+        }
+        else {
+            data = yield prisma_1.prisma.aktuator.findMany({
+                where: {
+                    tandonId: id
+                }
+            });
+        }
         if (!data) {
             return boom_1.default.notFound("Tidak ada aktuator");
         }
@@ -38,7 +51,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         }
     }
     finally {
-        prisma_1.prisma.$disconnect();
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.getHandler = getHandler;

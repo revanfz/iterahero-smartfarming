@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postHandler = exports.getHandler = void 0;
+exports.actuatorByGreenhouseHandler = exports.sensorByGreenhouseHandler = exports.postHandler = exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const cloudinary_1 = require("../config/cloudinary");
@@ -43,7 +43,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         }
     }
     finally {
-        prisma_1.prisma.$disconnect();
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.getHandler = getHandler;
@@ -87,7 +87,64 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         }
     }
     finally {
-        prisma_1.prisma.$disconnect();
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.postHandler = postHandler;
+const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = parseInt(request.query.id);
+        const data = yield prisma_1.prisma.sensor.findMany({
+            where: {
+                greenhouseId: id
+            }
+        });
+        if (!data) {
+            return boom_1.default.notFound("Tidak ada sensor di greenhouse terpilih");
+        }
+        return h.response({
+            status: "success",
+        }).code(200);
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.error(e);
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.sensorByGreenhouseHandler = sensorByGreenhouseHandler;
+const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = parseInt(request.query.id);
+        const data = yield prisma_1.prisma.aktuator.findMany({
+            where: {
+                greenhouseId: id
+            },
+            select: {
+                tandon: {
+                    select: {
+                        aktuator: true
+                    }
+                }
+            }
+        });
+        return h.response({
+            status: "success",
+            data
+        }).code(200);
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.error(e);
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.actuatorByGreenhouseHandler = actuatorByGreenhouseHandler;

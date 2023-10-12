@@ -18,7 +18,7 @@ export const initPeracikan = async () => {
   } catch (e) {
     console.log(e);
   } finally {
-    prisma.$disconnect();
+    await prisma.$disconnect();
   }
 };
 

@@ -1,7 +1,6 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
-import jwt from "jsonwebtoken";
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
   try {
@@ -57,7 +56,6 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
     if (!target) {
       return Boom.notFound("Tidak ada peracikan");
     }
-    // console.log(JSON.stringify(target));
     
     const jumlahTandon = target.tandon.reduce(
       (temp, a) => temp + a._count.tandonBahan,
@@ -90,5 +88,6 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.internal(e.message);
     }
   }
-  prisma.$disconnect();
+  await prisma.$disconnect();
 };
+

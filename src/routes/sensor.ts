@@ -7,7 +7,7 @@ const path = `${prefix}/sensor`
 export const sensorRoute: ServerRoute[] = [
     {
         method: "GET",
-        path,
+        path: path,
         handler: getHandler
-    }
+    },
 ]

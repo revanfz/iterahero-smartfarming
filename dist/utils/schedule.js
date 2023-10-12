@@ -54,7 +54,7 @@ const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
         console.log(e);
     }
     finally {
-        prisma_1.prisma.$disconnect();
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.initPeracikan = initPeracikan;

@@ -156,6 +156,7 @@ exports.Prisma.SensorScalarFieldEnum = {
   nilai: 'nilai',
   tandonId: 'tandonId',
   tandonBahanId: 'tandonBahanId',
+  greenhouseId: 'greenhouseId',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };

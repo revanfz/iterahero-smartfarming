@@ -40,7 +40,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         }
     }
     finally {
-        prisma.$disconnect();
+        await prisma.$disconnect();
     }
 }
 
@@ -90,6 +90,66 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             return Boom.internal(e, { kocak: "wwkwk" });
         }
     } finally {
-        prisma.$disconnect();
+        await prisma.$disconnect();
+    }
+}
+
+export const sensorByGreenhouseHandler = async (request: Request, h: ResponseToolkit) => {
+    try {
+        const id = parseInt(request.query.id);
+
+        const data = await prisma.sensor.findMany({
+            where: {
+                greenhouseId: id
+            }
+        })
+
+        if (!data) {
+            return Boom.notFound("Tidak ada sensor di greenhouse terpilih");
+        }
+
+        return h.response({
+            status: "success",
+        }).code(200)
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.error(e);
+            return Boom.internal(e.message)
+        }
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+}
+
+export const actuatorByGreenhouseHandler = async (request: Request, h: ResponseToolkit) => {
+    try {
+        const id = parseInt(request.query.id);
+        const data = await prisma.aktuator.findMany({
+            where: {
+                greenhouseId: id
+            },
+            select: {
+                tandon: {
+                    select: {
+                        aktuator: true
+                    }
+                }
+            }
+        })
+        return h.response({
+            status: "success",
+            data
+        }).code(200)
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.error(e);
+            return Boom.internal(e.message)
+        }
+    }
+    finally {
+        await prisma.$disconnect()
     }
 }

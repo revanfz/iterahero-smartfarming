@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getHandler = void 0;
+exports.actuatorByTandonHandler = exports.sensorByTandonHandler = exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
@@ -25,31 +25,6 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 where: {
                     id
                 },
-                include: {
-                    sensor: true,
-                    penjadwalan: true,
-                    tandonBahan: {
-                        include: {
-                            sensor: true,
-                        }
-                    },
-                }
-            });
-        }
-        else {
-            data = yield prisma_1.prisma.tandon.findMany({
-                where: {
-                    userId: id_user
-                },
-                include: {
-                    sensor: true,
-                    penjadwalan: true,
-                    tandonBahan: {
-                        include: {
-                            sensor: true
-                        }
-                    }
-                }
             });
         }
         if (!data) {
@@ -66,6 +41,68 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             return boom_1.default.internal(e.message);
         }
     }
-    prisma_1.prisma.$disconnect();
+    yield prisma_1.prisma.$disconnect();
 });
 exports.getHandler = getHandler;
+const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = parseInt(request.query.id);
+        const data = yield prisma_1.prisma.tandon.findMany({
+            where: {
+                id
+            },
+            select: {
+                sensor: true,
+                tandonBahan: {
+                    select: {
+                        sensor: true
+                    }
+                }
+            }
+        });
+        if (!data) {
+            return boom_1.default.notFound("Tidak ada sensor");
+        }
+        return h.response({
+            status: "success",
+            data
+        });
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.error(e);
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.sensorByTandonHandler = sensorByTandonHandler;
+const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = parseInt(request.query.id);
+        const data = yield prisma_1.prisma.aktuator.findMany({
+            where: {
+                tandonId: id
+            }
+        });
+        if (!data) {
+            return boom_1.default.notFound("Tidak ada aktuator");
+        }
+        return h.response({
+            status: "success",
+            data
+        }).code(200);
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.error(e);
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.actuatorByTandonHandler = actuatorByTandonHandler;

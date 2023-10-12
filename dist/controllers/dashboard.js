@@ -64,7 +64,6 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         if (!target) {
             return boom_1.default.notFound("Tidak ada peracikan");
         }
-        // console.log(JSON.stringify(target));
         const jumlahTandon = target.tandon.reduce((temp, a) => temp + a._count.tandonBahan, 0);
         const jumlahAktuator = target.tandon.reduce((temp, a) => temp + a._count.aktuator, 0);
         const jumlahSensor = target.tandon.reduce((temp, a) => temp + a._count.sensor, 0) + target.tandon.reduce((temp, a) => temp + a.tandonBahan.length, 0);
@@ -87,6 +86,6 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             return boom_1.default.internal(e.message);
         }
     }
-    prisma_1.prisma.$disconnect();
+    yield prisma_1.prisma.$disconnect();
 });
 exports.getHandler = getHandler;
