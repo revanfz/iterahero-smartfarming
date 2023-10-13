@@ -25,14 +25,15 @@ model User {
 }
 
 model Greenhouse {
-  id        Int        @id @default(autoincrement())
-  nama      String      @unique
-  thumbnail String
-  user      User[]
-  aktuator  Aktuator[]
-  sensor  Sensor[]
-  created_at  DateTime  @default(now())
-  updated_at  DateTime? @updatedAt
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  thumbnail  String
+  user       User[]
+  location   String
+  aktuator   Aktuator[]
+  sensor     Sensor[]
+  created_at DateTime   @default(now())
+  updated_at DateTime?  @updatedAt
 }
 
 model Resep {
@@ -42,62 +43,64 @@ model Resep {
   nama        String
   interval    Int
   penjadwalan Penjadwalan[]
-  created_at  DateTime  @default(now())
-  updated_at  DateTime? @updatedAt
+  created_at  DateTime      @default(now())
+  updated_at  DateTime?     @updatedAt
 }
 
 model Penjadwalan {
-  id       Int     @id @default(autoincrement())
-  waktu    String
-  isActive Boolean
-  hari     Int[]
-  resep    Resep   @relation(fields: [resepId], references: [id])
-  resepId  Int
-  tandon   Tandon  @relation(fields: [tandonId], references: [id])
-  tandonId Int
-  created_at  DateTime  @default(now())
-  updated_at  DateTime? @updatedAt
+  id         Int       @id @default(autoincrement())
+  waktu      String
+  isActive   Boolean
+  hari       Int[]
+  resep      Resep     @relation(fields: [resepId], references: [id])
+  resepId    Int
+  tandon     Tandon    @relation(fields: [tandonId], references: [id])
+  tandonId   Int
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
 }
 
 model Sensor {
-  id            Int          @id @default(autoincrement())
-  nama          String
-  persamaan     String
-  merek         String
-  satuan        String
-  status        Boolean
-  nilai         Int
-  tandon        Tandon?      @relation(fields: [tandonId], references: [id])
-  tandonId      Int?
-  tandonBahan   TandonBahan? @relation(fields: [tandonBahanId], references: [id])
-  tandonBahanId Int?
-  greenhouseId  Int?
-  greenhouse  Greenhouse? @relation(fields: [greenhouseId], references: [id])
-  created_at  DateTime  @default(now())
-  updated_at  DateTime? @updatedAt
+  id               Int          @id @default(autoincrement())
+  name             String
+  persamaan        String
+  brand            String
+  unit_measurement String
+  status           Boolean
+  nilai            Int
+  tandon           Tandon?      @relation(fields: [tandonId], references: [id])
+  tandonId         Int?
+  tandonBahan      TandonBahan? @relation(fields: [tandonBahanId], references: [id])
+  tandonBahanId    Int?
+  greenhouseId     Int?
+  greenhouse       Greenhouse?  @relation(fields: [greenhouseId], references: [id])
+  created_at       DateTime     @default(now())
+  updated_at       DateTime?    @updatedAt
 }
 
 model Aktuator {
   id           Int        @id @default(autoincrement())
-  nama         String
+  name         String
   merek        String
+  icon          String
+  color         String
   status       Boolean
   tandon       Tandon     @relation(fields: [tandonId], references: [id])
   tandonId     Int
   greenhouse   Greenhouse @relation(fields: [greenhouseId], references: [id])
   greenhouseId Int
-  created_at  DateTime  @default(now())
-  updated_at  DateTime? @updatedAt
+  created_at   DateTime   @default(now())
+  updated_at   DateTime?  @updatedAt
 }
 
 model TandonBahan {
-  id       Int      @id @default(autoincrement())
-  nama     String
-  sensor   Sensor[]
-  tandon   Tandon   @relation(fields: [tandonId], references: [id])
-  tandonId Int
-  created_at  DateTime  @default(now())
-  updated_at  DateTime? @updatedAt
+  id         Int       @id @default(autoincrement())
+  nama       String
+  sensor     Sensor[]
+  tandon     Tandon    @relation(fields: [tandonId], references: [id])
+  tandonId   Int
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
 }
 
 model Tandon {
@@ -111,6 +114,6 @@ model Tandon {
   aktuator    Aktuator[]
   tandonBahan TandonBahan[]
   penjadwalan Penjadwalan[]
-  created_at  DateTime  @default(now())
-  updated_at  DateTime? @updatedAt
+  created_at  DateTime      @default(now())
+  updated_at  DateTime?     @updatedAt
 }

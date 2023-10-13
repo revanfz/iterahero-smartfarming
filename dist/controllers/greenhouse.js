@@ -50,34 +50,35 @@ exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id_user } = request.auth.credentials;
-        const { nama, thumbnail } = request.payload;
+        const { name, thumbnail, location } = request.payload;
         console.log(thumbnail);
         const isExist = yield prisma_1.prisma.greenhouse.findUnique({
             where: {
-                nama
+                name
             }
         });
         if (isExist) {
-            return boom_1.default.forbidden(`Greenhouse ${nama} sudah ada.`);
+            return boom_1.default.forbidden(`Greenhouse ${name} sudah ada.`);
         }
-        const upload = yield (0, cloudinary_1.uploadImage)(thumbnail, nama);
+        const upload = yield (0, cloudinary_1.uploadImage)(thumbnail, name);
         if (!upload) {
             throw Error("Terjadi kesalahan saat mengupload");
         }
         yield prisma_1.prisma.greenhouse.create({
             data: {
-                nama,
+                name,
                 thumbnail: upload.secure_url,
                 user: {
                     connect: {
                         id: id_user
                     }
-                }
+                },
+                location
             }
         });
         return h.response({
             status: "ok",
-            message: `Greenhouse ${nama} berhasil ditambahkan.`
+            message: `Greenhouse ${name} berhasil ditambahkan.`
         }).code(200);
     }
     catch (e) {

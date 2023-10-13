@@ -6,7 +6,8 @@ import { uploadImage } from "../config/cloudinary";
 import { Readable } from "stream";
 
 interface InputGreenhouse {
-    nama: string,
+    name: string,
+    location: string,
     thumbnail: Readable,
 }
 
@@ -49,19 +50,19 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         const { id_user } = request.auth.credentials as {
             id_user: number
         }
-        const { nama, thumbnail } = request.payload as InputGreenhouse;
+        const { name, thumbnail, location } = request.payload as InputGreenhouse;
         console.log(thumbnail)
 
         const isExist = await prisma.greenhouse.findUnique({
             where: {
-                nama
+                name
             }
         });
 
         if (isExist) {
-            return Boom.forbidden(`Greenhouse ${nama} sudah ada.`)
+            return Boom.forbidden(`Greenhouse ${name} sudah ada.`)
         }
-        const upload = await uploadImage(thumbnail, nama);
+        const upload = await uploadImage(thumbnail, name);
 
         if (!upload) {
             throw Error("Terjadi kesalahan saat mengupload")
@@ -69,19 +70,20 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 
         await prisma.greenhouse.create({
             data: {
-                nama,
+                name,
                 thumbnail: upload.secure_url,
                 user: {
                     connect: {
                         id: id_user
                     }
-                }
+                },
+                location
             }
         })
 
         return h.response({
             status: "ok",
-            message: `Greenhouse ${nama} berhasil ditambahkan.`
+            message: `Greenhouse ${name} berhasil ditambahkan.`
         }).code(200)
     }
     catch (e) {

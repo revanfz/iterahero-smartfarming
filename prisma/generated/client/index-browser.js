@@ -119,8 +119,9 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.GreenhouseScalarFieldEnum = {
   id: 'id',
-  nama: 'nama',
+  name: 'name',
   thumbnail: 'thumbnail',
+  location: 'location',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -148,10 +149,10 @@ exports.Prisma.PenjadwalanScalarFieldEnum = {
 
 exports.Prisma.SensorScalarFieldEnum = {
   id: 'id',
-  nama: 'nama',
+  name: 'name',
   persamaan: 'persamaan',
-  merek: 'merek',
-  satuan: 'satuan',
+  brand: 'brand',
+  unit_measurement: 'unit_measurement',
   status: 'status',
   nilai: 'nilai',
   tandonId: 'tandonId',
@@ -163,8 +164,10 @@ exports.Prisma.SensorScalarFieldEnum = {
 
 exports.Prisma.AktuatorScalarFieldEnum = {
   id: 'id',
-  nama: 'nama',
+  name: 'name',
   merek: 'merek',
+  icon: 'icon',
+  color: 'color',
   status: 'status',
   tandonId: 'tandonId',
   greenhouseId: 'greenhouseId',
