@@ -10,7 +10,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
             id_user: number
         }
 
-        const data = await prisma.tandon.findFirst({
+        const data = await prisma.tandon.findMany({
                 where: {
                     userId: id_user
                 },
