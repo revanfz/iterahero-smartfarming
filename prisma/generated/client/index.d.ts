@@ -24,6 +24,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Greenhouse = $Result.DefaultSelection<Prisma.$GreenhousePayload>
 /**
+ * Model TandonPenyimpanan
+ * 
+ */
+export type TandonPenyimpanan = $Result.DefaultSelection<Prisma.$TandonPenyimpananPayload>
+/**
  * Model Resep
  * 
  */
@@ -195,6 +200,16 @@ export class PrismaClient<
     * ```
     */
   get greenhouse(): Prisma.GreenhouseDelegate<ExtArgs>;
+
+  /**
+   * `prisma.tandonPenyimpanan`: Exposes CRUD operations for the **TandonPenyimpanan** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more TandonPenyimpanans
+    * const tandonPenyimpanans = await prisma.tandonPenyimpanan.findMany()
+    * ```
+    */
+  get tandonPenyimpanan(): Prisma.TandonPenyimpananDelegate<ExtArgs>;
 
   /**
    * `prisma.resep`: Exposes CRUD operations for the **Resep** model.
@@ -727,6 +742,7 @@ export namespace Prisma {
   export const ModelName: {
     User: 'User',
     Greenhouse: 'Greenhouse',
+    TandonPenyimpanan: 'TandonPenyimpanan',
     Resep: 'Resep',
     Penjadwalan: 'Penjadwalan',
     Sensor: 'Sensor',
@@ -749,7 +765,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'greenhouse' | 'resep' | 'penjadwalan' | 'sensor' | 'aktuator' | 'tandonBahan' | 'tandon'
+      modelProps: 'user' | 'greenhouse' | 'tandonPenyimpanan' | 'resep' | 'penjadwalan' | 'sensor' | 'aktuator' | 'tandonBahan' | 'tandon'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -882,6 +898,72 @@ export namespace Prisma {
           count: {
             args: Prisma.GreenhouseCountArgs<ExtArgs>,
             result: $Utils.Optional<GreenhouseCountAggregateOutputType> | number
+          }
+        }
+      }
+      TandonPenyimpanan: {
+        payload: Prisma.$TandonPenyimpananPayload<ExtArgs>
+        fields: Prisma.TandonPenyimpananFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.TandonPenyimpananFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$TandonPenyimpananPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.TandonPenyimpananFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$TandonPenyimpananPayload>
+          }
+          findFirst: {
+            args: Prisma.TandonPenyimpananFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$TandonPenyimpananPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.TandonPenyimpananFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$TandonPenyimpananPayload>
+          }
+          findMany: {
+            args: Prisma.TandonPenyimpananFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$TandonPenyimpananPayload>[]
+          }
+          create: {
+            args: Prisma.TandonPenyimpananCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$TandonPenyimpananPayload>
+          }
+          createMany: {
+            args: Prisma.TandonPenyimpananCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.TandonPenyimpananDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$TandonPenyimpananPayload>
+          }
+          update: {
+            args: Prisma.TandonPenyimpananUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$TandonPenyimpananPayload>
+          }
+          deleteMany: {
+            args: Prisma.TandonPenyimpananDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.TandonPenyimpananUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.TandonPenyimpananUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$TandonPenyimpananPayload>
+          }
+          aggregate: {
+            args: Prisma.TandonPenyimpananAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateTandonPenyimpanan>
+          }
+          groupBy: {
+            args: Prisma.TandonPenyimpananGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<TandonPenyimpananGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.TandonPenyimpananCountArgs<ExtArgs>,
+            result: $Utils.Optional<TandonPenyimpananCountAggregateOutputType> | number
           }
         }
       }
@@ -1528,15 +1610,61 @@ export namespace Prisma {
 
 
   /**
+   * Count Type TandonPenyimpananCountOutputType
+   */
+
+  export type TandonPenyimpananCountOutputType = {
+    actuator: number
+    resep: number
+  }
+
+  export type TandonPenyimpananCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    actuator?: boolean | TandonPenyimpananCountOutputTypeCountActuatorArgs
+    resep?: boolean | TandonPenyimpananCountOutputTypeCountResepArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * TandonPenyimpananCountOutputType without action
+   */
+  export type TandonPenyimpananCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpananCountOutputType
+     */
+    select?: TandonPenyimpananCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * TandonPenyimpananCountOutputType without action
+   */
+  export type TandonPenyimpananCountOutputTypeCountActuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: AktuatorWhereInput
+  }
+
+
+  /**
+   * TandonPenyimpananCountOutputType without action
+   */
+  export type TandonPenyimpananCountOutputTypeCountResepArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: ResepWhereInput
+  }
+
+
+
+  /**
    * Count Type ResepCountOutputType
    */
 
   export type ResepCountOutputType = {
     penjadwalan: number
+    tandonPenyimpanan: number
   }
 
   export type ResepCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     penjadwalan?: boolean | ResepCountOutputTypeCountPenjadwalanArgs
+    tandonPenyimpanan?: boolean | ResepCountOutputTypeCountTandonPenyimpananArgs
   }
 
   // Custom InputTypes
@@ -1560,6 +1688,14 @@ export namespace Prisma {
   }
 
 
+  /**
+   * ResepCountOutputType without action
+   */
+  export type ResepCountOutputTypeCountTandonPenyimpananArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: TandonPenyimpananWhereInput
+  }
+
+
 
   /**
    * Count Type TandonBahanCountOutputType
@@ -1567,10 +1703,12 @@ export namespace Prisma {
 
   export type TandonBahanCountOutputType = {
     sensor: number
+    aktuator: number
   }
 
   export type TandonBahanCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     sensor?: boolean | TandonBahanCountOutputTypeCountSensorArgs
+    aktuator?: boolean | TandonBahanCountOutputTypeCountAktuatorArgs
   }
 
   // Custom InputTypes
@@ -1594,6 +1732,14 @@ export namespace Prisma {
   }
 
 
+  /**
+   * TandonBahanCountOutputType without action
+   */
+  export type TandonBahanCountOutputTypeCountAktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: AktuatorWhereInput
+  }
+
+
 
   /**
    * Count Type TandonCountOutputType
@@ -1604,6 +1750,7 @@ export namespace Prisma {
     aktuator: number
     tandonBahan: number
     penjadwalan: number
+    tandonPenyimpanan: number
   }
 
   export type TandonCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -1611,6 +1758,7 @@ export namespace Prisma {
     aktuator?: boolean | TandonCountOutputTypeCountAktuatorArgs
     tandonBahan?: boolean | TandonCountOutputTypeCountTandonBahanArgs
     penjadwalan?: boolean | TandonCountOutputTypeCountPenjadwalanArgs
+    tandonPenyimpanan?: boolean | TandonCountOutputTypeCountTandonPenyimpananArgs
   }
 
   // Custom InputTypes
@@ -1655,6 +1803,14 @@ export namespace Prisma {
    */
   export type TandonCountOutputTypeCountPenjadwalanArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: PenjadwalanWhereInput
+  }
+
+
+  /**
+   * TandonCountOutputType without action
+   */
+  export type TandonCountOutputTypeCountTandonPenyimpananArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: TandonPenyimpananWhereInput
   }
 
 
@@ -3725,6 +3881,1005 @@ export namespace Prisma {
 
 
   /**
+   * Model TandonPenyimpanan
+   */
+
+  export type AggregateTandonPenyimpanan = {
+    _count: TandonPenyimpananCountAggregateOutputType | null
+    _avg: TandonPenyimpananAvgAggregateOutputType | null
+    _sum: TandonPenyimpananSumAggregateOutputType | null
+    _min: TandonPenyimpananMinAggregateOutputType | null
+    _max: TandonPenyimpananMaxAggregateOutputType | null
+  }
+
+  export type TandonPenyimpananAvgAggregateOutputType = {
+    id: number | null
+    tandonId: number | null
+  }
+
+  export type TandonPenyimpananSumAggregateOutputType = {
+    id: number | null
+    tandonId: number | null
+  }
+
+  export type TandonPenyimpananMinAggregateOutputType = {
+    id: number | null
+    nama: string | null
+    distributable: boolean | null
+    tandonId: number | null
+  }
+
+  export type TandonPenyimpananMaxAggregateOutputType = {
+    id: number | null
+    nama: string | null
+    distributable: boolean | null
+    tandonId: number | null
+  }
+
+  export type TandonPenyimpananCountAggregateOutputType = {
+    id: number
+    nama: number
+    distributable: number
+    tandonId: number
+    _all: number
+  }
+
+
+  export type TandonPenyimpananAvgAggregateInputType = {
+    id?: true
+    tandonId?: true
+  }
+
+  export type TandonPenyimpananSumAggregateInputType = {
+    id?: true
+    tandonId?: true
+  }
+
+  export type TandonPenyimpananMinAggregateInputType = {
+    id?: true
+    nama?: true
+    distributable?: true
+    tandonId?: true
+  }
+
+  export type TandonPenyimpananMaxAggregateInputType = {
+    id?: true
+    nama?: true
+    distributable?: true
+    tandonId?: true
+  }
+
+  export type TandonPenyimpananCountAggregateInputType = {
+    id?: true
+    nama?: true
+    distributable?: true
+    tandonId?: true
+    _all?: true
+  }
+
+  export type TandonPenyimpananAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TandonPenyimpanan to aggregate.
+     */
+    where?: TandonPenyimpananWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TandonPenyimpanans to fetch.
+     */
+    orderBy?: TandonPenyimpananOrderByWithRelationInput | TandonPenyimpananOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: TandonPenyimpananWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TandonPenyimpanans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TandonPenyimpanans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned TandonPenyimpanans
+    **/
+    _count?: true | TandonPenyimpananCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: TandonPenyimpananAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: TandonPenyimpananSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: TandonPenyimpananMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: TandonPenyimpananMaxAggregateInputType
+  }
+
+  export type GetTandonPenyimpananAggregateType<T extends TandonPenyimpananAggregateArgs> = {
+        [P in keyof T & keyof AggregateTandonPenyimpanan]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTandonPenyimpanan[P]>
+      : GetScalarType<T[P], AggregateTandonPenyimpanan[P]>
+  }
+
+
+
+
+  export type TandonPenyimpananGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: TandonPenyimpananWhereInput
+    orderBy?: TandonPenyimpananOrderByWithAggregationInput | TandonPenyimpananOrderByWithAggregationInput[]
+    by: TandonPenyimpananScalarFieldEnum[] | TandonPenyimpananScalarFieldEnum
+    having?: TandonPenyimpananScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: TandonPenyimpananCountAggregateInputType | true
+    _avg?: TandonPenyimpananAvgAggregateInputType
+    _sum?: TandonPenyimpananSumAggregateInputType
+    _min?: TandonPenyimpananMinAggregateInputType
+    _max?: TandonPenyimpananMaxAggregateInputType
+  }
+
+  export type TandonPenyimpananGroupByOutputType = {
+    id: number
+    nama: string
+    distributable: boolean
+    tandonId: number
+    _count: TandonPenyimpananCountAggregateOutputType | null
+    _avg: TandonPenyimpananAvgAggregateOutputType | null
+    _sum: TandonPenyimpananSumAggregateOutputType | null
+    _min: TandonPenyimpananMinAggregateOutputType | null
+    _max: TandonPenyimpananMaxAggregateOutputType | null
+  }
+
+  type GetTandonPenyimpananGroupByPayload<T extends TandonPenyimpananGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<TandonPenyimpananGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof TandonPenyimpananGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], TandonPenyimpananGroupByOutputType[P]>
+            : GetScalarType<T[P], TandonPenyimpananGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type TandonPenyimpananSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nama?: boolean
+    distributable?: boolean
+    tandonId?: boolean
+    tandon?: boolean | TandonDefaultArgs<ExtArgs>
+    actuator?: boolean | TandonPenyimpanan$actuatorArgs<ExtArgs>
+    resep?: boolean | TandonPenyimpanan$resepArgs<ExtArgs>
+    _count?: boolean | TandonPenyimpananCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["tandonPenyimpanan"]>
+
+  export type TandonPenyimpananSelectScalar = {
+    id?: boolean
+    nama?: boolean
+    distributable?: boolean
+    tandonId?: boolean
+  }
+
+  export type TandonPenyimpananInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    tandon?: boolean | TandonDefaultArgs<ExtArgs>
+    actuator?: boolean | TandonPenyimpanan$actuatorArgs<ExtArgs>
+    resep?: boolean | TandonPenyimpanan$resepArgs<ExtArgs>
+    _count?: boolean | TandonPenyimpananCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $TandonPenyimpananPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    name: "TandonPenyimpanan"
+    objects: {
+      tandon: Prisma.$TandonPayload<ExtArgs>
+      actuator: Prisma.$AktuatorPayload<ExtArgs>[]
+      resep: Prisma.$ResepPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetResult<{
+      id: number
+      nama: string
+      distributable: boolean
+      tandonId: number
+    }, ExtArgs["result"]["tandonPenyimpanan"]>
+    composites: {}
+  }
+
+
+  type TandonPenyimpananGetPayload<S extends boolean | null | undefined | TandonPenyimpananDefaultArgs> = $Result.GetResult<Prisma.$TandonPenyimpananPayload, S>
+
+  type TandonPenyimpananCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
+    Omit<TandonPenyimpananFindManyArgs, 'select' | 'include'> & {
+      select?: TandonPenyimpananCountAggregateInputType | true
+    }
+
+  export interface TandonPenyimpananDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['TandonPenyimpanan'], meta: { name: 'TandonPenyimpanan' } }
+    /**
+     * Find zero or one TandonPenyimpanan that matches the filter.
+     * @param {TandonPenyimpananFindUniqueArgs} args - Arguments to find a TandonPenyimpanan
+     * @example
+     * // Get one TandonPenyimpanan
+     * const tandonPenyimpanan = await prisma.tandonPenyimpanan.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends TandonPenyimpananFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, TandonPenyimpananFindUniqueArgs<ExtArgs>>
+    ): Prisma__TandonPenyimpananClient<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one TandonPenyimpanan that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {TandonPenyimpananFindUniqueOrThrowArgs} args - Arguments to find a TandonPenyimpanan
+     * @example
+     * // Get one TandonPenyimpanan
+     * const tandonPenyimpanan = await prisma.tandonPenyimpanan.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends TandonPenyimpananFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, TandonPenyimpananFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__TandonPenyimpananClient<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first TandonPenyimpanan that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TandonPenyimpananFindFirstArgs} args - Arguments to find a TandonPenyimpanan
+     * @example
+     * // Get one TandonPenyimpanan
+     * const tandonPenyimpanan = await prisma.tandonPenyimpanan.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends TandonPenyimpananFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, TandonPenyimpananFindFirstArgs<ExtArgs>>
+    ): Prisma__TandonPenyimpananClient<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first TandonPenyimpanan that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TandonPenyimpananFindFirstOrThrowArgs} args - Arguments to find a TandonPenyimpanan
+     * @example
+     * // Get one TandonPenyimpanan
+     * const tandonPenyimpanan = await prisma.tandonPenyimpanan.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends TandonPenyimpananFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, TandonPenyimpananFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__TandonPenyimpananClient<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more TandonPenyimpanans that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TandonPenyimpananFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all TandonPenyimpanans
+     * const tandonPenyimpanans = await prisma.tandonPenyimpanan.findMany()
+     * 
+     * // Get first 10 TandonPenyimpanans
+     * const tandonPenyimpanans = await prisma.tandonPenyimpanan.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const tandonPenyimpananWithIdOnly = await prisma.tandonPenyimpanan.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends TandonPenyimpananFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, TandonPenyimpananFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a TandonPenyimpanan.
+     * @param {TandonPenyimpananCreateArgs} args - Arguments to create a TandonPenyimpanan.
+     * @example
+     * // Create one TandonPenyimpanan
+     * const TandonPenyimpanan = await prisma.tandonPenyimpanan.create({
+     *   data: {
+     *     // ... data to create a TandonPenyimpanan
+     *   }
+     * })
+     * 
+    **/
+    create<T extends TandonPenyimpananCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, TandonPenyimpananCreateArgs<ExtArgs>>
+    ): Prisma__TandonPenyimpananClient<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many TandonPenyimpanans.
+     *     @param {TandonPenyimpananCreateManyArgs} args - Arguments to create many TandonPenyimpanans.
+     *     @example
+     *     // Create many TandonPenyimpanans
+     *     const tandonPenyimpanan = await prisma.tandonPenyimpanan.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends TandonPenyimpananCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, TandonPenyimpananCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a TandonPenyimpanan.
+     * @param {TandonPenyimpananDeleteArgs} args - Arguments to delete one TandonPenyimpanan.
+     * @example
+     * // Delete one TandonPenyimpanan
+     * const TandonPenyimpanan = await prisma.tandonPenyimpanan.delete({
+     *   where: {
+     *     // ... filter to delete one TandonPenyimpanan
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends TandonPenyimpananDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, TandonPenyimpananDeleteArgs<ExtArgs>>
+    ): Prisma__TandonPenyimpananClient<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one TandonPenyimpanan.
+     * @param {TandonPenyimpananUpdateArgs} args - Arguments to update one TandonPenyimpanan.
+     * @example
+     * // Update one TandonPenyimpanan
+     * const tandonPenyimpanan = await prisma.tandonPenyimpanan.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends TandonPenyimpananUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, TandonPenyimpananUpdateArgs<ExtArgs>>
+    ): Prisma__TandonPenyimpananClient<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more TandonPenyimpanans.
+     * @param {TandonPenyimpananDeleteManyArgs} args - Arguments to filter TandonPenyimpanans to delete.
+     * @example
+     * // Delete a few TandonPenyimpanans
+     * const { count } = await prisma.tandonPenyimpanan.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends TandonPenyimpananDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, TandonPenyimpananDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more TandonPenyimpanans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TandonPenyimpananUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many TandonPenyimpanans
+     * const tandonPenyimpanan = await prisma.tandonPenyimpanan.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends TandonPenyimpananUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, TandonPenyimpananUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one TandonPenyimpanan.
+     * @param {TandonPenyimpananUpsertArgs} args - Arguments to update or create a TandonPenyimpanan.
+     * @example
+     * // Update or create a TandonPenyimpanan
+     * const tandonPenyimpanan = await prisma.tandonPenyimpanan.upsert({
+     *   create: {
+     *     // ... data to create a TandonPenyimpanan
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the TandonPenyimpanan we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends TandonPenyimpananUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, TandonPenyimpananUpsertArgs<ExtArgs>>
+    ): Prisma__TandonPenyimpananClient<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of TandonPenyimpanans.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TandonPenyimpananCountArgs} args - Arguments to filter TandonPenyimpanans to count.
+     * @example
+     * // Count the number of TandonPenyimpanans
+     * const count = await prisma.tandonPenyimpanan.count({
+     *   where: {
+     *     // ... the filter for the TandonPenyimpanans we want to count
+     *   }
+     * })
+    **/
+    count<T extends TandonPenyimpananCountArgs>(
+      args?: Subset<T, TandonPenyimpananCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], TandonPenyimpananCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a TandonPenyimpanan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TandonPenyimpananAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends TandonPenyimpananAggregateArgs>(args: Subset<T, TandonPenyimpananAggregateArgs>): Prisma.PrismaPromise<GetTandonPenyimpananAggregateType<T>>
+
+    /**
+     * Group by TandonPenyimpanan.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {TandonPenyimpananGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends TandonPenyimpananGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: TandonPenyimpananGroupByArgs['orderBy'] }
+        : { orderBy?: TandonPenyimpananGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, TandonPenyimpananGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetTandonPenyimpananGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the TandonPenyimpanan model
+   */
+  readonly fields: TandonPenyimpananFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for TandonPenyimpanan.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__TandonPenyimpananClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    tandon<T extends TandonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TandonDefaultArgs<ExtArgs>>): Prisma__TandonClient<$Result.GetResult<Prisma.$TandonPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+
+    actuator<T extends TandonPenyimpanan$actuatorArgs<ExtArgs> = {}>(args?: Subset<T, TandonPenyimpanan$actuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    resep<T extends TandonPenyimpanan$resepArgs<ExtArgs> = {}>(args?: Subset<T, TandonPenyimpanan$resepArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResepPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the TandonPenyimpanan model
+   */ 
+  interface TandonPenyimpananFieldRefs {
+    readonly id: FieldRef<"TandonPenyimpanan", 'Int'>
+    readonly nama: FieldRef<"TandonPenyimpanan", 'String'>
+    readonly distributable: FieldRef<"TandonPenyimpanan", 'Boolean'>
+    readonly tandonId: FieldRef<"TandonPenyimpanan", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * TandonPenyimpanan findUnique
+   */
+  export type TandonPenyimpananFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    /**
+     * Filter, which TandonPenyimpanan to fetch.
+     */
+    where: TandonPenyimpananWhereUniqueInput
+  }
+
+
+  /**
+   * TandonPenyimpanan findUniqueOrThrow
+   */
+  export type TandonPenyimpananFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    /**
+     * Filter, which TandonPenyimpanan to fetch.
+     */
+    where: TandonPenyimpananWhereUniqueInput
+  }
+
+
+  /**
+   * TandonPenyimpanan findFirst
+   */
+  export type TandonPenyimpananFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    /**
+     * Filter, which TandonPenyimpanan to fetch.
+     */
+    where?: TandonPenyimpananWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TandonPenyimpanans to fetch.
+     */
+    orderBy?: TandonPenyimpananOrderByWithRelationInput | TandonPenyimpananOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TandonPenyimpanans.
+     */
+    cursor?: TandonPenyimpananWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TandonPenyimpanans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TandonPenyimpanans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TandonPenyimpanans.
+     */
+    distinct?: TandonPenyimpananScalarFieldEnum | TandonPenyimpananScalarFieldEnum[]
+  }
+
+
+  /**
+   * TandonPenyimpanan findFirstOrThrow
+   */
+  export type TandonPenyimpananFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    /**
+     * Filter, which TandonPenyimpanan to fetch.
+     */
+    where?: TandonPenyimpananWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TandonPenyimpanans to fetch.
+     */
+    orderBy?: TandonPenyimpananOrderByWithRelationInput | TandonPenyimpananOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for TandonPenyimpanans.
+     */
+    cursor?: TandonPenyimpananWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TandonPenyimpanans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TandonPenyimpanans.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of TandonPenyimpanans.
+     */
+    distinct?: TandonPenyimpananScalarFieldEnum | TandonPenyimpananScalarFieldEnum[]
+  }
+
+
+  /**
+   * TandonPenyimpanan findMany
+   */
+  export type TandonPenyimpananFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    /**
+     * Filter, which TandonPenyimpanans to fetch.
+     */
+    where?: TandonPenyimpananWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of TandonPenyimpanans to fetch.
+     */
+    orderBy?: TandonPenyimpananOrderByWithRelationInput | TandonPenyimpananOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing TandonPenyimpanans.
+     */
+    cursor?: TandonPenyimpananWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` TandonPenyimpanans from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` TandonPenyimpanans.
+     */
+    skip?: number
+    distinct?: TandonPenyimpananScalarFieldEnum | TandonPenyimpananScalarFieldEnum[]
+  }
+
+
+  /**
+   * TandonPenyimpanan create
+   */
+  export type TandonPenyimpananCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    /**
+     * The data needed to create a TandonPenyimpanan.
+     */
+    data: XOR<TandonPenyimpananCreateInput, TandonPenyimpananUncheckedCreateInput>
+  }
+
+
+  /**
+   * TandonPenyimpanan createMany
+   */
+  export type TandonPenyimpananCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many TandonPenyimpanans.
+     */
+    data: TandonPenyimpananCreateManyInput | TandonPenyimpananCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * TandonPenyimpanan update
+   */
+  export type TandonPenyimpananUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    /**
+     * The data needed to update a TandonPenyimpanan.
+     */
+    data: XOR<TandonPenyimpananUpdateInput, TandonPenyimpananUncheckedUpdateInput>
+    /**
+     * Choose, which TandonPenyimpanan to update.
+     */
+    where: TandonPenyimpananWhereUniqueInput
+  }
+
+
+  /**
+   * TandonPenyimpanan updateMany
+   */
+  export type TandonPenyimpananUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update TandonPenyimpanans.
+     */
+    data: XOR<TandonPenyimpananUpdateManyMutationInput, TandonPenyimpananUncheckedUpdateManyInput>
+    /**
+     * Filter which TandonPenyimpanans to update
+     */
+    where?: TandonPenyimpananWhereInput
+  }
+
+
+  /**
+   * TandonPenyimpanan upsert
+   */
+  export type TandonPenyimpananUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    /**
+     * The filter to search for the TandonPenyimpanan to update in case it exists.
+     */
+    where: TandonPenyimpananWhereUniqueInput
+    /**
+     * In case the TandonPenyimpanan found by the `where` argument doesn't exist, create a new TandonPenyimpanan with this data.
+     */
+    create: XOR<TandonPenyimpananCreateInput, TandonPenyimpananUncheckedCreateInput>
+    /**
+     * In case the TandonPenyimpanan was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<TandonPenyimpananUpdateInput, TandonPenyimpananUncheckedUpdateInput>
+  }
+
+
+  /**
+   * TandonPenyimpanan delete
+   */
+  export type TandonPenyimpananDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    /**
+     * Filter which TandonPenyimpanan to delete.
+     */
+    where: TandonPenyimpananWhereUniqueInput
+  }
+
+
+  /**
+   * TandonPenyimpanan deleteMany
+   */
+  export type TandonPenyimpananDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which TandonPenyimpanans to delete
+     */
+    where?: TandonPenyimpananWhereInput
+  }
+
+
+  /**
+   * TandonPenyimpanan.actuator
+   */
+  export type TandonPenyimpanan$actuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aktuator
+     */
+    select?: AktuatorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AktuatorInclude<ExtArgs> | null
+    where?: AktuatorWhereInput
+    orderBy?: AktuatorOrderByWithRelationInput | AktuatorOrderByWithRelationInput[]
+    cursor?: AktuatorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AktuatorScalarFieldEnum | AktuatorScalarFieldEnum[]
+  }
+
+
+  /**
+   * TandonPenyimpanan.resep
+   */
+  export type TandonPenyimpanan$resepArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resep
+     */
+    select?: ResepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ResepInclude<ExtArgs> | null
+    where?: ResepWhereInput
+    orderBy?: ResepOrderByWithRelationInput | ResepOrderByWithRelationInput[]
+    cursor?: ResepWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ResepScalarFieldEnum | ResepScalarFieldEnum[]
+  }
+
+
+  /**
+   * TandonPenyimpanan without action
+   */
+  export type TandonPenyimpananDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+  }
+
+
+
+  /**
    * Model Resep
    */
 
@@ -3740,22 +4895,34 @@ export namespace Prisma {
     id: number | null
     ppm: number | null
     ph: number | null
+    volume: number | null
     interval: number | null
+    nutrisiA: number | null
+    nutrisiB: number | null
+    air: number | null
   }
 
   export type ResepSumAggregateOutputType = {
     id: number | null
     ppm: number | null
     ph: number | null
+    volume: number | null
     interval: number | null
+    nutrisiA: number | null
+    nutrisiB: number | null
+    air: number | null
   }
 
   export type ResepMinAggregateOutputType = {
     id: number | null
     ppm: number | null
     ph: number | null
+    volume: number | null
     nama: string | null
     interval: number | null
+    nutrisiA: number | null
+    nutrisiB: number | null
+    air: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -3764,8 +4931,12 @@ export namespace Prisma {
     id: number | null
     ppm: number | null
     ph: number | null
+    volume: number | null
     nama: string | null
     interval: number | null
+    nutrisiA: number | null
+    nutrisiB: number | null
+    air: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -3774,8 +4945,12 @@ export namespace Prisma {
     id: number
     ppm: number
     ph: number
+    volume: number
     nama: number
     interval: number
+    nutrisiA: number
+    nutrisiB: number
+    air: number
     created_at: number
     updated_at: number
     _all: number
@@ -3786,22 +4961,34 @@ export namespace Prisma {
     id?: true
     ppm?: true
     ph?: true
+    volume?: true
     interval?: true
+    nutrisiA?: true
+    nutrisiB?: true
+    air?: true
   }
 
   export type ResepSumAggregateInputType = {
     id?: true
     ppm?: true
     ph?: true
+    volume?: true
     interval?: true
+    nutrisiA?: true
+    nutrisiB?: true
+    air?: true
   }
 
   export type ResepMinAggregateInputType = {
     id?: true
     ppm?: true
     ph?: true
+    volume?: true
     nama?: true
     interval?: true
+    nutrisiA?: true
+    nutrisiB?: true
+    air?: true
     created_at?: true
     updated_at?: true
   }
@@ -3810,8 +4997,12 @@ export namespace Prisma {
     id?: true
     ppm?: true
     ph?: true
+    volume?: true
     nama?: true
     interval?: true
+    nutrisiA?: true
+    nutrisiB?: true
+    air?: true
     created_at?: true
     updated_at?: true
   }
@@ -3820,8 +5011,12 @@ export namespace Prisma {
     id?: true
     ppm?: true
     ph?: true
+    volume?: true
     nama?: true
     interval?: true
+    nutrisiA?: true
+    nutrisiB?: true
+    air?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -3915,10 +5110,14 @@ export namespace Prisma {
 
   export type ResepGroupByOutputType = {
     id: number
-    ppm: number
-    ph: number
+    ppm: number | null
+    ph: number | null
+    volume: number | null
     nama: string
-    interval: number
+    interval: number | null
+    nutrisiA: number | null
+    nutrisiB: number | null
+    air: number | null
     created_at: Date
     updated_at: Date | null
     _count: ResepCountAggregateOutputType | null
@@ -3946,11 +5145,16 @@ export namespace Prisma {
     id?: boolean
     ppm?: boolean
     ph?: boolean
+    volume?: boolean
     nama?: boolean
     interval?: boolean
+    nutrisiA?: boolean
+    nutrisiB?: boolean
+    air?: boolean
     created_at?: boolean
     updated_at?: boolean
     penjadwalan?: boolean | Resep$penjadwalanArgs<ExtArgs>
+    tandonPenyimpanan?: boolean | Resep$tandonPenyimpananArgs<ExtArgs>
     _count?: boolean | ResepCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resep"]>
 
@@ -3958,14 +5162,19 @@ export namespace Prisma {
     id?: boolean
     ppm?: boolean
     ph?: boolean
+    volume?: boolean
     nama?: boolean
     interval?: boolean
+    nutrisiA?: boolean
+    nutrisiB?: boolean
+    air?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
   export type ResepInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     penjadwalan?: boolean | Resep$penjadwalanArgs<ExtArgs>
+    tandonPenyimpanan?: boolean | Resep$tandonPenyimpananArgs<ExtArgs>
     _count?: boolean | ResepCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3974,13 +5183,18 @@ export namespace Prisma {
     name: "Resep"
     objects: {
       penjadwalan: Prisma.$PenjadwalanPayload<ExtArgs>[]
+      tandonPenyimpanan: Prisma.$TandonPenyimpananPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetResult<{
       id: number
-      ppm: number
-      ph: number
+      ppm: number | null
+      ph: number | null
+      volume: number | null
       nama: string
-      interval: number
+      interval: number | null
+      nutrisiA: number | null
+      nutrisiB: number | null
+      air: number | null
       created_at: Date
       updated_at: Date | null
     }, ExtArgs["result"]["resep"]>
@@ -4350,6 +5564,8 @@ export namespace Prisma {
 
     penjadwalan<T extends Resep$penjadwalanArgs<ExtArgs> = {}>(args?: Subset<T, Resep$penjadwalanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PenjadwalanPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    tandonPenyimpanan<T extends Resep$tandonPenyimpananArgs<ExtArgs> = {}>(args?: Subset<T, Resep$tandonPenyimpananArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4381,8 +5597,12 @@ export namespace Prisma {
     readonly id: FieldRef<"Resep", 'Int'>
     readonly ppm: FieldRef<"Resep", 'Int'>
     readonly ph: FieldRef<"Resep", 'Float'>
+    readonly volume: FieldRef<"Resep", 'Float'>
     readonly nama: FieldRef<"Resep", 'String'>
     readonly interval: FieldRef<"Resep", 'Int'>
+    readonly nutrisiA: FieldRef<"Resep", 'Float'>
+    readonly nutrisiB: FieldRef<"Resep", 'Float'>
+    readonly air: FieldRef<"Resep", 'Float'>
     readonly created_at: FieldRef<"Resep", 'DateTime'>
     readonly updated_at: FieldRef<"Resep", 'DateTime'>
   }
@@ -4714,6 +5934,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: PenjadwalanScalarFieldEnum | PenjadwalanScalarFieldEnum[]
+  }
+
+
+  /**
+   * Resep.tandonPenyimpanan
+   */
+  export type Resep$tandonPenyimpananArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    where?: TandonPenyimpananWhereInput
+    orderBy?: TandonPenyimpananOrderByWithRelationInput | TandonPenyimpananOrderByWithRelationInput[]
+    cursor?: TandonPenyimpananWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TandonPenyimpananScalarFieldEnum | TandonPenyimpananScalarFieldEnum[]
   }
 
 
@@ -5767,6 +7008,7 @@ export namespace Prisma {
     unit_measurement: string | null
     status: boolean | null
     nilai: number | null
+    icon: string | null
     tandonId: number | null
     tandonBahanId: number | null
     greenhouseId: number | null
@@ -5782,6 +7024,7 @@ export namespace Prisma {
     unit_measurement: string | null
     status: boolean | null
     nilai: number | null
+    icon: string | null
     tandonId: number | null
     tandonBahanId: number | null
     greenhouseId: number | null
@@ -5797,6 +7040,7 @@ export namespace Prisma {
     unit_measurement: number
     status: number
     nilai: number
+    icon: number
     tandonId: number
     tandonBahanId: number
     greenhouseId: number
@@ -5830,6 +7074,7 @@ export namespace Prisma {
     unit_measurement?: true
     status?: true
     nilai?: true
+    icon?: true
     tandonId?: true
     tandonBahanId?: true
     greenhouseId?: true
@@ -5845,6 +7090,7 @@ export namespace Prisma {
     unit_measurement?: true
     status?: true
     nilai?: true
+    icon?: true
     tandonId?: true
     tandonBahanId?: true
     greenhouseId?: true
@@ -5860,6 +7106,7 @@ export namespace Prisma {
     unit_measurement?: true
     status?: true
     nilai?: true
+    icon?: true
     tandonId?: true
     tandonBahanId?: true
     greenhouseId?: true
@@ -5962,6 +7209,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon: string | null
     tandonId: number | null
     tandonBahanId: number | null
     greenhouseId: number | null
@@ -5996,6 +7244,7 @@ export namespace Prisma {
     unit_measurement?: boolean
     status?: boolean
     nilai?: boolean
+    icon?: boolean
     tandonId?: boolean
     tandonBahanId?: boolean
     greenhouseId?: boolean
@@ -6014,6 +7263,7 @@ export namespace Prisma {
     unit_measurement?: boolean
     status?: boolean
     nilai?: boolean
+    icon?: boolean
     tandonId?: boolean
     tandonBahanId?: boolean
     greenhouseId?: boolean
@@ -6043,6 +7293,7 @@ export namespace Prisma {
       unit_measurement: string
       status: boolean
       nilai: number
+      icon: string | null
       tandonId: number | null
       tandonBahanId: number | null
       greenhouseId: number | null
@@ -6454,6 +7705,7 @@ export namespace Prisma {
     readonly unit_measurement: FieldRef<"Sensor", 'String'>
     readonly status: FieldRef<"Sensor", 'Boolean'>
     readonly nilai: FieldRef<"Sensor", 'Int'>
+    readonly icon: FieldRef<"Sensor", 'String'>
     readonly tandonId: FieldRef<"Sensor", 'Int'>
     readonly tandonBahanId: FieldRef<"Sensor", 'Int'>
     readonly greenhouseId: FieldRef<"Sensor", 'Int'>
@@ -6848,14 +8100,20 @@ export namespace Prisma {
 
   export type AktuatorAvgAggregateOutputType = {
     id: number | null
+    portPlc: number | null
     tandonId: number | null
     greenhouseId: number | null
+    tandonPenyimpananId: number | null
+    tandonBahanId: number | null
   }
 
   export type AktuatorSumAggregateOutputType = {
     id: number | null
+    portPlc: number | null
     tandonId: number | null
     greenhouseId: number | null
+    tandonPenyimpananId: number | null
+    tandonBahanId: number | null
   }
 
   export type AktuatorMinAggregateOutputType = {
@@ -6865,8 +8123,11 @@ export namespace Prisma {
     icon: string | null
     color: string | null
     status: boolean | null
+    portPlc: number | null
     tandonId: number | null
     greenhouseId: number | null
+    tandonPenyimpananId: number | null
+    tandonBahanId: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -6878,8 +8139,11 @@ export namespace Prisma {
     icon: string | null
     color: string | null
     status: boolean | null
+    portPlc: number | null
     tandonId: number | null
     greenhouseId: number | null
+    tandonPenyimpananId: number | null
+    tandonBahanId: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -6891,8 +8155,11 @@ export namespace Prisma {
     icon: number
     color: number
     status: number
+    portPlc: number
     tandonId: number
     greenhouseId: number
+    tandonPenyimpananId: number
+    tandonBahanId: number
     created_at: number
     updated_at: number
     _all: number
@@ -6901,14 +8168,20 @@ export namespace Prisma {
 
   export type AktuatorAvgAggregateInputType = {
     id?: true
+    portPlc?: true
     tandonId?: true
     greenhouseId?: true
+    tandonPenyimpananId?: true
+    tandonBahanId?: true
   }
 
   export type AktuatorSumAggregateInputType = {
     id?: true
+    portPlc?: true
     tandonId?: true
     greenhouseId?: true
+    tandonPenyimpananId?: true
+    tandonBahanId?: true
   }
 
   export type AktuatorMinAggregateInputType = {
@@ -6918,8 +8191,11 @@ export namespace Prisma {
     icon?: true
     color?: true
     status?: true
+    portPlc?: true
     tandonId?: true
     greenhouseId?: true
+    tandonPenyimpananId?: true
+    tandonBahanId?: true
     created_at?: true
     updated_at?: true
   }
@@ -6931,8 +8207,11 @@ export namespace Prisma {
     icon?: true
     color?: true
     status?: true
+    portPlc?: true
     tandonId?: true
     greenhouseId?: true
+    tandonPenyimpananId?: true
+    tandonBahanId?: true
     created_at?: true
     updated_at?: true
   }
@@ -6944,8 +8223,11 @@ export namespace Prisma {
     icon?: true
     color?: true
     status?: true
+    portPlc?: true
     tandonId?: true
     greenhouseId?: true
+    tandonPenyimpananId?: true
+    tandonBahanId?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -7044,8 +8326,11 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    tandonId: number
-    greenhouseId: number
+    portPlc: number
+    tandonId: number | null
+    greenhouseId: number | null
+    tandonPenyimpananId: number | null
+    tandonBahanId: number | null
     created_at: Date
     updated_at: Date | null
     _count: AktuatorCountAggregateOutputType | null
@@ -7076,12 +8361,17 @@ export namespace Prisma {
     icon?: boolean
     color?: boolean
     status?: boolean
+    portPlc?: boolean
     tandonId?: boolean
     greenhouseId?: boolean
+    tandonPenyimpananId?: boolean
+    tandonBahanId?: boolean
     created_at?: boolean
     updated_at?: boolean
-    tandon?: boolean | TandonDefaultArgs<ExtArgs>
-    greenhouse?: boolean | GreenhouseDefaultArgs<ExtArgs>
+    tandon?: boolean | Aktuator$tandonArgs<ExtArgs>
+    greenhouse?: boolean | Aktuator$greenhouseArgs<ExtArgs>
+    tandonPenyimpanan?: boolean | Aktuator$tandonPenyimpananArgs<ExtArgs>
+    tandonBahan?: boolean | Aktuator$tandonBahanArgs<ExtArgs>
   }, ExtArgs["result"]["aktuator"]>
 
   export type AktuatorSelectScalar = {
@@ -7091,23 +8381,30 @@ export namespace Prisma {
     icon?: boolean
     color?: boolean
     status?: boolean
+    portPlc?: boolean
     tandonId?: boolean
     greenhouseId?: boolean
+    tandonPenyimpananId?: boolean
+    tandonBahanId?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
 
   export type AktuatorInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    tandon?: boolean | TandonDefaultArgs<ExtArgs>
-    greenhouse?: boolean | GreenhouseDefaultArgs<ExtArgs>
+    tandon?: boolean | Aktuator$tandonArgs<ExtArgs>
+    greenhouse?: boolean | Aktuator$greenhouseArgs<ExtArgs>
+    tandonPenyimpanan?: boolean | Aktuator$tandonPenyimpananArgs<ExtArgs>
+    tandonBahan?: boolean | Aktuator$tandonBahanArgs<ExtArgs>
   }
 
 
   export type $AktuatorPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     name: "Aktuator"
     objects: {
-      tandon: Prisma.$TandonPayload<ExtArgs>
-      greenhouse: Prisma.$GreenhousePayload<ExtArgs>
+      tandon: Prisma.$TandonPayload<ExtArgs> | null
+      greenhouse: Prisma.$GreenhousePayload<ExtArgs> | null
+      tandonPenyimpanan: Prisma.$TandonPenyimpananPayload<ExtArgs> | null
+      tandonBahan: Prisma.$TandonBahanPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetResult<{
       id: number
@@ -7116,8 +8413,11 @@ export namespace Prisma {
       icon: string
       color: string
       status: boolean
-      tandonId: number
-      greenhouseId: number
+      portPlc: number
+      tandonId: number | null
+      greenhouseId: number | null
+      tandonPenyimpananId: number | null
+      tandonBahanId: number | null
       created_at: Date
       updated_at: Date | null
     }, ExtArgs["result"]["aktuator"]>
@@ -7485,9 +8785,13 @@ export namespace Prisma {
   export interface Prisma__AktuatorClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: 'PrismaPromise';
 
-    tandon<T extends TandonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TandonDefaultArgs<ExtArgs>>): Prisma__TandonClient<$Result.GetResult<Prisma.$TandonPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    tandon<T extends Aktuator$tandonArgs<ExtArgs> = {}>(args?: Subset<T, Aktuator$tandonArgs<ExtArgs>>): Prisma__TandonClient<$Result.GetResult<Prisma.$TandonPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
-    greenhouse<T extends GreenhouseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, GreenhouseDefaultArgs<ExtArgs>>): Prisma__GreenhouseClient<$Result.GetResult<Prisma.$GreenhousePayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
+    greenhouse<T extends Aktuator$greenhouseArgs<ExtArgs> = {}>(args?: Subset<T, Aktuator$greenhouseArgs<ExtArgs>>): Prisma__GreenhouseClient<$Result.GetResult<Prisma.$GreenhousePayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    tandonPenyimpanan<T extends Aktuator$tandonPenyimpananArgs<ExtArgs> = {}>(args?: Subset<T, Aktuator$tandonPenyimpananArgs<ExtArgs>>): Prisma__TandonPenyimpananClient<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
+
+    tandonBahan<T extends Aktuator$tandonBahanArgs<ExtArgs> = {}>(args?: Subset<T, Aktuator$tandonBahanArgs<ExtArgs>>): Prisma__TandonBahanClient<$Result.GetResult<Prisma.$TandonBahanPayload<ExtArgs>, T, 'findUniqueOrThrow'> | null, null, ExtArgs>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7523,8 +8827,11 @@ export namespace Prisma {
     readonly icon: FieldRef<"Aktuator", 'String'>
     readonly color: FieldRef<"Aktuator", 'String'>
     readonly status: FieldRef<"Aktuator", 'Boolean'>
+    readonly portPlc: FieldRef<"Aktuator", 'Int'>
     readonly tandonId: FieldRef<"Aktuator", 'Int'>
     readonly greenhouseId: FieldRef<"Aktuator", 'Int'>
+    readonly tandonPenyimpananId: FieldRef<"Aktuator", 'Int'>
+    readonly tandonBahanId: FieldRef<"Aktuator", 'Int'>
     readonly created_at: FieldRef<"Aktuator", 'DateTime'>
     readonly updated_at: FieldRef<"Aktuator", 'DateTime'>
   }
@@ -7839,6 +9146,70 @@ export namespace Prisma {
 
 
   /**
+   * Aktuator.tandon
+   */
+  export type Aktuator$tandonArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Tandon
+     */
+    select?: TandonSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonInclude<ExtArgs> | null
+    where?: TandonWhereInput
+  }
+
+
+  /**
+   * Aktuator.greenhouse
+   */
+  export type Aktuator$greenhouseArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Greenhouse
+     */
+    select?: GreenhouseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GreenhouseInclude<ExtArgs> | null
+    where?: GreenhouseWhereInput
+  }
+
+
+  /**
+   * Aktuator.tandonPenyimpanan
+   */
+  export type Aktuator$tandonPenyimpananArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    where?: TandonPenyimpananWhereInput
+  }
+
+
+  /**
+   * Aktuator.tandonBahan
+   */
+  export type Aktuator$tandonBahanArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonBahan
+     */
+    select?: TandonBahanSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonBahanInclude<ExtArgs> | null
+    where?: TandonBahanWhereInput
+  }
+
+
+  /**
    * Aktuator without action
    */
   export type AktuatorDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -8057,6 +9428,7 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     sensor?: boolean | TandonBahan$sensorArgs<ExtArgs>
+    aktuator?: boolean | TandonBahan$aktuatorArgs<ExtArgs>
     tandon?: boolean | TandonDefaultArgs<ExtArgs>
     _count?: boolean | TandonBahanCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tandonBahan"]>
@@ -8071,6 +9443,7 @@ export namespace Prisma {
 
   export type TandonBahanInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     sensor?: boolean | TandonBahan$sensorArgs<ExtArgs>
+    aktuator?: boolean | TandonBahan$aktuatorArgs<ExtArgs>
     tandon?: boolean | TandonDefaultArgs<ExtArgs>
     _count?: boolean | TandonBahanCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -8080,6 +9453,7 @@ export namespace Prisma {
     name: "TandonBahan"
     objects: {
       sensor: Prisma.$SensorPayload<ExtArgs>[]
+      aktuator: Prisma.$AktuatorPayload<ExtArgs>[]
       tandon: Prisma.$TandonPayload<ExtArgs>
     }
     scalars: $Extensions.GetResult<{
@@ -8455,6 +9829,8 @@ export namespace Prisma {
 
     sensor<T extends TandonBahan$sensorArgs<ExtArgs> = {}>(args?: Subset<T, TandonBahan$sensorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, 'findMany'> | Null>;
 
+    aktuator<T extends TandonBahan$aktuatorArgs<ExtArgs> = {}>(args?: Subset<T, TandonBahan$aktuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
+
     tandon<T extends TandonDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TandonDefaultArgs<ExtArgs>>): Prisma__TandonClient<$Result.GetResult<Prisma.$TandonPayload<ExtArgs>, T, 'findUniqueOrThrow'> | Null, Null, ExtArgs>;
 
     /**
@@ -8823,6 +10199,27 @@ export namespace Prisma {
 
 
   /**
+   * TandonBahan.aktuator
+   */
+  export type TandonBahan$aktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aktuator
+     */
+    select?: AktuatorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AktuatorInclude<ExtArgs> | null
+    where?: AktuatorWhereInput
+    orderBy?: AktuatorOrderByWithRelationInput | AktuatorOrderByWithRelationInput[]
+    cursor?: AktuatorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AktuatorScalarFieldEnum | AktuatorScalarFieldEnum[]
+  }
+
+
+  /**
    * TandonBahan without action
    */
   export type TandonBahanDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -9061,6 +10458,7 @@ export namespace Prisma {
     aktuator?: boolean | Tandon$aktuatorArgs<ExtArgs>
     tandonBahan?: boolean | Tandon$tandonBahanArgs<ExtArgs>
     penjadwalan?: boolean | Tandon$penjadwalanArgs<ExtArgs>
+    tandonPenyimpanan?: boolean | Tandon$tandonPenyimpananArgs<ExtArgs>
     _count?: boolean | TandonCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["tandon"]>
 
@@ -9080,6 +10478,7 @@ export namespace Prisma {
     aktuator?: boolean | Tandon$aktuatorArgs<ExtArgs>
     tandonBahan?: boolean | Tandon$tandonBahanArgs<ExtArgs>
     penjadwalan?: boolean | Tandon$penjadwalanArgs<ExtArgs>
+    tandonPenyimpanan?: boolean | Tandon$tandonPenyimpananArgs<ExtArgs>
     _count?: boolean | TandonCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -9092,6 +10491,7 @@ export namespace Prisma {
       aktuator: Prisma.$AktuatorPayload<ExtArgs>[]
       tandonBahan: Prisma.$TandonBahanPayload<ExtArgs>[]
       penjadwalan: Prisma.$PenjadwalanPayload<ExtArgs>[]
+      tandonPenyimpanan: Prisma.$TandonPenyimpananPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetResult<{
       id: number
@@ -9475,6 +10875,8 @@ export namespace Prisma {
     tandonBahan<T extends Tandon$tandonBahanArgs<ExtArgs> = {}>(args?: Subset<T, Tandon$tandonBahanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TandonBahanPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     penjadwalan<T extends Tandon$penjadwalanArgs<ExtArgs> = {}>(args?: Subset<T, Tandon$penjadwalanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PenjadwalanPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    tandonPenyimpanan<T extends Tandon$tandonPenyimpananArgs<ExtArgs> = {}>(args?: Subset<T, Tandon$tandonPenyimpananArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -9907,6 +11309,27 @@ export namespace Prisma {
 
 
   /**
+   * Tandon.tandonPenyimpanan
+   */
+  export type Tandon$tandonPenyimpananArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the TandonPenyimpanan
+     */
+    select?: TandonPenyimpananSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: TandonPenyimpananInclude<ExtArgs> | null
+    where?: TandonPenyimpananWhereInput
+    orderBy?: TandonPenyimpananOrderByWithRelationInput | TandonPenyimpananOrderByWithRelationInput[]
+    cursor?: TandonPenyimpananWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: TandonPenyimpananScalarFieldEnum | TandonPenyimpananScalarFieldEnum[]
+  }
+
+
+  /**
    * Tandon without action
    */
   export type TandonDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
@@ -9961,12 +11384,26 @@ export namespace Prisma {
   export type GreenhouseScalarFieldEnum = (typeof GreenhouseScalarFieldEnum)[keyof typeof GreenhouseScalarFieldEnum]
 
 
+  export const TandonPenyimpananScalarFieldEnum: {
+    id: 'id',
+    nama: 'nama',
+    distributable: 'distributable',
+    tandonId: 'tandonId'
+  };
+
+  export type TandonPenyimpananScalarFieldEnum = (typeof TandonPenyimpananScalarFieldEnum)[keyof typeof TandonPenyimpananScalarFieldEnum]
+
+
   export const ResepScalarFieldEnum: {
     id: 'id',
     ppm: 'ppm',
     ph: 'ph',
+    volume: 'volume',
     nama: 'nama',
     interval: 'interval',
+    nutrisiA: 'nutrisiA',
+    nutrisiB: 'nutrisiB',
+    air: 'air',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -9996,6 +11433,7 @@ export namespace Prisma {
     unit_measurement: 'unit_measurement',
     status: 'status',
     nilai: 'nilai',
+    icon: 'icon',
     tandonId: 'tandonId',
     tandonBahanId: 'tandonBahanId',
     greenhouseId: 'greenhouseId',
@@ -10013,8 +11451,11 @@ export namespace Prisma {
     icon: 'icon',
     color: 'color',
     status: 'status',
+    portPlc: 'portPlc',
     tandonId: 'tandonId',
     greenhouseId: 'greenhouseId',
+    tandonPenyimpananId: 'tandonPenyimpananId',
+    tandonBahanId: 'tandonBahanId',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -10118,6 +11559,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'Boolean'
+   */
+  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
    * Reference to a field of type 'Float'
    */
   export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
@@ -10128,13 +11576,6 @@ export namespace Prisma {
    * Reference to a field of type 'Float[]'
    */
   export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
-    
-
-
-  /**
-   * Reference to a field of type 'Boolean'
-   */
-  export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
     
   /**
    * Deep Input Types
@@ -10279,51 +11720,128 @@ export namespace Prisma {
     updated_at?: DateTimeNullableWithAggregatesFilter<"Greenhouse"> | Date | string | null
   }
 
+  export type TandonPenyimpananWhereInput = {
+    AND?: TandonPenyimpananWhereInput | TandonPenyimpananWhereInput[]
+    OR?: TandonPenyimpananWhereInput[]
+    NOT?: TandonPenyimpananWhereInput | TandonPenyimpananWhereInput[]
+    id?: IntFilter<"TandonPenyimpanan"> | number
+    nama?: StringFilter<"TandonPenyimpanan"> | string
+    distributable?: BoolFilter<"TandonPenyimpanan"> | boolean
+    tandonId?: IntFilter<"TandonPenyimpanan"> | number
+    tandon?: XOR<TandonRelationFilter, TandonWhereInput>
+    actuator?: AktuatorListRelationFilter
+    resep?: ResepListRelationFilter
+  }
+
+  export type TandonPenyimpananOrderByWithRelationInput = {
+    id?: SortOrder
+    nama?: SortOrder
+    distributable?: SortOrder
+    tandonId?: SortOrder
+    tandon?: TandonOrderByWithRelationInput
+    actuator?: AktuatorOrderByRelationAggregateInput
+    resep?: ResepOrderByRelationAggregateInput
+  }
+
+  export type TandonPenyimpananWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    nama?: string
+    AND?: TandonPenyimpananWhereInput | TandonPenyimpananWhereInput[]
+    OR?: TandonPenyimpananWhereInput[]
+    NOT?: TandonPenyimpananWhereInput | TandonPenyimpananWhereInput[]
+    distributable?: BoolFilter<"TandonPenyimpanan"> | boolean
+    tandonId?: IntFilter<"TandonPenyimpanan"> | number
+    tandon?: XOR<TandonRelationFilter, TandonWhereInput>
+    actuator?: AktuatorListRelationFilter
+    resep?: ResepListRelationFilter
+  }, "id" | "nama">
+
+  export type TandonPenyimpananOrderByWithAggregationInput = {
+    id?: SortOrder
+    nama?: SortOrder
+    distributable?: SortOrder
+    tandonId?: SortOrder
+    _count?: TandonPenyimpananCountOrderByAggregateInput
+    _avg?: TandonPenyimpananAvgOrderByAggregateInput
+    _max?: TandonPenyimpananMaxOrderByAggregateInput
+    _min?: TandonPenyimpananMinOrderByAggregateInput
+    _sum?: TandonPenyimpananSumOrderByAggregateInput
+  }
+
+  export type TandonPenyimpananScalarWhereWithAggregatesInput = {
+    AND?: TandonPenyimpananScalarWhereWithAggregatesInput | TandonPenyimpananScalarWhereWithAggregatesInput[]
+    OR?: TandonPenyimpananScalarWhereWithAggregatesInput[]
+    NOT?: TandonPenyimpananScalarWhereWithAggregatesInput | TandonPenyimpananScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"TandonPenyimpanan"> | number
+    nama?: StringWithAggregatesFilter<"TandonPenyimpanan"> | string
+    distributable?: BoolWithAggregatesFilter<"TandonPenyimpanan"> | boolean
+    tandonId?: IntWithAggregatesFilter<"TandonPenyimpanan"> | number
+  }
+
   export type ResepWhereInput = {
     AND?: ResepWhereInput | ResepWhereInput[]
     OR?: ResepWhereInput[]
     NOT?: ResepWhereInput | ResepWhereInput[]
     id?: IntFilter<"Resep"> | number
-    ppm?: IntFilter<"Resep"> | number
-    ph?: FloatFilter<"Resep"> | number
+    ppm?: IntNullableFilter<"Resep"> | number | null
+    ph?: FloatNullableFilter<"Resep"> | number | null
+    volume?: FloatNullableFilter<"Resep"> | number | null
     nama?: StringFilter<"Resep"> | string
-    interval?: IntFilter<"Resep"> | number
+    interval?: IntNullableFilter<"Resep"> | number | null
+    nutrisiA?: FloatNullableFilter<"Resep"> | number | null
+    nutrisiB?: FloatNullableFilter<"Resep"> | number | null
+    air?: FloatNullableFilter<"Resep"> | number | null
     created_at?: DateTimeFilter<"Resep"> | Date | string
     updated_at?: DateTimeNullableFilter<"Resep"> | Date | string | null
     penjadwalan?: PenjadwalanListRelationFilter
+    tandonPenyimpanan?: TandonPenyimpananListRelationFilter
   }
 
   export type ResepOrderByWithRelationInput = {
     id?: SortOrder
-    ppm?: SortOrder
-    ph?: SortOrder
+    ppm?: SortOrderInput | SortOrder
+    ph?: SortOrderInput | SortOrder
+    volume?: SortOrderInput | SortOrder
     nama?: SortOrder
-    interval?: SortOrder
+    interval?: SortOrderInput | SortOrder
+    nutrisiA?: SortOrderInput | SortOrder
+    nutrisiB?: SortOrderInput | SortOrder
+    air?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     penjadwalan?: PenjadwalanOrderByRelationAggregateInput
+    tandonPenyimpanan?: TandonPenyimpananOrderByRelationAggregateInput
   }
 
   export type ResepWhereUniqueInput = Prisma.AtLeast<{
     id?: number
+    nama?: string
     AND?: ResepWhereInput | ResepWhereInput[]
     OR?: ResepWhereInput[]
     NOT?: ResepWhereInput | ResepWhereInput[]
-    ppm?: IntFilter<"Resep"> | number
-    ph?: FloatFilter<"Resep"> | number
-    nama?: StringFilter<"Resep"> | string
-    interval?: IntFilter<"Resep"> | number
+    ppm?: IntNullableFilter<"Resep"> | number | null
+    ph?: FloatNullableFilter<"Resep"> | number | null
+    volume?: FloatNullableFilter<"Resep"> | number | null
+    interval?: IntNullableFilter<"Resep"> | number | null
+    nutrisiA?: FloatNullableFilter<"Resep"> | number | null
+    nutrisiB?: FloatNullableFilter<"Resep"> | number | null
+    air?: FloatNullableFilter<"Resep"> | number | null
     created_at?: DateTimeFilter<"Resep"> | Date | string
     updated_at?: DateTimeNullableFilter<"Resep"> | Date | string | null
     penjadwalan?: PenjadwalanListRelationFilter
-  }, "id">
+    tandonPenyimpanan?: TandonPenyimpananListRelationFilter
+  }, "id" | "nama">
 
   export type ResepOrderByWithAggregationInput = {
     id?: SortOrder
-    ppm?: SortOrder
-    ph?: SortOrder
+    ppm?: SortOrderInput | SortOrder
+    ph?: SortOrderInput | SortOrder
+    volume?: SortOrderInput | SortOrder
     nama?: SortOrder
-    interval?: SortOrder
+    interval?: SortOrderInput | SortOrder
+    nutrisiA?: SortOrderInput | SortOrder
+    nutrisiB?: SortOrderInput | SortOrder
+    air?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     _count?: ResepCountOrderByAggregateInput
@@ -10338,10 +11856,14 @@ export namespace Prisma {
     OR?: ResepScalarWhereWithAggregatesInput[]
     NOT?: ResepScalarWhereWithAggregatesInput | ResepScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Resep"> | number
-    ppm?: IntWithAggregatesFilter<"Resep"> | number
-    ph?: FloatWithAggregatesFilter<"Resep"> | number
+    ppm?: IntNullableWithAggregatesFilter<"Resep"> | number | null
+    ph?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
+    volume?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
     nama?: StringWithAggregatesFilter<"Resep"> | string
-    interval?: IntWithAggregatesFilter<"Resep"> | number
+    interval?: IntNullableWithAggregatesFilter<"Resep"> | number | null
+    nutrisiA?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
+    nutrisiB?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
+    air?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
     created_at?: DateTimeWithAggregatesFilter<"Resep"> | Date | string
     updated_at?: DateTimeNullableWithAggregatesFilter<"Resep"> | Date | string | null
   }
@@ -10432,6 +11954,7 @@ export namespace Prisma {
     unit_measurement?: StringFilter<"Sensor"> | string
     status?: BoolFilter<"Sensor"> | boolean
     nilai?: IntFilter<"Sensor"> | number
+    icon?: StringNullableFilter<"Sensor"> | string | null
     tandonId?: IntNullableFilter<"Sensor"> | number | null
     tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
     greenhouseId?: IntNullableFilter<"Sensor"> | number | null
@@ -10450,6 +11973,7 @@ export namespace Prisma {
     unit_measurement?: SortOrder
     status?: SortOrder
     nilai?: SortOrder
+    icon?: SortOrderInput | SortOrder
     tandonId?: SortOrderInput | SortOrder
     tandonBahanId?: SortOrderInput | SortOrder
     greenhouseId?: SortOrderInput | SortOrder
@@ -10471,6 +11995,7 @@ export namespace Prisma {
     unit_measurement?: StringFilter<"Sensor"> | string
     status?: BoolFilter<"Sensor"> | boolean
     nilai?: IntFilter<"Sensor"> | number
+    icon?: StringNullableFilter<"Sensor"> | string | null
     tandonId?: IntNullableFilter<"Sensor"> | number | null
     tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
     greenhouseId?: IntNullableFilter<"Sensor"> | number | null
@@ -10489,6 +12014,7 @@ export namespace Prisma {
     unit_measurement?: SortOrder
     status?: SortOrder
     nilai?: SortOrder
+    icon?: SortOrderInput | SortOrder
     tandonId?: SortOrderInput | SortOrder
     tandonBahanId?: SortOrderInput | SortOrder
     greenhouseId?: SortOrderInput | SortOrder
@@ -10512,6 +12038,7 @@ export namespace Prisma {
     unit_measurement?: StringWithAggregatesFilter<"Sensor"> | string
     status?: BoolWithAggregatesFilter<"Sensor"> | boolean
     nilai?: IntWithAggregatesFilter<"Sensor"> | number
+    icon?: StringNullableWithAggregatesFilter<"Sensor"> | string | null
     tandonId?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
     tandonBahanId?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
     greenhouseId?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
@@ -10529,12 +12056,17 @@ export namespace Prisma {
     icon?: StringFilter<"Aktuator"> | string
     color?: StringFilter<"Aktuator"> | string
     status?: BoolFilter<"Aktuator"> | boolean
-    tandonId?: IntFilter<"Aktuator"> | number
-    greenhouseId?: IntFilter<"Aktuator"> | number
+    portPlc?: IntFilter<"Aktuator"> | number
+    tandonId?: IntNullableFilter<"Aktuator"> | number | null
+    greenhouseId?: IntNullableFilter<"Aktuator"> | number | null
+    tandonPenyimpananId?: IntNullableFilter<"Aktuator"> | number | null
+    tandonBahanId?: IntNullableFilter<"Aktuator"> | number | null
     created_at?: DateTimeFilter<"Aktuator"> | Date | string
     updated_at?: DateTimeNullableFilter<"Aktuator"> | Date | string | null
-    tandon?: XOR<TandonRelationFilter, TandonWhereInput>
-    greenhouse?: XOR<GreenhouseRelationFilter, GreenhouseWhereInput>
+    tandon?: XOR<TandonNullableRelationFilter, TandonWhereInput> | null
+    greenhouse?: XOR<GreenhouseNullableRelationFilter, GreenhouseWhereInput> | null
+    tandonPenyimpanan?: XOR<TandonPenyimpananNullableRelationFilter, TandonPenyimpananWhereInput> | null
+    tandonBahan?: XOR<TandonBahanNullableRelationFilter, TandonBahanWhereInput> | null
   }
 
   export type AktuatorOrderByWithRelationInput = {
@@ -10544,12 +12076,17 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     status?: SortOrder
-    tandonId?: SortOrder
-    greenhouseId?: SortOrder
+    portPlc?: SortOrder
+    tandonId?: SortOrderInput | SortOrder
+    greenhouseId?: SortOrderInput | SortOrder
+    tandonPenyimpananId?: SortOrderInput | SortOrder
+    tandonBahanId?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     tandon?: TandonOrderByWithRelationInput
     greenhouse?: GreenhouseOrderByWithRelationInput
+    tandonPenyimpanan?: TandonPenyimpananOrderByWithRelationInput
+    tandonBahan?: TandonBahanOrderByWithRelationInput
   }
 
   export type AktuatorWhereUniqueInput = Prisma.AtLeast<{
@@ -10562,12 +12099,17 @@ export namespace Prisma {
     icon?: StringFilter<"Aktuator"> | string
     color?: StringFilter<"Aktuator"> | string
     status?: BoolFilter<"Aktuator"> | boolean
-    tandonId?: IntFilter<"Aktuator"> | number
-    greenhouseId?: IntFilter<"Aktuator"> | number
+    portPlc?: IntFilter<"Aktuator"> | number
+    tandonId?: IntNullableFilter<"Aktuator"> | number | null
+    greenhouseId?: IntNullableFilter<"Aktuator"> | number | null
+    tandonPenyimpananId?: IntNullableFilter<"Aktuator"> | number | null
+    tandonBahanId?: IntNullableFilter<"Aktuator"> | number | null
     created_at?: DateTimeFilter<"Aktuator"> | Date | string
     updated_at?: DateTimeNullableFilter<"Aktuator"> | Date | string | null
-    tandon?: XOR<TandonRelationFilter, TandonWhereInput>
-    greenhouse?: XOR<GreenhouseRelationFilter, GreenhouseWhereInput>
+    tandon?: XOR<TandonNullableRelationFilter, TandonWhereInput> | null
+    greenhouse?: XOR<GreenhouseNullableRelationFilter, GreenhouseWhereInput> | null
+    tandonPenyimpanan?: XOR<TandonPenyimpananNullableRelationFilter, TandonPenyimpananWhereInput> | null
+    tandonBahan?: XOR<TandonBahanNullableRelationFilter, TandonBahanWhereInput> | null
   }, "id">
 
   export type AktuatorOrderByWithAggregationInput = {
@@ -10577,8 +12119,11 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     status?: SortOrder
-    tandonId?: SortOrder
-    greenhouseId?: SortOrder
+    portPlc?: SortOrder
+    tandonId?: SortOrderInput | SortOrder
+    greenhouseId?: SortOrderInput | SortOrder
+    tandonPenyimpananId?: SortOrderInput | SortOrder
+    tandonBahanId?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     _count?: AktuatorCountOrderByAggregateInput
@@ -10598,8 +12143,11 @@ export namespace Prisma {
     icon?: StringWithAggregatesFilter<"Aktuator"> | string
     color?: StringWithAggregatesFilter<"Aktuator"> | string
     status?: BoolWithAggregatesFilter<"Aktuator"> | boolean
-    tandonId?: IntWithAggregatesFilter<"Aktuator"> | number
-    greenhouseId?: IntWithAggregatesFilter<"Aktuator"> | number
+    portPlc?: IntWithAggregatesFilter<"Aktuator"> | number
+    tandonId?: IntNullableWithAggregatesFilter<"Aktuator"> | number | null
+    greenhouseId?: IntNullableWithAggregatesFilter<"Aktuator"> | number | null
+    tandonPenyimpananId?: IntNullableWithAggregatesFilter<"Aktuator"> | number | null
+    tandonBahanId?: IntNullableWithAggregatesFilter<"Aktuator"> | number | null
     created_at?: DateTimeWithAggregatesFilter<"Aktuator"> | Date | string
     updated_at?: DateTimeNullableWithAggregatesFilter<"Aktuator"> | Date | string | null
   }
@@ -10614,6 +12162,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"TandonBahan"> | Date | string
     updated_at?: DateTimeNullableFilter<"TandonBahan"> | Date | string | null
     sensor?: SensorListRelationFilter
+    aktuator?: AktuatorListRelationFilter
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
   }
 
@@ -10624,6 +12173,7 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     sensor?: SensorOrderByRelationAggregateInput
+    aktuator?: AktuatorOrderByRelationAggregateInput
     tandon?: TandonOrderByWithRelationInput
   }
 
@@ -10637,6 +12187,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"TandonBahan"> | Date | string
     updated_at?: DateTimeNullableFilter<"TandonBahan"> | Date | string | null
     sensor?: SensorListRelationFilter
+    aktuator?: AktuatorListRelationFilter
     tandon?: XOR<TandonRelationFilter, TandonWhereInput>
   }, "id">
 
@@ -10680,6 +12231,7 @@ export namespace Prisma {
     aktuator?: AktuatorListRelationFilter
     tandonBahan?: TandonBahanListRelationFilter
     penjadwalan?: PenjadwalanListRelationFilter
+    tandonPenyimpanan?: TandonPenyimpananListRelationFilter
   }
 
   export type TandonOrderByWithRelationInput = {
@@ -10695,6 +12247,7 @@ export namespace Prisma {
     aktuator?: AktuatorOrderByRelationAggregateInput
     tandonBahan?: TandonBahanOrderByRelationAggregateInput
     penjadwalan?: PenjadwalanOrderByRelationAggregateInput
+    tandonPenyimpanan?: TandonPenyimpananOrderByRelationAggregateInput
   }
 
   export type TandonWhereUniqueInput = Prisma.AtLeast<{
@@ -10713,6 +12266,7 @@ export namespace Prisma {
     aktuator?: AktuatorListRelationFilter
     tandonBahan?: TandonBahanListRelationFilter
     penjadwalan?: PenjadwalanListRelationFilter
+    tandonPenyimpanan?: TandonPenyimpananListRelationFilter
   }, "id">
 
   export type TandonOrderByWithAggregationInput = {
@@ -10890,73 +12444,158 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type ResepCreateInput = {
-    ppm: number
-    ph: number
+  export type TandonPenyimpananCreateInput = {
     nama: string
-    interval: number
+    distributable: boolean
+    tandon: TandonCreateNestedOneWithoutTandonPenyimpananInput
+    actuator?: AktuatorCreateNestedManyWithoutTandonPenyimpananInput
+    resep?: ResepCreateNestedManyWithoutTandonPenyimpananInput
+  }
+
+  export type TandonPenyimpananUncheckedCreateInput = {
+    id?: number
+    nama: string
+    distributable: boolean
+    tandonId: number
+    actuator?: AktuatorUncheckedCreateNestedManyWithoutTandonPenyimpananInput
+    resep?: ResepUncheckedCreateNestedManyWithoutTandonPenyimpananInput
+  }
+
+  export type TandonPenyimpananUpdateInput = {
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+    tandon?: TandonUpdateOneRequiredWithoutTandonPenyimpananNestedInput
+    actuator?: AktuatorUpdateManyWithoutTandonPenyimpananNestedInput
+    resep?: ResepUpdateManyWithoutTandonPenyimpananNestedInput
+  }
+
+  export type TandonPenyimpananUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+    tandonId?: IntFieldUpdateOperationsInput | number
+    actuator?: AktuatorUncheckedUpdateManyWithoutTandonPenyimpananNestedInput
+    resep?: ResepUncheckedUpdateManyWithoutTandonPenyimpananNestedInput
+  }
+
+  export type TandonPenyimpananCreateManyInput = {
+    id?: number
+    nama: string
+    distributable: boolean
+    tandonId: number
+  }
+
+  export type TandonPenyimpananUpdateManyMutationInput = {
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+  }
+
+  export type TandonPenyimpananUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+    tandonId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type ResepCreateInput = {
+    ppm?: number | null
+    ph?: number | null
+    volume?: number | null
+    nama: string
+    interval?: number | null
+    nutrisiA?: number | null
+    nutrisiB?: number | null
+    air?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
     penjadwalan?: PenjadwalanCreateNestedManyWithoutResepInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedManyWithoutResepInput
   }
 
   export type ResepUncheckedCreateInput = {
     id?: number
-    ppm: number
-    ph: number
+    ppm?: number | null
+    ph?: number | null
+    volume?: number | null
     nama: string
-    interval: number
+    interval?: number | null
+    nutrisiA?: number | null
+    nutrisiB?: number | null
+    air?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutResepInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedCreateNestedManyWithoutResepInput
   }
 
   export type ResepUpdateInput = {
-    ppm?: IntFieldUpdateOperationsInput | number
-    ph?: FloatFieldUpdateOperationsInput | number
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     penjadwalan?: PenjadwalanUpdateManyWithoutResepNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateManyWithoutResepNestedInput
   }
 
   export type ResepUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    ppm?: IntFieldUpdateOperationsInput | number
-    ph?: FloatFieldUpdateOperationsInput | number
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutResepNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedUpdateManyWithoutResepNestedInput
   }
 
   export type ResepCreateManyInput = {
     id?: number
-    ppm: number
-    ph: number
+    ppm?: number | null
+    ph?: number | null
+    volume?: number | null
     nama: string
-    interval: number
+    interval?: number | null
+    nutrisiA?: number | null
+    nutrisiB?: number | null
+    air?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
 
   export type ResepUpdateManyMutationInput = {
-    ppm?: IntFieldUpdateOperationsInput | number
-    ph?: FloatFieldUpdateOperationsInput | number
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ResepUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    ppm?: IntFieldUpdateOperationsInput | number
-    ph?: FloatFieldUpdateOperationsInput | number
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -11040,6 +12679,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     tandon?: TandonCreateNestedOneWithoutSensorInput
@@ -11055,6 +12695,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     tandonId?: number | null
     tandonBahanId?: number | null
     greenhouseId?: number | null
@@ -11069,6 +12710,7 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneWithoutSensorNestedInput
@@ -11084,6 +12726,7 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -11099,6 +12742,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     tandonId?: number | null
     tandonBahanId?: number | null
     greenhouseId?: number | null
@@ -11113,6 +12757,7 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -11125,6 +12770,7 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -11138,10 +12784,13 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
+    portPlc: number
     created_at?: Date | string
     updated_at?: Date | string | null
-    tandon: TandonCreateNestedOneWithoutAktuatorInput
-    greenhouse: GreenhouseCreateNestedOneWithoutAktuatorInput
+    tandon?: TandonCreateNestedOneWithoutAktuatorInput
+    greenhouse?: GreenhouseCreateNestedOneWithoutAktuatorInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedOneWithoutActuatorInput
+    tandonBahan?: TandonBahanCreateNestedOneWithoutAktuatorInput
   }
 
   export type AktuatorUncheckedCreateInput = {
@@ -11151,8 +12800,11 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    tandonId: number
-    greenhouseId: number
+    portPlc: number
+    tandonId?: number | null
+    greenhouseId?: number | null
+    tandonPenyimpananId?: number | null
+    tandonBahanId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -11163,10 +12815,13 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    portPlc?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tandon?: TandonUpdateOneRequiredWithoutAktuatorNestedInput
-    greenhouse?: GreenhouseUpdateOneRequiredWithoutAktuatorNestedInput
+    tandon?: TandonUpdateOneWithoutAktuatorNestedInput
+    greenhouse?: GreenhouseUpdateOneWithoutAktuatorNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateOneWithoutActuatorNestedInput
+    tandonBahan?: TandonBahanUpdateOneWithoutAktuatorNestedInput
   }
 
   export type AktuatorUncheckedUpdateInput = {
@@ -11176,8 +12831,11 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    tandonId?: IntFieldUpdateOperationsInput | number
-    greenhouseId?: IntFieldUpdateOperationsInput | number
+    portPlc?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -11189,8 +12847,11 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    tandonId: number
-    greenhouseId: number
+    portPlc: number
+    tandonId?: number | null
+    greenhouseId?: number | null
+    tandonPenyimpananId?: number | null
+    tandonBahanId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -11201,6 +12862,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    portPlc?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -11212,8 +12874,11 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    tandonId?: IntFieldUpdateOperationsInput | number
-    greenhouseId?: IntFieldUpdateOperationsInput | number
+    portPlc?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -11223,6 +12888,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorCreateNestedManyWithoutTandonBahanInput
+    aktuator?: AktuatorCreateNestedManyWithoutTandonBahanInput
     tandon: TandonCreateNestedOneWithoutTandonBahanInput
   }
 
@@ -11233,6 +12899,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonBahanInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonBahanInput
   }
 
   export type TandonBahanUpdateInput = {
@@ -11240,6 +12907,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUpdateManyWithoutTandonBahanNestedInput
+    aktuator?: AktuatorUpdateManyWithoutTandonBahanNestedInput
     tandon?: TandonUpdateOneRequiredWithoutTandonBahanNestedInput
   }
 
@@ -11250,6 +12918,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonBahanNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutTandonBahanNestedInput
   }
 
   export type TandonBahanCreateManyInput = {
@@ -11285,6 +12954,7 @@ export namespace Prisma {
     aktuator?: AktuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedManyWithoutTandonInput
   }
 
   export type TandonUncheckedCreateInput = {
@@ -11299,6 +12969,7 @@ export namespace Prisma {
     aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedCreateNestedManyWithoutTandonInput
   }
 
   export type TandonUpdateInput = {
@@ -11312,6 +12983,7 @@ export namespace Prisma {
     aktuator?: AktuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateManyWithoutTandonNestedInput
   }
 
   export type TandonUncheckedUpdateInput = {
@@ -11326,6 +12998,7 @@ export namespace Prisma {
     aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedUpdateManyWithoutTandonNestedInput
   }
 
   export type TandonCreateManyInput = {
@@ -11594,15 +13267,85 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type BoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type TandonRelationFilter = {
+    is?: TandonWhereInput
+    isNot?: TandonWhereInput
+  }
+
+  export type ResepListRelationFilter = {
+    every?: ResepWhereInput
+    some?: ResepWhereInput
+    none?: ResepWhereInput
+  }
+
+  export type ResepOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TandonPenyimpananCountOrderByAggregateInput = {
+    id?: SortOrder
+    nama?: SortOrder
+    distributable?: SortOrder
+    tandonId?: SortOrder
+  }
+
+  export type TandonPenyimpananAvgOrderByAggregateInput = {
+    id?: SortOrder
+    tandonId?: SortOrder
+  }
+
+  export type TandonPenyimpananMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nama?: SortOrder
+    distributable?: SortOrder
+    tandonId?: SortOrder
+  }
+
+  export type TandonPenyimpananMinOrderByAggregateInput = {
+    id?: SortOrder
+    nama?: SortOrder
+    distributable?: SortOrder
+    tandonId?: SortOrder
+  }
+
+  export type TandonPenyimpananSumOrderByAggregateInput = {
+    id?: SortOrder
+    tandonId?: SortOrder
+  }
+
+  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type FloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type PenjadwalanListRelationFilter = {
@@ -11611,7 +13354,17 @@ export namespace Prisma {
     none?: PenjadwalanWhereInput
   }
 
+  export type TandonPenyimpananListRelationFilter = {
+    every?: TandonPenyimpananWhereInput
+    some?: TandonPenyimpananWhereInput
+    none?: TandonPenyimpananWhereInput
+  }
+
   export type PenjadwalanOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type TandonPenyimpananOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -11619,8 +13372,12 @@ export namespace Prisma {
     id?: SortOrder
     ppm?: SortOrder
     ph?: SortOrder
+    volume?: SortOrder
     nama?: SortOrder
     interval?: SortOrder
+    nutrisiA?: SortOrder
+    nutrisiB?: SortOrder
+    air?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11629,15 +13386,23 @@ export namespace Prisma {
     id?: SortOrder
     ppm?: SortOrder
     ph?: SortOrder
+    volume?: SortOrder
     interval?: SortOrder
+    nutrisiA?: SortOrder
+    nutrisiB?: SortOrder
+    air?: SortOrder
   }
 
   export type ResepMaxOrderByAggregateInput = {
     id?: SortOrder
     ppm?: SortOrder
     ph?: SortOrder
+    volume?: SortOrder
     nama?: SortOrder
     interval?: SortOrder
+    nutrisiA?: SortOrder
+    nutrisiB?: SortOrder
+    air?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11646,8 +13411,12 @@ export namespace Prisma {
     id?: SortOrder
     ppm?: SortOrder
     ph?: SortOrder
+    volume?: SortOrder
     nama?: SortOrder
     interval?: SortOrder
+    nutrisiA?: SortOrder
+    nutrisiB?: SortOrder
+    air?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11656,28 +13425,43 @@ export namespace Prisma {
     id?: SortOrder
     ppm?: SortOrder
     ph?: SortOrder
+    volume?: SortOrder
     interval?: SortOrder
+    nutrisiA?: SortOrder
+    nutrisiB?: SortOrder
+    air?: SortOrder
   }
 
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type BoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
   export type IntNullableListFilter<$PrismaModel = never> = {
@@ -11691,11 +13475,6 @@ export namespace Prisma {
   export type ResepRelationFilter = {
     is?: ResepWhereInput
     isNot?: ResepWhereInput
-  }
-
-  export type TandonRelationFilter = {
-    is?: TandonWhereInput
-    isNot?: TandonWhereInput
   }
 
   export type PenjadwalanCountOrderByAggregateInput = {
@@ -11743,23 +13522,19 @@ export namespace Prisma {
     tandonId?: SortOrder
   }
 
-  export type BoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type TandonNullableRelationFilter = {
@@ -11785,6 +13560,7 @@ export namespace Prisma {
     unit_measurement?: SortOrder
     status?: SortOrder
     nilai?: SortOrder
+    icon?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
     greenhouseId?: SortOrder
@@ -11808,6 +13584,7 @@ export namespace Prisma {
     unit_measurement?: SortOrder
     status?: SortOrder
     nilai?: SortOrder
+    icon?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
     greenhouseId?: SortOrder
@@ -11823,6 +13600,7 @@ export namespace Prisma {
     unit_measurement?: SortOrder
     status?: SortOrder
     nilai?: SortOrder
+    icon?: SortOrder
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
     greenhouseId?: SortOrder
@@ -11838,25 +13616,27 @@ export namespace Prisma {
     greenhouseId?: SortOrder
   }
 
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
     _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type GreenhouseRelationFilter = {
-    is?: GreenhouseWhereInput
-    isNot?: GreenhouseWhereInput
+  export type TandonPenyimpananNullableRelationFilter = {
+    is?: TandonPenyimpananWhereInput | null
+    isNot?: TandonPenyimpananWhereInput | null
   }
 
   export type AktuatorCountOrderByAggregateInput = {
@@ -11866,16 +13646,22 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     status?: SortOrder
+    portPlc?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
+    tandonPenyimpananId?: SortOrder
+    tandonBahanId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
   export type AktuatorAvgOrderByAggregateInput = {
     id?: SortOrder
+    portPlc?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
+    tandonPenyimpananId?: SortOrder
+    tandonBahanId?: SortOrder
   }
 
   export type AktuatorMaxOrderByAggregateInput = {
@@ -11885,8 +13671,11 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     status?: SortOrder
+    portPlc?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
+    tandonPenyimpananId?: SortOrder
+    tandonBahanId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -11898,16 +13687,22 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     status?: SortOrder
+    portPlc?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
+    tandonPenyimpananId?: SortOrder
+    tandonBahanId?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
 
   export type AktuatorSumOrderByAggregateInput = {
     id?: SortOrder
+    portPlc?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
+    tandonPenyimpananId?: SortOrder
+    tandonBahanId?: SortOrder
   }
 
   export type TandonBahanCountOrderByAggregateInput = {
@@ -12221,11 +14016,115 @@ export namespace Prisma {
     deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
   }
 
+  export type TandonCreateNestedOneWithoutTandonPenyimpananInput = {
+    create?: XOR<TandonCreateWithoutTandonPenyimpananInput, TandonUncheckedCreateWithoutTandonPenyimpananInput>
+    connectOrCreate?: TandonCreateOrConnectWithoutTandonPenyimpananInput
+    connect?: TandonWhereUniqueInput
+  }
+
+  export type AktuatorCreateNestedManyWithoutTandonPenyimpananInput = {
+    create?: XOR<AktuatorCreateWithoutTandonPenyimpananInput, AktuatorUncheckedCreateWithoutTandonPenyimpananInput> | AktuatorCreateWithoutTandonPenyimpananInput[] | AktuatorUncheckedCreateWithoutTandonPenyimpananInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonPenyimpananInput | AktuatorCreateOrConnectWithoutTandonPenyimpananInput[]
+    createMany?: AktuatorCreateManyTandonPenyimpananInputEnvelope
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+  }
+
+  export type ResepCreateNestedManyWithoutTandonPenyimpananInput = {
+    create?: XOR<ResepCreateWithoutTandonPenyimpananInput, ResepUncheckedCreateWithoutTandonPenyimpananInput> | ResepCreateWithoutTandonPenyimpananInput[] | ResepUncheckedCreateWithoutTandonPenyimpananInput[]
+    connectOrCreate?: ResepCreateOrConnectWithoutTandonPenyimpananInput | ResepCreateOrConnectWithoutTandonPenyimpananInput[]
+    connect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+  }
+
+  export type AktuatorUncheckedCreateNestedManyWithoutTandonPenyimpananInput = {
+    create?: XOR<AktuatorCreateWithoutTandonPenyimpananInput, AktuatorUncheckedCreateWithoutTandonPenyimpananInput> | AktuatorCreateWithoutTandonPenyimpananInput[] | AktuatorUncheckedCreateWithoutTandonPenyimpananInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonPenyimpananInput | AktuatorCreateOrConnectWithoutTandonPenyimpananInput[]
+    createMany?: AktuatorCreateManyTandonPenyimpananInputEnvelope
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+  }
+
+  export type ResepUncheckedCreateNestedManyWithoutTandonPenyimpananInput = {
+    create?: XOR<ResepCreateWithoutTandonPenyimpananInput, ResepUncheckedCreateWithoutTandonPenyimpananInput> | ResepCreateWithoutTandonPenyimpananInput[] | ResepUncheckedCreateWithoutTandonPenyimpananInput[]
+    connectOrCreate?: ResepCreateOrConnectWithoutTandonPenyimpananInput | ResepCreateOrConnectWithoutTandonPenyimpananInput[]
+    connect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+  }
+
+  export type BoolFieldUpdateOperationsInput = {
+    set?: boolean
+  }
+
+  export type TandonUpdateOneRequiredWithoutTandonPenyimpananNestedInput = {
+    create?: XOR<TandonCreateWithoutTandonPenyimpananInput, TandonUncheckedCreateWithoutTandonPenyimpananInput>
+    connectOrCreate?: TandonCreateOrConnectWithoutTandonPenyimpananInput
+    upsert?: TandonUpsertWithoutTandonPenyimpananInput
+    connect?: TandonWhereUniqueInput
+    update?: XOR<XOR<TandonUpdateToOneWithWhereWithoutTandonPenyimpananInput, TandonUpdateWithoutTandonPenyimpananInput>, TandonUncheckedUpdateWithoutTandonPenyimpananInput>
+  }
+
+  export type AktuatorUpdateManyWithoutTandonPenyimpananNestedInput = {
+    create?: XOR<AktuatorCreateWithoutTandonPenyimpananInput, AktuatorUncheckedCreateWithoutTandonPenyimpananInput> | AktuatorCreateWithoutTandonPenyimpananInput[] | AktuatorUncheckedCreateWithoutTandonPenyimpananInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonPenyimpananInput | AktuatorCreateOrConnectWithoutTandonPenyimpananInput[]
+    upsert?: AktuatorUpsertWithWhereUniqueWithoutTandonPenyimpananInput | AktuatorUpsertWithWhereUniqueWithoutTandonPenyimpananInput[]
+    createMany?: AktuatorCreateManyTandonPenyimpananInputEnvelope
+    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    update?: AktuatorUpdateWithWhereUniqueWithoutTandonPenyimpananInput | AktuatorUpdateWithWhereUniqueWithoutTandonPenyimpananInput[]
+    updateMany?: AktuatorUpdateManyWithWhereWithoutTandonPenyimpananInput | AktuatorUpdateManyWithWhereWithoutTandonPenyimpananInput[]
+    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
+  }
+
+  export type ResepUpdateManyWithoutTandonPenyimpananNestedInput = {
+    create?: XOR<ResepCreateWithoutTandonPenyimpananInput, ResepUncheckedCreateWithoutTandonPenyimpananInput> | ResepCreateWithoutTandonPenyimpananInput[] | ResepUncheckedCreateWithoutTandonPenyimpananInput[]
+    connectOrCreate?: ResepCreateOrConnectWithoutTandonPenyimpananInput | ResepCreateOrConnectWithoutTandonPenyimpananInput[]
+    upsert?: ResepUpsertWithWhereUniqueWithoutTandonPenyimpananInput | ResepUpsertWithWhereUniqueWithoutTandonPenyimpananInput[]
+    set?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    disconnect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    delete?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    connect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    update?: ResepUpdateWithWhereUniqueWithoutTandonPenyimpananInput | ResepUpdateWithWhereUniqueWithoutTandonPenyimpananInput[]
+    updateMany?: ResepUpdateManyWithWhereWithoutTandonPenyimpananInput | ResepUpdateManyWithWhereWithoutTandonPenyimpananInput[]
+    deleteMany?: ResepScalarWhereInput | ResepScalarWhereInput[]
+  }
+
+  export type AktuatorUncheckedUpdateManyWithoutTandonPenyimpananNestedInput = {
+    create?: XOR<AktuatorCreateWithoutTandonPenyimpananInput, AktuatorUncheckedCreateWithoutTandonPenyimpananInput> | AktuatorCreateWithoutTandonPenyimpananInput[] | AktuatorUncheckedCreateWithoutTandonPenyimpananInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonPenyimpananInput | AktuatorCreateOrConnectWithoutTandonPenyimpananInput[]
+    upsert?: AktuatorUpsertWithWhereUniqueWithoutTandonPenyimpananInput | AktuatorUpsertWithWhereUniqueWithoutTandonPenyimpananInput[]
+    createMany?: AktuatorCreateManyTandonPenyimpananInputEnvelope
+    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    update?: AktuatorUpdateWithWhereUniqueWithoutTandonPenyimpananInput | AktuatorUpdateWithWhereUniqueWithoutTandonPenyimpananInput[]
+    updateMany?: AktuatorUpdateManyWithWhereWithoutTandonPenyimpananInput | AktuatorUpdateManyWithWhereWithoutTandonPenyimpananInput[]
+    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
+  }
+
+  export type ResepUncheckedUpdateManyWithoutTandonPenyimpananNestedInput = {
+    create?: XOR<ResepCreateWithoutTandonPenyimpananInput, ResepUncheckedCreateWithoutTandonPenyimpananInput> | ResepCreateWithoutTandonPenyimpananInput[] | ResepUncheckedCreateWithoutTandonPenyimpananInput[]
+    connectOrCreate?: ResepCreateOrConnectWithoutTandonPenyimpananInput | ResepCreateOrConnectWithoutTandonPenyimpananInput[]
+    upsert?: ResepUpsertWithWhereUniqueWithoutTandonPenyimpananInput | ResepUpsertWithWhereUniqueWithoutTandonPenyimpananInput[]
+    set?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    disconnect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    delete?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    connect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    update?: ResepUpdateWithWhereUniqueWithoutTandonPenyimpananInput | ResepUpdateWithWhereUniqueWithoutTandonPenyimpananInput[]
+    updateMany?: ResepUpdateManyWithWhereWithoutTandonPenyimpananInput | ResepUpdateManyWithWhereWithoutTandonPenyimpananInput[]
+    deleteMany?: ResepScalarWhereInput | ResepScalarWhereInput[]
+  }
+
   export type PenjadwalanCreateNestedManyWithoutResepInput = {
     create?: XOR<PenjadwalanCreateWithoutResepInput, PenjadwalanUncheckedCreateWithoutResepInput> | PenjadwalanCreateWithoutResepInput[] | PenjadwalanUncheckedCreateWithoutResepInput[]
     connectOrCreate?: PenjadwalanCreateOrConnectWithoutResepInput | PenjadwalanCreateOrConnectWithoutResepInput[]
     createMany?: PenjadwalanCreateManyResepInputEnvelope
     connect?: PenjadwalanWhereUniqueInput | PenjadwalanWhereUniqueInput[]
+  }
+
+  export type TandonPenyimpananCreateNestedManyWithoutResepInput = {
+    create?: XOR<TandonPenyimpananCreateWithoutResepInput, TandonPenyimpananUncheckedCreateWithoutResepInput> | TandonPenyimpananCreateWithoutResepInput[] | TandonPenyimpananUncheckedCreateWithoutResepInput[]
+    connectOrCreate?: TandonPenyimpananCreateOrConnectWithoutResepInput | TandonPenyimpananCreateOrConnectWithoutResepInput[]
+    connect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
   }
 
   export type PenjadwalanUncheckedCreateNestedManyWithoutResepInput = {
@@ -12235,8 +14134,22 @@ export namespace Prisma {
     connect?: PenjadwalanWhereUniqueInput | PenjadwalanWhereUniqueInput[]
   }
 
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
+  export type TandonPenyimpananUncheckedCreateNestedManyWithoutResepInput = {
+    create?: XOR<TandonPenyimpananCreateWithoutResepInput, TandonPenyimpananUncheckedCreateWithoutResepInput> | TandonPenyimpananCreateWithoutResepInput[] | TandonPenyimpananUncheckedCreateWithoutResepInput[]
+    connectOrCreate?: TandonPenyimpananCreateOrConnectWithoutResepInput | TandonPenyimpananCreateOrConnectWithoutResepInput[]
+    connect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableFloatFieldUpdateOperationsInput = {
+    set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
@@ -12257,6 +14170,19 @@ export namespace Prisma {
     deleteMany?: PenjadwalanScalarWhereInput | PenjadwalanScalarWhereInput[]
   }
 
+  export type TandonPenyimpananUpdateManyWithoutResepNestedInput = {
+    create?: XOR<TandonPenyimpananCreateWithoutResepInput, TandonPenyimpananUncheckedCreateWithoutResepInput> | TandonPenyimpananCreateWithoutResepInput[] | TandonPenyimpananUncheckedCreateWithoutResepInput[]
+    connectOrCreate?: TandonPenyimpananCreateOrConnectWithoutResepInput | TandonPenyimpananCreateOrConnectWithoutResepInput[]
+    upsert?: TandonPenyimpananUpsertWithWhereUniqueWithoutResepInput | TandonPenyimpananUpsertWithWhereUniqueWithoutResepInput[]
+    set?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    disconnect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    delete?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    connect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    update?: TandonPenyimpananUpdateWithWhereUniqueWithoutResepInput | TandonPenyimpananUpdateWithWhereUniqueWithoutResepInput[]
+    updateMany?: TandonPenyimpananUpdateManyWithWhereWithoutResepInput | TandonPenyimpananUpdateManyWithWhereWithoutResepInput[]
+    deleteMany?: TandonPenyimpananScalarWhereInput | TandonPenyimpananScalarWhereInput[]
+  }
+
   export type PenjadwalanUncheckedUpdateManyWithoutResepNestedInput = {
     create?: XOR<PenjadwalanCreateWithoutResepInput, PenjadwalanUncheckedCreateWithoutResepInput> | PenjadwalanCreateWithoutResepInput[] | PenjadwalanUncheckedCreateWithoutResepInput[]
     connectOrCreate?: PenjadwalanCreateOrConnectWithoutResepInput | PenjadwalanCreateOrConnectWithoutResepInput[]
@@ -12269,6 +14195,19 @@ export namespace Prisma {
     update?: PenjadwalanUpdateWithWhereUniqueWithoutResepInput | PenjadwalanUpdateWithWhereUniqueWithoutResepInput[]
     updateMany?: PenjadwalanUpdateManyWithWhereWithoutResepInput | PenjadwalanUpdateManyWithWhereWithoutResepInput[]
     deleteMany?: PenjadwalanScalarWhereInput | PenjadwalanScalarWhereInput[]
+  }
+
+  export type TandonPenyimpananUncheckedUpdateManyWithoutResepNestedInput = {
+    create?: XOR<TandonPenyimpananCreateWithoutResepInput, TandonPenyimpananUncheckedCreateWithoutResepInput> | TandonPenyimpananCreateWithoutResepInput[] | TandonPenyimpananUncheckedCreateWithoutResepInput[]
+    connectOrCreate?: TandonPenyimpananCreateOrConnectWithoutResepInput | TandonPenyimpananCreateOrConnectWithoutResepInput[]
+    upsert?: TandonPenyimpananUpsertWithWhereUniqueWithoutResepInput | TandonPenyimpananUpsertWithWhereUniqueWithoutResepInput[]
+    set?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    disconnect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    delete?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    connect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    update?: TandonPenyimpananUpdateWithWhereUniqueWithoutResepInput | TandonPenyimpananUpdateWithWhereUniqueWithoutResepInput[]
+    updateMany?: TandonPenyimpananUpdateManyWithWhereWithoutResepInput | TandonPenyimpananUpdateManyWithWhereWithoutResepInput[]
+    deleteMany?: TandonPenyimpananScalarWhereInput | TandonPenyimpananScalarWhereInput[]
   }
 
   export type PenjadwalanCreatehariInput = {
@@ -12285,10 +14224,6 @@ export namespace Prisma {
     create?: XOR<TandonCreateWithoutPenjadwalanInput, TandonUncheckedCreateWithoutPenjadwalanInput>
     connectOrCreate?: TandonCreateOrConnectWithoutPenjadwalanInput
     connect?: TandonWhereUniqueInput
-  }
-
-  export type BoolFieldUpdateOperationsInput = {
-    set?: boolean
   }
 
   export type PenjadwalanUpdatehariInput = {
@@ -12330,6 +14265,10 @@ export namespace Prisma {
     connect?: GreenhouseWhereUniqueInput
   }
 
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
   export type TandonUpdateOneWithoutSensorNestedInput = {
     create?: XOR<TandonCreateWithoutSensorInput, TandonUncheckedCreateWithoutSensorInput>
     connectOrCreate?: TandonCreateOrConnectWithoutSensorInput
@@ -12360,14 +14299,6 @@ export namespace Prisma {
     update?: XOR<XOR<GreenhouseUpdateToOneWithWhereWithoutSensorInput, GreenhouseUpdateWithoutSensorInput>, GreenhouseUncheckedUpdateWithoutSensorInput>
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type TandonCreateNestedOneWithoutAktuatorInput = {
     create?: XOR<TandonCreateWithoutAktuatorInput, TandonUncheckedCreateWithoutAktuatorInput>
     connectOrCreate?: TandonCreateOrConnectWithoutAktuatorInput
@@ -12380,20 +14311,56 @@ export namespace Prisma {
     connect?: GreenhouseWhereUniqueInput
   }
 
-  export type TandonUpdateOneRequiredWithoutAktuatorNestedInput = {
+  export type TandonPenyimpananCreateNestedOneWithoutActuatorInput = {
+    create?: XOR<TandonPenyimpananCreateWithoutActuatorInput, TandonPenyimpananUncheckedCreateWithoutActuatorInput>
+    connectOrCreate?: TandonPenyimpananCreateOrConnectWithoutActuatorInput
+    connect?: TandonPenyimpananWhereUniqueInput
+  }
+
+  export type TandonBahanCreateNestedOneWithoutAktuatorInput = {
+    create?: XOR<TandonBahanCreateWithoutAktuatorInput, TandonBahanUncheckedCreateWithoutAktuatorInput>
+    connectOrCreate?: TandonBahanCreateOrConnectWithoutAktuatorInput
+    connect?: TandonBahanWhereUniqueInput
+  }
+
+  export type TandonUpdateOneWithoutAktuatorNestedInput = {
     create?: XOR<TandonCreateWithoutAktuatorInput, TandonUncheckedCreateWithoutAktuatorInput>
     connectOrCreate?: TandonCreateOrConnectWithoutAktuatorInput
     upsert?: TandonUpsertWithoutAktuatorInput
+    disconnect?: TandonWhereInput | boolean
+    delete?: TandonWhereInput | boolean
     connect?: TandonWhereUniqueInput
     update?: XOR<XOR<TandonUpdateToOneWithWhereWithoutAktuatorInput, TandonUpdateWithoutAktuatorInput>, TandonUncheckedUpdateWithoutAktuatorInput>
   }
 
-  export type GreenhouseUpdateOneRequiredWithoutAktuatorNestedInput = {
+  export type GreenhouseUpdateOneWithoutAktuatorNestedInput = {
     create?: XOR<GreenhouseCreateWithoutAktuatorInput, GreenhouseUncheckedCreateWithoutAktuatorInput>
     connectOrCreate?: GreenhouseCreateOrConnectWithoutAktuatorInput
     upsert?: GreenhouseUpsertWithoutAktuatorInput
+    disconnect?: GreenhouseWhereInput | boolean
+    delete?: GreenhouseWhereInput | boolean
     connect?: GreenhouseWhereUniqueInput
     update?: XOR<XOR<GreenhouseUpdateToOneWithWhereWithoutAktuatorInput, GreenhouseUpdateWithoutAktuatorInput>, GreenhouseUncheckedUpdateWithoutAktuatorInput>
+  }
+
+  export type TandonPenyimpananUpdateOneWithoutActuatorNestedInput = {
+    create?: XOR<TandonPenyimpananCreateWithoutActuatorInput, TandonPenyimpananUncheckedCreateWithoutActuatorInput>
+    connectOrCreate?: TandonPenyimpananCreateOrConnectWithoutActuatorInput
+    upsert?: TandonPenyimpananUpsertWithoutActuatorInput
+    disconnect?: TandonPenyimpananWhereInput | boolean
+    delete?: TandonPenyimpananWhereInput | boolean
+    connect?: TandonPenyimpananWhereUniqueInput
+    update?: XOR<XOR<TandonPenyimpananUpdateToOneWithWhereWithoutActuatorInput, TandonPenyimpananUpdateWithoutActuatorInput>, TandonPenyimpananUncheckedUpdateWithoutActuatorInput>
+  }
+
+  export type TandonBahanUpdateOneWithoutAktuatorNestedInput = {
+    create?: XOR<TandonBahanCreateWithoutAktuatorInput, TandonBahanUncheckedCreateWithoutAktuatorInput>
+    connectOrCreate?: TandonBahanCreateOrConnectWithoutAktuatorInput
+    upsert?: TandonBahanUpsertWithoutAktuatorInput
+    disconnect?: TandonBahanWhereInput | boolean
+    delete?: TandonBahanWhereInput | boolean
+    connect?: TandonBahanWhereUniqueInput
+    update?: XOR<XOR<TandonBahanUpdateToOneWithWhereWithoutAktuatorInput, TandonBahanUpdateWithoutAktuatorInput>, TandonBahanUncheckedUpdateWithoutAktuatorInput>
   }
 
   export type SensorCreateNestedManyWithoutTandonBahanInput = {
@@ -12401,6 +14368,13 @@ export namespace Prisma {
     connectOrCreate?: SensorCreateOrConnectWithoutTandonBahanInput | SensorCreateOrConnectWithoutTandonBahanInput[]
     createMany?: SensorCreateManyTandonBahanInputEnvelope
     connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+  }
+
+  export type AktuatorCreateNestedManyWithoutTandonBahanInput = {
+    create?: XOR<AktuatorCreateWithoutTandonBahanInput, AktuatorUncheckedCreateWithoutTandonBahanInput> | AktuatorCreateWithoutTandonBahanInput[] | AktuatorUncheckedCreateWithoutTandonBahanInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonBahanInput | AktuatorCreateOrConnectWithoutTandonBahanInput[]
+    createMany?: AktuatorCreateManyTandonBahanInputEnvelope
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
   }
 
   export type TandonCreateNestedOneWithoutTandonBahanInput = {
@@ -12416,6 +14390,13 @@ export namespace Prisma {
     connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
   }
 
+  export type AktuatorUncheckedCreateNestedManyWithoutTandonBahanInput = {
+    create?: XOR<AktuatorCreateWithoutTandonBahanInput, AktuatorUncheckedCreateWithoutTandonBahanInput> | AktuatorCreateWithoutTandonBahanInput[] | AktuatorUncheckedCreateWithoutTandonBahanInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonBahanInput | AktuatorCreateOrConnectWithoutTandonBahanInput[]
+    createMany?: AktuatorCreateManyTandonBahanInputEnvelope
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+  }
+
   export type SensorUpdateManyWithoutTandonBahanNestedInput = {
     create?: XOR<SensorCreateWithoutTandonBahanInput, SensorUncheckedCreateWithoutTandonBahanInput> | SensorCreateWithoutTandonBahanInput[] | SensorUncheckedCreateWithoutTandonBahanInput[]
     connectOrCreate?: SensorCreateOrConnectWithoutTandonBahanInput | SensorCreateOrConnectWithoutTandonBahanInput[]
@@ -12428,6 +14409,20 @@ export namespace Prisma {
     update?: SensorUpdateWithWhereUniqueWithoutTandonBahanInput | SensorUpdateWithWhereUniqueWithoutTandonBahanInput[]
     updateMany?: SensorUpdateManyWithWhereWithoutTandonBahanInput | SensorUpdateManyWithWhereWithoutTandonBahanInput[]
     deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
+  }
+
+  export type AktuatorUpdateManyWithoutTandonBahanNestedInput = {
+    create?: XOR<AktuatorCreateWithoutTandonBahanInput, AktuatorUncheckedCreateWithoutTandonBahanInput> | AktuatorCreateWithoutTandonBahanInput[] | AktuatorUncheckedCreateWithoutTandonBahanInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonBahanInput | AktuatorCreateOrConnectWithoutTandonBahanInput[]
+    upsert?: AktuatorUpsertWithWhereUniqueWithoutTandonBahanInput | AktuatorUpsertWithWhereUniqueWithoutTandonBahanInput[]
+    createMany?: AktuatorCreateManyTandonBahanInputEnvelope
+    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    update?: AktuatorUpdateWithWhereUniqueWithoutTandonBahanInput | AktuatorUpdateWithWhereUniqueWithoutTandonBahanInput[]
+    updateMany?: AktuatorUpdateManyWithWhereWithoutTandonBahanInput | AktuatorUpdateManyWithWhereWithoutTandonBahanInput[]
+    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
   }
 
   export type TandonUpdateOneRequiredWithoutTandonBahanNestedInput = {
@@ -12450,6 +14445,20 @@ export namespace Prisma {
     update?: SensorUpdateWithWhereUniqueWithoutTandonBahanInput | SensorUpdateWithWhereUniqueWithoutTandonBahanInput[]
     updateMany?: SensorUpdateManyWithWhereWithoutTandonBahanInput | SensorUpdateManyWithWhereWithoutTandonBahanInput[]
     deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
+  }
+
+  export type AktuatorUncheckedUpdateManyWithoutTandonBahanNestedInput = {
+    create?: XOR<AktuatorCreateWithoutTandonBahanInput, AktuatorUncheckedCreateWithoutTandonBahanInput> | AktuatorCreateWithoutTandonBahanInput[] | AktuatorUncheckedCreateWithoutTandonBahanInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutTandonBahanInput | AktuatorCreateOrConnectWithoutTandonBahanInput[]
+    upsert?: AktuatorUpsertWithWhereUniqueWithoutTandonBahanInput | AktuatorUpsertWithWhereUniqueWithoutTandonBahanInput[]
+    createMany?: AktuatorCreateManyTandonBahanInputEnvelope
+    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    update?: AktuatorUpdateWithWhereUniqueWithoutTandonBahanInput | AktuatorUpdateWithWhereUniqueWithoutTandonBahanInput[]
+    updateMany?: AktuatorUpdateManyWithWhereWithoutTandonBahanInput | AktuatorUpdateManyWithWhereWithoutTandonBahanInput[]
+    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutTandonInput = {
@@ -12486,6 +14495,13 @@ export namespace Prisma {
     connect?: PenjadwalanWhereUniqueInput | PenjadwalanWhereUniqueInput[]
   }
 
+  export type TandonPenyimpananCreateNestedManyWithoutTandonInput = {
+    create?: XOR<TandonPenyimpananCreateWithoutTandonInput, TandonPenyimpananUncheckedCreateWithoutTandonInput> | TandonPenyimpananCreateWithoutTandonInput[] | TandonPenyimpananUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: TandonPenyimpananCreateOrConnectWithoutTandonInput | TandonPenyimpananCreateOrConnectWithoutTandonInput[]
+    createMany?: TandonPenyimpananCreateManyTandonInputEnvelope
+    connect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+  }
+
   export type SensorUncheckedCreateNestedManyWithoutTandonInput = {
     create?: XOR<SensorCreateWithoutTandonInput, SensorUncheckedCreateWithoutTandonInput> | SensorCreateWithoutTandonInput[] | SensorUncheckedCreateWithoutTandonInput[]
     connectOrCreate?: SensorCreateOrConnectWithoutTandonInput | SensorCreateOrConnectWithoutTandonInput[]
@@ -12512,6 +14528,13 @@ export namespace Prisma {
     connectOrCreate?: PenjadwalanCreateOrConnectWithoutTandonInput | PenjadwalanCreateOrConnectWithoutTandonInput[]
     createMany?: PenjadwalanCreateManyTandonInputEnvelope
     connect?: PenjadwalanWhereUniqueInput | PenjadwalanWhereUniqueInput[]
+  }
+
+  export type TandonPenyimpananUncheckedCreateNestedManyWithoutTandonInput = {
+    create?: XOR<TandonPenyimpananCreateWithoutTandonInput, TandonPenyimpananUncheckedCreateWithoutTandonInput> | TandonPenyimpananCreateWithoutTandonInput[] | TandonPenyimpananUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: TandonPenyimpananCreateOrConnectWithoutTandonInput | TandonPenyimpananCreateOrConnectWithoutTandonInput[]
+    createMany?: TandonPenyimpananCreateManyTandonInputEnvelope
+    connect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
   }
 
   export type UserUpdateOneRequiredWithoutTandonNestedInput = {
@@ -12578,6 +14601,20 @@ export namespace Prisma {
     deleteMany?: PenjadwalanScalarWhereInput | PenjadwalanScalarWhereInput[]
   }
 
+  export type TandonPenyimpananUpdateManyWithoutTandonNestedInput = {
+    create?: XOR<TandonPenyimpananCreateWithoutTandonInput, TandonPenyimpananUncheckedCreateWithoutTandonInput> | TandonPenyimpananCreateWithoutTandonInput[] | TandonPenyimpananUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: TandonPenyimpananCreateOrConnectWithoutTandonInput | TandonPenyimpananCreateOrConnectWithoutTandonInput[]
+    upsert?: TandonPenyimpananUpsertWithWhereUniqueWithoutTandonInput | TandonPenyimpananUpsertWithWhereUniqueWithoutTandonInput[]
+    createMany?: TandonPenyimpananCreateManyTandonInputEnvelope
+    set?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    disconnect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    delete?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    connect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    update?: TandonPenyimpananUpdateWithWhereUniqueWithoutTandonInput | TandonPenyimpananUpdateWithWhereUniqueWithoutTandonInput[]
+    updateMany?: TandonPenyimpananUpdateManyWithWhereWithoutTandonInput | TandonPenyimpananUpdateManyWithWhereWithoutTandonInput[]
+    deleteMany?: TandonPenyimpananScalarWhereInput | TandonPenyimpananScalarWhereInput[]
+  }
+
   export type SensorUncheckedUpdateManyWithoutTandonNestedInput = {
     create?: XOR<SensorCreateWithoutTandonInput, SensorUncheckedCreateWithoutTandonInput> | SensorCreateWithoutTandonInput[] | SensorUncheckedCreateWithoutTandonInput[]
     connectOrCreate?: SensorCreateOrConnectWithoutTandonInput | SensorCreateOrConnectWithoutTandonInput[]
@@ -12632,6 +14669,20 @@ export namespace Prisma {
     update?: PenjadwalanUpdateWithWhereUniqueWithoutTandonInput | PenjadwalanUpdateWithWhereUniqueWithoutTandonInput[]
     updateMany?: PenjadwalanUpdateManyWithWhereWithoutTandonInput | PenjadwalanUpdateManyWithWhereWithoutTandonInput[]
     deleteMany?: PenjadwalanScalarWhereInput | PenjadwalanScalarWhereInput[]
+  }
+
+  export type TandonPenyimpananUncheckedUpdateManyWithoutTandonNestedInput = {
+    create?: XOR<TandonPenyimpananCreateWithoutTandonInput, TandonPenyimpananUncheckedCreateWithoutTandonInput> | TandonPenyimpananCreateWithoutTandonInput[] | TandonPenyimpananUncheckedCreateWithoutTandonInput[]
+    connectOrCreate?: TandonPenyimpananCreateOrConnectWithoutTandonInput | TandonPenyimpananCreateOrConnectWithoutTandonInput[]
+    upsert?: TandonPenyimpananUpsertWithWhereUniqueWithoutTandonInput | TandonPenyimpananUpsertWithWhereUniqueWithoutTandonInput[]
+    createMany?: TandonPenyimpananCreateManyTandonInputEnvelope
+    set?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    disconnect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    delete?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    connect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+    update?: TandonPenyimpananUpdateWithWhereUniqueWithoutTandonInput | TandonPenyimpananUpdateWithWhereUniqueWithoutTandonInput[]
+    updateMany?: TandonPenyimpananUpdateManyWithWhereWithoutTandonInput | TandonPenyimpananUpdateManyWithWhereWithoutTandonInput[]
+    deleteMany?: TandonPenyimpananScalarWhereInput | TandonPenyimpananScalarWhereInput[]
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -12764,22 +14815,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
   export type NestedBoolFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel>
     not?: NestedBoolFilter<$PrismaModel> | boolean
@@ -12791,6 +14826,17 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -12809,7 +14855,7 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
@@ -12817,7 +14863,43 @@ export namespace Prisma {
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedFloatNullableFilter<$PrismaModel>
+    _min?: NestedFloatNullableFilter<$PrismaModel>
+    _max?: NestedFloatNullableFilter<$PrismaModel>
+  }
+
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type GreenhouseCreateWithoutUserInput = {
@@ -12856,6 +14938,7 @@ export namespace Prisma {
     aktuator?: AktuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedManyWithoutTandonInput
   }
 
   export type TandonUncheckedCreateWithoutUserInput = {
@@ -12869,6 +14952,7 @@ export namespace Prisma {
     aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedCreateNestedManyWithoutTandonInput
   }
 
   export type TandonCreateOrConnectWithoutUserInput = {
@@ -12970,9 +15054,12 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
+    portPlc: number
     created_at?: Date | string
     updated_at?: Date | string | null
-    tandon: TandonCreateNestedOneWithoutAktuatorInput
+    tandon?: TandonCreateNestedOneWithoutAktuatorInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedOneWithoutActuatorInput
+    tandonBahan?: TandonBahanCreateNestedOneWithoutAktuatorInput
   }
 
   export type AktuatorUncheckedCreateWithoutGreenhouseInput = {
@@ -12982,7 +15069,10 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    tandonId: number
+    portPlc: number
+    tandonId?: number | null
+    tandonPenyimpananId?: number | null
+    tandonBahanId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -13004,6 +15094,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     tandon?: TandonCreateNestedOneWithoutSensorInput
@@ -13018,6 +15109,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     tandonId?: number | null
     tandonBahanId?: number | null
     created_at?: Date | string
@@ -13089,8 +15181,11 @@ export namespace Prisma {
     icon?: StringFilter<"Aktuator"> | string
     color?: StringFilter<"Aktuator"> | string
     status?: BoolFilter<"Aktuator"> | boolean
-    tandonId?: IntFilter<"Aktuator"> | number
-    greenhouseId?: IntFilter<"Aktuator"> | number
+    portPlc?: IntFilter<"Aktuator"> | number
+    tandonId?: IntNullableFilter<"Aktuator"> | number | null
+    greenhouseId?: IntNullableFilter<"Aktuator"> | number | null
+    tandonPenyimpananId?: IntNullableFilter<"Aktuator"> | number | null
+    tandonBahanId?: IntNullableFilter<"Aktuator"> | number | null
     created_at?: DateTimeFilter<"Aktuator"> | Date | string
     updated_at?: DateTimeNullableFilter<"Aktuator"> | Date | string | null
   }
@@ -13122,11 +15217,204 @@ export namespace Prisma {
     unit_measurement?: StringFilter<"Sensor"> | string
     status?: BoolFilter<"Sensor"> | boolean
     nilai?: IntFilter<"Sensor"> | number
+    icon?: StringNullableFilter<"Sensor"> | string | null
     tandonId?: IntNullableFilter<"Sensor"> | number | null
     tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
     greenhouseId?: IntNullableFilter<"Sensor"> | number | null
     created_at?: DateTimeFilter<"Sensor"> | Date | string
     updated_at?: DateTimeNullableFilter<"Sensor"> | Date | string | null
+  }
+
+  export type TandonCreateWithoutTandonPenyimpananInput = {
+    nama: string
+    status: string
+    isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    user: UserCreateNestedOneWithoutTandonInput
+    sensor?: SensorCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorCreateNestedManyWithoutTandonInput
+    tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
+    penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
+  }
+
+  export type TandonUncheckedCreateWithoutTandonPenyimpananInput = {
+    id?: number
+    nama: string
+    userId: number
+    status: string
+    isOnline: boolean
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
+    tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
+    penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
+  }
+
+  export type TandonCreateOrConnectWithoutTandonPenyimpananInput = {
+    where: TandonWhereUniqueInput
+    create: XOR<TandonCreateWithoutTandonPenyimpananInput, TandonUncheckedCreateWithoutTandonPenyimpananInput>
+  }
+
+  export type AktuatorCreateWithoutTandonPenyimpananInput = {
+    name: string
+    merek: string
+    icon: string
+    color: string
+    status: boolean
+    portPlc: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    tandon?: TandonCreateNestedOneWithoutAktuatorInput
+    greenhouse?: GreenhouseCreateNestedOneWithoutAktuatorInput
+    tandonBahan?: TandonBahanCreateNestedOneWithoutAktuatorInput
+  }
+
+  export type AktuatorUncheckedCreateWithoutTandonPenyimpananInput = {
+    id?: number
+    name: string
+    merek: string
+    icon: string
+    color: string
+    status: boolean
+    portPlc: number
+    tandonId?: number | null
+    greenhouseId?: number | null
+    tandonBahanId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type AktuatorCreateOrConnectWithoutTandonPenyimpananInput = {
+    where: AktuatorWhereUniqueInput
+    create: XOR<AktuatorCreateWithoutTandonPenyimpananInput, AktuatorUncheckedCreateWithoutTandonPenyimpananInput>
+  }
+
+  export type AktuatorCreateManyTandonPenyimpananInputEnvelope = {
+    data: AktuatorCreateManyTandonPenyimpananInput | AktuatorCreateManyTandonPenyimpananInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type ResepCreateWithoutTandonPenyimpananInput = {
+    ppm?: number | null
+    ph?: number | null
+    volume?: number | null
+    nama: string
+    interval?: number | null
+    nutrisiA?: number | null
+    nutrisiB?: number | null
+    air?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    penjadwalan?: PenjadwalanCreateNestedManyWithoutResepInput
+  }
+
+  export type ResepUncheckedCreateWithoutTandonPenyimpananInput = {
+    id?: number
+    ppm?: number | null
+    ph?: number | null
+    volume?: number | null
+    nama: string
+    interval?: number | null
+    nutrisiA?: number | null
+    nutrisiB?: number | null
+    air?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutResepInput
+  }
+
+  export type ResepCreateOrConnectWithoutTandonPenyimpananInput = {
+    where: ResepWhereUniqueInput
+    create: XOR<ResepCreateWithoutTandonPenyimpananInput, ResepUncheckedCreateWithoutTandonPenyimpananInput>
+  }
+
+  export type TandonUpsertWithoutTandonPenyimpananInput = {
+    update: XOR<TandonUpdateWithoutTandonPenyimpananInput, TandonUncheckedUpdateWithoutTandonPenyimpananInput>
+    create: XOR<TandonCreateWithoutTandonPenyimpananInput, TandonUncheckedCreateWithoutTandonPenyimpananInput>
+    where?: TandonWhereInput
+  }
+
+  export type TandonUpdateToOneWithWhereWithoutTandonPenyimpananInput = {
+    where?: TandonWhereInput
+    data: XOR<TandonUpdateWithoutTandonPenyimpananInput, TandonUncheckedUpdateWithoutTandonPenyimpananInput>
+  }
+
+  export type TandonUpdateWithoutTandonPenyimpananInput = {
+    nama?: StringFieldUpdateOperationsInput | string
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutTandonNestedInput
+    sensor?: SensorUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUpdateManyWithoutTandonNestedInput
+    tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
+    penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
+  }
+
+  export type TandonUncheckedUpdateWithoutTandonPenyimpananInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    userId?: IntFieldUpdateOperationsInput | number
+    status?: StringFieldUpdateOperationsInput | string
+    isOnline?: BoolFieldUpdateOperationsInput | boolean
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
+    tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
+    penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
+  }
+
+  export type AktuatorUpsertWithWhereUniqueWithoutTandonPenyimpananInput = {
+    where: AktuatorWhereUniqueInput
+    update: XOR<AktuatorUpdateWithoutTandonPenyimpananInput, AktuatorUncheckedUpdateWithoutTandonPenyimpananInput>
+    create: XOR<AktuatorCreateWithoutTandonPenyimpananInput, AktuatorUncheckedCreateWithoutTandonPenyimpananInput>
+  }
+
+  export type AktuatorUpdateWithWhereUniqueWithoutTandonPenyimpananInput = {
+    where: AktuatorWhereUniqueInput
+    data: XOR<AktuatorUpdateWithoutTandonPenyimpananInput, AktuatorUncheckedUpdateWithoutTandonPenyimpananInput>
+  }
+
+  export type AktuatorUpdateManyWithWhereWithoutTandonPenyimpananInput = {
+    where: AktuatorScalarWhereInput
+    data: XOR<AktuatorUpdateManyMutationInput, AktuatorUncheckedUpdateManyWithoutTandonPenyimpananInput>
+  }
+
+  export type ResepUpsertWithWhereUniqueWithoutTandonPenyimpananInput = {
+    where: ResepWhereUniqueInput
+    update: XOR<ResepUpdateWithoutTandonPenyimpananInput, ResepUncheckedUpdateWithoutTandonPenyimpananInput>
+    create: XOR<ResepCreateWithoutTandonPenyimpananInput, ResepUncheckedCreateWithoutTandonPenyimpananInput>
+  }
+
+  export type ResepUpdateWithWhereUniqueWithoutTandonPenyimpananInput = {
+    where: ResepWhereUniqueInput
+    data: XOR<ResepUpdateWithoutTandonPenyimpananInput, ResepUncheckedUpdateWithoutTandonPenyimpananInput>
+  }
+
+  export type ResepUpdateManyWithWhereWithoutTandonPenyimpananInput = {
+    where: ResepScalarWhereInput
+    data: XOR<ResepUpdateManyMutationInput, ResepUncheckedUpdateManyWithoutTandonPenyimpananInput>
+  }
+
+  export type ResepScalarWhereInput = {
+    AND?: ResepScalarWhereInput | ResepScalarWhereInput[]
+    OR?: ResepScalarWhereInput[]
+    NOT?: ResepScalarWhereInput | ResepScalarWhereInput[]
+    id?: IntFilter<"Resep"> | number
+    ppm?: IntNullableFilter<"Resep"> | number | null
+    ph?: FloatNullableFilter<"Resep"> | number | null
+    volume?: FloatNullableFilter<"Resep"> | number | null
+    nama?: StringFilter<"Resep"> | string
+    interval?: IntNullableFilter<"Resep"> | number | null
+    nutrisiA?: FloatNullableFilter<"Resep"> | number | null
+    nutrisiB?: FloatNullableFilter<"Resep"> | number | null
+    air?: FloatNullableFilter<"Resep"> | number | null
+    created_at?: DateTimeFilter<"Resep"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Resep"> | Date | string | null
   }
 
   export type PenjadwalanCreateWithoutResepInput = {
@@ -13156,6 +15444,26 @@ export namespace Prisma {
   export type PenjadwalanCreateManyResepInputEnvelope = {
     data: PenjadwalanCreateManyResepInput | PenjadwalanCreateManyResepInput[]
     skipDuplicates?: boolean
+  }
+
+  export type TandonPenyimpananCreateWithoutResepInput = {
+    nama: string
+    distributable: boolean
+    tandon: TandonCreateNestedOneWithoutTandonPenyimpananInput
+    actuator?: AktuatorCreateNestedManyWithoutTandonPenyimpananInput
+  }
+
+  export type TandonPenyimpananUncheckedCreateWithoutResepInput = {
+    id?: number
+    nama: string
+    distributable: boolean
+    tandonId: number
+    actuator?: AktuatorUncheckedCreateNestedManyWithoutTandonPenyimpananInput
+  }
+
+  export type TandonPenyimpananCreateOrConnectWithoutResepInput = {
+    where: TandonPenyimpananWhereUniqueInput
+    create: XOR<TandonPenyimpananCreateWithoutResepInput, TandonPenyimpananUncheckedCreateWithoutResepInput>
   }
 
   export type PenjadwalanUpsertWithWhereUniqueWithoutResepInput = {
@@ -13188,23 +15496,59 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"Penjadwalan"> | Date | string | null
   }
 
+  export type TandonPenyimpananUpsertWithWhereUniqueWithoutResepInput = {
+    where: TandonPenyimpananWhereUniqueInput
+    update: XOR<TandonPenyimpananUpdateWithoutResepInput, TandonPenyimpananUncheckedUpdateWithoutResepInput>
+    create: XOR<TandonPenyimpananCreateWithoutResepInput, TandonPenyimpananUncheckedCreateWithoutResepInput>
+  }
+
+  export type TandonPenyimpananUpdateWithWhereUniqueWithoutResepInput = {
+    where: TandonPenyimpananWhereUniqueInput
+    data: XOR<TandonPenyimpananUpdateWithoutResepInput, TandonPenyimpananUncheckedUpdateWithoutResepInput>
+  }
+
+  export type TandonPenyimpananUpdateManyWithWhereWithoutResepInput = {
+    where: TandonPenyimpananScalarWhereInput
+    data: XOR<TandonPenyimpananUpdateManyMutationInput, TandonPenyimpananUncheckedUpdateManyWithoutResepInput>
+  }
+
+  export type TandonPenyimpananScalarWhereInput = {
+    AND?: TandonPenyimpananScalarWhereInput | TandonPenyimpananScalarWhereInput[]
+    OR?: TandonPenyimpananScalarWhereInput[]
+    NOT?: TandonPenyimpananScalarWhereInput | TandonPenyimpananScalarWhereInput[]
+    id?: IntFilter<"TandonPenyimpanan"> | number
+    nama?: StringFilter<"TandonPenyimpanan"> | string
+    distributable?: BoolFilter<"TandonPenyimpanan"> | boolean
+    tandonId?: IntFilter<"TandonPenyimpanan"> | number
+  }
+
   export type ResepCreateWithoutPenjadwalanInput = {
-    ppm: number
-    ph: number
+    ppm?: number | null
+    ph?: number | null
+    volume?: number | null
     nama: string
-    interval: number
+    interval?: number | null
+    nutrisiA?: number | null
+    nutrisiB?: number | null
+    air?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedManyWithoutResepInput
   }
 
   export type ResepUncheckedCreateWithoutPenjadwalanInput = {
     id?: number
-    ppm: number
-    ph: number
+    ppm?: number | null
+    ph?: number | null
+    volume?: number | null
     nama: string
-    interval: number
+    interval?: number | null
+    nutrisiA?: number | null
+    nutrisiB?: number | null
+    air?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
+    tandonPenyimpanan?: TandonPenyimpananUncheckedCreateNestedManyWithoutResepInput
   }
 
   export type ResepCreateOrConnectWithoutPenjadwalanInput = {
@@ -13222,6 +15566,7 @@ export namespace Prisma {
     sensor?: SensorCreateNestedManyWithoutTandonInput
     aktuator?: AktuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedManyWithoutTandonInput
   }
 
   export type TandonUncheckedCreateWithoutPenjadwalanInput = {
@@ -13235,6 +15580,7 @@ export namespace Prisma {
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedCreateNestedManyWithoutTandonInput
   }
 
   export type TandonCreateOrConnectWithoutPenjadwalanInput = {
@@ -13254,22 +15600,32 @@ export namespace Prisma {
   }
 
   export type ResepUpdateWithoutPenjadwalanInput = {
-    ppm?: IntFieldUpdateOperationsInput | number
-    ph?: FloatFieldUpdateOperationsInput | number
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tandonPenyimpanan?: TandonPenyimpananUpdateManyWithoutResepNestedInput
   }
 
   export type ResepUncheckedUpdateWithoutPenjadwalanInput = {
     id?: IntFieldUpdateOperationsInput | number
-    ppm?: IntFieldUpdateOperationsInput | number
-    ph?: FloatFieldUpdateOperationsInput | number
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tandonPenyimpanan?: TandonPenyimpananUncheckedUpdateManyWithoutResepNestedInput
   }
 
   export type TandonUpsertWithoutPenjadwalanInput = {
@@ -13293,6 +15649,7 @@ export namespace Prisma {
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     aktuator?: AktuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateManyWithoutTandonNestedInput
   }
 
   export type TandonUncheckedUpdateWithoutPenjadwalanInput = {
@@ -13306,6 +15663,7 @@ export namespace Prisma {
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedUpdateManyWithoutTandonNestedInput
   }
 
   export type TandonCreateWithoutSensorInput = {
@@ -13318,6 +15676,7 @@ export namespace Prisma {
     aktuator?: AktuatorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedManyWithoutTandonInput
   }
 
   export type TandonUncheckedCreateWithoutSensorInput = {
@@ -13331,6 +15690,7 @@ export namespace Prisma {
     aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedCreateNestedManyWithoutTandonInput
   }
 
   export type TandonCreateOrConnectWithoutSensorInput = {
@@ -13342,6 +15702,7 @@ export namespace Prisma {
     nama: string
     created_at?: Date | string
     updated_at?: Date | string | null
+    aktuator?: AktuatorCreateNestedManyWithoutTandonBahanInput
     tandon: TandonCreateNestedOneWithoutTandonBahanInput
   }
 
@@ -13351,6 +15712,7 @@ export namespace Prisma {
     tandonId: number
     created_at?: Date | string
     updated_at?: Date | string | null
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonBahanInput
   }
 
   export type TandonBahanCreateOrConnectWithoutSensorInput = {
@@ -13405,6 +15767,7 @@ export namespace Prisma {
     aktuator?: AktuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateManyWithoutTandonNestedInput
   }
 
   export type TandonUncheckedUpdateWithoutSensorInput = {
@@ -13418,6 +15781,7 @@ export namespace Prisma {
     aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedUpdateManyWithoutTandonNestedInput
   }
 
   export type TandonBahanUpsertWithoutSensorInput = {
@@ -13435,6 +15799,7 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aktuator?: AktuatorUpdateManyWithoutTandonBahanNestedInput
     tandon?: TandonUpdateOneRequiredWithoutTandonBahanNestedInput
   }
 
@@ -13444,6 +15809,7 @@ export namespace Prisma {
     tandonId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aktuator?: AktuatorUncheckedUpdateManyWithoutTandonBahanNestedInput
   }
 
   export type GreenhouseUpsertWithoutSensorInput = {
@@ -13488,6 +15854,7 @@ export namespace Prisma {
     sensor?: SensorCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedManyWithoutTandonInput
   }
 
   export type TandonUncheckedCreateWithoutAktuatorInput = {
@@ -13501,6 +15868,7 @@ export namespace Prisma {
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     tandonBahan?: TandonBahanUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedCreateNestedManyWithoutTandonInput
   }
 
   export type TandonCreateOrConnectWithoutAktuatorInput = {
@@ -13534,6 +15902,48 @@ export namespace Prisma {
     create: XOR<GreenhouseCreateWithoutAktuatorInput, GreenhouseUncheckedCreateWithoutAktuatorInput>
   }
 
+  export type TandonPenyimpananCreateWithoutActuatorInput = {
+    nama: string
+    distributable: boolean
+    tandon: TandonCreateNestedOneWithoutTandonPenyimpananInput
+    resep?: ResepCreateNestedManyWithoutTandonPenyimpananInput
+  }
+
+  export type TandonPenyimpananUncheckedCreateWithoutActuatorInput = {
+    id?: number
+    nama: string
+    distributable: boolean
+    tandonId: number
+    resep?: ResepUncheckedCreateNestedManyWithoutTandonPenyimpananInput
+  }
+
+  export type TandonPenyimpananCreateOrConnectWithoutActuatorInput = {
+    where: TandonPenyimpananWhereUniqueInput
+    create: XOR<TandonPenyimpananCreateWithoutActuatorInput, TandonPenyimpananUncheckedCreateWithoutActuatorInput>
+  }
+
+  export type TandonBahanCreateWithoutAktuatorInput = {
+    nama: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    sensor?: SensorCreateNestedManyWithoutTandonBahanInput
+    tandon: TandonCreateNestedOneWithoutTandonBahanInput
+  }
+
+  export type TandonBahanUncheckedCreateWithoutAktuatorInput = {
+    id?: number
+    nama: string
+    tandonId: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    sensor?: SensorUncheckedCreateNestedManyWithoutTandonBahanInput
+  }
+
+  export type TandonBahanCreateOrConnectWithoutAktuatorInput = {
+    where: TandonBahanWhereUniqueInput
+    create: XOR<TandonBahanCreateWithoutAktuatorInput, TandonBahanUncheckedCreateWithoutAktuatorInput>
+  }
+
   export type TandonUpsertWithoutAktuatorInput = {
     update: XOR<TandonUpdateWithoutAktuatorInput, TandonUncheckedUpdateWithoutAktuatorInput>
     create: XOR<TandonCreateWithoutAktuatorInput, TandonUncheckedCreateWithoutAktuatorInput>
@@ -13555,6 +15965,7 @@ export namespace Prisma {
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateManyWithoutTandonNestedInput
   }
 
   export type TandonUncheckedUpdateWithoutAktuatorInput = {
@@ -13568,6 +15979,7 @@ export namespace Prisma {
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedUpdateManyWithoutTandonNestedInput
   }
 
   export type GreenhouseUpsertWithoutAktuatorInput = {
@@ -13602,6 +16014,60 @@ export namespace Prisma {
     sensor?: SensorUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
+  export type TandonPenyimpananUpsertWithoutActuatorInput = {
+    update: XOR<TandonPenyimpananUpdateWithoutActuatorInput, TandonPenyimpananUncheckedUpdateWithoutActuatorInput>
+    create: XOR<TandonPenyimpananCreateWithoutActuatorInput, TandonPenyimpananUncheckedCreateWithoutActuatorInput>
+    where?: TandonPenyimpananWhereInput
+  }
+
+  export type TandonPenyimpananUpdateToOneWithWhereWithoutActuatorInput = {
+    where?: TandonPenyimpananWhereInput
+    data: XOR<TandonPenyimpananUpdateWithoutActuatorInput, TandonPenyimpananUncheckedUpdateWithoutActuatorInput>
+  }
+
+  export type TandonPenyimpananUpdateWithoutActuatorInput = {
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+    tandon?: TandonUpdateOneRequiredWithoutTandonPenyimpananNestedInput
+    resep?: ResepUpdateManyWithoutTandonPenyimpananNestedInput
+  }
+
+  export type TandonPenyimpananUncheckedUpdateWithoutActuatorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+    tandonId?: IntFieldUpdateOperationsInput | number
+    resep?: ResepUncheckedUpdateManyWithoutTandonPenyimpananNestedInput
+  }
+
+  export type TandonBahanUpsertWithoutAktuatorInput = {
+    update: XOR<TandonBahanUpdateWithoutAktuatorInput, TandonBahanUncheckedUpdateWithoutAktuatorInput>
+    create: XOR<TandonBahanCreateWithoutAktuatorInput, TandonBahanUncheckedCreateWithoutAktuatorInput>
+    where?: TandonBahanWhereInput
+  }
+
+  export type TandonBahanUpdateToOneWithWhereWithoutAktuatorInput = {
+    where?: TandonBahanWhereInput
+    data: XOR<TandonBahanUpdateWithoutAktuatorInput, TandonBahanUncheckedUpdateWithoutAktuatorInput>
+  }
+
+  export type TandonBahanUpdateWithoutAktuatorInput = {
+    nama?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sensor?: SensorUpdateManyWithoutTandonBahanNestedInput
+    tandon?: TandonUpdateOneRequiredWithoutTandonBahanNestedInput
+  }
+
+  export type TandonBahanUncheckedUpdateWithoutAktuatorInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    tandonId?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sensor?: SensorUncheckedUpdateManyWithoutTandonBahanNestedInput
+  }
+
   export type SensorCreateWithoutTandonBahanInput = {
     name: string
     persamaan: string
@@ -13609,6 +16075,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     tandon?: TandonCreateNestedOneWithoutSensorInput
@@ -13623,6 +16090,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     tandonId?: number | null
     greenhouseId?: number | null
     created_at?: Date | string
@@ -13639,6 +16107,45 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AktuatorCreateWithoutTandonBahanInput = {
+    name: string
+    merek: string
+    icon: string
+    color: string
+    status: boolean
+    portPlc: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    tandon?: TandonCreateNestedOneWithoutAktuatorInput
+    greenhouse?: GreenhouseCreateNestedOneWithoutAktuatorInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedOneWithoutActuatorInput
+  }
+
+  export type AktuatorUncheckedCreateWithoutTandonBahanInput = {
+    id?: number
+    name: string
+    merek: string
+    icon: string
+    color: string
+    status: boolean
+    portPlc: number
+    tandonId?: number | null
+    greenhouseId?: number | null
+    tandonPenyimpananId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type AktuatorCreateOrConnectWithoutTandonBahanInput = {
+    where: AktuatorWhereUniqueInput
+    create: XOR<AktuatorCreateWithoutTandonBahanInput, AktuatorUncheckedCreateWithoutTandonBahanInput>
+  }
+
+  export type AktuatorCreateManyTandonBahanInputEnvelope = {
+    data: AktuatorCreateManyTandonBahanInput | AktuatorCreateManyTandonBahanInput[]
+    skipDuplicates?: boolean
+  }
+
   export type TandonCreateWithoutTandonBahanInput = {
     nama: string
     status: string
@@ -13649,6 +16156,7 @@ export namespace Prisma {
     sensor?: SensorCreateNestedManyWithoutTandonInput
     aktuator?: AktuatorCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedManyWithoutTandonInput
   }
 
   export type TandonUncheckedCreateWithoutTandonBahanInput = {
@@ -13662,6 +16170,7 @@ export namespace Prisma {
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
     aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutTandonInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedCreateNestedManyWithoutTandonInput
   }
 
   export type TandonCreateOrConnectWithoutTandonBahanInput = {
@@ -13685,6 +16194,22 @@ export namespace Prisma {
     data: XOR<SensorUpdateManyMutationInput, SensorUncheckedUpdateManyWithoutTandonBahanInput>
   }
 
+  export type AktuatorUpsertWithWhereUniqueWithoutTandonBahanInput = {
+    where: AktuatorWhereUniqueInput
+    update: XOR<AktuatorUpdateWithoutTandonBahanInput, AktuatorUncheckedUpdateWithoutTandonBahanInput>
+    create: XOR<AktuatorCreateWithoutTandonBahanInput, AktuatorUncheckedCreateWithoutTandonBahanInput>
+  }
+
+  export type AktuatorUpdateWithWhereUniqueWithoutTandonBahanInput = {
+    where: AktuatorWhereUniqueInput
+    data: XOR<AktuatorUpdateWithoutTandonBahanInput, AktuatorUncheckedUpdateWithoutTandonBahanInput>
+  }
+
+  export type AktuatorUpdateManyWithWhereWithoutTandonBahanInput = {
+    where: AktuatorScalarWhereInput
+    data: XOR<AktuatorUpdateManyMutationInput, AktuatorUncheckedUpdateManyWithoutTandonBahanInput>
+  }
+
   export type TandonUpsertWithoutTandonBahanInput = {
     update: XOR<TandonUpdateWithoutTandonBahanInput, TandonUncheckedUpdateWithoutTandonBahanInput>
     create: XOR<TandonCreateWithoutTandonBahanInput, TandonUncheckedCreateWithoutTandonBahanInput>
@@ -13706,6 +16231,7 @@ export namespace Prisma {
     sensor?: SensorUpdateManyWithoutTandonNestedInput
     aktuator?: AktuatorUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateManyWithoutTandonNestedInput
   }
 
   export type TandonUncheckedUpdateWithoutTandonBahanInput = {
@@ -13719,6 +16245,7 @@ export namespace Prisma {
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
     aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedUpdateManyWithoutTandonNestedInput
   }
 
   export type UserCreateWithoutTandonInput = {
@@ -13754,6 +16281,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     tandonBahan?: TandonBahanCreateNestedOneWithoutSensorInput
@@ -13768,6 +16296,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     tandonBahanId?: number | null
     greenhouseId?: number | null
     created_at?: Date | string
@@ -13790,9 +16319,12 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
+    portPlc: number
     created_at?: Date | string
     updated_at?: Date | string | null
-    greenhouse: GreenhouseCreateNestedOneWithoutAktuatorInput
+    greenhouse?: GreenhouseCreateNestedOneWithoutAktuatorInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedOneWithoutActuatorInput
+    tandonBahan?: TandonBahanCreateNestedOneWithoutAktuatorInput
   }
 
   export type AktuatorUncheckedCreateWithoutTandonInput = {
@@ -13802,7 +16334,10 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    greenhouseId: number
+    portPlc: number
+    greenhouseId?: number | null
+    tandonPenyimpananId?: number | null
+    tandonBahanId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -13822,6 +16357,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorCreateNestedManyWithoutTandonBahanInput
+    aktuator?: AktuatorCreateNestedManyWithoutTandonBahanInput
   }
 
   export type TandonBahanUncheckedCreateWithoutTandonInput = {
@@ -13830,6 +16366,7 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonBahanInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonBahanInput
   }
 
   export type TandonBahanCreateOrConnectWithoutTandonInput = {
@@ -13868,6 +16405,31 @@ export namespace Prisma {
 
   export type PenjadwalanCreateManyTandonInputEnvelope = {
     data: PenjadwalanCreateManyTandonInput | PenjadwalanCreateManyTandonInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type TandonPenyimpananCreateWithoutTandonInput = {
+    nama: string
+    distributable: boolean
+    actuator?: AktuatorCreateNestedManyWithoutTandonPenyimpananInput
+    resep?: ResepCreateNestedManyWithoutTandonPenyimpananInput
+  }
+
+  export type TandonPenyimpananUncheckedCreateWithoutTandonInput = {
+    id?: number
+    nama: string
+    distributable: boolean
+    actuator?: AktuatorUncheckedCreateNestedManyWithoutTandonPenyimpananInput
+    resep?: ResepUncheckedCreateNestedManyWithoutTandonPenyimpananInput
+  }
+
+  export type TandonPenyimpananCreateOrConnectWithoutTandonInput = {
+    where: TandonPenyimpananWhereUniqueInput
+    create: XOR<TandonPenyimpananCreateWithoutTandonInput, TandonPenyimpananUncheckedCreateWithoutTandonInput>
+  }
+
+  export type TandonPenyimpananCreateManyTandonInputEnvelope = {
+    data: TandonPenyimpananCreateManyTandonInput | TandonPenyimpananCreateManyTandonInput[]
     skipDuplicates?: boolean
   }
 
@@ -13978,6 +16540,22 @@ export namespace Prisma {
     data: XOR<PenjadwalanUpdateManyMutationInput, PenjadwalanUncheckedUpdateManyWithoutTandonInput>
   }
 
+  export type TandonPenyimpananUpsertWithWhereUniqueWithoutTandonInput = {
+    where: TandonPenyimpananWhereUniqueInput
+    update: XOR<TandonPenyimpananUpdateWithoutTandonInput, TandonPenyimpananUncheckedUpdateWithoutTandonInput>
+    create: XOR<TandonPenyimpananCreateWithoutTandonInput, TandonPenyimpananUncheckedCreateWithoutTandonInput>
+  }
+
+  export type TandonPenyimpananUpdateWithWhereUniqueWithoutTandonInput = {
+    where: TandonPenyimpananWhereUniqueInput
+    data: XOR<TandonPenyimpananUpdateWithoutTandonInput, TandonPenyimpananUncheckedUpdateWithoutTandonInput>
+  }
+
+  export type TandonPenyimpananUpdateManyWithWhereWithoutTandonInput = {
+    where: TandonPenyimpananScalarWhereInput
+    data: XOR<TandonPenyimpananUpdateManyMutationInput, TandonPenyimpananUncheckedUpdateManyWithoutTandonInput>
+  }
+
   export type TandonCreateManyUserInput = {
     id?: number
     nama: string
@@ -14027,6 +16605,7 @@ export namespace Prisma {
     aktuator?: AktuatorUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateManyWithoutTandonNestedInput
   }
 
   export type TandonUncheckedUpdateWithoutUserInput = {
@@ -14040,6 +16619,7 @@ export namespace Prisma {
     aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
     tandonBahan?: TandonBahanUncheckedUpdateManyWithoutTandonNestedInput
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutTandonNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedUpdateManyWithoutTandonNestedInput
   }
 
   export type TandonUncheckedUpdateManyWithoutUserInput = {
@@ -14058,7 +16638,10 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    tandonId: number
+    portPlc: number
+    tandonId?: number | null
+    tandonPenyimpananId?: number | null
+    tandonBahanId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -14071,6 +16654,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     tandonId?: number | null
     tandonBahanId?: number | null
     created_at?: Date | string
@@ -14114,9 +16698,12 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    portPlc?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tandon?: TandonUpdateOneRequiredWithoutAktuatorNestedInput
+    tandon?: TandonUpdateOneWithoutAktuatorNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateOneWithoutActuatorNestedInput
+    tandonBahan?: TandonBahanUpdateOneWithoutAktuatorNestedInput
   }
 
   export type AktuatorUncheckedUpdateWithoutGreenhouseInput = {
@@ -14126,7 +16713,10 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    tandonId?: IntFieldUpdateOperationsInput | number
+    portPlc?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -14138,7 +16728,10 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    tandonId?: IntFieldUpdateOperationsInput | number
+    portPlc?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -14150,6 +16743,7 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneWithoutSensorNestedInput
@@ -14164,6 +16758,7 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14178,8 +16773,111 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AktuatorCreateManyTandonPenyimpananInput = {
+    id?: number
+    name: string
+    merek: string
+    icon: string
+    color: string
+    status: boolean
+    portPlc: number
+    tandonId?: number | null
+    greenhouseId?: number | null
+    tandonBahanId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type AktuatorUpdateWithoutTandonPenyimpananInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    portPlc?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tandon?: TandonUpdateOneWithoutAktuatorNestedInput
+    greenhouse?: GreenhouseUpdateOneWithoutAktuatorNestedInput
+    tandonBahan?: TandonBahanUpdateOneWithoutAktuatorNestedInput
+  }
+
+  export type AktuatorUncheckedUpdateWithoutTandonPenyimpananInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    portPlc?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AktuatorUncheckedUpdateManyWithoutTandonPenyimpananInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    portPlc?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type ResepUpdateWithoutTandonPenyimpananInput = {
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    nama?: StringFieldUpdateOperationsInput | string
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    penjadwalan?: PenjadwalanUpdateManyWithoutResepNestedInput
+  }
+
+  export type ResepUncheckedUpdateWithoutTandonPenyimpananInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    nama?: StringFieldUpdateOperationsInput | string
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutResepNestedInput
+  }
+
+  export type ResepUncheckedUpdateManyWithoutTandonPenyimpananInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    nama?: StringFieldUpdateOperationsInput | string
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -14223,6 +16921,28 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type TandonPenyimpananUpdateWithoutResepInput = {
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+    tandon?: TandonUpdateOneRequiredWithoutTandonPenyimpananNestedInput
+    actuator?: AktuatorUpdateManyWithoutTandonPenyimpananNestedInput
+  }
+
+  export type TandonPenyimpananUncheckedUpdateWithoutResepInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+    tandonId?: IntFieldUpdateOperationsInput | number
+    actuator?: AktuatorUncheckedUpdateManyWithoutTandonPenyimpananNestedInput
+  }
+
+  export type TandonPenyimpananUncheckedUpdateManyWithoutResepInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+    tandonId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type SensorCreateManyTandonBahanInput = {
     id?: number
     name: string
@@ -14231,8 +16951,24 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     tandonId?: number | null
     greenhouseId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type AktuatorCreateManyTandonBahanInput = {
+    id?: number
+    name: string
+    merek: string
+    icon: string
+    color: string
+    status: boolean
+    portPlc: number
+    tandonId?: number | null
+    greenhouseId?: number | null
+    tandonPenyimpananId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -14244,6 +16980,7 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneWithoutSensorNestedInput
@@ -14258,6 +16995,7 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14272,8 +17010,53 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AktuatorUpdateWithoutTandonBahanInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    portPlc?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tandon?: TandonUpdateOneWithoutAktuatorNestedInput
+    greenhouse?: GreenhouseUpdateOneWithoutAktuatorNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateOneWithoutActuatorNestedInput
+  }
+
+  export type AktuatorUncheckedUpdateWithoutTandonBahanInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    portPlc?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AktuatorUncheckedUpdateManyWithoutTandonBahanInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    icon?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    portPlc?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -14286,6 +17069,7 @@ export namespace Prisma {
     unit_measurement: string
     status: boolean
     nilai: number
+    icon?: string | null
     tandonBahanId?: number | null
     greenhouseId?: number | null
     created_at?: Date | string
@@ -14299,7 +17083,10 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    greenhouseId: number
+    portPlc: number
+    greenhouseId?: number | null
+    tandonPenyimpananId?: number | null
+    tandonBahanId?: number | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -14321,6 +17108,12 @@ export namespace Prisma {
     updated_at?: Date | string | null
   }
 
+  export type TandonPenyimpananCreateManyTandonInput = {
+    id?: number
+    nama: string
+    distributable: boolean
+  }
+
   export type SensorUpdateWithoutTandonInput = {
     name?: StringFieldUpdateOperationsInput | string
     persamaan?: StringFieldUpdateOperationsInput | string
@@ -14328,6 +17121,7 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandonBahan?: TandonBahanUpdateOneWithoutSensorNestedInput
@@ -14342,6 +17136,7 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14356,6 +17151,7 @@ export namespace Prisma {
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
     nilai?: IntFieldUpdateOperationsInput | number
+    icon?: NullableStringFieldUpdateOperationsInput | string | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -14368,9 +17164,12 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    portPlc?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    greenhouse?: GreenhouseUpdateOneRequiredWithoutAktuatorNestedInput
+    greenhouse?: GreenhouseUpdateOneWithoutAktuatorNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateOneWithoutActuatorNestedInput
+    tandonBahan?: TandonBahanUpdateOneWithoutAktuatorNestedInput
   }
 
   export type AktuatorUncheckedUpdateWithoutTandonInput = {
@@ -14380,7 +17179,10 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    greenhouseId?: IntFieldUpdateOperationsInput | number
+    portPlc?: IntFieldUpdateOperationsInput | number
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -14392,7 +17194,10 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    greenhouseId?: IntFieldUpdateOperationsInput | number
+    portPlc?: IntFieldUpdateOperationsInput | number
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -14402,6 +17207,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUpdateManyWithoutTandonBahanNestedInput
+    aktuator?: AktuatorUpdateManyWithoutTandonBahanNestedInput
   }
 
   export type TandonBahanUncheckedUpdateWithoutTandonInput = {
@@ -14410,6 +17216,7 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonBahanNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutTandonBahanNestedInput
   }
 
   export type TandonBahanUncheckedUpdateManyWithoutTandonInput = {
@@ -14448,6 +17255,27 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type TandonPenyimpananUpdateWithoutTandonInput = {
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+    actuator?: AktuatorUpdateManyWithoutTandonPenyimpananNestedInput
+    resep?: ResepUpdateManyWithoutTandonPenyimpananNestedInput
+  }
+
+  export type TandonPenyimpananUncheckedUpdateWithoutTandonInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+    actuator?: AktuatorUncheckedUpdateManyWithoutTandonPenyimpananNestedInput
+    resep?: ResepUncheckedUpdateManyWithoutTandonPenyimpananNestedInput
+  }
+
+  export type TandonPenyimpananUncheckedUpdateManyWithoutTandonInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    distributable?: BoolFieldUpdateOperationsInput | boolean
+  }
+
 
 
   /**
@@ -14461,6 +17289,10 @@ export namespace Prisma {
      * @deprecated Use GreenhouseCountOutputTypeDefaultArgs instead
      */
     export type GreenhouseCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use TandonPenyimpananCountOutputTypeDefaultArgs instead
+     */
+    export type TandonPenyimpananCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = TandonPenyimpananCountOutputTypeDefaultArgs<ExtArgs>
     /**
      * @deprecated Use ResepCountOutputTypeDefaultArgs instead
      */
@@ -14481,6 +17313,10 @@ export namespace Prisma {
      * @deprecated Use GreenhouseDefaultArgs instead
      */
     export type GreenhouseArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = GreenhouseDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use TandonPenyimpananDefaultArgs instead
+     */
+    export type TandonPenyimpananArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = TandonPenyimpananDefaultArgs<ExtArgs>
     /**
      * @deprecated Use ResepDefaultArgs instead
      */

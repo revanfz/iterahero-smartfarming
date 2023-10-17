@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider      = "prisma-client-js"
-  output        = "./generated/client"
+  provider = "prisma-client-js"
+  output   = "./generated/client"
   // binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -36,15 +36,30 @@ model Greenhouse {
   updated_at DateTime?  @updatedAt
 }
 
+model TandonPenyimpanan {
+  id            Int        @id @default(autoincrement())
+  nama          String     @unique
+  distributable Boolean
+  tandon        Tandon     @relation(fields: [tandonId], references: [id])
+  tandonId      Int
+  actuator      Aktuator[]
+  resep         Resep[]
+}
+
 model Resep {
-  id          Int           @id @default(autoincrement())
-  ppm         Int
-  ph          Float
-  nama        String
-  interval    Int
-  penjadwalan Penjadwalan[]
-  created_at  DateTime      @default(now())
-  updated_at  DateTime?     @updatedAt
+  id                Int                 @id @default(autoincrement())
+  ppm               Int?
+  ph                Float?
+  volume            Float?
+  nama              String              @unique
+  interval          Int?
+  nutrisiA          Float?
+  nutrisiB          Float?
+  air               Float?
+  penjadwalan       Penjadwalan[]
+  tandonPenyimpanan TandonPenyimpanan[]
+  created_at        DateTime            @default(now())
+  updated_at        DateTime?           @updatedAt
 }
 
 model Penjadwalan {
@@ -68,6 +83,7 @@ model Sensor {
   unit_measurement String
   status           Boolean
   nilai            Int
+  icon             String?
   tandon           Tandon?      @relation(fields: [tandonId], references: [id])
   tandonId         Int?
   tandonBahan      TandonBahan? @relation(fields: [tandonBahanId], references: [id])
@@ -79,41 +95,48 @@ model Sensor {
 }
 
 model Aktuator {
-  id           Int        @id @default(autoincrement())
-  name         String
-  merek        String
-  icon          String
-  color         String
-  status       Boolean
-  tandon       Tandon     @relation(fields: [tandonId], references: [id])
-  tandonId     Int
-  greenhouse   Greenhouse @relation(fields: [greenhouseId], references: [id])
-  greenhouseId Int
-  created_at   DateTime   @default(now())
-  updated_at   DateTime?  @updatedAt
+  id                  Int                @id @default(autoincrement())
+  name                String
+  merek               String
+  icon                String
+  color               String
+  status              Boolean
+  portPlc             Int
+  tandon              Tandon?            @relation(fields: [tandonId], references: [id])
+  tandonId            Int?
+  greenhouse          Greenhouse?        @relation(fields: [greenhouseId], references: [id])
+  greenhouseId        Int?
+  tandonPenyimpanan   TandonPenyimpanan? @relation(fields: [tandonPenyimpananId], references: [id])
+  tandonPenyimpananId Int?
+  tandonBahan         TandonBahan?       @relation(fields: [tandonBahanId], references: [id])
+  tandonBahanId       Int?
+  created_at          DateTime           @default(now())
+  updated_at          DateTime?          @updatedAt
 }
 
 model TandonBahan {
-  id         Int       @id @default(autoincrement())
+  id         Int        @id @default(autoincrement())
   nama       String
   sensor     Sensor[]
-  tandon     Tandon    @relation(fields: [tandonId], references: [id])
+  aktuator   Aktuator[]
+  tandon     Tandon     @relation(fields: [tandonId], references: [id])
   tandonId   Int
-  created_at DateTime  @default(now())
-  updated_at DateTime? @updatedAt
+  created_at DateTime   @default(now())
+  updated_at DateTime?  @updatedAt
 }
 
 model Tandon {
-  id          Int           @id @default(autoincrement())
-  nama        String
-  user        User          @relation(fields: [userId], references: [id])
-  userId      Int
-  status      String
-  isOnline    Boolean
-  sensor      Sensor[]
-  aktuator    Aktuator[]
-  tandonBahan TandonBahan[]
-  penjadwalan Penjadwalan[]
-  created_at  DateTime      @default(now())
-  updated_at  DateTime?     @updatedAt
+  id                Int                 @id @default(autoincrement())
+  nama              String
+  user              User                @relation(fields: [userId], references: [id])
+  userId            Int
+  status            String
+  isOnline          Boolean
+  sensor            Sensor[]
+  aktuator          Aktuator[]
+  tandonBahan       TandonBahan[]
+  penjadwalan       Penjadwalan[]
+  tandonPenyimpanan TandonPenyimpanan[]
+  created_at        DateTime            @default(now())
+  updated_at        DateTime?           @updatedAt
 }

@@ -36,6 +36,7 @@
     "qs": "^6.11.2"
   },
   "devDependencies": {
+    "@flydotio/dockerfile": "^0.4.10",
     "@types/bcrypt": "^5.0.0",
     "@types/chai": "^4.3.6",
     "@types/hapi": "^18.0.11",

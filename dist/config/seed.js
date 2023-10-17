@@ -64,22 +64,6 @@ function main() {
                 }
             },
         });
-        const resep = yield prisma_1.prisma.resep.createMany({
-            data: [
-                {
-                    nama: "melon",
-                    ppm: 1000,
-                    ph: 7.2,
-                    interval: 120,
-                },
-                {
-                    nama: "Semangka",
-                    ppm: 1200,
-                    ph: 6.4,
-                    interval: 95,
-                },
-            ],
-        });
         const tandon = yield prisma_1.prisma.tandon.createMany({
             data: [
                 {
@@ -95,6 +79,74 @@ function main() {
                     status: "Idle",
                 },
             ],
+        });
+        const tandonPenyimpanan = yield prisma_1.prisma.tandonPenyimpanan.createMany({
+            data: [
+                {
+                    nama: "Melon",
+                    distributable: true,
+                    tandonId: 2,
+                },
+                {
+                    nama: "Semangka",
+                    distributable: false,
+                    tandonId: 2,
+                },
+                {
+                    nama: "Ketimun",
+                    distributable: false,
+                    tandonId: 2,
+                }
+            ]
+        });
+        const selenoid = yield prisma_1.prisma.aktuator.create({
+            data: {
+                name: "Selenoid Melon",
+                color: "red",
+                icon: "",
+                merek: "Endress-Hauser",
+                portPlc: 1,
+                status: true,
+            }
+        });
+        const resep = yield prisma_1.prisma.resep.create({
+            data: {
+                nama: "Melon",
+                ppm: 1000,
+                ph: 7.2,
+                interval: 120,
+                tandonPenyimpanan: {
+                    connect: {
+                        nama: "Melon"
+                    }
+                }
+            }
+        });
+        const resep2 = yield prisma_1.prisma.resep.create({
+            data: {
+                nama: "Semangka",
+                ppm: 1200,
+                ph: 6.4,
+                interval: 95,
+                tandonPenyimpanan: {
+                    connect: {
+                        nama: "Semangka"
+                    }
+                }
+            }
+        });
+        const resep3 = yield prisma_1.prisma.resep.create({
+            data: {
+                nama: "Ketimun",
+                ppm: 900,
+                ph: 6.6,
+                interval: 105,
+                tandonPenyimpanan: {
+                    connect: {
+                        nama: "Ketimun"
+                    }
+                }
+            }
         });
         const tandonBahan = yield prisma_1.prisma.tandonBahan.createMany({
             data: [
@@ -150,6 +202,7 @@ function main() {
                     status: true,
                     tandonBahanId: 1,
                     nilai: 10,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor Ketinggian",
@@ -159,6 +212,7 @@ function main() {
                     status: true,
                     tandonBahanId: 2,
                     nilai: 20,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor Ketinggian",
@@ -168,6 +222,7 @@ function main() {
                     status: true,
                     tandonBahanId: 3,
                     nilai: 30,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor Ketinggian",
@@ -177,6 +232,7 @@ function main() {
                     status: true,
                     tandonBahanId: 4,
                     nilai: 7,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor Ketinggian",
@@ -186,6 +242,7 @@ function main() {
                     status: true,
                     tandonBahanId: 5,
                     nilai: 11,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor pH",
@@ -195,6 +252,7 @@ function main() {
                     status: true,
                     tandonId: 1,
                     nilai: 6.2,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor Suhu",
@@ -204,6 +262,7 @@ function main() {
                     status: true,
                     tandonId: 1,
                     nilai: 299.15,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor TDS",
@@ -213,6 +272,7 @@ function main() {
                     status: true,
                     tandonId: 1,
                     nilai: 1200,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor Ketinggian",
@@ -222,6 +282,7 @@ function main() {
                     status: true,
                     tandonBahanId: 6,
                     nilai: 10,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor Ketinggian",
@@ -231,6 +292,7 @@ function main() {
                     status: true,
                     tandonBahanId: 7,
                     nilai: 20,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor Ketinggian",
@@ -240,6 +302,7 @@ function main() {
                     status: true,
                     tandonBahanId: 8,
                     nilai: 30,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor Ketinggian",
@@ -249,6 +312,7 @@ function main() {
                     status: true,
                     tandonBahanId: 9,
                     nilai: 7,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor Ketinggian",
@@ -258,6 +322,7 @@ function main() {
                     status: true,
                     tandonBahanId: 10,
                     nilai: 11,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor pH",
@@ -267,6 +332,7 @@ function main() {
                     status: true,
                     tandonId: 2,
                     nilai: 6.2,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor Suhu",
@@ -276,6 +342,7 @@ function main() {
                     status: true,
                     tandonId: 2,
                     nilai: 299.15,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
                 {
                     name: "Sensor TDS",
@@ -285,10 +352,11 @@ function main() {
                     status: true,
                     tandonId: 2,
                     nilai: 1200,
+                    icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
                 },
             ],
         });
-        console.log({ admin, operator, resep, tandon, tandonBahan, sensor });
+        console.log({ admin, operator, tandonPenyimpanan, resep, resep2, resep3, tandon, tandonBahan, sensor });
     });
 }
 main()

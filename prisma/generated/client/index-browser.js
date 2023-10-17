@@ -126,12 +126,23 @@ exports.Prisma.GreenhouseScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.TandonPenyimpananScalarFieldEnum = {
+  id: 'id',
+  nama: 'nama',
+  distributable: 'distributable',
+  tandonId: 'tandonId'
+};
+
 exports.Prisma.ResepScalarFieldEnum = {
   id: 'id',
   ppm: 'ppm',
   ph: 'ph',
+  volume: 'volume',
   nama: 'nama',
   interval: 'interval',
+  nutrisiA: 'nutrisiA',
+  nutrisiB: 'nutrisiB',
+  air: 'air',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -155,6 +166,7 @@ exports.Prisma.SensorScalarFieldEnum = {
   unit_measurement: 'unit_measurement',
   status: 'status',
   nilai: 'nilai',
+  icon: 'icon',
   tandonId: 'tandonId',
   tandonBahanId: 'tandonBahanId',
   greenhouseId: 'greenhouseId',
@@ -169,8 +181,11 @@ exports.Prisma.AktuatorScalarFieldEnum = {
   icon: 'icon',
   color: 'color',
   status: 'status',
+  portPlc: 'portPlc',
   tandonId: 'tandonId',
   greenhouseId: 'greenhouseId',
+  tandonPenyimpananId: 'tandonPenyimpananId',
+  tandonBahanId: 'tandonBahanId',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -212,6 +227,7 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.ModelName = {
   User: 'User',
   Greenhouse: 'Greenhouse',
+  TandonPenyimpanan: 'TandonPenyimpanan',
   Resep: 'Resep',
   Penjadwalan: 'Penjadwalan',
   Sensor: 'Sensor',
