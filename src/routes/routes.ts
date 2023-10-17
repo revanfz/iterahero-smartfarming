@@ -11,6 +11,7 @@ import { dashboardRoute } from "./dashboard";
 import { greenhouseRoute } from "./greenhouse";
 import { aktuatorRoute } from "./aktuator";
 import { sensorRoute } from "./sensor";
+import { kontrolRoute } from "./kontrol";
 
 export const routes: ServerRoute[] = [
   ...home,
@@ -24,5 +25,6 @@ export const routes: ServerRoute[] = [
   ...dashboardRoute,
   ...greenhouseRoute,
   ...aktuatorRoute,
-  ...sensorRoute
+  ...sensorRoute,
+  ...kontrolRoute
 ];

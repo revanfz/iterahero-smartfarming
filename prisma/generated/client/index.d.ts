@@ -5114,7 +5114,7 @@ export namespace Prisma {
     ph: number | null
     volume: number | null
     nama: string
-    interval: number | null
+    interval: number
     nutrisiA: number | null
     nutrisiB: number | null
     air: number | null
@@ -5191,7 +5191,7 @@ export namespace Prisma {
       ph: number | null
       volume: number | null
       nama: string
-      interval: number | null
+      interval: number
       nutrisiA: number | null
       nutrisiB: number | null
       air: number | null
@@ -11787,7 +11787,7 @@ export namespace Prisma {
     ph?: FloatNullableFilter<"Resep"> | number | null
     volume?: FloatNullableFilter<"Resep"> | number | null
     nama?: StringFilter<"Resep"> | string
-    interval?: IntNullableFilter<"Resep"> | number | null
+    interval?: IntFilter<"Resep"> | number
     nutrisiA?: FloatNullableFilter<"Resep"> | number | null
     nutrisiB?: FloatNullableFilter<"Resep"> | number | null
     air?: FloatNullableFilter<"Resep"> | number | null
@@ -11803,7 +11803,7 @@ export namespace Prisma {
     ph?: SortOrderInput | SortOrder
     volume?: SortOrderInput | SortOrder
     nama?: SortOrder
-    interval?: SortOrderInput | SortOrder
+    interval?: SortOrder
     nutrisiA?: SortOrderInput | SortOrder
     nutrisiB?: SortOrderInput | SortOrder
     air?: SortOrderInput | SortOrder
@@ -11822,7 +11822,7 @@ export namespace Prisma {
     ppm?: IntNullableFilter<"Resep"> | number | null
     ph?: FloatNullableFilter<"Resep"> | number | null
     volume?: FloatNullableFilter<"Resep"> | number | null
-    interval?: IntNullableFilter<"Resep"> | number | null
+    interval?: IntFilter<"Resep"> | number
     nutrisiA?: FloatNullableFilter<"Resep"> | number | null
     nutrisiB?: FloatNullableFilter<"Resep"> | number | null
     air?: FloatNullableFilter<"Resep"> | number | null
@@ -11838,7 +11838,7 @@ export namespace Prisma {
     ph?: SortOrderInput | SortOrder
     volume?: SortOrderInput | SortOrder
     nama?: SortOrder
-    interval?: SortOrderInput | SortOrder
+    interval?: SortOrder
     nutrisiA?: SortOrderInput | SortOrder
     nutrisiB?: SortOrderInput | SortOrder
     air?: SortOrderInput | SortOrder
@@ -11860,7 +11860,7 @@ export namespace Prisma {
     ph?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
     volume?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
     nama?: StringWithAggregatesFilter<"Resep"> | string
-    interval?: IntNullableWithAggregatesFilter<"Resep"> | number | null
+    interval?: IntWithAggregatesFilter<"Resep"> | number
     nutrisiA?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
     nutrisiB?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
     air?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
@@ -12502,7 +12502,7 @@ export namespace Prisma {
     ph?: number | null
     volume?: number | null
     nama: string
-    interval?: number | null
+    interval: number
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
@@ -12518,7 +12518,7 @@ export namespace Prisma {
     ph?: number | null
     volume?: number | null
     nama: string
-    interval?: number | null
+    interval: number
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
@@ -12533,7 +12533,7 @@ export namespace Prisma {
     ph?: NullableFloatFieldUpdateOperationsInput | number | null
     volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    interval?: IntFieldUpdateOperationsInput | number
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -12549,7 +12549,7 @@ export namespace Prisma {
     ph?: NullableFloatFieldUpdateOperationsInput | number | null
     volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    interval?: IntFieldUpdateOperationsInput | number
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -12565,7 +12565,7 @@ export namespace Prisma {
     ph?: number | null
     volume?: number | null
     nama: string
-    interval?: number | null
+    interval: number
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
@@ -12578,7 +12578,7 @@ export namespace Prisma {
     ph?: NullableFloatFieldUpdateOperationsInput | number | null
     volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    interval?: IntFieldUpdateOperationsInput | number
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -12592,7 +12592,7 @@ export namespace Prisma {
     ph?: NullableFloatFieldUpdateOperationsInput | number | null
     volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    interval?: IntFieldUpdateOperationsInput | number
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -15301,7 +15301,7 @@ export namespace Prisma {
     ph?: number | null
     volume?: number | null
     nama: string
-    interval?: number | null
+    interval: number
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
@@ -15316,7 +15316,7 @@ export namespace Prisma {
     ph?: number | null
     volume?: number | null
     nama: string
-    interval?: number | null
+    interval: number
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
@@ -15409,7 +15409,7 @@ export namespace Prisma {
     ph?: FloatNullableFilter<"Resep"> | number | null
     volume?: FloatNullableFilter<"Resep"> | number | null
     nama?: StringFilter<"Resep"> | string
-    interval?: IntNullableFilter<"Resep"> | number | null
+    interval?: IntFilter<"Resep"> | number
     nutrisiA?: FloatNullableFilter<"Resep"> | number | null
     nutrisiB?: FloatNullableFilter<"Resep"> | number | null
     air?: FloatNullableFilter<"Resep"> | number | null
@@ -15527,7 +15527,7 @@ export namespace Prisma {
     ph?: number | null
     volume?: number | null
     nama: string
-    interval?: number | null
+    interval: number
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
@@ -15542,7 +15542,7 @@ export namespace Prisma {
     ph?: number | null
     volume?: number | null
     nama: string
-    interval?: number | null
+    interval: number
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
@@ -15604,7 +15604,7 @@ export namespace Prisma {
     ph?: NullableFloatFieldUpdateOperationsInput | number | null
     volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    interval?: IntFieldUpdateOperationsInput | number
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -15619,7 +15619,7 @@ export namespace Prisma {
     ph?: NullableFloatFieldUpdateOperationsInput | number | null
     volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    interval?: IntFieldUpdateOperationsInput | number
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16844,7 +16844,7 @@ export namespace Prisma {
     ph?: NullableFloatFieldUpdateOperationsInput | number | null
     volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    interval?: IntFieldUpdateOperationsInput | number
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16859,7 +16859,7 @@ export namespace Prisma {
     ph?: NullableFloatFieldUpdateOperationsInput | number | null
     volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    interval?: IntFieldUpdateOperationsInput | number
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -16874,7 +16874,7 @@ export namespace Prisma {
     ph?: NullableFloatFieldUpdateOperationsInput | number | null
     volume?: NullableFloatFieldUpdateOperationsInput | number | null
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    interval?: IntFieldUpdateOperationsInput | number
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null

@@ -99,15 +99,36 @@ function main() {
                 }
             ]
         });
-        const selenoid = yield prisma_1.prisma.aktuator.create({
-            data: {
-                name: "Selenoid Melon",
-                color: "red",
-                icon: "",
-                merek: "Endress-Hauser",
-                portPlc: 1,
-                status: true,
-            }
+        const selenoid = yield prisma_1.prisma.aktuator.createMany({
+            data: [
+                {
+                    name: "Selenoid Melon",
+                    color: "red",
+                    icon: "",
+                    merek: "Endress-Hauser",
+                    portPlc: 2,
+                    tandonId: 2,
+                    status: true,
+                },
+                {
+                    name: "Selenoid Semangka",
+                    color: "red",
+                    icon: "",
+                    merek: "Endress-Hauser",
+                    portPlc: 17,
+                    tandonId: 2,
+                    status: true,
+                },
+                {
+                    name: "Selenoid Ketimun",
+                    color: "red",
+                    icon: "",
+                    merek: "Endress-Hauser",
+                    portPlc: 22,
+                    tandonId: 2,
+                    status: true,
+                }
+            ]
         });
         const resep = yield prisma_1.prisma.resep.create({
             data: {

@@ -52,7 +52,7 @@ model Resep {
   ph                Float?
   volume            Float?
   nama              String              @unique
-  interval          Int?
+  interval          Int
   nutrisiA          Float?
   nutrisiB          Float?
   air               Float?

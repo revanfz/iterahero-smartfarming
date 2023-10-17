@@ -13,6 +13,7 @@ const dashboard_1 = require("./dashboard");
 const greenhouse_1 = require("./greenhouse");
 const aktuator_1 = require("./aktuator");
 const sensor_1 = require("./sensor");
+const kontrol_1 = require("./kontrol");
 exports.routes = [
     ...home_1.home,
     ...login_1.loginRoute,
@@ -25,5 +26,6 @@ exports.routes = [
     ...dashboard_1.dashboardRoute,
     ...greenhouse_1.greenhouseRoute,
     ...aktuator_1.aktuatorRoute,
-    ...sensor_1.sensorRoute
+    ...sensor_1.sensorRoute,
+    ...kontrol_1.kontrolRoute
 ];
