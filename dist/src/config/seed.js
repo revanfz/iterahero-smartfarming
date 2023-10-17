@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const aktuatorSeeding = require("../../prisma/data/aktuator");
-const seedingSensor = require("../../prisma/data/sensor");
-const tandonBahanSeeding = require("../../prisma/data/tandonBahan");
-const tandonPenyimpananSeeding = require("../../prisma/data/tandonPenyimpanan");
+const aktuator_1 = require("../../prisma/data/aktuator");
+const sensor_1 = require("../../prisma/data/sensor");
+const tandonBahan_1 = require("../../prisma/data/tandonBahan");
+const tandonPenyimpanan_1 = require("../../prisma/data/tandonPenyimpanan");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const prisma_1 = require("./prisma");
 function main() {
@@ -85,10 +85,10 @@ function main() {
             ],
         });
         const tandonPenyimpanan = yield prisma_1.prisma.tandonPenyimpanan.createMany({
-            data: tandonPenyimpananSeeding
+            data: tandonPenyimpanan_1.tandonPenyimpananSeeding
         });
         const selenoid = yield prisma_1.prisma.aktuator.createMany({
-            data: aktuatorSeeding
+            data: aktuator_1.aktuatorSeeding
         });
         const resep = yield prisma_1.prisma.resep.create({
             data: {
@@ -130,10 +130,10 @@ function main() {
             }
         });
         const tandonBahan = yield prisma_1.prisma.tandonBahan.createMany({
-            data: tandonBahanSeeding
+            data: tandonBahan_1.tandonBahanSeeding
         });
         const sensor = yield prisma_1.prisma.sensor.createMany({
-            data: seedingSensor
+            data: sensor_1.seedingSensor
         });
         console.log({ admin, operator, selenoid, tandonPenyimpanan, resep, resep2, resep3, tandon, tandonBahan, sensor });
     });

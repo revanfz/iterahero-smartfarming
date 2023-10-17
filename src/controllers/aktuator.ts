@@ -1,5 +1,4 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
-import Identifier from "../models/Identifier";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 

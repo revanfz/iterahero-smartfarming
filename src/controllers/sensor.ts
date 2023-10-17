@@ -1,11 +1,10 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
-import Identifier from "../models/Identifier";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { id } = request.query as Identifier;
+        const id = parseInt(request.query.id)
 
         const data = await prisma.sensor.findMany({
             where: {

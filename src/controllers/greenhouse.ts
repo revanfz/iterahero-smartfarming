@@ -1,5 +1,4 @@
 import { prisma } from "../config/prisma";
-import Identifier from "../models/Identifier";
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import Boom from "@hapi/boom";
 import { uploadImage } from "../config/cloudinary";

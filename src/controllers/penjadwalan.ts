@@ -2,7 +2,6 @@ import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 import { deletePeracikan, initPeracikan, onOffPeracikan } from "../utils/schedule";
-import Identifier from "../models/Identifier";
 
 interface InputPenjadwalan {
     id_tandon: number,
@@ -127,7 +126,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { id } = request.query as Identifier;
+        const id = parseInt(request.query.id);
 
         await prisma.penjadwalan.delete({
             where: {
@@ -153,7 +152,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const patchHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { id } = request.query as Identifier;
+        const id  = parseInt(request.query.id);
         const targetWaktu = await prisma.penjadwalan.findUnique({
             where: { id },
         });

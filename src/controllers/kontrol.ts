@@ -1,6 +1,5 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
-import Identifier from "../models/Identifier";
 import Boom from "@hapi/boom"
 import { publishData } from "../config/mqtt";
 
