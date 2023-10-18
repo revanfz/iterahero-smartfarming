@@ -17,7 +17,12 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield prisma_1.prisma.resep.findMany();
+        const { tipe } = request.query.tipe;
+        const data = yield prisma_1.prisma.resep.findMany({
+            where: {
+                tipe
+            }
+        });
         if (!data) {
             return boom_1.default.notFound("Tidak ada resep tersimpan");
         }
