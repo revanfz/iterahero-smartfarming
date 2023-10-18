@@ -13,12 +13,12 @@ interface InputResep {
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { tipe } = request.query.tipe;
+        const tipe = request.query.tipe;
         const data = await prisma.resep.findMany({
-                where: {
-                    tipe
-                }
-            })
+            where: {
+                tipe
+            }
+        })
 
         if (!data) {
             return Boom.notFound("Tidak ada resep tersimpan");

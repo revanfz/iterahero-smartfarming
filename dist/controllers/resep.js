@@ -17,7 +17,12 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield prisma_1.prisma.resep.findMany();
+        const tipe = request.query.tipe;
+        const data = yield prisma_1.prisma.resep.findMany({
+            where: {
+                tipe
+            }
+        });
         if (!data) {
             return boom_1.default.notFound("Tidak ada resep tersimpan");
         }
@@ -36,13 +41,19 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
 exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { nama, ppm, ph, interval } = request.payload;
+        const { nama, ppm, ph, interval, tipe, idTandonPenyimpanan } = request.payload;
         yield prisma_1.prisma.resep.create({
             data: {
                 nama,
                 ppm,
                 ph,
-                interval
+                interval,
+                tipe,
+                tandonPenyimpanan: {
+                    connect: {
+                        id: idTandonPenyimpanan
+                    }
+                }
             }
         });
         return h.response({

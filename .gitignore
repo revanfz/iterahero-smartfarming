@@ -1,4 +1,4 @@
 node_modules
 .env
 src/config/seed.ts
-prisma/data
+src/config/data

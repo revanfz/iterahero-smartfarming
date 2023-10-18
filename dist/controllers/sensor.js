@@ -17,7 +17,7 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id } = request.query;
+        const id = parseInt(request.query.id);
         const data = yield prisma_1.prisma.sensor.findMany({
             where: {
                 tandonId: id
