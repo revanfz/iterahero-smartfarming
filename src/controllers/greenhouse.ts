@@ -17,7 +17,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         }
         const id = parseInt(request.query.id);
         let data;
-        if (Number.isNaN(id)) {
+        if (!Number.isNaN(id)) {
             data = await prisma.greenhouse.findUnique({
                 where: {
                     id

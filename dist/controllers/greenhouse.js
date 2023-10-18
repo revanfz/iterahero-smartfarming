@@ -21,7 +21,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         const { id_user } = request.auth.credentials;
         const id = parseInt(request.query.id);
         let data;
-        if (Number.isNaN(id)) {
+        if (!Number.isNaN(id)) {
             data = yield prisma_1.prisma.greenhouse.findUnique({
                 where: {
                     id

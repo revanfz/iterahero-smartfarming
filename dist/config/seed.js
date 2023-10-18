@@ -12,10 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const aktuator_1 = require("./data/aktuator");
-const sensor_1 = require("./data/sensor");
-const tandonBahan_1 = require("./data/tandonBahan");
-const tandonPenyimpanan_1 = require("./data/tandonPenyimpanan");
+const aktuator_1 = require("../data/aktuator");
+const sensor_1 = require("../data/sensor");
+const tandonBahan_1 = require("../data/tandonBahan");
+const tandonPenyimpanan_1 = require("../data/tandonPenyimpanan");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const prisma_1 = require("./prisma");
 function main() {
