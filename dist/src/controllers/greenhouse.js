@@ -12,22 +12,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.actuatorByGreenhouseHandler = exports.sensorByGreenhouseHandler = exports.postHandler = exports.getHandler = void 0;
+exports.ghByIdHandler = exports.actuatorByGreenhouseHandler = exports.sensorByGreenhouseHandler = exports.postHandler = exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const cloudinary_1 = require("../config/cloudinary");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id_user } = request.auth.credentials;
-        const data = yield prisma_1.prisma.greenhouse.findMany({
-            where: {
-                user: {
-                    every: {
-                        id: id_user
+        const id = parseInt(request.query.id);
+        let data;
+        if (Number.isNaN(id)) {
+            data = yield prisma_1.prisma.greenhouse.findUnique({
+                where: {
+                    id
+                }
+            });
+        }
+        else {
+            data = yield prisma_1.prisma.greenhouse.findMany({
+                where: {
+                    user: {
+                        every: {
+                            id: id_user
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
         if (!data) {
             return boom_1.default.notFound("Tidak ada greenhouse.");
         }
@@ -150,3 +161,30 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
     }
 });
 exports.actuatorByGreenhouseHandler = actuatorByGreenhouseHandler;
+const ghByIdHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = parseInt(request.query.id);
+        const data = yield prisma_1.prisma.greenhouse.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!data) {
+            return boom_1.default.notFound("Tidak ada gh tersebut.");
+        }
+        return h.response({
+            status: 'success',
+            data
+        }).code(200);
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.error(e);
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        prisma_1.prisma.$disconnect();
+    }
+});
+exports.ghByIdHandler = ghByIdHandler;

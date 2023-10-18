@@ -15,15 +15,26 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         const { id_user } = request.auth.credentials as {
             id_user: number
         }
-        const data = await prisma.greenhouse.findMany({
-            where: {
-                user: {
-                    every: {
-                        id: id_user
+        const id = parseInt(request.query.id);
+        let data;
+        if (Number.isNaN(id)) {
+            data = await prisma.greenhouse.findUnique({
+                where: {
+                    id
+                }
+            })
+        } else {
+            data = await prisma.greenhouse.findMany({
+                where: {
+                    user: {
+                        every: {
+                            id: id_user
+                        }
                     }
                 }
-            }
-        })
+            })
+        }
+        
         if (!data) {
             return Boom.notFound("Tidak ada greenhouse.")
         }
@@ -152,5 +163,34 @@ export const actuatorByGreenhouseHandler = async (request: Request, h: ResponseT
     }
     finally {
         await prisma.$disconnect()
+    }
+}
+
+export const ghByIdHandler = async (request: Request, h: ResponseToolkit) => {
+    try {
+        const id = parseInt(request.query.id);
+        const data = await prisma.greenhouse.findUnique({
+            where: {
+                id
+            }
+        })
+
+        if (!data) {
+            return Boom.notFound("Tidak ada gh tersebut.")
+        }
+
+        return h.response({
+            status: 'success',
+            data
+        }).code(200)
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.error(e)
+            return Boom.internal(e.message)
+        }
+    }
+    finally {
+        prisma.$disconnect()
     }
 }
