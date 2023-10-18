@@ -143,6 +143,7 @@ exports.Prisma.ResepScalarFieldEnum = {
   nutrisiA: 'nutrisiA',
   nutrisiB: 'nutrisiB',
   air: 'air',
+  tipe: 'tipe',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };

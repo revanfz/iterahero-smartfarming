@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "./generated/client"
+  provider      = "prisma-client-js"
+  output        = "./generated/client"
   // binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -49,13 +49,14 @@ model TandonPenyimpanan {
 model Resep {
   id                Int                 @id @default(autoincrement())
   ppm               Int?
-  ph                Float?
+  ph                Float
   volume            Float?
-  nama              String              @unique
+  nama              String              
   interval          Int
   nutrisiA          Float?
   nutrisiB          Float?
   air               Float?
+  tipe              String
   penjadwalan       Penjadwalan[]
   tandonPenyimpanan TandonPenyimpanan[]
   created_at        DateTime            @default(now())

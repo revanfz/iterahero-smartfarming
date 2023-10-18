@@ -100,8 +100,9 @@ function main() {
                     connect: {
                         nama: "Melon"
                     }
-                }
-            }
+                },
+                tipe: "besaran"
+            },
         });
         const resep2 = yield prisma_1.prisma.resep.create({
             data: {
@@ -113,7 +114,8 @@ function main() {
                     connect: {
                         nama: "Semangka"
                     }
-                }
+                },
+                tipe: "besaran"
             }
         });
         const resep3 = yield prisma_1.prisma.resep.create({
@@ -126,7 +128,56 @@ function main() {
                     connect: {
                         nama: "Ketimun"
                     }
-                }
+                },
+                tipe: "besaran"
+            }
+        });
+        const resep4 = yield prisma_1.prisma.resep.create({
+            data: {
+                nama: "Melon",
+                nutrisiA: 50,
+                nutrisiB: 50,
+                air: 3700,
+                interval: 120,
+                ph: 7.2,
+                tandonPenyimpanan: {
+                    connect: {
+                        nama: "Melon"
+                    }
+                },
+                tipe: "rasio"
+            }
+        });
+        const resep5 = yield prisma_1.prisma.resep.create({
+            data: {
+                nama: "Semangka",
+                nutrisiA: 30,
+                nutrisiB: 30,
+                air: 2640,
+                interval: 95,
+                ph: 6.4,
+                tandonPenyimpanan: {
+                    connect: {
+                        nama: "Semangka"
+                    }
+                },
+                tipe: "rasio"
+            }
+        });
+        const resep6 = yield prisma_1.prisma.resep.create({
+            data: {
+                nama: "Ketimun",
+                nutrisiA: 40,
+                nutrisiB: 40,
+                air: 1720,
+                interval: 105,
+                ph: 6.6,
+                tandonPenyimpanan: {
+                    connect: {
+                        nama: "Ketimun"
+                    }
+                },
+                tipe: "rasio"
             }
         });
         const tandonBahan = yield prisma_1.prisma.tandonBahan.createMany({
@@ -135,7 +186,7 @@ function main() {
         const sensor = yield prisma_1.prisma.sensor.createMany({
             data: sensor_1.seedingSensor
         });
-        console.log({ admin, operator, selenoid, tandonPenyimpanan, resep, resep2, resep3, tandon, tandonBahan, sensor });
+        console.log({ admin, operator, selenoid, tandonPenyimpanan, resep, resep2, resep3, resep4, resep5, resep6, tandon, tandonBahan, sensor });
     });
 }
 main()
