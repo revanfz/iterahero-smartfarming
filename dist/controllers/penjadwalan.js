@@ -64,7 +64,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             return boom_1.default.notFound("Tidak ada resep yang sesuai");
         }
         const arrJam = [{ hour: jam, minute: menit }];
-        const arrValidasi = [`${jam}:${menit}`];
+        const arrValidasi = [`${jam < 10 ? '0' + jam : jam}:${menit < 10 ? '0' + menit : menit}`];
         for (let i = 0; i < iterasi - 1; i++) {
             const intervalJam = Math.floor(resepTarget.interval / 60);
             const intervalMenit = resepTarget.interval % 60;
@@ -124,6 +124,7 @@ exports.postHandler = postHandler;
 const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = parseInt(request.query.id);
+        console.log(id);
         yield prisma_1.prisma.penjadwalan.delete({
             where: {
                 id

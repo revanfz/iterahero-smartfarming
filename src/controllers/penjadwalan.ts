@@ -61,7 +61,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         }
 
         const arrJam: object[] = [{ hour: jam, minute: menit }];
-        const arrValidasi: string[] = [`${jam}:${menit}`];
+        const arrValidasi: string[] = [`${jam < 10 ? '0' + jam : jam}:${menit < 10 ? '0' + menit : menit}`];
 
         for (let i = 0; i < iterasi-1; i++) {
             const intervalJam = Math.floor(resepTarget.interval / 60);
@@ -127,6 +127,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     try {
         const id = parseInt(request.query.id);
+        console.log(id);
 
         await prisma.penjadwalan.delete({
             where: {
