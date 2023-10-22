@@ -51,7 +51,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
 exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { resep, id_tandon, waktu, iterasi, hari } = request.payload;
+        const { resep, id_tandon, waktu, iterasi, hari, durasi } = request.payload;
         const _splitTime = waktu.split(":");
         const jam = parseInt(_splitTime[0]);
         const menit = parseInt(_splitTime[1]);
@@ -85,6 +85,9 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 },
                 hari: {
                     hasSome: hari
+                },
+                tandonId: {
+                    equals: id_tandon
                 }
             }
         });
@@ -100,7 +103,8 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     waktu: item,
                     tandonId: id_tandon,
                     isActive: true,
-                    hari
+                    hari,
+                    durasi
                 }
             });
         }));
@@ -124,7 +128,6 @@ exports.postHandler = postHandler;
 const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = parseInt(request.query.id);
-        console.log(id);
         yield prisma_1.prisma.penjadwalan.delete({
             where: {
                 id
@@ -148,7 +151,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
 exports.deleteHandler = deleteHandler;
 const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const id = parseInt(request.query.id);
+        const { id } = request.payload;
         const targetWaktu = yield prisma_1.prisma.penjadwalan.findUnique({
             where: { id },
         });
@@ -166,7 +169,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         (0, schedule_1.onOffPeracikan)(id);
         return h.response({
             status: 'success',
-            message: 'Penjadwalan berhasil di-nonaktifkan'
+            message: `Penjadwalan berhasil di-${targetWaktu.isActive ? 'nonaktifkan' : 'aktifkan'}`
         }).code(200);
     }
     catch (e) {

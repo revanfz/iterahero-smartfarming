@@ -5999,6 +5999,7 @@ export namespace Prisma {
 
   export type PenjadwalanAvgAggregateOutputType = {
     id: number | null
+    durasi: number | null
     hari: number | null
     resepId: number | null
     tandonId: number | null
@@ -6006,6 +6007,7 @@ export namespace Prisma {
 
   export type PenjadwalanSumAggregateOutputType = {
     id: number | null
+    durasi: number | null
     hari: number[]
     resepId: number | null
     tandonId: number | null
@@ -6015,6 +6017,7 @@ export namespace Prisma {
     id: number | null
     waktu: string | null
     isActive: boolean | null
+    durasi: number | null
     resepId: number | null
     tandonId: number | null
     created_at: Date | null
@@ -6025,6 +6028,7 @@ export namespace Prisma {
     id: number | null
     waktu: string | null
     isActive: boolean | null
+    durasi: number | null
     resepId: number | null
     tandonId: number | null
     created_at: Date | null
@@ -6035,6 +6039,7 @@ export namespace Prisma {
     id: number
     waktu: number
     isActive: number
+    durasi: number
     hari: number
     resepId: number
     tandonId: number
@@ -6046,6 +6051,7 @@ export namespace Prisma {
 
   export type PenjadwalanAvgAggregateInputType = {
     id?: true
+    durasi?: true
     hari?: true
     resepId?: true
     tandonId?: true
@@ -6053,6 +6059,7 @@ export namespace Prisma {
 
   export type PenjadwalanSumAggregateInputType = {
     id?: true
+    durasi?: true
     hari?: true
     resepId?: true
     tandonId?: true
@@ -6062,6 +6069,7 @@ export namespace Prisma {
     id?: true
     waktu?: true
     isActive?: true
+    durasi?: true
     resepId?: true
     tandonId?: true
     created_at?: true
@@ -6072,6 +6080,7 @@ export namespace Prisma {
     id?: true
     waktu?: true
     isActive?: true
+    durasi?: true
     resepId?: true
     tandonId?: true
     created_at?: true
@@ -6082,6 +6091,7 @@ export namespace Prisma {
     id?: true
     waktu?: true
     isActive?: true
+    durasi?: true
     hari?: true
     resepId?: true
     tandonId?: true
@@ -6180,6 +6190,7 @@ export namespace Prisma {
     id: number
     waktu: string
     isActive: boolean
+    durasi: number
     hari: number[]
     resepId: number
     tandonId: number
@@ -6210,6 +6221,7 @@ export namespace Prisma {
     id?: boolean
     waktu?: boolean
     isActive?: boolean
+    durasi?: boolean
     hari?: boolean
     resepId?: boolean
     tandonId?: boolean
@@ -6223,6 +6235,7 @@ export namespace Prisma {
     id?: boolean
     waktu?: boolean
     isActive?: boolean
+    durasi?: boolean
     hari?: boolean
     resepId?: boolean
     tandonId?: boolean
@@ -6246,6 +6259,7 @@ export namespace Prisma {
       id: number
       waktu: string
       isActive: boolean
+      durasi: number
       hari: number[]
       resepId: number
       tandonId: number
@@ -6651,6 +6665,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Penjadwalan", 'Int'>
     readonly waktu: FieldRef<"Penjadwalan", 'String'>
     readonly isActive: FieldRef<"Penjadwalan", 'Boolean'>
+    readonly durasi: FieldRef<"Penjadwalan", 'Int'>
     readonly hari: FieldRef<"Penjadwalan", 'Int[]'>
     readonly resepId: FieldRef<"Penjadwalan", 'Int'>
     readonly tandonId: FieldRef<"Penjadwalan", 'Int'>
@@ -11427,6 +11442,7 @@ export namespace Prisma {
     id: 'id',
     waktu: 'waktu',
     isActive: 'isActive',
+    durasi: 'durasi',
     hari: 'hari',
     resepId: 'resepId',
     tandonId: 'tandonId',
@@ -11892,6 +11908,7 @@ export namespace Prisma {
     id?: IntFilter<"Penjadwalan"> | number
     waktu?: StringFilter<"Penjadwalan"> | string
     isActive?: BoolFilter<"Penjadwalan"> | boolean
+    durasi?: IntFilter<"Penjadwalan"> | number
     hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
@@ -11905,6 +11922,7 @@ export namespace Prisma {
     id?: SortOrder
     waktu?: SortOrder
     isActive?: SortOrder
+    durasi?: SortOrder
     hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
@@ -11921,6 +11939,7 @@ export namespace Prisma {
     NOT?: PenjadwalanWhereInput | PenjadwalanWhereInput[]
     waktu?: StringFilter<"Penjadwalan"> | string
     isActive?: BoolFilter<"Penjadwalan"> | boolean
+    durasi?: IntFilter<"Penjadwalan"> | number
     hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
@@ -11934,6 +11953,7 @@ export namespace Prisma {
     id?: SortOrder
     waktu?: SortOrder
     isActive?: SortOrder
+    durasi?: SortOrder
     hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
@@ -11953,6 +11973,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Penjadwalan"> | number
     waktu?: StringWithAggregatesFilter<"Penjadwalan"> | string
     isActive?: BoolWithAggregatesFilter<"Penjadwalan"> | boolean
+    durasi?: IntWithAggregatesFilter<"Penjadwalan"> | number
     hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntWithAggregatesFilter<"Penjadwalan"> | number
     tandonId?: IntWithAggregatesFilter<"Penjadwalan"> | number
@@ -12627,6 +12648,7 @@ export namespace Prisma {
   export type PenjadwalanCreateInput = {
     waktu: string
     isActive: boolean
+    durasi: number
     hari?: PenjadwalanCreatehariInput | number[]
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -12638,6 +12660,7 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    durasi: number
     hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
     tandonId: number
@@ -12648,6 +12671,7 @@ export namespace Prisma {
   export type PenjadwalanUpdateInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    durasi?: IntFieldUpdateOperationsInput | number
     hari?: PenjadwalanUpdatehariInput | number[]
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12659,6 +12683,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    durasi?: IntFieldUpdateOperationsInput | number
     hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
     tandonId?: IntFieldUpdateOperationsInput | number
@@ -12670,6 +12695,7 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    durasi: number
     hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
     tandonId: number
@@ -12680,6 +12706,7 @@ export namespace Prisma {
   export type PenjadwalanUpdateManyMutationInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    durasi?: IntFieldUpdateOperationsInput | number
     hari?: PenjadwalanUpdatehariInput | number[]
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12689,6 +12716,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    durasi?: IntFieldUpdateOperationsInput | number
     hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
     tandonId?: IntFieldUpdateOperationsInput | number
@@ -13535,6 +13563,7 @@ export namespace Prisma {
     id?: SortOrder
     waktu?: SortOrder
     isActive?: SortOrder
+    durasi?: SortOrder
     hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
@@ -13544,6 +13573,7 @@ export namespace Prisma {
 
   export type PenjadwalanAvgOrderByAggregateInput = {
     id?: SortOrder
+    durasi?: SortOrder
     hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
@@ -13553,6 +13583,7 @@ export namespace Prisma {
     id?: SortOrder
     waktu?: SortOrder
     isActive?: SortOrder
+    durasi?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
     created_at?: SortOrder
@@ -13563,6 +13594,7 @@ export namespace Prisma {
     id?: SortOrder
     waktu?: SortOrder
     isActive?: SortOrder
+    durasi?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
     created_at?: SortOrder
@@ -13571,6 +13603,7 @@ export namespace Prisma {
 
   export type PenjadwalanSumOrderByAggregateInput = {
     id?: SortOrder
+    durasi?: SortOrder
     hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
@@ -15501,6 +15534,7 @@ export namespace Prisma {
   export type PenjadwalanCreateWithoutResepInput = {
     waktu: string
     isActive: boolean
+    durasi: number
     hari?: PenjadwalanCreatehariInput | number[]
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -15511,6 +15545,7 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    durasi: number
     hari?: PenjadwalanCreatehariInput | number[]
     tandonId: number
     created_at?: Date | string
@@ -15570,6 +15605,7 @@ export namespace Prisma {
     id?: IntFilter<"Penjadwalan"> | number
     waktu?: StringFilter<"Penjadwalan"> | string
     isActive?: BoolFilter<"Penjadwalan"> | boolean
+    durasi?: IntFilter<"Penjadwalan"> | number
     hari?: IntNullableListFilter<"Penjadwalan">
     resepId?: IntFilter<"Penjadwalan"> | number
     tandonId?: IntFilter<"Penjadwalan"> | number
@@ -16467,6 +16503,7 @@ export namespace Prisma {
   export type PenjadwalanCreateWithoutTandonInput = {
     waktu: string
     isActive: boolean
+    durasi: number
     hari?: PenjadwalanCreatehariInput | number[]
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -16477,6 +16514,7 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    durasi: number
     hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
     created_at?: Date | string
@@ -16974,6 +17012,7 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    durasi: number
     hari?: PenjadwalanCreatehariInput | number[]
     tandonId: number
     created_at?: Date | string
@@ -16983,6 +17022,7 @@ export namespace Prisma {
   export type PenjadwalanUpdateWithoutResepInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    durasi?: IntFieldUpdateOperationsInput | number
     hari?: PenjadwalanUpdatehariInput | number[]
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16993,6 +17033,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    durasi?: IntFieldUpdateOperationsInput | number
     hari?: PenjadwalanUpdatehariInput | number[]
     tandonId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17003,6 +17044,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    durasi?: IntFieldUpdateOperationsInput | number
     hari?: PenjadwalanUpdatehariInput | number[]
     tandonId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17190,6 +17232,7 @@ export namespace Prisma {
     id?: number
     waktu: string
     isActive: boolean
+    durasi: number
     hari?: PenjadwalanCreatehariInput | number[]
     resepId: number
     created_at?: Date | string
@@ -17317,6 +17360,7 @@ export namespace Prisma {
   export type PenjadwalanUpdateWithoutTandonInput = {
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    durasi?: IntFieldUpdateOperationsInput | number
     hari?: PenjadwalanUpdatehariInput | number[]
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -17327,6 +17371,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    durasi?: IntFieldUpdateOperationsInput | number
     hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -17337,6 +17382,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     waktu?: StringFieldUpdateOperationsInput | string
     isActive?: BoolFieldUpdateOperationsInput | boolean
+    durasi?: IntFieldUpdateOperationsInput | number
     hari?: PenjadwalanUpdatehariInput | number[]
     resepId?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string

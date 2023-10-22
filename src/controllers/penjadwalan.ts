@@ -8,6 +8,7 @@ interface InputPenjadwalan {
     resep: string,
     waktu: string,
     iterasi: number,
+    durasi: number,
     hari: number[]
 }
 
@@ -46,7 +47,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { resep, id_tandon, waktu, iterasi, hari } = request.payload as InputPenjadwalan;
+        const { resep, id_tandon, waktu, iterasi, hari, durasi } = request.payload as InputPenjadwalan;
         const _splitTime = waktu.split(":");
         const jam = parseInt(_splitTime[0]);
         const menit = parseInt(_splitTime[1]);
@@ -84,6 +85,9 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
                 },
                 hari: {
                     hasSome: hari
+                },
+                tandonId: {
+                    equals: id_tandon
                 }
             }
         });
@@ -101,7 +105,8 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
                     waktu: item,
                     tandonId: id_tandon,
                     isActive: true,
-                    hari
+                    hari,
+                    durasi
                 }
             })
         });
@@ -127,7 +132,6 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     try {
         const id = parseInt(request.query.id);
-        console.log(id);
 
         await prisma.penjadwalan.delete({
             where: {
@@ -153,7 +157,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const patchHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const id  = parseInt(request.query.id);
+        const  { id } = request.payload as { id: number };
         const targetWaktu = await prisma.penjadwalan.findUnique({
             where: { id },
         });
@@ -173,7 +177,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
 
         return h.response({
             status: 'success',
-            message: 'Penjadwalan berhasil di-nonaktifkan'
+            message: `Penjadwalan berhasil di-${targetWaktu.isActive ? 'nonaktifkan' : 'aktifkan'}`
         }).code(200);
     }
     catch (e) {
