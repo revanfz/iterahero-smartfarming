@@ -134,6 +134,10 @@ model Tandon {
   userId            Int
   status            String
   isOnline          Boolean
+  rasioA            Float
+  rasioB            Float
+  rasioAir          Float
+  ppm               Float
   sensor            Sensor[]
   aktuator          Aktuator[]
   tandonBahan       TandonBahan[]

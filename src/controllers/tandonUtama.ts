@@ -98,3 +98,51 @@ export const actuatorByTandonHandler = async (request: Request, h: ResponseToolk
         await prisma.$disconnect();
     }
 }
+
+export const patchHandler = async (request: Request, h: ResponseToolkit) => {
+    try {
+        const { id_tandon, ppm, rasioA, rasioB, rasioAir } = request.payload as {
+            id_tandon: number,
+            ppm: number,
+            rasioA: number,
+            rasioB: number,
+            rasioAir: number
+        }
+
+        const target = await prisma.tandon.findUnique({
+            where: {
+                id: id_tandon
+            }
+        })
+
+        if (!target) {
+            return Boom.notFound("Tidak ada tandon terpilih.")
+        }
+
+        const update = await prisma.tandon.update({
+            where: {
+                id: id_tandon
+            },
+            data: {
+                ppm,
+                rasioA,
+                rasioB,
+                rasioAir
+            }
+        })
+
+        return h.response({
+            status: 'success',
+            message: `Rasio ${target.nama} berhasil diperbarui`
+        });
+    }
+    catch(e) {
+        if (e instanceof Error) {
+            console.error(e)
+            return Boom.internal(e.message)
+        }
+    }
+    finally {
+        await prisma.$disconnect();
+    }
+}

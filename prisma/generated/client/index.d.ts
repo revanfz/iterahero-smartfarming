@@ -10276,11 +10276,19 @@ export namespace Prisma {
   export type TandonAvgAggregateOutputType = {
     id: number | null
     userId: number | null
+    rasioA: number | null
+    rasioB: number | null
+    rasioAir: number | null
+    ppm: number | null
   }
 
   export type TandonSumAggregateOutputType = {
     id: number | null
     userId: number | null
+    rasioA: number | null
+    rasioB: number | null
+    rasioAir: number | null
+    ppm: number | null
   }
 
   export type TandonMinAggregateOutputType = {
@@ -10289,6 +10297,10 @@ export namespace Prisma {
     userId: number | null
     status: string | null
     isOnline: boolean | null
+    rasioA: number | null
+    rasioB: number | null
+    rasioAir: number | null
+    ppm: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -10299,6 +10311,10 @@ export namespace Prisma {
     userId: number | null
     status: string | null
     isOnline: boolean | null
+    rasioA: number | null
+    rasioB: number | null
+    rasioAir: number | null
+    ppm: number | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -10309,6 +10325,10 @@ export namespace Prisma {
     userId: number
     status: number
     isOnline: number
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at: number
     updated_at: number
     _all: number
@@ -10318,11 +10338,19 @@ export namespace Prisma {
   export type TandonAvgAggregateInputType = {
     id?: true
     userId?: true
+    rasioA?: true
+    rasioB?: true
+    rasioAir?: true
+    ppm?: true
   }
 
   export type TandonSumAggregateInputType = {
     id?: true
     userId?: true
+    rasioA?: true
+    rasioB?: true
+    rasioAir?: true
+    ppm?: true
   }
 
   export type TandonMinAggregateInputType = {
@@ -10331,6 +10359,10 @@ export namespace Prisma {
     userId?: true
     status?: true
     isOnline?: true
+    rasioA?: true
+    rasioB?: true
+    rasioAir?: true
+    ppm?: true
     created_at?: true
     updated_at?: true
   }
@@ -10341,6 +10373,10 @@ export namespace Prisma {
     userId?: true
     status?: true
     isOnline?: true
+    rasioA?: true
+    rasioB?: true
+    rasioAir?: true
+    ppm?: true
     created_at?: true
     updated_at?: true
   }
@@ -10351,6 +10387,10 @@ export namespace Prisma {
     userId?: true
     status?: true
     isOnline?: true
+    rasioA?: true
+    rasioB?: true
+    rasioAir?: true
+    ppm?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -10448,6 +10488,10 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at: Date
     updated_at: Date | null
     _count: TandonCountAggregateOutputType | null
@@ -10477,6 +10521,10 @@ export namespace Prisma {
     userId?: boolean
     status?: boolean
     isOnline?: boolean
+    rasioA?: boolean
+    rasioB?: boolean
+    rasioAir?: boolean
+    ppm?: boolean
     created_at?: boolean
     updated_at?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
@@ -10494,6 +10542,10 @@ export namespace Prisma {
     userId?: boolean
     status?: boolean
     isOnline?: boolean
+    rasioA?: boolean
+    rasioB?: boolean
+    rasioAir?: boolean
+    ppm?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
@@ -10525,6 +10577,10 @@ export namespace Prisma {
       userId: number
       status: string
       isOnline: boolean
+      rasioA: number
+      rasioB: number
+      rasioAir: number
+      ppm: number
       created_at: Date
       updated_at: Date | null
     }, ExtArgs["result"]["tandon"]>
@@ -10937,6 +10993,10 @@ export namespace Prisma {
     readonly userId: FieldRef<"Tandon", 'Int'>
     readonly status: FieldRef<"Tandon", 'String'>
     readonly isOnline: FieldRef<"Tandon", 'Boolean'>
+    readonly rasioA: FieldRef<"Tandon", 'Float'>
+    readonly rasioB: FieldRef<"Tandon", 'Float'>
+    readonly rasioAir: FieldRef<"Tandon", 'Float'>
+    readonly ppm: FieldRef<"Tandon", 'Float'>
     readonly created_at: FieldRef<"Tandon", 'DateTime'>
     readonly updated_at: FieldRef<"Tandon", 'DateTime'>
   }
@@ -11508,6 +11568,10 @@ export namespace Prisma {
     userId: 'userId',
     status: 'status',
     isOnline: 'isOnline',
+    rasioA: 'rasioA',
+    rasioB: 'rasioB',
+    rasioAir: 'rasioAir',
+    ppm: 'ppm',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -12262,6 +12326,10 @@ export namespace Prisma {
     userId?: IntFilter<"Tandon"> | number
     status?: StringFilter<"Tandon"> | string
     isOnline?: BoolFilter<"Tandon"> | boolean
+    rasioA?: FloatFilter<"Tandon"> | number
+    rasioB?: FloatFilter<"Tandon"> | number
+    rasioAir?: FloatFilter<"Tandon"> | number
+    ppm?: FloatFilter<"Tandon"> | number
     created_at?: DateTimeFilter<"Tandon"> | Date | string
     updated_at?: DateTimeNullableFilter<"Tandon"> | Date | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -12278,6 +12346,10 @@ export namespace Prisma {
     userId?: SortOrder
     status?: SortOrder
     isOnline?: SortOrder
+    rasioA?: SortOrder
+    rasioB?: SortOrder
+    rasioAir?: SortOrder
+    ppm?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
@@ -12297,6 +12369,10 @@ export namespace Prisma {
     userId?: IntFilter<"Tandon"> | number
     status?: StringFilter<"Tandon"> | string
     isOnline?: BoolFilter<"Tandon"> | boolean
+    rasioA?: FloatFilter<"Tandon"> | number
+    rasioB?: FloatFilter<"Tandon"> | number
+    rasioAir?: FloatFilter<"Tandon"> | number
+    ppm?: FloatFilter<"Tandon"> | number
     created_at?: DateTimeFilter<"Tandon"> | Date | string
     updated_at?: DateTimeNullableFilter<"Tandon"> | Date | string | null
     user?: XOR<UserRelationFilter, UserWhereInput>
@@ -12313,6 +12389,10 @@ export namespace Prisma {
     userId?: SortOrder
     status?: SortOrder
     isOnline?: SortOrder
+    rasioA?: SortOrder
+    rasioB?: SortOrder
+    rasioAir?: SortOrder
+    ppm?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     _count?: TandonCountOrderByAggregateInput
@@ -12331,6 +12411,10 @@ export namespace Prisma {
     userId?: IntWithAggregatesFilter<"Tandon"> | number
     status?: StringWithAggregatesFilter<"Tandon"> | string
     isOnline?: BoolWithAggregatesFilter<"Tandon"> | boolean
+    rasioA?: FloatWithAggregatesFilter<"Tandon"> | number
+    rasioB?: FloatWithAggregatesFilter<"Tandon"> | number
+    rasioAir?: FloatWithAggregatesFilter<"Tandon"> | number
+    ppm?: FloatWithAggregatesFilter<"Tandon"> | number
     created_at?: DateTimeWithAggregatesFilter<"Tandon"> | Date | string
     updated_at?: DateTimeNullableWithAggregatesFilter<"Tandon"> | Date | string | null
   }
@@ -12999,6 +13083,10 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
@@ -13015,6 +13103,10 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
@@ -13028,6 +13120,10 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
@@ -13044,6 +13140,10 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
@@ -13059,6 +13159,10 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -13067,6 +13171,10 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -13077,6 +13185,10 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -13847,6 +13959,10 @@ export namespace Prisma {
     userId?: SortOrder
     status?: SortOrder
     isOnline?: SortOrder
+    rasioA?: SortOrder
+    rasioB?: SortOrder
+    rasioAir?: SortOrder
+    ppm?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -13854,6 +13970,10 @@ export namespace Prisma {
   export type TandonAvgOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    rasioA?: SortOrder
+    rasioB?: SortOrder
+    rasioAir?: SortOrder
+    ppm?: SortOrder
   }
 
   export type TandonMaxOrderByAggregateInput = {
@@ -13862,6 +13982,10 @@ export namespace Prisma {
     userId?: SortOrder
     status?: SortOrder
     isOnline?: SortOrder
+    rasioA?: SortOrder
+    rasioB?: SortOrder
+    rasioAir?: SortOrder
+    ppm?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -13872,6 +13996,10 @@ export namespace Prisma {
     userId?: SortOrder
     status?: SortOrder
     isOnline?: SortOrder
+    rasioA?: SortOrder
+    rasioB?: SortOrder
+    rasioAir?: SortOrder
+    ppm?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -13879,6 +14007,10 @@ export namespace Prisma {
   export type TandonSumOrderByAggregateInput = {
     id?: SortOrder
     userId?: SortOrder
+    rasioA?: SortOrder
+    rasioB?: SortOrder
+    rasioAir?: SortOrder
+    ppm?: SortOrder
   }
 
   export type GreenhouseCreateNestedManyWithoutUserInput = {
@@ -15043,6 +15175,10 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorCreateNestedManyWithoutTandonInput
@@ -15057,6 +15193,10 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
@@ -15129,6 +15269,10 @@ export namespace Prisma {
     userId?: IntFilter<"Tandon"> | number
     status?: StringFilter<"Tandon"> | string
     isOnline?: BoolFilter<"Tandon"> | boolean
+    rasioA?: FloatFilter<"Tandon"> | number
+    rasioB?: FloatFilter<"Tandon"> | number
+    rasioAir?: FloatFilter<"Tandon"> | number
+    ppm?: FloatFilter<"Tandon"> | number
     created_at?: DateTimeFilter<"Tandon"> | Date | string
     updated_at?: DateTimeNullableFilter<"Tandon"> | Date | string | null
   }
@@ -15340,6 +15484,10 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
@@ -15355,6 +15503,10 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
@@ -15458,6 +15610,10 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
@@ -15473,6 +15629,10 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
@@ -15679,6 +15839,10 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
@@ -15694,6 +15858,10 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
@@ -15764,6 +15932,10 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
@@ -15779,6 +15951,10 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
@@ -15791,6 +15967,10 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
@@ -15806,6 +15986,10 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     aktuator?: AktuatorUncheckedCreateNestedManyWithoutTandonInput
@@ -15882,6 +16066,10 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
@@ -15897,6 +16085,10 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aktuator?: AktuatorUncheckedUpdateManyWithoutTandonNestedInput
@@ -15969,6 +16161,10 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
@@ -15984,6 +16180,10 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
@@ -16080,6 +16280,10 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
@@ -16095,6 +16299,10 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
@@ -16271,6 +16479,10 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     user: UserCreateNestedOneWithoutTandonInput
@@ -16286,6 +16498,10 @@ export namespace Prisma {
     userId: number
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
     sensor?: SensorUncheckedCreateNestedManyWithoutTandonInput
@@ -16346,6 +16562,10 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateOneRequiredWithoutTandonNestedInput
@@ -16361,6 +16581,10 @@ export namespace Prisma {
     userId?: IntFieldUpdateOperationsInput | number
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
@@ -16684,6 +16908,10 @@ export namespace Prisma {
     nama: string
     status: string
     isOnline: boolean
+    rasioA: number
+    rasioB: number
+    rasioAir: number
+    ppm: number
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -16722,6 +16950,10 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUpdateManyWithoutTandonNestedInput
@@ -16736,6 +16968,10 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     sensor?: SensorUncheckedUpdateManyWithoutTandonNestedInput
@@ -16750,6 +16986,10 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     status?: StringFieldUpdateOperationsInput | string
     isOnline?: BoolFieldUpdateOperationsInput | boolean
+    rasioA?: FloatFieldUpdateOperationsInput | number
+    rasioB?: FloatFieldUpdateOperationsInput | number
+    rasioAir?: FloatFieldUpdateOperationsInput | number
+    ppm?: FloatFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }

@@ -3,23 +3,22 @@ import { publishData } from "../config/mqtt";
 import { prisma } from "../config/prisma";
 
 export const initPeracikan = async () => {
-  await schedule.gracefulShutdown();
-  try {
-    const data = await prisma.penjadwalan.findMany({
-      orderBy: {
-        id: "asc",
-      },
-    });
-    data
-      .filter((item) => item.isActive === true)
-      .forEach((item) => {
-        schedulePeracikan(item.id, item.waktu, item.hari, item.resepId);
+  schedule
+    .gracefulShutdown()
+    .then(async () => {
+      const data = await prisma.penjadwalan.findMany({
+        orderBy: {
+          id: "asc",
+        },
       });
-  } catch (e) {
-    console.log(e);
-  } finally {
-    await prisma.$disconnect();
-  }
+      data
+        .filter((item) => item.isActive === true)
+        .forEach((item) => {
+          schedulePeracikan(item.id, item.waktu, item.hari, item.resepId);
+        });
+    })
+    .catch((err) => console.error(err))
+    .finally(async () => await prisma.$disconnect());
 };
 
 export const onOffPeracikan = async (id: number) => {

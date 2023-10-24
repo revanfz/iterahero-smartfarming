@@ -206,6 +206,10 @@ exports.Prisma.TandonScalarFieldEnum = {
   userId: 'userId',
   status: 'status',
   isOnline: 'isOnline',
+  rasioA: 'rasioA',
+  rasioB: 'rasioB',
+  rasioAir: 'rasioAir',
+  ppm: 'ppm',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
