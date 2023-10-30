@@ -1,6 +1,8 @@
 import {
   actuatorByGreenhouseHandler,
+  deleteHandler,
   getHandler,
+  patchHandler,
   postHandler,
   sensorByGreenhouseHandler,
 } from "../controllers/greenhouse";
@@ -20,6 +22,27 @@ export const greenhouseRoute: ServerRoute[] = [
     method: "POST",
     path,
     handler: postHandler,
+    options: {
+      payload: {
+        parse: true,
+        allow: "multipart/form-data",
+        multipart: {
+          output: "stream",
+        },
+        maxBytes: 1000 * 1000 * 5, // 5 Mb
+      },
+    },
+  },
+  
+  {
+    method: "DELETE",
+    path,
+    handler: deleteHandler,
+  },
+  {
+    method: "PATCH",
+    path,
+    handler: patchHandler,
     options: {
       payload: {
         parse: true,

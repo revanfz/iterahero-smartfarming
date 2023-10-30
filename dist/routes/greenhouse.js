@@ -30,6 +30,26 @@ exports.greenhouseRoute = [
         },
     },
     {
+        method: "DELETE",
+        path,
+        handler: greenhouse_1.deleteHandler,
+    },
+    {
+        method: "PATCH",
+        path,
+        handler: greenhouse_1.patchHandler,
+        options: {
+            payload: {
+                parse: true,
+                allow: "multipart/form-data",
+                multipart: {
+                    output: "stream",
+                },
+                maxBytes: 1000 * 1000 * 5, // 5 Mb
+            },
+        },
+    },
+    {
         method: "GET",
         path: path + "/{id}/sensor",
         handler: greenhouse_1.sensorByGreenhouseHandler,

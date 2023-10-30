@@ -37,8 +37,9 @@ const schedule = __importStar(require("node-schedule"));
 const mqtt_1 = require("../config/mqtt");
 const prisma_1 = require("../config/prisma");
 const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield schedule.gracefulShutdown();
-    try {
+    schedule
+        .gracefulShutdown()
+        .then(() => __awaiter(void 0, void 0, void 0, function* () {
         const data = yield prisma_1.prisma.penjadwalan.findMany({
             orderBy: {
                 id: "asc",
@@ -49,13 +50,9 @@ const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
             .forEach((item) => {
             (0, exports.schedulePeracikan)(item.id, item.waktu, item.hari, item.resepId);
         });
-    }
-    catch (e) {
-        console.log(e);
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
-    }
+    }))
+        .catch((err) => console.error(err))
+        .finally(() => __awaiter(void 0, void 0, void 0, function* () { return yield prisma_1.prisma.$disconnect(); }));
 });
 exports.initPeracikan = initPeracikan;
 const onOffPeracikan = (id) => __awaiter(void 0, void 0, void 0, function* () {

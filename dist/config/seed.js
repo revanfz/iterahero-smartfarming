@@ -18,6 +18,7 @@ const tandonBahan_1 = require("../data/tandonBahan");
 const tandonPenyimpanan_1 = require("../data/tandonPenyimpanan");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const prisma_1 = require("./prisma");
+const tandon_1 = require("../data/tandon");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const admin = yield prisma_1.prisma.user.upsert({
@@ -33,15 +34,15 @@ function main() {
                 greenhouse: {
                     connectOrCreate: {
                         where: {
-                            id: 1
+                            id: 1,
                         },
                         create: {
                             name: "Greenhouse Kebun Raya",
                             thumbnail: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
-                            location: "UPT Kebun Raya"
-                        }
-                    }
-                }
+                            location: "UPT Kebun Raya",
+                        },
+                    },
+                },
             },
         });
         const operator = yield prisma_1.prisma.user.upsert({
@@ -57,38 +58,25 @@ function main() {
                 greenhouse: {
                     connectOrCreate: {
                         where: {
-                            id: 2
+                            id: 2,
                         },
                         create: {
                             name: "Greenhouse Wanayasa",
                             thumbnail: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
-                            location: "Wanayasa"
-                        }
-                    }
-                }
+                            location: "Wanayasa",
+                        },
+                    },
+                },
             },
         });
         const tandon = yield prisma_1.prisma.tandon.createMany({
-            data: [
-                {
-                    nama: "Tandon Peracikan - Kebun Raya",
-                    userId: 1,
-                    isOnline: true,
-                    status: "Idle",
-                },
-                {
-                    nama: "Tandon Peracikan - Mitra",
-                    userId: 2,
-                    isOnline: true,
-                    status: "Idle",
-                },
-            ],
+            data: tandon_1.seedingTandon
         });
         const tandonPenyimpanan = yield prisma_1.prisma.tandonPenyimpanan.createMany({
-            data: tandonPenyimpanan_1.tandonPenyimpananSeeding
+            data: tandonPenyimpanan_1.tandonPenyimpananSeeding,
         });
         const selenoid = yield prisma_1.prisma.aktuator.createMany({
-            data: aktuator_1.aktuatorSeeding
+            data: aktuator_1.aktuatorSeeding,
         });
         const resep = yield prisma_1.prisma.resep.create({
             data: {
@@ -98,10 +86,10 @@ function main() {
                 interval: 120,
                 tandonPenyimpanan: {
                     connect: {
-                        nama: "Melon"
-                    }
+                        nama: "Melon",
+                    },
                 },
-                tipe: "besaran"
+                tipe: "besaran",
             },
         });
         const resep2 = yield prisma_1.prisma.resep.create({
@@ -112,11 +100,11 @@ function main() {
                 interval: 95,
                 tandonPenyimpanan: {
                     connect: {
-                        nama: "Semangka"
-                    }
+                        nama: "Semangka",
+                    },
                 },
-                tipe: "besaran"
-            }
+                tipe: "besaran",
+            },
         });
         const resep3 = yield prisma_1.prisma.resep.create({
             data: {
@@ -126,11 +114,11 @@ function main() {
                 interval: 105,
                 tandonPenyimpanan: {
                     connect: {
-                        nama: "Ketimun"
-                    }
+                        nama: "Ketimun",
+                    },
                 },
-                tipe: "besaran"
-            }
+                tipe: "besaran",
+            },
         });
         const resep4 = yield prisma_1.prisma.resep.create({
             data: {
@@ -142,11 +130,11 @@ function main() {
                 ph: 7.2,
                 tandonPenyimpanan: {
                     connect: {
-                        nama: "Melon"
-                    }
+                        nama: "Melon",
+                    },
                 },
-                tipe: "rasio"
-            }
+                tipe: "rasio",
+            },
         });
         const resep5 = yield prisma_1.prisma.resep.create({
             data: {
@@ -158,11 +146,11 @@ function main() {
                 ph: 6.4,
                 tandonPenyimpanan: {
                     connect: {
-                        nama: "Semangka"
-                    }
+                        nama: "Semangka",
+                    },
                 },
-                tipe: "rasio"
-            }
+                tipe: "rasio",
+            },
         });
         const resep6 = yield prisma_1.prisma.resep.create({
             data: {
@@ -174,19 +162,33 @@ function main() {
                 ph: 6.6,
                 tandonPenyimpanan: {
                     connect: {
-                        nama: "Ketimun"
-                    }
+                        nama: "Ketimun",
+                    },
                 },
-                tipe: "rasio"
-            }
+                tipe: "rasio",
+            },
         });
         const tandonBahan = yield prisma_1.prisma.tandonBahan.createMany({
-            data: tandonBahan_1.tandonBahanSeeding
+            data: tandonBahan_1.tandonBahanSeeding,
         });
         const sensor = yield prisma_1.prisma.sensor.createMany({
-            data: sensor_1.seedingSensor
+            data: sensor_1.seedingSensor,
         });
-        console.log({ admin, operator, selenoid, tandonPenyimpanan, resep, resep2, resep3, resep4, resep5, resep6, tandon, tandonBahan, sensor });
+        console.log({
+            admin,
+            operator,
+            selenoid,
+            tandonPenyimpanan,
+            resep,
+            resep2,
+            resep3,
+            resep4,
+            resep5,
+            resep6,
+            tandon,
+            tandonBahan,
+            sensor,
+        });
     });
 }
 main()

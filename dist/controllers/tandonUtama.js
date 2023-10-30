@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.actuatorByTandonHandler = exports.sensorByTandonHandler = exports.getHandler = void 0;
+exports.patchHandler = exports.actuatorByTandonHandler = exports.sensorByTandonHandler = exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
@@ -102,3 +102,41 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
     }
 });
 exports.actuatorByTandonHandler = actuatorByTandonHandler;
+const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id_tandon, ppm, rasioA, rasioB, rasioAir } = request.payload;
+        const target = yield prisma_1.prisma.tandon.findUnique({
+            where: {
+                id: id_tandon
+            }
+        });
+        if (!target) {
+            return boom_1.default.notFound("Tidak ada tandon terpilih.");
+        }
+        const update = yield prisma_1.prisma.tandon.update({
+            where: {
+                id: id_tandon
+            },
+            data: {
+                ppm,
+                rasioA,
+                rasioB,
+                rasioAir
+            }
+        });
+        return h.response({
+            status: 'success',
+            message: `Rasio ${target.nama} berhasil diperbarui`
+        });
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.error(e);
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.patchHandler = patchHandler;
