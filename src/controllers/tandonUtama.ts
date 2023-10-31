@@ -8,12 +8,21 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         const { id_user } = request.auth.credentials as {
             id_user: number
         }
-
-        const data = await prisma.tandon.findMany({
+        const id = parseInt(request.query.id)
+        let data;
+        if (isNaN(id)) {
+            data = await prisma.tandon.findMany({
                 where: {
                     userId: id_user
                 },
             });
+        } else {
+            data = await prisma.tandon.findUnique({
+                where: {
+                    id
+                }
+            })
+        }
 
         if (!data) {
             return Boom.notFound("Tidak ada tandon terpilih");
@@ -119,7 +128,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
             return Boom.notFound("Tidak ada tandon terpilih.")
         }
 
-        const update = await prisma.tandon.update({
+        await prisma.tandon.update({
             where: {
                 id: id_tandon
             },

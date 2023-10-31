@@ -18,11 +18,22 @@ const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id_user } = request.auth.credentials;
-        const data = yield prisma_1.prisma.tandon.findMany({
-            where: {
-                userId: id_user
-            },
-        });
+        const id = parseInt(request.query.id);
+        let data;
+        if (isNaN(id)) {
+            data = yield prisma_1.prisma.tandon.findMany({
+                where: {
+                    userId: id_user
+                },
+            });
+        }
+        else {
+            data = yield prisma_1.prisma.tandon.findUnique({
+                where: {
+                    id
+                }
+            });
+        }
         if (!data) {
             return boom_1.default.notFound("Tidak ada tandon terpilih");
         }
@@ -113,7 +124,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         if (!target) {
             return boom_1.default.notFound("Tidak ada tandon terpilih.");
         }
-        const update = yield prisma_1.prisma.tandon.update({
+        yield prisma_1.prisma.tandon.update({
             where: {
                 id: id_tandon
             },
