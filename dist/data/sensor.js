@@ -70,7 +70,7 @@ exports.seedingSensor = [
         status: true,
         tandonId: 1,
         nilai: 299.15,
-        icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
+        icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666447016/itera%20herro%20icon/Icon%20fix/Monitoring/Temperatur_lingkungan_v5zd9b.png"
     },
     {
         name: "Sensor TDS",
@@ -80,7 +80,7 @@ exports.seedingSensor = [
         status: true,
         tandonId: 1,
         nilai: 1200,
-        icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
+        icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666447500/itera%20herro%20icon/Icon%20fix/Monitoring/tds_k0gvaf.png"
     },
     {
         name: "Sensor Ketinggian",
@@ -150,7 +150,7 @@ exports.seedingSensor = [
         status: true,
         tandonId: 2,
         nilai: 299.15,
-        icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
+        icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666447016/itera%20herro%20icon/Icon%20fix/Monitoring/Temperatur_lingkungan_v5zd9b.png"
     },
     {
         name: "Sensor TDS",
@@ -160,6 +160,6 @@ exports.seedingSensor = [
         status: true,
         tandonId: 2,
         nilai: 1200,
-        icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666445910/itera%20herro%20icon/Icon%20fix/Monitoring/ph_ykaxmx.png"
+        icon: "https://res.cloudinary.com/diyu8lkwy/image/upload/v1666447500/itera%20herro%20icon/Icon%20fix/Monitoring/tds_k0gvaf.png"
     },
 ];

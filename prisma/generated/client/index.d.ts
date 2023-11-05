@@ -8126,7 +8126,7 @@ export namespace Prisma {
 
   export type AktuatorAvgAggregateOutputType = {
     id: number | null
-    portPlc: number | null
+    portRaspi: number | null
     tandonId: number | null
     greenhouseId: number | null
     tandonPenyimpananId: number | null
@@ -8135,7 +8135,7 @@ export namespace Prisma {
 
   export type AktuatorSumAggregateOutputType = {
     id: number | null
-    portPlc: number | null
+    portRaspi: number | null
     tandonId: number | null
     greenhouseId: number | null
     tandonPenyimpananId: number | null
@@ -8149,7 +8149,7 @@ export namespace Prisma {
     icon: string | null
     color: string | null
     status: boolean | null
-    portPlc: number | null
+    portRaspi: number | null
     tandonId: number | null
     greenhouseId: number | null
     tandonPenyimpananId: number | null
@@ -8165,7 +8165,7 @@ export namespace Prisma {
     icon: string | null
     color: string | null
     status: boolean | null
-    portPlc: number | null
+    portRaspi: number | null
     tandonId: number | null
     greenhouseId: number | null
     tandonPenyimpananId: number | null
@@ -8181,7 +8181,7 @@ export namespace Prisma {
     icon: number
     color: number
     status: number
-    portPlc: number
+    portRaspi: number
     tandonId: number
     greenhouseId: number
     tandonPenyimpananId: number
@@ -8194,7 +8194,7 @@ export namespace Prisma {
 
   export type AktuatorAvgAggregateInputType = {
     id?: true
-    portPlc?: true
+    portRaspi?: true
     tandonId?: true
     greenhouseId?: true
     tandonPenyimpananId?: true
@@ -8203,7 +8203,7 @@ export namespace Prisma {
 
   export type AktuatorSumAggregateInputType = {
     id?: true
-    portPlc?: true
+    portRaspi?: true
     tandonId?: true
     greenhouseId?: true
     tandonPenyimpananId?: true
@@ -8217,7 +8217,7 @@ export namespace Prisma {
     icon?: true
     color?: true
     status?: true
-    portPlc?: true
+    portRaspi?: true
     tandonId?: true
     greenhouseId?: true
     tandonPenyimpananId?: true
@@ -8233,7 +8233,7 @@ export namespace Prisma {
     icon?: true
     color?: true
     status?: true
-    portPlc?: true
+    portRaspi?: true
     tandonId?: true
     greenhouseId?: true
     tandonPenyimpananId?: true
@@ -8249,7 +8249,7 @@ export namespace Prisma {
     icon?: true
     color?: true
     status?: true
-    portPlc?: true
+    portRaspi?: true
     tandonId?: true
     greenhouseId?: true
     tandonPenyimpananId?: true
@@ -8352,7 +8352,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     tandonId: number | null
     greenhouseId: number | null
     tandonPenyimpananId: number | null
@@ -8387,7 +8387,7 @@ export namespace Prisma {
     icon?: boolean
     color?: boolean
     status?: boolean
-    portPlc?: boolean
+    portRaspi?: boolean
     tandonId?: boolean
     greenhouseId?: boolean
     tandonPenyimpananId?: boolean
@@ -8407,7 +8407,7 @@ export namespace Prisma {
     icon?: boolean
     color?: boolean
     status?: boolean
-    portPlc?: boolean
+    portRaspi?: boolean
     tandonId?: boolean
     greenhouseId?: boolean
     tandonPenyimpananId?: boolean
@@ -8439,7 +8439,7 @@ export namespace Prisma {
       icon: string
       color: string
       status: boolean
-      portPlc: number
+      portRaspi: number
       tandonId: number | null
       greenhouseId: number | null
       tandonPenyimpananId: number | null
@@ -8853,7 +8853,7 @@ export namespace Prisma {
     readonly icon: FieldRef<"Aktuator", 'String'>
     readonly color: FieldRef<"Aktuator", 'String'>
     readonly status: FieldRef<"Aktuator", 'Boolean'>
-    readonly portPlc: FieldRef<"Aktuator", 'Int'>
+    readonly portRaspi: FieldRef<"Aktuator", 'Int'>
     readonly tandonId: FieldRef<"Aktuator", 'Int'>
     readonly greenhouseId: FieldRef<"Aktuator", 'Int'>
     readonly tandonPenyimpananId: FieldRef<"Aktuator", 'Int'>
@@ -11539,7 +11539,7 @@ export namespace Prisma {
     icon: 'icon',
     color: 'color',
     status: 'status',
-    portPlc: 'portPlc',
+    portRaspi: 'portRaspi',
     tandonId: 'tandonId',
     greenhouseId: 'greenhouseId',
     tandonPenyimpananId: 'tandonPenyimpananId',
@@ -12158,7 +12158,7 @@ export namespace Prisma {
     icon?: StringFilter<"Aktuator"> | string
     color?: StringFilter<"Aktuator"> | string
     status?: BoolFilter<"Aktuator"> | boolean
-    portPlc?: IntFilter<"Aktuator"> | number
+    portRaspi?: IntFilter<"Aktuator"> | number
     tandonId?: IntNullableFilter<"Aktuator"> | number | null
     greenhouseId?: IntNullableFilter<"Aktuator"> | number | null
     tandonPenyimpananId?: IntNullableFilter<"Aktuator"> | number | null
@@ -12178,7 +12178,7 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     status?: SortOrder
-    portPlc?: SortOrder
+    portRaspi?: SortOrder
     tandonId?: SortOrderInput | SortOrder
     greenhouseId?: SortOrderInput | SortOrder
     tandonPenyimpananId?: SortOrderInput | SortOrder
@@ -12201,7 +12201,7 @@ export namespace Prisma {
     icon?: StringFilter<"Aktuator"> | string
     color?: StringFilter<"Aktuator"> | string
     status?: BoolFilter<"Aktuator"> | boolean
-    portPlc?: IntFilter<"Aktuator"> | number
+    portRaspi?: IntFilter<"Aktuator"> | number
     tandonId?: IntNullableFilter<"Aktuator"> | number | null
     greenhouseId?: IntNullableFilter<"Aktuator"> | number | null
     tandonPenyimpananId?: IntNullableFilter<"Aktuator"> | number | null
@@ -12221,7 +12221,7 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     status?: SortOrder
-    portPlc?: SortOrder
+    portRaspi?: SortOrder
     tandonId?: SortOrderInput | SortOrder
     greenhouseId?: SortOrderInput | SortOrder
     tandonPenyimpananId?: SortOrderInput | SortOrder
@@ -12245,7 +12245,7 @@ export namespace Prisma {
     icon?: StringWithAggregatesFilter<"Aktuator"> | string
     color?: StringWithAggregatesFilter<"Aktuator"> | string
     status?: BoolWithAggregatesFilter<"Aktuator"> | boolean
-    portPlc?: IntWithAggregatesFilter<"Aktuator"> | number
+    portRaspi?: IntWithAggregatesFilter<"Aktuator"> | number
     tandonId?: IntNullableWithAggregatesFilter<"Aktuator"> | number | null
     greenhouseId?: IntNullableWithAggregatesFilter<"Aktuator"> | number | null
     tandonPenyimpananId?: IntNullableWithAggregatesFilter<"Aktuator"> | number | null
@@ -12920,7 +12920,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     created_at?: Date | string
     updated_at?: Date | string | null
     tandon?: TandonCreateNestedOneWithoutAktuatorInput
@@ -12936,7 +12936,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     tandonId?: number | null
     greenhouseId?: number | null
     tandonPenyimpananId?: number | null
@@ -12951,7 +12951,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneWithoutAktuatorNestedInput
@@ -12967,7 +12967,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -12983,7 +12983,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     tandonId?: number | null
     greenhouseId?: number | null
     tandonPenyimpananId?: number | null
@@ -12998,7 +12998,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -13010,7 +13010,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -13845,7 +13845,7 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     status?: SortOrder
-    portPlc?: SortOrder
+    portRaspi?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
     tandonPenyimpananId?: SortOrder
@@ -13856,7 +13856,7 @@ export namespace Prisma {
 
   export type AktuatorAvgOrderByAggregateInput = {
     id?: SortOrder
-    portPlc?: SortOrder
+    portRaspi?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
     tandonPenyimpananId?: SortOrder
@@ -13870,7 +13870,7 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     status?: SortOrder
-    portPlc?: SortOrder
+    portRaspi?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
     tandonPenyimpananId?: SortOrder
@@ -13886,7 +13886,7 @@ export namespace Prisma {
     icon?: SortOrder
     color?: SortOrder
     status?: SortOrder
-    portPlc?: SortOrder
+    portRaspi?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
     tandonPenyimpananId?: SortOrder
@@ -13897,7 +13897,7 @@ export namespace Prisma {
 
   export type AktuatorSumOrderByAggregateInput = {
     id?: SortOrder
-    portPlc?: SortOrder
+    portRaspi?: SortOrder
     tandonId?: SortOrder
     greenhouseId?: SortOrder
     tandonPenyimpananId?: SortOrder
@@ -15309,7 +15309,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     created_at?: Date | string
     updated_at?: Date | string | null
     tandon?: TandonCreateNestedOneWithoutAktuatorInput
@@ -15324,7 +15324,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     tandonId?: number | null
     tandonPenyimpananId?: number | null
     tandonBahanId?: number | null
@@ -15436,7 +15436,7 @@ export namespace Prisma {
     icon?: StringFilter<"Aktuator"> | string
     color?: StringFilter<"Aktuator"> | string
     status?: BoolFilter<"Aktuator"> | boolean
-    portPlc?: IntFilter<"Aktuator"> | number
+    portRaspi?: IntFilter<"Aktuator"> | number
     tandonId?: IntNullableFilter<"Aktuator"> | number | null
     greenhouseId?: IntNullableFilter<"Aktuator"> | number | null
     tandonPenyimpananId?: IntNullableFilter<"Aktuator"> | number | null
@@ -15526,7 +15526,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     created_at?: Date | string
     updated_at?: Date | string | null
     tandon?: TandonCreateNestedOneWithoutAktuatorInput
@@ -15541,7 +15541,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     tandonId?: number | null
     greenhouseId?: number | null
     tandonBahanId?: number | null
@@ -16442,7 +16442,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     created_at?: Date | string
     updated_at?: Date | string | null
     tandon?: TandonCreateNestedOneWithoutAktuatorInput
@@ -16457,7 +16457,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     tandonId?: number | null
     greenhouseId?: number | null
     tandonPenyimpananId?: number | null
@@ -16664,7 +16664,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     created_at?: Date | string
     updated_at?: Date | string | null
     greenhouse?: GreenhouseCreateNestedOneWithoutAktuatorInput
@@ -16679,7 +16679,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     greenhouseId?: number | null
     tandonPenyimpananId?: number | null
     tandonBahanId?: number | null
@@ -17001,7 +17001,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     tandonId?: number | null
     tandonPenyimpananId?: number | null
     tandonBahanId?: number | null
@@ -17061,7 +17061,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneWithoutAktuatorNestedInput
@@ -17076,7 +17076,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17091,7 +17091,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17150,7 +17150,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     tandonId?: number | null
     greenhouseId?: number | null
     tandonBahanId?: number | null
@@ -17164,7 +17164,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneWithoutAktuatorNestedInput
@@ -17179,7 +17179,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17194,7 +17194,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17335,7 +17335,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     tandonId?: number | null
     greenhouseId?: number | null
     tandonPenyimpananId?: number | null
@@ -17393,7 +17393,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandon?: TandonUpdateOneWithoutAktuatorNestedInput
@@ -17408,7 +17408,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17423,7 +17423,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17453,7 +17453,7 @@ export namespace Prisma {
     icon: string
     color: string
     status: boolean
-    portPlc: number
+    portRaspi: number
     greenhouseId?: number | null
     tandonPenyimpananId?: number | null
     tandonBahanId?: number | null
@@ -17535,7 +17535,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     greenhouse?: GreenhouseUpdateOneWithoutAktuatorNestedInput
@@ -17550,7 +17550,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -17565,7 +17565,7 @@ export namespace Prisma {
     icon?: StringFieldUpdateOperationsInput | string
     color?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
-    portPlc?: IntFieldUpdateOperationsInput | number
+    portRaspi?: IntFieldUpdateOperationsInput | number
     greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
     tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null

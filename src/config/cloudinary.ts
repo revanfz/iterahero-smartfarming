@@ -1,6 +1,8 @@
 import { UploadApiResponse, v2 } from "cloudinary";
 import { Readable } from "stream";
 
+const folder = "iterahero2023"
+
 v2.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -10,7 +12,7 @@ v2.config({
 export const uploadImage = async (image: Readable, nama: string): Promise<UploadApiResponse | undefined> => {
  return new Promise((resolve, reject) => {
     const stream = v2.uploader.upload_stream({
-        folder: "iterahero2023",
+        folder,
         public_id: `gh-${nama}`,
         resource_type: "auto"
     }, (err, result) => {
@@ -23,7 +25,7 @@ export const uploadImage = async (image: Readable, nama: string): Promise<Upload
 
 export const deleteImage = async (publicId: string) => {
   return v2.uploader
-    .destroy(publicId)
+    .destroy(`${folder}/${publicId}`)
     .then((result) => {
       return result;
     })
@@ -31,3 +33,13 @@ export const deleteImage = async (publicId: string) => {
       return err;
     });
 };
+
+export const renameFile = async (publicId: string, newFileName: string) => {
+  return v2.uploader.rename(`${folder}/${publicId}`, newFileName)
+    .then((result) => {
+      return result
+    })
+    .catch((err) => {
+      return err
+    })
+}

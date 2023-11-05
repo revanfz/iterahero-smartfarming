@@ -183,7 +183,7 @@ exports.Prisma.AktuatorScalarFieldEnum = {
   icon: 'icon',
   color: 'color',
   status: 'status',
-  portPlc: 'portPlc',
+  portRaspi: 'portRaspi',
   tandonId: 'tandonId',
   greenhouseId: 'greenhouseId',
   tandonPenyimpananId: 'tandonPenyimpananId',

@@ -64,7 +64,6 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const { id_user } = request.auth.credentials;
         const { name, thumbnail, location } = request.payload;
-        console.log(thumbnail);
         const isExist = yield prisma_1.prisma.greenhouse.findUnique({
             where: {
                 name,
@@ -99,7 +98,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            return boom_1.default.internal(e, { kocak: "wwkwk" });
+            return boom_1.default.internal(e.message);
         }
     }
     finally {
@@ -121,6 +120,9 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
             });
             if (!target) {
                 return boom_1.default.notFound("Tidak ada gh tersebut");
+            }
+            if (name) {
+                yield (0, cloudinary_1.renameFile)(target.name, name);
             }
             if (thumbnail) {
                 (0, cloudinary_1.deleteImage)(`gh-${target.name}`);
@@ -185,6 +187,9 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
             console.log(e);
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.deleteHandler = deleteHandler;

@@ -1,7 +1,7 @@
 import { prisma } from "../config/prisma";
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import Boom from "@hapi/boom";
-import { deleteImage, uploadImage } from "../config/cloudinary";
+import { deleteImage, renameFile, uploadImage } from "../config/cloudinary";
 import { Readable } from "stream";
 
 interface InputGreenhouse {
@@ -61,7 +61,6 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       id_user: number;
     };
     const { name, thumbnail, location } = request.payload as InputGreenhouse;
-    console.log(thumbnail);
 
     const isExist = await prisma.greenhouse.findUnique({
       where: {
@@ -100,7 +99,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     console.log(e);
     if (e instanceof Error) {
-      return Boom.internal(e, { kocak: "wwkwk" });
+      return Boom.internal(e.message);
     }
   } finally {
     await prisma.$disconnect();
@@ -122,6 +121,10 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
 
       if (!target) {
         return Boom.notFound("Tidak ada gh tersebut");
+      }
+
+      if (name) {
+        await renameFile(target.name, name)
       }
 
       if (thumbnail) {
@@ -187,6 +190,9 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
       console.log(e);
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect()
   }
 };
 

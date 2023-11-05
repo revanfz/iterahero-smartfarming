@@ -16,7 +16,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             return Boom.notFound("Tidak ada aktuator dengan id tersebut")
         }
         
-        publishData("iterahero2023/actuator", JSON.stringify({ pin: data.portPlc }))
+        publishData("iterahero2023/actuator", JSON.stringify({ pin: data.portRaspi }))
         return h.response({
             status: "success",
             message: `${data.name} berhasil dinyalakan`

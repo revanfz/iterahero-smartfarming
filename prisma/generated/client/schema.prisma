@@ -28,8 +28,8 @@ model Greenhouse {
   id         Int        @id @default(autoincrement())
   name       String     @unique
   thumbnail  String
-  user       User[]
   location   String
+  user       User[]
   aktuator   Aktuator[]
   sensor     Sensor[]
   created_at DateTime   @default(now())
@@ -103,7 +103,7 @@ model Aktuator {
   icon                String
   color               String
   status              Boolean
-  portPlc             Int
+  portRaspi           Int
   tandon              Tandon?            @relation(fields: [tandonId], references: [id])
   tandonId            Int?
   greenhouse          Greenhouse?        @relation(fields: [greenhouseId], references: [id])

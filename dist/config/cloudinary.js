@@ -9,8 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteImage = exports.uploadImage = void 0;
+exports.renameFile = exports.deleteImage = exports.uploadImage = void 0;
 const cloudinary_1 = require("cloudinary");
+const folder = "iterahero2023";
 cloudinary_1.v2.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
@@ -19,7 +20,7 @@ cloudinary_1.v2.config({
 const uploadImage = (image, nama) => __awaiter(void 0, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
         const stream = cloudinary_1.v2.uploader.upload_stream({
-            folder: "iterahero2023",
+            folder,
             public_id: `gh-${nama}`,
             resource_type: "auto"
         }, (err, result) => {
@@ -34,7 +35,7 @@ const uploadImage = (image, nama) => __awaiter(void 0, void 0, void 0, function*
 exports.uploadImage = uploadImage;
 const deleteImage = (publicId) => __awaiter(void 0, void 0, void 0, function* () {
     return cloudinary_1.v2.uploader
-        .destroy(publicId)
+        .destroy(`${folder}/${publicId}`)
         .then((result) => {
         return result;
     })
@@ -43,3 +44,13 @@ const deleteImage = (publicId) => __awaiter(void 0, void 0, void 0, function* ()
     });
 });
 exports.deleteImage = deleteImage;
+const renameFile = (publicId, newFileName) => __awaiter(void 0, void 0, void 0, function* () {
+    return cloudinary_1.v2.uploader.rename(`${folder}/${publicId}`, newFileName)
+        .then((result) => {
+        return result;
+    })
+        .catch((err) => {
+        return err;
+    });
+});
+exports.renameFile = renameFile;
