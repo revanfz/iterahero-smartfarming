@@ -54,16 +54,10 @@ exports.getHandler = getHandler;
 const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = parseInt(request.params.id);
-        const data = yield prisma_1.prisma.tandon.findMany({
+        const data = yield prisma_1.prisma.sensor.findMany({
             where: {
-                id
-            },
-            select: {
-                sensor: true,
-                tandonBahan: {
-                    select: {
-                        sensor: true
-                    }
+                tandon: {
+                    id
                 }
             }
         });

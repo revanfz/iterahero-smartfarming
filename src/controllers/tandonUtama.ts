@@ -45,16 +45,10 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 export const sensorByTandonHandler = async (request: Request, h: ResponseToolkit) => {
     try {
         const id = parseInt(request.params.id);
-        const data = await prisma.tandon.findMany({
+        const data = await prisma.sensor.findMany({
             where: {
-                id
-            },
-            select: {
-                sensor: true,
-                tandonBahan: {
-                    select: {
-                        sensor: true
-                    }
+                tandon: {
+                    id
                 }
             }
         })
