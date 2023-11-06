@@ -2865,7 +2865,7 @@ export namespace Prisma {
   export type GreenhouseMinAggregateOutputType = {
     id: number | null
     name: string | null
-    thumbnail: string | null
+    image: string | null
     location: string | null
     created_at: Date | null
     updated_at: Date | null
@@ -2874,7 +2874,7 @@ export namespace Prisma {
   export type GreenhouseMaxAggregateOutputType = {
     id: number | null
     name: string | null
-    thumbnail: string | null
+    image: string | null
     location: string | null
     created_at: Date | null
     updated_at: Date | null
@@ -2883,7 +2883,7 @@ export namespace Prisma {
   export type GreenhouseCountAggregateOutputType = {
     id: number
     name: number
-    thumbnail: number
+    image: number
     location: number
     created_at: number
     updated_at: number
@@ -2902,7 +2902,7 @@ export namespace Prisma {
   export type GreenhouseMinAggregateInputType = {
     id?: true
     name?: true
-    thumbnail?: true
+    image?: true
     location?: true
     created_at?: true
     updated_at?: true
@@ -2911,7 +2911,7 @@ export namespace Prisma {
   export type GreenhouseMaxAggregateInputType = {
     id?: true
     name?: true
-    thumbnail?: true
+    image?: true
     location?: true
     created_at?: true
     updated_at?: true
@@ -2920,7 +2920,7 @@ export namespace Prisma {
   export type GreenhouseCountAggregateInputType = {
     id?: true
     name?: true
-    thumbnail?: true
+    image?: true
     location?: true
     created_at?: true
     updated_at?: true
@@ -3016,7 +3016,7 @@ export namespace Prisma {
   export type GreenhouseGroupByOutputType = {
     id: number
     name: string
-    thumbnail: string
+    image: string
     location: string
     created_at: Date
     updated_at: Date | null
@@ -3044,7 +3044,7 @@ export namespace Prisma {
   export type GreenhouseSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    thumbnail?: boolean
+    image?: boolean
     location?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -3057,7 +3057,7 @@ export namespace Prisma {
   export type GreenhouseSelectScalar = {
     id?: boolean
     name?: boolean
-    thumbnail?: boolean
+    image?: boolean
     location?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -3081,7 +3081,7 @@ export namespace Prisma {
     scalars: $Extensions.GetResult<{
       id: number
       name: string
-      thumbnail: string
+      image: string
       location: string
       created_at: Date
       updated_at: Date | null
@@ -3486,7 +3486,7 @@ export namespace Prisma {
   interface GreenhouseFieldRefs {
     readonly id: FieldRef<"Greenhouse", 'Int'>
     readonly name: FieldRef<"Greenhouse", 'String'>
-    readonly thumbnail: FieldRef<"Greenhouse", 'String'>
+    readonly image: FieldRef<"Greenhouse", 'String'>
     readonly location: FieldRef<"Greenhouse", 'String'>
     readonly created_at: FieldRef<"Greenhouse", 'DateTime'>
     readonly updated_at: FieldRef<"Greenhouse", 'DateTime'>
@@ -11461,7 +11461,7 @@ export namespace Prisma {
   export const GreenhouseScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    thumbnail: 'thumbnail',
+    image: 'image',
     location: 'location',
     created_at: 'created_at',
     updated_at: 'updated_at'
@@ -11750,7 +11750,7 @@ export namespace Prisma {
     NOT?: GreenhouseWhereInput | GreenhouseWhereInput[]
     id?: IntFilter<"Greenhouse"> | number
     name?: StringFilter<"Greenhouse"> | string
-    thumbnail?: StringFilter<"Greenhouse"> | string
+    image?: StringFilter<"Greenhouse"> | string
     location?: StringFilter<"Greenhouse"> | string
     created_at?: DateTimeFilter<"Greenhouse"> | Date | string
     updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
@@ -11762,7 +11762,7 @@ export namespace Prisma {
   export type GreenhouseOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    thumbnail?: SortOrder
+    image?: SortOrder
     location?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
@@ -11777,7 +11777,7 @@ export namespace Prisma {
     AND?: GreenhouseWhereInput | GreenhouseWhereInput[]
     OR?: GreenhouseWhereInput[]
     NOT?: GreenhouseWhereInput | GreenhouseWhereInput[]
-    thumbnail?: StringFilter<"Greenhouse"> | string
+    image?: StringFilter<"Greenhouse"> | string
     location?: StringFilter<"Greenhouse"> | string
     created_at?: DateTimeFilter<"Greenhouse"> | Date | string
     updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
@@ -11789,7 +11789,7 @@ export namespace Prisma {
   export type GreenhouseOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    thumbnail?: SortOrder
+    image?: SortOrder
     location?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
@@ -11806,7 +11806,7 @@ export namespace Prisma {
     NOT?: GreenhouseScalarWhereWithAggregatesInput | GreenhouseScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Greenhouse"> | number
     name?: StringWithAggregatesFilter<"Greenhouse"> | string
-    thumbnail?: StringWithAggregatesFilter<"Greenhouse"> | string
+    image?: StringWithAggregatesFilter<"Greenhouse"> | string
     location?: StringWithAggregatesFilter<"Greenhouse"> | string
     created_at?: DateTimeWithAggregatesFilter<"Greenhouse"> | Date | string
     updated_at?: DateTimeNullableWithAggregatesFilter<"Greenhouse"> | Date | string | null
@@ -12496,7 +12496,7 @@ export namespace Prisma {
 
   export type GreenhouseCreateInput = {
     name: string
-    thumbnail: string
+    image: string
     location: string
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -12508,7 +12508,7 @@ export namespace Prisma {
   export type GreenhouseUncheckedCreateInput = {
     id?: number
     name: string
-    thumbnail: string
+    image: string
     location: string
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -12519,7 +12519,7 @@ export namespace Prisma {
 
   export type GreenhouseUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12531,7 +12531,7 @@ export namespace Prisma {
   export type GreenhouseUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12543,7 +12543,7 @@ export namespace Prisma {
   export type GreenhouseCreateManyInput = {
     id?: number
     name: string
-    thumbnail: string
+    image: string
     location: string
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -12551,7 +12551,7 @@ export namespace Prisma {
 
   export type GreenhouseUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -12560,7 +12560,7 @@ export namespace Prisma {
   export type GreenhouseUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -13399,7 +13399,7 @@ export namespace Prisma {
   export type GreenhouseCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    thumbnail?: SortOrder
+    image?: SortOrder
     location?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -13412,7 +13412,7 @@ export namespace Prisma {
   export type GreenhouseMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    thumbnail?: SortOrder
+    image?: SortOrder
     location?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -13421,7 +13421,7 @@ export namespace Prisma {
   export type GreenhouseMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    thumbnail?: SortOrder
+    image?: SortOrder
     location?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -15147,7 +15147,7 @@ export namespace Prisma {
 
   export type GreenhouseCreateWithoutUserInput = {
     name: string
-    thumbnail: string
+    image: string
     location: string
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -15158,7 +15158,7 @@ export namespace Prisma {
   export type GreenhouseUncheckedCreateWithoutUserInput = {
     id?: number
     name: string
-    thumbnail: string
+    image: string
     location: string
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -15238,7 +15238,7 @@ export namespace Prisma {
     NOT?: GreenhouseScalarWhereInput | GreenhouseScalarWhereInput[]
     id?: IntFilter<"Greenhouse"> | number
     name?: StringFilter<"Greenhouse"> | string
-    thumbnail?: StringFilter<"Greenhouse"> | string
+    image?: StringFilter<"Greenhouse"> | string
     location?: StringFilter<"Greenhouse"> | string
     created_at?: DateTimeFilter<"Greenhouse"> | Date | string
     updated_at?: DateTimeNullableFilter<"Greenhouse"> | Date | string | null
@@ -16027,7 +16027,7 @@ export namespace Prisma {
 
   export type GreenhouseCreateWithoutSensorInput = {
     name: string
-    thumbnail: string
+    image: string
     location: string
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -16038,7 +16038,7 @@ export namespace Prisma {
   export type GreenhouseUncheckedCreateWithoutSensorInput = {
     id?: number
     name: string
-    thumbnail: string
+    image: string
     location: string
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -16138,7 +16138,7 @@ export namespace Prisma {
 
   export type GreenhouseUpdateWithoutSensorInput = {
     name?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16149,7 +16149,7 @@ export namespace Prisma {
   export type GreenhouseUncheckedUpdateWithoutSensorInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16199,7 +16199,7 @@ export namespace Prisma {
 
   export type GreenhouseCreateWithoutAktuatorInput = {
     name: string
-    thumbnail: string
+    image: string
     location: string
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -16210,7 +16210,7 @@ export namespace Prisma {
   export type GreenhouseUncheckedCreateWithoutAktuatorInput = {
     id?: number
     name: string
-    thumbnail: string
+    image: string
     location: string
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -16324,7 +16324,7 @@ export namespace Prisma {
 
   export type GreenhouseUpdateWithoutAktuatorInput = {
     name?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16335,7 +16335,7 @@ export namespace Prisma {
   export type GreenhouseUncheckedUpdateWithoutAktuatorInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16918,7 +16918,7 @@ export namespace Prisma {
 
   export type GreenhouseUpdateWithoutUserInput = {
     name?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16929,7 +16929,7 @@ export namespace Prisma {
   export type GreenhouseUncheckedUpdateWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -16940,7 +16940,7 @@ export namespace Prisma {
   export type GreenhouseUncheckedUpdateManyWithoutUserInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    thumbnail?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     location?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

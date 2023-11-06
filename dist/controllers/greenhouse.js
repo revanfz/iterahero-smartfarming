@@ -63,7 +63,7 @@ exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id_user } = request.auth.credentials;
-        const { name, thumbnail, location } = request.payload;
+        const { name, image, location } = request.payload;
         const isExist = yield prisma_1.prisma.greenhouse.findUnique({
             where: {
                 name,
@@ -72,14 +72,14 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         if (isExist) {
             return boom_1.default.forbidden(`Greenhouse ${name} sudah ada.`);
         }
-        const upload = yield (0, cloudinary_1.uploadImage)(thumbnail, name);
+        const upload = yield (0, cloudinary_1.uploadImage)(image, name);
         if (!upload) {
             throw Error("Terjadi kesalahan saat mengupload");
         }
         yield prisma_1.prisma.greenhouse.create({
             data: {
                 name,
-                thumbnail: upload.secure_url,
+                image: upload.secure_url,
                 user: {
                     connect: {
                         id: id_user,
@@ -111,7 +111,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     try {
         const id = parseInt(request.query.id);
         let img_url;
-        const { name, thumbnail, location } = request.payload;
+        const { name, image, location } = request.payload;
         if (!isNaN(id)) {
             const target = yield prisma_1.prisma.greenhouse.findUnique({
                 where: {
@@ -124,9 +124,9 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
             if (name) {
                 yield (0, cloudinary_1.renameFile)(target.name, name);
             }
-            if (thumbnail) {
+            if (image) {
                 (0, cloudinary_1.deleteImage)(`gh-${target.name}`);
-                img_url = yield (0, cloudinary_1.uploadImage)(thumbnail, name);
+                img_url = yield (0, cloudinary_1.uploadImage)(image, name);
             }
             yield prisma_1.prisma.greenhouse.update({
                 where: {
@@ -134,7 +134,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
                 },
                 data: {
                     name,
-                    thumbnail: (_a = img_url === null || img_url === void 0 ? void 0 : img_url.secure_url) !== null && _a !== void 0 ? _a : target.thumbnail,
+                    image: (_a = img_url === null || img_url === void 0 ? void 0 : img_url.secure_url) !== null && _a !== void 0 ? _a : target.image,
                     location,
                 },
             });

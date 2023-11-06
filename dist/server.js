@@ -86,7 +86,7 @@ const init = function () {
                 sub: process.env.JWT_SUB,
                 nbf: true,
                 exp: true,
-                maxAgeSec: 60 * 60 * 12,
+                maxAgeSec: 60 * 60 * 24 * 3,
                 timeSkewSec: 20,
             },
             validate: (artifacts, request, h) => {

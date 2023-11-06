@@ -38,7 +38,7 @@ function main() {
                         },
                         create: {
                             name: "Greenhouse Kebun Raya",
-                            thumbnail: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
+                            image: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
                             location: "UPT Kebun Raya",
                         },
                     },
@@ -62,7 +62,7 @@ function main() {
                         },
                         create: {
                             name: "Greenhouse Wanayasa",
-                            thumbnail: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
+                            image: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
                             location: "Wanayasa",
                         },
                     },

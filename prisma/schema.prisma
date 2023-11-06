@@ -4,7 +4,7 @@
 generator client {
   provider      = "prisma-client-js"
   output        = "./generated/client"
-  binaryTargets = ["native", "debian-openssl-3.0.x"]
+  // binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -27,7 +27,7 @@ model User {
 model Greenhouse {
   id         Int        @id @default(autoincrement())
   name       String     @unique
-  thumbnail  String
+  image  String
   location   String
   user       User[]
   aktuator   Aktuator[]

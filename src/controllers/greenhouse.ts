@@ -7,7 +7,7 @@ import { Readable } from "stream";
 interface InputGreenhouse {
   name: string;
   location: string;
-  thumbnail: Readable;
+  image: Readable;
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
@@ -60,7 +60,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
     const { id_user } = request.auth.credentials as {
       id_user: number;
     };
-    const { name, thumbnail, location } = request.payload as InputGreenhouse;
+    const { name, image, location } = request.payload as InputGreenhouse;
 
     const isExist = await prisma.greenhouse.findUnique({
       where: {
@@ -71,7 +71,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
     if (isExist) {
       return Boom.forbidden(`Greenhouse ${name} sudah ada.`);
     }
-    const upload = await uploadImage(thumbnail, name);
+    const upload = await uploadImage(image, name);
 
     if (!upload) {
       throw Error("Terjadi kesalahan saat mengupload");
@@ -80,7 +80,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
     await prisma.greenhouse.create({
       data: {
         name,
-        thumbnail: upload.secure_url,
+        image: upload.secure_url,
         user: {
           connect: {
             id: id_user,
@@ -110,7 +110,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   try {
     const id = parseInt(request.query.id);
     let img_url;
-    const { name, thumbnail, location } = request.payload as InputGreenhouse;
+    const { name, image, location } = request.payload as InputGreenhouse;
 
     if (!isNaN(id)) {
       const target = await prisma.greenhouse.findUnique({
@@ -127,9 +127,9 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
         await renameFile(target.name, name)
       }
 
-      if (thumbnail) {
+      if (image) {
         deleteImage(`gh-${target.name}`);
-        img_url = await uploadImage(thumbnail, name);
+        img_url = await uploadImage(image, name);
       }
       await prisma.greenhouse.update({
         where: {
@@ -137,7 +137,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
         },
         data: {
           name,
-          thumbnail: img_url?.secure_url ?? target.thumbnail,
+          image: img_url?.secure_url ?? target.image,
           location,
         },
       });

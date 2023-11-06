@@ -120,7 +120,7 @@ exports.Prisma.UserScalarFieldEnum = {
 exports.Prisma.GreenhouseScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  thumbnail: 'thumbnail',
+  image: 'image',
   location: 'location',
   created_at: 'created_at',
   updated_at: 'updated_at'
