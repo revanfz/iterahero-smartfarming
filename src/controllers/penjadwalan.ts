@@ -41,7 +41,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         return h.response({
             status: 'success',
             data,
-            cursor: data[data.length-1].id,
+            cursor: data[data.length-1]?.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
         }).code(200)
     }

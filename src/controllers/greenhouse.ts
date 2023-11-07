@@ -302,7 +302,7 @@ export const actuatorByGreenhouseHandler = async (
       .response({
         status: "success",
         data,
-        cursor: data[data.length-1].id,
+        cursor: data[data.length-1]?.id,
         totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
       })
       .code(200);

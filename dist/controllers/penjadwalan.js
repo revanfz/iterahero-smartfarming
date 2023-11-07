@@ -17,6 +17,7 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const schedule_1 = require("../utils/schedule");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const size = request.query.size;
     const cursor = request.query.cursor;
     try {
@@ -43,7 +44,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         return h.response({
             status: 'success',
             data,
-            cursor: data[data.length - 1].id,
+            cursor: (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
         }).code(200);
     }

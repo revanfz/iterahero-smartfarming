@@ -256,6 +256,7 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
 });
 exports.sensorByGreenhouseHandler = sensorByGreenhouseHandler;
 const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    var _b;
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
     try {
@@ -288,7 +289,7 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
             .response({
             status: "success",
             data,
-            cursor: data[data.length - 1].id,
+            cursor: (_b = data[data.length - 1]) === null || _b === void 0 ? void 0 : _b.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
         })
             .code(200);
