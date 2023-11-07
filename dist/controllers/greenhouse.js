@@ -54,7 +54,8 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 cursor: cursor ? { id: cursor } : undefined,
             });
         }
-        if (!data || Array.isArray(data) && data.length < 1) {
+        if (!data) {
+            //  || Array.isArray(data) && data.length < 1) {
             return boom_1.default.notFound("Tidak ada greenhouse.");
         }
         const res = {

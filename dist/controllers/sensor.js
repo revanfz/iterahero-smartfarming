@@ -33,9 +33,9 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             skip: cursor ? 1 : 0,
             cursor: cursor ? { id: cursor } : undefined,
         });
-        if (data.length < 1) {
-            return boom_1.default.notFound("Tidak ada sensor");
-        }
+        // if (data.length < 1) {
+        //     return Boom.notFound("Tidak ada sensor")
+        // }
         return h.response({
             status: "success",
             data,

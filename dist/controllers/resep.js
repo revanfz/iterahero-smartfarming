@@ -23,9 +23,9 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 tipe
             }
         });
-        if (data.length < 1) {
-            return boom_1.default.notFound("Tidak ada resep tersimpan");
-        }
+        // if (data.length < 1) {
+        //     return Boom.notFound("Tidak ada resep tersimpan");
+        // }
         return h.response({
             status: 'success',
             data
