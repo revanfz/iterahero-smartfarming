@@ -169,6 +169,8 @@ exports.Prisma.SensorScalarFieldEnum = {
   status: 'status',
   nilai: 'nilai',
   icon: 'icon',
+  range_min: 'range_min',
+  range_max: 'range_max',
   tandonId: 'tandonId',
   tandonBahanId: 'tandonBahanId',
   greenhouseId: 'greenhouseId',
@@ -214,6 +216,14 @@ exports.Prisma.TandonScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  message: 'message',
+  read: 'read',
+  created_at: 'created_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -239,7 +249,8 @@ exports.Prisma.ModelName = {
   Sensor: 'Sensor',
   Aktuator: 'Aktuator',
   TandonBahan: 'TandonBahan',
-  Tandon: 'Tandon'
+  Tandon: 'Tandon',
+  Notification: 'Notification'
 };
 
 /**

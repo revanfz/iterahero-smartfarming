@@ -4,7 +4,7 @@
 generator client {
   provider      = "prisma-client-js"
   output        = "./generated/client"
-  // binaryTargets = ["native", "debian-openssl-3.0.x"]
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -13,22 +13,23 @@ datasource db {
 }
 
 model User {
-  id         Int          @id @default(autoincrement())
-  username   String
-  email      String       @unique
-  password   String
-  role       String
-  greenhouse Greenhouse[]
-  tandon     Tandon[]
+  id           Int            @id @default(autoincrement())
+  username     String
+  email        String         @unique
+  password     String
+  role         String
+  greenhouse   Greenhouse[]
+  tandon       Tandon[]
+  notification Notification[]
   // penjadwalan Penjadwalan[]
-  created_at DateTime     @default(now())
-  updated_at DateTime?    @updatedAt
+  created_at   DateTime       @default(now())
+  updated_at   DateTime?      @updatedAt
 }
 
 model Greenhouse {
   id         Int        @id @default(autoincrement())
   name       String     @unique
-  image  String
+  image      String
   location   String
   user       User[]
   aktuator   Aktuator[]
@@ -89,6 +90,8 @@ model Sensor {
   status           Boolean
   nilai            Int
   icon             String?
+  range_min        Int?
+  range_max        Int?
   tandon           Tandon?      @relation(fields: [tandonId], references: [id])
   tandonId         Int?
   tandonBahan      TandonBahan? @relation(fields: [tandonBahanId], references: [id])
@@ -148,4 +151,13 @@ model Tandon {
   tandonPenyimpanan TandonPenyimpanan[]
   created_at        DateTime            @default(now())
   updated_at        DateTime?           @updatedAt
+}
+
+model Notification {
+  id         Int      @id @default(autoincrement())
+  user       User     @relation(fields: [userId], references: [id])
+  userId     Int
+  message    String
+  read       Boolean
+  created_at DateTime @default(now())
 }

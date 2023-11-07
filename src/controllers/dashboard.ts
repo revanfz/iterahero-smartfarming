@@ -4,15 +4,13 @@ import Boom from "@hapi/boom";
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
   try {
-    const token = request.auth.credentials;
-    const { email, role } = token as {
-      email: string;
-      role: string;
-    };
+    const { id_user } = request.auth.credentials as {
+      id_user: number
+    }
 
     const target = await prisma.user.findUnique({
       where: {
-        email,
+        id: id_user,
       },
       select: {
         _count: {

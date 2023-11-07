@@ -17,11 +17,10 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const token = request.auth.credentials;
-        const { email, role } = token;
+        const { id_user } = request.auth.credentials;
         const target = yield prisma_1.prisma.user.findUnique({
             where: {
-                email,
+                id: id_user,
             },
             select: {
                 _count: {
