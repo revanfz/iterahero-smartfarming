@@ -20,7 +20,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
             }
         })
 
-        if (!data) {
+        if (data.length < 1) {
             return Boom.notFound("Tidak ada resep tersimpan");
         }
 

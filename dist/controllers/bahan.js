@@ -18,17 +18,18 @@ const prisma_1 = require("../config/prisma");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield prisma_1.prisma.tandonBahan.findMany({
-            where: {},
             include: {
                 sensor: true
             }
         });
-        if (!data) {
+        if (data.length < 1) {
             return boom_1.default.notFound("Tidak ada bahan");
         }
         return h.response({
             status: 'success',
-            data
+            data,
+            cursor: data[data.length - 1].id,
+            totalPage: Math.ceil(data.length / 100)
         }).code(200);
     }
     catch (e) {

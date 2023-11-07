@@ -5,19 +5,20 @@ import { prisma } from "../config/prisma";
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
     try {
         const data = await prisma.tandonBahan.findMany({
-            where: {},
             include: {
                 sensor: true
             }
         })
 
-        if (!data) {
+        if (data.length < 1) {
             return Boom.notFound("Tidak ada bahan")
         }
 
         return h.response({
             status: 'success',
-            data
+            data,
+            cursor: data[data.length - 1].id,
+            totalPage: Math.ceil(data.length / 100)
         }).code(200);
     }
     catch(e) {

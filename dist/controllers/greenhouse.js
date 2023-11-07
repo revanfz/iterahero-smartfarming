@@ -17,10 +17,13 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const cloudinary_1 = require("../config/cloudinary");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    const size = parseInt(request.query.size);
+    const cursor = parseInt(request.query.cursor);
+    const id = parseInt(request.query.id);
+    let data;
+    let total = 0;
     try {
         const { id_user } = request.auth.credentials;
-        const id = parseInt(request.query.id);
-        let data;
         if (!Number.isNaN(id)) {
             data = yield prisma_1.prisma.greenhouse.findUnique({
                 where: {
@@ -29,6 +32,15 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             });
         }
         else {
+            total = yield prisma_1.prisma.greenhouse.count({
+                where: {
+                    user: {
+                        every: {
+                            id: id_user
+                        }
+                    }
+                }
+            });
             data = yield prisma_1.prisma.greenhouse.findMany({
                 where: {
                     user: {
@@ -37,17 +49,25 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                         },
                     },
                 },
+                take: isNaN(size) ? 100 : size,
+                skip: cursor ? 1 : 0,
+                cursor: cursor ? { id: cursor } : undefined,
             });
         }
-        if (!data) {
+        if (!data || Array.isArray(data) && data.length < 1) {
             return boom_1.default.notFound("Tidak ada greenhouse.");
         }
-        return h
-            .response({
+        const res = {
             status: "success",
             data,
-        })
-            .code(200);
+            cursor: -1,
+            totalPage: 1,
+        };
+        if (Array.isArray(data)) {
+            res.cursor = data[data.length - 1].id;
+            res.totalPage = size ? Math.ceil(total / size) : Math.ceil(total / 100);
+        }
+        return h.response(res).code(200);
     }
     catch (e) {
         if (e instanceof Error) {
@@ -194,20 +214,32 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
 });
 exports.deleteHandler = deleteHandler;
 const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = parseInt(request.params.id);
+    const size = parseInt(request.query.size);
+    const cursor = parseInt(request.query.cursor);
     try {
-        const id = parseInt(request.params.id);
+        const total = yield prisma_1.prisma.sensor.count({
+            where: {
+                greenhouseId: id
+            }
+        });
         const data = yield prisma_1.prisma.sensor.findMany({
             where: {
                 greenhouseId: id,
             },
+            cursor: cursor ? { id: cursor } : undefined,
+            take: size ? size : 100,
+            skip: cursor ? 1 : 0
         });
-        if (!data) {
-            return boom_1.default.notFound("Tidak ada sensor di greenhouse terpilih");
-        }
+        // if (data.length < 1) {
+        //   return Boom.notFound("Tidak ada sensor di greenhouse terpilih");
+        // }
         return h
             .response({
             status: "success",
             data,
+            cursor: data[data.length - 1].id,
+            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
         })
             .code(200);
     }
@@ -223,8 +255,15 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
 });
 exports.sensorByGreenhouseHandler = sensorByGreenhouseHandler;
 const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    const size = parseInt(request.query.size);
+    const cursor = parseInt(request.query.cursor);
     try {
         const id = parseInt(request.params.id);
+        const total = yield prisma_1.prisma.aktuator.count({
+            where: {
+                greenhouseId: id
+            }
+        });
         const data = yield prisma_1.prisma.aktuator.findMany({
             where: {
                 greenhouseId: id,
@@ -235,12 +274,21 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
                         aktuator: true,
                     },
                 },
+                id: true
             },
+            take: size ? size : 100,
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
         });
+        // if (data.length < 1) {
+        //   return Boom.notFound("Tidak ada sensor di greenhouse terpilih");
+        // }
         return h
             .response({
             status: "success",
             data,
+            cursor: data[data.length - 1].id,
+            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
         })
             .code(200);
     }

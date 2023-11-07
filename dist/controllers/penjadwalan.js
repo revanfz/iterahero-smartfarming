@@ -17,7 +17,10 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const schedule_1 = require("../utils/schedule");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    const size = request.query.size;
+    const cursor = request.query.cursor;
     try {
+        const total = yield prisma_1.prisma.penjadwalan.count();
         const data = yield prisma_1.prisma.penjadwalan.findMany({
             include: {
                 resep: true
@@ -29,17 +32,23 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 {
                     hari: "asc"
                 }
-            ]
+            ],
+            take: size ? size : 100,
+            skip: parseInt(cursor) ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined
         });
-        if (!data) {
+        if (data.length < 1) {
             return boom_1.default.notFound("Tidak ada data penjadwalan");
         }
         return h.response({
             status: 'success',
-            data
+            data,
+            cursor: data[data.length - 1].id,
+            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
         }).code(200);
     }
     catch (e) {
+        console.log(e);
         if (e instanceof Error) {
             return boom_1.default.internal(e.message);
         }

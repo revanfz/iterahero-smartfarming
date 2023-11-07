@@ -13,7 +13,10 @@ interface InputPenjadwalan {
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
+    const size = request.query.size;
+    const cursor = request.query.cursor
     try {
+        const total = await prisma.penjadwalan.count();
         const data = await prisma.penjadwalan.findMany({
             include: {
                 resep: true
@@ -25,18 +28,24 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
                 {
                     hari: "asc"
                 }
-            ]
+            ],
+            take: size ? size : 100,
+            skip: parseInt(cursor) ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined
         });
 
-        if (!data) {
+        if (data.length < 1) {
             return Boom.notFound("Tidak ada data penjadwalan")
         }
         return h.response({
             status: 'success',
-            data
+            data,
+            cursor: data[data.length-1].id,
+            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
         }).code(200)
     }
     catch (e) {
+        console.log(e)
         if (e instanceof Error) {
             return Boom.internal(e.message)
         }

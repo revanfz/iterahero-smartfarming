@@ -16,19 +16,31 @@ exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = parseInt(request.query.id);
+    const size = parseInt(request.query.size);
+    const cursor = parseInt(request.query.cursor);
     try {
-        const id = parseInt(request.query.id);
-        const data = yield prisma_1.prisma.sensor.findMany({
+        const total = yield prisma_1.prisma.sensor.count({
             where: {
                 tandonId: id
             }
         });
-        if (!data) {
+        const data = yield prisma_1.prisma.sensor.findMany({
+            where: {
+                tandonId: id
+            },
+            take: size ? size : 100,
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
+        });
+        if (data.length < 1) {
             return boom_1.default.notFound("Tidak ada sensor");
         }
         return h.response({
             status: "success",
-            data
+            data,
+            cursor: data[data.length - 1].id,
+            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
         });
     }
     catch (e) {

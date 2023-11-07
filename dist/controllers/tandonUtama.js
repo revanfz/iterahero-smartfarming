@@ -23,24 +23,26 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         if (isNaN(id)) {
             data = yield prisma_1.prisma.tandon.findMany({
                 where: {
-                    userId: id_user
+                    userId: id_user,
                 },
             });
         }
         else {
             data = yield prisma_1.prisma.tandon.findUnique({
                 where: {
-                    id
-                }
+                    id,
+                },
             });
         }
         if (!data) {
             return boom_1.default.notFound("Tidak ada tandon terpilih");
         }
-        return h.response({
-            status: 'success',
-            data
-        }).code(200);
+        return h
+            .response({
+            status: "success",
+            data,
+        })
+            .code(200);
     }
     catch (e) {
         if (e instanceof Error) {
@@ -52,21 +54,35 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.getHandler = getHandler;
 const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = parseInt(request.params.id);
+    const size = parseInt(request.query.size);
+    const cursor = parseInt(request.query.cursor);
     try {
-        const id = parseInt(request.params.id);
+        const total = yield prisma_1.prisma.sensor.count({
+            where: {
+                tandon: {
+                    id,
+                },
+            },
+        });
         const data = yield prisma_1.prisma.sensor.findMany({
             where: {
                 tandon: {
-                    id
-                }
-            }
+                    id,
+                },
+            },
+            take: size ? size : 100,
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
         });
-        if (!data) {
-            return boom_1.default.notFound("Tidak ada sensor");
-        }
+        // if (data.length < 1) {
+        //     return Boom.notFound("Tidak ada sensor")
+        // }
         return h.response({
             status: "success",
-            data
+            data,
+            cursor: data[data.length - 1].id,
+            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
         });
     }
     catch (e) {
@@ -81,20 +97,34 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
 });
 exports.sensorByTandonHandler = sensorByTandonHandler;
 const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = parseInt(request.params.id);
+    const size = parseInt(request.query.size);
+    const cursor = parseInt(request.query.cursor);
     try {
-        const id = parseInt(request.params.id);
+        const total = yield prisma_1.prisma.aktuator.count({
+            where: {
+                tandonId: id,
+            },
+        });
         const data = yield prisma_1.prisma.aktuator.findMany({
             where: {
-                tandonId: id
-            }
+                tandonId: id,
+            },
+            take: size ? size : 100,
+            skip: cursor ? 1 : 0,
+            cursor: cursor ? { id: cursor } : undefined,
         });
-        if (!data) {
-            return boom_1.default.notFound("Tidak ada aktuator");
-        }
-        return h.response({
+        // if (data.length < 1) {
+        //     return Boom.notFound("Tidak ada aktuator")
+        // }
+        return h
+            .response({
             status: "success",
-            data
-        }).code(200);
+            data,
+            cursor: data[data.length - 1].id,
+            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
+        })
+            .code(200);
     }
     catch (e) {
         if (e instanceof Error) {
@@ -112,26 +142,26 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         const { id_tandon, ppm, rasioA, rasioB, rasioAir } = request.payload;
         const target = yield prisma_1.prisma.tandon.findUnique({
             where: {
-                id: id_tandon
-            }
+                id: id_tandon,
+            },
         });
         if (!target) {
             return boom_1.default.notFound("Tidak ada tandon terpilih.");
         }
         yield prisma_1.prisma.tandon.update({
             where: {
-                id: id_tandon
+                id: id_tandon,
             },
             data: {
                 ppm,
                 rasioA,
                 rasioB,
-                rasioAir
-            }
+                rasioAir,
+            },
         });
         return h.response({
-            status: 'success',
-            message: `Rasio ${target.nama} berhasil diperbarui`
+            status: "success",
+            message: `Rasio ${target.nama} berhasil diperbarui`,
         });
     }
     catch (e) {

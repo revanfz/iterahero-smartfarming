@@ -16,33 +16,48 @@ exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    const id = parseInt(request.query.id);
+    const size = parseInt(request.query.size);
+    const cursor = parseInt(request.query.cursor);
+    let data;
+    let total = 0;
     try {
-        const id = parseInt(request.query.id);
-        let data;
         if (id) {
-            data = yield prisma_1.prisma.sensor.findMany({
+            data = yield prisma_1.prisma.aktuator.findUnique({
                 where: {
-                    tandonId: id,
+                    id: id,
                 },
-                include: {
-                    tandonBahan: true
-                }
             });
         }
         else {
-            data = yield prisma_1.prisma.aktuator.findMany({
+            total = yield prisma_1.prisma.aktuator.count({
                 where: {
                     tandonId: id
                 }
             });
+            data = yield prisma_1.prisma.aktuator.findMany({
+                where: {
+                    tandonId: id,
+                },
+                skip: cursor ? 1 : 0,
+                take: size ? size : 100,
+                cursor: cursor ? { id: cursor } : undefined,
+            });
         }
-        if (!data) {
-            return boom_1.default.notFound("Tidak ada aktuator");
-        }
-        return h.response({
+        // if (!data || (Array.isArray(data) && data.length < 1)) {
+        //   return Boom.notFound("Tidak ada aktuator");
+        // }
+        const res = {
             status: "success",
-            data
-        });
+            data,
+            cursor: -1,
+            totalPage: 1
+        };
+        if (Array.isArray(data)) {
+            res.cursor = data[data.length - 1].id;
+            res.totalPage = size ? Math.ceil(total / size) : Math.ceil(total / 100);
+        }
+        return h.response(res).code(200);
     }
     catch (e) {
         if (e instanceof Error) {

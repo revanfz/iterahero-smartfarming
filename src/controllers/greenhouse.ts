@@ -11,12 +11,16 @@ interface InputGreenhouse {
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
+  const size = parseInt(request.query.size);
+  const cursor = parseInt(request.query.cursor);
+  const id = parseInt(request.query.id);
+  let data;
+  let total = 0;
   try {
     const { id_user } = request.auth.credentials as {
       id_user: number;
     };
-    const id = parseInt(request.query.id);
-    let data;
+
     if (!Number.isNaN(id)) {
       data = await prisma.greenhouse.findUnique({
         where: {
@@ -24,6 +28,15 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         },
       });
     } else {
+      total = await prisma.greenhouse.count({
+        where: {
+          user: {
+            every: {
+              id: id_user
+            }
+          }
+        }
+      })
       data = await prisma.greenhouse.findMany({
         where: {
           user: {
@@ -32,19 +45,29 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
             },
           },
         },
+        take: isNaN(size) ? 100 : size,
+        skip: cursor ? 1 : 0,
+        cursor: cursor ? { id: cursor } : undefined,
       });
     }
 
-    if (!data) {
+    if (!data || Array.isArray(data) && data.length < 1) {
       return Boom.notFound("Tidak ada greenhouse.");
     }
+    
+    const res = {
+      status: "success",
+      data,
+      cursor: -1,
+      totalPage: 1,
+    }
 
-    return h
-      .response({
-        status: "success",
-        data,
-      })
-      .code(200);
+    if (Array.isArray(data)) {
+      res.cursor = data[data.length - 1].id
+      res.totalPage = size ? Math.ceil(total / size) : Math.ceil(total / 100);
+    }
+
+    return h.response(res).code(200);
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);
@@ -200,22 +223,34 @@ export const sensorByGreenhouseHandler = async (
   request: Request,
   h: ResponseToolkit
 ) => {
+  const id = parseInt(request.params.id);
+  const size = parseInt(request.query.size);
+  const cursor = parseInt(request.query.cursor); 
   try {
-    const id = parseInt(request.params.id);
+    const total = await prisma.sensor.count({
+      where: {
+        greenhouseId: id
+      }
+    });
     const data = await prisma.sensor.findMany({
       where: {
         greenhouseId: id,
       },
+      cursor: cursor ? { id: cursor } : undefined,
+      take: size ? size : 100,
+      skip: cursor ? 1 : 0
     });
 
-    if (!data) {
-      return Boom.notFound("Tidak ada sensor di greenhouse terpilih");
-    }
+    // if (data.length < 1) {
+    //   return Boom.notFound("Tidak ada sensor di greenhouse terpilih");
+    // }
 
     return h
       .response({
         status: "success",
         data,
+        cursor: data[data.length - 1].id,
+        totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
       })
       .code(200);
   } catch (e) {
@@ -232,8 +267,15 @@ export const actuatorByGreenhouseHandler = async (
   request: Request,
   h: ResponseToolkit
 ) => {
+  const size = parseInt(request.query.size);
+    const cursor = parseInt(request.query.cursor);
   try {
     const id = parseInt(request.params.id);
+    const total = await prisma.aktuator.count({
+      where: {
+        greenhouseId: id
+      }
+    });
     const data = await prisma.aktuator.findMany({
       where: {
         greenhouseId: id,
@@ -244,12 +286,23 @@ export const actuatorByGreenhouseHandler = async (
             aktuator: true,
           },
         },
+        id: true
       },
+      take: size ? size : 100,
+      skip: cursor ? 1 : 0,
+      cursor: cursor ? { id: cursor } : undefined,
     });
+
+    // if (data.length < 1) {
+    //   return Boom.notFound("Tidak ada sensor di greenhouse terpilih");
+    // }
+
     return h
       .response({
         status: "success",
         data,
+        cursor: data[data.length-1].id,
+        totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
       })
       .code(200);
   } catch (e) {

@@ -3,43 +3,57 @@ import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
-    try {
-        const id = parseInt(request.query.id);
-        let data;
-
-        if (id) {
-            data = await prisma.sensor.findMany({
-                where: {
-                    tandonId: id,
-                },
-                include: {
-                    tandonBahan: true
-                }
-            })
-        } else {
-            data = await prisma.aktuator.findMany({
-                where: {
-                    tandonId: id
-                }
-            });
+  const id = parseInt(request.query.id);
+  const size = parseInt(request.query.size);
+  const cursor = parseInt(request.query.cursor);
+  let data;
+  let total = 0;
+  try {
+    if (id) {
+      data = await prisma.aktuator.findUnique({
+        where: {
+          id: id,
+        },
+      });
+    } else {
+      total = await prisma.aktuator.count({
+        where: {
+          tandonId: id
         }
+      })
+      data = await prisma.aktuator.findMany({
+        where: {
+          tandonId: id,
+        },
+        skip: cursor ? 1 : 0,
+        take: size ? size : 100,
+        cursor: cursor ? { id: cursor } : undefined,
+      });
+    }
 
-        if (!data) {
-            return Boom.notFound("Tidak ada aktuator")
-        }
+    // if (!data || (Array.isArray(data) && data.length < 1)) {
+    //   return Boom.notFound("Tidak ada aktuator");
+    // }
 
-        return h.response({
-            status: "success",
-            data
-        });
+    const res = {
+      status: "success",
+      data,
+      cursor: -1,
+      totalPage: 1
+    };
+
+    if (Array.isArray(data)) {
+      res.cursor = data[data.length - 1].id;
+      res.totalPage = size ? Math.ceil(total / size) : Math.ceil(total / 100);
     }
-    catch (e) {
-        if (e instanceof Error) {
-            console.log(e)
-            return Boom.internal(e.message);
-        }
+
+    return h.response(res).code(200);
+  } catch (e) {
+    if (e instanceof Error) {
+      console.log(e);
+      return Boom.internal(e.message);
     }
-    finally {
-        await prisma.$disconnect();
-    }
-}
+  } finally {
+    await prisma.$disconnect();
+  }
+};
