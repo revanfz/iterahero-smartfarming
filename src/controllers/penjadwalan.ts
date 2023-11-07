@@ -34,9 +34,10 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
             cursor: cursor ? { id: cursor } : undefined
         });
 
-        if (data.length < 1) {
-            return Boom.notFound("Tidak ada data penjadwalan")
-        }
+        // if (data.length < 1) {
+        //     return Boom.notFound("Tidak ada data penjadwalan")
+        // }
+
         return h.response({
             status: 'success',
             data,

@@ -51,7 +51,8 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       });
     }
 
-    if (!data || Array.isArray(data) && data.length < 1) {
+    if (!data) {
+    //  || Array.isArray(data) && data.length < 1) {
       return Boom.notFound("Tidak ada greenhouse.");
     }
     

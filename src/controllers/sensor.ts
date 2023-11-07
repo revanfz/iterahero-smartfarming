@@ -21,9 +21,9 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
             cursor: cursor ? { id: cursor } : undefined,
         });
 
-        if (data.length < 1) {
-            return Boom.notFound("Tidak ada sensor")
-        }
+        // if (data.length < 1) {
+        //     return Boom.notFound("Tidak ada sensor")
+        // }
 
         return h.response({
             status: "success",
