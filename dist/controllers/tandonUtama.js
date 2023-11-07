@@ -54,6 +54,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.getHandler = getHandler;
 const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const id = parseInt(request.params.id);
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
@@ -81,7 +82,7 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
         return h.response({
             status: "success",
             data,
-            cursor: data[data.length - 1].id,
+            cursor: (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
         });
     }
@@ -97,6 +98,7 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
 });
 exports.sensorByTandonHandler = sensorByTandonHandler;
 const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    var _b;
     const id = parseInt(request.params.id);
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
@@ -121,7 +123,7 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
             .response({
             status: "success",
             data,
-            cursor: data[data.length - 1].id,
+            cursor: (_b = data[data.length - 1]) === null || _b === void 0 ? void 0 : _b.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
         })
             .code(200);

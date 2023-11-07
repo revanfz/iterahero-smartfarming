@@ -16,6 +16,7 @@ exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const id = parseInt(request.query.id);
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
@@ -54,7 +55,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             totalPage: 1
         };
         if (Array.isArray(data)) {
-            res.cursor = data[data.length - 1].id;
+            res.cursor = (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id;
             res.totalPage = size ? Math.ceil(total / size) : Math.ceil(total / 100);
         }
         return h.response(res).code(200);

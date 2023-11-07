@@ -64,7 +64,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
     }
 
     if (Array.isArray(data)) {
-      res.cursor = data[data.length - 1].id
+      res.cursor = data[data.length - 1]?.id
       res.totalPage = size ? Math.ceil(total / size) : Math.ceil(total / 100);
     }
 
@@ -250,7 +250,7 @@ export const sensorByGreenhouseHandler = async (
       .response({
         status: "success",
         data,
-        cursor: data[data.length - 1].id,
+        cursor: data[data.length - 1]?.id,
         totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
       })
       .code(200);

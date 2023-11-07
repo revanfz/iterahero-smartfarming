@@ -17,6 +17,7 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const cloudinary_1 = require("../config/cloudinary");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
     const id = parseInt(request.query.id);
@@ -65,7 +66,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             totalPage: 1,
         };
         if (Array.isArray(data)) {
-            res.cursor = data[data.length - 1].id;
+            res.cursor = (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id;
             res.totalPage = size ? Math.ceil(total / size) : Math.ceil(total / 100);
         }
         return h.response(res).code(200);
@@ -128,7 +129,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
 });
 exports.postHandler = postHandler;
 const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _b;
     try {
         const id = parseInt(request.query.id);
         let img_url;
@@ -155,7 +156,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
                 },
                 data: {
                     name,
-                    image: (_a = img_url === null || img_url === void 0 ? void 0 : img_url.secure_url) !== null && _a !== void 0 ? _a : target.image,
+                    image: (_b = img_url === null || img_url === void 0 ? void 0 : img_url.secure_url) !== null && _b !== void 0 ? _b : target.image,
                     location,
                 },
             });
@@ -215,6 +216,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
 });
 exports.deleteHandler = deleteHandler;
 const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    var _c;
     const id = parseInt(request.params.id);
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
@@ -239,7 +241,7 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
             .response({
             status: "success",
             data,
-            cursor: data[data.length - 1].id,
+            cursor: (_c = data[data.length - 1]) === null || _c === void 0 ? void 0 : _c.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
         })
             .code(200);
@@ -256,7 +258,7 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
 });
 exports.sensorByGreenhouseHandler = sensorByGreenhouseHandler;
 const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
-    var _b;
+    var _d;
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
     try {
@@ -289,7 +291,7 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
             .response({
             status: "success",
             data,
-            cursor: (_b = data[data.length - 1]) === null || _b === void 0 ? void 0 : _b.id,
+            cursor: (_d = data[data.length - 1]) === null || _d === void 0 ? void 0 : _d.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
         })
             .code(200);

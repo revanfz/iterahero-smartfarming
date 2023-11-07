@@ -16,6 +16,7 @@ exports.getHandler = void 0;
 const boom_1 = __importDefault(require("@hapi/boom"));
 const prisma_1 = require("../config/prisma");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         const data = yield prisma_1.prisma.tandonBahan.findMany({
             include: {
@@ -28,7 +29,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         return h.response({
             status: 'success',
             data,
-            cursor: data[data.length - 1].id,
+            cursor: (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id,
             totalPage: Math.ceil(data.length / 100)
         }).code(200);
     }

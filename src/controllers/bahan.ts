@@ -17,7 +17,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         return h.response({
             status: 'success',
             data,
-            cursor: data[data.length - 1].id,
+            cursor: data[data.length - 1]?.id,
             totalPage: Math.ceil(data.length / 100)
         }).code(200);
     }
