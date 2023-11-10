@@ -6,8 +6,7 @@ import { deletePeracikan, initPeracikan, onOffPeracikan } from "../utils/schedul
 interface InputPenjadwalan {
     id_tandon: number,
     resep: string,
-    waktu: string,
-    iterasi: number,
+    waktu: string[],
     durasi: number,
     hari: number[]
 }
@@ -57,10 +56,10 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { resep, id_tandon, waktu, iterasi, hari, durasi } = request.payload as InputPenjadwalan;
-        const _splitTime = waktu.split(":");
-        const jam = parseInt(_splitTime[0]);
-        const menit = parseInt(_splitTime[1]);
+        const { resep, id_tandon, waktu, hari, durasi } = request.payload as InputPenjadwalan;
+        // const _splitTime = waktu.split(":");
+        // const jam = parseInt(_splitTime[0]);
+        // const menit = parseInt(_splitTime[1]);
         const resepTarget = await prisma.resep.findFirst({
             where: {
                 nama: resep
@@ -71,27 +70,27 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             return Boom.notFound("Tidak ada resep yang sesuai")
         }
 
-        const arrJam: object[] = [{ hour: jam, minute: menit }];
-        const arrValidasi: string[] = [`${jam < 10 ? '0' + jam : jam}:${menit < 10 ? '0' + menit : menit}`];
+        // const arrJam: object[] = [{ hour: jam, minute: menit }];
+        // const arrValidasi: string[] = [`${jam < 10 ? '0' + jam : jam}:${menit < 10 ? '0' + menit : menit}`];
 
-        for (let i = 0; i < iterasi-1; i++) {
-            const intervalJam = Math.floor(resepTarget.interval / 60);
-            const intervalMenit = resepTarget.interval % 60;
-            let jamJadwal = jam + intervalJam * (i + 1);
-            let menitJadwal = menit + intervalMenit * (i + 1);
-            jamJadwal += Math.floor(menitJadwal / 60);
-            menitJadwal %= 60;
-            if (jamJadwal > 24) {
-                return Boom.badRequest("Peracikan dengan skema tersebut tidak dapat dilakukan.")
-            }
-            arrValidasi.push(`${jamJadwal < 10 ? '0' + jamJadwal : jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
-            arrJam.push({ hour: jamJadwal % 24, minute: menitJadwal })
-        }
+        // for (let i = 0; i < iterasi-1; i++) {
+        //     const intervalJam = Math.floor(resepTarget.interval / 60);
+        //     const intervalMenit = resepTarget.interval % 60;
+        //     let jamJadwal = jam + intervalJam * (i + 1);
+        //     let menitJadwal = menit + intervalMenit * (i + 1);
+        //     jamJadwal += Math.floor(menitJadwal / 60);
+        //     menitJadwal %= 60;
+        //     if (jamJadwal > 24) {
+        //         return Boom.badRequest("Peracikan dengan skema tersebut tidak dapat dilakukan.")
+        //     }
+        //     arrValidasi.push(`${jamJadwal < 10 ? '0' + jamJadwal : jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
+        //     arrJam.push({ hour: jamJadwal % 24, minute: menitJadwal })
+        // }
 
         const isJadwalExist = await prisma.penjadwalan.findFirst({
             where: {
                 waktu: {
-                    in: arrValidasi
+                    in: waktu
                 },
                 hari: {
                     hasSome: hari
@@ -108,7 +107,20 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             return error;
         }
 
-        arrValidasi.forEach(async (item, index) => {
+        // arrValidasi.forEach(async (item, index) => {
+        //     await prisma.penjadwalan.create({
+        //         data: {
+        //             resepId: resepTarget.id,
+        //             waktu: item,
+        //             tandonId: id_tandon,
+        //             isActive: true,
+        //             hari,
+        //             durasi
+        //         }
+        //     })
+        // });
+
+        waktu.forEach(async (item) => {
             await prisma.penjadwalan.create({
                 data: {
                     resepId: resepTarget.id,
@@ -119,7 +131,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
                     durasi
                 }
             })
-        });
+        })
 
         initPeracikan()
 

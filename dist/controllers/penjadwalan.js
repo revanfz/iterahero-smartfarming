@@ -61,10 +61,10 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
 exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { resep, id_tandon, waktu, iterasi, hari, durasi } = request.payload;
-        const _splitTime = waktu.split(":");
-        const jam = parseInt(_splitTime[0]);
-        const menit = parseInt(_splitTime[1]);
+        const { resep, id_tandon, waktu, hari, durasi } = request.payload;
+        // const _splitTime = waktu.split(":");
+        // const jam = parseInt(_splitTime[0]);
+        // const menit = parseInt(_splitTime[1]);
         const resepTarget = yield prisma_1.prisma.resep.findFirst({
             where: {
                 nama: resep
@@ -73,25 +73,25 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         if (!resepTarget) {
             return boom_1.default.notFound("Tidak ada resep yang sesuai");
         }
-        const arrJam = [{ hour: jam, minute: menit }];
-        const arrValidasi = [`${jam < 10 ? '0' + jam : jam}:${menit < 10 ? '0' + menit : menit}`];
-        for (let i = 0; i < iterasi - 1; i++) {
-            const intervalJam = Math.floor(resepTarget.interval / 60);
-            const intervalMenit = resepTarget.interval % 60;
-            let jamJadwal = jam + intervalJam * (i + 1);
-            let menitJadwal = menit + intervalMenit * (i + 1);
-            jamJadwal += Math.floor(menitJadwal / 60);
-            menitJadwal %= 60;
-            if (jamJadwal > 24) {
-                return boom_1.default.badRequest("Peracikan dengan skema tersebut tidak dapat dilakukan.");
-            }
-            arrValidasi.push(`${jamJadwal < 10 ? '0' + jamJadwal : jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
-            arrJam.push({ hour: jamJadwal % 24, minute: menitJadwal });
-        }
+        // const arrJam: object[] = [{ hour: jam, minute: menit }];
+        // const arrValidasi: string[] = [`${jam < 10 ? '0' + jam : jam}:${menit < 10 ? '0' + menit : menit}`];
+        // for (let i = 0; i < iterasi-1; i++) {
+        //     const intervalJam = Math.floor(resepTarget.interval / 60);
+        //     const intervalMenit = resepTarget.interval % 60;
+        //     let jamJadwal = jam + intervalJam * (i + 1);
+        //     let menitJadwal = menit + intervalMenit * (i + 1);
+        //     jamJadwal += Math.floor(menitJadwal / 60);
+        //     menitJadwal %= 60;
+        //     if (jamJadwal > 24) {
+        //         return Boom.badRequest("Peracikan dengan skema tersebut tidak dapat dilakukan.")
+        //     }
+        //     arrValidasi.push(`${jamJadwal < 10 ? '0' + jamJadwal : jamJadwal}:${menitJadwal < 10 ? '0' + menitJadwal : menitJadwal}`);
+        //     arrJam.push({ hour: jamJadwal % 24, minute: menitJadwal })
+        // }
         const isJadwalExist = yield prisma_1.prisma.penjadwalan.findFirst({
             where: {
                 waktu: {
-                    in: arrValidasi
+                    in: waktu
                 },
                 hari: {
                     hasSome: hari
@@ -106,7 +106,19 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             error.output.payload.data = { status: isJadwalExist.isActive ? 'enabled' : 'disabled', hari };
             return error;
         }
-        arrValidasi.forEach((item, index) => __awaiter(void 0, void 0, void 0, function* () {
+        // arrValidasi.forEach(async (item, index) => {
+        //     await prisma.penjadwalan.create({
+        //         data: {
+        //             resepId: resepTarget.id,
+        //             waktu: item,
+        //             tandonId: id_tandon,
+        //             isActive: true,
+        //             hari,
+        //             durasi
+        //         }
+        //     })
+        // });
+        waktu.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
             yield prisma_1.prisma.penjadwalan.create({
                 data: {
                     resepId: resepTarget.id,
