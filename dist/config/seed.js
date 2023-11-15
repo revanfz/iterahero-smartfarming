@@ -70,7 +70,7 @@ function main() {
             },
         });
         const tandon = yield prisma_1.prisma.tandon.createMany({
-            data: tandon_1.seedingTandon
+            data: tandon_1.seedingTandon,
         });
         const tandonPenyimpanan = yield prisma_1.prisma.tandonPenyimpanan.createMany({
             data: tandonPenyimpanan_1.tandonPenyimpananSeeding,
@@ -85,9 +85,16 @@ function main() {
                 ph: 7.2,
                 volume: 3800,
                 greenhouse: {
-                    connect: {
-                        id: 1
-                    }
+                    connectOrCreate: {
+                        where: {
+                            id: 4,
+                        },
+                        create: {
+                            name: "Greenhouse Melon",
+                            image: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
+                            location: "Wanayasa",
+                        },
+                    },
                 },
                 tipe: "besaran",
             },
@@ -99,9 +106,16 @@ function main() {
                 ph: 6.4,
                 volume: 5000,
                 greenhouse: {
-                    connect: {
-                        id: 1
-                    }
+                    connectOrCreate: {
+                        where: {
+                            id: 5,
+                        },
+                        create: {
+                            name: "Greenhouse Semangka",
+                            image: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
+                            location: "Wanayasa",
+                        },
+                    },
                 },
                 tipe: "besaran",
             },
@@ -113,9 +127,16 @@ function main() {
                 ph: 6.6,
                 volume: 4200,
                 greenhouse: {
-                    connect: {
-                        id: 1
-                    }
+                    connectOrCreate: {
+                        where: {
+                            id: 6,
+                        },
+                        create: {
+                            name: "Greenhouse Ketimun",
+                            image: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
+                            location: "Wanayasa",
+                        },
+                    },
                 },
                 tipe: "besaran",
             },

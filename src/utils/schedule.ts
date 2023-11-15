@@ -13,8 +13,8 @@ export const initPeracikan = async () => {
       });
       data
         .filter((item) => item.isActive === true)
-        .forEach((item) => {
-          schedulePeracikan(item.id, item.waktu, item.hari, item.resepId);
+        .forEach(async (item) => {
+          await schedulePeracikan(item.id, item.waktu, item.hari, item.resepId);
         });
     })
     .catch((err) => console.error(err))
@@ -31,7 +31,7 @@ export const onOffPeracikan = async (id: number) => {
     if (data.isActive) {
       schedule.scheduledJobs[`iterahero2023-peracikan-${id}`].cancel();
     } else {
-      schedulePeracikan(data.id, data.waktu, data.hari, data.resepId);
+      await schedulePeracikan(data.id, data.waktu, data.hari, data.resepId);
     }
   }
 };
@@ -59,13 +59,20 @@ export const schedulePeracikan = async (
     where: {
       id: resep,
     },
+    include: {
+      greenhouse: {
+        select: {
+          id: true
+        }
+      }
+    }
   });
+
   if (komposisi) {
     schedule.scheduleJob(
       `iterahero2023-peracikan-${id}`,
       rule,
       function (resep: object) {
-        console.log(`Schedule ${hour}:${waktu}`);
         publishData(
           "iterahero2023/peracikan",
           JSON.stringify({

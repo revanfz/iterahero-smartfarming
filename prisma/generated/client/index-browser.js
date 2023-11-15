@@ -144,6 +144,7 @@ exports.Prisma.ResepScalarFieldEnum = {
   nutrisiB: 'nutrisiB',
   air: 'air',
   tipe: 'tipe',
+  greenhouseId: 'greenhouseId',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };

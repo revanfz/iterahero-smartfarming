@@ -34,7 +34,7 @@ model Greenhouse {
   user       User[]
   aktuator   Aktuator[]
   sensor     Sensor[]
-  resep       Resep[]
+  resep      Resep?
   created_at DateTime   @default(now())
   updated_at DateTime?  @updatedAt
 }
@@ -62,7 +62,8 @@ model Resep {
   tipe              String?
   penjadwalan       Penjadwalan[]
   tandonPenyimpanan TandonPenyimpanan[]
-  greenhouse        Greenhouse[]
+  greenhouse        Greenhouse?         @relation(fields: [greenhouseId], references: [id])
+  greenhouseId      Int                 @unique
   created_at        DateTime            @default(now())
   updated_at        DateTime?           @updatedAt
 }

@@ -103,7 +103,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 },
             });
         }));
-        (0, schedule_1.initPeracikan)();
+        yield (0, schedule_1.initPeracikan)();
         return h
             .response({
             status: "success",

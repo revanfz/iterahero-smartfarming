@@ -110,7 +110,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       });
     });
 
-    initPeracikan();
+    await initPeracikan();
 
     return h
       .response({
