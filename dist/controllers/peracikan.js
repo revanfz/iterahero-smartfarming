@@ -21,23 +21,25 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         const { nama } = request.payload;
         const data = yield prisma_1.prisma.resep.findFirst({
             where: {
-                nama
-            }
+                nama,
+            },
         });
         if (!data) {
             return boom_1.default.notFound(`Tidak ada resep dengan nama: ${nama}`);
         }
         (0, mqtt_1.publishData)("iterahero/peracikan", JSON.stringify(data));
-        return h.response({
-            status: 'success',
-            message: data
-        }).code(200);
+        return h
+            .response({
+            status: "success",
+            message: data,
+        })
+            .code(200);
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             return boom_1.default.internal(e.message);
         }
     }
-    yield prisma_1.prisma.$disconnect();
 });
 exports.postHandler = postHandler;

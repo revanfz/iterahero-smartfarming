@@ -1655,12 +1655,14 @@ export namespace Prisma {
     user: number
     aktuator: number
     sensor: number
+    resep: number
   }
 
   export type GreenhouseCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     user?: boolean | GreenhouseCountOutputTypeCountUserArgs
     aktuator?: boolean | GreenhouseCountOutputTypeCountAktuatorArgs
     sensor?: boolean | GreenhouseCountOutputTypeCountSensorArgs
+    resep?: boolean | GreenhouseCountOutputTypeCountResepArgs
   }
 
   // Custom InputTypes
@@ -1697,6 +1699,14 @@ export namespace Prisma {
    */
   export type GreenhouseCountOutputTypeCountSensorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: SensorWhereInput
+  }
+
+
+  /**
+   * GreenhouseCountOutputType without action
+   */
+  export type GreenhouseCountOutputTypeCountResepArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: ResepWhereInput
   }
 
 
@@ -1752,11 +1762,13 @@ export namespace Prisma {
   export type ResepCountOutputType = {
     penjadwalan: number
     tandonPenyimpanan: number
+    greenhouse: number
   }
 
   export type ResepCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     penjadwalan?: boolean | ResepCountOutputTypeCountPenjadwalanArgs
     tandonPenyimpanan?: boolean | ResepCountOutputTypeCountTandonPenyimpananArgs
+    greenhouse?: boolean | ResepCountOutputTypeCountGreenhouseArgs
   }
 
   // Custom InputTypes
@@ -1785,6 +1797,14 @@ export namespace Prisma {
    */
   export type ResepCountOutputTypeCountTandonPenyimpananArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: TandonPenyimpananWhereInput
+  }
+
+
+  /**
+   * ResepCountOutputType without action
+   */
+  export type ResepCountOutputTypeCountGreenhouseArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: GreenhouseWhereInput
   }
 
 
@@ -3169,6 +3189,7 @@ export namespace Prisma {
     user?: boolean | Greenhouse$userArgs<ExtArgs>
     aktuator?: boolean | Greenhouse$aktuatorArgs<ExtArgs>
     sensor?: boolean | Greenhouse$sensorArgs<ExtArgs>
+    resep?: boolean | Greenhouse$resepArgs<ExtArgs>
     _count?: boolean | GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["greenhouse"]>
 
@@ -3185,6 +3206,7 @@ export namespace Prisma {
     user?: boolean | Greenhouse$userArgs<ExtArgs>
     aktuator?: boolean | Greenhouse$aktuatorArgs<ExtArgs>
     sensor?: boolean | Greenhouse$sensorArgs<ExtArgs>
+    resep?: boolean | Greenhouse$resepArgs<ExtArgs>
     _count?: boolean | GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -3195,6 +3217,7 @@ export namespace Prisma {
       user: Prisma.$UserPayload<ExtArgs>[]
       aktuator: Prisma.$AktuatorPayload<ExtArgs>[]
       sensor: Prisma.$SensorPayload<ExtArgs>[]
+      resep: Prisma.$ResepPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetResult<{
       id: number
@@ -3573,6 +3596,8 @@ export namespace Prisma {
     aktuator<T extends Greenhouse$aktuatorArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$aktuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     sensor<T extends Greenhouse$sensorArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$sensorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    resep<T extends Greenhouse$resepArgs<ExtArgs> = {}>(args?: Subset<T, Greenhouse$resepArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ResepPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3979,6 +4004,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: SensorScalarFieldEnum | SensorScalarFieldEnum[]
+  }
+
+
+  /**
+   * Greenhouse.resep
+   */
+  export type Greenhouse$resepArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Resep
+     */
+    select?: ResepSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: ResepInclude<ExtArgs> | null
+    where?: ResepWhereInput
+    orderBy?: ResepOrderByWithRelationInput | ResepOrderByWithRelationInput[]
+    cursor?: ResepWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ResepScalarFieldEnum | ResepScalarFieldEnum[]
   }
 
 
@@ -5236,13 +5282,13 @@ export namespace Prisma {
     id: number
     ppm: number | null
     ph: number
-    volume: number | null
+    volume: number
     nama: string
-    interval: number
+    interval: number | null
     nutrisiA: number | null
     nutrisiB: number | null
     air: number | null
-    tipe: string
+    tipe: string | null
     created_at: Date
     updated_at: Date | null
     _count: ResepCountAggregateOutputType | null
@@ -5281,6 +5327,7 @@ export namespace Prisma {
     updated_at?: boolean
     penjadwalan?: boolean | Resep$penjadwalanArgs<ExtArgs>
     tandonPenyimpanan?: boolean | Resep$tandonPenyimpananArgs<ExtArgs>
+    greenhouse?: boolean | Resep$greenhouseArgs<ExtArgs>
     _count?: boolean | ResepCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["resep"]>
 
@@ -5302,6 +5349,7 @@ export namespace Prisma {
   export type ResepInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     penjadwalan?: boolean | Resep$penjadwalanArgs<ExtArgs>
     tandonPenyimpanan?: boolean | Resep$tandonPenyimpananArgs<ExtArgs>
+    greenhouse?: boolean | Resep$greenhouseArgs<ExtArgs>
     _count?: boolean | ResepCountOutputTypeDefaultArgs<ExtArgs>
   }
 
@@ -5311,18 +5359,19 @@ export namespace Prisma {
     objects: {
       penjadwalan: Prisma.$PenjadwalanPayload<ExtArgs>[]
       tandonPenyimpanan: Prisma.$TandonPenyimpananPayload<ExtArgs>[]
+      greenhouse: Prisma.$GreenhousePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetResult<{
       id: number
       ppm: number | null
       ph: number
-      volume: number | null
+      volume: number
       nama: string
-      interval: number
+      interval: number | null
       nutrisiA: number | null
       nutrisiB: number | null
       air: number | null
-      tipe: string
+      tipe: string | null
       created_at: Date
       updated_at: Date | null
     }, ExtArgs["result"]["resep"]>
@@ -5693,6 +5742,8 @@ export namespace Prisma {
     penjadwalan<T extends Resep$penjadwalanArgs<ExtArgs> = {}>(args?: Subset<T, Resep$penjadwalanArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PenjadwalanPayload<ExtArgs>, T, 'findMany'> | Null>;
 
     tandonPenyimpanan<T extends Resep$tandonPenyimpananArgs<ExtArgs> = {}>(args?: Subset<T, Resep$tandonPenyimpananArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TandonPenyimpananPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    greenhouse<T extends Resep$greenhouseArgs<ExtArgs> = {}>(args?: Subset<T, Resep$greenhouseArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$GreenhousePayload<ExtArgs>, T, 'findMany'> | Null>;
 
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -6084,6 +6135,27 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: TandonPenyimpananScalarFieldEnum | TandonPenyimpananScalarFieldEnum[]
+  }
+
+
+  /**
+   * Resep.greenhouse
+   */
+  export type Resep$greenhouseArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Greenhouse
+     */
+    select?: GreenhouseSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: GreenhouseInclude<ExtArgs> | null
+    where?: GreenhouseWhereInput
+    orderBy?: GreenhouseOrderByWithRelationInput | GreenhouseOrderByWithRelationInput[]
+    cursor?: GreenhouseWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: GreenhouseScalarFieldEnum | GreenhouseScalarFieldEnum[]
   }
 
 
@@ -12877,6 +12949,7 @@ export namespace Prisma {
     user?: UserListRelationFilter
     aktuator?: AktuatorListRelationFilter
     sensor?: SensorListRelationFilter
+    resep?: ResepListRelationFilter
   }
 
   export type GreenhouseOrderByWithRelationInput = {
@@ -12889,6 +12962,7 @@ export namespace Prisma {
     user?: UserOrderByRelationAggregateInput
     aktuator?: AktuatorOrderByRelationAggregateInput
     sensor?: SensorOrderByRelationAggregateInput
+    resep?: ResepOrderByRelationAggregateInput
   }
 
   export type GreenhouseWhereUniqueInput = Prisma.AtLeast<{
@@ -12904,6 +12978,7 @@ export namespace Prisma {
     user?: UserListRelationFilter
     aktuator?: AktuatorListRelationFilter
     sensor?: SensorListRelationFilter
+    resep?: ResepListRelationFilter
   }, "id" | "name">
 
   export type GreenhouseOrderByWithAggregationInput = {
@@ -12997,34 +13072,36 @@ export namespace Prisma {
     id?: IntFilter<"Resep"> | number
     ppm?: IntNullableFilter<"Resep"> | number | null
     ph?: FloatFilter<"Resep"> | number
-    volume?: FloatNullableFilter<"Resep"> | number | null
+    volume?: FloatFilter<"Resep"> | number
     nama?: StringFilter<"Resep"> | string
-    interval?: IntFilter<"Resep"> | number
+    interval?: IntNullableFilter<"Resep"> | number | null
     nutrisiA?: FloatNullableFilter<"Resep"> | number | null
     nutrisiB?: FloatNullableFilter<"Resep"> | number | null
     air?: FloatNullableFilter<"Resep"> | number | null
-    tipe?: StringFilter<"Resep"> | string
+    tipe?: StringNullableFilter<"Resep"> | string | null
     created_at?: DateTimeFilter<"Resep"> | Date | string
     updated_at?: DateTimeNullableFilter<"Resep"> | Date | string | null
     penjadwalan?: PenjadwalanListRelationFilter
     tandonPenyimpanan?: TandonPenyimpananListRelationFilter
+    greenhouse?: GreenhouseListRelationFilter
   }
 
   export type ResepOrderByWithRelationInput = {
     id?: SortOrder
     ppm?: SortOrderInput | SortOrder
     ph?: SortOrder
-    volume?: SortOrderInput | SortOrder
+    volume?: SortOrder
     nama?: SortOrder
-    interval?: SortOrder
+    interval?: SortOrderInput | SortOrder
     nutrisiA?: SortOrderInput | SortOrder
     nutrisiB?: SortOrderInput | SortOrder
     air?: SortOrderInput | SortOrder
-    tipe?: SortOrder
+    tipe?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     penjadwalan?: PenjadwalanOrderByRelationAggregateInput
     tandonPenyimpanan?: TandonPenyimpananOrderByRelationAggregateInput
+    greenhouse?: GreenhouseOrderByRelationAggregateInput
   }
 
   export type ResepWhereUniqueInput = Prisma.AtLeast<{
@@ -13034,30 +13111,31 @@ export namespace Prisma {
     NOT?: ResepWhereInput | ResepWhereInput[]
     ppm?: IntNullableFilter<"Resep"> | number | null
     ph?: FloatFilter<"Resep"> | number
-    volume?: FloatNullableFilter<"Resep"> | number | null
+    volume?: FloatFilter<"Resep"> | number
     nama?: StringFilter<"Resep"> | string
-    interval?: IntFilter<"Resep"> | number
+    interval?: IntNullableFilter<"Resep"> | number | null
     nutrisiA?: FloatNullableFilter<"Resep"> | number | null
     nutrisiB?: FloatNullableFilter<"Resep"> | number | null
     air?: FloatNullableFilter<"Resep"> | number | null
-    tipe?: StringFilter<"Resep"> | string
+    tipe?: StringNullableFilter<"Resep"> | string | null
     created_at?: DateTimeFilter<"Resep"> | Date | string
     updated_at?: DateTimeNullableFilter<"Resep"> | Date | string | null
     penjadwalan?: PenjadwalanListRelationFilter
     tandonPenyimpanan?: TandonPenyimpananListRelationFilter
+    greenhouse?: GreenhouseListRelationFilter
   }, "id">
 
   export type ResepOrderByWithAggregationInput = {
     id?: SortOrder
     ppm?: SortOrderInput | SortOrder
     ph?: SortOrder
-    volume?: SortOrderInput | SortOrder
+    volume?: SortOrder
     nama?: SortOrder
-    interval?: SortOrder
+    interval?: SortOrderInput | SortOrder
     nutrisiA?: SortOrderInput | SortOrder
     nutrisiB?: SortOrderInput | SortOrder
     air?: SortOrderInput | SortOrder
-    tipe?: SortOrder
+    tipe?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     _count?: ResepCountOrderByAggregateInput
@@ -13074,13 +13152,13 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Resep"> | number
     ppm?: IntNullableWithAggregatesFilter<"Resep"> | number | null
     ph?: FloatWithAggregatesFilter<"Resep"> | number
-    volume?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
+    volume?: FloatWithAggregatesFilter<"Resep"> | number
     nama?: StringWithAggregatesFilter<"Resep"> | string
-    interval?: IntWithAggregatesFilter<"Resep"> | number
+    interval?: IntNullableWithAggregatesFilter<"Resep"> | number | null
     nutrisiA?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
     nutrisiB?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
     air?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
-    tipe?: StringWithAggregatesFilter<"Resep"> | string
+    tipe?: StringNullableWithAggregatesFilter<"Resep"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Resep"> | Date | string
     updated_at?: DateTimeNullableWithAggregatesFilter<"Resep"> | Date | string | null
   }
@@ -13694,6 +13772,7 @@ export namespace Prisma {
     user?: UserCreateNestedManyWithoutGreenhouseInput
     aktuator?: AktuatorCreateNestedManyWithoutGreenhouseInput
     sensor?: SensorCreateNestedManyWithoutGreenhouseInput
+    resep?: ResepCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateInput = {
@@ -13706,6 +13785,7 @@ export namespace Prisma {
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
     aktuator?: AktuatorUncheckedCreateNestedManyWithoutGreenhouseInput
     sensor?: SensorUncheckedCreateNestedManyWithoutGreenhouseInput
+    resep?: ResepUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUpdateInput = {
@@ -13717,6 +13797,7 @@ export namespace Prisma {
     user?: UserUpdateManyWithoutGreenhouseNestedInput
     aktuator?: AktuatorUpdateManyWithoutGreenhouseNestedInput
     sensor?: SensorUpdateManyWithoutGreenhouseNestedInput
+    resep?: ResepUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateInput = {
@@ -13729,6 +13810,7 @@ export namespace Prisma {
     user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
     aktuator?: AktuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
     sensor?: SensorUncheckedUpdateManyWithoutGreenhouseNestedInput
+    resep?: ResepUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseCreateManyInput = {
@@ -13813,80 +13895,84 @@ export namespace Prisma {
   export type ResepCreateInput = {
     ppm?: number | null
     ph: number
-    volume?: number | null
+    volume: number
     nama: string
-    interval: number
+    interval?: number | null
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
-    tipe: string
+    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     penjadwalan?: PenjadwalanCreateNestedManyWithoutResepInput
     tandonPenyimpanan?: TandonPenyimpananCreateNestedManyWithoutResepInput
+    greenhouse?: GreenhouseCreateNestedManyWithoutResepInput
   }
 
   export type ResepUncheckedCreateInput = {
     id?: number
     ppm?: number | null
     ph: number
-    volume?: number | null
+    volume: number
     nama: string
-    interval: number
+    interval?: number | null
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
-    tipe: string
+    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutResepInput
     tandonPenyimpanan?: TandonPenyimpananUncheckedCreateNestedManyWithoutResepInput
+    greenhouse?: GreenhouseUncheckedCreateNestedManyWithoutResepInput
   }
 
   export type ResepUpdateInput = {
     ppm?: NullableIntFieldUpdateOperationsInput | number | null
     ph?: FloatFieldUpdateOperationsInput | number
-    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: StringFieldUpdateOperationsInput | string
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     penjadwalan?: PenjadwalanUpdateManyWithoutResepNestedInput
     tandonPenyimpanan?: TandonPenyimpananUpdateManyWithoutResepNestedInput
+    greenhouse?: GreenhouseUpdateManyWithoutResepNestedInput
   }
 
   export type ResepUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     ppm?: NullableIntFieldUpdateOperationsInput | number | null
     ph?: FloatFieldUpdateOperationsInput | number
-    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: StringFieldUpdateOperationsInput | string
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutResepNestedInput
     tandonPenyimpanan?: TandonPenyimpananUncheckedUpdateManyWithoutResepNestedInput
+    greenhouse?: GreenhouseUncheckedUpdateManyWithoutResepNestedInput
   }
 
   export type ResepCreateManyInput = {
     id?: number
     ppm?: number | null
     ph: number
-    volume?: number | null
+    volume: number
     nama: string
-    interval: number
+    interval?: number | null
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
-    tipe: string
+    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -13894,13 +13980,13 @@ export namespace Prisma {
   export type ResepUpdateManyMutationInput = {
     ppm?: NullableIntFieldUpdateOperationsInput | number | null
     ph?: FloatFieldUpdateOperationsInput | number
-    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: StringFieldUpdateOperationsInput | string
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -13909,13 +13995,13 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     ppm?: NullableIntFieldUpdateOperationsInput | number | null
     ph?: FloatFieldUpdateOperationsInput | number
-    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: StringFieldUpdateOperationsInput | string
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -14651,6 +14737,12 @@ export namespace Prisma {
     none?: SensorWhereInput
   }
 
+  export type ResepListRelationFilter = {
+    every?: ResepWhereInput
+    some?: ResepWhereInput
+    none?: ResepWhereInput
+  }
+
   export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -14660,6 +14752,10 @@ export namespace Prisma {
   }
 
   export type SensorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ResepOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -14706,16 +14802,6 @@ export namespace Prisma {
   export type TandonRelationFilter = {
     is?: TandonWhereInput
     isNot?: TandonWhereInput
-  }
-
-  export type ResepListRelationFilter = {
-    every?: ResepWhereInput
-    some?: ResepWhereInput
-    none?: ResepWhereInput
-  }
-
-  export type ResepOrderByRelationAggregateInput = {
-    _count?: SortOrder
   }
 
   export type TandonPenyimpananCountOrderByAggregateInput = {
@@ -14788,6 +14874,21 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type PenjadwalanListRelationFilter = {
@@ -14925,6 +15026,24 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type IntNullableListFilter<$PrismaModel = never> = {
     equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
     has?: number | IntFieldRefInput<$PrismaModel> | null
@@ -14986,21 +15105,6 @@ export namespace Prisma {
     hari?: SortOrder
     resepId?: SortOrder
     tandonId?: SortOrder
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
   export type TandonNullableRelationFilter = {
@@ -15090,24 +15194,6 @@ export namespace Prisma {
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
     greenhouseId?: SortOrder
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type TandonPenyimpananNullableRelationFilter = {
@@ -15486,6 +15572,12 @@ export namespace Prisma {
     connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
   }
 
+  export type ResepCreateNestedManyWithoutGreenhouseInput = {
+    create?: XOR<ResepCreateWithoutGreenhouseInput, ResepUncheckedCreateWithoutGreenhouseInput> | ResepCreateWithoutGreenhouseInput[] | ResepUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: ResepCreateOrConnectWithoutGreenhouseInput | ResepCreateOrConnectWithoutGreenhouseInput[]
+    connect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+  }
+
   export type UserUncheckedCreateNestedManyWithoutGreenhouseInput = {
     create?: XOR<UserCreateWithoutGreenhouseInput, UserUncheckedCreateWithoutGreenhouseInput> | UserCreateWithoutGreenhouseInput[] | UserUncheckedCreateWithoutGreenhouseInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGreenhouseInput | UserCreateOrConnectWithoutGreenhouseInput[]
@@ -15504,6 +15596,12 @@ export namespace Prisma {
     connectOrCreate?: SensorCreateOrConnectWithoutGreenhouseInput | SensorCreateOrConnectWithoutGreenhouseInput[]
     createMany?: SensorCreateManyGreenhouseInputEnvelope
     connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+  }
+
+  export type ResepUncheckedCreateNestedManyWithoutGreenhouseInput = {
+    create?: XOR<ResepCreateWithoutGreenhouseInput, ResepUncheckedCreateWithoutGreenhouseInput> | ResepCreateWithoutGreenhouseInput[] | ResepUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: ResepCreateOrConnectWithoutGreenhouseInput | ResepCreateOrConnectWithoutGreenhouseInput[]
+    connect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
   }
 
   export type UserUpdateManyWithoutGreenhouseNestedInput = {
@@ -15547,6 +15645,19 @@ export namespace Prisma {
     deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
   }
 
+  export type ResepUpdateManyWithoutGreenhouseNestedInput = {
+    create?: XOR<ResepCreateWithoutGreenhouseInput, ResepUncheckedCreateWithoutGreenhouseInput> | ResepCreateWithoutGreenhouseInput[] | ResepUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: ResepCreateOrConnectWithoutGreenhouseInput | ResepCreateOrConnectWithoutGreenhouseInput[]
+    upsert?: ResepUpsertWithWhereUniqueWithoutGreenhouseInput | ResepUpsertWithWhereUniqueWithoutGreenhouseInput[]
+    set?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    disconnect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    delete?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    connect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    update?: ResepUpdateWithWhereUniqueWithoutGreenhouseInput | ResepUpdateWithWhereUniqueWithoutGreenhouseInput[]
+    updateMany?: ResepUpdateManyWithWhereWithoutGreenhouseInput | ResepUpdateManyWithWhereWithoutGreenhouseInput[]
+    deleteMany?: ResepScalarWhereInput | ResepScalarWhereInput[]
+  }
+
   export type UserUncheckedUpdateManyWithoutGreenhouseNestedInput = {
     create?: XOR<UserCreateWithoutGreenhouseInput, UserUncheckedCreateWithoutGreenhouseInput> | UserCreateWithoutGreenhouseInput[] | UserUncheckedCreateWithoutGreenhouseInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGreenhouseInput | UserCreateOrConnectWithoutGreenhouseInput[]
@@ -15586,6 +15697,19 @@ export namespace Prisma {
     update?: SensorUpdateWithWhereUniqueWithoutGreenhouseInput | SensorUpdateWithWhereUniqueWithoutGreenhouseInput[]
     updateMany?: SensorUpdateManyWithWhereWithoutGreenhouseInput | SensorUpdateManyWithWhereWithoutGreenhouseInput[]
     deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
+  }
+
+  export type ResepUncheckedUpdateManyWithoutGreenhouseNestedInput = {
+    create?: XOR<ResepCreateWithoutGreenhouseInput, ResepUncheckedCreateWithoutGreenhouseInput> | ResepCreateWithoutGreenhouseInput[] | ResepUncheckedCreateWithoutGreenhouseInput[]
+    connectOrCreate?: ResepCreateOrConnectWithoutGreenhouseInput | ResepCreateOrConnectWithoutGreenhouseInput[]
+    upsert?: ResepUpsertWithWhereUniqueWithoutGreenhouseInput | ResepUpsertWithWhereUniqueWithoutGreenhouseInput[]
+    set?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    disconnect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    delete?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    connect?: ResepWhereUniqueInput | ResepWhereUniqueInput[]
+    update?: ResepUpdateWithWhereUniqueWithoutGreenhouseInput | ResepUpdateWithWhereUniqueWithoutGreenhouseInput[]
+    updateMany?: ResepUpdateManyWithWhereWithoutGreenhouseInput | ResepUpdateManyWithWhereWithoutGreenhouseInput[]
+    deleteMany?: ResepScalarWhereInput | ResepScalarWhereInput[]
   }
 
   export type TandonCreateNestedOneWithoutTandonPenyimpananInput = {
@@ -15699,6 +15823,12 @@ export namespace Prisma {
     connect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
   }
 
+  export type GreenhouseCreateNestedManyWithoutResepInput = {
+    create?: XOR<GreenhouseCreateWithoutResepInput, GreenhouseUncheckedCreateWithoutResepInput> | GreenhouseCreateWithoutResepInput[] | GreenhouseUncheckedCreateWithoutResepInput[]
+    connectOrCreate?: GreenhouseCreateOrConnectWithoutResepInput | GreenhouseCreateOrConnectWithoutResepInput[]
+    connect?: GreenhouseWhereUniqueInput | GreenhouseWhereUniqueInput[]
+  }
+
   export type PenjadwalanUncheckedCreateNestedManyWithoutResepInput = {
     create?: XOR<PenjadwalanCreateWithoutResepInput, PenjadwalanUncheckedCreateWithoutResepInput> | PenjadwalanCreateWithoutResepInput[] | PenjadwalanUncheckedCreateWithoutResepInput[]
     connectOrCreate?: PenjadwalanCreateOrConnectWithoutResepInput | PenjadwalanCreateOrConnectWithoutResepInput[]
@@ -15710,6 +15840,12 @@ export namespace Prisma {
     create?: XOR<TandonPenyimpananCreateWithoutResepInput, TandonPenyimpananUncheckedCreateWithoutResepInput> | TandonPenyimpananCreateWithoutResepInput[] | TandonPenyimpananUncheckedCreateWithoutResepInput[]
     connectOrCreate?: TandonPenyimpananCreateOrConnectWithoutResepInput | TandonPenyimpananCreateOrConnectWithoutResepInput[]
     connect?: TandonPenyimpananWhereUniqueInput | TandonPenyimpananWhereUniqueInput[]
+  }
+
+  export type GreenhouseUncheckedCreateNestedManyWithoutResepInput = {
+    create?: XOR<GreenhouseCreateWithoutResepInput, GreenhouseUncheckedCreateWithoutResepInput> | GreenhouseCreateWithoutResepInput[] | GreenhouseUncheckedCreateWithoutResepInput[]
+    connectOrCreate?: GreenhouseCreateOrConnectWithoutResepInput | GreenhouseCreateOrConnectWithoutResepInput[]
+    connect?: GreenhouseWhereUniqueInput | GreenhouseWhereUniqueInput[]
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -15734,6 +15870,10 @@ export namespace Prisma {
     decrement?: number
     multiply?: number
     divide?: number
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type PenjadwalanUpdateManyWithoutResepNestedInput = {
@@ -15763,6 +15903,19 @@ export namespace Prisma {
     deleteMany?: TandonPenyimpananScalarWhereInput | TandonPenyimpananScalarWhereInput[]
   }
 
+  export type GreenhouseUpdateManyWithoutResepNestedInput = {
+    create?: XOR<GreenhouseCreateWithoutResepInput, GreenhouseUncheckedCreateWithoutResepInput> | GreenhouseCreateWithoutResepInput[] | GreenhouseUncheckedCreateWithoutResepInput[]
+    connectOrCreate?: GreenhouseCreateOrConnectWithoutResepInput | GreenhouseCreateOrConnectWithoutResepInput[]
+    upsert?: GreenhouseUpsertWithWhereUniqueWithoutResepInput | GreenhouseUpsertWithWhereUniqueWithoutResepInput[]
+    set?: GreenhouseWhereUniqueInput | GreenhouseWhereUniqueInput[]
+    disconnect?: GreenhouseWhereUniqueInput | GreenhouseWhereUniqueInput[]
+    delete?: GreenhouseWhereUniqueInput | GreenhouseWhereUniqueInput[]
+    connect?: GreenhouseWhereUniqueInput | GreenhouseWhereUniqueInput[]
+    update?: GreenhouseUpdateWithWhereUniqueWithoutResepInput | GreenhouseUpdateWithWhereUniqueWithoutResepInput[]
+    updateMany?: GreenhouseUpdateManyWithWhereWithoutResepInput | GreenhouseUpdateManyWithWhereWithoutResepInput[]
+    deleteMany?: GreenhouseScalarWhereInput | GreenhouseScalarWhereInput[]
+  }
+
   export type PenjadwalanUncheckedUpdateManyWithoutResepNestedInput = {
     create?: XOR<PenjadwalanCreateWithoutResepInput, PenjadwalanUncheckedCreateWithoutResepInput> | PenjadwalanCreateWithoutResepInput[] | PenjadwalanUncheckedCreateWithoutResepInput[]
     connectOrCreate?: PenjadwalanCreateOrConnectWithoutResepInput | PenjadwalanCreateOrConnectWithoutResepInput[]
@@ -15788,6 +15941,19 @@ export namespace Prisma {
     update?: TandonPenyimpananUpdateWithWhereUniqueWithoutResepInput | TandonPenyimpananUpdateWithWhereUniqueWithoutResepInput[]
     updateMany?: TandonPenyimpananUpdateManyWithWhereWithoutResepInput | TandonPenyimpananUpdateManyWithWhereWithoutResepInput[]
     deleteMany?: TandonPenyimpananScalarWhereInput | TandonPenyimpananScalarWhereInput[]
+  }
+
+  export type GreenhouseUncheckedUpdateManyWithoutResepNestedInput = {
+    create?: XOR<GreenhouseCreateWithoutResepInput, GreenhouseUncheckedCreateWithoutResepInput> | GreenhouseCreateWithoutResepInput[] | GreenhouseUncheckedCreateWithoutResepInput[]
+    connectOrCreate?: GreenhouseCreateOrConnectWithoutResepInput | GreenhouseCreateOrConnectWithoutResepInput[]
+    upsert?: GreenhouseUpsertWithWhereUniqueWithoutResepInput | GreenhouseUpsertWithWhereUniqueWithoutResepInput[]
+    set?: GreenhouseWhereUniqueInput | GreenhouseWhereUniqueInput[]
+    disconnect?: GreenhouseWhereUniqueInput | GreenhouseWhereUniqueInput[]
+    delete?: GreenhouseWhereUniqueInput | GreenhouseWhereUniqueInput[]
+    connect?: GreenhouseWhereUniqueInput | GreenhouseWhereUniqueInput[]
+    update?: GreenhouseUpdateWithWhereUniqueWithoutResepInput | GreenhouseUpdateWithWhereUniqueWithoutResepInput[]
+    updateMany?: GreenhouseUpdateManyWithWhereWithoutResepInput | GreenhouseUpdateManyWithWhereWithoutResepInput[]
+    deleteMany?: GreenhouseScalarWhereInput | GreenhouseScalarWhereInput[]
   }
 
   export type PenjadwalanCreatehariInput = {
@@ -15843,10 +16009,6 @@ export namespace Prisma {
     create?: XOR<GreenhouseCreateWithoutSensorInput, GreenhouseUncheckedCreateWithoutSensorInput>
     connectOrCreate?: GreenhouseCreateOrConnectWithoutSensorInput
     connect?: GreenhouseWhereUniqueInput
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type TandonUpdateOneWithoutSensorNestedInput = {
@@ -16433,6 +16595,20 @@ export namespace Prisma {
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -16481,20 +16657,6 @@ export namespace Prisma {
     _max?: NestedFloatNullableFilter<$PrismaModel>
   }
 
-  export type NestedStringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel> | null
     in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
@@ -16520,6 +16682,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     aktuator?: AktuatorCreateNestedManyWithoutGreenhouseInput
     sensor?: SensorCreateNestedManyWithoutGreenhouseInput
+    resep?: ResepCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateWithoutUserInput = {
@@ -16531,6 +16694,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     aktuator?: AktuatorUncheckedCreateNestedManyWithoutGreenhouseInput
     sensor?: SensorUncheckedCreateNestedManyWithoutGreenhouseInput
+    resep?: ResepUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseCreateOrConnectWithoutUserInput = {
@@ -16804,6 +16968,44 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type ResepCreateWithoutGreenhouseInput = {
+    ppm?: number | null
+    ph: number
+    volume: number
+    nama: string
+    interval?: number | null
+    nutrisiA?: number | null
+    nutrisiB?: number | null
+    air?: number | null
+    tipe?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    penjadwalan?: PenjadwalanCreateNestedManyWithoutResepInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedManyWithoutResepInput
+  }
+
+  export type ResepUncheckedCreateWithoutGreenhouseInput = {
+    id?: number
+    ppm?: number | null
+    ph: number
+    volume: number
+    nama: string
+    interval?: number | null
+    nutrisiA?: number | null
+    nutrisiB?: number | null
+    air?: number | null
+    tipe?: string | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutResepInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedCreateNestedManyWithoutResepInput
+  }
+
+  export type ResepCreateOrConnectWithoutGreenhouseInput = {
+    where: ResepWhereUniqueInput
+    create: XOR<ResepCreateWithoutGreenhouseInput, ResepUncheckedCreateWithoutGreenhouseInput>
+  }
+
   export type UserUpsertWithWhereUniqueWithoutGreenhouseInput = {
     where: UserWhereUniqueInput
     update: XOR<UserUpdateWithoutGreenhouseInput, UserUncheckedUpdateWithoutGreenhouseInput>
@@ -16905,6 +17107,40 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"Sensor"> | Date | string | null
   }
 
+  export type ResepUpsertWithWhereUniqueWithoutGreenhouseInput = {
+    where: ResepWhereUniqueInput
+    update: XOR<ResepUpdateWithoutGreenhouseInput, ResepUncheckedUpdateWithoutGreenhouseInput>
+    create: XOR<ResepCreateWithoutGreenhouseInput, ResepUncheckedCreateWithoutGreenhouseInput>
+  }
+
+  export type ResepUpdateWithWhereUniqueWithoutGreenhouseInput = {
+    where: ResepWhereUniqueInput
+    data: XOR<ResepUpdateWithoutGreenhouseInput, ResepUncheckedUpdateWithoutGreenhouseInput>
+  }
+
+  export type ResepUpdateManyWithWhereWithoutGreenhouseInput = {
+    where: ResepScalarWhereInput
+    data: XOR<ResepUpdateManyMutationInput, ResepUncheckedUpdateManyWithoutGreenhouseInput>
+  }
+
+  export type ResepScalarWhereInput = {
+    AND?: ResepScalarWhereInput | ResepScalarWhereInput[]
+    OR?: ResepScalarWhereInput[]
+    NOT?: ResepScalarWhereInput | ResepScalarWhereInput[]
+    id?: IntFilter<"Resep"> | number
+    ppm?: IntNullableFilter<"Resep"> | number | null
+    ph?: FloatFilter<"Resep"> | number
+    volume?: FloatFilter<"Resep"> | number
+    nama?: StringFilter<"Resep"> | string
+    interval?: IntNullableFilter<"Resep"> | number | null
+    nutrisiA?: FloatNullableFilter<"Resep"> | number | null
+    nutrisiB?: FloatNullableFilter<"Resep"> | number | null
+    air?: FloatNullableFilter<"Resep"> | number | null
+    tipe?: StringNullableFilter<"Resep"> | string | null
+    created_at?: DateTimeFilter<"Resep"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Resep"> | Date | string | null
+  }
+
   export type TandonCreateWithoutTandonPenyimpananInput = {
     nama: string
     status: string
@@ -16987,32 +17223,34 @@ export namespace Prisma {
   export type ResepCreateWithoutTandonPenyimpananInput = {
     ppm?: number | null
     ph: number
-    volume?: number | null
+    volume: number
     nama: string
-    interval: number
+    interval?: number | null
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
-    tipe: string
+    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     penjadwalan?: PenjadwalanCreateNestedManyWithoutResepInput
+    greenhouse?: GreenhouseCreateNestedManyWithoutResepInput
   }
 
   export type ResepUncheckedCreateWithoutTandonPenyimpananInput = {
     id?: number
     ppm?: number | null
     ph: number
-    volume?: number | null
+    volume: number
     nama: string
-    interval: number
+    interval?: number | null
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
-    tipe: string
+    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutResepInput
+    greenhouse?: GreenhouseUncheckedCreateNestedManyWithoutResepInput
   }
 
   export type ResepCreateOrConnectWithoutTandonPenyimpananInput = {
@@ -17098,24 +17336,6 @@ export namespace Prisma {
     data: XOR<ResepUpdateManyMutationInput, ResepUncheckedUpdateManyWithoutTandonPenyimpananInput>
   }
 
-  export type ResepScalarWhereInput = {
-    AND?: ResepScalarWhereInput | ResepScalarWhereInput[]
-    OR?: ResepScalarWhereInput[]
-    NOT?: ResepScalarWhereInput | ResepScalarWhereInput[]
-    id?: IntFilter<"Resep"> | number
-    ppm?: IntNullableFilter<"Resep"> | number | null
-    ph?: FloatFilter<"Resep"> | number
-    volume?: FloatNullableFilter<"Resep"> | number | null
-    nama?: StringFilter<"Resep"> | string
-    interval?: IntFilter<"Resep"> | number
-    nutrisiA?: FloatNullableFilter<"Resep"> | number | null
-    nutrisiB?: FloatNullableFilter<"Resep"> | number | null
-    air?: FloatNullableFilter<"Resep"> | number | null
-    tipe?: StringFilter<"Resep"> | string
-    created_at?: DateTimeFilter<"Resep"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Resep"> | Date | string | null
-  }
-
   export type PenjadwalanCreateWithoutResepInput = {
     waktu: string
     isActive: boolean
@@ -17165,6 +17385,34 @@ export namespace Prisma {
   export type TandonPenyimpananCreateOrConnectWithoutResepInput = {
     where: TandonPenyimpananWhereUniqueInput
     create: XOR<TandonPenyimpananCreateWithoutResepInput, TandonPenyimpananUncheckedCreateWithoutResepInput>
+  }
+
+  export type GreenhouseCreateWithoutResepInput = {
+    name: string
+    image: string
+    location: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    user?: UserCreateNestedManyWithoutGreenhouseInput
+    aktuator?: AktuatorCreateNestedManyWithoutGreenhouseInput
+    sensor?: SensorCreateNestedManyWithoutGreenhouseInput
+  }
+
+  export type GreenhouseUncheckedCreateWithoutResepInput = {
+    id?: number
+    name: string
+    image: string
+    location: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutGreenhouseInput
+    sensor?: SensorUncheckedCreateNestedManyWithoutGreenhouseInput
+  }
+
+  export type GreenhouseCreateOrConnectWithoutResepInput = {
+    where: GreenhouseWhereUniqueInput
+    create: XOR<GreenhouseCreateWithoutResepInput, GreenhouseUncheckedCreateWithoutResepInput>
   }
 
   export type PenjadwalanUpsertWithWhereUniqueWithoutResepInput = {
@@ -17224,35 +17472,53 @@ export namespace Prisma {
     tandonId?: IntFilter<"TandonPenyimpanan"> | number
   }
 
+  export type GreenhouseUpsertWithWhereUniqueWithoutResepInput = {
+    where: GreenhouseWhereUniqueInput
+    update: XOR<GreenhouseUpdateWithoutResepInput, GreenhouseUncheckedUpdateWithoutResepInput>
+    create: XOR<GreenhouseCreateWithoutResepInput, GreenhouseUncheckedCreateWithoutResepInput>
+  }
+
+  export type GreenhouseUpdateWithWhereUniqueWithoutResepInput = {
+    where: GreenhouseWhereUniqueInput
+    data: XOR<GreenhouseUpdateWithoutResepInput, GreenhouseUncheckedUpdateWithoutResepInput>
+  }
+
+  export type GreenhouseUpdateManyWithWhereWithoutResepInput = {
+    where: GreenhouseScalarWhereInput
+    data: XOR<GreenhouseUpdateManyMutationInput, GreenhouseUncheckedUpdateManyWithoutResepInput>
+  }
+
   export type ResepCreateWithoutPenjadwalanInput = {
     ppm?: number | null
     ph: number
-    volume?: number | null
+    volume: number
     nama: string
-    interval: number
+    interval?: number | null
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
-    tipe: string
+    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     tandonPenyimpanan?: TandonPenyimpananCreateNestedManyWithoutResepInput
+    greenhouse?: GreenhouseCreateNestedManyWithoutResepInput
   }
 
   export type ResepUncheckedCreateWithoutPenjadwalanInput = {
     id?: number
     ppm?: number | null
     ph: number
-    volume?: number | null
+    volume: number
     nama: string
-    interval: number
+    interval?: number | null
     nutrisiA?: number | null
     nutrisiB?: number | null
     air?: number | null
-    tipe: string
+    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     tandonPenyimpanan?: TandonPenyimpananUncheckedCreateNestedManyWithoutResepInput
+    greenhouse?: GreenhouseUncheckedCreateNestedManyWithoutResepInput
   }
 
   export type ResepCreateOrConnectWithoutPenjadwalanInput = {
@@ -17314,32 +17580,34 @@ export namespace Prisma {
   export type ResepUpdateWithoutPenjadwalanInput = {
     ppm?: NullableIntFieldUpdateOperationsInput | number | null
     ph?: FloatFieldUpdateOperationsInput | number
-    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: StringFieldUpdateOperationsInput | string
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandonPenyimpanan?: TandonPenyimpananUpdateManyWithoutResepNestedInput
+    greenhouse?: GreenhouseUpdateManyWithoutResepNestedInput
   }
 
   export type ResepUncheckedUpdateWithoutPenjadwalanInput = {
     id?: IntFieldUpdateOperationsInput | number
     ppm?: NullableIntFieldUpdateOperationsInput | number | null
     ph?: FloatFieldUpdateOperationsInput | number
-    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: StringFieldUpdateOperationsInput | string
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     tandonPenyimpanan?: TandonPenyimpananUncheckedUpdateManyWithoutResepNestedInput
+    greenhouse?: GreenhouseUncheckedUpdateManyWithoutResepNestedInput
   }
 
   export type TandonUpsertWithoutPenjadwalanInput = {
@@ -17458,6 +17726,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user?: UserCreateNestedManyWithoutGreenhouseInput
     aktuator?: AktuatorCreateNestedManyWithoutGreenhouseInput
+    resep?: ResepCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateWithoutSensorInput = {
@@ -17469,6 +17738,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
     aktuator?: AktuatorUncheckedCreateNestedManyWithoutGreenhouseInput
+    resep?: ResepUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseCreateOrConnectWithoutSensorInput = {
@@ -17569,6 +17839,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateManyWithoutGreenhouseNestedInput
     aktuator?: AktuatorUpdateManyWithoutGreenhouseNestedInput
+    resep?: ResepUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateWithoutSensorInput = {
@@ -17580,6 +17851,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
     aktuator?: AktuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
+    resep?: ResepUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type TandonCreateWithoutAktuatorInput = {
@@ -17630,6 +17902,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user?: UserCreateNestedManyWithoutGreenhouseInput
     sensor?: SensorCreateNestedManyWithoutGreenhouseInput
+    resep?: ResepCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseUncheckedCreateWithoutAktuatorInput = {
@@ -17641,6 +17914,7 @@ export namespace Prisma {
     updated_at?: Date | string | null
     user?: UserUncheckedCreateNestedManyWithoutGreenhouseInput
     sensor?: SensorUncheckedCreateNestedManyWithoutGreenhouseInput
+    resep?: ResepUncheckedCreateNestedManyWithoutGreenhouseInput
   }
 
   export type GreenhouseCreateOrConnectWithoutAktuatorInput = {
@@ -17755,6 +18029,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUpdateManyWithoutGreenhouseNestedInput
     sensor?: SensorUpdateManyWithoutGreenhouseNestedInput
+    resep?: ResepUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateWithoutAktuatorInput = {
@@ -17766,6 +18041,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
     sensor?: SensorUncheckedUpdateManyWithoutGreenhouseNestedInput
+    resep?: ResepUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type TandonPenyimpananUpsertWithoutActuatorInput = {
@@ -18430,6 +18706,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aktuator?: AktuatorUpdateManyWithoutGreenhouseNestedInput
     sensor?: SensorUpdateManyWithoutGreenhouseNestedInput
+    resep?: ResepUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateWithoutUserInput = {
@@ -18441,6 +18718,7 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aktuator?: AktuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
     sensor?: SensorUncheckedUpdateManyWithoutGreenhouseNestedInput
+    resep?: ResepUncheckedUpdateManyWithoutGreenhouseNestedInput
   }
 
   export type GreenhouseUncheckedUpdateManyWithoutUserInput = {
@@ -18679,6 +18957,54 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type ResepUpdateWithoutGreenhouseInput = {
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: FloatFieldUpdateOperationsInput | number
+    volume?: FloatFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    penjadwalan?: PenjadwalanUpdateManyWithoutResepNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateManyWithoutResepNestedInput
+  }
+
+  export type ResepUncheckedUpdateWithoutGreenhouseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: FloatFieldUpdateOperationsInput | number
+    volume?: FloatFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutResepNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUncheckedUpdateManyWithoutResepNestedInput
+  }
+
+  export type ResepUncheckedUpdateManyWithoutGreenhouseInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ph?: FloatFieldUpdateOperationsInput | number
+    volume?: FloatFieldUpdateOperationsInput | number
+    nama?: StringFieldUpdateOperationsInput | string
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
+    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
+    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
+    air?: NullableFloatFieldUpdateOperationsInput | number | null
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type AktuatorCreateManyTandonPenyimpananInput = {
     id?: number
     name: string
@@ -18741,45 +19067,47 @@ export namespace Prisma {
   export type ResepUpdateWithoutTandonPenyimpananInput = {
     ppm?: NullableIntFieldUpdateOperationsInput | number | null
     ph?: FloatFieldUpdateOperationsInput | number
-    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: StringFieldUpdateOperationsInput | string
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     penjadwalan?: PenjadwalanUpdateManyWithoutResepNestedInput
+    greenhouse?: GreenhouseUpdateManyWithoutResepNestedInput
   }
 
   export type ResepUncheckedUpdateWithoutTandonPenyimpananInput = {
     id?: IntFieldUpdateOperationsInput | number
     ppm?: NullableIntFieldUpdateOperationsInput | number | null
     ph?: FloatFieldUpdateOperationsInput | number
-    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: StringFieldUpdateOperationsInput | string
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutResepNestedInput
+    greenhouse?: GreenhouseUncheckedUpdateManyWithoutResepNestedInput
   }
 
   export type ResepUncheckedUpdateManyWithoutTandonPenyimpananInput = {
     id?: IntFieldUpdateOperationsInput | number
     ppm?: NullableIntFieldUpdateOperationsInput | number | null
     ph?: FloatFieldUpdateOperationsInput | number
-    volume?: NullableFloatFieldUpdateOperationsInput | number | null
+    volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: IntFieldUpdateOperationsInput | number
+    interval?: NullableIntFieldUpdateOperationsInput | number | null
     nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
     nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
     air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: StringFieldUpdateOperationsInput | string
+    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -18847,6 +19175,38 @@ export namespace Prisma {
     nama?: StringFieldUpdateOperationsInput | string
     distributable?: BoolFieldUpdateOperationsInput | boolean
     tandonId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type GreenhouseUpdateWithoutResepInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateManyWithoutGreenhouseNestedInput
+    aktuator?: AktuatorUpdateManyWithoutGreenhouseNestedInput
+    sensor?: SensorUpdateManyWithoutGreenhouseNestedInput
+  }
+
+  export type GreenhouseUncheckedUpdateWithoutResepInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUncheckedUpdateManyWithoutGreenhouseNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutGreenhouseNestedInput
+    sensor?: SensorUncheckedUpdateManyWithoutGreenhouseNestedInput
+  }
+
+  export type GreenhouseUncheckedUpdateManyWithoutResepInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    location?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type SensorCreateManyTandonBahanInput = {

@@ -30,42 +30,38 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
+    await prisma.$disconnect();
     if (e instanceof Error) {
       return Boom.internal(e.message);
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
-    const { id_user } = request.auth.credentials as {
-        id_user: number
+  const { id_user } = request.auth.credentials as {
+    id_user: number;
+  };
+
+  try {
+    for (let i = 0; i < 3; i++) {
+      await prisma.notification.create({
+        data: {
+          message: `Hello ${i}`,
+          read: false,
+          userId: id_user,
+        },
+      });
     }
 
-    try {
-        for (let i = 0; i < 3; i++) {
-            await prisma.notification.create({
-                data: {
-                    message: `Hello ${i}`,
-                    read: false,
-                    userId: id_user
-                }
-            })
-        }
-
-        return h.response({
-            status: "success",
-            message: "Notif ditambahin"
-        })
+    return h.response({
+      status: "success",
+      message: "Notif ditambahin",
+    });
+  } catch (e) {
+    await prisma.$disconnect();
+    if (e instanceof Error) {
+      console.log(e);
+      return Boom.internal(e.message);
     }
-    catch(e) {
-        if (e instanceof Error) {
-            console.log(e)
-            return Boom.internal(e.message)
-        }
-    }
-    finally {
-        await prisma.$disconnect()
-    }
-}
+  }
+};

@@ -34,12 +34,12 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
+    await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
     }
   }
-  await prisma.$disconnect();
 };
 
 export const sensorByTandonHandler = async (
@@ -79,12 +79,11 @@ export const sensorByTandonHandler = async (
       totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
     });
   } catch (e) {
+    await prisma.$disconnect();
     if (e instanceof Error) {
       console.error(e);
       return Boom.internal(e.message);
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };
 
@@ -123,12 +122,11 @@ export const actuatorByTandonHandler = async (
       })
       .code(200);
   } catch (e) {
+    await prisma.$disconnect();
     if (e instanceof Error) {
       console.error(e);
       return Boom.internal(e.message);
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };
 
@@ -169,11 +167,10 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       message: `Rasio ${target.nama} berhasil diperbarui`,
     });
   } catch (e) {
+    await prisma.$disconnect();
     if (e instanceof Error) {
       console.error(e);
       return Boom.internal(e.message);
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };

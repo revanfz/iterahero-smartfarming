@@ -18,9 +18,9 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
     } else {
       total = await prisma.aktuator.count({
         where: {
-          tandonId: id
-        }
-      })
+          tandonId: id,
+        },
+      });
       data = await prisma.aktuator.findMany({
         where: {
           tandonId: id,
@@ -39,7 +39,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       status: "success",
       data,
       cursor: -1,
-      totalPage: 1
+      totalPage: 1,
     };
 
     if (Array.isArray(data)) {
@@ -49,11 +49,10 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 
     return h.response(res).code(200);
   } catch (e) {
+    await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };

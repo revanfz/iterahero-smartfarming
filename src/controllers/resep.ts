@@ -1,70 +1,99 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
-import Boom from "@hapi/boom"
+import Boom from "@hapi/boom";
 
 interface InputResep {
-    nama: string,
-    ppm: number,
-    ph: number,
-    interval: number,
-    tipe: string,
-    idTandonPenyimpanan: number
+  nama: string;
+  ppm: number;
+  ph: number;
+  volume: number;
+  id_greenhouse: number;
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
-    try {
-        const tipe = request.query.tipe;
-        const data = await prisma.resep.findMany({
-            where: {
-                tipe
-            }
-        })
+  try {
+    const tipe = request.query.tipe;
+    const data = await prisma.resep.findMany({
+      where: {
+        tipe,
+      },
+    });
 
-        // if (data.length < 1) {
-        //     return Boom.notFound("Tidak ada resep tersimpan");
-        // }
+    // if (data.length < 1) {
+    //     return Boom.notFound("Tidak ada resep tersimpan");
+    // }
 
-        return h.response({
-            status: 'success',
-            data
-        }).code(200)
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            return Boom.internal(e.message)
-        }
-    }
+    return h
+      .response({
+        status: "success",
+        data,
+      })
+      .code(200);
+  } catch (e) {
     await prisma.$disconnect();
-}
+    if (e instanceof Error) {
+      return Boom.internal(e.message);
+    }
+  }
+};
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
-    try {
-        const { nama, ppm, ph, interval, tipe, idTandonPenyimpanan } = request.payload as InputResep;
+  try {
+    const { nama, ppm, ph, volume, id_greenhouse } =
+      request.payload as InputResep;
 
-        await prisma.resep.create({
-            data: {
-                nama,
-                ppm,
-                ph,
-                interval,
-                tipe,
-                tandonPenyimpanan: {
-                    connect : {
-                        id: idTandonPenyimpanan
-                    }
-                }
-            }
-        });
+    await prisma.resep.create({
+      data: {
+        nama,
+        ppm,
+        ph,
+        volume,
+        greenhouse: {
+          connect: {
+            id: id_greenhouse,
+          },
+        },
+      },
+    });
 
-        return h.response({
-            status: 'success',
-            message: `Resep ${nama} berhasil ditambahkan`
-        }).code(201);
-    }
-    catch (e) {
-        if (e instanceof Error) {
-            return Boom.internal(e.message);
-        }
-    }
+    return h
+      .response({
+        status: "success",
+        message: `Resep ${nama} berhasil ditambahkan`,
+      })
+      .code(201);
+  } catch (e) {
     await prisma.$disconnect();
-}
+    if (e instanceof Error) {
+      return Boom.internal(e.message);
+    }
+  }
+};
+
+export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
+  try {
+    const id = parseInt(request.query.id);
+    if (isNaN(id)) {
+      return Boom.badRequest("ID tidak valid");
+    }
+
+    await prisma.resep.delete({
+      where: {
+        id,
+      },
+    });
+
+    return h
+      .response({
+        status: "success",
+        message: "Resep berhasil dihapus",
+      })
+      .code(201);
+  } catch (e) {
+    await prisma.$disconnect();
+    if (e instanceof Error) {
+      console.log(e);
+      return Boom.internal("ID tidak ditemukan");
+    }
+  }
+};

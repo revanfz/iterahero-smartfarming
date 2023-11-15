@@ -21,26 +21,26 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         const { id } = request.query;
         const data = yield prisma_1.prisma.aktuator.findUnique({
             where: {
-                id: parseInt(id)
-            }
+                id: parseInt(id),
+            },
         });
         if (!data) {
             return boom_1.default.notFound("Tidak ada aktuator dengan id tersebut");
         }
         (0, mqtt_1.publishData)("iterahero2023/actuator", JSON.stringify({ pin: data.portRaspi }));
-        return h.response({
+        return h
+            .response({
             status: "success",
-            message: `${data.name} berhasil dinyalakan`
-        }).code(200);
+            message: `${data.name} berhasil dinyalakan`,
+        })
+            .code(200);
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);
         }
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.postHandler = postHandler;

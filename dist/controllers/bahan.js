@@ -20,24 +20,27 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const data = yield prisma_1.prisma.tandonBahan.findMany({
             include: {
-                sensor: true
-            }
+                sensor: true,
+            },
         });
         if (data.length < 1) {
             return boom_1.default.notFound("Tidak ada bahan");
         }
-        return h.response({
-            status: 'success',
+        return h
+            .response({
+            status: "success",
             data,
             cursor: (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id,
-            totalPage: Math.ceil(data.length / 100)
-        }).code(200);
+            totalPage: Math.ceil(data.length / 100),
+        })
+            .code(200);
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
+            console.log(e);
             return boom_1.default.internal(e.message);
         }
     }
-    yield prisma_1.prisma.$disconnect();
 });
 exports.getHandler = getHandler;

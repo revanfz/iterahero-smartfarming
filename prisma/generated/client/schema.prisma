@@ -34,6 +34,7 @@ model Greenhouse {
   user       User[]
   aktuator   Aktuator[]
   sensor     Sensor[]
+  resep       Resep[]
   created_at DateTime   @default(now())
   updated_at DateTime?  @updatedAt
 }
@@ -52,15 +53,16 @@ model Resep {
   id                Int                 @id @default(autoincrement())
   ppm               Int?
   ph                Float
-  volume            Float?
+  volume            Float
   nama              String
-  interval          Int
+  interval          Int?
   nutrisiA          Float?
   nutrisiB          Float?
   air               Float?
-  tipe              String
+  tipe              String?
   penjadwalan       Penjadwalan[]
   tandonPenyimpanan TandonPenyimpanan[]
+  greenhouse        Greenhouse[]
   created_at        DateTime            @default(now())
   updated_at        DateTime?           @updatedAt
 }

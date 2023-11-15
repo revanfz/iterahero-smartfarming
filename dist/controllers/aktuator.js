@@ -33,8 +33,8 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         else {
             total = yield prisma_1.prisma.aktuator.count({
                 where: {
-                    tandonId: id
-                }
+                    tandonId: id,
+                },
             });
             data = yield prisma_1.prisma.aktuator.findMany({
                 where: {
@@ -52,7 +52,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             status: "success",
             data,
             cursor: -1,
-            totalPage: 1
+            totalPage: 1,
         };
         if (Array.isArray(data)) {
             res.cursor = (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id;
@@ -61,13 +61,11 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         return h.response(res).code(200);
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);
         }
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.getHandler = getHandler;

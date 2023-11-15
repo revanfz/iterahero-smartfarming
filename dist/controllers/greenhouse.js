@@ -37,10 +37,10 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 where: {
                     user: {
                         every: {
-                            id: id_user
-                        }
-                    }
-                }
+                            id: id_user,
+                        },
+                    },
+                },
             });
             data = yield prisma_1.prisma.greenhouse.findMany({
                 where: {
@@ -72,13 +72,11 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         return h.response(res).code(200);
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);
         }
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.getHandler = getHandler;
@@ -118,13 +116,11 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             .code(200);
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         console.log(e);
         if (e instanceof Error) {
             return boom_1.default.internal(e.message);
         }
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.postHandler = postHandler;
@@ -167,13 +163,11 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         }
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);
         }
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.patchHandler = patchHandler;
@@ -205,13 +199,11 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         }
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);
         }
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.deleteHandler = deleteHandler;
@@ -223,8 +215,8 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
     try {
         const total = yield prisma_1.prisma.sensor.count({
             where: {
-                greenhouseId: id
-            }
+                greenhouseId: id,
+            },
         });
         const data = yield prisma_1.prisma.sensor.findMany({
             where: {
@@ -232,7 +224,7 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
             },
             cursor: cursor ? { id: cursor } : undefined,
             take: size ? size : 100,
-            skip: cursor ? 1 : 0
+            skip: cursor ? 1 : 0,
         });
         // if (data.length < 1) {
         //   return Boom.notFound("Tidak ada sensor di greenhouse terpilih");
@@ -242,18 +234,16 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
             status: "success",
             data,
             cursor: (_c = data[data.length - 1]) === null || _c === void 0 ? void 0 : _c.id,
-            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
+            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
         })
             .code(200);
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.error(e);
             return boom_1.default.internal(e.message);
         }
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.sensorByGreenhouseHandler = sensorByGreenhouseHandler;
@@ -265,8 +255,8 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
         const id = parseInt(request.params.id);
         const total = yield prisma_1.prisma.aktuator.count({
             where: {
-                greenhouseId: id
-            }
+                greenhouseId: id,
+            },
         });
         const data = yield prisma_1.prisma.aktuator.findMany({
             where: {
@@ -278,7 +268,7 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
                         aktuator: true,
                     },
                 },
-                id: true
+                id: true,
             },
             take: size ? size : 100,
             skip: cursor ? 1 : 0,
@@ -292,18 +282,16 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
             status: "success",
             data,
             cursor: (_d = data[data.length - 1]) === null || _d === void 0 ? void 0 : _d.id,
-            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
+            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
         })
             .code(200);
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.error(e);
             return boom_1.default.internal(e.message);
         }
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.actuatorByGreenhouseHandler = actuatorByGreenhouseHandler;
@@ -326,13 +314,11 @@ const ghByIdHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
             .code(200);
     }
     catch (e) {
+        prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.error(e);
             return boom_1.default.internal(e.message);
         }
-    }
-    finally {
-        prisma_1.prisma.$disconnect();
     }
 });
 exports.ghByIdHandler = ghByIdHandler;

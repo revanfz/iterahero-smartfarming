@@ -23,12 +23,12 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const total = yield prisma_1.prisma.sensor.count({
             where: {
-                tandonId: id
-            }
+                tandonId: id,
+            },
         });
         const data = yield prisma_1.prisma.sensor.findMany({
             where: {
-                tandonId: id
+                tandonId: id,
             },
             take: size ? size : 100,
             skip: cursor ? 1 : 0,
@@ -41,17 +41,15 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             status: "success",
             data,
             cursor: (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id,
-            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
+            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
         });
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);
         }
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.getHandler = getHandler;

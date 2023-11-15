@@ -32,11 +32,11 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         where: {
           user: {
             every: {
-              id: id_user
-            }
-          }
-        }
-      })
+              id: id_user,
+            },
+          },
+        },
+      });
       data = await prisma.greenhouse.findMany({
         where: {
           user: {
@@ -52,30 +52,29 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
     }
 
     if (!data) {
-    //  || Array.isArray(data) && data.length < 1) {
+      //  || Array.isArray(data) && data.length < 1) {
       return Boom.notFound("Tidak ada greenhouse.");
     }
-    
+
     const res = {
       status: "success",
       data,
       cursor: -1,
       totalPage: 1,
-    }
+    };
 
     if (Array.isArray(data)) {
-      res.cursor = data[data.length - 1]?.id
+      res.cursor = data[data.length - 1]?.id;
       res.totalPage = size ? Math.ceil(total / size) : Math.ceil(total / 100);
     }
 
     return h.response(res).code(200);
   } catch (e) {
+    await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };
 
@@ -121,12 +120,12 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
+    await prisma.$disconnect();
+
     console.log(e);
     if (e instanceof Error) {
       return Boom.internal(e.message);
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };
 
@@ -148,7 +147,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       }
 
       if (name) {
-        await renameFile(target.name, name)
+        await renameFile(target.name, name);
       }
 
       if (image) {
@@ -172,12 +171,12 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       });
     }
   } catch (e) {
+    await prisma.$disconnect();
+
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };
 
@@ -210,13 +209,11 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
       throw "Invalid id";
     }
   } catch (e) {
+    await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
     }
-  }
-  finally {
-    await prisma.$disconnect()
   }
 };
 
@@ -226,12 +223,12 @@ export const sensorByGreenhouseHandler = async (
 ) => {
   const id = parseInt(request.params.id);
   const size = parseInt(request.query.size);
-  const cursor = parseInt(request.query.cursor); 
+  const cursor = parseInt(request.query.cursor);
   try {
     const total = await prisma.sensor.count({
       where: {
-        greenhouseId: id
-      }
+        greenhouseId: id,
+      },
     });
     const data = await prisma.sensor.findMany({
       where: {
@@ -239,7 +236,7 @@ export const sensorByGreenhouseHandler = async (
       },
       cursor: cursor ? { id: cursor } : undefined,
       take: size ? size : 100,
-      skip: cursor ? 1 : 0
+      skip: cursor ? 1 : 0,
     });
 
     // if (data.length < 1) {
@@ -251,16 +248,16 @@ export const sensorByGreenhouseHandler = async (
         status: "success",
         data,
         cursor: data[data.length - 1]?.id,
-        totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
+        totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
       })
       .code(200);
   } catch (e) {
+    await prisma.$disconnect();
+
     if (e instanceof Error) {
       console.error(e);
       return Boom.internal(e.message);
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };
 
@@ -269,13 +266,13 @@ export const actuatorByGreenhouseHandler = async (
   h: ResponseToolkit
 ) => {
   const size = parseInt(request.query.size);
-    const cursor = parseInt(request.query.cursor);
+  const cursor = parseInt(request.query.cursor);
   try {
     const id = parseInt(request.params.id);
     const total = await prisma.aktuator.count({
       where: {
-        greenhouseId: id
-      }
+        greenhouseId: id,
+      },
     });
     const data = await prisma.aktuator.findMany({
       where: {
@@ -287,7 +284,7 @@ export const actuatorByGreenhouseHandler = async (
             aktuator: true,
           },
         },
-        id: true
+        id: true,
       },
       take: size ? size : 100,
       skip: cursor ? 1 : 0,
@@ -302,17 +299,16 @@ export const actuatorByGreenhouseHandler = async (
       .response({
         status: "success",
         data,
-        cursor: data[data.length-1]?.id,
-        totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100)
+        cursor: data[data.length - 1]?.id,
+        totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
       })
       .code(200);
   } catch (e) {
+    await prisma.$disconnect();
     if (e instanceof Error) {
       console.error(e);
       return Boom.internal(e.message);
     }
-  } finally {
-    await prisma.$disconnect();
   }
 };
 
@@ -336,11 +332,10 @@ export const ghByIdHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
+    prisma.$disconnect();
     if (e instanceof Error) {
       console.error(e);
       return Boom.internal(e.message);
     }
-  } finally {
-    prisma.$disconnect();
   }
 };

@@ -61,12 +61,10 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             .code(200);
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             return Boom.internal(e.message);
         }
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.getHandler = getHandler;
@@ -78,23 +76,21 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 data: {
                     message: `Hello ${i}`,
                     read: false,
-                    userId: id_user
-                }
+                    userId: id_user,
+                },
             });
         }
         return h.response({
             status: "success",
-            message: "Notif ditambahin"
+            message: "Notif ditambahin",
         });
     }
     catch (e) {
+        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return Boom.internal(e.message);
         }
-    }
-    finally {
-        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.postHandler = postHandler;
