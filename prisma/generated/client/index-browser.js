@@ -139,11 +139,6 @@ exports.Prisma.ResepScalarFieldEnum = {
   ph: 'ph',
   volume: 'volume',
   nama: 'nama',
-  interval: 'interval',
-  nutrisiA: 'nutrisiA',
-  nutrisiB: 'nutrisiB',
-  air: 'air',
-  tipe: 'tipe',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };

@@ -9,8 +9,7 @@ const postValidator = Joi.object({
     ppm: Joi.number().required(),
     ph: Joi.number().required(),
     nama: Joi.string().required(),
-    volume: Joi.number().required(),
-    id_greenhouse: Joi.number().required()
+    volume: Joi.number().required()
 })
 
 export const resepRoute: ServerRoute[] = [

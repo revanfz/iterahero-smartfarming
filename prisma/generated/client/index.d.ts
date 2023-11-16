@@ -5040,10 +5040,6 @@ export namespace Prisma {
     ppm: number | null
     ph: number | null
     volume: number | null
-    interval: number | null
-    nutrisiA: number | null
-    nutrisiB: number | null
-    air: number | null
   }
 
   export type ResepSumAggregateOutputType = {
@@ -5051,10 +5047,6 @@ export namespace Prisma {
     ppm: number | null
     ph: number | null
     volume: number | null
-    interval: number | null
-    nutrisiA: number | null
-    nutrisiB: number | null
-    air: number | null
   }
 
   export type ResepMinAggregateOutputType = {
@@ -5063,11 +5055,6 @@ export namespace Prisma {
     ph: number | null
     volume: number | null
     nama: string | null
-    interval: number | null
-    nutrisiA: number | null
-    nutrisiB: number | null
-    air: number | null
-    tipe: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -5078,11 +5065,6 @@ export namespace Prisma {
     ph: number | null
     volume: number | null
     nama: string | null
-    interval: number | null
-    nutrisiA: number | null
-    nutrisiB: number | null
-    air: number | null
-    tipe: string | null
     created_at: Date | null
     updated_at: Date | null
   }
@@ -5093,11 +5075,6 @@ export namespace Prisma {
     ph: number
     volume: number
     nama: number
-    interval: number
-    nutrisiA: number
-    nutrisiB: number
-    air: number
-    tipe: number
     created_at: number
     updated_at: number
     _all: number
@@ -5109,10 +5086,6 @@ export namespace Prisma {
     ppm?: true
     ph?: true
     volume?: true
-    interval?: true
-    nutrisiA?: true
-    nutrisiB?: true
-    air?: true
   }
 
   export type ResepSumAggregateInputType = {
@@ -5120,10 +5093,6 @@ export namespace Prisma {
     ppm?: true
     ph?: true
     volume?: true
-    interval?: true
-    nutrisiA?: true
-    nutrisiB?: true
-    air?: true
   }
 
   export type ResepMinAggregateInputType = {
@@ -5132,11 +5101,6 @@ export namespace Prisma {
     ph?: true
     volume?: true
     nama?: true
-    interval?: true
-    nutrisiA?: true
-    nutrisiB?: true
-    air?: true
-    tipe?: true
     created_at?: true
     updated_at?: true
   }
@@ -5147,11 +5111,6 @@ export namespace Prisma {
     ph?: true
     volume?: true
     nama?: true
-    interval?: true
-    nutrisiA?: true
-    nutrisiB?: true
-    air?: true
-    tipe?: true
     created_at?: true
     updated_at?: true
   }
@@ -5162,11 +5121,6 @@ export namespace Prisma {
     ph?: true
     volume?: true
     nama?: true
-    interval?: true
-    nutrisiA?: true
-    nutrisiB?: true
-    air?: true
-    tipe?: true
     created_at?: true
     updated_at?: true
     _all?: true
@@ -5260,15 +5214,10 @@ export namespace Prisma {
 
   export type ResepGroupByOutputType = {
     id: number
-    ppm: number | null
+    ppm: number
     ph: number
     volume: number
     nama: string
-    interval: number | null
-    nutrisiA: number | null
-    nutrisiB: number | null
-    air: number | null
-    tipe: string | null
     created_at: Date
     updated_at: Date | null
     _count: ResepCountAggregateOutputType | null
@@ -5298,11 +5247,6 @@ export namespace Prisma {
     ph?: boolean
     volume?: boolean
     nama?: boolean
-    interval?: boolean
-    nutrisiA?: boolean
-    nutrisiB?: boolean
-    air?: boolean
-    tipe?: boolean
     created_at?: boolean
     updated_at?: boolean
     penjadwalan?: boolean | Resep$penjadwalanArgs<ExtArgs>
@@ -5315,11 +5259,6 @@ export namespace Prisma {
     ph?: boolean
     volume?: boolean
     nama?: boolean
-    interval?: boolean
-    nutrisiA?: boolean
-    nutrisiB?: boolean
-    air?: boolean
-    tipe?: boolean
     created_at?: boolean
     updated_at?: boolean
   }
@@ -5337,15 +5276,10 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetResult<{
       id: number
-      ppm: number | null
+      ppm: number
       ph: number
       volume: number
       nama: string
-      interval: number | null
-      nutrisiA: number | null
-      nutrisiB: number | null
-      air: number | null
-      tipe: string | null
       created_at: Date
       updated_at: Date | null
     }, ExtArgs["result"]["resep"]>
@@ -5748,11 +5682,6 @@ export namespace Prisma {
     readonly ph: FieldRef<"Resep", 'Float'>
     readonly volume: FieldRef<"Resep", 'Float'>
     readonly nama: FieldRef<"Resep", 'String'>
-    readonly interval: FieldRef<"Resep", 'Int'>
-    readonly nutrisiA: FieldRef<"Resep", 'Float'>
-    readonly nutrisiB: FieldRef<"Resep", 'Float'>
-    readonly air: FieldRef<"Resep", 'Float'>
-    readonly tipe: FieldRef<"Resep", 'String'>
     readonly created_at: FieldRef<"Resep", 'DateTime'>
     readonly updated_at: FieldRef<"Resep", 'DateTime'>
   }
@@ -12630,11 +12559,6 @@ export namespace Prisma {
     ph: 'ph',
     volume: 'volume',
     nama: 'nama',
-    interval: 'interval',
-    nutrisiA: 'nutrisiA',
-    nutrisiB: 'nutrisiB',
-    air: 'air',
-    tipe: 'tipe',
     created_at: 'created_at',
     updated_at: 'updated_at'
   };
@@ -13040,15 +12964,10 @@ export namespace Prisma {
     OR?: ResepWhereInput[]
     NOT?: ResepWhereInput | ResepWhereInput[]
     id?: IntFilter<"Resep"> | number
-    ppm?: IntNullableFilter<"Resep"> | number | null
+    ppm?: IntFilter<"Resep"> | number
     ph?: FloatFilter<"Resep"> | number
     volume?: FloatFilter<"Resep"> | number
     nama?: StringFilter<"Resep"> | string
-    interval?: IntNullableFilter<"Resep"> | number | null
-    nutrisiA?: FloatNullableFilter<"Resep"> | number | null
-    nutrisiB?: FloatNullableFilter<"Resep"> | number | null
-    air?: FloatNullableFilter<"Resep"> | number | null
-    tipe?: StringNullableFilter<"Resep"> | string | null
     created_at?: DateTimeFilter<"Resep"> | Date | string
     updated_at?: DateTimeNullableFilter<"Resep"> | Date | string | null
     penjadwalan?: PenjadwalanListRelationFilter
@@ -13056,15 +12975,10 @@ export namespace Prisma {
 
   export type ResepOrderByWithRelationInput = {
     id?: SortOrder
-    ppm?: SortOrderInput | SortOrder
+    ppm?: SortOrder
     ph?: SortOrder
     volume?: SortOrder
     nama?: SortOrder
-    interval?: SortOrderInput | SortOrder
-    nutrisiA?: SortOrderInput | SortOrder
-    nutrisiB?: SortOrderInput | SortOrder
-    air?: SortOrderInput | SortOrder
-    tipe?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     penjadwalan?: PenjadwalanOrderByRelationAggregateInput
@@ -13075,15 +12989,10 @@ export namespace Prisma {
     AND?: ResepWhereInput | ResepWhereInput[]
     OR?: ResepWhereInput[]
     NOT?: ResepWhereInput | ResepWhereInput[]
-    ppm?: IntNullableFilter<"Resep"> | number | null
+    ppm?: IntFilter<"Resep"> | number
     ph?: FloatFilter<"Resep"> | number
     volume?: FloatFilter<"Resep"> | number
     nama?: StringFilter<"Resep"> | string
-    interval?: IntNullableFilter<"Resep"> | number | null
-    nutrisiA?: FloatNullableFilter<"Resep"> | number | null
-    nutrisiB?: FloatNullableFilter<"Resep"> | number | null
-    air?: FloatNullableFilter<"Resep"> | number | null
-    tipe?: StringNullableFilter<"Resep"> | string | null
     created_at?: DateTimeFilter<"Resep"> | Date | string
     updated_at?: DateTimeNullableFilter<"Resep"> | Date | string | null
     penjadwalan?: PenjadwalanListRelationFilter
@@ -13091,15 +13000,10 @@ export namespace Prisma {
 
   export type ResepOrderByWithAggregationInput = {
     id?: SortOrder
-    ppm?: SortOrderInput | SortOrder
+    ppm?: SortOrder
     ph?: SortOrder
     volume?: SortOrder
     nama?: SortOrder
-    interval?: SortOrderInput | SortOrder
-    nutrisiA?: SortOrderInput | SortOrder
-    nutrisiB?: SortOrderInput | SortOrder
-    air?: SortOrderInput | SortOrder
-    tipe?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
     _count?: ResepCountOrderByAggregateInput
@@ -13114,15 +13018,10 @@ export namespace Prisma {
     OR?: ResepScalarWhereWithAggregatesInput[]
     NOT?: ResepScalarWhereWithAggregatesInput | ResepScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Resep"> | number
-    ppm?: IntNullableWithAggregatesFilter<"Resep"> | number | null
+    ppm?: IntWithAggregatesFilter<"Resep"> | number
     ph?: FloatWithAggregatesFilter<"Resep"> | number
     volume?: FloatWithAggregatesFilter<"Resep"> | number
     nama?: StringWithAggregatesFilter<"Resep"> | string
-    interval?: IntNullableWithAggregatesFilter<"Resep"> | number | null
-    nutrisiA?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
-    nutrisiB?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
-    air?: FloatNullableWithAggregatesFilter<"Resep"> | number | null
-    tipe?: StringNullableWithAggregatesFilter<"Resep"> | string | null
     created_at?: DateTimeWithAggregatesFilter<"Resep"> | Date | string
     updated_at?: DateTimeNullableWithAggregatesFilter<"Resep"> | Date | string | null
   }
@@ -13873,15 +13772,10 @@ export namespace Prisma {
   }
 
   export type ResepCreateInput = {
-    ppm?: number | null
+    ppm: number
     ph: number
     volume: number
     nama: string
-    interval?: number | null
-    nutrisiA?: number | null
-    nutrisiB?: number | null
-    air?: number | null
-    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     penjadwalan?: PenjadwalanCreateNestedManyWithoutResepInput
@@ -13889,30 +13783,20 @@ export namespace Prisma {
 
   export type ResepUncheckedCreateInput = {
     id?: number
-    ppm?: number | null
+    ppm: number
     ph: number
     volume: number
     nama: string
-    interval?: number | null
-    nutrisiA?: number | null
-    nutrisiB?: number | null
-    air?: number | null
-    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
     penjadwalan?: PenjadwalanUncheckedCreateNestedManyWithoutResepInput
   }
 
   export type ResepUpdateInput = {
-    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ppm?: IntFieldUpdateOperationsInput | number
     ph?: FloatFieldUpdateOperationsInput | number
     volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
-    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
-    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
-    air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     penjadwalan?: PenjadwalanUpdateManyWithoutResepNestedInput
@@ -13920,15 +13804,10 @@ export namespace Prisma {
 
   export type ResepUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ppm?: IntFieldUpdateOperationsInput | number
     ph?: FloatFieldUpdateOperationsInput | number
     volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
-    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
-    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
-    air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     penjadwalan?: PenjadwalanUncheckedUpdateManyWithoutResepNestedInput
@@ -13936,44 +13815,29 @@ export namespace Prisma {
 
   export type ResepCreateManyInput = {
     id?: number
-    ppm?: number | null
+    ppm: number
     ph: number
     volume: number
     nama: string
-    interval?: number | null
-    nutrisiA?: number | null
-    nutrisiB?: number | null
-    air?: number | null
-    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
 
   export type ResepUpdateManyMutationInput = {
-    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ppm?: IntFieldUpdateOperationsInput | number
     ph?: FloatFieldUpdateOperationsInput | number
     volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
-    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
-    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
-    air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ResepUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ppm?: IntFieldUpdateOperationsInput | number
     ph?: FloatFieldUpdateOperationsInput | number
     volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
-    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
-    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
-    air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -14827,17 +14691,6 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type FloatFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel>
     in?: number[] | ListFloatFieldRefInput<$PrismaModel>
@@ -14849,43 +14702,12 @@ export namespace Prisma {
     not?: NestedFloatFilter<$PrismaModel> | number
   }
 
-  export type FloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type StringNullableFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableFilter<$PrismaModel> | string | null
-  }
-
   export type ResepCountOrderByAggregateInput = {
     id?: SortOrder
     ppm?: SortOrder
     ph?: SortOrder
     volume?: SortOrder
     nama?: SortOrder
-    interval?: SortOrder
-    nutrisiA?: SortOrder
-    nutrisiB?: SortOrder
-    air?: SortOrder
-    tipe?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -14895,10 +14717,6 @@ export namespace Prisma {
     ppm?: SortOrder
     ph?: SortOrder
     volume?: SortOrder
-    interval?: SortOrder
-    nutrisiA?: SortOrder
-    nutrisiB?: SortOrder
-    air?: SortOrder
   }
 
   export type ResepMaxOrderByAggregateInput = {
@@ -14907,11 +14725,6 @@ export namespace Prisma {
     ph?: SortOrder
     volume?: SortOrder
     nama?: SortOrder
-    interval?: SortOrder
-    nutrisiA?: SortOrder
-    nutrisiB?: SortOrder
-    air?: SortOrder
-    tipe?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -14922,11 +14735,6 @@ export namespace Prisma {
     ph?: SortOrder
     volume?: SortOrder
     nama?: SortOrder
-    interval?: SortOrder
-    nutrisiA?: SortOrder
-    nutrisiB?: SortOrder
-    air?: SortOrder
-    tipe?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
   }
@@ -14936,26 +14744,6 @@ export namespace Prisma {
     ppm?: SortOrder
     ph?: SortOrder
     volume?: SortOrder
-    interval?: SortOrder
-    nutrisiA?: SortOrder
-    nutrisiB?: SortOrder
-    air?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type FloatWithAggregatesFilter<$PrismaModel = never> = {
@@ -14972,40 +14760,6 @@ export namespace Prisma {
     _sum?: NestedFloatFilter<$PrismaModel>
     _min?: NestedFloatFilter<$PrismaModel>
     _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    mode?: QueryMode
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type IntNullableListFilter<$PrismaModel = never> = {
@@ -15089,6 +14843,32 @@ export namespace Prisma {
     tandonId?: SortOrder
     greenhouseId?: SortOrder
     createdBy?: SortOrder
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
   export type TandonNullableRelationFilter = {
@@ -15178,6 +14958,40 @@ export namespace Prisma {
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
     greenhouseId?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type TandonPenyimpananNullableRelationFilter = {
@@ -15821,32 +15635,12 @@ export namespace Prisma {
     connect?: PenjadwalanWhereUniqueInput | PenjadwalanWhereUniqueInput[]
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type FloatFieldUpdateOperationsInput = {
     set?: number
     increment?: number
     decrement?: number
     multiply?: number
     divide?: number
-  }
-
-  export type NullableFloatFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
   }
 
   export type PenjadwalanUpdateManyWithoutResepNestedInput = {
@@ -15958,6 +15752,18 @@ export namespace Prisma {
     create?: XOR<GreenhouseCreateWithoutSensorInput, GreenhouseUncheckedCreateWithoutSensorInput>
     connectOrCreate?: GreenhouseCreateOrConnectWithoutSensorInput
     connect?: GreenhouseWhereUniqueInput
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type TandonUpdateOneWithoutSensorNestedInput = {
@@ -16533,15 +16339,20 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
     lt?: number | FloatFieldRefInput<$PrismaModel>
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedFloatFilter<$PrismaModel>
+    _min?: NestedFloatFilter<$PrismaModel>
+    _max?: NestedFloatFilter<$PrismaModel>
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -16556,6 +16367,23 @@ export namespace Prisma {
     startsWith?: string | StringFieldRefInput<$PrismaModel>
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -16574,23 +16402,7 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
     notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
@@ -16598,29 +16410,7 @@ export namespace Prisma {
     lte?: number | FloatFieldRefInput<$PrismaModel>
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedFloatNullableFilter<$PrismaModel>
-    _min?: NestedFloatNullableFilter<$PrismaModel>
-    _max?: NestedFloatNullableFilter<$PrismaModel>
-  }
-
-  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: string | StringFieldRefInput<$PrismaModel> | null
-    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
-    lt?: string | StringFieldRefInput<$PrismaModel>
-    lte?: string | StringFieldRefInput<$PrismaModel>
-    gt?: string | StringFieldRefInput<$PrismaModel>
-    gte?: string | StringFieldRefInput<$PrismaModel>
-    contains?: string | StringFieldRefInput<$PrismaModel>
-    startsWith?: string | StringFieldRefInput<$PrismaModel>
-    endsWith?: string | StringFieldRefInput<$PrismaModel>
-    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedStringNullableFilter<$PrismaModel>
-    _max?: NestedStringNullableFilter<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type GreenhouseCreateWithoutUserInput = {
@@ -17332,30 +17122,20 @@ export namespace Prisma {
   }
 
   export type ResepCreateWithoutPenjadwalanInput = {
-    ppm?: number | null
+    ppm: number
     ph: number
     volume: number
     nama: string
-    interval?: number | null
-    nutrisiA?: number | null
-    nutrisiB?: number | null
-    air?: number | null
-    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
 
   export type ResepUncheckedCreateWithoutPenjadwalanInput = {
     id?: number
-    ppm?: number | null
+    ppm: number
     ph: number
     volume: number
     nama: string
-    interval?: number | null
-    nutrisiA?: number | null
-    nutrisiB?: number | null
-    air?: number | null
-    tipe?: string | null
     created_at?: Date | string
     updated_at?: Date | string | null
   }
@@ -17475,30 +17255,20 @@ export namespace Prisma {
   }
 
   export type ResepUpdateWithoutPenjadwalanInput = {
-    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ppm?: IntFieldUpdateOperationsInput | number
     ph?: FloatFieldUpdateOperationsInput | number
     volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
-    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
-    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
-    air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type ResepUncheckedUpdateWithoutPenjadwalanInput = {
     id?: IntFieldUpdateOperationsInput | number
-    ppm?: NullableIntFieldUpdateOperationsInput | number | null
+    ppm?: IntFieldUpdateOperationsInput | number
     ph?: FloatFieldUpdateOperationsInput | number
     volume?: FloatFieldUpdateOperationsInput | number
     nama?: StringFieldUpdateOperationsInput | string
-    interval?: NullableIntFieldUpdateOperationsInput | number | null
-    nutrisiA?: NullableFloatFieldUpdateOperationsInput | number | null
-    nutrisiB?: NullableFloatFieldUpdateOperationsInput | number | null
-    air?: NullableFloatFieldUpdateOperationsInput | number | null
-    tipe?: NullableStringFieldUpdateOperationsInput | string | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
