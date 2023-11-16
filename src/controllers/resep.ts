@@ -41,6 +41,15 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
   try {
     const { nama, ppm, ph, volume, id_greenhouse } =
       request.payload as InputResep;
+    const isExist = await prisma.resep.count({
+      where: {
+        greenhouseId: id_greenhouse
+      }
+    })
+    
+    if (isExist) {
+      return Boom.badRequest("GH tersebut sudah ada resepnya")
+    }
 
     await prisma.resep.create({
       data: {
@@ -48,11 +57,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         ppm,
         ph,
         volume,
-        greenhouse: {
-          connect: {
-            id: id_greenhouse,
-          },
-        },
+        greenhouseId: id_greenhouse
       },
     });
 
@@ -65,7 +70,8 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     await prisma.$disconnect();
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      console.log(e.stack)
+      return Boom.internal(e.stack?.toString());
     }
   }
 };

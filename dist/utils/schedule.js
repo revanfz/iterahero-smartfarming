@@ -48,7 +48,7 @@ const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
         data
             .filter((item) => item.isActive)
             .forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
-            (0, exports.schedulePeracikan)(item.id, item.waktu, item.hari, item.resepId);
+            yield (0, exports.schedulePeracikan)(item.id, item.waktu, item.hari, item.resepId, item.durasi);
         }));
     }))
         .catch((err) => console.error(err))
@@ -66,7 +66,7 @@ const onOffPeracikan = (id) => __awaiter(void 0, void 0, void 0, function* () {
             schedule.scheduledJobs[`iterahero2023-peracikan-${id}`].cancel();
         }
         else {
-            (0, exports.schedulePeracikan)(data.id, data.waktu, data.hari, data.resepId);
+            yield (0, exports.schedulePeracikan)(data.id, data.waktu, data.hari, data.resepId, data.durasi);
         }
     }
 });
@@ -75,7 +75,7 @@ const deletePeracikan = (id) => {
     schedule.scheduledJobs[`iterahero2023-peracikan-${id}`].cancel();
 };
 exports.deletePeracikan = deletePeracikan;
-const schedulePeracikan = (id, jam, hari, resep) => __awaiter(void 0, void 0, void 0, function* () {
+const schedulePeracikan = (id, jam, hari, resep, durasi) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const waktu = jam.split(":");
         const hour = parseInt(waktu[0]);
@@ -97,12 +97,14 @@ const schedulePeracikan = (id, jam, hari, resep) => __awaiter(void 0, void 0, vo
             },
         });
         if (komposisi) {
-            schedule.scheduleJob(`iterahero2023-peracikan-${id}`, rule, function (resep) {
+            console.log(`Peracikan-${komposisi.nama}`);
+            schedule.scheduleJob(`iterahero2023-peracikan-${id}`, rule, function (resep, durasi) {
                 (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
                     peracikan: true,
                     komposisi: resep,
+                    lamaPenyiraman: durasi
                 }));
-            }.bind(null, komposisi));
+            }.bind(null, komposisi, durasi));
             komposisi = null;
         }
     }

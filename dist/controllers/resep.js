@@ -42,19 +42,24 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     try {
         const { nama, ppm, ph, volume, id_greenhouse } = request.payload;
+        const isExist = yield prisma_1.prisma.resep.count({
+            where: {
+                greenhouseId: id_greenhouse
+            }
+        });
+        if (isExist) {
+            return boom_1.default.badRequest("GH tersebut sudah ada resepnya");
+        }
         yield prisma_1.prisma.resep.create({
             data: {
                 nama,
                 ppm,
                 ph,
                 volume,
-                greenhouse: {
-                    connect: {
-                        id: id_greenhouse,
-                    },
-                },
+                greenhouseId: id_greenhouse
             },
         });
         return h
@@ -67,7 +72,8 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     catch (e) {
         yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
-            return boom_1.default.internal(e.message);
+            console.log(e.stack);
+            return boom_1.default.internal((_a = e.stack) === null || _a === void 0 ? void 0 : _a.toString());
         }
     }
 });

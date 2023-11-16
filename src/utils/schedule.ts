@@ -14,7 +14,7 @@ export const initPeracikan = async () => {
       data
         .filter((item) => item.isActive)
         .forEach(async (item) => {
-          schedulePeracikan(item.id, item.waktu, item.hari, item.resepId);
+          await schedulePeracikan(item.id, item.waktu, item.hari, item.resepId, item.durasi);
         });
     })
     .catch((err) => console.error(err))
@@ -31,7 +31,7 @@ export const onOffPeracikan = async (id: number) => {
     if (data.isActive) {
       schedule.scheduledJobs[`iterahero2023-peracikan-${id}`].cancel();
     } else {
-      schedulePeracikan(data.id, data.waktu, data.hari, data.resepId);
+      await schedulePeracikan(data.id, data.waktu, data.hari, data.resepId, data.durasi);
     }
   }
 };
@@ -44,7 +44,8 @@ export const schedulePeracikan = async (
   id: number,
   jam: string,
   hari: number[],
-  resep: number
+  resep: number,
+  durasi: number
 ) => {
   try {
     const waktu = jam.split(":");
@@ -69,18 +70,20 @@ export const schedulePeracikan = async (
       },
     });
     if (komposisi) {
+      console.log(`Peracikan-${komposisi.nama}`)
       schedule.scheduleJob(
         `iterahero2023-peracikan-${id}`,
         rule,
-        function (resep: object) {
+        function (resep: object, durasi: number) {
           publishData(
             "iterahero2023/peracikan",
             JSON.stringify({
               peracikan: true,
               komposisi: resep,
+              lamaPenyiraman: durasi
             })
           );
-        }.bind(null, komposisi)
+        }.bind(null, komposisi, durasi)
       );
       komposisi = null
     }
