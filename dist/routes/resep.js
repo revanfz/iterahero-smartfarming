@@ -12,8 +12,7 @@ const postValidator = joi_1.default.object({
     ppm: joi_1.default.number().required(),
     ph: joi_1.default.number().required(),
     nama: joi_1.default.string().required(),
-    volume: joi_1.default.number().required(),
-    id_greenhouse: joi_1.default.number().required()
+    volume: joi_1.default.number().required()
 });
 exports.resepRoute = [
     {
