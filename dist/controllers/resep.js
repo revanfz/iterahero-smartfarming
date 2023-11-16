@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteHandler = exports.postHandler = exports.getHandler = void 0;
+exports.patchHandler = exports.deleteHandler = exports.postHandler = exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
@@ -27,10 +27,12 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             .code(200);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.getHandler = getHandler;
@@ -54,11 +56,13 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             .code(201);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e.stack);
             return boom_1.default.internal((_a = e.stack) === null || _a === void 0 ? void 0 : _a.toString());
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.postHandler = postHandler;
@@ -81,11 +85,52 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
             .code(201);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal("ID tidak ditemukan");
         }
     }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
 });
 exports.deleteHandler = deleteHandler;
+const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = parseInt(request.query.id);
+        const { nama, ppm, ph, volume } = request.payload;
+        const data = yield prisma_1.prisma.resep.findUnique({
+            where: {
+                id
+            }
+        });
+        if (!data) {
+            return boom_1.default.notFound("Tidak ada id resep tersebut");
+        }
+        yield prisma_1.prisma.resep.update({
+            where: {
+                id
+            },
+            data: {
+                ppm,
+                ph,
+                volume,
+                nama
+            }
+        });
+        return h.response({
+            status: 'success',
+            message: `Resep ${nama} berhasil diubah`
+        });
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            console.log(e);
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.patchHandler = patchHandler;

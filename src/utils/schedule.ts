@@ -14,7 +14,7 @@ export const initPeracikan = async () => {
       data
         .filter((item) => item.isActive === true)
         .forEach(async (item) => {
-          await schedulePeracikan(item.id, item.waktu, item.hari, item.resepId, item.durasi);
+          await schedulePeracikan(item.id, item.waktu, item.hari, item.resepId, item.durasi, item.greenhouseId);
         });
     })
     .catch((err) => console.error(err))
@@ -31,7 +31,7 @@ export const onOffPeracikan = async (id: number) => {
     if (data.isActive) {
       schedule.scheduledJobs[`iterahero2023-peracikan-${id}`].cancel();
     } else {
-      await schedulePeracikan(data.id, data.waktu, data.hari, data.resepId, data.durasi);
+      await schedulePeracikan(data.id, data.waktu, data.hari, data.resepId, data.durasi, data.greenhouseId);
     }
   }
 };
@@ -45,7 +45,8 @@ export const schedulePeracikan = async (
   jam: string,
   hari: number[],
   resep: number,
-  durasi: number
+  durasi: number,
+  id_greenhouse: number
 ) => {
   try {
     const waktu = jam.split(":");
@@ -60,7 +61,7 @@ export const schedulePeracikan = async (
     let komposisi = await prisma.resep.findUnique({
       where: {
         id: resep,
-      }
+      },
     });
     let rasio = await prisma.tandon.findUnique({
       where: {
@@ -72,26 +73,32 @@ export const schedulePeracikan = async (
         rasioAir: true
       }
     })
-    if (komposisi && rasio) {
+    let aktuator = await prisma.aktuator.findMany({
+      where:{
+        greenhouseId: id_greenhouse,
+      }
+    })
+    if (komposisi && rasio && aktuator) {
       schedule.scheduleJob(
         `iterahero2023-peracikan-${id}`,
         rule,
-        function (resep: object, durasi: number, rasio: object) {
+        function (resep: object, durasi: number, rasio: object, aktuator: object) {
           publishData(
             "iterahero2023/peracikan",
             JSON.stringify({
-              peracikan: true,
               komposisi: resep,
               lamaPenyiraman: durasi,
-              konstanta: rasio
+              konstanta: rasio,
+              aktuator
             })
           );
-        }.bind(null, komposisi, durasi, rasio)
+        }.bind(null, komposisi, durasi, rasio, aktuator)
       );
-      komposisi = null
-      rasio = null
     }
   } catch (e) {
     console.log(e);
+  }
+  finally {
+    await prisma.$disconnect()
   }
 };

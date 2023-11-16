@@ -48,11 +48,13 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             .code(200);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         console.log(e);
         if (e instanceof Error) {
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.getHandler = getHandler;
@@ -102,7 +104,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     greenhouseId: id_greenhouse
                 },
             });
-            yield (0, schedule_1.schedulePeracikan)(schedule.id, schedule.waktu, schedule.hari, schedule.resepId, schedule.durasi);
+            yield (0, schedule_1.schedulePeracikan)(schedule.id, schedule.waktu, schedule.hari, schedule.resepId, schedule.durasi, schedule.greenhouseId);
         }));
         return h
             .response({
@@ -112,11 +114,13 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             .code(201);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.postHandler = postHandler;
@@ -137,10 +141,12 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
             .code(200);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             return boom_1.default.notFound("Tidak ada penjadwalan dengan id tersebut");
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.deleteHandler = deleteHandler;
@@ -170,10 +176,12 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
             .code(200);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.patchHandler = patchHandler;

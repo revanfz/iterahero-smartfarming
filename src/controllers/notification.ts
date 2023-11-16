@@ -30,10 +30,12 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };
 
@@ -58,10 +60,12 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       message: "Notif ditambahin",
     });
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };

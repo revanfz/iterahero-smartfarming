@@ -32,10 +32,12 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
     });
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };

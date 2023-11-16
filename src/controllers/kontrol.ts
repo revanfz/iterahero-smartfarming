@@ -27,10 +27,12 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };

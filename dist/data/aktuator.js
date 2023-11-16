@@ -3,6 +3,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.aktuatorSeeding = void 0;
 exports.aktuatorSeeding = [
     {
+        name: "Selenoid Melon",
+        color: "red",
+        icon: "",
+        merek: "Endress-Hauser",
+        portRaspi: 2,
+        greenhouseId: 2,
+        status: true,
+    },
+    {
         name: "Selenoid Air",
         color: "red",
         icon: "",

@@ -1,7 +1,7 @@
 import { ServerRoute } from "@hapi/hapi";
 import Joi from 'joi'
 import { prefix } from "../utils/prefix";
-import { deleteHandler, getHandler, postHandler } from "../controllers/resep";
+import { deleteHandler, getHandler, patchHandler, postHandler } from "../controllers/resep";
 
 const path = `${prefix}/resep`;
 
@@ -34,5 +34,10 @@ export const resepRoute: ServerRoute[] = [
         method: "DELETE",
         path,
         handler: deleteHandler
+    },
+    {
+        method: "PATCH",
+        path,
+        handler: patchHandler
     }
 ]

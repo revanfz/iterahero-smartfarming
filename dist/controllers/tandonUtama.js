@@ -87,11 +87,13 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
         });
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.error(e);
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.sensorByTandonHandler = sensorByTandonHandler;
@@ -127,11 +129,13 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
             .code(200);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.error(e);
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.actuatorByTandonHandler = actuatorByTandonHandler;
@@ -163,11 +167,13 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         });
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.error(e);
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.patchHandler = patchHandler;

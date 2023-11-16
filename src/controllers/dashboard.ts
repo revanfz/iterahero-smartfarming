@@ -86,6 +86,8 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.internal(e.message);
     }
   }
-  await prisma.$disconnect();
+  finally {
+    await prisma.$disconnect();
+  }
 };
 

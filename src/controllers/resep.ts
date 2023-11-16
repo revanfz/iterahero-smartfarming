@@ -20,10 +20,12 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };
 
@@ -48,11 +50,13 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(201);
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e.stack)
       return Boom.internal(e.stack?.toString());
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };
 
@@ -76,10 +80,55 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(201);
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal("ID tidak ditemukan");
     }
   }
+  finally {
+    await prisma.$disconnect();
+  }
 };
+
+export const patchHandler = async (request: Request, h: ResponseToolkit) => {
+  try {
+    const id = parseInt(request.query.id)
+    const { nama, ppm, ph, volume} =
+      request.payload as InputResep;
+    const data = await prisma.resep.findUnique({
+      where: {
+        id
+      }
+    })
+
+    if(!data) {
+      return Boom.notFound("Tidak ada id resep tersebut")
+    }
+
+    await prisma.resep.update({
+      where: {
+        id
+      },
+      data: {
+        ppm,
+        ph,
+        volume,
+        nama
+      }
+    })
+
+    return h.response({
+      status: 'success',
+      message: `Resep ${nama} berhasil diubah`
+    });
+  }
+  catch (e) {
+    if (e instanceof Error) {
+      console.log(e)
+      return Boom.internal(e.message)
+    }
+  }
+  finally {
+    await prisma.$disconnect()
+  }
+}

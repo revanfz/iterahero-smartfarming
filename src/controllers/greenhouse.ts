@@ -120,12 +120,13 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
-    await prisma.$disconnect();
-
     console.log(e);
     if (e instanceof Error) {
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };
 
@@ -171,12 +172,13 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       });
     }
   } catch (e) {
-    await prisma.$disconnect();
-
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };
 
@@ -209,11 +211,13 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
       throw "Invalid id";
     }
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };
 
@@ -252,12 +256,13 @@ export const sensorByGreenhouseHandler = async (
       })
       .code(200);
   } catch (e) {
-    await prisma.$disconnect();
-
     if (e instanceof Error) {
       console.error(e);
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };
 
@@ -304,11 +309,13 @@ export const actuatorByGreenhouseHandler = async (
       })
       .code(200);
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       console.error(e);
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };
 

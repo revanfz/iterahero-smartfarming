@@ -36,5 +36,10 @@ exports.resepRoute = [
         method: "DELETE",
         path,
         handler: resep_1.deleteHandler
+    },
+    {
+        method: "PATCH",
+        path,
+        handler: resep_1.patchHandler
     }
 ];

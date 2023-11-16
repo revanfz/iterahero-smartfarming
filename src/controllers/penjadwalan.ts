@@ -47,11 +47,13 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
-    await prisma.$disconnect();
     console.log(e);
     if (e instanceof Error) {
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };
 
@@ -110,7 +112,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
           greenhouseId: id_greenhouse
         },
       });
-      await schedulePeracikan(schedule.id, schedule.waktu, schedule.hari, schedule.resepId, schedule.durasi)
+      await schedulePeracikan(schedule.id, schedule.waktu, schedule.hari, schedule.resepId, schedule.durasi, schedule.greenhouseId)
     });
 
     return h
@@ -120,11 +122,13 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(201);
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };
 
@@ -147,10 +151,12 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       return Boom.notFound("Tidak ada penjadwalan dengan id tersebut");
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };
 
@@ -183,9 +189,11 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
-    await prisma.$disconnect();
     if (e instanceof Error) {
       return Boom.internal(e.message);
     }
+  }
+  finally {
+    await prisma.$disconnect();
   }
 };

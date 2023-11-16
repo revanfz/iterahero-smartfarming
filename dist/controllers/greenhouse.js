@@ -116,11 +116,13 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             .code(200);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         console.log(e);
         if (e instanceof Error) {
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.postHandler = postHandler;
@@ -163,11 +165,13 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         }
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.patchHandler = patchHandler;
@@ -199,11 +203,13 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         }
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.deleteHandler = deleteHandler;
@@ -239,11 +245,13 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
             .code(200);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.error(e);
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.sensorByGreenhouseHandler = sensorByGreenhouseHandler;
@@ -287,11 +295,13 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
             .code(200);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
         if (e instanceof Error) {
             console.error(e);
             return boom_1.default.internal(e.message);
         }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
     }
 });
 exports.actuatorByGreenhouseHandler = actuatorByGreenhouseHandler;
