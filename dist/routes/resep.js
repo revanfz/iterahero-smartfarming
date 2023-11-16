@@ -31,5 +31,10 @@ exports.resepRoute = [
                 failAction: "error"
             }
         }
+    },
+    {
+        method: "DELETE",
+        path,
+        handler: resep_1.deleteHandler
     }
 ];
