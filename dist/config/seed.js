@@ -84,19 +84,6 @@ function main() {
                 ppm: 1000,
                 ph: 7.2,
                 volume: 3800,
-                greenhouse: {
-                    connectOrCreate: {
-                        where: {
-                            id: 4,
-                        },
-                        create: {
-                            name: "Greenhouse Melon",
-                            image: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
-                            location: "Wanayasa",
-                        },
-                    },
-                },
-                tipe: "besaran",
             },
         });
         const resep2 = yield prisma_1.prisma.resep.create({
@@ -105,19 +92,6 @@ function main() {
                 ppm: 1200,
                 ph: 6.4,
                 volume: 5000,
-                greenhouse: {
-                    connectOrCreate: {
-                        where: {
-                            id: 5,
-                        },
-                        create: {
-                            name: "Greenhouse Semangka",
-                            image: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
-                            location: "Wanayasa",
-                        },
-                    },
-                },
-                tipe: "besaran",
             },
         });
         const resep3 = yield prisma_1.prisma.resep.create({
@@ -126,19 +100,6 @@ function main() {
                 ppm: 900,
                 ph: 6.6,
                 volume: 4200,
-                greenhouse: {
-                    connectOrCreate: {
-                        where: {
-                            id: 6,
-                        },
-                        create: {
-                            name: "Greenhouse Ketimun",
-                            image: "https://res.cloudinary.com/iterahero2023/image/upload/v1696756417/iterahero2023/gh-kebun%20raya.jpg",
-                            location: "Wanayasa",
-                        },
-                    },
-                },
-                tipe: "besaran",
             },
         });
         const tandonBahan = yield prisma_1.prisma.tandonBahan.createMany({

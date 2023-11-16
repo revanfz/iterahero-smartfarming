@@ -38,9 +38,6 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             skip: parseInt(cursor) ? 1 : 0,
             cursor: cursor ? { id: cursor } : undefined,
         });
-        // if (data.length < 1) {
-        //     return Boom.notFound("Tidak ada data penjadwalan")
-        // }
         return h
             .response({
             status: "success",
@@ -61,7 +58,8 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
 exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { resep, id_tandon, waktu, hari, durasi } = request.payload;
+        const { id_user } = request.auth.credentials;
+        const { resep, id_tandon, waktu, hari, durasi, id_greenhouse } = request.payload;
         const resepTarget = yield prisma_1.prisma.resep.findFirst({
             where: {
                 nama: resep,
@@ -92,7 +90,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             return error;
         }
         waktu.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
-            yield prisma_1.prisma.penjadwalan.create({
+            const schedule = yield prisma_1.prisma.penjadwalan.create({
                 data: {
                     resepId: resepTarget.id,
                     waktu: item,
@@ -100,10 +98,12 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     isActive: true,
                     hari,
                     durasi,
+                    createdBy: id_user,
+                    greenhouseId: id_greenhouse
                 },
             });
+            yield (0, schedule_1.schedulePeracikan)(schedule.id, schedule.waktu, schedule.hari, schedule.resepId, schedule.durasi);
         }));
-        yield (0, schedule_1.initPeracikan)();
         return h
             .response({
             status: "success",

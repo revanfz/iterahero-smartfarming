@@ -3,8 +3,8 @@ import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 import {
   deletePeracikan,
-  initPeracikan,
   onOffPeracikan,
+  schedulePeracikan
 } from "../utils/schedule";
 
 interface InputPenjadwalan {
@@ -13,6 +13,7 @@ interface InputPenjadwalan {
   waktu: string[];
   durasi: number;
   hari: number[];
+  id_greenhouse: number
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
@@ -37,10 +38,6 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       cursor: cursor ? { id: cursor } : undefined,
     });
 
-    // if (data.length < 1) {
-    //     return Boom.notFound("Tidak ada data penjadwalan")
-    // }
-
     return h
       .response({
         status: "success",
@@ -60,7 +57,10 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
   try {
-    const { resep, id_tandon, waktu, hari, durasi } =
+    const { id_user } = request.auth.credentials as {
+      id_user: number;
+    };
+    const { resep, id_tandon, waktu, hari, durasi, id_greenhouse } =
       request.payload as InputPenjadwalan;
     const resepTarget = await prisma.resep.findFirst({
       where: {
@@ -98,7 +98,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
     }
 
     waktu.forEach(async (item) => {
-      await prisma.penjadwalan.create({
+      const schedule = await prisma.penjadwalan.create({
         data: {
           resepId: resepTarget.id,
           waktu: item,
@@ -106,11 +106,12 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
           isActive: true,
           hari,
           durasi,
+          createdBy: id_user,
+          greenhouseId: id_greenhouse
         },
       });
+      await schedulePeracikan(schedule.id, schedule.waktu, schedule.hari, schedule.resepId, schedule.durasi)
     });
-
-    await initPeracikan();
 
     return h
       .response({

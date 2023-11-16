@@ -12,7 +12,7 @@ export const initPeracikan = async () => {
         },
       });
       data
-        .filter((item) => item.isActive)
+        .filter((item) => item.isActive === true)
         .forEach(async (item) => {
           await schedulePeracikan(item.id, item.waktu, item.hari, item.resepId, item.durasi);
         });
@@ -60,32 +60,36 @@ export const schedulePeracikan = async (
     let komposisi = await prisma.resep.findUnique({
       where: {
         id: resep,
-      },
-      include: {
-        greenhouse: {
-          select: {
-            id: true,
-          },
-        },
-      },
+      }
     });
-    if (komposisi) {
-      console.log(`Peracikan-${komposisi.nama}`)
+    let rasio = await prisma.tandon.findUnique({
+      where: {
+        id: 1
+      },
+      select: {
+        rasioA: true,
+        rasioB: true,
+        rasioAir: true
+      }
+    })
+    if (komposisi && rasio) {
       schedule.scheduleJob(
         `iterahero2023-peracikan-${id}`,
         rule,
-        function (resep: object, durasi: number) {
+        function (resep: object, durasi: number, rasio: object) {
           publishData(
             "iterahero2023/peracikan",
             JSON.stringify({
               peracikan: true,
               komposisi: resep,
-              lamaPenyiraman: durasi
+              lamaPenyiraman: durasi,
+              konstanta: rasio
             })
           );
-        }.bind(null, komposisi, durasi)
+        }.bind(null, komposisi, durasi, rasio)
       );
       komposisi = null
+      rasio = null
     }
   } catch (e) {
     console.log(e);

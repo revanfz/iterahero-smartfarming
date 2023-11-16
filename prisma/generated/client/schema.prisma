@@ -21,22 +21,22 @@ model User {
   greenhouse   Greenhouse[]
   tandon       Tandon[]
   notification Notification[]
-  // penjadwalan Penjadwalan[]
+  penjadwalan  Penjadwalan[]
   created_at   DateTime       @default(now())
   updated_at   DateTime?      @updatedAt
 }
 
 model Greenhouse {
-  id         Int        @id @default(autoincrement())
-  name       String     @unique
-  image      String
-  location   String
-  user       User[]
-  aktuator   Aktuator[]
-  sensor     Sensor[]
-  resep      Resep?
-  created_at DateTime   @default(now())
-  updated_at DateTime?  @updatedAt
+  id          Int           @id @default(autoincrement())
+  name        String        @unique
+  image       String
+  location    String
+  user        User[]
+  aktuator    Aktuator[]
+  sensor      Sensor[]
+  penjadwalan Penjadwalan[]
+  created_at  DateTime      @default(now())
+  updated_at  DateTime?     @updatedAt
 }
 
 model TandonPenyimpanan {
@@ -46,42 +46,40 @@ model TandonPenyimpanan {
   tandon        Tandon     @relation(fields: [tandonId], references: [id])
   tandonId      Int
   actuator      Aktuator[]
-  resep         Resep[]
 }
 
 model Resep {
-  id                Int                 @id @default(autoincrement())
-  ppm               Int?
-  ph                Float
-  volume            Float
-  nama              String
-  interval          Int?
-  nutrisiA          Float?
-  nutrisiB          Float?
-  air               Float?
-  tipe              String?
-  penjadwalan       Penjadwalan[]
-  tandonPenyimpanan TandonPenyimpanan[]
-  greenhouse        Greenhouse?         @relation(fields: [greenhouseId], references: [id])
-  greenhouseId      Int                 @unique
-  created_at        DateTime            @default(now())
-  updated_at        DateTime?           @updatedAt
+  id          Int           @id @default(autoincrement())
+  ppm         Int?
+  ph          Float
+  volume      Float
+  nama        String
+  interval    Int?
+  nutrisiA    Float?
+  nutrisiB    Float?
+  air         Float?
+  tipe        String?
+  penjadwalan Penjadwalan[]
+  created_at  DateTime      @default(now())
+  updated_at  DateTime?     @updatedAt
 }
 
 model Penjadwalan {
-  id         Int       @id @default(autoincrement())
-  waktu      String
-  isActive   Boolean
-  durasi     Int
-  hari       Int[]
-  resep      Resep     @relation(fields: [resepId], references: [id])
-  resepId    Int
-  tandon     Tandon    @relation(fields: [tandonId], references: [id])
-  tandonId   Int
-  // user      User      @relation(fields: [createdBy], references: [id])
-  // createdBy  Int
-  created_at DateTime  @default(now())
-  updated_at DateTime? @updatedAt
+  id           Int        @id @default(autoincrement())
+  waktu        String
+  isActive     Boolean
+  durasi       Int
+  hari         Int[]
+  resep        Resep      @relation(fields: [resepId], references: [id])
+  resepId      Int
+  tandon       Tandon     @relation(fields: [tandonId], references: [id])
+  tandonId     Int
+  greenhouse   Greenhouse @relation(fields: [greenhouseId], references: [id])
+  greenhouseId Int
+  user         User       @relation(fields: [createdBy], references: [id])
+  createdBy    Int
+  created_at   DateTime   @default(now())
+  updated_at   DateTime?  @updatedAt
 }
 
 model Sensor {

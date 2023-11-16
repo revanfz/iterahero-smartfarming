@@ -144,7 +144,6 @@ exports.Prisma.ResepScalarFieldEnum = {
   nutrisiB: 'nutrisiB',
   air: 'air',
   tipe: 'tipe',
-  greenhouseId: 'greenhouseId',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };
@@ -157,6 +156,8 @@ exports.Prisma.PenjadwalanScalarFieldEnum = {
   hari: 'hari',
   resepId: 'resepId',
   tandonId: 'tandonId',
+  greenhouseId: 'greenhouseId',
+  createdBy: 'createdBy',
   created_at: 'created_at',
   updated_at: 'updated_at'
 };

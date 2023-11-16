@@ -7,7 +7,6 @@ interface InputResep {
   ppm: number;
   ph: number;
   volume: number;
-  id_greenhouse: number;
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
@@ -18,10 +17,6 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         tipe,
       },
     });
-
-    // if (data.length < 1) {
-    //     return Boom.notFound("Tidak ada resep tersimpan");
-    // }
 
     return h
       .response({
@@ -39,17 +34,8 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
   try {
-    const { nama, ppm, ph, volume, id_greenhouse } =
+    const { nama, ppm, ph, volume} =
       request.payload as InputResep;
-    const isExist = await prisma.resep.count({
-      where: {
-        greenhouseId: id_greenhouse
-      }
-    })
-    
-    if (isExist) {
-      return Boom.badRequest("GH tersebut sudah ada resepnya")
-    }
 
     await prisma.resep.create({
       data: {
@@ -57,7 +43,6 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         ppm,
         ph,
         volume,
-        greenhouseId: id_greenhouse
       },
     });
 

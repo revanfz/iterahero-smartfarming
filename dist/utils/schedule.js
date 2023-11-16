@@ -46,7 +46,7 @@ const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
             },
         });
         data
-            .filter((item) => item.isActive)
+            .filter((item) => item.isActive === true)
             .forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
             yield (0, exports.schedulePeracikan)(item.id, item.waktu, item.hari, item.resepId, item.durasi);
         }));
@@ -87,25 +87,29 @@ const schedulePeracikan = (id, jam, hari, resep, durasi) => __awaiter(void 0, vo
         let komposisi = yield prisma_1.prisma.resep.findUnique({
             where: {
                 id: resep,
-            },
-            include: {
-                greenhouse: {
-                    select: {
-                        id: true,
-                    },
-                },
-            },
+            }
         });
-        if (komposisi) {
-            console.log(`Peracikan-${komposisi.nama}`);
-            schedule.scheduleJob(`iterahero2023-peracikan-${id}`, rule, function (resep, durasi) {
+        let rasio = yield prisma_1.prisma.tandon.findUnique({
+            where: {
+                id: 1
+            },
+            select: {
+                rasioA: true,
+                rasioB: true,
+                rasioAir: true
+            }
+        });
+        if (komposisi && rasio) {
+            schedule.scheduleJob(`iterahero2023-peracikan-${id}`, rule, function (resep, durasi, rasio) {
                 (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
                     peracikan: true,
                     komposisi: resep,
-                    lamaPenyiraman: durasi
+                    lamaPenyiraman: durasi,
+                    konstanta: rasio
                 }));
-            }.bind(null, komposisi, durasi));
+            }.bind(null, komposisi, durasi, rasio));
             komposisi = null;
+            rasio = null;
         }
     }
     catch (e) {

@@ -23,9 +23,6 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 tipe,
             },
         });
-        // if (data.length < 1) {
-        //     return Boom.notFound("Tidak ada resep tersimpan");
-        // }
         return h
             .response({
             status: "success",
@@ -44,22 +41,13 @@ exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
-        const { nama, ppm, ph, volume, id_greenhouse } = request.payload;
-        const isExist = yield prisma_1.prisma.resep.count({
-            where: {
-                greenhouseId: id_greenhouse
-            }
-        });
-        if (isExist) {
-            return boom_1.default.badRequest("GH tersebut sudah ada resepnya");
-        }
+        const { nama, ppm, ph, volume } = request.payload;
         yield prisma_1.prisma.resep.create({
             data: {
                 nama,
                 ppm,
                 ph,
                 volume,
-                greenhouseId: id_greenhouse
             },
         });
         return h
