@@ -14220,7 +14220,7 @@ export namespace Prisma {
 
   export type TandonCreateInput = {
     nama: string
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -14240,7 +14240,7 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -14296,7 +14296,7 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -16443,7 +16443,7 @@ export namespace Prisma {
 
   export type TandonCreateWithoutUserInput = {
     nama: string
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -16461,7 +16461,7 @@ export namespace Prisma {
   export type TandonUncheckedCreateWithoutUserInput = {
     id?: number
     nama: string
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -16931,7 +16931,7 @@ export namespace Prisma {
 
   export type TandonCreateWithoutTandonPenyimpananInput = {
     nama: string
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -16950,7 +16950,7 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -17147,7 +17147,7 @@ export namespace Prisma {
 
   export type TandonCreateWithoutPenjadwalanInput = {
     nama: string
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -17166,7 +17166,7 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -17391,7 +17391,7 @@ export namespace Prisma {
 
   export type TandonCreateWithoutSensorInput = {
     nama: string
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -17410,7 +17410,7 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -17589,7 +17589,7 @@ export namespace Prisma {
 
   export type TandonCreateWithoutAktuatorInput = {
     nama: string
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -17608,7 +17608,7 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -17911,7 +17911,7 @@ export namespace Prisma {
 
   export type TandonCreateWithoutTandonBahanInput = {
     nama: string
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -17930,7 +17930,7 @@ export namespace Prisma {
     id?: number
     nama: string
     userId: number
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number
@@ -18430,7 +18430,7 @@ export namespace Prisma {
   export type TandonCreateManyUserInput = {
     id?: number
     nama: string
-    status: string
+    status?: string
     isOnline: boolean
     rasioA: number
     rasioB: number

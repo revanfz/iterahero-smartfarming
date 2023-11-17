@@ -96,7 +96,8 @@ const schedulePeracikan = (id, jam, hari, resep, durasi, id_greenhouse) => __awa
             select: {
                 rasioA: true,
                 rasioB: true,
-                rasioAir: true
+                rasioAir: true,
+                ppm: true
             }
         });
         let aktuator = yield prisma_1.prisma.aktuator.findMany({

@@ -70,7 +70,8 @@ export const schedulePeracikan = async (
       select: {
         rasioA: true,
         rasioB: true,
-        rasioAir: true
+        rasioAir: true,
+        ppm: true
       }
     })
     let aktuator = await prisma.aktuator.findMany({

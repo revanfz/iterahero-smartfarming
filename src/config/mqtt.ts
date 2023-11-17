@@ -1,5 +1,7 @@
 import * as mqtt from "mqtt";
 import "dotenv/config";
+import { prisma } from "./prisma";
+import SensorModel from "../models/Sensor";
 
 const clientId = `Iterahero2023_${Math.random().toString().slice(4)}`;
 
@@ -17,16 +19,31 @@ export function connectMqtt() {
 
   broker.on("connect", () => {
     console.log("Connected to MQTT");
-    broker.subscribe("iterahero2023/led")
-    broker.subscribe("iterahero2023/peracikan");
-    broker.subscribe("iterahero2023/penjadwalan");
-    broker.subscribe("iterahero2023/+/sensor");
+    broker.subscribe("iterahero2023/#");
   });
 
-  broker.on("message", (topic, payload, packet) => {
+  broker.on("message", async (topic, payload, packet) => {
     try {
       const data = JSON.parse(payload.toString());
       console.log(data);
+      if (topic === "iterahero2023/peracikan/info") {
+        await prisma.tandon.update({
+          where: {
+            id: 2
+          },
+          data: {
+            status: data.status
+          }
+        })
+      }
+      else if (topic === "iterahero2023/info") {
+        console.log(data.sensor)
+        data.sensor.forEach(async (item: object, index: number) => {
+          const id = Object.keys(item)[0]
+          const val = Object.values(item)[0]
+          await SensorModel.findOneAndUpdate({ sensorId: parseInt(id)}, { nilai: val })
+        })
+      }
     }
     catch (e) {
       if (e instanceof Error) console.log(e.message);

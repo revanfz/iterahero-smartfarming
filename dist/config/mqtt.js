@@ -22,10 +22,24 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.publishData = exports.connectMqtt = void 0;
 const mqtt = __importStar(require("mqtt"));
 require("dotenv/config");
+const prisma_1 = require("./prisma");
+const Sensor_1 = __importDefault(require("../models/Sensor"));
 const clientId = `Iterahero2023_${Math.random().toString().slice(4)}`;
 let broker;
 function connectMqtt() {
@@ -39,21 +53,36 @@ function connectMqtt() {
     });
     broker.on("connect", () => {
         console.log("Connected to MQTT");
-        broker.subscribe("iterahero2023/led");
-        broker.subscribe("iterahero2023/peracikan");
-        broker.subscribe("iterahero2023/penjadwalan");
-        broker.subscribe("iterahero2023/+/sensor");
+        broker.subscribe("iterahero2023/#");
     });
-    broker.on("message", (topic, payload, packet) => {
+    broker.on("message", (topic, payload, packet) => __awaiter(this, void 0, void 0, function* () {
         try {
             const data = JSON.parse(payload.toString());
             console.log(data);
+            if (topic === "iterahero2023/peracikan/info") {
+                yield prisma_1.prisma.tandon.update({
+                    where: {
+                        id: 2
+                    },
+                    data: {
+                        status: data.status
+                    }
+                });
+            }
+            else if (topic === "iterahero2023/info") {
+                console.log(data.sensor);
+                data.sensor.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
+                    const id = Object.keys(item)[0];
+                    const val = Object.values(item)[0];
+                    yield Sensor_1.default.findOneAndUpdate({ sensorId: parseInt(id) }, { nilai: val });
+                }));
+            }
         }
         catch (e) {
             if (e instanceof Error)
                 console.log(e.message);
         }
-    });
+    }));
 }
 exports.connectMqtt = connectMqtt;
 function publishData(topic, message) {

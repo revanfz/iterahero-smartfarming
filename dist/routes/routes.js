@@ -15,6 +15,7 @@ const aktuator_1 = require("./aktuator");
 const sensor_1 = require("./sensor");
 const kontrol_1 = require("./kontrol");
 const notification_1 = require("./notification");
+const logging_1 = require("./logging");
 exports.routes = [
     ...home_1.home,
     ...login_1.loginRoute,
@@ -29,5 +30,6 @@ exports.routes = [
     ...aktuator_1.aktuatorRoute,
     ...sensor_1.sensorRoute,
     ...kontrol_1.kontrolRoute,
-    ...notification_1.notificationRoute
+    ...notification_1.notificationRoute,
+    ...logging_1.loggingRoute
 ];

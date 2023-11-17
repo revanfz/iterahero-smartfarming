@@ -13,6 +13,7 @@ import { aktuatorRoute } from "./aktuator";
 import { sensorRoute } from "./sensor";
 import { kontrolRoute } from "./kontrol";
 import { notificationRoute } from "./notification";
+import { loggingRoute } from "./logging";
 
 export const routes: ServerRoute[] = [
   ...home,
@@ -28,5 +29,6 @@ export const routes: ServerRoute[] = [
   ...aktuatorRoute,
   ...sensorRoute,
   ...kontrolRoute,
-  ...notificationRoute
+  ...notificationRoute,
+  ...loggingRoute
 ];
