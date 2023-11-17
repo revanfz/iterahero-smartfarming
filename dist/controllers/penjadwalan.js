@@ -25,6 +25,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         const data = yield prisma_1.prisma.penjadwalan.findMany({
             include: {
                 resep: true,
+                greenhouse: true
             },
             orderBy: [
                 {

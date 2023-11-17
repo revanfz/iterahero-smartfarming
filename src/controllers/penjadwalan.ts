@@ -24,6 +24,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
     const data = await prisma.penjadwalan.findMany({
       include: {
         resep: true,
+        greenhouse: true
       },
       orderBy: [
         {
