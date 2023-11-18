@@ -4,7 +4,7 @@
 generator client {
   provider = "prisma-client-js"
   output   = "./generated/client"
-  // binaryTargets = ["native", "debian-openssl-3.0.x"]
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
@@ -94,6 +94,8 @@ model Sensor {
   brand            String
   unit_measurement String
   status           Boolean
+  channel          Int?
+  GPIO             Int?
   icon             Icon         @relation(fields: [type], references: [name])
   type             String
   range_min        Int?

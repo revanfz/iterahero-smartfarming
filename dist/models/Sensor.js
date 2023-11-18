@@ -27,7 +27,8 @@ const mongoose_1 = __importStar(require("mongoose"));
 const sensorSchema = new mongoose_1.Schema({
     nama: { type: String, required: true },
     nilai: { type: Number, required: true, default: 0 },
-    sensorId: { type: Number, required: true, unique: true },
+    gpio: { type: Number },
+    channel: { type: Number },
     greenhouseId: { type: Number },
     tandonId: { type: Number }
 });

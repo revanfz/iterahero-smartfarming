@@ -3,7 +3,8 @@ import mongoose, { Document, Schema } from "mongoose";
 interface Model extends Document {
     nama: string,
     nilai: number,
-    sensorId: number,
+    channel: number,
+    gpio: number,
     greenhouseId: number,
     tandonId: number
 }
@@ -11,7 +12,8 @@ interface Model extends Document {
 const sensorSchema = new Schema<Model>({
     nama: { type: String, required: true },
     nilai: { type: Number, required: true, default: 0},
-    sensorId: { type: Number, required: true, unique: true},
+    gpio: { type: Number },
+    channel: { type: Number },
     greenhouseId: { type: Number },
     tandonId: { type: Number }
 })

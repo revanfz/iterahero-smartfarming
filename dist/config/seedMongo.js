@@ -25,13 +25,14 @@ const seedData = () => __awaiter(void 0, void 0, void 0, function* () {
         yield Sensor_1.default.deleteMany();
         const data = yield prisma_1.prisma.sensor.findMany();
         const seedData = data.map((item) => {
-            var _a, _b, _c;
+            var _a, _b, _c, _d, _e;
             return ({
-                sensorId: item.id,
                 nama: item.name,
-                greenhouseId: (_a = item.greenhouseId) !== null && _a !== void 0 ? _a : undefined,
-                tandonId: (_b = item.tandonId) !== null && _b !== void 0 ? _b : undefined,
-                tandonBahanId: (_c = item.tandonBahanId) !== null && _c !== void 0 ? _c : undefined,
+                channel: (_a = item.channel) !== null && _a !== void 0 ? _a : undefined,
+                gpio: (_b = item.GPIO) !== null && _b !== void 0 ? _b : undefined,
+                greenhouseId: (_c = item.greenhouseId) !== null && _c !== void 0 ? _c : undefined,
+                tandonId: (_d = item.tandonId) !== null && _d !== void 0 ? _d : undefined,
+                tandonBahanId: (_e = item.tandonBahanId) !== null && _e !== void 0 ? _e : undefined,
             });
         });
         yield Sensor_1.default.insertMany(seedData, { ordered: false });

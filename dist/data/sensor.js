@@ -9,7 +9,8 @@ exports.seedingSensor = [
         persamaan: "e = mc^2",
         status: true,
         tandonId: 1,
-        type: "Sensor pH"
+        type: "Sensor pH",
+        channel: 0
     },
     {
         name: "Sensor Suhu",
@@ -18,7 +19,8 @@ exports.seedingSensor = [
         persamaan: "y = ax^2 + bx + c",
         status: true,
         tandonId: 1,
-        type: "Sensor Suhu"
+        type: "Sensor Suhu",
+        GPIO: 15
     },
     {
         name: "Sensor EC",
@@ -27,7 +29,8 @@ exports.seedingSensor = [
         persamaan: " 1/ D * Inv (x)",
         status: true,
         tandonId: 1,
-        type: "Sensor EC"
+        type: "Sensor EC",
+        channel: 1
     },
     {
         name: "Sensor pH",
@@ -36,7 +39,8 @@ exports.seedingSensor = [
         persamaan: "e = mc^2",
         status: true,
         tandonId: 2,
-        type: "Sensor pH"
+        type: "Sensor pH",
+        channel: 0
     },
     {
         name: "Sensor Suhu",
@@ -45,7 +49,8 @@ exports.seedingSensor = [
         persamaan: "y = ax^2 + bx + c",
         status: true,
         tandonId: 2,
-        type: "Sensor Suhu"
+        type: "Sensor Suhu",
+        GPIO: 15
     },
     {
         name: "Sensor Ec",
@@ -54,6 +59,7 @@ exports.seedingSensor = [
         persamaan: " 1/ D * Inv (x)",
         status: true,
         tandonId: 2,
-        type: "Sensor EC"
+        type: "Sensor EC",
+        channel: 1
     },
 ];

@@ -172,6 +172,8 @@ exports.Prisma.SensorScalarFieldEnum = {
   brand: 'brand',
   unit_measurement: 'unit_measurement',
   status: 'status',
+  channel: 'channel',
+  GPIO: 'GPIO',
   type: 'type',
   range_min: 'range_min',
   range_max: 'range_max',

@@ -38,10 +38,15 @@ export function connectMqtt() {
         })
       }
       else if (topic === "iterahero2023/info") {
-        data.sensor.forEach(async (item: object, index: number) => {
-          const id = Object.keys(item)[0]
+        data.sensor_adc.forEach(async (item: object, index: number) => {
+          const channel = Object.keys(item)[0]
           const val = Object.values(item)[0]
-          await SensorModel.findOneAndUpdate({ sensorId: parseInt(id)}, { nilai: val })
+          await SensorModel.findOneAndUpdate({ channel: parseInt(channel)}, { nilai: val })
+        })
+        data.sensor_non_adc.forEach(async (item: object, index: number) => {
+          const gpio = Object.keys(item)[0]
+          const val = Object.values(item)[0]
+          await SensorModel.findOneAndUpdate({ gpio }, { nilai: val })
         })
       }
       else if (topic === "iterahero2023/actuator") {

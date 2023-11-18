@@ -94,6 +94,8 @@ model Sensor {
   brand            String
   unit_measurement String
   status           Boolean
+  channel          Int?
+  GPIO             Int?
   icon             Icon         @relation(fields: [type], references: [name])
   type             String
   range_min        Int?

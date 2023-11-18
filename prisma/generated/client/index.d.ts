@@ -8226,6 +8226,8 @@ export namespace Prisma {
 
   export type SensorAvgAggregateOutputType = {
     id: number | null
+    channel: number | null
+    GPIO: number | null
     range_min: number | null
     range_max: number | null
     tandonId: number | null
@@ -8235,6 +8237,8 @@ export namespace Prisma {
 
   export type SensorSumAggregateOutputType = {
     id: number | null
+    channel: number | null
+    GPIO: number | null
     range_min: number | null
     range_max: number | null
     tandonId: number | null
@@ -8249,6 +8253,8 @@ export namespace Prisma {
     brand: string | null
     unit_measurement: string | null
     status: boolean | null
+    channel: number | null
+    GPIO: number | null
     type: string | null
     range_min: number | null
     range_max: number | null
@@ -8266,6 +8272,8 @@ export namespace Prisma {
     brand: string | null
     unit_measurement: string | null
     status: boolean | null
+    channel: number | null
+    GPIO: number | null
     type: string | null
     range_min: number | null
     range_max: number | null
@@ -8283,6 +8291,8 @@ export namespace Prisma {
     brand: number
     unit_measurement: number
     status: number
+    channel: number
+    GPIO: number
     type: number
     range_min: number
     range_max: number
@@ -8297,6 +8307,8 @@ export namespace Prisma {
 
   export type SensorAvgAggregateInputType = {
     id?: true
+    channel?: true
+    GPIO?: true
     range_min?: true
     range_max?: true
     tandonId?: true
@@ -8306,6 +8318,8 @@ export namespace Prisma {
 
   export type SensorSumAggregateInputType = {
     id?: true
+    channel?: true
+    GPIO?: true
     range_min?: true
     range_max?: true
     tandonId?: true
@@ -8320,6 +8334,8 @@ export namespace Prisma {
     brand?: true
     unit_measurement?: true
     status?: true
+    channel?: true
+    GPIO?: true
     type?: true
     range_min?: true
     range_max?: true
@@ -8337,6 +8353,8 @@ export namespace Prisma {
     brand?: true
     unit_measurement?: true
     status?: true
+    channel?: true
+    GPIO?: true
     type?: true
     range_min?: true
     range_max?: true
@@ -8354,6 +8372,8 @@ export namespace Prisma {
     brand?: true
     unit_measurement?: true
     status?: true
+    channel?: true
+    GPIO?: true
     type?: true
     range_min?: true
     range_max?: true
@@ -8458,6 +8478,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel: number | null
+    GPIO: number | null
     type: string
     range_min: number | null
     range_max: number | null
@@ -8494,6 +8516,8 @@ export namespace Prisma {
     brand?: boolean
     unit_measurement?: boolean
     status?: boolean
+    channel?: boolean
+    GPIO?: boolean
     type?: boolean
     range_min?: boolean
     range_max?: boolean
@@ -8515,6 +8539,8 @@ export namespace Prisma {
     brand?: boolean
     unit_measurement?: boolean
     status?: boolean
+    channel?: boolean
+    GPIO?: boolean
     type?: boolean
     range_min?: boolean
     range_max?: boolean
@@ -8548,6 +8574,8 @@ export namespace Prisma {
       brand: string
       unit_measurement: string
       status: boolean
+      channel: number | null
+      GPIO: number | null
       type: string
       range_min: number | null
       range_max: number | null
@@ -8963,6 +8991,8 @@ export namespace Prisma {
     readonly brand: FieldRef<"Sensor", 'String'>
     readonly unit_measurement: FieldRef<"Sensor", 'String'>
     readonly status: FieldRef<"Sensor", 'Boolean'>
+    readonly channel: FieldRef<"Sensor", 'Int'>
+    readonly GPIO: FieldRef<"Sensor", 'Int'>
     readonly type: FieldRef<"Sensor", 'String'>
     readonly range_min: FieldRef<"Sensor", 'Int'>
     readonly range_max: FieldRef<"Sensor", 'Int'>
@@ -13723,6 +13753,8 @@ export namespace Prisma {
     brand: 'brand',
     unit_measurement: 'unit_measurement',
     status: 'status',
+    channel: 'channel',
+    GPIO: 'GPIO',
     type: 'type',
     range_min: 'range_min',
     range_max: 'range_max',
@@ -14324,6 +14356,8 @@ export namespace Prisma {
     brand?: StringFilter<"Sensor"> | string
     unit_measurement?: StringFilter<"Sensor"> | string
     status?: BoolFilter<"Sensor"> | boolean
+    channel?: IntNullableFilter<"Sensor"> | number | null
+    GPIO?: IntNullableFilter<"Sensor"> | number | null
     type?: StringFilter<"Sensor"> | string
     range_min?: IntNullableFilter<"Sensor"> | number | null
     range_max?: IntNullableFilter<"Sensor"> | number | null
@@ -14345,6 +14379,8 @@ export namespace Prisma {
     brand?: SortOrder
     unit_measurement?: SortOrder
     status?: SortOrder
+    channel?: SortOrderInput | SortOrder
+    GPIO?: SortOrderInput | SortOrder
     type?: SortOrder
     range_min?: SortOrderInput | SortOrder
     range_max?: SortOrderInput | SortOrder
@@ -14369,6 +14405,8 @@ export namespace Prisma {
     brand?: StringFilter<"Sensor"> | string
     unit_measurement?: StringFilter<"Sensor"> | string
     status?: BoolFilter<"Sensor"> | boolean
+    channel?: IntNullableFilter<"Sensor"> | number | null
+    GPIO?: IntNullableFilter<"Sensor"> | number | null
     type?: StringFilter<"Sensor"> | string
     range_min?: IntNullableFilter<"Sensor"> | number | null
     range_max?: IntNullableFilter<"Sensor"> | number | null
@@ -14390,6 +14428,8 @@ export namespace Prisma {
     brand?: SortOrder
     unit_measurement?: SortOrder
     status?: SortOrder
+    channel?: SortOrderInput | SortOrder
+    GPIO?: SortOrderInput | SortOrder
     type?: SortOrder
     range_min?: SortOrderInput | SortOrder
     range_max?: SortOrderInput | SortOrder
@@ -14415,6 +14455,8 @@ export namespace Prisma {
     brand?: StringWithAggregatesFilter<"Sensor"> | string
     unit_measurement?: StringWithAggregatesFilter<"Sensor"> | string
     status?: BoolWithAggregatesFilter<"Sensor"> | boolean
+    channel?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
+    GPIO?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
     type?: StringWithAggregatesFilter<"Sensor"> | string
     range_min?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
     range_max?: IntNullableWithAggregatesFilter<"Sensor"> | number | null
@@ -15193,6 +15235,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     range_min?: number | null
     range_max?: number | null
     created_at?: Date | string
@@ -15210,6 +15254,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     type: string
     range_min?: number | null
     range_max?: number | null
@@ -15226,6 +15272,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15243,6 +15291,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     type?: StringFieldUpdateOperationsInput | string
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
@@ -15260,6 +15310,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     type: string
     range_min?: number | null
     range_max?: number | null
@@ -15276,6 +15328,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -15289,6 +15343,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     type?: StringFieldUpdateOperationsInput | string
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
@@ -16160,6 +16216,8 @@ export namespace Prisma {
     brand?: SortOrder
     unit_measurement?: SortOrder
     status?: SortOrder
+    channel?: SortOrder
+    GPIO?: SortOrder
     type?: SortOrder
     range_min?: SortOrder
     range_max?: SortOrder
@@ -16172,6 +16230,8 @@ export namespace Prisma {
 
   export type SensorAvgOrderByAggregateInput = {
     id?: SortOrder
+    channel?: SortOrder
+    GPIO?: SortOrder
     range_min?: SortOrder
     range_max?: SortOrder
     tandonId?: SortOrder
@@ -16186,6 +16246,8 @@ export namespace Prisma {
     brand?: SortOrder
     unit_measurement?: SortOrder
     status?: SortOrder
+    channel?: SortOrder
+    GPIO?: SortOrder
     type?: SortOrder
     range_min?: SortOrder
     range_max?: SortOrder
@@ -16203,6 +16265,8 @@ export namespace Prisma {
     brand?: SortOrder
     unit_measurement?: SortOrder
     status?: SortOrder
+    channel?: SortOrder
+    GPIO?: SortOrder
     type?: SortOrder
     range_min?: SortOrder
     range_max?: SortOrder
@@ -16215,6 +16279,8 @@ export namespace Prisma {
 
   export type SensorSumOrderByAggregateInput = {
     id?: SortOrder
+    channel?: SortOrder
+    GPIO?: SortOrder
     range_min?: SortOrder
     range_max?: SortOrder
     tandonId?: SortOrder
@@ -17992,6 +18058,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     range_min?: number | null
     range_max?: number | null
     created_at?: Date | string
@@ -18008,6 +18076,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     range_min?: number | null
     range_max?: number | null
     tandonId?: number | null
@@ -18092,6 +18162,8 @@ export namespace Prisma {
     brand?: StringFilter<"Sensor"> | string
     unit_measurement?: StringFilter<"Sensor"> | string
     status?: BoolFilter<"Sensor"> | boolean
+    channel?: IntNullableFilter<"Sensor"> | number | null
+    GPIO?: IntNullableFilter<"Sensor"> | number | null
     type?: StringFilter<"Sensor"> | string
     range_min?: IntNullableFilter<"Sensor"> | number | null
     range_max?: IntNullableFilter<"Sensor"> | number | null
@@ -18212,6 +18284,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     range_min?: number | null
     range_max?: number | null
     created_at?: Date | string
@@ -18228,6 +18302,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     type: string
     range_min?: number | null
     range_max?: number | null
@@ -19363,6 +19439,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     range_min?: number | null
     range_max?: number | null
     created_at?: Date | string
@@ -19379,6 +19457,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     type: string
     range_min?: number | null
     range_max?: number | null
@@ -19591,6 +19671,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     range_min?: number | null
     range_max?: number | null
     created_at?: Date | string
@@ -19607,6 +19689,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     type: string
     range_min?: number | null
     range_max?: number | null
@@ -20131,6 +20215,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     range_min?: number | null
     range_max?: number | null
     tandonId?: number | null
@@ -20161,6 +20247,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20177,6 +20265,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20193,6 +20283,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
     tandonId?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20268,6 +20360,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     type: string
     range_min?: number | null
     range_max?: number | null
@@ -20375,6 +20469,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20391,6 +20487,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     type?: StringFieldUpdateOperationsInput | string
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20407,6 +20505,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     type?: StringFieldUpdateOperationsInput | string
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20571,6 +20671,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     type: string
     range_min?: number | null
     range_max?: number | null
@@ -20601,6 +20703,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20617,6 +20721,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     type?: StringFieldUpdateOperationsInput | string
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20633,6 +20739,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     type?: StringFieldUpdateOperationsInput | string
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20693,6 +20801,8 @@ export namespace Prisma {
     brand: string
     unit_measurement: string
     status: boolean
+    channel?: number | null
+    GPIO?: number | null
     type: string
     range_min?: number | null
     range_max?: number | null
@@ -20749,6 +20859,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20765,6 +20877,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     type?: StringFieldUpdateOperationsInput | string
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
@@ -20781,6 +20895,8 @@ export namespace Prisma {
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
     type?: StringFieldUpdateOperationsInput | string
     range_min?: NullableIntFieldUpdateOperationsInput | number | null
     range_max?: NullableIntFieldUpdateOperationsInput | number | null
