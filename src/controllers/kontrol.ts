@@ -16,10 +16,20 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.notFound("Tidak ada aktuator dengan id tersebut");
     }
 
+    await prisma.aktuator.updateMany({
+      where: {
+        GPIO: data.GPIO
+      },
+      data: {
+        status: !data.status
+      }
+    })
+
     publishData(
-      "iterahero2023/actuator",
+      "iterahero2023/kontrol",
       JSON.stringify({ pin: data.GPIO })
     );
+
     return h
       .response({
         status: "success",

@@ -10,13 +10,5 @@ export const peracikanRoute: ServerRoute[] = [
         method: "POST",
         path,
         handler: postHandler,
-        options: {
-            tags: ['api'],
-            validate: {
-                payload: Joi.object({
-                    nama: Joi.string().required()
-                })
-            }
-        }
     }
 ]

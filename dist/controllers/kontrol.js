@@ -27,7 +27,15 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         if (!data) {
             return boom_1.default.notFound("Tidak ada aktuator dengan id tersebut");
         }
-        (0, mqtt_1.publishData)("iterahero2023/actuator", JSON.stringify({ pin: data.GPIO }));
+        yield prisma_1.prisma.aktuator.updateMany({
+            where: {
+                GPIO: data.GPIO
+            },
+            data: {
+                status: !data.status
+            }
+        });
+        (0, mqtt_1.publishData)("iterahero2023/kontrol", JSON.stringify({ pin: data.GPIO }));
         return h
             .response({
             status: "success",
