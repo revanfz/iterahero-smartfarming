@@ -277,13 +277,12 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
             where: {
                 greenhouseId: id,
             },
-            select: {
-                tandon: {
+            include: {
+                icon: {
                     select: {
-                        aktuator: true,
-                    },
-                },
-                id: true,
+                        logo: true
+                    }
+                }
             },
             take: size ? size : 100,
             skip: cursor ? 1 : 0,

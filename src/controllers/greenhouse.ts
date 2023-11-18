@@ -290,13 +290,12 @@ export const actuatorByGreenhouseHandler = async (
       where: {
         greenhouseId: id,
       },
-      select: {
-        tandon: {
+      include: {
+        icon: {
           select: {
-            aktuator: true,
-          },
-        },
-        id: true,
+            logo: true
+          }
+        }
       },
       take: size ? size : 100,
       skip: cursor ? 1 : 0,

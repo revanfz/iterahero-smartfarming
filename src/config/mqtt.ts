@@ -2,6 +2,7 @@ import * as mqtt from "mqtt";
 import "dotenv/config";
 import { prisma } from "./prisma";
 import SensorModel from "../models/Sensor";
+import { parse } from "path";
 
 const clientId = `Iterahero2023_${Math.random().toString().slice(4)}`;
 
@@ -42,17 +43,14 @@ export function connectMqtt() {
           const val = Object.values(item)[0]
           await SensorModel.findOneAndUpdate({ sensorId: parseInt(id)}, { nilai: val })
         })
-        data.actuator.forEach(async (item: object, index: number) => {
-          console.log(item)
-        })
       }
       else if (topic === "iterahero2023/actuator") {
         data.actuator.forEach(async (item: object, index: number) => {
-          const id = Object.keys(item)[0]
+          const port = Object.keys(item)[0]
           const status = Object.values(item)[0]
-          await prisma.aktuator.update({
+          await prisma.aktuator.updateMany({
             where: {
-              id: parseInt(id)
+              GPIO: parseInt(port)
             },
             data: {
               status

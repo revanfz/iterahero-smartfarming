@@ -75,17 +75,14 @@ function connectMqtt() {
                     const val = Object.values(item)[0];
                     yield Sensor_1.default.findOneAndUpdate({ sensorId: parseInt(id) }, { nilai: val });
                 }));
-                data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
-                    console.log(item);
-                }));
             }
             else if (topic === "iterahero2023/actuator") {
                 data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
-                    const id = Object.keys(item)[0];
+                    const port = Object.keys(item)[0];
                     const status = Object.values(item)[0];
-                    yield prisma_1.prisma.aktuator.update({
+                    yield prisma_1.prisma.aktuator.updateMany({
                         where: {
-                            id: parseInt(id)
+                            GPIO: parseInt(port)
                         },
                         data: {
                             status

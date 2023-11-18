@@ -14,6 +14,13 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         where: {
           id: id,
         },
+        include: {
+          icon: {
+            select: {
+              logo: true
+            }
+          }
+        }
       });
     } else {
       total = await prisma.aktuator.count({
@@ -24,6 +31,13 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       data = await prisma.aktuator.findMany({
         where: {
           tandonId: id,
+        },
+        include: {
+          icon: {
+            select: {
+              logo: true
+            }
+          }
         },
         skip: cursor ? 1 : 0,
         take: size ? size : 100,

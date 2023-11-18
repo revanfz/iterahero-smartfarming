@@ -28,6 +28,13 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 where: {
                     id: id,
                 },
+                include: {
+                    icon: {
+                        select: {
+                            logo: true
+                        }
+                    }
+                }
             });
         }
         else {
@@ -39,6 +46,13 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             data = yield prisma_1.prisma.aktuator.findMany({
                 where: {
                     tandonId: id,
+                },
+                include: {
+                    icon: {
+                        select: {
+                            logo: true
+                        }
+                    }
                 },
                 skip: cursor ? 1 : 0,
                 take: size ? size : 100,
