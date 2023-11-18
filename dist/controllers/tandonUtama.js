@@ -72,6 +72,13 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
                     id,
                 },
             },
+            include: {
+                icon: {
+                    select: {
+                        logo: true,
+                    }
+                }
+            },
             take: size ? size : 100,
             skip: cursor ? 1 : 0,
             cursor: cursor ? { id: cursor } : undefined,

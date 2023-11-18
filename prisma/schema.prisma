@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider      = "prisma-client-js"
-  output        = "./generated/client"
+  provider = "prisma-client-js"
+  output   = "./generated/client"
   // binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -24,6 +24,16 @@ model User {
   penjadwalan  Penjadwalan[]
   created_at   DateTime       @default(now())
   updated_at   DateTime?      @updatedAt
+}
+
+model Icon {
+  id         Int        @id @default(autoincrement())
+  logo       String
+  name       String     @unique
+  created_at DateTime   @default(now())
+  updated_at DateTime?  @updatedAt
+  sensor     Sensor[]
+  aktuator   Aktuator[]
 }
 
 model Greenhouse {
@@ -84,8 +94,8 @@ model Sensor {
   brand            String
   unit_measurement String
   status           Boolean
-  nilai            Int
-  icon             String?
+  icon             Icon         @relation(fields: [type], references: [name])
+  type             String
   range_min        Int?
   range_max        Int?
   tandon           Tandon?      @relation(fields: [tandonId], references: [id])
@@ -102,10 +112,11 @@ model Aktuator {
   id                  Int                @id @default(autoincrement())
   name                String
   merek               String
-  icon                String
   color               String
   status              Boolean
-  portRaspi           Int
+  GPIO                Int
+  icon                Icon               @relation(fields: [type], references: [name])
+  type                String
   tandon              Tandon?            @relation(fields: [tandonId], references: [id])
   tandonId            Int?
   greenhouse          Greenhouse?        @relation(fields: [greenhouseId], references: [id])

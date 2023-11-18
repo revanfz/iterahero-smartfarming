@@ -117,6 +117,14 @@ exports.Prisma.UserScalarFieldEnum = {
   updated_at: 'updated_at'
 };
 
+exports.Prisma.IconScalarFieldEnum = {
+  id: 'id',
+  logo: 'logo',
+  name: 'name',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.GreenhouseScalarFieldEnum = {
   id: 'id',
   name: 'name',
@@ -164,8 +172,7 @@ exports.Prisma.SensorScalarFieldEnum = {
   brand: 'brand',
   unit_measurement: 'unit_measurement',
   status: 'status',
-  nilai: 'nilai',
-  icon: 'icon',
+  type: 'type',
   range_min: 'range_min',
   range_max: 'range_max',
   tandonId: 'tandonId',
@@ -179,10 +186,10 @@ exports.Prisma.AktuatorScalarFieldEnum = {
   id: 'id',
   name: 'name',
   merek: 'merek',
-  icon: 'icon',
   color: 'color',
   status: 'status',
-  portRaspi: 'portRaspi',
+  GPIO: 'GPIO',
+  type: 'type',
   tandonId: 'tandonId',
   greenhouseId: 'greenhouseId',
   tandonPenyimpananId: 'tandonPenyimpananId',
@@ -239,6 +246,7 @@ exports.Prisma.NullsOrder = {
 
 exports.Prisma.ModelName = {
   User: 'User',
+  Icon: 'Icon',
   Greenhouse: 'Greenhouse',
   TandonPenyimpanan: 'TandonPenyimpanan',
   Resep: 'Resep',

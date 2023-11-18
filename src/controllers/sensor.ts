@@ -3,18 +3,17 @@ import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
-  const id = parseInt(request.query.id);
   const size = parseInt(request.query.size);
   const cursor = parseInt(request.query.cursor);
   try {
-    const total = await prisma.sensor.count({
-      where: {
-        tandonId: id,
-      },
-    });
+    const total = await prisma.sensor.count();
     const data = await prisma.sensor.findMany({
-      where: {
-        tandonId: id,
+      include: {
+        icon: {
+          select: {
+            logo: true
+          }
+        }
       },
       take: size ? size : 100,
       skip: cursor ? 1 : 0,

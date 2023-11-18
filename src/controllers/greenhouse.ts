@@ -238,6 +238,13 @@ export const sensorByGreenhouseHandler = async (
       where: {
         greenhouseId: id,
       },
+      include: {
+        icon: {
+          select: {
+            logo: true,
+          }
+        }
+      },
       cursor: cursor ? { id: cursor } : undefined,
       take: size ? size : 100,
       skip: cursor ? 1 : 0,

@@ -18,7 +18,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 
     publishData(
       "iterahero2023/actuator",
-      JSON.stringify({ pin: data.portRaspi })
+      JSON.stringify({ pin: data.GPIO })
     );
     return h
       .response({

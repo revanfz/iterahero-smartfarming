@@ -65,7 +65,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         const { resep, id_tandon, waktu, hari, durasi, id_greenhouse } = request.payload;
         const resepTarget = yield prisma_1.prisma.resep.findFirst({
             where: {
-                nama: resep,
+                id: resep,
             },
         });
         if (!resepTarget) {

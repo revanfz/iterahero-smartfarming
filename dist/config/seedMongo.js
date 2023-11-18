@@ -15,17 +15,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importDefault(require("mongoose"));
 require("dotenv/config");
 const Sensor_1 = __importDefault(require("../models/Sensor"));
+const prisma_1 = require("./prisma");
 const connect = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield mongoose_1.default.connect(process.env.MONGODB_URL || '');
+    yield mongoose_1.default.connect(process.env.MONGODB_URL || "");
 });
 const seedData = () => __awaiter(void 0, void 0, void 0, function* () {
     yield connect();
     try {
-        yield Sensor_1.default.insertMany([
-            { nama: "Sensor PH", sensorId: 14 },
-            { nama: "Sensor Suhu", sensorId: 15 },
-            { nama: "Sensor TDS", sensorId: 16 }
-        ], { ordered: false });
+        yield Sensor_1.default.deleteMany();
+        const data = yield prisma_1.prisma.sensor.findMany();
+        const seedData = data.map((item) => {
+            var _a, _b, _c;
+            return ({
+                sensorId: item.id,
+                nama: item.name,
+                greenhouseId: (_a = item.greenhouseId) !== null && _a !== void 0 ? _a : undefined,
+                tandonId: (_b = item.tandonId) !== null && _b !== void 0 ? _b : undefined,
+                tandonBahanId: (_c = item.tandonBahanId) !== null && _c !== void 0 ? _c : undefined,
+            });
+        });
+        yield Sensor_1.default.insertMany(seedData, { ordered: false });
     }
     catch (error) {
     }

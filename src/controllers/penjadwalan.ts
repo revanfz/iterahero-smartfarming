@@ -9,7 +9,7 @@ import {
 
 interface InputPenjadwalan {
   id_tandon: number;
-  resep: string;
+  resep: number;
   waktu: string[];
   durasi: number;
   hari: number[];
@@ -67,7 +67,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       request.payload as InputPenjadwalan;
     const resepTarget = await prisma.resep.findFirst({
       where: {
-        nama: resep,
+        id: resep,
       },
     });
 

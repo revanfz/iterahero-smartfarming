@@ -63,6 +63,13 @@ export const sensorByTandonHandler = async (
           id,
         },
       },
+      include: {
+        icon: {
+          select: {
+            logo: true,
+          }
+        }
+      },
       take: size ? size : 100,
       skip: cursor ? 1 : 0,
       cursor: cursor ? { id: cursor } : undefined,

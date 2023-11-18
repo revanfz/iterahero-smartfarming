@@ -70,11 +70,27 @@ function connectMqtt() {
                 });
             }
             else if (topic === "iterahero2023/info") {
-                console.log(data.sensor);
                 data.sensor.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
                     const id = Object.keys(item)[0];
                     const val = Object.values(item)[0];
                     yield Sensor_1.default.findOneAndUpdate({ sensorId: parseInt(id) }, { nilai: val });
+                }));
+                data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
+                    console.log(item);
+                }));
+            }
+            else if (topic === "iterahero2023/actuator") {
+                data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
+                    const id = Object.keys(item)[0];
+                    const status = Object.values(item)[0];
+                    yield prisma_1.prisma.aktuator.update({
+                        where: {
+                            id: parseInt(id)
+                        },
+                        data: {
+                            status
+                        }
+                    });
                 }));
             }
         }

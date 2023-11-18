@@ -19,6 +19,7 @@ const tandonPenyimpanan_1 = require("../data/tandonPenyimpanan");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const prisma_1 = require("./prisma");
 const tandon_1 = require("../data/tandon");
+const icon_1 = require("../data/icon");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
         const admin = yield prisma_1.prisma.user.upsert({
@@ -75,6 +76,9 @@ function main() {
         const tandonPenyimpanan = yield prisma_1.prisma.tandonPenyimpanan.createMany({
             data: tandonPenyimpanan_1.tandonPenyimpananSeeding,
         });
+        const icon = yield prisma_1.prisma.icon.createMany({
+            data: icon_1.iconSeeding
+        });
         const selenoid = yield prisma_1.prisma.aktuator.createMany({
             data: aktuator_1.aktuatorSeeding,
         });
@@ -112,6 +116,7 @@ function main() {
             admin,
             operator,
             selenoid,
+            icon,
             tandonPenyimpanan,
             resep,
             resep2,

@@ -15,9 +15,18 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.getHandler = void 0;
 const boom_1 = __importDefault(require("@hapi/boom"));
 const Sensor_1 = __importDefault(require("../models/Sensor"));
-const getHandler = (_request, h) => __awaiter(void 0, void 0, void 0, function* () {
+const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield Sensor_1.default.find();
+        let filter = {};
+        const id_greenhouse = request.query.id_greenhouse;
+        const id_tandon = request.query.id_tandon;
+        if (id_greenhouse) {
+            filter = { greenhouseId: id_greenhouse };
+        }
+        if (id_tandon) {
+            filter = { tandonId: id_tandon };
+        }
+        const data = yield Sensor_1.default.find(filter);
         return h.response({
             status: 'success',
             data

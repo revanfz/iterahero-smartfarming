@@ -17,18 +17,17 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
-    const id = parseInt(request.query.id);
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
     try {
-        const total = yield prisma_1.prisma.sensor.count({
-            where: {
-                tandonId: id,
-            },
-        });
+        const total = yield prisma_1.prisma.sensor.count();
         const data = yield prisma_1.prisma.sensor.findMany({
-            where: {
-                tandonId: id,
+            include: {
+                icon: {
+                    select: {
+                        logo: true
+                    }
+                }
             },
             take: size ? size : 100,
             skip: cursor ? 1 : 0,

@@ -5,26 +5,59 @@ import { publishData } from "../config/mqtt";
 
 interface InputResep {
   nama: string;
+  resep: number
+  id_tandon: number,
+  durasi: number,
+  id_greenhouse: number
 }
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
   try {
-    const { nama } = request.payload as InputResep;
-    const data = await prisma.resep.findFirst({
+    const { resep, id_tandon, durasi, id_greenhouse  } = request.payload as InputResep;
+    const komposisi = await prisma.resep.findFirst({
       where: {
-        nama,
+        id: resep,
       },
     });
 
-    if (!data) {
-      return Boom.notFound(`Tidak ada resep dengan nama: ${nama}`);
+    const rasio = await prisma.tandon.findUnique({
+      where: {
+        id: id_tandon
+      },
+      select: {
+        rasioA: true,
+        rasioB: true,
+        rasioAir: true,
+        ppm: true
+      }
+    })
+
+    const aktuator = await prisma.aktuator.findMany({
+      where: {
+        greenhouseId: id_greenhouse
+      }
+    })
+
+    publishData("iterahero2023/peracikan", JSON.stringify({
+      komposisi,
+      lamaPenyiraman: durasi,
+      konstanta: rasio,
+      aktuator
+    }));
+
+    
+    if (!komposisi) {
+      return Boom.notFound(`Tidak ada resep dengan nama: ${resep}`);
+    } else if (!rasio) {
+      return Boom.badRequest("Konstanta pupuk belum diatur pada tandon peracikan")
+    } else if (aktuator.length < 1) {
+      console.log("Gabisa distribusi")
     }
 
-    publishData("iterahero/peracikan", JSON.stringify(data));
     return h
       .response({
         status: "success",
-        message: data,
+        message: komposisi,
       })
       .code(200);
   } catch (e) {
