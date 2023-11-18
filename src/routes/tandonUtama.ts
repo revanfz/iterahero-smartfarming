@@ -2,6 +2,7 @@ import { ServerRoute } from "@hapi/hapi";
 import {
   actuatorByTandonHandler,
   getHandler,
+  patchHandler,
   sensorByTandonHandler,
 } from "../controllers/tandonUtama";
 import { prefix } from "../utils/prefix";
@@ -46,5 +47,10 @@ export const tandonUtamaRoute: ServerRoute[] = [
         }),
       },
     },
+  },
+  {
+    method: "PATCH",
+    path,
+    handler: patchHandler
   },
 ];

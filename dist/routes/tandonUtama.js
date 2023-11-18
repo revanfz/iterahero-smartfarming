@@ -46,4 +46,9 @@ exports.tandonUtamaRoute = [
             },
         },
     },
+    {
+        method: "PATCH",
+        path,
+        handler: tandonUtama_1.patchHandler
+    },
 ];
