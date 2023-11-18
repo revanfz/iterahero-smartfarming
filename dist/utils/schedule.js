@@ -106,8 +106,9 @@ const schedulePeracikan = (id, jam, hari, resep, durasi, id_greenhouse) => __awa
             }
         });
         if (komposisi && rasio && aktuator) {
+            console.log("Peracikan");
             schedule.scheduleJob(`iterahero2023-peracikan-${id}`, rule, function (resep, durasi, rasio, aktuator) {
-                (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
+                (0, mqtt_1.publishData)("iterahero2023/penjadwalan-peracikan", JSON.stringify({
                     komposisi: resep,
                     lamaPenyiraman: durasi,
                     konstanta: rasio,

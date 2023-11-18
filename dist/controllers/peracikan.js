@@ -18,7 +18,7 @@ const prisma_1 = require("../config/prisma");
 const mqtt_1 = require("../config/mqtt");
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { resep, id_tandon, durasi, id_greenhouse } = request.payload;
+        const { resep, id_tandon } = request.payload;
         const komposisi = yield prisma_1.prisma.resep.findFirst({
             where: {
                 id: resep,
@@ -35,25 +35,15 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 ppm: true
             }
         });
-        const aktuator = yield prisma_1.prisma.aktuator.findMany({
-            where: {
-                greenhouseId: id_greenhouse
-            }
-        });
         (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
             komposisi,
-            lamaPenyiraman: durasi,
             konstanta: rasio,
-            aktuator
         }));
         if (!komposisi) {
             return boom_1.default.notFound(`Tidak ada resep dengan nama: ${resep}`);
         }
         else if (!rasio) {
             return boom_1.default.badRequest("Konstanta pupuk belum diatur pada tandon peracikan");
-        }
-        else if (aktuator.length < 1) {
-            console.log("Gabisa distribusi");
         }
         return h
             .response({
