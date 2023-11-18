@@ -73,12 +73,12 @@ function connectMqtt() {
                 data.sensor_adc.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
                     const channel = Object.keys(item)[0];
                     const val = Object.values(item)[0];
-                    yield Sensor_1.default.findOneAndUpdate({ channel: parseInt(channel) }, { nilai: val });
+                    yield Sensor_1.default.updateMany({ channel: parseInt(channel) }, { nilai: val });
                 }));
                 data.sensor_non_adc.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
                     const gpio = Object.keys(item)[0];
                     const val = Object.values(item)[0];
-                    yield Sensor_1.default.findOneAndUpdate({ gpio }, { nilai: val });
+                    yield Sensor_1.default.updateMany({ gpio: parseInt(gpio) }, { nilai: val });
                 }));
             }
             else if (topic === "iterahero2023/actuator") {

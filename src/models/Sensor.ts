@@ -18,6 +18,6 @@ const sensorSchema = new Schema<Model>({
     tandonId: { type: Number }
 })
 
-const SensorModel = mongoose.model<Model>('Model', sensorSchema)
+const SensorModel = mongoose.model<Model>('Sensor', sensorSchema)
 
 export default SensorModel

@@ -2,7 +2,6 @@ import * as mqtt from "mqtt";
 import "dotenv/config";
 import { prisma } from "./prisma";
 import SensorModel from "../models/Sensor";
-import { parse } from "path";
 
 const clientId = `Iterahero2023_${Math.random().toString().slice(4)}`;
 
@@ -19,7 +18,7 @@ export function connectMqtt() {
   });
 
   broker.on("connect", () => {
-    console.log("Connected to MQTT");
+   console.log("Connected to MQTT");
     broker.subscribe("iterahero2023/#");
   });
 
@@ -41,12 +40,12 @@ export function connectMqtt() {
         data.sensor_adc.forEach(async (item: object, index: number) => {
           const channel = Object.keys(item)[0]
           const val = Object.values(item)[0]
-          await SensorModel.findOneAndUpdate({ channel: parseInt(channel)}, { nilai: val })
+          await SensorModel.updateMany({ channel: parseInt(channel)}, { nilai: val })
         })
         data.sensor_non_adc.forEach(async (item: object, index: number) => {
           const gpio = Object.keys(item)[0]
           const val = Object.values(item)[0]
-          await SensorModel.findOneAndUpdate({ gpio }, { nilai: val })
+          await SensorModel.updateMany({ gpio: parseInt(gpio) }, { nilai: val })
         })
       }
       else if (topic === "iterahero2023/actuator") {

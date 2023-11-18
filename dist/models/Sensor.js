@@ -32,5 +32,5 @@ const sensorSchema = new mongoose_1.Schema({
     greenhouseId: { type: Number },
     tandonId: { type: Number }
 });
-const SensorModel = mongoose_1.default.model('Model', sensorSchema);
+const SensorModel = mongoose_1.default.model('Sensor', sensorSchema);
 exports.default = SensorModel;

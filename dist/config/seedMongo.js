@@ -25,19 +25,19 @@ const seedData = () => __awaiter(void 0, void 0, void 0, function* () {
         yield Sensor_1.default.deleteMany();
         const data = yield prisma_1.prisma.sensor.findMany();
         const seedData = data.map((item) => {
-            var _a, _b, _c, _d, _e;
+            var _a, _b, _c, _d;
             return ({
                 nama: item.name,
                 channel: (_a = item.channel) !== null && _a !== void 0 ? _a : undefined,
                 gpio: (_b = item.GPIO) !== null && _b !== void 0 ? _b : undefined,
                 greenhouseId: (_c = item.greenhouseId) !== null && _c !== void 0 ? _c : undefined,
-                tandonId: (_d = item.tandonId) !== null && _d !== void 0 ? _d : undefined,
-                tandonBahanId: (_e = item.tandonBahanId) !== null && _e !== void 0 ? _e : undefined,
+                tandonId: (_d = item.tandonId) !== null && _d !== void 0 ? _d : undefined
             });
         });
-        yield Sensor_1.default.insertMany(seedData, { ordered: false });
+        yield Sensor_1.default.insertMany(seedData);
     }
     catch (error) {
+        console.log(error);
     }
     finally {
         mongoose_1.default.disconnect();
