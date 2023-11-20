@@ -2,8 +2,8 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
-  output   = "./generated/client"
+  provider      = "prisma-client-js"
+  output        = "./generated/client"
   // binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
@@ -24,16 +24,6 @@ model User {
   penjadwalan  Penjadwalan[]
   created_at   DateTime       @default(now())
   updated_at   DateTime?      @updatedAt
-}
-
-model Icon {
-  id         Int        @id @default(autoincrement())
-  logo       String
-  name       String     @unique
-  created_at DateTime   @default(now())
-  updated_at DateTime?  @updatedAt
-  sensor     Sensor[]
-  aktuator   Aktuator[]
 }
 
 model Greenhouse {
@@ -87,10 +77,20 @@ model Penjadwalan {
   updated_at   DateTime?  @updatedAt
 }
 
+model Icon {
+  id         Int        @id @default(autoincrement())
+  logo       String
+  name       String     @unique
+  created_at DateTime   @default(now())
+  updated_at DateTime?  @updatedAt
+  sensor     Sensor[]
+  aktuator   Aktuator[]
+}
+
 model Sensor {
   id               Int          @id @default(autoincrement())
   name             String
-  persamaan        String
+  calibration      String?
   brand            String
   unit_measurement String
   status           Boolean

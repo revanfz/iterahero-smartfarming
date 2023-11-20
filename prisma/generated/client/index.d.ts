@@ -19,11 +19,6 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
 /**
- * Model Icon
- * 
- */
-export type Icon = $Result.DefaultSelection<Prisma.$IconPayload>
-/**
  * Model Greenhouse
  * 
  */
@@ -43,6 +38,11 @@ export type Resep = $Result.DefaultSelection<Prisma.$ResepPayload>
  * 
  */
 export type Penjadwalan = $Result.DefaultSelection<Prisma.$PenjadwalanPayload>
+/**
+ * Model Icon
+ * 
+ */
+export type Icon = $Result.DefaultSelection<Prisma.$IconPayload>
 /**
  * Model Sensor
  * 
@@ -202,16 +202,6 @@ export class PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs>;
 
   /**
-   * `prisma.icon`: Exposes CRUD operations for the **Icon** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Icons
-    * const icons = await prisma.icon.findMany()
-    * ```
-    */
-  get icon(): Prisma.IconDelegate<ExtArgs>;
-
-  /**
    * `prisma.greenhouse`: Exposes CRUD operations for the **Greenhouse** model.
     * Example usage:
     * ```ts
@@ -250,6 +240,16 @@ export class PrismaClient<
     * ```
     */
   get penjadwalan(): Prisma.PenjadwalanDelegate<ExtArgs>;
+
+  /**
+   * `prisma.icon`: Exposes CRUD operations for the **Icon** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Icons
+    * const icons = await prisma.icon.findMany()
+    * ```
+    */
+  get icon(): Prisma.IconDelegate<ExtArgs>;
 
   /**
    * `prisma.sensor`: Exposes CRUD operations for the **Sensor** model.
@@ -771,11 +771,11 @@ export namespace Prisma {
 
   export const ModelName: {
     User: 'User',
-    Icon: 'Icon',
     Greenhouse: 'Greenhouse',
     TandonPenyimpanan: 'TandonPenyimpanan',
     Resep: 'Resep',
     Penjadwalan: 'Penjadwalan',
+    Icon: 'Icon',
     Sensor: 'Sensor',
     Aktuator: 'Aktuator',
     TandonBahan: 'TandonBahan',
@@ -797,7 +797,7 @@ export namespace Prisma {
 
   export type TypeMap<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     meta: {
-      modelProps: 'user' | 'icon' | 'greenhouse' | 'tandonPenyimpanan' | 'resep' | 'penjadwalan' | 'sensor' | 'aktuator' | 'tandonBahan' | 'tandon' | 'notification'
+      modelProps: 'user' | 'greenhouse' | 'tandonPenyimpanan' | 'resep' | 'penjadwalan' | 'icon' | 'sensor' | 'aktuator' | 'tandonBahan' | 'tandon' | 'notification'
       txIsolationLevel: Prisma.TransactionIsolationLevel
     },
     model: {
@@ -864,72 +864,6 @@ export namespace Prisma {
           count: {
             args: Prisma.UserCountArgs<ExtArgs>,
             result: $Utils.Optional<UserCountAggregateOutputType> | number
-          }
-        }
-      }
-      Icon: {
-        payload: Prisma.$IconPayload<ExtArgs>
-        fields: Prisma.IconFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.IconFindUniqueArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$IconPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.IconFindUniqueOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$IconPayload>
-          }
-          findFirst: {
-            args: Prisma.IconFindFirstArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$IconPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.IconFindFirstOrThrowArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$IconPayload>
-          }
-          findMany: {
-            args: Prisma.IconFindManyArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$IconPayload>[]
-          }
-          create: {
-            args: Prisma.IconCreateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$IconPayload>
-          }
-          createMany: {
-            args: Prisma.IconCreateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          delete: {
-            args: Prisma.IconDeleteArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$IconPayload>
-          }
-          update: {
-            args: Prisma.IconUpdateArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$IconPayload>
-          }
-          deleteMany: {
-            args: Prisma.IconDeleteManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          updateMany: {
-            args: Prisma.IconUpdateManyArgs<ExtArgs>,
-            result: Prisma.BatchPayload
-          }
-          upsert: {
-            args: Prisma.IconUpsertArgs<ExtArgs>,
-            result: $Utils.PayloadToResult<Prisma.$IconPayload>
-          }
-          aggregate: {
-            args: Prisma.IconAggregateArgs<ExtArgs>,
-            result: $Utils.Optional<AggregateIcon>
-          }
-          groupBy: {
-            args: Prisma.IconGroupByArgs<ExtArgs>,
-            result: $Utils.Optional<IconGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.IconCountArgs<ExtArgs>,
-            result: $Utils.Optional<IconCountAggregateOutputType> | number
           }
         }
       }
@@ -1194,6 +1128,72 @@ export namespace Prisma {
           count: {
             args: Prisma.PenjadwalanCountArgs<ExtArgs>,
             result: $Utils.Optional<PenjadwalanCountAggregateOutputType> | number
+          }
+        }
+      }
+      Icon: {
+        payload: Prisma.$IconPayload<ExtArgs>
+        fields: Prisma.IconFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.IconFindUniqueArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$IconPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.IconFindUniqueOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$IconPayload>
+          }
+          findFirst: {
+            args: Prisma.IconFindFirstArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$IconPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.IconFindFirstOrThrowArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$IconPayload>
+          }
+          findMany: {
+            args: Prisma.IconFindManyArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$IconPayload>[]
+          }
+          create: {
+            args: Prisma.IconCreateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$IconPayload>
+          }
+          createMany: {
+            args: Prisma.IconCreateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          delete: {
+            args: Prisma.IconDeleteArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$IconPayload>
+          }
+          update: {
+            args: Prisma.IconUpdateArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$IconPayload>
+          }
+          deleteMany: {
+            args: Prisma.IconDeleteManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          updateMany: {
+            args: Prisma.IconUpdateManyArgs<ExtArgs>,
+            result: Prisma.BatchPayload
+          }
+          upsert: {
+            args: Prisma.IconUpsertArgs<ExtArgs>,
+            result: $Utils.PayloadToResult<Prisma.$IconPayload>
+          }
+          aggregate: {
+            args: Prisma.IconAggregateArgs<ExtArgs>,
+            result: $Utils.Optional<AggregateIcon>
+          }
+          groupBy: {
+            args: Prisma.IconGroupByArgs<ExtArgs>,
+            result: $Utils.Optional<IconGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.IconCountArgs<ExtArgs>,
+            result: $Utils.Optional<IconCountAggregateOutputType> | number
           }
         }
       }
@@ -1740,50 +1740,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type IconCountOutputType
-   */
-
-  export type IconCountOutputType = {
-    sensor: number
-    aktuator: number
-  }
-
-  export type IconCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    sensor?: boolean | IconCountOutputTypeCountSensorArgs
-    aktuator?: boolean | IconCountOutputTypeCountAktuatorArgs
-  }
-
-  // Custom InputTypes
-
-  /**
-   * IconCountOutputType without action
-   */
-  export type IconCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the IconCountOutputType
-     */
-    select?: IconCountOutputTypeSelect<ExtArgs> | null
-  }
-
-
-  /**
-   * IconCountOutputType without action
-   */
-  export type IconCountOutputTypeCountSensorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: SensorWhereInput
-  }
-
-
-  /**
-   * IconCountOutputType without action
-   */
-  export type IconCountOutputTypeCountAktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: AktuatorWhereInput
-  }
-
-
-
-  /**
    * Count Type GreenhouseCountOutputType
    */
 
@@ -1911,6 +1867,50 @@ export namespace Prisma {
    */
   export type ResepCountOutputTypeCountPenjadwalanArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
     where?: PenjadwalanWhereInput
+  }
+
+
+
+  /**
+   * Count Type IconCountOutputType
+   */
+
+  export type IconCountOutputType = {
+    sensor: number
+    aktuator: number
+  }
+
+  export type IconCountOutputTypeSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    sensor?: boolean | IconCountOutputTypeCountSensorArgs
+    aktuator?: boolean | IconCountOutputTypeCountAktuatorArgs
+  }
+
+  // Custom InputTypes
+
+  /**
+   * IconCountOutputType without action
+   */
+  export type IconCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the IconCountOutputType
+     */
+    select?: IconCountOutputTypeSelect<ExtArgs> | null
+  }
+
+
+  /**
+   * IconCountOutputType without action
+   */
+  export type IconCountOutputTypeCountSensorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: SensorWhereInput
+  }
+
+
+  /**
+   * IconCountOutputType without action
+   */
+  export type IconCountOutputTypeCountAktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: AktuatorWhereInput
   }
 
 
@@ -3108,1007 +3108,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well.
      */
     include?: UserInclude<ExtArgs> | null
-  }
-
-
-
-  /**
-   * Model Icon
-   */
-
-  export type AggregateIcon = {
-    _count: IconCountAggregateOutputType | null
-    _avg: IconAvgAggregateOutputType | null
-    _sum: IconSumAggregateOutputType | null
-    _min: IconMinAggregateOutputType | null
-    _max: IconMaxAggregateOutputType | null
-  }
-
-  export type IconAvgAggregateOutputType = {
-    id: number | null
-  }
-
-  export type IconSumAggregateOutputType = {
-    id: number | null
-  }
-
-  export type IconMinAggregateOutputType = {
-    id: number | null
-    logo: string | null
-    name: string | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type IconMaxAggregateOutputType = {
-    id: number | null
-    logo: string | null
-    name: string | null
-    created_at: Date | null
-    updated_at: Date | null
-  }
-
-  export type IconCountAggregateOutputType = {
-    id: number
-    logo: number
-    name: number
-    created_at: number
-    updated_at: number
-    _all: number
-  }
-
-
-  export type IconAvgAggregateInputType = {
-    id?: true
-  }
-
-  export type IconSumAggregateInputType = {
-    id?: true
-  }
-
-  export type IconMinAggregateInputType = {
-    id?: true
-    logo?: true
-    name?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type IconMaxAggregateInputType = {
-    id?: true
-    logo?: true
-    name?: true
-    created_at?: true
-    updated_at?: true
-  }
-
-  export type IconCountAggregateInputType = {
-    id?: true
-    logo?: true
-    name?: true
-    created_at?: true
-    updated_at?: true
-    _all?: true
-  }
-
-  export type IconAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Icon to aggregate.
-     */
-    where?: IconWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Icons to fetch.
-     */
-    orderBy?: IconOrderByWithRelationInput | IconOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: IconWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Icons from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Icons.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned Icons
-    **/
-    _count?: true | IconCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to average
-    **/
-    _avg?: IconAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: IconSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: IconMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: IconMaxAggregateInputType
-  }
-
-  export type GetIconAggregateType<T extends IconAggregateArgs> = {
-        [P in keyof T & keyof AggregateIcon]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateIcon[P]>
-      : GetScalarType<T[P], AggregateIcon[P]>
-  }
-
-
-
-
-  export type IconGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    where?: IconWhereInput
-    orderBy?: IconOrderByWithAggregationInput | IconOrderByWithAggregationInput[]
-    by: IconScalarFieldEnum[] | IconScalarFieldEnum
-    having?: IconScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: IconCountAggregateInputType | true
-    _avg?: IconAvgAggregateInputType
-    _sum?: IconSumAggregateInputType
-    _min?: IconMinAggregateInputType
-    _max?: IconMaxAggregateInputType
-  }
-
-  export type IconGroupByOutputType = {
-    id: number
-    logo: string
-    name: string
-    created_at: Date
-    updated_at: Date | null
-    _count: IconCountAggregateOutputType | null
-    _avg: IconAvgAggregateOutputType | null
-    _sum: IconSumAggregateOutputType | null
-    _min: IconMinAggregateOutputType | null
-    _max: IconMaxAggregateOutputType | null
-  }
-
-  type GetIconGroupByPayload<T extends IconGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<IconGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof IconGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], IconGroupByOutputType[P]>
-            : GetScalarType<T[P], IconGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type IconSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    logo?: boolean
-    name?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-    sensor?: boolean | Icon$sensorArgs<ExtArgs>
-    aktuator?: boolean | Icon$aktuatorArgs<ExtArgs>
-    _count?: boolean | IconCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["icon"]>
-
-  export type IconSelectScalar = {
-    id?: boolean
-    logo?: boolean
-    name?: boolean
-    created_at?: boolean
-    updated_at?: boolean
-  }
-
-  export type IconInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    sensor?: boolean | Icon$sensorArgs<ExtArgs>
-    aktuator?: boolean | Icon$aktuatorArgs<ExtArgs>
-    _count?: boolean | IconCountOutputTypeDefaultArgs<ExtArgs>
-  }
-
-
-  export type $IconPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    name: "Icon"
-    objects: {
-      sensor: Prisma.$SensorPayload<ExtArgs>[]
-      aktuator: Prisma.$AktuatorPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetResult<{
-      id: number
-      logo: string
-      name: string
-      created_at: Date
-      updated_at: Date | null
-    }, ExtArgs["result"]["icon"]>
-    composites: {}
-  }
-
-
-  type IconGetPayload<S extends boolean | null | undefined | IconDefaultArgs> = $Result.GetResult<Prisma.$IconPayload, S>
-
-  type IconCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
-    Omit<IconFindManyArgs, 'select' | 'include'> & {
-      select?: IconCountAggregateInputType | true
-    }
-
-  export interface IconDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Icon'], meta: { name: 'Icon' } }
-    /**
-     * Find zero or one Icon that matches the filter.
-     * @param {IconFindUniqueArgs} args - Arguments to find a Icon
-     * @example
-     * // Get one Icon
-     * const icon = await prisma.icon.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUnique<T extends IconFindUniqueArgs<ExtArgs>>(
-      args: SelectSubset<T, IconFindUniqueArgs<ExtArgs>>
-    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
-
-    /**
-     * Find one Icon that matches the filter or throw an error  with `error.code='P2025'` 
-     *     if no matches were found.
-     * @param {IconFindUniqueOrThrowArgs} args - Arguments to find a Icon
-     * @example
-     * // Get one Icon
-     * const icon = await prisma.icon.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findUniqueOrThrow<T extends IconFindUniqueOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, IconFindUniqueOrThrowArgs<ExtArgs>>
-    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find the first Icon that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {IconFindFirstArgs} args - Arguments to find a Icon
-     * @example
-     * // Get one Icon
-     * const icon = await prisma.icon.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirst<T extends IconFindFirstArgs<ExtArgs>>(
-      args?: SelectSubset<T, IconFindFirstArgs<ExtArgs>>
-    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
-
-    /**
-     * Find the first Icon that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {IconFindFirstOrThrowArgs} args - Arguments to find a Icon
-     * @example
-     * // Get one Icon
-     * const icon = await prisma.icon.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-    **/
-    findFirstOrThrow<T extends IconFindFirstOrThrowArgs<ExtArgs>>(
-      args?: SelectSubset<T, IconFindFirstOrThrowArgs<ExtArgs>>
-    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
-
-    /**
-     * Find zero or more Icons that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {IconFindManyArgs=} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Icons
-     * const icons = await prisma.icon.findMany()
-     * 
-     * // Get first 10 Icons
-     * const icons = await prisma.icon.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const iconWithIdOnly = await prisma.icon.findMany({ select: { id: true } })
-     * 
-    **/
-    findMany<T extends IconFindManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, IconFindManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'findMany'>>
-
-    /**
-     * Create a Icon.
-     * @param {IconCreateArgs} args - Arguments to create a Icon.
-     * @example
-     * // Create one Icon
-     * const Icon = await prisma.icon.create({
-     *   data: {
-     *     // ... data to create a Icon
-     *   }
-     * })
-     * 
-    **/
-    create<T extends IconCreateArgs<ExtArgs>>(
-      args: SelectSubset<T, IconCreateArgs<ExtArgs>>
-    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
-
-    /**
-     * Create many Icons.
-     *     @param {IconCreateManyArgs} args - Arguments to create many Icons.
-     *     @example
-     *     // Create many Icons
-     *     const icon = await prisma.icon.createMany({
-     *       data: {
-     *         // ... provide data here
-     *       }
-     *     })
-     *     
-    **/
-    createMany<T extends IconCreateManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, IconCreateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Delete a Icon.
-     * @param {IconDeleteArgs} args - Arguments to delete one Icon.
-     * @example
-     * // Delete one Icon
-     * const Icon = await prisma.icon.delete({
-     *   where: {
-     *     // ... filter to delete one Icon
-     *   }
-     * })
-     * 
-    **/
-    delete<T extends IconDeleteArgs<ExtArgs>>(
-      args: SelectSubset<T, IconDeleteArgs<ExtArgs>>
-    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
-
-    /**
-     * Update one Icon.
-     * @param {IconUpdateArgs} args - Arguments to update one Icon.
-     * @example
-     * // Update one Icon
-     * const icon = await prisma.icon.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    update<T extends IconUpdateArgs<ExtArgs>>(
-      args: SelectSubset<T, IconUpdateArgs<ExtArgs>>
-    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
-
-    /**
-     * Delete zero or more Icons.
-     * @param {IconDeleteManyArgs} args - Arguments to filter Icons to delete.
-     * @example
-     * // Delete a few Icons
-     * const { count } = await prisma.icon.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-    **/
-    deleteMany<T extends IconDeleteManyArgs<ExtArgs>>(
-      args?: SelectSubset<T, IconDeleteManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Icons.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {IconUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Icons
-     * const icon = await prisma.icon.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-    **/
-    updateMany<T extends IconUpdateManyArgs<ExtArgs>>(
-      args: SelectSubset<T, IconUpdateManyArgs<ExtArgs>>
-    ): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create or update one Icon.
-     * @param {IconUpsertArgs} args - Arguments to update or create a Icon.
-     * @example
-     * // Update or create a Icon
-     * const icon = await prisma.icon.upsert({
-     *   create: {
-     *     // ... data to create a Icon
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Icon we want to update
-     *   }
-     * })
-    **/
-    upsert<T extends IconUpsertArgs<ExtArgs>>(
-      args: SelectSubset<T, IconUpsertArgs<ExtArgs>>
-    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
-
-    /**
-     * Count the number of Icons.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {IconCountArgs} args - Arguments to filter Icons to count.
-     * @example
-     * // Count the number of Icons
-     * const count = await prisma.icon.count({
-     *   where: {
-     *     // ... the filter for the Icons we want to count
-     *   }
-     * })
-    **/
-    count<T extends IconCountArgs>(
-      args?: Subset<T, IconCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], IconCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Icon.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {IconAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends IconAggregateArgs>(args: Subset<T, IconAggregateArgs>): Prisma.PrismaPromise<GetIconAggregateType<T>>
-
-    /**
-     * Group by Icon.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {IconGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends IconGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: IconGroupByArgs['orderBy'] }
-        : { orderBy?: IconGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, IconGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIconGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the Icon model
-   */
-  readonly fields: IconFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for Icon.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__IconClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: 'PrismaPromise';
-
-    sensor<T extends Icon$sensorArgs<ExtArgs> = {}>(args?: Subset<T, Icon$sensorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    aktuator<T extends Icon$aktuatorArgs<ExtArgs> = {}>(args?: Subset<T, Icon$aktuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
-
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
-  }
-
-
-
-  /**
-   * Fields of the Icon model
-   */ 
-  interface IconFieldRefs {
-    readonly id: FieldRef<"Icon", 'Int'>
-    readonly logo: FieldRef<"Icon", 'String'>
-    readonly name: FieldRef<"Icon", 'String'>
-    readonly created_at: FieldRef<"Icon", 'DateTime'>
-    readonly updated_at: FieldRef<"Icon", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-
-  /**
-   * Icon findUnique
-   */
-  export type IconFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Icon
-     */
-    select?: IconSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: IconInclude<ExtArgs> | null
-    /**
-     * Filter, which Icon to fetch.
-     */
-    where: IconWhereUniqueInput
-  }
-
-
-  /**
-   * Icon findUniqueOrThrow
-   */
-  export type IconFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Icon
-     */
-    select?: IconSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: IconInclude<ExtArgs> | null
-    /**
-     * Filter, which Icon to fetch.
-     */
-    where: IconWhereUniqueInput
-  }
-
-
-  /**
-   * Icon findFirst
-   */
-  export type IconFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Icon
-     */
-    select?: IconSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: IconInclude<ExtArgs> | null
-    /**
-     * Filter, which Icon to fetch.
-     */
-    where?: IconWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Icons to fetch.
-     */
-    orderBy?: IconOrderByWithRelationInput | IconOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Icons.
-     */
-    cursor?: IconWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Icons from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Icons.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Icons.
-     */
-    distinct?: IconScalarFieldEnum | IconScalarFieldEnum[]
-  }
-
-
-  /**
-   * Icon findFirstOrThrow
-   */
-  export type IconFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Icon
-     */
-    select?: IconSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: IconInclude<ExtArgs> | null
-    /**
-     * Filter, which Icon to fetch.
-     */
-    where?: IconWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Icons to fetch.
-     */
-    orderBy?: IconOrderByWithRelationInput | IconOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for Icons.
-     */
-    cursor?: IconWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Icons from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Icons.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Icons.
-     */
-    distinct?: IconScalarFieldEnum | IconScalarFieldEnum[]
-  }
-
-
-  /**
-   * Icon findMany
-   */
-  export type IconFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Icon
-     */
-    select?: IconSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: IconInclude<ExtArgs> | null
-    /**
-     * Filter, which Icons to fetch.
-     */
-    where?: IconWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of Icons to fetch.
-     */
-    orderBy?: IconOrderByWithRelationInput | IconOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing Icons.
-     */
-    cursor?: IconWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` Icons from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` Icons.
-     */
-    skip?: number
-    distinct?: IconScalarFieldEnum | IconScalarFieldEnum[]
-  }
-
-
-  /**
-   * Icon create
-   */
-  export type IconCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Icon
-     */
-    select?: IconSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: IconInclude<ExtArgs> | null
-    /**
-     * The data needed to create a Icon.
-     */
-    data: XOR<IconCreateInput, IconUncheckedCreateInput>
-  }
-
-
-  /**
-   * Icon createMany
-   */
-  export type IconCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many Icons.
-     */
-    data: IconCreateManyInput | IconCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-
-  /**
-   * Icon update
-   */
-  export type IconUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Icon
-     */
-    select?: IconSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: IconInclude<ExtArgs> | null
-    /**
-     * The data needed to update a Icon.
-     */
-    data: XOR<IconUpdateInput, IconUncheckedUpdateInput>
-    /**
-     * Choose, which Icon to update.
-     */
-    where: IconWhereUniqueInput
-  }
-
-
-  /**
-   * Icon updateMany
-   */
-  export type IconUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update Icons.
-     */
-    data: XOR<IconUpdateManyMutationInput, IconUncheckedUpdateManyInput>
-    /**
-     * Filter which Icons to update
-     */
-    where?: IconWhereInput
-  }
-
-
-  /**
-   * Icon upsert
-   */
-  export type IconUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Icon
-     */
-    select?: IconSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: IconInclude<ExtArgs> | null
-    /**
-     * The filter to search for the Icon to update in case it exists.
-     */
-    where: IconWhereUniqueInput
-    /**
-     * In case the Icon found by the `where` argument doesn't exist, create a new Icon with this data.
-     */
-    create: XOR<IconCreateInput, IconUncheckedCreateInput>
-    /**
-     * In case the Icon was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<IconUpdateInput, IconUncheckedUpdateInput>
-  }
-
-
-  /**
-   * Icon delete
-   */
-  export type IconDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Icon
-     */
-    select?: IconSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: IconInclude<ExtArgs> | null
-    /**
-     * Filter which Icon to delete.
-     */
-    where: IconWhereUniqueInput
-  }
-
-
-  /**
-   * Icon deleteMany
-   */
-  export type IconDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which Icons to delete
-     */
-    where?: IconWhereInput
-  }
-
-
-  /**
-   * Icon.sensor
-   */
-  export type Icon$sensorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Sensor
-     */
-    select?: SensorSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: SensorInclude<ExtArgs> | null
-    where?: SensorWhereInput
-    orderBy?: SensorOrderByWithRelationInput | SensorOrderByWithRelationInput[]
-    cursor?: SensorWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: SensorScalarFieldEnum | SensorScalarFieldEnum[]
-  }
-
-
-  /**
-   * Icon.aktuator
-   */
-  export type Icon$aktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Aktuator
-     */
-    select?: AktuatorSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: AktuatorInclude<ExtArgs> | null
-    where?: AktuatorWhereInput
-    orderBy?: AktuatorOrderByWithRelationInput | AktuatorOrderByWithRelationInput[]
-    cursor?: AktuatorWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AktuatorScalarFieldEnum | AktuatorScalarFieldEnum[]
-  }
-
-
-  /**
-   * Icon without action
-   */
-  export type IconDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Icon
-     */
-    select?: IconSelect<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well.
-     */
-    include?: IconInclude<ExtArgs> | null
   }
 
 
@@ -8213,6 +7212,1007 @@ export namespace Prisma {
 
 
   /**
+   * Model Icon
+   */
+
+  export type AggregateIcon = {
+    _count: IconCountAggregateOutputType | null
+    _avg: IconAvgAggregateOutputType | null
+    _sum: IconSumAggregateOutputType | null
+    _min: IconMinAggregateOutputType | null
+    _max: IconMaxAggregateOutputType | null
+  }
+
+  export type IconAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type IconSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type IconMinAggregateOutputType = {
+    id: number | null
+    logo: string | null
+    name: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type IconMaxAggregateOutputType = {
+    id: number | null
+    logo: string | null
+    name: string | null
+    created_at: Date | null
+    updated_at: Date | null
+  }
+
+  export type IconCountAggregateOutputType = {
+    id: number
+    logo: number
+    name: number
+    created_at: number
+    updated_at: number
+    _all: number
+  }
+
+
+  export type IconAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type IconSumAggregateInputType = {
+    id?: true
+  }
+
+  export type IconMinAggregateInputType = {
+    id?: true
+    logo?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type IconMaxAggregateInputType = {
+    id?: true
+    logo?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+  }
+
+  export type IconCountAggregateInputType = {
+    id?: true
+    logo?: true
+    name?: true
+    created_at?: true
+    updated_at?: true
+    _all?: true
+  }
+
+  export type IconAggregateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Icon to aggregate.
+     */
+    where?: IconWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Icons to fetch.
+     */
+    orderBy?: IconOrderByWithRelationInput | IconOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: IconWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Icons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Icons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Icons
+    **/
+    _count?: true | IconCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: IconAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: IconSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: IconMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: IconMaxAggregateInputType
+  }
+
+  export type GetIconAggregateType<T extends IconAggregateArgs> = {
+        [P in keyof T & keyof AggregateIcon]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateIcon[P]>
+      : GetScalarType<T[P], AggregateIcon[P]>
+  }
+
+
+
+
+  export type IconGroupByArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    where?: IconWhereInput
+    orderBy?: IconOrderByWithAggregationInput | IconOrderByWithAggregationInput[]
+    by: IconScalarFieldEnum[] | IconScalarFieldEnum
+    having?: IconScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: IconCountAggregateInputType | true
+    _avg?: IconAvgAggregateInputType
+    _sum?: IconSumAggregateInputType
+    _min?: IconMinAggregateInputType
+    _max?: IconMaxAggregateInputType
+  }
+
+  export type IconGroupByOutputType = {
+    id: number
+    logo: string
+    name: string
+    created_at: Date
+    updated_at: Date | null
+    _count: IconCountAggregateOutputType | null
+    _avg: IconAvgAggregateOutputType | null
+    _sum: IconSumAggregateOutputType | null
+    _min: IconMinAggregateOutputType | null
+    _max: IconMaxAggregateOutputType | null
+  }
+
+  type GetIconGroupByPayload<T extends IconGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<IconGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof IconGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], IconGroupByOutputType[P]>
+            : GetScalarType<T[P], IconGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type IconSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    logo?: boolean
+    name?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+    sensor?: boolean | Icon$sensorArgs<ExtArgs>
+    aktuator?: boolean | Icon$aktuatorArgs<ExtArgs>
+    _count?: boolean | IconCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["icon"]>
+
+  export type IconSelectScalar = {
+    id?: boolean
+    logo?: boolean
+    name?: boolean
+    created_at?: boolean
+    updated_at?: boolean
+  }
+
+  export type IconInclude<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    sensor?: boolean | Icon$sensorArgs<ExtArgs>
+    aktuator?: boolean | Icon$aktuatorArgs<ExtArgs>
+    _count?: boolean | IconCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+
+  export type $IconPayload<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    name: "Icon"
+    objects: {
+      sensor: Prisma.$SensorPayload<ExtArgs>[]
+      aktuator: Prisma.$AktuatorPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetResult<{
+      id: number
+      logo: string
+      name: string
+      created_at: Date
+      updated_at: Date | null
+    }, ExtArgs["result"]["icon"]>
+    composites: {}
+  }
+
+
+  type IconGetPayload<S extends boolean | null | undefined | IconDefaultArgs> = $Result.GetResult<Prisma.$IconPayload, S>
+
+  type IconCountArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = 
+    Omit<IconFindManyArgs, 'select' | 'include'> & {
+      select?: IconCountAggregateInputType | true
+    }
+
+  export interface IconDelegate<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Icon'], meta: { name: 'Icon' } }
+    /**
+     * Find zero or one Icon that matches the filter.
+     * @param {IconFindUniqueArgs} args - Arguments to find a Icon
+     * @example
+     * // Get one Icon
+     * const icon = await prisma.icon.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUnique<T extends IconFindUniqueArgs<ExtArgs>>(
+      args: SelectSubset<T, IconFindUniqueArgs<ExtArgs>>
+    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'findUnique'> | null, null, ExtArgs>
+
+    /**
+     * Find one Icon that matches the filter or throw an error  with `error.code='P2025'` 
+     *     if no matches were found.
+     * @param {IconFindUniqueOrThrowArgs} args - Arguments to find a Icon
+     * @example
+     * // Get one Icon
+     * const icon = await prisma.icon.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findUniqueOrThrow<T extends IconFindUniqueOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, IconFindUniqueOrThrowArgs<ExtArgs>>
+    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'findUniqueOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find the first Icon that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IconFindFirstArgs} args - Arguments to find a Icon
+     * @example
+     * // Get one Icon
+     * const icon = await prisma.icon.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirst<T extends IconFindFirstArgs<ExtArgs>>(
+      args?: SelectSubset<T, IconFindFirstArgs<ExtArgs>>
+    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'findFirst'> | null, null, ExtArgs>
+
+    /**
+     * Find the first Icon that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IconFindFirstOrThrowArgs} args - Arguments to find a Icon
+     * @example
+     * // Get one Icon
+     * const icon = await prisma.icon.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+    **/
+    findFirstOrThrow<T extends IconFindFirstOrThrowArgs<ExtArgs>>(
+      args?: SelectSubset<T, IconFindFirstOrThrowArgs<ExtArgs>>
+    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'findFirstOrThrow'>, never, ExtArgs>
+
+    /**
+     * Find zero or more Icons that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IconFindManyArgs=} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Icons
+     * const icons = await prisma.icon.findMany()
+     * 
+     * // Get first 10 Icons
+     * const icons = await prisma.icon.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const iconWithIdOnly = await prisma.icon.findMany({ select: { id: true } })
+     * 
+    **/
+    findMany<T extends IconFindManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, IconFindManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'findMany'>>
+
+    /**
+     * Create a Icon.
+     * @param {IconCreateArgs} args - Arguments to create a Icon.
+     * @example
+     * // Create one Icon
+     * const Icon = await prisma.icon.create({
+     *   data: {
+     *     // ... data to create a Icon
+     *   }
+     * })
+     * 
+    **/
+    create<T extends IconCreateArgs<ExtArgs>>(
+      args: SelectSubset<T, IconCreateArgs<ExtArgs>>
+    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'create'>, never, ExtArgs>
+
+    /**
+     * Create many Icons.
+     *     @param {IconCreateManyArgs} args - Arguments to create many Icons.
+     *     @example
+     *     // Create many Icons
+     *     const icon = await prisma.icon.createMany({
+     *       data: {
+     *         // ... provide data here
+     *       }
+     *     })
+     *     
+    **/
+    createMany<T extends IconCreateManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, IconCreateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Icon.
+     * @param {IconDeleteArgs} args - Arguments to delete one Icon.
+     * @example
+     * // Delete one Icon
+     * const Icon = await prisma.icon.delete({
+     *   where: {
+     *     // ... filter to delete one Icon
+     *   }
+     * })
+     * 
+    **/
+    delete<T extends IconDeleteArgs<ExtArgs>>(
+      args: SelectSubset<T, IconDeleteArgs<ExtArgs>>
+    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'delete'>, never, ExtArgs>
+
+    /**
+     * Update one Icon.
+     * @param {IconUpdateArgs} args - Arguments to update one Icon.
+     * @example
+     * // Update one Icon
+     * const icon = await prisma.icon.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    update<T extends IconUpdateArgs<ExtArgs>>(
+      args: SelectSubset<T, IconUpdateArgs<ExtArgs>>
+    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'update'>, never, ExtArgs>
+
+    /**
+     * Delete zero or more Icons.
+     * @param {IconDeleteManyArgs} args - Arguments to filter Icons to delete.
+     * @example
+     * // Delete a few Icons
+     * const { count } = await prisma.icon.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+    **/
+    deleteMany<T extends IconDeleteManyArgs<ExtArgs>>(
+      args?: SelectSubset<T, IconDeleteManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Icons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IconUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Icons
+     * const icon = await prisma.icon.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+    **/
+    updateMany<T extends IconUpdateManyArgs<ExtArgs>>(
+      args: SelectSubset<T, IconUpdateManyArgs<ExtArgs>>
+    ): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Icon.
+     * @param {IconUpsertArgs} args - Arguments to update or create a Icon.
+     * @example
+     * // Update or create a Icon
+     * const icon = await prisma.icon.upsert({
+     *   create: {
+     *     // ... data to create a Icon
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Icon we want to update
+     *   }
+     * })
+    **/
+    upsert<T extends IconUpsertArgs<ExtArgs>>(
+      args: SelectSubset<T, IconUpsertArgs<ExtArgs>>
+    ): Prisma__IconClient<$Result.GetResult<Prisma.$IconPayload<ExtArgs>, T, 'upsert'>, never, ExtArgs>
+
+    /**
+     * Count the number of Icons.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IconCountArgs} args - Arguments to filter Icons to count.
+     * @example
+     * // Count the number of Icons
+     * const count = await prisma.icon.count({
+     *   where: {
+     *     // ... the filter for the Icons we want to count
+     *   }
+     * })
+    **/
+    count<T extends IconCountArgs>(
+      args?: Subset<T, IconCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], IconCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Icon.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IconAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends IconAggregateArgs>(args: Subset<T, IconAggregateArgs>): Prisma.PrismaPromise<GetIconAggregateType<T>>
+
+    /**
+     * Group by Icon.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {IconGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends IconGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: IconGroupByArgs['orderBy'] }
+        : { orderBy?: IconGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, IconGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetIconGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Icon model
+   */
+  readonly fields: IconFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Icon.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__IconClient<T, Null = never, ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: 'PrismaPromise';
+
+    sensor<T extends Icon$sensorArgs<ExtArgs> = {}>(args?: Subset<T, Icon$sensorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SensorPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    aktuator<T extends Icon$aktuatorArgs<ExtArgs> = {}>(args?: Subset<T, Icon$aktuatorArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AktuatorPayload<ExtArgs>, T, 'findMany'> | Null>;
+
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>;
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>;
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>;
+  }
+
+
+
+  /**
+   * Fields of the Icon model
+   */ 
+  interface IconFieldRefs {
+    readonly id: FieldRef<"Icon", 'Int'>
+    readonly logo: FieldRef<"Icon", 'String'>
+    readonly name: FieldRef<"Icon", 'String'>
+    readonly created_at: FieldRef<"Icon", 'DateTime'>
+    readonly updated_at: FieldRef<"Icon", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+
+  /**
+   * Icon findUnique
+   */
+  export type IconFindUniqueArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Icon
+     */
+    select?: IconSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: IconInclude<ExtArgs> | null
+    /**
+     * Filter, which Icon to fetch.
+     */
+    where: IconWhereUniqueInput
+  }
+
+
+  /**
+   * Icon findUniqueOrThrow
+   */
+  export type IconFindUniqueOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Icon
+     */
+    select?: IconSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: IconInclude<ExtArgs> | null
+    /**
+     * Filter, which Icon to fetch.
+     */
+    where: IconWhereUniqueInput
+  }
+
+
+  /**
+   * Icon findFirst
+   */
+  export type IconFindFirstArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Icon
+     */
+    select?: IconSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: IconInclude<ExtArgs> | null
+    /**
+     * Filter, which Icon to fetch.
+     */
+    where?: IconWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Icons to fetch.
+     */
+    orderBy?: IconOrderByWithRelationInput | IconOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Icons.
+     */
+    cursor?: IconWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Icons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Icons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Icons.
+     */
+    distinct?: IconScalarFieldEnum | IconScalarFieldEnum[]
+  }
+
+
+  /**
+   * Icon findFirstOrThrow
+   */
+  export type IconFindFirstOrThrowArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Icon
+     */
+    select?: IconSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: IconInclude<ExtArgs> | null
+    /**
+     * Filter, which Icon to fetch.
+     */
+    where?: IconWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Icons to fetch.
+     */
+    orderBy?: IconOrderByWithRelationInput | IconOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Icons.
+     */
+    cursor?: IconWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Icons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Icons.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Icons.
+     */
+    distinct?: IconScalarFieldEnum | IconScalarFieldEnum[]
+  }
+
+
+  /**
+   * Icon findMany
+   */
+  export type IconFindManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Icon
+     */
+    select?: IconSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: IconInclude<ExtArgs> | null
+    /**
+     * Filter, which Icons to fetch.
+     */
+    where?: IconWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Icons to fetch.
+     */
+    orderBy?: IconOrderByWithRelationInput | IconOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Icons.
+     */
+    cursor?: IconWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Icons from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Icons.
+     */
+    skip?: number
+    distinct?: IconScalarFieldEnum | IconScalarFieldEnum[]
+  }
+
+
+  /**
+   * Icon create
+   */
+  export type IconCreateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Icon
+     */
+    select?: IconSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: IconInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Icon.
+     */
+    data: XOR<IconCreateInput, IconUncheckedCreateInput>
+  }
+
+
+  /**
+   * Icon createMany
+   */
+  export type IconCreateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Icons.
+     */
+    data: IconCreateManyInput | IconCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+
+  /**
+   * Icon update
+   */
+  export type IconUpdateArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Icon
+     */
+    select?: IconSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: IconInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Icon.
+     */
+    data: XOR<IconUpdateInput, IconUncheckedUpdateInput>
+    /**
+     * Choose, which Icon to update.
+     */
+    where: IconWhereUniqueInput
+  }
+
+
+  /**
+   * Icon updateMany
+   */
+  export type IconUpdateManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Icons.
+     */
+    data: XOR<IconUpdateManyMutationInput, IconUncheckedUpdateManyInput>
+    /**
+     * Filter which Icons to update
+     */
+    where?: IconWhereInput
+  }
+
+
+  /**
+   * Icon upsert
+   */
+  export type IconUpsertArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Icon
+     */
+    select?: IconSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: IconInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Icon to update in case it exists.
+     */
+    where: IconWhereUniqueInput
+    /**
+     * In case the Icon found by the `where` argument doesn't exist, create a new Icon with this data.
+     */
+    create: XOR<IconCreateInput, IconUncheckedCreateInput>
+    /**
+     * In case the Icon was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<IconUpdateInput, IconUncheckedUpdateInput>
+  }
+
+
+  /**
+   * Icon delete
+   */
+  export type IconDeleteArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Icon
+     */
+    select?: IconSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: IconInclude<ExtArgs> | null
+    /**
+     * Filter which Icon to delete.
+     */
+    where: IconWhereUniqueInput
+  }
+
+
+  /**
+   * Icon deleteMany
+   */
+  export type IconDeleteManyArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Icons to delete
+     */
+    where?: IconWhereInput
+  }
+
+
+  /**
+   * Icon.sensor
+   */
+  export type Icon$sensorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sensor
+     */
+    select?: SensorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: SensorInclude<ExtArgs> | null
+    where?: SensorWhereInput
+    orderBy?: SensorOrderByWithRelationInput | SensorOrderByWithRelationInput[]
+    cursor?: SensorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SensorScalarFieldEnum | SensorScalarFieldEnum[]
+  }
+
+
+  /**
+   * Icon.aktuator
+   */
+  export type Icon$aktuatorArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Aktuator
+     */
+    select?: AktuatorSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: AktuatorInclude<ExtArgs> | null
+    where?: AktuatorWhereInput
+    orderBy?: AktuatorOrderByWithRelationInput | AktuatorOrderByWithRelationInput[]
+    cursor?: AktuatorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AktuatorScalarFieldEnum | AktuatorScalarFieldEnum[]
+  }
+
+
+  /**
+   * Icon without action
+   */
+  export type IconDefaultArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Icon
+     */
+    select?: IconSelect<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well.
+     */
+    include?: IconInclude<ExtArgs> | null
+  }
+
+
+
+  /**
    * Model Sensor
    */
 
@@ -8249,7 +8249,7 @@ export namespace Prisma {
   export type SensorMinAggregateOutputType = {
     id: number | null
     name: string | null
-    persamaan: string | null
+    calibration: string | null
     brand: string | null
     unit_measurement: string | null
     status: boolean | null
@@ -8268,7 +8268,7 @@ export namespace Prisma {
   export type SensorMaxAggregateOutputType = {
     id: number | null
     name: string | null
-    persamaan: string | null
+    calibration: string | null
     brand: string | null
     unit_measurement: string | null
     status: boolean | null
@@ -8287,7 +8287,7 @@ export namespace Prisma {
   export type SensorCountAggregateOutputType = {
     id: number
     name: number
-    persamaan: number
+    calibration: number
     brand: number
     unit_measurement: number
     status: number
@@ -8330,7 +8330,7 @@ export namespace Prisma {
   export type SensorMinAggregateInputType = {
     id?: true
     name?: true
-    persamaan?: true
+    calibration?: true
     brand?: true
     unit_measurement?: true
     status?: true
@@ -8349,7 +8349,7 @@ export namespace Prisma {
   export type SensorMaxAggregateInputType = {
     id?: true
     name?: true
-    persamaan?: true
+    calibration?: true
     brand?: true
     unit_measurement?: true
     status?: true
@@ -8368,7 +8368,7 @@ export namespace Prisma {
   export type SensorCountAggregateInputType = {
     id?: true
     name?: true
-    persamaan?: true
+    calibration?: true
     brand?: true
     unit_measurement?: true
     status?: true
@@ -8474,7 +8474,7 @@ export namespace Prisma {
   export type SensorGroupByOutputType = {
     id: number
     name: string
-    persamaan: string
+    calibration: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -8512,7 +8512,7 @@ export namespace Prisma {
   export type SensorSelect<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
-    persamaan?: boolean
+    calibration?: boolean
     brand?: boolean
     unit_measurement?: boolean
     status?: boolean
@@ -8535,7 +8535,7 @@ export namespace Prisma {
   export type SensorSelectScalar = {
     id?: boolean
     name?: boolean
-    persamaan?: boolean
+    calibration?: boolean
     brand?: boolean
     unit_measurement?: boolean
     status?: boolean
@@ -8570,7 +8570,7 @@ export namespace Prisma {
     scalars: $Extensions.GetResult<{
       id: number
       name: string
-      persamaan: string
+      calibration: string | null
       brand: string
       unit_measurement: string
       status: boolean
@@ -8987,7 +8987,7 @@ export namespace Prisma {
   interface SensorFieldRefs {
     readonly id: FieldRef<"Sensor", 'Int'>
     readonly name: FieldRef<"Sensor", 'String'>
-    readonly persamaan: FieldRef<"Sensor", 'String'>
+    readonly calibration: FieldRef<"Sensor", 'String'>
     readonly brand: FieldRef<"Sensor", 'String'>
     readonly unit_measurement: FieldRef<"Sensor", 'String'>
     readonly status: FieldRef<"Sensor", 'Boolean'>
@@ -13683,17 +13683,6 @@ export namespace Prisma {
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
 
 
-  export const IconScalarFieldEnum: {
-    id: 'id',
-    logo: 'logo',
-    name: 'name',
-    created_at: 'created_at',
-    updated_at: 'updated_at'
-  };
-
-  export type IconScalarFieldEnum = (typeof IconScalarFieldEnum)[keyof typeof IconScalarFieldEnum]
-
-
   export const GreenhouseScalarFieldEnum: {
     id: 'id',
     name: 'name',
@@ -13746,10 +13735,21 @@ export namespace Prisma {
   export type PenjadwalanScalarFieldEnum = (typeof PenjadwalanScalarFieldEnum)[keyof typeof PenjadwalanScalarFieldEnum]
 
 
+  export const IconScalarFieldEnum: {
+    id: 'id',
+    logo: 'logo',
+    name: 'name',
+    created_at: 'created_at',
+    updated_at: 'updated_at'
+  };
+
+  export type IconScalarFieldEnum = (typeof IconScalarFieldEnum)[keyof typeof IconScalarFieldEnum]
+
+
   export const SensorScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    persamaan: 'persamaan',
+    calibration: 'calibration',
     brand: 'brand',
     unit_measurement: 'unit_measurement',
     status: 'status',
@@ -13995,66 +13995,6 @@ export namespace Prisma {
     role?: StringWithAggregatesFilter<"User"> | string
     created_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updated_at?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
-  }
-
-  export type IconWhereInput = {
-    AND?: IconWhereInput | IconWhereInput[]
-    OR?: IconWhereInput[]
-    NOT?: IconWhereInput | IconWhereInput[]
-    id?: IntFilter<"Icon"> | number
-    logo?: StringFilter<"Icon"> | string
-    name?: StringFilter<"Icon"> | string
-    created_at?: DateTimeFilter<"Icon"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Icon"> | Date | string | null
-    sensor?: SensorListRelationFilter
-    aktuator?: AktuatorListRelationFilter
-  }
-
-  export type IconOrderByWithRelationInput = {
-    id?: SortOrder
-    logo?: SortOrder
-    name?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrderInput | SortOrder
-    sensor?: SensorOrderByRelationAggregateInput
-    aktuator?: AktuatorOrderByRelationAggregateInput
-  }
-
-  export type IconWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
-    name?: string
-    AND?: IconWhereInput | IconWhereInput[]
-    OR?: IconWhereInput[]
-    NOT?: IconWhereInput | IconWhereInput[]
-    logo?: StringFilter<"Icon"> | string
-    created_at?: DateTimeFilter<"Icon"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Icon"> | Date | string | null
-    sensor?: SensorListRelationFilter
-    aktuator?: AktuatorListRelationFilter
-  }, "id" | "name">
-
-  export type IconOrderByWithAggregationInput = {
-    id?: SortOrder
-    logo?: SortOrder
-    name?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrderInput | SortOrder
-    _count?: IconCountOrderByAggregateInput
-    _avg?: IconAvgOrderByAggregateInput
-    _max?: IconMaxOrderByAggregateInput
-    _min?: IconMinOrderByAggregateInput
-    _sum?: IconSumOrderByAggregateInput
-  }
-
-  export type IconScalarWhereWithAggregatesInput = {
-    AND?: IconScalarWhereWithAggregatesInput | IconScalarWhereWithAggregatesInput[]
-    OR?: IconScalarWhereWithAggregatesInput[]
-    NOT?: IconScalarWhereWithAggregatesInput | IconScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Icon"> | number
-    logo?: StringWithAggregatesFilter<"Icon"> | string
-    name?: StringWithAggregatesFilter<"Icon"> | string
-    created_at?: DateTimeWithAggregatesFilter<"Icon"> | Date | string
-    updated_at?: DateTimeNullableWithAggregatesFilter<"Icon"> | Date | string | null
   }
 
   export type GreenhouseWhereInput = {
@@ -14346,13 +14286,73 @@ export namespace Prisma {
     updated_at?: DateTimeNullableWithAggregatesFilter<"Penjadwalan"> | Date | string | null
   }
 
+  export type IconWhereInput = {
+    AND?: IconWhereInput | IconWhereInput[]
+    OR?: IconWhereInput[]
+    NOT?: IconWhereInput | IconWhereInput[]
+    id?: IntFilter<"Icon"> | number
+    logo?: StringFilter<"Icon"> | string
+    name?: StringFilter<"Icon"> | string
+    created_at?: DateTimeFilter<"Icon"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Icon"> | Date | string | null
+    sensor?: SensorListRelationFilter
+    aktuator?: AktuatorListRelationFilter
+  }
+
+  export type IconOrderByWithRelationInput = {
+    id?: SortOrder
+    logo?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    sensor?: SensorOrderByRelationAggregateInput
+    aktuator?: AktuatorOrderByRelationAggregateInput
+  }
+
+  export type IconWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    name?: string
+    AND?: IconWhereInput | IconWhereInput[]
+    OR?: IconWhereInput[]
+    NOT?: IconWhereInput | IconWhereInput[]
+    logo?: StringFilter<"Icon"> | string
+    created_at?: DateTimeFilter<"Icon"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Icon"> | Date | string | null
+    sensor?: SensorListRelationFilter
+    aktuator?: AktuatorListRelationFilter
+  }, "id" | "name">
+
+  export type IconOrderByWithAggregationInput = {
+    id?: SortOrder
+    logo?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrderInput | SortOrder
+    _count?: IconCountOrderByAggregateInput
+    _avg?: IconAvgOrderByAggregateInput
+    _max?: IconMaxOrderByAggregateInput
+    _min?: IconMinOrderByAggregateInput
+    _sum?: IconSumOrderByAggregateInput
+  }
+
+  export type IconScalarWhereWithAggregatesInput = {
+    AND?: IconScalarWhereWithAggregatesInput | IconScalarWhereWithAggregatesInput[]
+    OR?: IconScalarWhereWithAggregatesInput[]
+    NOT?: IconScalarWhereWithAggregatesInput | IconScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Icon"> | number
+    logo?: StringWithAggregatesFilter<"Icon"> | string
+    name?: StringWithAggregatesFilter<"Icon"> | string
+    created_at?: DateTimeWithAggregatesFilter<"Icon"> | Date | string
+    updated_at?: DateTimeNullableWithAggregatesFilter<"Icon"> | Date | string | null
+  }
+
   export type SensorWhereInput = {
     AND?: SensorWhereInput | SensorWhereInput[]
     OR?: SensorWhereInput[]
     NOT?: SensorWhereInput | SensorWhereInput[]
     id?: IntFilter<"Sensor"> | number
     name?: StringFilter<"Sensor"> | string
-    persamaan?: StringFilter<"Sensor"> | string
+    calibration?: StringNullableFilter<"Sensor"> | string | null
     brand?: StringFilter<"Sensor"> | string
     unit_measurement?: StringFilter<"Sensor"> | string
     status?: BoolFilter<"Sensor"> | boolean
@@ -14375,7 +14375,7 @@ export namespace Prisma {
   export type SensorOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    persamaan?: SortOrder
+    calibration?: SortOrderInput | SortOrder
     brand?: SortOrder
     unit_measurement?: SortOrder
     status?: SortOrder
@@ -14401,7 +14401,7 @@ export namespace Prisma {
     OR?: SensorWhereInput[]
     NOT?: SensorWhereInput | SensorWhereInput[]
     name?: StringFilter<"Sensor"> | string
-    persamaan?: StringFilter<"Sensor"> | string
+    calibration?: StringNullableFilter<"Sensor"> | string | null
     brand?: StringFilter<"Sensor"> | string
     unit_measurement?: StringFilter<"Sensor"> | string
     status?: BoolFilter<"Sensor"> | boolean
@@ -14424,7 +14424,7 @@ export namespace Prisma {
   export type SensorOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    persamaan?: SortOrder
+    calibration?: SortOrderInput | SortOrder
     brand?: SortOrder
     unit_measurement?: SortOrder
     status?: SortOrder
@@ -14451,7 +14451,7 @@ export namespace Prisma {
     NOT?: SensorScalarWhereWithAggregatesInput | SensorScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Sensor"> | number
     name?: StringWithAggregatesFilter<"Sensor"> | string
-    persamaan?: StringWithAggregatesFilter<"Sensor"> | string
+    calibration?: StringNullableWithAggregatesFilter<"Sensor"> | string | null
     brand?: StringWithAggregatesFilter<"Sensor"> | string
     unit_measurement?: StringWithAggregatesFilter<"Sensor"> | string
     status?: BoolWithAggregatesFilter<"Sensor"> | boolean
@@ -14881,67 +14881,6 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type IconCreateInput = {
-    logo: string
-    name: string
-    created_at?: Date | string
-    updated_at?: Date | string | null
-    sensor?: SensorCreateNestedManyWithoutIconInput
-    aktuator?: AktuatorCreateNestedManyWithoutIconInput
-  }
-
-  export type IconUncheckedCreateInput = {
-    id?: number
-    logo: string
-    name: string
-    created_at?: Date | string
-    updated_at?: Date | string | null
-    sensor?: SensorUncheckedCreateNestedManyWithoutIconInput
-    aktuator?: AktuatorUncheckedCreateNestedManyWithoutIconInput
-  }
-
-  export type IconUpdateInput = {
-    logo?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sensor?: SensorUpdateManyWithoutIconNestedInput
-    aktuator?: AktuatorUpdateManyWithoutIconNestedInput
-  }
-
-  export type IconUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    logo?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    sensor?: SensorUncheckedUpdateManyWithoutIconNestedInput
-    aktuator?: AktuatorUncheckedUpdateManyWithoutIconNestedInput
-  }
-
-  export type IconCreateManyInput = {
-    id?: number
-    logo: string
-    name: string
-    created_at?: Date | string
-    updated_at?: Date | string | null
-  }
-
-  export type IconUpdateManyMutationInput = {
-    logo?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type IconUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    logo?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
   export type GreenhouseCreateInput = {
     name: string
     image: string
@@ -15229,9 +15168,70 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type IconCreateInput = {
+    logo: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    sensor?: SensorCreateNestedManyWithoutIconInput
+    aktuator?: AktuatorCreateNestedManyWithoutIconInput
+  }
+
+  export type IconUncheckedCreateInput = {
+    id?: number
+    logo: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    sensor?: SensorUncheckedCreateNestedManyWithoutIconInput
+    aktuator?: AktuatorUncheckedCreateNestedManyWithoutIconInput
+  }
+
+  export type IconUpdateInput = {
+    logo?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sensor?: SensorUpdateManyWithoutIconNestedInput
+    aktuator?: AktuatorUpdateManyWithoutIconNestedInput
+  }
+
+  export type IconUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    logo?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    sensor?: SensorUncheckedUpdateManyWithoutIconNestedInput
+    aktuator?: AktuatorUncheckedUpdateManyWithoutIconNestedInput
+  }
+
+  export type IconCreateManyInput = {
+    id?: number
+    logo: string
+    name: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type IconUpdateManyMutationInput = {
+    logo?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type IconUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    logo?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type SensorCreateInput = {
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -15250,7 +15250,7 @@ export namespace Prisma {
   export type SensorUncheckedCreateInput = {
     id?: number
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -15268,7 +15268,7 @@ export namespace Prisma {
 
   export type SensorUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -15287,7 +15287,7 @@ export namespace Prisma {
   export type SensorUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -15306,7 +15306,7 @@ export namespace Prisma {
   export type SensorCreateManyInput = {
     id?: number
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -15324,7 +15324,7 @@ export namespace Prisma {
 
   export type SensorUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -15339,7 +15339,7 @@ export namespace Prisma {
   export type SensorUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -15878,10 +15878,10 @@ export namespace Prisma {
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
   }
 
-  export type SensorListRelationFilter = {
-    every?: SensorWhereInput
-    some?: SensorWhereInput
-    none?: SensorWhereInput
+  export type UserListRelationFilter = {
+    every?: UserWhereInput
+    some?: UserWhereInput
+    none?: UserWhereInput
   }
 
   export type AktuatorListRelationFilter = {
@@ -15890,7 +15890,13 @@ export namespace Prisma {
     none?: AktuatorWhereInput
   }
 
-  export type SensorOrderByRelationAggregateInput = {
+  export type SensorListRelationFilter = {
+    every?: SensorWhereInput
+    some?: SensorWhereInput
+    none?: SensorWhereInput
+  }
+
+  export type UserOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -15898,45 +15904,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type IconCountOrderByAggregateInput = {
-    id?: SortOrder
-    logo?: SortOrder
-    name?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type IconAvgOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type IconMaxOrderByAggregateInput = {
-    id?: SortOrder
-    logo?: SortOrder
-    name?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type IconMinOrderByAggregateInput = {
-    id?: SortOrder
-    logo?: SortOrder
-    name?: SortOrder
-    created_at?: SortOrder
-    updated_at?: SortOrder
-  }
-
-  export type IconSumOrderByAggregateInput = {
-    id?: SortOrder
-  }
-
-  export type UserListRelationFilter = {
-    every?: UserWhereInput
-    some?: UserWhereInput
-    none?: UserWhereInput
-  }
-
-  export type UserOrderByRelationAggregateInput = {
+  export type SensorOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -16178,6 +16146,53 @@ export namespace Prisma {
     createdBy?: SortOrder
   }
 
+  export type IconCountOrderByAggregateInput = {
+    id?: SortOrder
+    logo?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type IconAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type IconMaxOrderByAggregateInput = {
+    id?: SortOrder
+    logo?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type IconMinOrderByAggregateInput = {
+    id?: SortOrder
+    logo?: SortOrder
+    name?: SortOrder
+    created_at?: SortOrder
+    updated_at?: SortOrder
+  }
+
+  export type IconSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type IntNullableFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -16212,7 +16227,7 @@ export namespace Prisma {
   export type SensorCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    persamaan?: SortOrder
+    calibration?: SortOrder
     brand?: SortOrder
     unit_measurement?: SortOrder
     status?: SortOrder
@@ -16242,7 +16257,7 @@ export namespace Prisma {
   export type SensorMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    persamaan?: SortOrder
+    calibration?: SortOrder
     brand?: SortOrder
     unit_measurement?: SortOrder
     status?: SortOrder
@@ -16261,7 +16276,7 @@ export namespace Prisma {
   export type SensorMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
-    persamaan?: SortOrder
+    calibration?: SortOrder
     brand?: SortOrder
     unit_measurement?: SortOrder
     status?: SortOrder
@@ -16286,6 +16301,24 @@ export namespace Prisma {
     tandonId?: SortOrder
     tandonBahanId?: SortOrder
     greenhouseId?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -16707,90 +16740,6 @@ export namespace Prisma {
     deleteMany?: PenjadwalanScalarWhereInput | PenjadwalanScalarWhereInput[]
   }
 
-  export type SensorCreateNestedManyWithoutIconInput = {
-    create?: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput> | SensorCreateWithoutIconInput[] | SensorUncheckedCreateWithoutIconInput[]
-    connectOrCreate?: SensorCreateOrConnectWithoutIconInput | SensorCreateOrConnectWithoutIconInput[]
-    createMany?: SensorCreateManyIconInputEnvelope
-    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
-  }
-
-  export type AktuatorCreateNestedManyWithoutIconInput = {
-    create?: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput> | AktuatorCreateWithoutIconInput[] | AktuatorUncheckedCreateWithoutIconInput[]
-    connectOrCreate?: AktuatorCreateOrConnectWithoutIconInput | AktuatorCreateOrConnectWithoutIconInput[]
-    createMany?: AktuatorCreateManyIconInputEnvelope
-    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
-  }
-
-  export type SensorUncheckedCreateNestedManyWithoutIconInput = {
-    create?: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput> | SensorCreateWithoutIconInput[] | SensorUncheckedCreateWithoutIconInput[]
-    connectOrCreate?: SensorCreateOrConnectWithoutIconInput | SensorCreateOrConnectWithoutIconInput[]
-    createMany?: SensorCreateManyIconInputEnvelope
-    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
-  }
-
-  export type AktuatorUncheckedCreateNestedManyWithoutIconInput = {
-    create?: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput> | AktuatorCreateWithoutIconInput[] | AktuatorUncheckedCreateWithoutIconInput[]
-    connectOrCreate?: AktuatorCreateOrConnectWithoutIconInput | AktuatorCreateOrConnectWithoutIconInput[]
-    createMany?: AktuatorCreateManyIconInputEnvelope
-    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
-  }
-
-  export type SensorUpdateManyWithoutIconNestedInput = {
-    create?: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput> | SensorCreateWithoutIconInput[] | SensorUncheckedCreateWithoutIconInput[]
-    connectOrCreate?: SensorCreateOrConnectWithoutIconInput | SensorCreateOrConnectWithoutIconInput[]
-    upsert?: SensorUpsertWithWhereUniqueWithoutIconInput | SensorUpsertWithWhereUniqueWithoutIconInput[]
-    createMany?: SensorCreateManyIconInputEnvelope
-    set?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
-    disconnect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
-    delete?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
-    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
-    update?: SensorUpdateWithWhereUniqueWithoutIconInput | SensorUpdateWithWhereUniqueWithoutIconInput[]
-    updateMany?: SensorUpdateManyWithWhereWithoutIconInput | SensorUpdateManyWithWhereWithoutIconInput[]
-    deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
-  }
-
-  export type AktuatorUpdateManyWithoutIconNestedInput = {
-    create?: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput> | AktuatorCreateWithoutIconInput[] | AktuatorUncheckedCreateWithoutIconInput[]
-    connectOrCreate?: AktuatorCreateOrConnectWithoutIconInput | AktuatorCreateOrConnectWithoutIconInput[]
-    upsert?: AktuatorUpsertWithWhereUniqueWithoutIconInput | AktuatorUpsertWithWhereUniqueWithoutIconInput[]
-    createMany?: AktuatorCreateManyIconInputEnvelope
-    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
-    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
-    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
-    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
-    update?: AktuatorUpdateWithWhereUniqueWithoutIconInput | AktuatorUpdateWithWhereUniqueWithoutIconInput[]
-    updateMany?: AktuatorUpdateManyWithWhereWithoutIconInput | AktuatorUpdateManyWithWhereWithoutIconInput[]
-    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
-  }
-
-  export type SensorUncheckedUpdateManyWithoutIconNestedInput = {
-    create?: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput> | SensorCreateWithoutIconInput[] | SensorUncheckedCreateWithoutIconInput[]
-    connectOrCreate?: SensorCreateOrConnectWithoutIconInput | SensorCreateOrConnectWithoutIconInput[]
-    upsert?: SensorUpsertWithWhereUniqueWithoutIconInput | SensorUpsertWithWhereUniqueWithoutIconInput[]
-    createMany?: SensorCreateManyIconInputEnvelope
-    set?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
-    disconnect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
-    delete?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
-    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
-    update?: SensorUpdateWithWhereUniqueWithoutIconInput | SensorUpdateWithWhereUniqueWithoutIconInput[]
-    updateMany?: SensorUpdateManyWithWhereWithoutIconInput | SensorUpdateManyWithWhereWithoutIconInput[]
-    deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
-  }
-
-  export type AktuatorUncheckedUpdateManyWithoutIconNestedInput = {
-    create?: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput> | AktuatorCreateWithoutIconInput[] | AktuatorUncheckedCreateWithoutIconInput[]
-    connectOrCreate?: AktuatorCreateOrConnectWithoutIconInput | AktuatorCreateOrConnectWithoutIconInput[]
-    upsert?: AktuatorUpsertWithWhereUniqueWithoutIconInput | AktuatorUpsertWithWhereUniqueWithoutIconInput[]
-    createMany?: AktuatorCreateManyIconInputEnvelope
-    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
-    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
-    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
-    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
-    update?: AktuatorUpdateWithWhereUniqueWithoutIconInput | AktuatorUpdateWithWhereUniqueWithoutIconInput[]
-    updateMany?: AktuatorUpdateManyWithWhereWithoutIconInput | AktuatorUpdateManyWithWhereWithoutIconInput[]
-    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
-  }
-
   export type UserCreateNestedManyWithoutGreenhouseInput = {
     create?: XOR<UserCreateWithoutGreenhouseInput, UserUncheckedCreateWithoutGreenhouseInput> | UserCreateWithoutGreenhouseInput[] | UserUncheckedCreateWithoutGreenhouseInput[]
     connectOrCreate?: UserCreateOrConnectWithoutGreenhouseInput | UserCreateOrConnectWithoutGreenhouseInput[]
@@ -17130,6 +17079,90 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutPenjadwalanInput, UserUpdateWithoutPenjadwalanInput>, UserUncheckedUpdateWithoutPenjadwalanInput>
   }
 
+  export type SensorCreateNestedManyWithoutIconInput = {
+    create?: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput> | SensorCreateWithoutIconInput[] | SensorUncheckedCreateWithoutIconInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutIconInput | SensorCreateOrConnectWithoutIconInput[]
+    createMany?: SensorCreateManyIconInputEnvelope
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+  }
+
+  export type AktuatorCreateNestedManyWithoutIconInput = {
+    create?: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput> | AktuatorCreateWithoutIconInput[] | AktuatorUncheckedCreateWithoutIconInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutIconInput | AktuatorCreateOrConnectWithoutIconInput[]
+    createMany?: AktuatorCreateManyIconInputEnvelope
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+  }
+
+  export type SensorUncheckedCreateNestedManyWithoutIconInput = {
+    create?: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput> | SensorCreateWithoutIconInput[] | SensorUncheckedCreateWithoutIconInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutIconInput | SensorCreateOrConnectWithoutIconInput[]
+    createMany?: SensorCreateManyIconInputEnvelope
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+  }
+
+  export type AktuatorUncheckedCreateNestedManyWithoutIconInput = {
+    create?: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput> | AktuatorCreateWithoutIconInput[] | AktuatorUncheckedCreateWithoutIconInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutIconInput | AktuatorCreateOrConnectWithoutIconInput[]
+    createMany?: AktuatorCreateManyIconInputEnvelope
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+  }
+
+  export type SensorUpdateManyWithoutIconNestedInput = {
+    create?: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput> | SensorCreateWithoutIconInput[] | SensorUncheckedCreateWithoutIconInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutIconInput | SensorCreateOrConnectWithoutIconInput[]
+    upsert?: SensorUpsertWithWhereUniqueWithoutIconInput | SensorUpsertWithWhereUniqueWithoutIconInput[]
+    createMany?: SensorCreateManyIconInputEnvelope
+    set?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    disconnect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    delete?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    update?: SensorUpdateWithWhereUniqueWithoutIconInput | SensorUpdateWithWhereUniqueWithoutIconInput[]
+    updateMany?: SensorUpdateManyWithWhereWithoutIconInput | SensorUpdateManyWithWhereWithoutIconInput[]
+    deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
+  }
+
+  export type AktuatorUpdateManyWithoutIconNestedInput = {
+    create?: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput> | AktuatorCreateWithoutIconInput[] | AktuatorUncheckedCreateWithoutIconInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutIconInput | AktuatorCreateOrConnectWithoutIconInput[]
+    upsert?: AktuatorUpsertWithWhereUniqueWithoutIconInput | AktuatorUpsertWithWhereUniqueWithoutIconInput[]
+    createMany?: AktuatorCreateManyIconInputEnvelope
+    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    update?: AktuatorUpdateWithWhereUniqueWithoutIconInput | AktuatorUpdateWithWhereUniqueWithoutIconInput[]
+    updateMany?: AktuatorUpdateManyWithWhereWithoutIconInput | AktuatorUpdateManyWithWhereWithoutIconInput[]
+    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
+  }
+
+  export type SensorUncheckedUpdateManyWithoutIconNestedInput = {
+    create?: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput> | SensorCreateWithoutIconInput[] | SensorUncheckedCreateWithoutIconInput[]
+    connectOrCreate?: SensorCreateOrConnectWithoutIconInput | SensorCreateOrConnectWithoutIconInput[]
+    upsert?: SensorUpsertWithWhereUniqueWithoutIconInput | SensorUpsertWithWhereUniqueWithoutIconInput[]
+    createMany?: SensorCreateManyIconInputEnvelope
+    set?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    disconnect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    delete?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    connect?: SensorWhereUniqueInput | SensorWhereUniqueInput[]
+    update?: SensorUpdateWithWhereUniqueWithoutIconInput | SensorUpdateWithWhereUniqueWithoutIconInput[]
+    updateMany?: SensorUpdateManyWithWhereWithoutIconInput | SensorUpdateManyWithWhereWithoutIconInput[]
+    deleteMany?: SensorScalarWhereInput | SensorScalarWhereInput[]
+  }
+
+  export type AktuatorUncheckedUpdateManyWithoutIconNestedInput = {
+    create?: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput> | AktuatorCreateWithoutIconInput[] | AktuatorUncheckedCreateWithoutIconInput[]
+    connectOrCreate?: AktuatorCreateOrConnectWithoutIconInput | AktuatorCreateOrConnectWithoutIconInput[]
+    upsert?: AktuatorUpsertWithWhereUniqueWithoutIconInput | AktuatorUpsertWithWhereUniqueWithoutIconInput[]
+    createMany?: AktuatorCreateManyIconInputEnvelope
+    set?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    disconnect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    delete?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    connect?: AktuatorWhereUniqueInput | AktuatorWhereUniqueInput[]
+    update?: AktuatorUpdateWithWhereUniqueWithoutIconInput | AktuatorUpdateWithWhereUniqueWithoutIconInput[]
+    updateMany?: AktuatorUpdateManyWithWhereWithoutIconInput | AktuatorUpdateManyWithWhereWithoutIconInput[]
+    deleteMany?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
+  }
+
   export type IconCreateNestedOneWithoutSensorInput = {
     create?: XOR<IconCreateWithoutSensorInput, IconUncheckedCreateWithoutSensorInput>
     connectOrCreate?: IconCreateOrConnectWithoutSensorInput
@@ -17152,6 +17185,10 @@ export namespace Prisma {
     create?: XOR<GreenhouseCreateWithoutSensorInput, GreenhouseUncheckedCreateWithoutSensorInput>
     connectOrCreate?: GreenhouseCreateOrConnectWithoutSensorInput
     connect?: GreenhouseWhereUniqueInput
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type NullableIntFieldUpdateOperationsInput = {
@@ -17773,6 +17810,37 @@ export namespace Prisma {
     _max?: NestedFloatFilter<$PrismaModel>
   }
 
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
+  }
+
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -18052,163 +18120,6 @@ export namespace Prisma {
     updated_at?: DateTimeNullableFilter<"Penjadwalan"> | Date | string | null
   }
 
-  export type SensorCreateWithoutIconInput = {
-    name: string
-    persamaan: string
-    brand: string
-    unit_measurement: string
-    status: boolean
-    channel?: number | null
-    GPIO?: number | null
-    range_min?: number | null
-    range_max?: number | null
-    created_at?: Date | string
-    updated_at?: Date | string | null
-    tandon?: TandonCreateNestedOneWithoutSensorInput
-    tandonBahan?: TandonBahanCreateNestedOneWithoutSensorInput
-    greenhouse?: GreenhouseCreateNestedOneWithoutSensorInput
-  }
-
-  export type SensorUncheckedCreateWithoutIconInput = {
-    id?: number
-    name: string
-    persamaan: string
-    brand: string
-    unit_measurement: string
-    status: boolean
-    channel?: number | null
-    GPIO?: number | null
-    range_min?: number | null
-    range_max?: number | null
-    tandonId?: number | null
-    tandonBahanId?: number | null
-    greenhouseId?: number | null
-    created_at?: Date | string
-    updated_at?: Date | string | null
-  }
-
-  export type SensorCreateOrConnectWithoutIconInput = {
-    where: SensorWhereUniqueInput
-    create: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput>
-  }
-
-  export type SensorCreateManyIconInputEnvelope = {
-    data: SensorCreateManyIconInput | SensorCreateManyIconInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type AktuatorCreateWithoutIconInput = {
-    name: string
-    merek: string
-    color: string
-    status: boolean
-    GPIO: number
-    created_at?: Date | string
-    updated_at?: Date | string | null
-    tandon?: TandonCreateNestedOneWithoutAktuatorInput
-    greenhouse?: GreenhouseCreateNestedOneWithoutAktuatorInput
-    tandonPenyimpanan?: TandonPenyimpananCreateNestedOneWithoutActuatorInput
-    tandonBahan?: TandonBahanCreateNestedOneWithoutAktuatorInput
-  }
-
-  export type AktuatorUncheckedCreateWithoutIconInput = {
-    id?: number
-    name: string
-    merek: string
-    color: string
-    status: boolean
-    GPIO: number
-    tandonId?: number | null
-    greenhouseId?: number | null
-    tandonPenyimpananId?: number | null
-    tandonBahanId?: number | null
-    created_at?: Date | string
-    updated_at?: Date | string | null
-  }
-
-  export type AktuatorCreateOrConnectWithoutIconInput = {
-    where: AktuatorWhereUniqueInput
-    create: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput>
-  }
-
-  export type AktuatorCreateManyIconInputEnvelope = {
-    data: AktuatorCreateManyIconInput | AktuatorCreateManyIconInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type SensorUpsertWithWhereUniqueWithoutIconInput = {
-    where: SensorWhereUniqueInput
-    update: XOR<SensorUpdateWithoutIconInput, SensorUncheckedUpdateWithoutIconInput>
-    create: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput>
-  }
-
-  export type SensorUpdateWithWhereUniqueWithoutIconInput = {
-    where: SensorWhereUniqueInput
-    data: XOR<SensorUpdateWithoutIconInput, SensorUncheckedUpdateWithoutIconInput>
-  }
-
-  export type SensorUpdateManyWithWhereWithoutIconInput = {
-    where: SensorScalarWhereInput
-    data: XOR<SensorUpdateManyMutationInput, SensorUncheckedUpdateManyWithoutIconInput>
-  }
-
-  export type SensorScalarWhereInput = {
-    AND?: SensorScalarWhereInput | SensorScalarWhereInput[]
-    OR?: SensorScalarWhereInput[]
-    NOT?: SensorScalarWhereInput | SensorScalarWhereInput[]
-    id?: IntFilter<"Sensor"> | number
-    name?: StringFilter<"Sensor"> | string
-    persamaan?: StringFilter<"Sensor"> | string
-    brand?: StringFilter<"Sensor"> | string
-    unit_measurement?: StringFilter<"Sensor"> | string
-    status?: BoolFilter<"Sensor"> | boolean
-    channel?: IntNullableFilter<"Sensor"> | number | null
-    GPIO?: IntNullableFilter<"Sensor"> | number | null
-    type?: StringFilter<"Sensor"> | string
-    range_min?: IntNullableFilter<"Sensor"> | number | null
-    range_max?: IntNullableFilter<"Sensor"> | number | null
-    tandonId?: IntNullableFilter<"Sensor"> | number | null
-    tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
-    greenhouseId?: IntNullableFilter<"Sensor"> | number | null
-    created_at?: DateTimeFilter<"Sensor"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Sensor"> | Date | string | null
-  }
-
-  export type AktuatorUpsertWithWhereUniqueWithoutIconInput = {
-    where: AktuatorWhereUniqueInput
-    update: XOR<AktuatorUpdateWithoutIconInput, AktuatorUncheckedUpdateWithoutIconInput>
-    create: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput>
-  }
-
-  export type AktuatorUpdateWithWhereUniqueWithoutIconInput = {
-    where: AktuatorWhereUniqueInput
-    data: XOR<AktuatorUpdateWithoutIconInput, AktuatorUncheckedUpdateWithoutIconInput>
-  }
-
-  export type AktuatorUpdateManyWithWhereWithoutIconInput = {
-    where: AktuatorScalarWhereInput
-    data: XOR<AktuatorUpdateManyMutationInput, AktuatorUncheckedUpdateManyWithoutIconInput>
-  }
-
-  export type AktuatorScalarWhereInput = {
-    AND?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
-    OR?: AktuatorScalarWhereInput[]
-    NOT?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
-    id?: IntFilter<"Aktuator"> | number
-    name?: StringFilter<"Aktuator"> | string
-    merek?: StringFilter<"Aktuator"> | string
-    color?: StringFilter<"Aktuator"> | string
-    status?: BoolFilter<"Aktuator"> | boolean
-    GPIO?: IntFilter<"Aktuator"> | number
-    type?: StringFilter<"Aktuator"> | string
-    tandonId?: IntNullableFilter<"Aktuator"> | number | null
-    greenhouseId?: IntNullableFilter<"Aktuator"> | number | null
-    tandonPenyimpananId?: IntNullableFilter<"Aktuator"> | number | null
-    tandonBahanId?: IntNullableFilter<"Aktuator"> | number | null
-    created_at?: DateTimeFilter<"Aktuator"> | Date | string
-    updated_at?: DateTimeNullableFilter<"Aktuator"> | Date | string | null
-  }
-
   export type UserCreateWithoutGreenhouseInput = {
     username: string
     email: string
@@ -18280,7 +18191,7 @@ export namespace Prisma {
 
   export type SensorCreateWithoutGreenhouseInput = {
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -18298,7 +18209,7 @@ export namespace Prisma {
   export type SensorUncheckedCreateWithoutGreenhouseInput = {
     id?: number
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -18403,6 +18314,25 @@ export namespace Prisma {
     data: XOR<AktuatorUpdateManyMutationInput, AktuatorUncheckedUpdateManyWithoutGreenhouseInput>
   }
 
+  export type AktuatorScalarWhereInput = {
+    AND?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
+    OR?: AktuatorScalarWhereInput[]
+    NOT?: AktuatorScalarWhereInput | AktuatorScalarWhereInput[]
+    id?: IntFilter<"Aktuator"> | number
+    name?: StringFilter<"Aktuator"> | string
+    merek?: StringFilter<"Aktuator"> | string
+    color?: StringFilter<"Aktuator"> | string
+    status?: BoolFilter<"Aktuator"> | boolean
+    GPIO?: IntFilter<"Aktuator"> | number
+    type?: StringFilter<"Aktuator"> | string
+    tandonId?: IntNullableFilter<"Aktuator"> | number | null
+    greenhouseId?: IntNullableFilter<"Aktuator"> | number | null
+    tandonPenyimpananId?: IntNullableFilter<"Aktuator"> | number | null
+    tandonBahanId?: IntNullableFilter<"Aktuator"> | number | null
+    created_at?: DateTimeFilter<"Aktuator"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Aktuator"> | Date | string | null
+  }
+
   export type SensorUpsertWithWhereUniqueWithoutGreenhouseInput = {
     where: SensorWhereUniqueInput
     update: XOR<SensorUpdateWithoutGreenhouseInput, SensorUncheckedUpdateWithoutGreenhouseInput>
@@ -18417,6 +18347,28 @@ export namespace Prisma {
   export type SensorUpdateManyWithWhereWithoutGreenhouseInput = {
     where: SensorScalarWhereInput
     data: XOR<SensorUpdateManyMutationInput, SensorUncheckedUpdateManyWithoutGreenhouseInput>
+  }
+
+  export type SensorScalarWhereInput = {
+    AND?: SensorScalarWhereInput | SensorScalarWhereInput[]
+    OR?: SensorScalarWhereInput[]
+    NOT?: SensorScalarWhereInput | SensorScalarWhereInput[]
+    id?: IntFilter<"Sensor"> | number
+    name?: StringFilter<"Sensor"> | string
+    calibration?: StringNullableFilter<"Sensor"> | string | null
+    brand?: StringFilter<"Sensor"> | string
+    unit_measurement?: StringFilter<"Sensor"> | string
+    status?: BoolFilter<"Sensor"> | boolean
+    channel?: IntNullableFilter<"Sensor"> | number | null
+    GPIO?: IntNullableFilter<"Sensor"> | number | null
+    type?: StringFilter<"Sensor"> | string
+    range_min?: IntNullableFilter<"Sensor"> | number | null
+    range_max?: IntNullableFilter<"Sensor"> | number | null
+    tandonId?: IntNullableFilter<"Sensor"> | number | null
+    tandonBahanId?: IntNullableFilter<"Sensor"> | number | null
+    greenhouseId?: IntNullableFilter<"Sensor"> | number | null
+    created_at?: DateTimeFilter<"Sensor"> | Date | string
+    updated_at?: DateTimeNullableFilter<"Sensor"> | Date | string | null
   }
 
   export type PenjadwalanUpsertWithWhereUniqueWithoutGreenhouseInput = {
@@ -18893,6 +18845,122 @@ export namespace Prisma {
     greenhouse?: GreenhouseUncheckedUpdateManyWithoutUserNestedInput
     tandon?: TandonUncheckedUpdateManyWithoutUserNestedInput
     notification?: NotificationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type SensorCreateWithoutIconInput = {
+    name: string
+    calibration?: string | null
+    brand: string
+    unit_measurement: string
+    status: boolean
+    channel?: number | null
+    GPIO?: number | null
+    range_min?: number | null
+    range_max?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    tandon?: TandonCreateNestedOneWithoutSensorInput
+    tandonBahan?: TandonBahanCreateNestedOneWithoutSensorInput
+    greenhouse?: GreenhouseCreateNestedOneWithoutSensorInput
+  }
+
+  export type SensorUncheckedCreateWithoutIconInput = {
+    id?: number
+    name: string
+    calibration?: string | null
+    brand: string
+    unit_measurement: string
+    status: boolean
+    channel?: number | null
+    GPIO?: number | null
+    range_min?: number | null
+    range_max?: number | null
+    tandonId?: number | null
+    tandonBahanId?: number | null
+    greenhouseId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type SensorCreateOrConnectWithoutIconInput = {
+    where: SensorWhereUniqueInput
+    create: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput>
+  }
+
+  export type SensorCreateManyIconInputEnvelope = {
+    data: SensorCreateManyIconInput | SensorCreateManyIconInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type AktuatorCreateWithoutIconInput = {
+    name: string
+    merek: string
+    color: string
+    status: boolean
+    GPIO: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    tandon?: TandonCreateNestedOneWithoutAktuatorInput
+    greenhouse?: GreenhouseCreateNestedOneWithoutAktuatorInput
+    tandonPenyimpanan?: TandonPenyimpananCreateNestedOneWithoutActuatorInput
+    tandonBahan?: TandonBahanCreateNestedOneWithoutAktuatorInput
+  }
+
+  export type AktuatorUncheckedCreateWithoutIconInput = {
+    id?: number
+    name: string
+    merek: string
+    color: string
+    status: boolean
+    GPIO: number
+    tandonId?: number | null
+    greenhouseId?: number | null
+    tandonPenyimpananId?: number | null
+    tandonBahanId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type AktuatorCreateOrConnectWithoutIconInput = {
+    where: AktuatorWhereUniqueInput
+    create: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput>
+  }
+
+  export type AktuatorCreateManyIconInputEnvelope = {
+    data: AktuatorCreateManyIconInput | AktuatorCreateManyIconInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SensorUpsertWithWhereUniqueWithoutIconInput = {
+    where: SensorWhereUniqueInput
+    update: XOR<SensorUpdateWithoutIconInput, SensorUncheckedUpdateWithoutIconInput>
+    create: XOR<SensorCreateWithoutIconInput, SensorUncheckedCreateWithoutIconInput>
+  }
+
+  export type SensorUpdateWithWhereUniqueWithoutIconInput = {
+    where: SensorWhereUniqueInput
+    data: XOR<SensorUpdateWithoutIconInput, SensorUncheckedUpdateWithoutIconInput>
+  }
+
+  export type SensorUpdateManyWithWhereWithoutIconInput = {
+    where: SensorScalarWhereInput
+    data: XOR<SensorUpdateManyMutationInput, SensorUncheckedUpdateManyWithoutIconInput>
+  }
+
+  export type AktuatorUpsertWithWhereUniqueWithoutIconInput = {
+    where: AktuatorWhereUniqueInput
+    update: XOR<AktuatorUpdateWithoutIconInput, AktuatorUncheckedUpdateWithoutIconInput>
+    create: XOR<AktuatorCreateWithoutIconInput, AktuatorUncheckedCreateWithoutIconInput>
+  }
+
+  export type AktuatorUpdateWithWhereUniqueWithoutIconInput = {
+    where: AktuatorWhereUniqueInput
+    data: XOR<AktuatorUpdateWithoutIconInput, AktuatorUncheckedUpdateWithoutIconInput>
+  }
+
+  export type AktuatorUpdateManyWithWhereWithoutIconInput = {
+    where: AktuatorScalarWhereInput
+    data: XOR<AktuatorUpdateManyMutationInput, AktuatorUncheckedUpdateManyWithoutIconInput>
   }
 
   export type IconCreateWithoutSensorInput = {
@@ -19435,7 +19503,7 @@ export namespace Prisma {
 
   export type SensorCreateWithoutTandonBahanInput = {
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -19453,7 +19521,7 @@ export namespace Prisma {
   export type SensorUncheckedCreateWithoutTandonBahanInput = {
     id?: number
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -19667,7 +19735,7 @@ export namespace Prisma {
 
   export type SensorCreateWithoutTandonInput = {
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -19685,7 +19753,7 @@ export namespace Prisma {
   export type SensorUncheckedCreateWithoutTandonInput = {
     id?: number
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -20208,136 +20276,6 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
-  export type SensorCreateManyIconInput = {
-    id?: number
-    name: string
-    persamaan: string
-    brand: string
-    unit_measurement: string
-    status: boolean
-    channel?: number | null
-    GPIO?: number | null
-    range_min?: number | null
-    range_max?: number | null
-    tandonId?: number | null
-    tandonBahanId?: number | null
-    greenhouseId?: number | null
-    created_at?: Date | string
-    updated_at?: Date | string | null
-  }
-
-  export type AktuatorCreateManyIconInput = {
-    id?: number
-    name: string
-    merek: string
-    color: string
-    status: boolean
-    GPIO: number
-    tandonId?: number | null
-    greenhouseId?: number | null
-    tandonPenyimpananId?: number | null
-    tandonBahanId?: number | null
-    created_at?: Date | string
-    updated_at?: Date | string | null
-  }
-
-  export type SensorUpdateWithoutIconInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
-    brand?: StringFieldUpdateOperationsInput | string
-    unit_measurement?: StringFieldUpdateOperationsInput | string
-    status?: BoolFieldUpdateOperationsInput | boolean
-    channel?: NullableIntFieldUpdateOperationsInput | number | null
-    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
-    range_min?: NullableIntFieldUpdateOperationsInput | number | null
-    range_max?: NullableIntFieldUpdateOperationsInput | number | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tandon?: TandonUpdateOneWithoutSensorNestedInput
-    tandonBahan?: TandonBahanUpdateOneWithoutSensorNestedInput
-    greenhouse?: GreenhouseUpdateOneWithoutSensorNestedInput
-  }
-
-  export type SensorUncheckedUpdateWithoutIconInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
-    brand?: StringFieldUpdateOperationsInput | string
-    unit_measurement?: StringFieldUpdateOperationsInput | string
-    status?: BoolFieldUpdateOperationsInput | boolean
-    channel?: NullableIntFieldUpdateOperationsInput | number | null
-    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
-    range_min?: NullableIntFieldUpdateOperationsInput | number | null
-    range_max?: NullableIntFieldUpdateOperationsInput | number | null
-    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
-    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
-    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type SensorUncheckedUpdateManyWithoutIconInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
-    brand?: StringFieldUpdateOperationsInput | string
-    unit_measurement?: StringFieldUpdateOperationsInput | string
-    status?: BoolFieldUpdateOperationsInput | boolean
-    channel?: NullableIntFieldUpdateOperationsInput | number | null
-    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
-    range_min?: NullableIntFieldUpdateOperationsInput | number | null
-    range_max?: NullableIntFieldUpdateOperationsInput | number | null
-    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
-    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
-    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type AktuatorUpdateWithoutIconInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    merek?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
-    status?: BoolFieldUpdateOperationsInput | boolean
-    GPIO?: IntFieldUpdateOperationsInput | number
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    tandon?: TandonUpdateOneWithoutAktuatorNestedInput
-    greenhouse?: GreenhouseUpdateOneWithoutAktuatorNestedInput
-    tandonPenyimpanan?: TandonPenyimpananUpdateOneWithoutActuatorNestedInput
-    tandonBahan?: TandonBahanUpdateOneWithoutAktuatorNestedInput
-  }
-
-  export type AktuatorUncheckedUpdateWithoutIconInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    merek?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
-    status?: BoolFieldUpdateOperationsInput | boolean
-    GPIO?: IntFieldUpdateOperationsInput | number
-    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
-    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
-    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
-    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
-  export type AktuatorUncheckedUpdateManyWithoutIconInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    merek?: StringFieldUpdateOperationsInput | string
-    color?: StringFieldUpdateOperationsInput | string
-    status?: BoolFieldUpdateOperationsInput | boolean
-    GPIO?: IntFieldUpdateOperationsInput | number
-    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
-    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
-    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
-    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
-    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  }
-
   export type AktuatorCreateManyGreenhouseInput = {
     id?: number
     name: string
@@ -20356,7 +20294,7 @@ export namespace Prisma {
   export type SensorCreateManyGreenhouseInput = {
     id?: number
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -20465,7 +20403,7 @@ export namespace Prisma {
 
   export type SensorUpdateWithoutGreenhouseInput = {
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -20483,7 +20421,7 @@ export namespace Prisma {
   export type SensorUncheckedUpdateWithoutGreenhouseInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -20501,7 +20439,7 @@ export namespace Prisma {
   export type SensorUncheckedUpdateManyWithoutGreenhouseInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -20664,10 +20602,140 @@ export namespace Prisma {
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
+  export type SensorCreateManyIconInput = {
+    id?: number
+    name: string
+    calibration?: string | null
+    brand: string
+    unit_measurement: string
+    status: boolean
+    channel?: number | null
+    GPIO?: number | null
+    range_min?: number | null
+    range_max?: number | null
+    tandonId?: number | null
+    tandonBahanId?: number | null
+    greenhouseId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type AktuatorCreateManyIconInput = {
+    id?: number
+    name: string
+    merek: string
+    color: string
+    status: boolean
+    GPIO: number
+    tandonId?: number | null
+    greenhouseId?: number | null
+    tandonPenyimpananId?: number | null
+    tandonBahanId?: number | null
+    created_at?: Date | string
+    updated_at?: Date | string | null
+  }
+
+  export type SensorUpdateWithoutIconInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
+    brand?: StringFieldUpdateOperationsInput | string
+    unit_measurement?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
+    range_min?: NullableIntFieldUpdateOperationsInput | number | null
+    range_max?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tandon?: TandonUpdateOneWithoutSensorNestedInput
+    tandonBahan?: TandonBahanUpdateOneWithoutSensorNestedInput
+    greenhouse?: GreenhouseUpdateOneWithoutSensorNestedInput
+  }
+
+  export type SensorUncheckedUpdateWithoutIconInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
+    brand?: StringFieldUpdateOperationsInput | string
+    unit_measurement?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
+    range_min?: NullableIntFieldUpdateOperationsInput | number | null
+    range_max?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type SensorUncheckedUpdateManyWithoutIconInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
+    brand?: StringFieldUpdateOperationsInput | string
+    unit_measurement?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    channel?: NullableIntFieldUpdateOperationsInput | number | null
+    GPIO?: NullableIntFieldUpdateOperationsInput | number | null
+    range_min?: NullableIntFieldUpdateOperationsInput | number | null
+    range_max?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AktuatorUpdateWithoutIconInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    GPIO?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    tandon?: TandonUpdateOneWithoutAktuatorNestedInput
+    greenhouse?: GreenhouseUpdateOneWithoutAktuatorNestedInput
+    tandonPenyimpanan?: TandonPenyimpananUpdateOneWithoutActuatorNestedInput
+    tandonBahan?: TandonBahanUpdateOneWithoutAktuatorNestedInput
+  }
+
+  export type AktuatorUncheckedUpdateWithoutIconInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    GPIO?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type AktuatorUncheckedUpdateManyWithoutIconInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    merek?: StringFieldUpdateOperationsInput | string
+    color?: StringFieldUpdateOperationsInput | string
+    status?: BoolFieldUpdateOperationsInput | boolean
+    GPIO?: IntFieldUpdateOperationsInput | number
+    tandonId?: NullableIntFieldUpdateOperationsInput | number | null
+    greenhouseId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonPenyimpananId?: NullableIntFieldUpdateOperationsInput | number | null
+    tandonBahanId?: NullableIntFieldUpdateOperationsInput | number | null
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type SensorCreateManyTandonBahanInput = {
     id?: number
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -20699,7 +20767,7 @@ export namespace Prisma {
 
   export type SensorUpdateWithoutTandonBahanInput = {
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -20717,7 +20785,7 @@ export namespace Prisma {
   export type SensorUncheckedUpdateWithoutTandonBahanInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -20735,7 +20803,7 @@ export namespace Prisma {
   export type SensorUncheckedUpdateManyWithoutTandonBahanInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -20797,7 +20865,7 @@ export namespace Prisma {
   export type SensorCreateManyTandonInput = {
     id?: number
     name: string
-    persamaan: string
+    calibration?: string | null
     brand: string
     unit_measurement: string
     status: boolean
@@ -20855,7 +20923,7 @@ export namespace Prisma {
 
   export type SensorUpdateWithoutTandonInput = {
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -20873,7 +20941,7 @@ export namespace Prisma {
   export type SensorUncheckedUpdateWithoutTandonInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -20891,7 +20959,7 @@ export namespace Prisma {
   export type SensorUncheckedUpdateManyWithoutTandonInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    persamaan?: StringFieldUpdateOperationsInput | string
+    calibration?: NullableStringFieldUpdateOperationsInput | string | null
     brand?: StringFieldUpdateOperationsInput | string
     unit_measurement?: StringFieldUpdateOperationsInput | string
     status?: BoolFieldUpdateOperationsInput | boolean
@@ -21041,10 +21109,6 @@ export namespace Prisma {
      */
     export type UserCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = UserCountOutputTypeDefaultArgs<ExtArgs>
     /**
-     * @deprecated Use IconCountOutputTypeDefaultArgs instead
-     */
-    export type IconCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = IconCountOutputTypeDefaultArgs<ExtArgs>
-    /**
      * @deprecated Use GreenhouseCountOutputTypeDefaultArgs instead
      */
     export type GreenhouseCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = GreenhouseCountOutputTypeDefaultArgs<ExtArgs>
@@ -21057,6 +21121,10 @@ export namespace Prisma {
      */
     export type ResepCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = ResepCountOutputTypeDefaultArgs<ExtArgs>
     /**
+     * @deprecated Use IconCountOutputTypeDefaultArgs instead
+     */
+    export type IconCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = IconCountOutputTypeDefaultArgs<ExtArgs>
+    /**
      * @deprecated Use TandonBahanCountOutputTypeDefaultArgs instead
      */
     export type TandonBahanCountOutputTypeArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = TandonBahanCountOutputTypeDefaultArgs<ExtArgs>
@@ -21068,10 +21136,6 @@ export namespace Prisma {
      * @deprecated Use UserDefaultArgs instead
      */
     export type UserArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = UserDefaultArgs<ExtArgs>
-    /**
-     * @deprecated Use IconDefaultArgs instead
-     */
-    export type IconArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = IconDefaultArgs<ExtArgs>
     /**
      * @deprecated Use GreenhouseDefaultArgs instead
      */
@@ -21088,6 +21152,10 @@ export namespace Prisma {
      * @deprecated Use PenjadwalanDefaultArgs instead
      */
     export type PenjadwalanArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = PenjadwalanDefaultArgs<ExtArgs>
+    /**
+     * @deprecated Use IconDefaultArgs instead
+     */
+    export type IconArgs<ExtArgs extends $Extensions.Args = $Extensions.DefaultArgs> = IconDefaultArgs<ExtArgs>
     /**
      * @deprecated Use SensorDefaultArgs instead
      */
