@@ -7,14 +7,14 @@
     "seed": "ts-node src/config/seed.ts"
   },
   "scripts": {
-    "start": "prisma generate && node dist/index.js",
+    "start": "node dist/index.js",
     "dev:tsc": "tsc --watch -p .",
     "dev:serve": "nodemon -e js -w dist dist/index.js",
     "dev": "run-p dev:*",
     "test": "set NODE_ENV=test & mocha -r ts-node/register test/**/*.test.ts"
   },
   "keywords": [],
-  "author": "",
+  "author": "Raven",
   "license": "ISC",
   "dependencies": {
     "@hapi/boom": "^10.0.1",

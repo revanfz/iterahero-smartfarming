@@ -108,5 +108,7 @@
   },
   "exclude": [
     "test",
+    "src/config/seed.ts",
+    "src/config/seedMongo.ts"
   ],
 }
