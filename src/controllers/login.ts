@@ -4,7 +4,6 @@ import "dotenv/config";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom"
 import bcrypt from "bcrypt"
-import { publishData } from "../config/mqtt";
 
 interface LoginInput {
     email: string,

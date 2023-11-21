@@ -12,6 +12,12 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       },
     });
 
+    const target = await prisma.microcontroller.findUnique({
+      where: {
+        id: data?.microcontrollerId
+      }
+    })
+
     if (!data) {
       return Boom.notFound("Tidak ada aktuator dengan id tersebut");
     }
@@ -27,7 +33,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 
     publishData(
       "iterahero2023/kontrol",
-      JSON.stringify({ pin: data.GPIO })
+      JSON.stringify({ pin: data.GPIO, microcontroller: target?.name })
     );
 
     return h
