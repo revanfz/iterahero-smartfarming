@@ -1,11 +1,11 @@
 import { init, start } from "./server";
 import { connectMqtt } from "./config/mqtt";
-import { initPeracikan } from "./utils/schedule";
 import main from "./config/mongo";
+import { agendaInit } from "./utils/agenda";
 
 init().then(() => {
-    initPeracikan();
     connectMqtt();
-    start();
+    agendaInit().catch(err => console.error(err))
+    start().catch(err => console.error(err));
     main().catch(err => console.error(err))
 });

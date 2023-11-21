@@ -80,7 +80,7 @@ export const schedulePeracikan = async (
       }
     })
     if (komposisi && rasio && aktuator) {
-      console.log("Peracikan")
+      console.log({ komposisi, rasio, aktuator })
       schedule.scheduleJob(
         `iterahero2023-peracikan-${id}`,
         rule,

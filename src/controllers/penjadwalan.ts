@@ -6,6 +6,7 @@ import {
   onOffPeracikan,
   schedulePeracikan
 } from "../utils/schedule";
+import { deletePenjadwalan, onOffPenjadwalan, reinitializeSchedule } from "../utils/agenda";
 
 interface InputPenjadwalan {
   id_tandon: number;
@@ -113,8 +114,9 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
           greenhouseId: id_greenhouse
         },
       });
-      await schedulePeracikan(schedule.id, schedule.waktu, schedule.hari, schedule.resepId, schedule.durasi, schedule.greenhouseId)
     });
+
+    await reinitializeSchedule()
 
     return h
       .response({
@@ -143,7 +145,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
       },
     });
 
-    deletePeracikan(id);
+    await deletePenjadwalan(id)
 
     return h
       .response({
@@ -179,7 +181,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.notFound("Penjadwalan terpilih tidak ditemukan");
     }
 
-    onOffPeracikan(id);
+    await onOffPenjadwalan(targetWaktu.id, targetWaktu.isActive)
 
     return h
       .response({

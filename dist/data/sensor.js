@@ -7,7 +7,7 @@ exports.seedingSensor = [
         brand: "Endreess-Hauser",
         unit_measurement: "pH",
         calibration: "e = mc^2",
-        status: true,
+        status: false,
         tandonId: 1,
         type: "Sensor pH",
         channel: 0
@@ -17,7 +17,7 @@ exports.seedingSensor = [
         brand: "Allianz",
         unit_measurement: "Kelvin",
         calibration: "y = ax^2 + bx + c",
-        status: true,
+        status: false,
         tandonId: 1,
         type: "Sensor Suhu",
         GPIO: 15
@@ -27,7 +27,7 @@ exports.seedingSensor = [
         brand: "Carlsberg",
         unit_measurement: "PPM",
         calibration: " 1/ D * Inv (x)",
-        status: true,
+        status: false,
         tandonId: 1,
         type: "Sensor EC",
         channel: 1
@@ -37,7 +37,7 @@ exports.seedingSensor = [
         brand: "Endreess-Hauser",
         unit_measurement: "pH",
         calibration: "e = mc^2",
-        status: true,
+        status: false,
         tandonId: 2,
         type: "Sensor pH",
         channel: 0
@@ -47,7 +47,7 @@ exports.seedingSensor = [
         brand: "Allianz",
         unit_measurement: "Kelvin",
         calibration: "y = ax^2 + bx + c",
-        status: true,
+        status: false,
         tandonId: 2,
         type: "Sensor Suhu",
         GPIO: 15
@@ -57,7 +57,7 @@ exports.seedingSensor = [
         brand: "Carlsberg",
         unit_measurement: "PPM",
         calibration: " 1/ D * Inv (x)",
-        status: true,
+        status: false,
         tandonId: 2,
         type: "Sensor EC",
         channel: 1

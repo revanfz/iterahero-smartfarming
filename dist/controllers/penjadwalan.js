@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.patchHandler = exports.deleteHandler = exports.postHandler = exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
-const schedule_1 = require("../utils/schedule");
+const agenda_1 = require("../utils/agenda");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const size = request.query.size;
@@ -105,8 +105,8 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     greenhouseId: id_greenhouse
                 },
             });
-            yield (0, schedule_1.schedulePeracikan)(schedule.id, schedule.waktu, schedule.hari, schedule.resepId, schedule.durasi, schedule.greenhouseId);
         }));
+        yield (0, agenda_1.reinitializeSchedule)();
         return h
             .response({
             status: "success",
@@ -133,7 +133,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
                 id,
             },
         });
-        (0, schedule_1.deletePeracikan)(id);
+        yield (0, agenda_1.deletePenjadwalan)(id);
         return h
             .response({
             status: "success",
@@ -168,7 +168,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         else {
             return boom_1.default.notFound("Penjadwalan terpilih tidak ditemukan");
         }
-        (0, schedule_1.onOffPeracikan)(id);
+        yield (0, agenda_1.onOffPenjadwalan)(targetWaktu.id, targetWaktu.isActive);
         return h
             .response({
             status: "success",

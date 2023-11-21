@@ -2,7 +2,7 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider      = "prisma-client-js"
+  provider = "prisma-client-js"
   // output        = "./generated/client"
   // binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
@@ -24,6 +24,17 @@ model User {
   penjadwalan  Penjadwalan[]
   created_at   DateTime       @default(now())
   updated_at   DateTime?      @updatedAt
+}
+
+model Microcontroller {
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  brand      String
+  location   String
+  sensor     Sensor[]
+  aktuator   Aktuator[]
+  created_at DateTime   @default(now())
+  updated_at DateTime?  @updatedAt
 }
 
 model Greenhouse {
@@ -88,35 +99,39 @@ model Icon {
 }
 
 model Sensor {
-  id               Int          @id @default(autoincrement())
-  name             String
-  calibration      String?
-  brand            String
-  unit_measurement String
-  status           Boolean
-  channel          Int?
-  GPIO             Int?
-  icon             Icon         @relation(fields: [type], references: [name])
-  type             String
-  range_min        Int?
-  range_max        Int?
-  tandon           Tandon?      @relation(fields: [tandonId], references: [id])
-  tandonId         Int?
-  tandonBahan      TandonBahan? @relation(fields: [tandonBahanId], references: [id])
-  tandonBahanId    Int?
-  greenhouseId     Int?
-  greenhouse       Greenhouse?  @relation(fields: [greenhouseId], references: [id])
-  created_at       DateTime     @default(now())
-  updated_at       DateTime?    @updatedAt
+  id                Int             @id @default(autoincrement())
+  name              String
+  calibration       String?
+  brand             String
+  unit_measurement  String
+  status            Boolean
+  channel           Int?
+  GPIO              Int?
+  icon              Icon            @relation(fields: [type], references: [name])
+  type              String
+  range_min         Int?
+  range_max         Int?
+  microcontroller   Microcontroller @relation(fields: [microcontrollerId], references: [id])
+  microcontrollerId Int
+  tandon            Tandon?         @relation(fields: [tandonId], references: [id])
+  tandonId          Int?
+  tandonBahan       TandonBahan?    @relation(fields: [tandonBahanId], references: [id])
+  tandonBahanId     Int?
+  greenhouseId      Int?
+  greenhouse        Greenhouse?     @relation(fields: [greenhouseId], references: [id])
+  created_at        DateTime        @default(now())
+  updated_at        DateTime?       @updatedAt
 }
 
 model Aktuator {
-  id                  Int                @id @default(autoincrement())
-  name                String
-  merek               String
-  color               String
-  status              Boolean
-  GPIO                Int
+  id     Int     @id @default(autoincrement())
+  name   String
+  merek  String
+  color  String
+  status Boolean
+  GPIO   Int
+  microcontroller     Microcontroller    @relation(fields: [microcontrollerId], references: [id])
+  microcontrollerId   Int
   icon                Icon               @relation(fields: [type], references: [name])
   type                String
   tandon              Tandon?            @relation(fields: [tandonId], references: [id])

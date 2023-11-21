@@ -27,10 +27,11 @@ const mongoose_1 = __importStar(require("mongoose"));
 const sensorSchema = new mongoose_1.Schema({
     nama: { type: String, required: true },
     nilai: { type: Number, required: true, default: 0 },
+    microcontrollerId: { type: Number, required: true },
     gpio: { type: Number },
     channel: { type: Number },
     greenhouseId: { type: Number },
-    tandonId: { type: Number }
+    tandonId: { type: Number },
 });
 const SensorModel = mongoose_1.default.model('Sensor', sensorSchema);
 exports.default = SensorModel;
