@@ -2,6 +2,7 @@ import "dotenv/config";
 import { Agenda, Job } from "@hokify/agenda";
 import { prisma } from "../config/prisma";
 import { publishData } from "../config/mqtt";
+import { Penjadwalan } from "@prisma/client";
 
 const convertToCronExpression = (waktu: string, hari: number[]) => {
   const [jam, menit] = waktu.split(":");
@@ -14,6 +15,24 @@ export const agenda = new Agenda({
   db: { address: process.env.MONGODB_URL || "", collection: "penjadwalan" },
 });
 
+export const createJobs = async (target: Penjadwalan) => {
+  const schedule = agenda.create(
+    "penjadwalan-peracikan",
+    { 
+      id_penjadwalan: target.id,
+      id_resep: target.resepId,
+      id_tandon: target.tandonId,
+      id_greenhouse: target.greenhouseId,
+      durasi: target.durasi
+    }
+  );
+  const cron_exp = convertToCronExpression(target.waktu, target.hari);
+  schedule.repeatEvery(cron_exp, {
+    timezone: "Asia/Jakarta",
+  });
+  await schedule.save()
+}
+
 export const reinitializeSchedule = async () => {
   await agenda.cancel({ name: { $in: ["penjadwalan-peracikan", "test"] } });
 
@@ -22,21 +41,7 @@ export const reinitializeSchedule = async () => {
   penjadwalan
     .filter((item) => item.isActive)
     .forEach(async (item) => {
-      const schedule = agenda.create(
-        "penjadwalan-peracikan",
-        { 
-          id_penjadwalan: item.id,
-          id_resep: item.resepId,
-          id_tandon: item.tandonId,
-          id_greenhouse: item.greenhouseId,
-          durasi: item.durasi
-        }
-      );
-      const cron_exp = convertToCronExpression(item.waktu, item.hari);
-      schedule.repeatEvery(cron_exp, {
-        timezone: "Asia/Jakarta",
-      });
-      schedule.save()
+      await createJobs(item)
     });
 };
 
@@ -48,7 +53,6 @@ export const onOffPenjadwalan = async (id: number, currentStatus: boolean) => {
     if (currentStatus) job.disable();
     else job.enable();
   });
-  console.log(data);
 };
 
 export const deletePenjadwalan = async (id: number) => {

@@ -6,7 +6,7 @@ import {
   onOffPeracikan,
   schedulePeracikan
 } from "../utils/schedule";
-import { deletePenjadwalan, onOffPenjadwalan, reinitializeSchedule } from "../utils/agenda";
+import { createJobs, deletePenjadwalan, onOffPenjadwalan, reinitializeSchedule } from "../utils/agenda";
 
 interface InputPenjadwalan {
   id_tandon: number;
@@ -114,9 +114,9 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
           greenhouseId: id_greenhouse
         },
       });
-    });
 
-    await reinitializeSchedule()
+      await createJobs(schedule)
+    });
 
     return h
       .response({
@@ -139,13 +139,13 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
   try {
     const id = parseInt(request.query.id);
 
+    await deletePenjadwalan(id)
+
     await prisma.penjadwalan.delete({
       where: {
         id,
       },
     });
-
-    await deletePenjadwalan(id)
 
     return h
       .response({
@@ -171,6 +171,8 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
     });
 
     if (targetWaktu) {
+      await onOffPenjadwalan(targetWaktu.id, targetWaktu.isActive)
+
       await prisma.penjadwalan.update({
         where: { id },
         data: {
@@ -180,8 +182,6 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
     } else {
       return Boom.notFound("Penjadwalan terpilih tidak ditemukan");
     }
-
-    await onOffPenjadwalan(targetWaktu.id, targetWaktu.isActive)
 
     return h
       .response({

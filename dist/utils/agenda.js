@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.agendaInit = exports.deletePenjadwalan = exports.onOffPenjadwalan = exports.reinitializeSchedule = exports.agenda = void 0;
+exports.agendaInit = exports.deletePenjadwalan = exports.onOffPenjadwalan = exports.reinitializeSchedule = exports.createJobs = exports.agenda = void 0;
 require("dotenv/config");
 const agenda_1 = require("@hokify/agenda");
 const prisma_1 = require("../config/prisma");
@@ -22,24 +22,28 @@ const convertToCronExpression = (waktu, hari) => {
 exports.agenda = new agenda_1.Agenda({
     db: { address: process.env.MONGODB_URL || "", collection: "penjadwalan" },
 });
+const createJobs = (target) => __awaiter(void 0, void 0, void 0, function* () {
+    const schedule = exports.agenda.create("penjadwalan-peracikan", {
+        id_penjadwalan: target.id,
+        id_resep: target.resepId,
+        id_tandon: target.tandonId,
+        id_greenhouse: target.greenhouseId,
+        durasi: target.durasi
+    });
+    const cron_exp = convertToCronExpression(target.waktu, target.hari);
+    schedule.repeatEvery(cron_exp, {
+        timezone: "Asia/Jakarta",
+    });
+    yield schedule.save();
+});
+exports.createJobs = createJobs;
 const reinitializeSchedule = () => __awaiter(void 0, void 0, void 0, function* () {
     yield exports.agenda.cancel({ name: { $in: ["penjadwalan-peracikan", "test"] } });
     const penjadwalan = yield prisma_1.prisma.penjadwalan.findMany();
     penjadwalan
         .filter((item) => item.isActive)
         .forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
-        const schedule = exports.agenda.create("penjadwalan-peracikan", {
-            id_penjadwalan: item.id,
-            id_resep: item.resepId,
-            id_tandon: item.tandonId,
-            id_greenhouse: item.greenhouseId,
-            durasi: item.durasi
-        });
-        const cron_exp = convertToCronExpression(item.waktu, item.hari);
-        schedule.repeatEvery(cron_exp, {
-            timezone: "Asia/Jakarta",
-        });
-        schedule.save();
+        yield (0, exports.createJobs)(item);
     }));
 });
 exports.reinitializeSchedule = reinitializeSchedule;
@@ -53,7 +57,6 @@ const onOffPenjadwalan = (id, currentStatus) => __awaiter(void 0, void 0, void 0
         else
             job.enable();
     });
-    console.log(data);
 });
 exports.onOffPenjadwalan = onOffPenjadwalan;
 const deletePenjadwalan = (id) => __awaiter(void 0, void 0, void 0, function* () {

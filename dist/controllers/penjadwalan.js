@@ -105,8 +105,8 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     greenhouseId: id_greenhouse
                 },
             });
+            yield (0, agenda_1.createJobs)(schedule);
         }));
-        yield (0, agenda_1.reinitializeSchedule)();
         return h
             .response({
             status: "success",
@@ -128,12 +128,12 @@ exports.postHandler = postHandler;
 const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = parseInt(request.query.id);
+        yield (0, agenda_1.deletePenjadwalan)(id);
         yield prisma_1.prisma.penjadwalan.delete({
             where: {
                 id,
             },
         });
-        yield (0, agenda_1.deletePenjadwalan)(id);
         return h
             .response({
             status: "success",
@@ -158,6 +158,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
             where: { id },
         });
         if (targetWaktu) {
+            yield (0, agenda_1.onOffPenjadwalan)(targetWaktu.id, targetWaktu.isActive);
             yield prisma_1.prisma.penjadwalan.update({
                 where: { id },
                 data: {
@@ -168,7 +169,6 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         else {
             return boom_1.default.notFound("Penjadwalan terpilih tidak ditemukan");
         }
-        yield (0, agenda_1.onOffPenjadwalan)(targetWaktu.id, targetWaktu.isActive);
         return h
             .response({
             status: "success",
