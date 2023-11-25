@@ -213,19 +213,19 @@ export const actuatorByTandonHandler = async (
 export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   try {
     const { edit } = request.query as {
-      edit: boolean
+      edit: string
     }
     const { id_tandon, ppm, rasioA, rasioB, rasioAir } = request.payload as {
-      id_tandon: number;
-      ppm: number;
-      rasioA: number;
-      rasioB: number;
-      rasioAir: number;
+      id_tandon: string;
+      ppm: string;
+      rasioA: string;
+      rasioB: string;
+      rasioAir: string;
     };
-
+    let msg;
     const target = await prisma.tandon.findUnique({
       where: {
-        id: id_tandon,
+        id: parseInt(id_tandon),
       },
     });
 
@@ -233,7 +233,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.notFound("Tidak ada tandon terpilih.");
     }
 
-    if (edit) {
+    if (edit !== 'rasio') {
       let img_url;
       const { name, image, location } = request.payload as InputTandon;
       if (name !== target.nama) {
@@ -253,22 +253,25 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
           location,
         },
       });
+      msg = `Tandon ${name ?? target.nama} berhasil diperbarui`
+    } else {
+      await prisma.tandon.update({
+        where: {
+          id: parseInt(id_tandon),
+        },
+        data: {
+          ppm: parseFloat(ppm),
+          rasioA: parseFloat(rasioA),
+          rasioB: parseFloat(rasioB),
+          rasioAir: parseFloat(rasioAir),
+        },
+      });
+      msg = `Rasio ${target.nama} berhasil diperbarui`
     }
-    await prisma.tandon.update({
-      where: {
-        id: id_tandon,
-      },
-      data: {
-        ppm,
-        rasioA,
-        rasioB,
-        rasioAir,
-      },
-    });
 
     return h.response({
       status: "success",
-      message: `Rasio ${target.nama} berhasil diperbarui`,
+      message: `${msg}`,
     });
   } catch (e) {
     if (e instanceof Error) {

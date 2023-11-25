@@ -206,15 +206,16 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     try {
         const { edit } = request.query;
         const { id_tandon, ppm, rasioA, rasioB, rasioAir } = request.payload;
+        let msg;
         const target = yield prisma_1.prisma.tandon.findUnique({
             where: {
-                id: id_tandon,
+                id: parseInt(id_tandon),
             },
         });
         if (!target) {
             return boom_1.default.notFound("Tidak ada tandon terpilih.");
         }
-        if (edit) {
+        if (edit !== 'rasio') {
             let img_url;
             const { name, image, location } = request.payload;
             if (name !== target.nama) {
@@ -234,21 +235,25 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
                     location,
                 },
             });
+            msg = `Tandon ${name !== null && name !== void 0 ? name : target.nama} berhasil diperbarui`;
         }
-        yield prisma_1.prisma.tandon.update({
-            where: {
-                id: id_tandon,
-            },
-            data: {
-                ppm,
-                rasioA,
-                rasioB,
-                rasioAir,
-            },
-        });
+        else {
+            yield prisma_1.prisma.tandon.update({
+                where: {
+                    id: parseInt(id_tandon),
+                },
+                data: {
+                    ppm: parseFloat(ppm),
+                    rasioA: parseFloat(rasioA),
+                    rasioB: parseFloat(rasioB),
+                    rasioAir: parseFloat(rasioAir),
+                },
+            });
+            msg = `Rasio ${target.nama} berhasil diperbarui`;
+        }
         return h.response({
             status: "success",
-            message: `Rasio ${target.nama} berhasil diperbarui`,
+            message: `${msg}`,
         });
     }
     catch (e) {
