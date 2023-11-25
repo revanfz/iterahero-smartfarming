@@ -17,11 +17,11 @@ cloudinary_1.v2.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-const uploadImage = (image, nama) => __awaiter(void 0, void 0, void 0, function* () {
+const uploadImage = (image, tipe, nama) => __awaiter(void 0, void 0, void 0, function* () {
     return new Promise((resolve, reject) => {
         const stream = cloudinary_1.v2.uploader.upload_stream({
             folder,
-            public_id: `gh-${nama}`,
+            public_id: `${tipe}-${nama}`,
             resource_type: "auto"
         }, (err, result) => {
             if (err)

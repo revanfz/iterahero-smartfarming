@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Date, Document, Schema } from "mongoose";
 
 interface Model extends Document {
     nama: string,
@@ -8,6 +8,8 @@ interface Model extends Document {
     greenhouseId: number,
     tandonId: number,
     microcontrollerId: number,
+    createdAt: Date,
+    updatedAt: Date
 }
 
 const sensorSchema = new Schema<Model>({
@@ -18,7 +20,9 @@ const sensorSchema = new Schema<Model>({
     channel: { type: Number },
     greenhouseId: { type: Number },
     tandonId: { type: Number },
-})
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+}, { timestamps: true })
 
 const SensorModel = mongoose.model<Model>('Sensor', sensorSchema)
 

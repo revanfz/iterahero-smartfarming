@@ -24,6 +24,11 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 id: parseInt(id),
             },
         });
+        const target = yield prisma_1.prisma.microcontroller.findUnique({
+            where: {
+                id: data === null || data === void 0 ? void 0 : data.microcontrollerId
+            }
+        });
         if (!data) {
             return boom_1.default.notFound("Tidak ada aktuator dengan id tersebut");
         }
@@ -35,7 +40,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 status: !data.status
             }
         });
-        (0, mqtt_1.publishData)("iterahero2023/kontrol", JSON.stringify({ pin: data.GPIO }));
+        (0, mqtt_1.publishData)("iterahero2023/kontrol", JSON.stringify({ pin: data.GPIO, microcontroller: target === null || target === void 0 ? void 0 : target.name }));
         return h
             .response({
             status: "success",

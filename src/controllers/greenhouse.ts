@@ -94,7 +94,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
     if (isExist) {
       return Boom.forbidden(`Greenhouse ${name} sudah ada.`);
     }
-    const upload = await uploadImage(image, name);
+    const upload = await uploadImage(image, 'gh', name);
 
     if (!upload) {
       throw Error("Terjadi kesalahan saat mengupload");
@@ -147,13 +147,13 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
         return Boom.notFound("Tidak ada gh tersebut");
       }
 
-      if (name) {
-        await renameFile(target.name, name);
+      if (name !== target.name) {
+        await renameFile('gh-' + target.name, name);
       }
 
       if (image) {
         deleteImage(`gh-${target.name}`);
-        img_url = await uploadImage(image, name);
+        img_url = await uploadImage(image, 'gh', name);
       }
       await prisma.greenhouse.update({
         where: {

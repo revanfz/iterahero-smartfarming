@@ -88,9 +88,18 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
         const aktuator = yield prisma_1.prisma.aktuator.findMany({
             where: {
                 greenhouseId: id_greenhouse,
+                tandonId: id_tandon,
             },
         });
-        (0, mqtt_1.publishData)("iterahero2023/penjadwalan-peracikan", JSON.stringify({
+        // publishData(
+        //   "iterahero2023/penjadwalan-peracikan",
+        //   JSON.stringify({
+        //     komposisi: resep,
+        //     lamaPenyiraman: durasi,
+        //     konstanta: rasio,
+        //     aktuator,
+        //   })
+        (0, mqtt_1.publishData)("iterahero2023/penjadwalan-distribusi", JSON.stringify({
             komposisi: resep,
             lamaPenyiraman: durasi,
             konstanta: rasio,

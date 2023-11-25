@@ -9,11 +9,11 @@ v2.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const uploadImage = async (image: Readable, nama: string): Promise<UploadApiResponse | undefined> => {
+export const uploadImage = async (image: Readable, tipe:string, nama: string): Promise<UploadApiResponse | undefined> => {
  return new Promise((resolve, reject) => {
     const stream = v2.uploader.upload_stream({
         folder,
-        public_id: `gh-${nama}`,
+        public_id: `${tipe}-${nama}`,
         resource_type: "auto"
     }, (err, result) => {
         if (err) reject(err);

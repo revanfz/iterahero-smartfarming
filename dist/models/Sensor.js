@@ -32,6 +32,8 @@ const sensorSchema = new mongoose_1.Schema({
     channel: { type: Number },
     greenhouseId: { type: Number },
     tandonId: { type: Number },
-});
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }
+}, { timestamps: true });
 const SensorModel = mongoose_1.default.model('Sensor', sensorSchema);
 exports.default = SensorModel;

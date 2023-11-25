@@ -91,16 +91,25 @@ export const agendaInit = async () => {
     const aktuator = await prisma.aktuator.findMany({
       where: {
         greenhouseId: id_greenhouse,
+        tandonId: id_tandon,
       },
     });
-    publishData(
-      "iterahero2023/penjadwalan-peracikan",
-      JSON.stringify({
-        komposisi: resep,
-        lamaPenyiraman: durasi,
-        konstanta: rasio,
-        aktuator,
-      })
+    // publishData(
+    //   "iterahero2023/penjadwalan-peracikan",
+    //   JSON.stringify({
+    //     komposisi: resep,
+    //     lamaPenyiraman: durasi,
+    //     konstanta: rasio,
+    //     aktuator,
+    //   })
+      publishData(
+        "iterahero2023/penjadwalan-distribusi",
+        JSON.stringify({
+          komposisi: resep,
+          lamaPenyiraman: durasi,
+          konstanta: rasio,
+          aktuator,
+        })
     );
     done();
   });

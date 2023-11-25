@@ -12,9 +12,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.patchHandler = exports.actuatorByTandonHandler = exports.sensorByTandonHandler = exports.getHandler = void 0;
+exports.patchHandler = exports.actuatorByTandonHandler = exports.sensorByTandonHandler = exports.postHandler = exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
+const cloudinary_1 = require("../config/cloudinary");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id_user } = request.auth.credentials;
@@ -53,6 +54,53 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getHandler = getHandler;
+const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id_user } = request.auth.credentials;
+        const { name, image, location } = request.payload;
+        const isExist = yield prisma_1.prisma.tandon.findFirst({
+            where: {
+                nama: name,
+            },
+        });
+        if (isExist) {
+            return boom_1.default.forbidden(`Tandon ${name} sudah ada.`);
+        }
+        const upload = yield (0, cloudinary_1.uploadImage)(image, 'tandon', name);
+        if (!upload) {
+            throw Error("Terjadi kesalahan saat mengupload");
+        }
+        yield prisma_1.prisma.tandon.create({
+            data: {
+                nama: name,
+                image: upload.secure_url,
+                user: {
+                    connect: {
+                        id: id_user,
+                    },
+                },
+                location,
+                isOnline: true,
+            },
+        });
+        return h
+            .response({
+            status: "ok",
+            message: `Tandon ${name} berhasil ditambahkan.`,
+        })
+            .code(200);
+    }
+    catch (e) {
+        console.log(e);
+        if (e instanceof Error) {
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.postHandler = postHandler;
 const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const id = parseInt(request.params.id);
@@ -154,7 +202,9 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
 });
 exports.actuatorByTandonHandler = actuatorByTandonHandler;
 const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    var _c;
     try {
+        const { edit } = request.query;
         const { id_tandon, ppm, rasioA, rasioB, rasioAir } = request.payload;
         const target = yield prisma_1.prisma.tandon.findUnique({
             where: {
@@ -163,6 +213,27 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         });
         if (!target) {
             return boom_1.default.notFound("Tidak ada tandon terpilih.");
+        }
+        if (edit) {
+            let img_url;
+            const { name, image, location } = request.payload;
+            if (name !== target.nama) {
+                yield (0, cloudinary_1.renameFile)('tandon-' + target.nama, name);
+            }
+            if (image) {
+                (0, cloudinary_1.deleteImage)(`tandon-${target.nama}`);
+                img_url = yield (0, cloudinary_1.uploadImage)(image, 'tandon', name);
+            }
+            yield prisma_1.prisma.tandon.update({
+                where: {
+                    id: target.id,
+                },
+                data: {
+                    nama: name,
+                    image: (_c = img_url === null || img_url === void 0 ? void 0 : img_url.secure_url) !== null && _c !== void 0 ? _c : target.image,
+                    location,
+                },
+            });
         }
         yield prisma_1.prisma.tandon.update({
             where: {

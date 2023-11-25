@@ -92,7 +92,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         if (isExist) {
             return boom_1.default.forbidden(`Greenhouse ${name} sudah ada.`);
         }
-        const upload = yield (0, cloudinary_1.uploadImage)(image, name);
+        const upload = yield (0, cloudinary_1.uploadImage)(image, 'gh', name);
         if (!upload) {
             throw Error("Terjadi kesalahan saat mengupload");
         }
@@ -141,12 +141,12 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
             if (!target) {
                 return boom_1.default.notFound("Tidak ada gh tersebut");
             }
-            if (name) {
-                yield (0, cloudinary_1.renameFile)(target.name, name);
+            if (name !== target.name) {
+                yield (0, cloudinary_1.renameFile)('gh-' + target.name, name);
             }
             if (image) {
                 (0, cloudinary_1.deleteImage)(`gh-${target.name}`);
-                img_url = yield (0, cloudinary_1.uploadImage)(image, name);
+                img_url = yield (0, cloudinary_1.uploadImage)(image, 'gh', name);
             }
             yield prisma_1.prisma.greenhouse.update({
                 where: {

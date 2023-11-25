@@ -164,10 +164,12 @@ model Tandon {
   userId            Int
   status            String              @default("Kosong")
   isOnline          Boolean
-  rasioA            Float
-  rasioB            Float
-  rasioAir          Float
-  ppm               Float
+  rasioA            Float               @default(0)
+  rasioB            Float               @default(0)
+  rasioAir          Float               @default(0)
+  ppm               Float               @default(0)
+  image             String
+  location          String
   sensor            Sensor[]
   aktuator          Aktuator[]
   tandonBahan       TandonBahan[]

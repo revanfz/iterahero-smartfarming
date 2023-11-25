@@ -35,20 +35,30 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             return Boom.unauthorized("Username tidak terdaftar")
         }
 
+        // const tokenExpiry = new Date(Date.now() + ((3 * 24) + 7) * 60 * 60 * 1000)
+
         const payloadJwt = {
             email,
             id_user: user.id,
             role: user.role,
+            // tokenExpiry,
             aud: process.env.JWT_AUD,
             iss: process.env.JWT_ISS,
             sub: process.env.JWT_SUB
         }
         const jwtSecret = process.env.JWT_SECRET || '';
         const token = jwt.sign(payloadJwt, jwtSecret, { expiresIn: "3d" });
-        
+
         return h.response({
             status: 'success',
-            accessToken: token,
+            accessToken: token
+            // data: {
+            //     accessToken: token,
+            //     email: user.email,
+            //     id_user: user.id,
+            //     role: user.role,
+            //     tokenExpiry
+            // }
         }).code(200);    
     }
     catch (e) {
