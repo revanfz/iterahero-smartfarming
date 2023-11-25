@@ -212,20 +212,22 @@ export const actuatorByTandonHandler = async (
 
 export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   try {
+    const id_tandon = parseInt(request.query.id_tandon)
     const { edit } = request.query as {
       edit: string
     }
-    const { id_tandon, ppm, rasioA, rasioB, rasioAir } = request.payload as {
-      id_tandon: string;
+    const { ppm, rasioA, rasioB, rasioAir } = request.payload as {
       ppm: string;
       rasioA: string;
       rasioB: string;
       rasioAir: string;
     };
+    
     let msg;
+
     const target = await prisma.tandon.findUnique({
       where: {
-        id: parseInt(id_tandon),
+        id: id_tandon
       },
     });
 
@@ -257,7 +259,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
     } else {
       await prisma.tandon.update({
         where: {
-          id: parseInt(id_tandon),
+          id: id_tandon,
         },
         data: {
           ppm: parseFloat(ppm),
