@@ -5,6 +5,7 @@ import {
   patchHandler,
   postHandler,
   sensorByTandonHandler,
+  deleteHandler
 } from "../controllers/tandonUtama";
 import { prefix } from "../utils/prefix";
 import Joi from "joi";
@@ -78,5 +79,10 @@ export const tandonUtamaRoute: ServerRoute[] = [
         maxBytes: 1000 * 1000 * 5, // 5 Mb
       },
     },
+  },
+  {
+    method: "DELETE",
+    path,
+    handler: deleteHandler,
   },
 ];

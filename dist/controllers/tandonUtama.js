@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.patchHandler = exports.actuatorByTandonHandler = exports.sensorByTandonHandler = exports.postHandler = exports.getHandler = void 0;
+exports.deleteHandler = exports.patchHandler = exports.actuatorByTandonHandler = exports.sensorByTandonHandler = exports.postHandler = exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const cloudinary_1 = require("../config/cloudinary");
@@ -276,3 +276,41 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.patchHandler = patchHandler;
+const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = parseInt(request.query.id);
+        if (!isNaN(id)) {
+            const target = yield prisma_1.prisma.tandon.findUnique({
+                where: {
+                    id,
+                },
+            });
+            if (!target) {
+                return boom_1.default.notFound("Tidak ada gh tersebut");
+            }
+            yield prisma_1.prisma.tandon.delete({
+                where: {
+                    id: target.id,
+                },
+            });
+            yield (0, cloudinary_1.deleteImage)(`tandon-${target.nama}`);
+            return h.response({
+                status: "success",
+                message: `Tandon ${target.nama} berhasil dihapus`,
+            });
+        }
+        else {
+            throw "Invalid id";
+        }
+    }
+    catch (e) {
+        console.log(e);
+        if (e instanceof Error) {
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.deleteHandler = deleteHandler;

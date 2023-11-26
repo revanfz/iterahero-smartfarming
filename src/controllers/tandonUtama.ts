@@ -293,3 +293,43 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
     await prisma.$disconnect();
   }
 };
+
+export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
+  try {
+    const id = parseInt(request.query.id);
+    if (!isNaN(id)) {
+      const target = await prisma.tandon.findUnique({
+        where: {
+          id,
+        },
+      });
+      if (!target) {
+        return Boom.notFound("Tidak ada gh tersebut");
+      }
+
+      await prisma.tandon.delete({
+        where: {
+          id: target.id,
+        },
+      });
+
+      await deleteImage(`tandon-${target.nama}`);
+
+      return h.response({
+        status: "success",
+        message: `Tandon ${target.nama} berhasil dihapus`,
+      });
+    } else {
+      throw "Invalid id";
+    }
+  }
+  catch (e) {
+    console.log(e)
+    if (e instanceof Error) {
+      return Boom.internal(e.message)
+    }
+  }
+  finally {
+    await prisma.$disconnect()
+  }
+}

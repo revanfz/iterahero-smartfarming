@@ -76,4 +76,9 @@ exports.tandonUtamaRoute = [
             },
         },
     },
+    {
+        method: "DELETE",
+        path,
+        handler: tandonUtama_1.deleteHandler,
+    },
 ];
