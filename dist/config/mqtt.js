@@ -43,30 +43,36 @@ const Sensor_1 = __importDefault(require("../models/Sensor"));
 const clientId = `Iterahero2023_${Math.random().toString().slice(4)}`;
 let broker;
 function connectMqtt() {
-    broker = mqtt.connect({
-        host: "c401972c13f24e59b71daf85c5f5a712.s2.eu.hivemq.cloud",
-        port: 8883,
-        username: process.env.MQTT_USERNAME,
-        password: process.env.MQTT_PASSWORD,
-        protocol: "mqtts",
+    // broker = mqtt.connect({
+    //   host: "c401972c13f24e59b71daf85c5f5a712.s2.eu.hivemq.cloud",
+    //   port: 8883,
+    //   username: process.env.MQTT_USERNAME,
+    //   password: process.env.MQTT_PASSWORD,
+    //   protocol: "mqtts",
+    //   clientId
+    // });
+    broker = mqtt.connect("ws://broker.hivemq.com:8000/mqtt", {
+        protocolId: "MQTT",
+        clean: true,
         clientId
     });
     broker.on("connect", () => {
         console.log("Connected to MQTT");
         broker.subscribe("iterahero2023/#");
+        // broker.subscribe("iterahero/#");
     });
     broker.on("message", (topic, payload, packet) => __awaiter(this, void 0, void 0, function* () {
         try {
             const data = JSON.parse(payload.toString());
-            console.log(data);
+            console.log({ topic, data });
             if (topic === "iterahero2023/peracikan/info") {
                 yield prisma_1.prisma.tandon.update({
                     where: {
-                        id: 2
+                        id: 2,
                     },
                     data: {
-                        status: data.status
-                    }
+                        status: data.status,
+                    },
                 });
             }
             else if (topic === "iterahero2023/info") {
@@ -87,11 +93,11 @@ function connectMqtt() {
                     const status = Object.values(item)[0];
                     yield prisma_1.prisma.aktuator.updateMany({
                         where: {
-                            GPIO: parseInt(port)
+                            GPIO: parseInt(port),
                         },
                         data: {
-                            status
-                        }
+                            status,
+                        },
                     });
                 }));
             }
@@ -112,6 +118,6 @@ function publishData(topic, message) {
     }
 }
 exports.publishData = publishData;
-process.on('SIGINT', () => {
+process.on("SIGINT", () => {
     broker.end();
 });

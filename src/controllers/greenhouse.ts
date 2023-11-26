@@ -242,6 +242,7 @@ export const sensorByGreenhouseHandler = async (
         icon: {
           select: {
             logo: true,
+            color: true
           }
         }
       },
@@ -260,6 +261,11 @@ export const sensorByGreenhouseHandler = async (
         data,
         cursor: data[data.length - 1]?.id,
         totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
+        totalData: await prisma.sensor.count({
+          where: {
+            greenhouseId: id
+          }
+        })
       })
       .code(200);
   } catch (e) {
@@ -293,7 +299,8 @@ export const actuatorByGreenhouseHandler = async (
       include: {
         icon: {
           select: {
-            logo: true
+            logo: true,
+            color: true
           }
         }
       },
@@ -312,6 +319,11 @@ export const actuatorByGreenhouseHandler = async (
         data,
         cursor: data[data.length - 1]?.id,
         totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
+        totalData: await prisma.aktuator.count({
+          where: {
+            greenhouseId: id
+          }
+        })
       })
       .code(200);
   } catch (e) {

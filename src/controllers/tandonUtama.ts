@@ -113,21 +113,18 @@ export const sensorByTandonHandler = async (
   try {
     const total = await prisma.sensor.count({
       where: {
-        tandon: {
-          id,
-        },
+        tandonId: id
       },
     });
     const data = await prisma.sensor.findMany({
       where: {
-        tandon: {
-          id,
-        },
+        tandonId: id
       },
       include: {
         icon: {
           select: {
             logo: true,
+            color: true
           }
         }
       },
@@ -145,6 +142,11 @@ export const sensorByTandonHandler = async (
       data,
       cursor: data[data.length - 1]?.id,
       totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
+      totalData: await prisma.sensor.count({
+        where: {
+          tandonId: id
+        }
+      })
     });
   } catch (e) {
     if (e instanceof Error) {
@@ -178,7 +180,8 @@ export const actuatorByTandonHandler = async (
       include: {
         icon: {
           select: {
-            logo: true
+            logo: true,
+            color: true
           }
         }
       },
@@ -197,6 +200,11 @@ export const actuatorByTandonHandler = async (
         data,
         cursor: data[data.length - 1]?.id,
         totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
+        totalData: await prisma.aktuator.count({
+          where: {
+            tandonId: id
+          }
+        })
       })
       .code(200);
   } catch (e) {

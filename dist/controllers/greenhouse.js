@@ -232,6 +232,7 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
                 icon: {
                     select: {
                         logo: true,
+                        color: true
                     }
                 }
             },
@@ -248,6 +249,11 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
             data,
             cursor: (_c = data[data.length - 1]) === null || _c === void 0 ? void 0 : _c.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
+            totalData: yield prisma_1.prisma.sensor.count({
+                where: {
+                    greenhouseId: id
+                }
+            })
         })
             .code(200);
     }
@@ -280,7 +286,8 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
             include: {
                 icon: {
                     select: {
-                        logo: true
+                        logo: true,
+                        color: true
                     }
                 }
             },
@@ -297,6 +304,11 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
             data,
             cursor: (_d = data[data.length - 1]) === null || _d === void 0 ? void 0 : _d.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
+            totalData: yield prisma_1.prisma.aktuator.count({
+                where: {
+                    greenhouseId: id
+                }
+            })
         })
             .code(200);
     }

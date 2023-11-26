@@ -17,53 +17,63 @@ export function connectMqtt() {
     clientId
   });
 
+  // broker = mqtt.connect("ws://broker.hivemq.com:8000/mqtt", {
+  //   protocolId: "MQTT",
+  //   clean: true,
+  //   clientId
+  // });
+
   broker.on("connect", () => {
-   console.log("Connected to MQTT");
+    console.log("Connected to MQTT");
     broker.subscribe("iterahero2023/#");
+    // broker.subscribe("iterahero/#");
   });
 
   broker.on("message", async (topic, payload, packet) => {
     try {
       const data = JSON.parse(payload.toString());
-      console.log(data);
+      console.log({ topic, data });
       if (topic === "iterahero2023/peracikan/info") {
         await prisma.tandon.update({
           where: {
-            id: 2
+            id: 2,
           },
           data: {
-            status: data.status
-          }
-        })
-      }
-      else if (topic === "iterahero2023/info") {
+            status: data.status,
+          },
+        });
+      } else if (topic === "iterahero2023/info") {
         data.sensor_adc.forEach(async (item: object, index: number) => {
-          const channel = Object.keys(item)[0]
-          const val = Object.values(item)[0]
-          await SensorModel.updateMany({ channel: parseInt(channel)}, { nilai: val })
-        })
+          const channel = Object.keys(item)[0];
+          const val = Object.values(item)[0];
+          await SensorModel.updateMany(
+            { channel: parseInt(channel) },
+            { nilai: val }
+          );
+        });
         data.sensor_non_adc.forEach(async (item: object, index: number) => {
-          const gpio = Object.keys(item)[0]
-          const val = Object.values(item)[0]
-          await SensorModel.updateMany({ gpio: parseInt(gpio) }, { nilai: val })
-        })
-      }
-      else if (topic === "iterahero2023/actuator") {
+          const gpio = Object.keys(item)[0];
+          const val = Object.values(item)[0];
+          await SensorModel.updateMany(
+            { gpio: parseInt(gpio) },
+            { nilai: val }
+          );
+        });
+      } else if (topic === "iterahero2023/actuator") {
         data.actuator.forEach(async (item: object, index: number) => {
-          const port = Object.keys(item)[0]
-          const status = Object.values(item)[0]
+          const port = Object.keys(item)[0];
+          const status = Object.values(item)[0];
           await prisma.aktuator.updateMany({
             where: {
-              GPIO: parseInt(port)
+              GPIO: parseInt(port),
             },
             data: {
-              status
-            }
-          })
-        })
+              status,
+            },
+          });
+        });
       }
-    }
-    catch (e) {
+    } catch (e) {
       if (e instanceof Error) console.log(e.message);
     }
   });
@@ -77,6 +87,6 @@ export function publishData(topic: string, message: string) {
   }
 }
 
-process.on('SIGINT', () => {
-    broker.end();
-})
+process.on("SIGINT", () => {
+  broker.end();
+});

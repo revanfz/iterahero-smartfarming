@@ -109,21 +109,18 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
     try {
         const total = yield prisma_1.prisma.sensor.count({
             where: {
-                tandon: {
-                    id,
-                },
+                tandonId: id
             },
         });
         const data = yield prisma_1.prisma.sensor.findMany({
             where: {
-                tandon: {
-                    id,
-                },
+                tandonId: id
             },
             include: {
                 icon: {
                     select: {
                         logo: true,
+                        color: true
                     }
                 }
             },
@@ -139,6 +136,11 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
             data,
             cursor: (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
+            totalData: yield prisma_1.prisma.sensor.count({
+                where: {
+                    tandonId: id
+                }
+            })
         });
     }
     catch (e) {
@@ -170,7 +172,8 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
             include: {
                 icon: {
                     select: {
-                        logo: true
+                        logo: true,
+                        color: true
                     }
                 }
             },
@@ -187,6 +190,11 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
             data,
             cursor: (_b = data[data.length - 1]) === null || _b === void 0 ? void 0 : _b.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
+            totalData: yield prisma_1.prisma.aktuator.count({
+                where: {
+                    tandonId: id
+                }
+            })
         })
             .code(200);
     }
@@ -204,12 +212,13 @@ exports.actuatorByTandonHandler = actuatorByTandonHandler;
 const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _c;
     try {
+        const id_tandon = parseInt(request.query.id_tandon);
         const { edit } = request.query;
-        const { id_tandon, ppm, rasioA, rasioB, rasioAir } = request.payload;
+        const { ppm, rasioA, rasioB, rasioAir } = request.payload;
         let msg;
         const target = yield prisma_1.prisma.tandon.findUnique({
             where: {
-                id: parseInt(id_tandon),
+                id: id_tandon
             },
         });
         if (!target) {
@@ -240,7 +249,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         else {
             yield prisma_1.prisma.tandon.update({
                 where: {
-                    id: parseInt(id_tandon),
+                    id: id_tandon,
                 },
                 data: {
                     ppm: parseFloat(ppm),
