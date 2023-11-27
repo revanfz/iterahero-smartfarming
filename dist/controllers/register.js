@@ -18,7 +18,7 @@ const boom_1 = __importDefault(require("@hapi/boom"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { username, password, email } = request.payload;
+        const { name, username, password, email } = request.payload;
         const isRegistered = yield prisma_1.prisma.user.findUnique({
             where: {
                 email
@@ -29,6 +29,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         }
         yield prisma_1.prisma.user.create({
             data: {
+                name,
                 username,
                 password: yield bcrypt_1.default.hash(password, 10),
                 email,

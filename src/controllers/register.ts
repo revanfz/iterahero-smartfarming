@@ -4,6 +4,7 @@ import Boom from "@hapi/boom";
 import bcrypt from "bcrypt";
 
 interface RegisterInput {
+    name: string,
     username: string,
     password: string,
     email: string
@@ -11,7 +12,7 @@ interface RegisterInput {
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
     try {
-        const { username, password, email } = request.payload as RegisterInput;
+        const { name, username, password, email } = request.payload as RegisterInput;
 
         const isRegistered = await prisma.user.findUnique({
             where: {
@@ -24,6 +25,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         }
         await prisma.user.create({
             data: {
+                name,
                 username,
                 password: await bcrypt.hash(password, 10),
                 email,

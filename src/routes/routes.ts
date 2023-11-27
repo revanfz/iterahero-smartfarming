@@ -14,6 +14,7 @@ import { sensorRoute } from "./sensor";
 import { kontrolRoute } from "./kontrol";
 import { notificationRoute } from "./notification";
 import { loggingRoute } from "./logging";
+import { iconRoute } from "./icon";
 
 export const routes: ServerRoute[] = [
   ...home,
@@ -30,5 +31,6 @@ export const routes: ServerRoute[] = [
   ...sensorRoute,
   ...kontrolRoute,
   ...notificationRoute,
-  ...loggingRoute
+  ...loggingRoute,
+  ...iconRoute
 ];
