@@ -17,6 +17,7 @@ const kontrol_1 = require("./kontrol");
 const notification_1 = require("./notification");
 const logging_1 = require("./logging");
 const icon_1 = require("./icon");
+const grafik_1 = require("./grafik");
 exports.routes = [
     ...home_1.home,
     ...login_1.loginRoute,
@@ -33,5 +34,6 @@ exports.routes = [
     ...kontrol_1.kontrolRoute,
     ...notification_1.notificationRoute,
     ...logging_1.loggingRoute,
-    ...icon_1.iconRoute
+    ...icon_1.iconRoute,
+    ...grafik_1.grafikRoute
 ];

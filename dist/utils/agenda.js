@@ -8,12 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.agendaInit = exports.deletePenjadwalan = exports.onOffPenjadwalan = exports.reinitializeSchedule = exports.createJobs = exports.agenda = void 0;
 require("dotenv/config");
 const agenda_1 = require("@hokify/agenda");
 const prisma_1 = require("../config/prisma");
 const mqtt_1 = require("../config/mqtt");
+const Sensor_1 = __importDefault(require("../models/Sensor"));
+const SensorLog_1 = __importDefault(require("../models/SensorLog"));
 const convertToCronExpression = (waktu, hari) => {
     const [jam, menit] = waktu.split(":");
     const cronDaysOfWeek = hari.sort().join(",");
@@ -38,7 +43,7 @@ const createJobs = (target) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.createJobs = createJobs;
 const reinitializeSchedule = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield exports.agenda.cancel({ name: { $in: ["penjadwalan-peracikan", "test"] } });
+    yield exports.agenda.cancel({ name: { $in: ["penjadwalan-peracikan"] } });
     const penjadwalan = yield prisma_1.prisma.penjadwalan.findMany();
     penjadwalan
         .filter((item) => item.isActive)
@@ -64,8 +69,10 @@ const deletePenjadwalan = (id) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.deletePenjadwalan = deletePenjadwalan;
 const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
-    exports.agenda.define("test", (jobs) => __awaiter(void 0, void 0, void 0, function* () {
-        console.log("test");
+    exports.agenda.define("logging-sensor", (job, done) => __awaiter(void 0, void 0, void 0, function* () {
+        const data = yield Sensor_1.default.find();
+        data.forEach((item) => __awaiter(void 0, void 0, void 0, function* () { return yield SensorLog_1.default.create({ id_sensor: item.id, nama: item.nama, nilai: item.nilai }); }));
+        done();
     }));
     exports.agenda.define("penjadwalan-peracikan", (job, done) => __awaiter(void 0, void 0, void 0, function* () {
         const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi } = job.attrs.data;
@@ -109,12 +116,8 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
     }));
     yield exports.agenda.start();
     console.log("Agenda started");
-    (0, exports.reinitializeSchedule)().then(() => 
-    // agenda.every("10 seconds", "test", null, {
-    //   timezone: "Asia/Jakarta",
-    //   skipImmediate: true,
-    // })
-    console.log("Inisialisasi Penjadwalan Selesai"));
+    yield exports.agenda.every("1 day", "logging-sensor");
+    (0, exports.reinitializeSchedule)().then(() => console.log("Inisialisasi Penjadwalan Selesai"));
 });
 exports.agendaInit = agendaInit;
 function graceful() {

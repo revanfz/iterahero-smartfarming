@@ -3,6 +3,8 @@ import { Agenda, Job } from "@hokify/agenda";
 import { prisma } from "../config/prisma";
 import { publishData } from "../config/mqtt";
 import { Penjadwalan } from "@prisma/client";
+import Sensor from "../models/Sensor";
+import SensorLog from "../models/SensorLog";
 
 const convertToCronExpression = (waktu: string, hari: number[]) => {
   const [jam, menit] = waktu.split(":");
@@ -34,7 +36,7 @@ export const createJobs = async (target: Penjadwalan) => {
 }
 
 export const reinitializeSchedule = async () => {
-  await agenda.cancel({ name: { $in: ["penjadwalan-peracikan", "test"] } });
+  await agenda.cancel({ name: { $in: ["penjadwalan-peracikan"] } });
 
   const penjadwalan = await prisma.penjadwalan.findMany();
 
@@ -60,9 +62,11 @@ export const deletePenjadwalan = async (id: number) => {
 };
 
 export const agendaInit = async () => {
-  agenda.define("test", async (jobs: Job) => {
-    console.log("test");
-  });
+  agenda.define("logging-sensor", async (job: Job, done) => {
+    const data = await Sensor.find();
+    data.forEach(async item => await SensorLog.create({ id_sensor: item.id, nama: item.nama, nilai: item.nilai }))
+    done();
+  })
 
   agenda.define("penjadwalan-peracikan", async (job: Job, done) => {
     const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi } = job.attrs.data as {
@@ -116,12 +120,8 @@ export const agendaInit = async () => {
 
   await agenda.start();
   console.log("Agenda started");
-
+  await agenda.every("1 day", "logging-sensor")
   reinitializeSchedule().then(() =>
-    // agenda.every("10 seconds", "test", null, {
-    //   timezone: "Asia/Jakarta",
-    //   skipImmediate: true,
-    // })
     console.log("Inisialisasi Penjadwalan Selesai")
   );
 };

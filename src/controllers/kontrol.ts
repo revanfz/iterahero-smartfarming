@@ -39,7 +39,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
     return h
       .response({
         status: "success",
-        message: `${data.name} berhasil dinyalakan`,
+        message: `${data.name} berhasil ${data.status ? 'dimatikan' : 'dinyalakan'}`,
       })
       .code(200);
   } catch (e) {

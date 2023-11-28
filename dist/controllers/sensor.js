@@ -17,31 +17,48 @@ const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
+    const id = parseInt(request.query.id);
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
     try {
-        const total = yield prisma_1.prisma.sensor.count();
-        const data = yield prisma_1.prisma.sensor.findMany({
-            include: {
-                icon: {
-                    select: {
-                        logo: true
-                    }
+        let data;
+        if (!isNaN(id)) {
+            data = yield prisma_1.prisma.sensor.findUnique({
+                where: {
+                    id
                 }
-            },
-            take: size ? size : 100,
-            skip: cursor ? 1 : 0,
-            cursor: cursor ? { id: cursor } : undefined,
-        });
-        // if (data.length < 1) {
-        //     return Boom.notFound("Tidak ada sensor")
-        // }
-        return h.response({
-            status: "success",
-            data,
-            cursor: (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id,
-            totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
-        });
+            });
+            if (!data) {
+                return boom_1.default.notFound(`Tidak ada sensor dengan id ${id}`);
+            }
+            else {
+                return h.response({
+                    status: "success",
+                    data
+                }).code(200);
+            }
+        }
+        else {
+            const total = yield prisma_1.prisma.sensor.count();
+            data = yield prisma_1.prisma.sensor.findMany({
+                include: {
+                    icon: {
+                        select: {
+                            logo: true
+                        }
+                    }
+                },
+                take: size ? size : 100,
+                skip: cursor ? 1 : 0,
+                cursor: cursor ? { id: cursor } : undefined,
+            });
+            return h.response({
+                status: "success",
+                data,
+                cursor: id !== null && id !== void 0 ? id : (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id,
+                totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
+            }).code(200);
+        }
     }
     catch (e) {
         if (e instanceof Error) {

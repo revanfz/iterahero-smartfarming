@@ -44,7 +44,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         return h
             .response({
             status: "success",
-            message: `${data.name} berhasil dinyalakan`,
+            message: `${data.name} berhasil ${data.status ? 'dimatikan' : 'dinyalakan'}`,
         })
             .code(200);
     }

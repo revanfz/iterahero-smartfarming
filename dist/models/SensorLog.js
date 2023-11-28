@@ -24,15 +24,10 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = __importStar(require("mongoose"));
-const sensorSchema = new mongoose_1.Schema({
+const SensorLogSchema = new mongoose_1.Schema({
     id_sensor: { type: Number, required: true },
     nama: { type: String, required: true },
-    nilai: { type: Number, required: true, default: 0 },
-    microcontrollerId: { type: Number, required: true },
-    gpio: { type: Number },
-    channel: { type: Number },
-    greenhouseId: { type: Number },
-    tandonId: { type: Number },
-}, { timestamps: true });
-const Sensor = mongoose_1.default.model("Sensor", sensorSchema);
-exports.default = Sensor;
+    nilai: { type: Number, default: 0 },
+}, { timestamps: { createdAt: true, updatedAt: false } });
+const SensorLog = mongoose_1.default.model('SensorLog', SensorLogSchema);
+exports.default = SensorLog;

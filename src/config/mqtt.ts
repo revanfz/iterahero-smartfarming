@@ -48,7 +48,7 @@ export function connectMqtt() {
           const val = Object.values(item)[0];
           await SensorModel.updateMany(
             { channel: parseInt(channel) },
-            { nilai: val }
+            { $set: { nilai: val, updatedAt: new Date() }}
           );
         });
         data.sensor_non_adc.forEach(async (item: object, index: number) => {
@@ -56,7 +56,7 @@ export function connectMqtt() {
           const val = Object.values(item)[0];
           await SensorModel.updateMany(
             { gpio: parseInt(gpio) },
-            { nilai: val }
+            { $set: { nilai: val, updatedAt: new Date() }}
           );
         });
       } else if (topic === "iterahero2023/actuator") {
