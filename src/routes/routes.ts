@@ -16,6 +16,7 @@ import { notificationRoute } from "./notification";
 import { loggingRoute } from "./logging";
 import { iconRoute } from "./icon";
 import { grafikRoute } from "./grafik";
+import { summaryRoute } from "./summary";
 
 export const routes: ServerRoute[] = [
   ...home,
@@ -34,5 +35,6 @@ export const routes: ServerRoute[] = [
   ...notificationRoute,
   ...loggingRoute,
   ...iconRoute,
-  ...grafikRoute
+  ...grafikRoute,
+  ...summaryRoute
 ];

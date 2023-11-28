@@ -6,7 +6,7 @@ import {
   onOffPeracikan,
   schedulePeracikan
 } from "../utils/schedule";
-import { createJobs, deletePenjadwalan, onOffPenjadwalan, reinitializeSchedule } from "../utils/agenda";
+import { createJobs, deletePenjadwalan, onOffPenjadwalan } from "../utils/agenda";
 
 interface InputPenjadwalan {
   id_tandon: number;

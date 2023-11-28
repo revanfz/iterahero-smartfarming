@@ -6,6 +6,10 @@ import { Penjadwalan } from "@prisma/client";
 import Sensor from "../models/Sensor";
 import SensorLog from "../models/SensorLog";
 
+export const agenda = new Agenda({
+  db: { address: process.env.MONGODB_URL || "", collection: "penjadwalan" },
+});
+
 const convertToCronExpression = (waktu: string, hari: number[]) => {
   const [jam, menit] = waktu.split(":");
   const cronDaysOfWeek = hari.sort().join(",");
@@ -13,37 +17,28 @@ const convertToCronExpression = (waktu: string, hari: number[]) => {
   return `${parseInt(menit)} ${parseInt(jam)} * * ${cronDaysOfWeek}`;
 };
 
-export const agenda = new Agenda({
-  db: { address: process.env.MONGODB_URL || "", collection: "penjadwalan" },
-});
-
 export const createJobs = async (target: Penjadwalan) => {
-  const schedule = agenda.create(
-    "penjadwalan-peracikan",
-    { 
-      id_penjadwalan: target.id,
-      id_resep: target.resepId,
-      id_tandon: target.tandonId,
-      id_greenhouse: target.greenhouseId,
-      durasi: target.durasi
-    }
-  );
+  const schedule = agenda.create("penjadwalan-peracikan", {
+    id_penjadwalan: target.id,
+    id_resep: target.resepId,
+    id_tandon: target.tandonId,
+    id_greenhouse: target.greenhouseId,
+    durasi: target.durasi,
+  });
   const cron_exp = convertToCronExpression(target.waktu, target.hari);
   schedule.repeatEvery(cron_exp, {
     timezone: "Asia/Jakarta",
   });
-  await schedule.save()
-}
+  await schedule.save();
+};
 
 export const reinitializeSchedule = async () => {
-  await agenda.cancel({ name: { $in: ["penjadwalan-peracikan"] } });
-
   const penjadwalan = await prisma.penjadwalan.findMany();
 
   penjadwalan
     .filter((item) => item.isActive)
     .forEach(async (item) => {
-      await createJobs(item)
+      await createJobs(item);
     });
 };
 
@@ -62,14 +57,46 @@ export const deletePenjadwalan = async (id: number) => {
 };
 
 export const agendaInit = async () => {
-  agenda.define("logging-sensor", async (job: Job, done) => {
-    const data = await Sensor.find();
-    data.forEach(async item => await SensorLog.create({ id_sensor: item.id, nama: item.nama, nilai: item.nilai }))
-    done();
-  })
+  agenda.define("logging-sensor", async (job: Job) => {
+    const data = await prisma.sensor.findMany();
+    data
+      .filter((item) => item.status)
+      .forEach(async (item) => {
+        const target = await Sensor.findOne({ id_sensor: item.id }).sort({
+          createdAt: -1,
+        });
+        if (target) {
+          await SensorLog.create({
+            id_sensor: target.id_sensor,
+            nama: target.nama,
+            nilai: target.nilai,
+            createdAt: new Date(),
+          });
+        }
+      });
+  });
 
-  agenda.define("penjadwalan-peracikan", async (job: Job, done) => {
-    const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi } = job.attrs.data as {
+  agenda.define("check-sensor", async (job: Job) => {
+    const data = await prisma.sensor.findMany();
+    data.forEach(async (item) => {
+      const now = new Date();
+      const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+      if (item.updated_at && item.updated_at < oneHourAgo && item.status) {
+        await prisma.sensor.update({
+          where: {
+            id: item.id,
+          },
+          data: {
+            status: !item.status,
+          },
+        });
+      }
+    });
+  });
+
+  agenda.define("penjadwalan-peracikan", async (job: Job) => {
+    const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi } = job
+      .attrs.data as {
       id_penjadwalan: number;
       id_resep: number;
       id_tandon: number;
@@ -98,36 +125,32 @@ export const agendaInit = async () => {
         tandonId: id_tandon,
       },
     });
-    // publishData(
-    //   "iterahero2023/penjadwalan-peracikan",
-    //   JSON.stringify({
-    //     komposisi: resep,
-    //     lamaPenyiraman: durasi,
-    //     konstanta: rasio,
-    //     aktuator,
-    //   })
-      publishData(
-        "iterahero2023/penjadwalan-distribusi",
-        JSON.stringify({
-          komposisi: resep,
-          lamaPenyiraman: durasi,
-          konstanta: rasio,
-          aktuator,
-        })
+    publishData(
+      "iterahero2023/penjadwalan-peracikan",
+      JSON.stringify({
+        komposisi: resep,
+        lamaPenyiraman: durasi,
+        konstanta: rasio,
+        aktuator,
+      })
     );
-    done();
   });
 
-  await agenda.start();
-  console.log("Agenda started");
-  await agenda.every("1 day", "logging-sensor")
+  agenda.start().then(() => console.log("Agenda Started")).catch(err => console.error(err));
+
+  agenda.every("10 minutes", "check-sensor");
+  agenda.every("1 day", "logging-sensor");
   reinitializeSchedule().then(() =>
     console.log("Inisialisasi Penjadwalan Selesai")
   );
 };
 
 async function graceful() {
-  await agenda.cancel({ name: { $in: ["penjadwalan-peracikan", "test"] } });
+  await agenda.cancel({
+    name: {
+      $in: ["penjadwalan-peracikan", "test", "logging-sensor", "check-sensor"],
+    },
+  });
   console.log("Stopping agenda");
   await agenda.stop();
   process.exit(0);

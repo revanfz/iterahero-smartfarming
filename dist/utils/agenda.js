@@ -19,21 +19,21 @@ const prisma_1 = require("../config/prisma");
 const mqtt_1 = require("../config/mqtt");
 const Sensor_1 = __importDefault(require("../models/Sensor"));
 const SensorLog_1 = __importDefault(require("../models/SensorLog"));
+exports.agenda = new agenda_1.Agenda({
+    db: { address: process.env.MONGODB_URL || "", collection: "penjadwalan" },
+});
 const convertToCronExpression = (waktu, hari) => {
     const [jam, menit] = waktu.split(":");
     const cronDaysOfWeek = hari.sort().join(",");
     return `${parseInt(menit)} ${parseInt(jam)} * * ${cronDaysOfWeek}`;
 };
-exports.agenda = new agenda_1.Agenda({
-    db: { address: process.env.MONGODB_URL || "", collection: "penjadwalan" },
-});
 const createJobs = (target) => __awaiter(void 0, void 0, void 0, function* () {
     const schedule = exports.agenda.create("penjadwalan-peracikan", {
         id_penjadwalan: target.id,
         id_resep: target.resepId,
         id_tandon: target.tandonId,
         id_greenhouse: target.greenhouseId,
-        durasi: target.durasi
+        durasi: target.durasi,
     });
     const cron_exp = convertToCronExpression(target.waktu, target.hari);
     schedule.repeatEvery(cron_exp, {
@@ -43,7 +43,6 @@ const createJobs = (target) => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.createJobs = createJobs;
 const reinitializeSchedule = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield exports.agenda.cancel({ name: { $in: ["penjadwalan-peracikan"] } });
     const penjadwalan = yield prisma_1.prisma.penjadwalan.findMany();
     penjadwalan
         .filter((item) => item.isActive)
@@ -69,13 +68,44 @@ const deletePenjadwalan = (id) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.deletePenjadwalan = deletePenjadwalan;
 const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
-    exports.agenda.define("logging-sensor", (job, done) => __awaiter(void 0, void 0, void 0, function* () {
-        const data = yield Sensor_1.default.find();
-        data.forEach((item) => __awaiter(void 0, void 0, void 0, function* () { return yield SensorLog_1.default.create({ id_sensor: item.id, nama: item.nama, nilai: item.nilai }); }));
-        done();
+    exports.agenda.define("logging-sensor", (job) => __awaiter(void 0, void 0, void 0, function* () {
+        const data = yield prisma_1.prisma.sensor.findMany();
+        data
+            .filter((item) => item.status)
+            .forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
+            const target = yield Sensor_1.default.findOne({ id_sensor: item.id }).sort({
+                createdAt: -1,
+            });
+            if (target) {
+                yield SensorLog_1.default.create({
+                    id_sensor: target.id_sensor,
+                    nama: target.nama,
+                    nilai: target.nilai,
+                    createdAt: new Date(),
+                });
+            }
+        }));
     }));
-    exports.agenda.define("penjadwalan-peracikan", (job, done) => __awaiter(void 0, void 0, void 0, function* () {
-        const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi } = job.attrs.data;
+    exports.agenda.define("check-sensor", (job) => __awaiter(void 0, void 0, void 0, function* () {
+        const data = yield prisma_1.prisma.sensor.findMany();
+        data.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
+            const now = new Date();
+            const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
+            if (item.updated_at && item.updated_at < oneHourAgo && item.status) {
+                yield prisma_1.prisma.sensor.update({
+                    where: {
+                        id: item.id,
+                    },
+                    data: {
+                        status: !item.status,
+                    },
+                });
+            }
+        }));
+    }));
+    exports.agenda.define("penjadwalan-peracikan", (job) => __awaiter(void 0, void 0, void 0, function* () {
+        const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi } = job
+            .attrs.data;
         const resep = yield prisma_1.prisma.resep.findUnique({
             where: {
                 id: id_resep,
@@ -98,31 +128,26 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                 tandonId: id_tandon,
             },
         });
-        // publishData(
-        //   "iterahero2023/penjadwalan-peracikan",
-        //   JSON.stringify({
-        //     komposisi: resep,
-        //     lamaPenyiraman: durasi,
-        //     konstanta: rasio,
-        //     aktuator,
-        //   })
-        (0, mqtt_1.publishData)("iterahero2023/penjadwalan-distribusi", JSON.stringify({
+        (0, mqtt_1.publishData)("iterahero2023/penjadwalan-peracikan", JSON.stringify({
             komposisi: resep,
             lamaPenyiraman: durasi,
             konstanta: rasio,
             aktuator,
         }));
-        done();
     }));
-    yield exports.agenda.start();
-    console.log("Agenda started");
-    yield exports.agenda.every("1 day", "logging-sensor");
+    exports.agenda.start().then(() => console.log("Agenda Started")).catch(err => console.error(err));
+    exports.agenda.every("10 minutes", "check-sensor");
+    exports.agenda.every("1 day", "logging-sensor");
     (0, exports.reinitializeSchedule)().then(() => console.log("Inisialisasi Penjadwalan Selesai"));
 });
 exports.agendaInit = agendaInit;
 function graceful() {
     return __awaiter(this, void 0, void 0, function* () {
-        yield exports.agenda.cancel({ name: { $in: ["penjadwalan-peracikan", "test"] } });
+        yield exports.agenda.cancel({
+            name: {
+                $in: ["penjadwalan-peracikan", "test", "logging-sensor", "check-sensor"],
+            },
+        });
         console.log("Stopping agenda");
         yield exports.agenda.stop();
         process.exit(0);

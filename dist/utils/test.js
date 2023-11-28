@@ -23,7 +23,7 @@ const connect = () => __awaiter(void 0, void 0, void 0, function* () {
     return __awaiter(this, void 0, void 0, function* () {
         yield connect();
         try {
-            const pipeline = (0, aggregate_1.generatePipeline)("Week", 1);
+            const pipeline = (0, aggregate_1.pipelineGrafik)("Week", 1);
             const result = yield SensorLog_1.default.aggregate(pipeline);
             console.log(result);
         }

@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import "dotenv/config";
 import SensorLog from "../models/SensorLog";
-import { generatePipeline } from "./aggregate";
+import { pipelineGrafik } from "./aggregate";
 
 const connect = async () => {
   await mongoose.connect(process.env.MONGODB_URL || "");
@@ -11,7 +11,7 @@ const connect = async () => {
   await connect();
 
   try {
-    const pipeline = generatePipeline("Week", 1)
+    const pipeline = pipelineGrafik("Week", 1)
     const result: Document[] = await SensorLog.aggregate(pipeline)
     console.log(result);
   } catch (e) {
