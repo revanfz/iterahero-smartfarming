@@ -31,7 +31,9 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 include: {
                     icon: {
                         select: {
-                            logo: true
+                            logo: true,
+                            name: true,
+                            color: true,
                         }
                     }
                 }
@@ -50,7 +52,9 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 include: {
                     icon: {
                         select: {
-                            logo: true
+                            logo: true,
+                            name: true,
+                            color: true,
                         }
                     }
                 },

@@ -26,6 +26,15 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             data = yield prisma_1.prisma.sensor.findUnique({
                 where: {
                     id
+                },
+                include: {
+                    icon: {
+                        select: {
+                            logo: true,
+                            name: true,
+                            color: true,
+                        }
+                    }
                 }
             });
             if (!data) {
@@ -44,7 +53,9 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 include: {
                     icon: {
                         select: {
-                            logo: true
+                            logo: true,
+                            name: true,
+                            color: true,
                         }
                     }
                 },

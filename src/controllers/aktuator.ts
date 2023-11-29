@@ -17,7 +17,9 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         include: {
           icon: {
             select: {
-              logo: true
+              logo: true,
+              name: true,
+              color: true,
             }
           }
         }
@@ -35,7 +37,9 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         include: {
           icon: {
             select: {
-              logo: true
+              logo: true,
+              name: true,
+              color: true,
             }
           }
         },
