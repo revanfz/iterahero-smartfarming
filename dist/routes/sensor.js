@@ -7,7 +7,22 @@ const path = `${prefix_1.prefix}/sensor`;
 exports.sensorRoute = [
     {
         method: "GET",
-        path: path,
+        path,
         handler: sensor_1.getHandler
     },
+    {
+        method: "PUT",
+        path,
+        handler: sensor_1.patchHandler
+    },
+    {
+        method: "DELETE",
+        path,
+        handler: sensor_1.deleteHandler
+    },
+    {
+        method: "POST",
+        path,
+        handler: sensor_1.postHandler
+    }
 ];

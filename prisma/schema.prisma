@@ -106,15 +106,15 @@ model Sensor {
   calibration       String?
   brand             String
   unit_measurement  String
-  status            Boolean
+  status            Boolean         @default(false)
   channel           Int?
   GPIO              Int?
   icon              Icon            @relation(fields: [type], references: [name])
   type              String
   range_min         Int?
   range_max         Int?
-  microcontroller   Microcontroller @relation(fields: [microcontrollerId], references: [id])
-  microcontrollerId Int
+  microcontroller   Microcontroller? @relation(fields: [microcontrollerId], references: [id])
+  microcontrollerId Int?
   tandon            Tandon?         @relation(fields: [tandonId], references: [id])
   tandonId          Int?
   tandonBahan       TandonBahan?    @relation(fields: [tandonBahanId], references: [id])
@@ -129,10 +129,10 @@ model Aktuator {
   id                  Int                @id @default(autoincrement())
   name                String
   merek               String?
-  status              Boolean
+  status              Boolean            @default(false)
   GPIO                Int?
-  microcontroller     Microcontroller    @relation(fields: [microcontrollerId], references: [id])
-  microcontrollerId   Int
+  microcontroller     Microcontroller?    @relation(fields: [microcontrollerId], references: [id])
+  microcontrollerId   Int?
   icon                Icon               @relation(fields: [type], references: [name])
   type                String
   tandon              Tandon?            @relation(fields: [tandonId], references: [id])

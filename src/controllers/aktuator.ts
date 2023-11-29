@@ -2,6 +2,14 @@ import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 
+interface AktuatorInput {
+  name: string;
+  merek: string;
+  greenhouseId: number;
+  tandonId: number;
+  type: string;
+}
+
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
   const id = parseInt(request.query.id);
   const size = parseInt(request.query.size);
@@ -20,9 +28,9 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
               logo: true,
               name: true,
               color: true,
-            }
-          }
-        }
+            },
+          },
+        },
       });
     } else {
       total = await prisma.aktuator.count({
@@ -40,18 +48,14 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
               logo: true,
               name: true,
               color: true,
-            }
-          }
+            },
+          },
         },
         skip: cursor ? 1 : 0,
         take: size ? size : 100,
         cursor: cursor ? { id: cursor } : undefined,
       });
     }
-
-    // if (!data || (Array.isArray(data) && data.length < 1)) {
-    //   return Boom.notFound("Tidak ada aktuator");
-    // }
 
     const res = {
       status: "success",
@@ -71,8 +75,84 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       console.log(e);
       return Boom.internal(e.message);
     }
+  } finally {
+    await prisma.$disconnect();
   }
-  finally {
+};
+
+export const postHandler = async (request: Request, h: ResponseToolkit) => {
+  try {
+    const { name, merek, greenhouseId, tandonId, type } =
+      request.payload as AktuatorInput;
+
+    const aktuator = await prisma.aktuator.create({
+      data: {
+        name,
+        merek,
+        greenhouseId,
+        tandonId,
+        type,
+      },
+    });
+
+    return h.response({
+      status: "success",
+      message: `${aktuator.name} berhasil ditambahkan`,
+    });
+  } catch (e) {
+    console.log(e);
+    if (e instanceof Error) {
+      return Boom.internal(e.message);
+    }
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+export const patchHandler = async (request: Request, h: ResponseToolkit) => {
+  try {
+    const id_aktuator = parseInt(request.query.id);
+
+    if (isNaN(id_aktuator)) {
+      return Boom.badRequest("ID Sensor tidak valid");
+    }
+
+    const { name, merek, greenhouseId, tandonId, type } =
+      request.payload as AktuatorInput;
+
+    const target = await prisma.aktuator.findUnique({
+      where: {
+        id: id_aktuator,
+      },
+    });
+
+    if (!target) {
+      return Boom.notFound("Tidak ada id tersebut");
+    }
+
+    await prisma.aktuator.update({
+      where: {
+        id: id_aktuator,
+      },
+      data: {
+        name,
+        merek,
+        greenhouseId,
+        tandonId,
+        type,
+      },
+    });
+
+    return h.response({
+      status: "success",
+      message: `${target.name} berhasil diperbarui`,
+    });
+  } catch (e) {
+    console.log(e);
+    if (e instanceof Error) {
+      return Boom.internal(e.message);
+    }
+  } finally {
     await prisma.$disconnect();
   }
 };
