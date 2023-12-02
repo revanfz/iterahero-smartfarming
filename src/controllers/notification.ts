@@ -5,11 +5,28 @@ import { prisma } from "../config/prisma";
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
   const size = parseInt(request.query.size);
   const cursor = parseInt(request.query.cursor);
+  const read = request.query.isRead;
+  let data;
   const { id_user } = request.auth.credentials as {
     id_user: number;
   };
   try {
-    const data = await prisma.notification.findMany({
+    if (read === "false") {
+      data = await prisma.notification.findMany({
+        where: {
+          userId: id_user,
+          read: false
+        },
+        orderBy: {
+          created_at: 'desc'
+        },
+        cursor: cursor ? { id: cursor } : undefined,
+        take: size ? size : 100,
+        skip: cursor ? 1 : 0,
+      })
+    }
+
+    data = await prisma.notification.findMany({
       where: {
         userId: id_user,
       },
@@ -20,10 +37,6 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       take: size ? size : 100,
       skip: cursor ? 1 : 0,
     });
-
-    if (!data) {
-      return Boom.notFound("Tidak ada notifikasi");
-    }
 
     return h
       .response({

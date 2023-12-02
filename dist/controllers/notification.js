@@ -39,9 +39,25 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     var _a;
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
+    const read = request.query.isRead;
+    let data;
     const { id_user } = request.auth.credentials;
     try {
-        const data = yield prisma_1.prisma.notification.findMany({
+        if (read === "false") {
+            data = yield prisma_1.prisma.notification.findMany({
+                where: {
+                    userId: id_user,
+                    read: false
+                },
+                orderBy: {
+                    created_at: 'desc'
+                },
+                cursor: cursor ? { id: cursor } : undefined,
+                take: size ? size : 100,
+                skip: cursor ? 1 : 0,
+            });
+        }
+        data = yield prisma_1.prisma.notification.findMany({
             where: {
                 userId: id_user,
             },
@@ -52,9 +68,6 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             take: size ? size : 100,
             skip: cursor ? 1 : 0,
         });
-        if (!data) {
-            return Boom.notFound("Tidak ada notifikasi");
-        }
         return h
             .response({
             status: "success",
