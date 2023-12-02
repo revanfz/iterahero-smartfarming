@@ -4,7 +4,7 @@ import { prisma } from "../config/prisma";
 
 export const getHandler = async (_: Request, h: ResponseToolkit) => {
     try {
-        const data = await prisma.icon.findMany();
+        const data = await prisma.category.findMany();
 
         return h.response({
             status: 'success',

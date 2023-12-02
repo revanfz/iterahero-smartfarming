@@ -121,7 +121,7 @@ export const sensorByTandonHandler = async (
         tandonId: id
       },
       include: {
-        icon: {
+        category: {
           select: {
             logo: true,
             color: true
@@ -178,10 +178,11 @@ export const actuatorByTandonHandler = async (
       },
       
       include: {
-        icon: {
+        category: {
           select: {
             logo: true,
-            color: true
+            color: true,
+            satuan: true
           }
         }
       },

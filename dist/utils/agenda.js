@@ -33,6 +33,7 @@ const createJobs = (target) => __awaiter(void 0, void 0, void 0, function* () {
         id_resep: target.resepId,
         id_tandon: target.tandonId,
         id_greenhouse: target.greenhouseId,
+        createdBy: target.createdBy,
         durasi: target.durasi,
     });
     const cron_exp = convertToCronExpression(target.waktu, target.hari);
@@ -104,7 +105,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
         }));
     }));
     exports.agenda.define("penjadwalan-peracikan", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi } = job
+        const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi, createdBy } = job
             .attrs.data;
         const resep = yield prisma_1.prisma.resep.findUnique({
             where: {
@@ -127,6 +128,13 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                 greenhouseId: id_greenhouse,
                 tandonId: id_tandon,
             },
+        });
+        yield prisma_1.prisma.notification.create({
+            data: {
+                message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} telah dimulai`,
+                read: false,
+                userId: createdBy,
+            }
         });
         (0, mqtt_1.publishData)("iterahero2023/penjadwalan-peracikan", JSON.stringify({
             komposisi: resep,

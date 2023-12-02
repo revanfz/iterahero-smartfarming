@@ -9,5 +9,20 @@ exports.aktuatorRoute = [
         method: "GET",
         path,
         handler: aktuator_1.getHandler
+    },
+    {
+        method: "POST",
+        path,
+        handler: aktuator_1.postHandler
+    },
+    {
+        method: "PATCH",
+        path,
+        handler: aktuator_1.patchHandler
+    },
+    {
+        method: "DELETE",
+        path,
+        handler: aktuator_1.deleteHandler
     }
 ];

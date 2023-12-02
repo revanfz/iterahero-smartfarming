@@ -28,11 +28,12 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                     id,
                 },
                 include: {
-                    icon: {
+                    category: {
                         select: {
                             logo: true,
                             name: true,
                             color: true,
+                            satuan: true
                         },
                     },
                 },
@@ -53,11 +54,12 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             const total = yield prisma_1.prisma.sensor.count();
             data = yield prisma_1.prisma.sensor.findMany({
                 include: {
-                    icon: {
+                    category: {
                         select: {
                             logo: true,
                             name: true,
                             color: true,
+                            satuan: true
                         },
                     },
                 },
@@ -91,8 +93,8 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         const { name, brand, calibration, unit_measurement, type, range_min, range_max, id_greenhouse, id_tandon } = request.payload;
         const sensor = yield prisma_1.prisma.sensor.create({
             data: {
-                greenhouseId: id_greenhouse !== null && id_greenhouse !== void 0 ? id_greenhouse : null,
-                tandonId: id_tandon !== null && id_tandon !== void 0 ? id_tandon : null,
+                greenhouseId: id_greenhouse,
+                tandonId: id_tandon,
                 name,
                 brand,
                 calibration,

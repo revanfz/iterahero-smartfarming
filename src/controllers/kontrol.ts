@@ -12,36 +12,38 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       },
     });
 
-    const target = await prisma.microcontroller.findUnique({
-      where: {
-        id: data?.microcontrollerId
-      }
-    })
-
-    if (!data) {
-      return Boom.notFound("Tidak ada aktuator dengan id tersebut");
-    }
-
-    await prisma.aktuator.updateMany({
-      where: {
-        GPIO: data.GPIO
-      },
-      data: {
-        status: !data.status
-      }
-    })
-
-    publishData(
-      "iterahero2023/kontrol",
-      JSON.stringify({ pin: data.GPIO, microcontroller: target?.name })
-    );
-
-    return h
-      .response({
-        status: "success",
-        message: `${data.name} berhasil ${data.status ? 'dimatikan' : 'dinyalakan'}`,
+    if (data?.microcontrollerId) {
+      const target = await prisma.microcontroller.findUnique({
+        where: {
+          id: data?.microcontrollerId
+        }
       })
-      .code(200);
+      if (!data) {
+        return Boom.notFound("Tidak ada aktuator dengan id tersebut");
+      }
+      await prisma.aktuator.updateMany({
+        where: {
+          GPIO: data.GPIO
+        },
+        data: {
+          status: !data.status
+        }
+      })
+  
+      publishData(
+        "iterahero2023/kontrol",
+        JSON.stringify({ pin: data.GPIO, microcontroller: target?.name })
+      );
+  
+      return h
+        .response({
+          status: "success",
+          message: `${data.name} berhasil ${data.status ? 'dimatikan' : 'dinyalakan'}`,
+        })
+        .code(200);
+    } else {
+        return Boom.badRequest("Sensor belum terhubung ke microcontroller");
+    }
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);

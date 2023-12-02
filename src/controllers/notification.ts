@@ -13,6 +13,9 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       where: {
         userId: id_user,
       },
+      orderBy: {
+        created_at: 'desc'
+      },
       cursor: cursor ? { id: cursor } : undefined,
       take: size ? size : 100,
       skip: cursor ? 1 : 0,
@@ -33,8 +36,38 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
     if (e instanceof Error) {
       return Boom.internal(e.message);
     }
+  } finally {
+    await prisma.$disconnect();
   }
-  finally {
+};
+
+export const patchHandler = async (request: Request, h: ResponseToolkit) => {
+  try {
+    const { id } = request.payload as { id: number[] };
+
+    const updatePromise = id.map((identifier) => {
+      prisma.notification.update({
+        where: {
+          id: identifier,
+        },
+        data: {
+          read: true,
+        },
+      });
+    });
+    await Promise.all(updatePromise);
+
+    return h.response({
+      status: 'success',
+      message: 'Notifikasi telah dibaca'
+    }).code(200)
+    
+  } catch (e) {
+    console.log(e);
+    if (e instanceof Error) {
+      return Boom.internal(e.message);
+    }
+  } finally {
     await prisma.$disconnect();
   }
 };
@@ -64,8 +97,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       console.log(e);
       return Boom.internal(e.message);
     }
-  }
-  finally {
+  } finally {
     await prisma.$disconnect();
   }
 };

@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getHandler = void 0;
+exports.deleteHandler = exports.patchHandler = exports.postHandler = exports.getHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
@@ -29,14 +29,15 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                     id: id,
                 },
                 include: {
-                    icon: {
+                    category: {
                         select: {
                             logo: true,
                             name: true,
                             color: true,
-                        }
-                    }
-                }
+                            satuan: true
+                        },
+                    },
+                },
             });
         }
         else {
@@ -50,22 +51,19 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                     tandonId: id,
                 },
                 include: {
-                    icon: {
+                    category: {
                         select: {
                             logo: true,
                             name: true,
                             color: true,
-                        }
-                    }
+                        },
+                    },
                 },
                 skip: cursor ? 1 : 0,
                 take: size ? size : 100,
                 cursor: cursor ? { id: cursor } : undefined,
             });
         }
-        // if (!data || (Array.isArray(data) && data.length < 1)) {
-        //   return Boom.notFound("Tidak ada aktuator");
-        // }
         const res = {
             status: "success",
             data,
@@ -89,3 +87,107 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getHandler = getHandler;
+const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { name, merek, id_greenhouse, id_tandon, type } = request.payload;
+        const aktuator = yield prisma_1.prisma.aktuator.create({
+            data: {
+                name,
+                merek,
+                greenhouseId: id_greenhouse !== null && id_greenhouse !== void 0 ? id_greenhouse : null,
+                tandonId: id_tandon !== null && id_tandon !== void 0 ? id_tandon : null,
+                type,
+            },
+        });
+        return h.response({
+            status: "success",
+            message: `${aktuator.name} berhasil ditambahkan`,
+        });
+    }
+    catch (e) {
+        console.log(e);
+        if (e instanceof Error) {
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.postHandler = postHandler;
+const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id_aktuator = parseInt(request.query.id);
+        if (isNaN(id_aktuator)) {
+            return boom_1.default.badRequest("ID Sensor tidak valid");
+        }
+        const { name, merek, type } = request.payload;
+        const target = yield prisma_1.prisma.aktuator.findUnique({
+            where: {
+                id: id_aktuator,
+            },
+        });
+        if (!target) {
+            return boom_1.default.notFound("Tidak ada id tersebut");
+        }
+        yield prisma_1.prisma.aktuator.update({
+            where: {
+                id: id_aktuator,
+            },
+            data: {
+                name,
+                merek,
+                type,
+            },
+        });
+        return h.response({
+            status: "success",
+            message: `${target.name} berhasil diperbarui`,
+        });
+    }
+    catch (e) {
+        console.log(e);
+        if (e instanceof Error) {
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.patchHandler = patchHandler;
+const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id_aktuator = parseInt(request.query.id);
+        if (isNaN(id_aktuator)) {
+            return boom_1.default.badRequest("ID aktuator  tidak valid");
+        }
+        const target = yield prisma_1.prisma.aktuator.findUnique({
+            where: {
+                id: id_aktuator,
+            },
+        });
+        if (!target) {
+            return boom_1.default.notFound("Tidak ada sensor dengan id tersebut");
+        }
+        yield prisma_1.prisma.aktuator.delete({
+            where: {
+                id: id_aktuator,
+            },
+        });
+        return h.response({
+            status: "success",
+            message: `${target.name} berhasil dihapus`,
+        });
+    }
+    catch (e) {
+        console.error(e);
+        if (e instanceof Error) {
+            return boom_1.default.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.deleteHandler = deleteHandler;

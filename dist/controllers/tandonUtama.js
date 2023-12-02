@@ -117,7 +117,7 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
                 tandonId: id
             },
             include: {
-                icon: {
+                category: {
                     select: {
                         logo: true,
                         color: true
@@ -170,10 +170,11 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
                 tandonId: id,
             },
             include: {
-                icon: {
+                category: {
                     select: {
                         logo: true,
-                        color: true
+                        color: true,
+                        satuan: true
                     }
                 }
             },

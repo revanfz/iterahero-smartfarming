@@ -23,6 +23,7 @@ export const createJobs = async (target: Penjadwalan) => {
     id_resep: target.resepId,
     id_tandon: target.tandonId,
     id_greenhouse: target.greenhouseId,
+    createdBy: target.createdBy,
     durasi: target.durasi,
   });
   const cron_exp = convertToCronExpression(target.waktu, target.hari);
@@ -95,13 +96,14 @@ export const agendaInit = async () => {
   });
 
   agenda.define("penjadwalan-peracikan", async (job: Job) => {
-    const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi } = job
+    const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi, createdBy } = job
       .attrs.data as {
       id_penjadwalan: number;
       id_resep: number;
       id_tandon: number;
       id_greenhouse: number;
       durasi: number;
+      createdBy: number;
     };
     const resep = await prisma.resep.findUnique({
       where: {
@@ -125,6 +127,13 @@ export const agendaInit = async () => {
         tandonId: id_tandon,
       },
     });
+    await prisma.notification.create({
+      data: {
+        message: `Penjadwalan ${resep?.nama} telah dimulai`,
+        read: false,
+        userId: createdBy,
+      }
+    })
     publishData(
       "iterahero2023/penjadwalan-peracikan",
       JSON.stringify({

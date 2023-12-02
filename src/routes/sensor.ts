@@ -11,7 +11,7 @@ export const sensorRoute: ServerRoute[] = [
         handler: getHandler
     },
     {
-        method: "PUT",
+        method: "PATCH",
         path,
         handler: patchHandler
     },

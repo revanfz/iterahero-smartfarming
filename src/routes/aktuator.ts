@@ -1,6 +1,6 @@
 import { ServerRoute } from "@hapi/hapi";
 import { prefix } from "../utils/prefix";
-import { getHandler, patchHandler, postHandler } from "../controllers/aktuator";
+import { getHandler, patchHandler, postHandler, deleteHandler } from "../controllers/aktuator";
 
 const path = `${prefix}/aktuator`
 
@@ -19,5 +19,10 @@ export const aktuatorRoute: ServerRoute[] = [
         method: "PATCH",
         path,
         handler: patchHandler
+    },
+    {
+        method: "DELETE",
+        path,
+        handler: deleteHandler
     }
 ]

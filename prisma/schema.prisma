@@ -89,11 +89,12 @@ model Penjadwalan {
   updated_at   DateTime?  @updatedAt
 }
 
-model Icon {
+model Category {
   id         Int        @id @default(autoincrement())
   logo       String
   color      String
   name       String     @unique
+  satuan     String?
   created_at DateTime   @default(now())
   updated_at DateTime?  @updatedAt
   sensor     Sensor[]
@@ -101,28 +102,28 @@ model Icon {
 }
 
 model Sensor {
-  id                Int             @id @default(autoincrement())
+  id                Int              @id @default(autoincrement())
   name              String
   calibration       String?
   brand             String
   unit_measurement  String
-  status            Boolean         @default(false)
+  status            Boolean          @default(false)
   channel           Int?
   GPIO              Int?
-  icon              Icon            @relation(fields: [type], references: [name])
+  category          Category         @relation(fields: [type], references: [name])
   type              String
   range_min         Int?
   range_max         Int?
   microcontroller   Microcontroller? @relation(fields: [microcontrollerId], references: [id])
   microcontrollerId Int?
-  tandon            Tandon?         @relation(fields: [tandonId], references: [id])
+  tandon            Tandon?          @relation(fields: [tandonId], references: [id])
   tandonId          Int?
-  tandonBahan       TandonBahan?    @relation(fields: [tandonBahanId], references: [id])
+  tandonBahan       TandonBahan?     @relation(fields: [tandonBahanId], references: [id])
   tandonBahanId     Int?
   greenhouseId      Int?
-  greenhouse        Greenhouse?     @relation(fields: [greenhouseId], references: [id])
-  created_at        DateTime        @default(now())
-  updated_at        DateTime?       @updatedAt
+  greenhouse        Greenhouse?      @relation(fields: [greenhouseId], references: [id])
+  created_at        DateTime         @default(now())
+  updated_at        DateTime?        @updatedAt
 }
 
 model Aktuator {
@@ -131,9 +132,9 @@ model Aktuator {
   merek               String?
   status              Boolean            @default(false)
   GPIO                Int?
-  microcontroller     Microcontroller?    @relation(fields: [microcontrollerId], references: [id])
+  microcontroller     Microcontroller?   @relation(fields: [microcontrollerId], references: [id])
   microcontrollerId   Int?
-  icon                Icon               @relation(fields: [type], references: [name])
+  category            Category           @relation(fields: [type], references: [name])
   type                String
   tandon              Tandon?            @relation(fields: [tandonId], references: [id])
   tandonId            Int?
@@ -185,6 +186,6 @@ model Notification {
   user       User     @relation(fields: [userId], references: [id])
   userId     Int
   message    String
-  read       Boolean
+  read       Boolean  @default(false)
   created_at DateTime @default(now())
 }

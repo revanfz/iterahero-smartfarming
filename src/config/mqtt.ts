@@ -26,7 +26,7 @@ export function connectMqtt() {
   broker.on("connect", () => {
     console.log("Connected to MQTT");
     broker.subscribe("iterahero2023/#");
-    // broker.subscribe("iterahero/#");
+    broker.subscribe("iterahero/#");
   });
 
   broker.on("message", async (topic, payload, packet) => {

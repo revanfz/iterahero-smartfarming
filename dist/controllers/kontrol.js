@@ -24,29 +24,34 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 id: parseInt(id),
             },
         });
-        const target = yield prisma_1.prisma.microcontroller.findUnique({
-            where: {
-                id: data === null || data === void 0 ? void 0 : data.microcontrollerId
+        if (data === null || data === void 0 ? void 0 : data.microcontrollerId) {
+            const target = yield prisma_1.prisma.microcontroller.findUnique({
+                where: {
+                    id: data === null || data === void 0 ? void 0 : data.microcontrollerId
+                }
+            });
+            if (!data) {
+                return boom_1.default.notFound("Tidak ada aktuator dengan id tersebut");
             }
-        });
-        if (!data) {
-            return boom_1.default.notFound("Tidak ada aktuator dengan id tersebut");
+            yield prisma_1.prisma.aktuator.updateMany({
+                where: {
+                    GPIO: data.GPIO
+                },
+                data: {
+                    status: !data.status
+                }
+            });
+            (0, mqtt_1.publishData)("iterahero2023/kontrol", JSON.stringify({ pin: data.GPIO, microcontroller: target === null || target === void 0 ? void 0 : target.name }));
+            return h
+                .response({
+                status: "success",
+                message: `${data.name} berhasil ${data.status ? 'dimatikan' : 'dinyalakan'}`,
+            })
+                .code(200);
         }
-        yield prisma_1.prisma.aktuator.updateMany({
-            where: {
-                GPIO: data.GPIO
-            },
-            data: {
-                status: !data.status
-            }
-        });
-        (0, mqtt_1.publishData)("iterahero2023/kontrol", JSON.stringify({ pin: data.GPIO, microcontroller: target === null || target === void 0 ? void 0 : target.name }));
-        return h
-            .response({
-            status: "success",
-            message: `${data.name} berhasil ${data.status ? 'dimatikan' : 'dinyalakan'}`,
-        })
-            .code(200);
+        else {
+            return boom_1.default.badRequest("Sensor belum terhubung ke microcontroller");
+        }
     }
     catch (e) {
         if (e instanceof Error) {

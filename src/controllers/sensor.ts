@@ -26,11 +26,12 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
           id,
         },
         include: {
-          icon: {
+          category: {
             select: {
               logo: true,
               name: true,
               color: true,
+              satuan: true
             },
           },
         },
@@ -50,11 +51,12 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       const total = await prisma.sensor.count();
       data = await prisma.sensor.findMany({
         include: {
-          icon: {
+          category: {
             select: {
               logo: true,
               name: true,
               color: true,
+              satuan: true
             },
           },
         },

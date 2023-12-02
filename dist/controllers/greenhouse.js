@@ -229,12 +229,14 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
                 greenhouseId: id,
             },
             include: {
-                icon: {
+                category: {
                     select: {
                         logo: true,
-                        color: true
-                    }
-                }
+                        name: true,
+                        color: true,
+                        satuan: true
+                    },
+                },
             },
             cursor: cursor ? { id: cursor } : undefined,
             take: size ? size : 100,
@@ -284,12 +286,14 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
                 greenhouseId: id,
             },
             include: {
-                icon: {
+                category: {
                     select: {
                         logo: true,
-                        color: true
-                    }
-                }
+                        name: true,
+                        color: true,
+                        satuan: true
+                    },
+                },
             },
             take: size ? size : 100,
             skip: cursor ? 1 : 0,

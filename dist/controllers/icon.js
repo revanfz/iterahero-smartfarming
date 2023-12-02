@@ -37,7 +37,7 @@ const Boom = __importStar(require("@hapi/boom"));
 const prisma_1 = require("../config/prisma");
 const getHandler = (_, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield prisma_1.prisma.icon.findMany();
+        const data = yield prisma_1.prisma.category.findMany();
         return h.response({
             status: 'success',
             data

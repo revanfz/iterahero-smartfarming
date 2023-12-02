@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postHandler = exports.getHandler = void 0;
+exports.postHandler = exports.patchHandler = exports.getHandler = void 0;
 const Boom = __importStar(require("@hapi/boom"));
 const prisma_1 = require("../config/prisma");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
@@ -44,6 +44,9 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         const data = yield prisma_1.prisma.notification.findMany({
             where: {
                 userId: id_user,
+            },
+            orderBy: {
+                created_at: 'desc'
             },
             cursor: cursor ? { id: cursor } : undefined,
             take: size ? size : 100,
@@ -70,6 +73,36 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getHandler = getHandler;
+const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = request.payload;
+        const updatePromise = id.map((identifier) => {
+            prisma_1.prisma.notification.update({
+                where: {
+                    id: identifier,
+                },
+                data: {
+                    read: true,
+                },
+            });
+        });
+        yield Promise.all(updatePromise);
+        return h.response({
+            status: 'success',
+            message: 'Notifikasi telah dibaca'
+        }).code(200);
+    }
+    catch (e) {
+        console.log(e);
+        if (e instanceof Error) {
+            return Boom.internal(e.message);
+        }
+    }
+    finally {
+        yield prisma_1.prisma.$disconnect();
+    }
+});
+exports.patchHandler = patchHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     const { id_user } = request.auth.credentials;
     try {

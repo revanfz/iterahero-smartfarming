@@ -5,8 +5,8 @@ import Boom from "@hapi/boom";
 interface AktuatorInput {
   name: string;
   merek: string;
-  greenhouseId: number;
-  tandonId: number;
+  id_greenhouse: number;
+  id_tandon: number;
   type: string;
 }
 
@@ -23,11 +23,12 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
           id: id,
         },
         include: {
-          icon: {
+          category: {
             select: {
               logo: true,
               name: true,
               color: true,
+              satuan: true
             },
           },
         },
@@ -43,7 +44,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
           tandonId: id,
         },
         include: {
-          icon: {
+          category: {
             select: {
               logo: true,
               name: true,
@@ -82,15 +83,15 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
   try {
-    const { name, merek, greenhouseId, tandonId, type } =
+    const { name, merek, id_greenhouse, id_tandon, type } =
       request.payload as AktuatorInput;
 
     const aktuator = await prisma.aktuator.create({
       data: {
         name,
         merek,
-        greenhouseId,
-        tandonId,
+        greenhouseId: id_greenhouse ?? null,
+        tandonId: id_tandon ?? null,
         type,
       },
     });
@@ -117,7 +118,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.badRequest("ID Sensor tidak valid");
     }
 
-    const { name, merek, greenhouseId, tandonId, type } =
+    const { name, merek, type } =
       request.payload as AktuatorInput;
 
     const target = await prisma.aktuator.findUnique({
@@ -137,8 +138,6 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       data: {
         name,
         merek,
-        greenhouseId,
-        tandonId,
         type,
       },
     });
@@ -149,6 +148,44 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
     });
   } catch (e) {
     console.log(e);
+    if (e instanceof Error) {
+      return Boom.internal(e.message);
+    }
+  } finally {
+    await prisma.$disconnect();
+  }
+};
+
+export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
+  try {
+    const id_aktuator = parseInt(request.query.id);
+
+    if (isNaN(id_aktuator)) {
+      return Boom.badRequest("ID aktuator  tidak valid");
+    }
+
+    const target = await prisma.aktuator.findUnique({
+      where: {
+        id: id_aktuator,
+      },
+    });
+
+    if (!target) {
+      return Boom.notFound("Tidak ada sensor dengan id tersebut");
+    }
+
+    await prisma.aktuator.delete({
+      where: {
+        id: id_aktuator,
+      },
+    });
+
+    return h.response({
+      status: "success",
+      message: `${target.name} berhasil dihapus`,
+    });
+  } catch (e) {
+    console.error(e);
     if (e instanceof Error) {
       return Boom.internal(e.message);
     }

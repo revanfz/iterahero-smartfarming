@@ -11,7 +11,7 @@ exports.sensorRoute = [
         handler: sensor_1.getHandler
     },
     {
-        method: "PUT",
+        method: "PATCH",
         path,
         handler: sensor_1.patchHandler
     },

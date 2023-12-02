@@ -239,12 +239,14 @@ export const sensorByGreenhouseHandler = async (
         greenhouseId: id,
       },
       include: {
-        icon: {
+        category: {
           select: {
             logo: true,
-            color: true
-          }
-        }
+            name: true,
+            color: true,
+            satuan: true
+          },
+        },
       },
       cursor: cursor ? { id: cursor } : undefined,
       take: size ? size : 100,
@@ -297,12 +299,14 @@ export const actuatorByGreenhouseHandler = async (
         greenhouseId: id,
       },
       include: {
-        icon: {
+        category: {
           select: {
             logo: true,
-            color: true
-          }
-        }
+            name: true,
+            color: true,
+            satuan: true
+          },
+        },
       },
       take: size ? size : 100,
       skip: cursor ? 1 : 0,
