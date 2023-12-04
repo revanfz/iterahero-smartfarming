@@ -31,13 +31,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.start = exports.init = void 0;
 const JWT = __importStar(require("@hapi/jwt"));
 const HapiSwagger = __importStar(require("hapi-swagger"));
 const Inert = __importStar(require("@hapi/inert"));
 const Vision = __importStar(require("@hapi/vision"));
-const Qs = __importStar(require("qs"));
+const qs_1 = __importDefault(require("qs"));
 const jwt = __importStar(require("jsonwebtoken"));
 require("dotenv/config");
 const hapi_1 = require("@hapi/hapi");
@@ -50,7 +53,7 @@ const init = function () {
             port: process.env.PORT || 3000,
             host: process.env.HOST || "localhost",
             query: {
-                parser: (query) => Qs.parse(query),
+                parser: (query) => qs_1.default.parse(query),
             },
             routes: {
                 cors: {

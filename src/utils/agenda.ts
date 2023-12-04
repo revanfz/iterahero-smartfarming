@@ -148,7 +148,7 @@ export const agendaInit = async () => {
   agenda.start().then(() => console.log("Agenda Started")).catch(err => console.error(err));
 
   agenda.every("10 minutes", "check-sensor");
-  agenda.every("1 day", "logging-sensor");
+  agenda.every("1 hour", "logging-sensor");
   reinitializeSchedule().then(() =>
     console.log("Inisialisasi Penjadwalan Selesai")
   );

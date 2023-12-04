@@ -4,7 +4,7 @@ import * as JWT from "@hapi/jwt";
 import * as HapiSwagger from "hapi-swagger";
 import * as Inert from "@hapi/inert";
 import * as Vision from "@hapi/vision";
-import * as Qs from "qs";
+import Qs from "qs";
 import * as jwt from "jsonwebtoken";
 import "dotenv/config";
 import { Server, AuthArtifacts, Request, ResponseToolkit } from "@hapi/hapi";
