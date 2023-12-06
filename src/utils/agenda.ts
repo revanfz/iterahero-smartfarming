@@ -2,7 +2,7 @@ import "dotenv/config";
 import { Agenda, Job } from "@hokify/agenda";
 import { prisma } from "../config/prisma";
 import { publishData } from "../config/mqtt";
-import { Penjadwalan } from "@prisma/client";
+import { AutomationSchedule, Penjadwalan } from "@prisma/client";
 import Sensor from "../models/Sensor";
 import SensorLog from "../models/SensorLog";
 
@@ -17,7 +17,7 @@ const convertToCronExpression = (waktu: string, hari: number[]) => {
   return `${parseInt(menit)} ${parseInt(jam)} * * ${cronDaysOfWeek}`;
 };
 
-export const createJobs = async (target: Penjadwalan) => {
+export const createPenjadwalan = async (target: Penjadwalan) => {
   const schedule = agenda.create("penjadwalan-peracikan", {
     id_penjadwalan: target.id,
     id_resep: target.resepId,
@@ -33,13 +33,54 @@ export const createJobs = async (target: Penjadwalan) => {
   await schedule.save();
 };
 
+export const createAutomation = async (target: AutomationSchedule) => {
+  
+  const [hour, minute] = target.startTime.split(":");
+  let jamJadwal = [];
+
+  for (let i = 0; i < target.iterasi; i++) {
+    let jam = parseInt(hour);
+    jam = jam + i * target.interval;
+    console.log(jam);
+    jamJadwal.push(jam);
+    if (jam >= 24) {
+      throw 'Jamnya tidak valid'
+    }
+  }
+
+  const schedule = agenda.create("automation", {
+    id_aktuator: target.id,
+    durasi: target.duration,
+  });
+
+  const jamAutomasi = jamJadwal.sort().join(",");
+
+  schedule.repeatEvery(`${minute} ${jamAutomasi} * * *`, {
+    timezone: "Asia/Jakarta",
+  });
+  await schedule.save();
+};
+
 export const reinitializeSchedule = async () => {
-  const penjadwalan = await prisma.penjadwalan.findMany();
+  const penjadwalan = await prisma.penjadwalan.findMany({
+    where: {
+      isActive: true
+    }
+  });
+  const automation = await prisma.automationSchedule.findMany({
+    where: {
+      isActive: true
+    },
+  });
 
   penjadwalan
-    .filter((item) => item.isActive)
     .forEach(async (item) => {
-      await createJobs(item);
+      await createPenjadwalan(item);
+    });
+
+  automation
+    .forEach(async (item) => {
+      await createAutomation(item);
     });
 };
 
@@ -53,8 +94,22 @@ export const onOffPenjadwalan = async (id: number, currentStatus: boolean) => {
   });
 };
 
+export const onOffAutomation = async (id: number, currentStatus: boolean) => {
+  const data = await agenda.jobs({
+    "data.id_aktuator": id,
+  });
+  data.forEach((job) => {
+    if (currentStatus) job.disable();
+    else job.enable();
+  });
+};
+
 export const deletePenjadwalan = async (id: number) => {
   await agenda.cancel({ "data.id_penjadwalan": id });
+};
+
+export const deleteAutomation = async (id: number) => {
+  await agenda.cancel({ "data.id_aktuator": id });
 };
 
 export const agendaInit = async () => {
@@ -95,9 +150,36 @@ export const agendaInit = async () => {
     });
   });
 
+  agenda.define("automation", async (job: Job) => {
+    const { id_aktuator, durasi } = job.attrs.data as {
+      id_aktuator: number;
+      durasi: number;
+    };
+    const data = await prisma.aktuator.findUnique({
+      where: {
+        id: id_aktuator,
+      },
+    });
+    console.log(data?.name, id_aktuator)
+    publishData(
+      "iterahero2023/kontrol",
+      JSON.stringify({
+        pin: data?.GPIO,
+        state: data?.status ? false : true,
+        durasi,
+      })
+    );
+  });
+
   agenda.define("penjadwalan-peracikan", async (job: Job) => {
-    const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi, createdBy } = job
-      .attrs.data as {
+    const {
+      id_penjadwalan,
+      id_resep,
+      id_tandon,
+      id_greenhouse,
+      durasi,
+      createdBy,
+    } = job.attrs.data as {
       id_penjadwalan: number;
       id_resep: number;
       id_tandon: number;
@@ -132,8 +214,8 @@ export const agendaInit = async () => {
         message: `Penjadwalan ${resep?.nama} telah dimulai`,
         read: false,
         userId: createdBy,
-      }
-    })
+      },
+    });
     publishData(
       "iterahero2023/penjadwalan-peracikan",
       JSON.stringify({
@@ -145,7 +227,10 @@ export const agendaInit = async () => {
     );
   });
 
-  agenda.start().then(() => console.log("Agenda Started")).catch(err => console.error(err));
+  agenda
+    .start()
+    .then(() => console.log("Agenda Started"))
+    .catch((err) => console.error(err));
 
   agenda.every("10 minutes", "check-sensor");
   agenda.every("1 hour", "logging-sensor");

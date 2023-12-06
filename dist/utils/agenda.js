@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.agendaInit = exports.deletePenjadwalan = exports.onOffPenjadwalan = exports.reinitializeSchedule = exports.createJobs = exports.agenda = void 0;
+exports.agendaInit = exports.deleteAutomation = exports.deletePenjadwalan = exports.onOffAutomation = exports.onOffPenjadwalan = exports.reinitializeSchedule = exports.createAutomation = exports.createPenjadwalan = exports.agenda = void 0;
 require("dotenv/config");
 const agenda_1 = require("@hokify/agenda");
 const prisma_1 = require("../config/prisma");
@@ -27,7 +27,7 @@ const convertToCronExpression = (waktu, hari) => {
     const cronDaysOfWeek = hari.sort().join(",");
     return `${parseInt(menit)} ${parseInt(jam)} * * ${cronDaysOfWeek}`;
 };
-const createJobs = (target) => __awaiter(void 0, void 0, void 0, function* () {
+const createPenjadwalan = (target) => __awaiter(void 0, void 0, void 0, function* () {
     const schedule = exports.agenda.create("penjadwalan-peracikan", {
         id_penjadwalan: target.id,
         id_resep: target.resepId,
@@ -42,13 +42,48 @@ const createJobs = (target) => __awaiter(void 0, void 0, void 0, function* () {
     });
     yield schedule.save();
 });
-exports.createJobs = createJobs;
+exports.createPenjadwalan = createPenjadwalan;
+const createAutomation = (target) => __awaiter(void 0, void 0, void 0, function* () {
+    const [hour, minute] = target.startTime.split(":");
+    let jamJadwal = [];
+    for (let i = 0; i < target.iterasi; i++) {
+        let jam = parseInt(hour);
+        jam = jam + i * target.interval;
+        console.log(jam);
+        jamJadwal.push(jam);
+        if (jam >= 24) {
+            throw 'Jamnya tidak valid';
+        }
+    }
+    const schedule = exports.agenda.create("automation", {
+        id_aktuator: target.id,
+        durasi: target.duration,
+    });
+    const jamAutomasi = jamJadwal.sort().join(",");
+    schedule.repeatEvery(`${minute} ${jamAutomasi} * * *`, {
+        timezone: "Asia/Jakarta",
+    });
+    yield schedule.save();
+});
+exports.createAutomation = createAutomation;
 const reinitializeSchedule = () => __awaiter(void 0, void 0, void 0, function* () {
-    const penjadwalan = yield prisma_1.prisma.penjadwalan.findMany();
+    const penjadwalan = yield prisma_1.prisma.penjadwalan.findMany({
+        where: {
+            isActive: true
+        }
+    });
+    const automation = yield prisma_1.prisma.automationSchedule.findMany({
+        where: {
+            isActive: true
+        },
+    });
     penjadwalan
-        .filter((item) => item.isActive)
         .forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
-        yield (0, exports.createJobs)(item);
+        yield (0, exports.createPenjadwalan)(item);
+    }));
+    automation
+        .forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
+        yield (0, exports.createAutomation)(item);
     }));
 });
 exports.reinitializeSchedule = reinitializeSchedule;
@@ -64,10 +99,26 @@ const onOffPenjadwalan = (id, currentStatus) => __awaiter(void 0, void 0, void 0
     });
 });
 exports.onOffPenjadwalan = onOffPenjadwalan;
+const onOffAutomation = (id, currentStatus) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = yield exports.agenda.jobs({
+        "data.id_aktuator": id,
+    });
+    data.forEach((job) => {
+        if (currentStatus)
+            job.disable();
+        else
+            job.enable();
+    });
+});
+exports.onOffAutomation = onOffAutomation;
 const deletePenjadwalan = (id) => __awaiter(void 0, void 0, void 0, function* () {
     yield exports.agenda.cancel({ "data.id_penjadwalan": id });
 });
 exports.deletePenjadwalan = deletePenjadwalan;
+const deleteAutomation = (id) => __awaiter(void 0, void 0, void 0, function* () {
+    yield exports.agenda.cancel({ "data.id_aktuator": id });
+});
+exports.deleteAutomation = deleteAutomation;
 const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
     exports.agenda.define("logging-sensor", (job) => __awaiter(void 0, void 0, void 0, function* () {
         const data = yield prisma_1.prisma.sensor.findMany();
@@ -104,9 +155,22 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             }
         }));
     }));
+    exports.agenda.define("automation", (job) => __awaiter(void 0, void 0, void 0, function* () {
+        const { id_aktuator, durasi } = job.attrs.data;
+        const data = yield prisma_1.prisma.aktuator.findUnique({
+            where: {
+                id: id_aktuator,
+            },
+        });
+        console.log(data === null || data === void 0 ? void 0 : data.name, id_aktuator);
+        (0, mqtt_1.publishData)("iterahero2023/kontrol", JSON.stringify({
+            pin: data === null || data === void 0 ? void 0 : data.GPIO,
+            state: (data === null || data === void 0 ? void 0 : data.status) ? false : true,
+            durasi,
+        }));
+    }));
     exports.agenda.define("penjadwalan-peracikan", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi, createdBy } = job
-            .attrs.data;
+        const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi, createdBy, } = job.attrs.data;
         const resep = yield prisma_1.prisma.resep.findUnique({
             where: {
                 id: id_resep,
@@ -134,7 +198,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                 message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} telah dimulai`,
                 read: false,
                 userId: createdBy,
-            }
+            },
         });
         (0, mqtt_1.publishData)("iterahero2023/penjadwalan-peracikan", JSON.stringify({
             komposisi: resep,
@@ -143,9 +207,12 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             aktuator,
         }));
     }));
-    exports.agenda.start().then(() => console.log("Agenda Started")).catch(err => console.error(err));
+    exports.agenda
+        .start()
+        .then(() => console.log("Agenda Started"))
+        .catch((err) => console.error(err));
     exports.agenda.every("10 minutes", "check-sensor");
-    exports.agenda.every("1 day", "logging-sensor");
+    exports.agenda.every("1 hour", "logging-sensor");
     (0, exports.reinitializeSchedule)().then(() => console.log("Inisialisasi Penjadwalan Selesai"));
 });
 exports.agendaInit = agendaInit;

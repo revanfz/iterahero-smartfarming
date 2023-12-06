@@ -102,50 +102,82 @@ model Category {
 }
 
 model Sensor {
-  id                Int              @id @default(autoincrement())
+  id                Int                @id @default(autoincrement())
   name              String
   calibration       String?
   brand             String
   unit_measurement  String
-  status            Boolean          @default(false)
+  status            Boolean            @default(false)
   channel           Int?
   GPIO              Int?
-  category          Category         @relation(fields: [type], references: [name])
+  category          Category           @relation(fields: [type], references: [name])
   type              String
   range_min         Int?
   range_max         Int?
-  microcontroller   Microcontroller? @relation(fields: [microcontrollerId], references: [id])
+  microcontroller   Microcontroller?   @relation(fields: [microcontrollerId], references: [id])
   microcontrollerId Int?
-  tandon            Tandon?          @relation(fields: [tandonId], references: [id])
+  tandon            Tandon?            @relation(fields: [tandonId], references: [id])
   tandonId          Int?
-  tandonBahan       TandonBahan?     @relation(fields: [tandonBahanId], references: [id])
+  tandonBahan       TandonBahan?       @relation(fields: [tandonBahanId], references: [id])
   tandonBahanId     Int?
   greenhouseId      Int?
-  greenhouse        Greenhouse?      @relation(fields: [greenhouseId], references: [id])
-  created_at        DateTime         @default(now())
-  updated_at        DateTime?        @updatedAt
+  greenhouse        Greenhouse?        @relation(fields: [greenhouseId], references: [id])
+  AutomationSensor  AutomationSensor[]
+  created_at        DateTime           @default(now())
+  updated_at        DateTime?          @updatedAt
 }
 
 model Aktuator {
-  id                  Int                @id @default(autoincrement())
+  id                  Int                 @id @default(autoincrement())
   name                String
   merek               String?
-  status              Boolean            @default(false)
+  status              Boolean             @default(false)
   GPIO                Int?
-  microcontroller     Microcontroller?   @relation(fields: [microcontrollerId], references: [id])
+  microcontroller     Microcontroller?    @relation(fields: [microcontrollerId], references: [id])
   microcontrollerId   Int?
-  category            Category           @relation(fields: [type], references: [name])
+  category            Category            @relation(fields: [type], references: [name])
   type                String
-  tandon              Tandon?            @relation(fields: [tandonId], references: [id])
+  tandon              Tandon?             @relation(fields: [tandonId], references: [id])
   tandonId            Int?
-  greenhouse          Greenhouse?        @relation(fields: [greenhouseId], references: [id])
+  greenhouse          Greenhouse?         @relation(fields: [greenhouseId], references: [id])
   greenhouseId        Int?
-  tandonPenyimpanan   TandonPenyimpanan? @relation(fields: [tandonPenyimpananId], references: [id])
+  tandonPenyimpanan   TandonPenyimpanan?  @relation(fields: [tandonPenyimpananId], references: [id])
   tandonPenyimpananId Int?
-  tandonBahan         TandonBahan?       @relation(fields: [tandonBahanId], references: [id])
+  tandonBahan         TandonBahan?        @relation(fields: [tandonBahanId], references: [id])
   tandonBahanId       Int?
-  created_at          DateTime           @default(now())
-  updated_at          DateTime?          @updatedAt
+  automation          Boolean             @default(false)
+  AutomationSensor    AutomationSensor[]
+  AutomationSchedule  AutomationSchedule?
+  created_at          DateTime            @default(now())
+  updated_at          DateTime?           @updatedAt
+}
+
+model AutomationSchedule {
+  id         Int       @id @default(autoincrement())
+  aktuator   Aktuator  @relation(fields: [aktuatorId], references: [id])
+  aktuatorId Int       @unique
+  duration   Int
+  startTime  String
+  hari       Int[]     @default([0, 1, 2, 3, 4, 5, 6])
+  interval   Int
+  iterasi    Int
+  isActive   Boolean   @default(true)
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
+}
+
+model AutomationSensor {
+  id         Int       @id @default(autoincrement())
+  isActive   Boolean   @default(true)
+  aktuator   Aktuator  @relation(fields: [aktuatorId], references: [id])
+  aktuatorId Int
+  sensor     Sensor    @relation(fields: [sensorId], references: [id])
+  sensorId   Int
+  condition  String
+  constant   Int
+  action     Boolean
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
 }
 
 model TandonBahan {

@@ -7,7 +7,12 @@ const path = `${prefix_1.prefix}/logging`;
 exports.loggingRoute = [
     {
         method: "GET",
-        path,
-        handler: logging_1.getHandler
+        path: path + "/sensor",
+        handler: logging_1.getSensorHandler
+    },
+    {
+        method: "GET",
+        path: path + "/aktuator",
+        handler: logging_1.getAktuatorHandler
     }
 ];

@@ -105,7 +105,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     greenhouseId: id_greenhouse
                 },
             });
-            yield (0, agenda_1.createJobs)(schedule);
+            yield (0, agenda_1.createPenjadwalan)(schedule);
         }));
         return h
             .response({

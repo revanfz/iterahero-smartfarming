@@ -19,6 +19,7 @@ const logging_1 = require("./logging");
 const icon_1 = require("./icon");
 const grafik_1 = require("./grafik");
 const summary_1 = require("./summary");
+const automation_1 = require("./automation");
 exports.routes = [
     ...home_1.home,
     ...login_1.loginRoute,
@@ -37,5 +38,6 @@ exports.routes = [
     ...logging_1.loggingRoute,
     ...icon_1.iconRoute,
     ...grafik_1.grafikRoute,
-    ...summary_1.summaryRoute
+    ...summary_1.summaryRoute,
+    ...automation_1.automationRoute
 ];

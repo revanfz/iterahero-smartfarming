@@ -6,7 +6,7 @@ import {
   onOffPeracikan,
   schedulePeracikan
 } from "../utils/schedule";
-import { createJobs, deletePenjadwalan, onOffPenjadwalan } from "../utils/agenda";
+import { createPenjadwalan, deletePenjadwalan, onOffPenjadwalan } from "../utils/agenda";
 
 interface InputPenjadwalan {
   id_tandon: number;
@@ -115,7 +115,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         },
       });
 
-      await createJobs(schedule)
+      await createPenjadwalan(schedule)
     });
 
     return h

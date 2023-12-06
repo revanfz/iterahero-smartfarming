@@ -17,6 +17,7 @@ import { loggingRoute } from "./logging";
 import { iconRoute } from "./icon";
 import { grafikRoute } from "./grafik";
 import { summaryRoute } from "./summary";
+import { automationRoute } from "./automation";
 
 export const routes: ServerRoute[] = [
   ...home,
@@ -36,5 +37,6 @@ export const routes: ServerRoute[] = [
   ...loggingRoute,
   ...iconRoute,
   ...grafikRoute,
-  ...summaryRoute
+  ...summaryRoute,
+  ...automationRoute
 ];
