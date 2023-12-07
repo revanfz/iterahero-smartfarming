@@ -109,7 +109,7 @@ export const deletePenjadwalan = async (id: number) => {
 };
 
 export const deleteAutomation = async (id: number) => {
-  await agenda.cancel({ "data.id_aktuator": id });
+  await agenda.cancel({ "data.id_automation": id });
 };
 
 export const agendaInit = async () => {
@@ -151,7 +151,8 @@ export const agendaInit = async () => {
   });
 
   agenda.define("automation", async (job: Job) => {
-    const { id_aktuator, durasi } = job.attrs.data as {
+    const { id_automation, id_aktuator, durasi } = job.attrs.data as {
+      id_automation: number;
       id_aktuator: number;
       durasi: number;
     };

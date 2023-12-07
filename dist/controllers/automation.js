@@ -46,11 +46,18 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             where: {
                 aktuatorId: id_aktuator,
             },
+            include: {
+                aktuator: true,
+                sensor: true
+            }
         });
         const bySchedule = yield prisma_1.prisma.automationSchedule.findUnique({
             where: {
                 aktuatorId: id_aktuator,
             },
+            include: {
+                aktuator: true
+            }
         });
         return h
             .response({
@@ -177,9 +184,10 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
 exports.patchHandler = patchHandler;
 const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id_aktuator } = request.payload;
+        const { id_automation } = request.payload;
+        // const { id_aktuator } = request.payload as { id_aktuator: number }
         const { type } = request.query;
-        if (isNaN(id_aktuator)) {
+        if (isNaN(id_automation)) {
             return Boom.badRequest("ID aktuator tidak valid");
         }
         if (type === "bySensor") {
@@ -189,8 +197,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
             }
             const deletedSensor = yield prisma_1.prisma.automationSensor.deleteMany({
                 where: {
-                    aktuatorId: id_aktuator,
-                    sensorId: id_sensor
+                    id: id_automation,
                 }
             });
             return h.response({
@@ -201,10 +208,10 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         else if (type === "bySchedule") {
             const deletedSchedule = yield prisma_1.prisma.automationSchedule.delete({
                 where: {
-                    aktuatorId: id_aktuator
+                    id: id_automation
                 }
             });
-            yield (0, agenda_1.deleteAutomation)(id_aktuator);
+            yield (0, agenda_1.deleteAutomation)(id_automation);
             return h.response({
                 status: 'succes',
                 message: "Automasi jadwaln berhasil dihapus"

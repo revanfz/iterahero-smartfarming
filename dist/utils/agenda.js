@@ -116,7 +116,7 @@ const deletePenjadwalan = (id) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.deletePenjadwalan = deletePenjadwalan;
 const deleteAutomation = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    yield exports.agenda.cancel({ "data.id_aktuator": id });
+    yield exports.agenda.cancel({ "data.id_automation": id });
 });
 exports.deleteAutomation = deleteAutomation;
 const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -156,7 +156,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
         }));
     }));
     exports.agenda.define("automation", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        const { id_aktuator, durasi } = job.attrs.data;
+        const { id_automation, id_aktuator, durasi } = job.attrs.data;
         const data = yield prisma_1.prisma.aktuator.findUnique({
             where: {
                 id: id_aktuator,

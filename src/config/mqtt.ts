@@ -32,7 +32,8 @@ export function connectMqtt() {
   broker.on("message", async (topic, payload, packet) => {
     try {
       const data = JSON.parse(payload.toString());
-      console.log({ topic, data });
+      console.log({ topic });
+      console.log(data)
       if (topic === "iterahero2023/peracikan/info") {
         await prisma.tandon.update({
           where: {
@@ -50,6 +51,14 @@ export function connectMqtt() {
             { channel: parseInt(channel) },
             { $set: { nilai: val, updatedAt: new Date() }}
           );
+          await prisma.sensor.updateMany({
+            where: {
+              channel: parseInt(channel)
+            },
+            data: {
+              status: true
+            }
+          })
         });
         data.sensor_non_adc.forEach(async (item: object, index: number) => {
           const gpio = Object.keys(item)[0];
@@ -58,6 +67,14 @@ export function connectMqtt() {
             { gpio: parseInt(gpio) },
             { $set: { nilai: val, updatedAt: new Date() }}
           );
+          await prisma.sensor.updateMany({
+            where: {
+              GPIO: parseInt(gpio)
+            },
+            data: {
+              status: true
+            }
+          })
         });
       } else if (topic === "iterahero2023/actuator") {
         data.actuator.forEach(async (item: object, index: number) => {

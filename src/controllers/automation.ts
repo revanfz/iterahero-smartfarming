@@ -28,12 +28,19 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       where: {
         aktuatorId: id_aktuator,
       },
+      include: {
+        aktuator: true,
+        sensor: true
+      }
     });
 
     const bySchedule = await prisma.automationSchedule.findUnique({
       where: {
         aktuatorId: id_aktuator,
       },
+      include: {
+        aktuator: true
+      }
     });
 
     return h
@@ -177,10 +184,11 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
   try {
-    const { id_aktuator } = request.payload as { id_aktuator: number }
+    const { id_automation } = request.payload as { id_automation: number }
+    // const { id_aktuator } = request.payload as { id_aktuator: number }
     const { type } = request.query;
 
-    if (isNaN(id_aktuator)) {
+    if (isNaN(id_automation)) {
       return Boom.badRequest("ID aktuator tidak valid")
     }
 
@@ -192,8 +200,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
       
       const deletedSensor = await prisma.automationSensor.deleteMany({
         where: {
-          aktuatorId: id_aktuator,
-          sensorId: id_sensor
+          id: id_automation,
         }
       })
 
@@ -205,11 +212,11 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     else if (type === "bySchedule") {
       const deletedSchedule = await prisma.automationSchedule.delete({
         where: {
-          aktuatorId: id_aktuator
+          id: id_automation
         }
       })
 
-      await deleteAutomation(id_aktuator)
+      await deleteAutomation(id_automation)
       
       return h.response({
         status: 'succes',

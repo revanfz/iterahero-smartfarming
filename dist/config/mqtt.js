@@ -64,7 +64,8 @@ function connectMqtt() {
     broker.on("message", (topic, payload, packet) => __awaiter(this, void 0, void 0, function* () {
         try {
             const data = JSON.parse(payload.toString());
-            console.log({ topic, data });
+            console.log({ topic });
+            console.log(data);
             if (topic === "iterahero2023/peracikan/info") {
                 yield prisma_1.prisma.tandon.update({
                     where: {
@@ -80,11 +81,27 @@ function connectMqtt() {
                     const channel = Object.keys(item)[0];
                     const val = Object.values(item)[0];
                     yield Sensor_1.default.updateMany({ channel: parseInt(channel) }, { $set: { nilai: val, updatedAt: new Date() } });
+                    yield prisma_1.prisma.sensor.updateMany({
+                        where: {
+                            channel: parseInt(channel)
+                        },
+                        data: {
+                            status: true
+                        }
+                    });
                 }));
                 data.sensor_non_adc.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
                     const gpio = Object.keys(item)[0];
                     const val = Object.values(item)[0];
                     yield Sensor_1.default.updateMany({ gpio: parseInt(gpio) }, { $set: { nilai: val, updatedAt: new Date() } });
+                    yield prisma_1.prisma.sensor.updateMany({
+                        where: {
+                            GPIO: parseInt(gpio)
+                        },
+                        data: {
+                            status: true
+                        }
+                    });
                 }));
             }
             else if (topic === "iterahero2023/actuator") {
