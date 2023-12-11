@@ -24,5 +24,10 @@ exports.automationRoute = [
         method: "DELETE",
         path,
         handler: automation_1.deleteHandler
+    },
+    {
+        method: "PUT",
+        path,
+        handler: automation_1.putHandler
     }
 ];

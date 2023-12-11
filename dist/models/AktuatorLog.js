@@ -28,6 +28,7 @@ const AktuatorLogSchema = new mongoose_1.Schema({
     id_aktuator: { type: Number, required: true },
     nama: { type: String },
     message: { type: String },
+    status: { type: Boolean }
 }, { timestamps: { createdAt: true, updatedAt: false } });
 const AktuatorLog = mongoose_1.default.model('AktuatorLog', AktuatorLogSchema);
 exports.default = AktuatorLog;

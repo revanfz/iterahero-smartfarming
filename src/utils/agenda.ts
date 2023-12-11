@@ -5,6 +5,7 @@ import { publishData } from "../config/mqtt";
 import { AutomationSchedule, Penjadwalan } from "@prisma/client";
 import Sensor from "../models/Sensor";
 import SensorLog from "../models/SensorLog";
+import AktuatorLog from "../models/AktuatorLog";
 
 export const agenda = new Agenda({
   db: { address: process.env.MONGODB_URL || "", collection: "penjadwalan" },
@@ -34,54 +35,62 @@ export const createPenjadwalan = async (target: Penjadwalan) => {
 };
 
 export const createAutomation = async (target: AutomationSchedule) => {
-  
   const [hour, minute] = target.startTime.split(":");
+  const menitOff = parseInt(minute) + target.duration;
   let jamJadwal = [];
+  let jamOff = [];
 
   for (let i = 0; i < target.iterasi; i++) {
     let jam = parseInt(hour);
+    let menit = parseInt(minute);
     jam = jam + i * target.interval;
-    console.log(jam);
+    jamOff.push(jam + Math.floor(menit / 60));
     jamJadwal.push(jam);
     if (jam >= 24) {
-      throw 'Jamnya tidak valid'
+      throw "Jamnya tidak valid";
     }
   }
-
-  const schedule = agenda.create("automation", {
-    id_aktuator: target.id,
+  // Automasi menyala
+  const jamAutomasi = jamJadwal.sort().join(",");
+  const scheduleAutomation = agenda.create("automation", {
+    id_aktuator: target.aktuatorId,
     durasi: target.duration,
   });
-
-  const jamAutomasi = jamJadwal.sort().join(",");
-
-  schedule.repeatEvery(`${minute} ${jamAutomasi} * * *`, {
+  scheduleAutomation.repeatEvery(`${minute} ${jamAutomasi} * * *`, {
     timezone: "Asia/Jakarta",
   });
-  await schedule.save();
+  await scheduleAutomation.save();
+
+  // Automasi mati
+  const jamAutomasiOff = jamOff.sort().join(",");
+  const scheduleOff = agenda.create("automation-off", {
+    id_aktuator: target.aktuatorId,
+  });
+  scheduleOff.repeatEvery(`${menitOff % 60} ${jamAutomasiOff} * * *`, {
+    timezone: "Asia/Jakarta",
+  });
+  await scheduleOff.save();
 };
 
 export const reinitializeSchedule = async () => {
   const penjadwalan = await prisma.penjadwalan.findMany({
     where: {
-      isActive: true
-    }
+      isActive: true,
+    },
   });
   const automation = await prisma.automationSchedule.findMany({
     where: {
-      isActive: true
+      isActive: true,
     },
   });
 
-  penjadwalan
-    .forEach(async (item) => {
-      await createPenjadwalan(item);
-    });
+  penjadwalan.forEach(async (item) => {
+    await createPenjadwalan(item);
+  });
 
-  automation
-    .forEach(async (item) => {
-      await createAutomation(item);
-    });
+  automation.forEach(async (item) => {
+    await createAutomation(item);
+  });
 };
 
 export const onOffPenjadwalan = async (id: number, currentStatus: boolean) => {
@@ -161,15 +170,54 @@ export const agendaInit = async () => {
         id: id_aktuator,
       },
     });
-    console.log(data?.name, id_aktuator)
+    await prisma.aktuator.update({
+      where: {
+        id: id_aktuator,
+      },
+      data: {
+        status: true,
+      },
+    });
+    await AktuatorLog.create({
+      id_aktuator,
+      message: `Automasi - ${data?.name} menyala`,
+      status: true
+    });
+    console.log(data?.name, id_aktuator);
     publishData(
       "iterahero2023/kontrol",
       JSON.stringify({
         pin: data?.GPIO,
-        state: data?.status ? false : true,
+        state: true,
         durasi,
       })
     );
+  });
+
+  agenda.define("automation-off", async (job: Job) => {
+    const { id_automation, id_aktuator } = job.attrs.data as {
+      id_automation: number;
+      id_aktuator: number;
+      durasi: number;
+    };
+    const data = await prisma.aktuator.findUnique({
+      where: {
+        id: id_aktuator,
+      },
+    });
+    await prisma.aktuator.update({
+      where: {
+        id: id_aktuator,
+      },
+      data: {
+        status: false,
+      },
+    });
+    await AktuatorLog.create({
+      id_aktuator,
+      message: `Automasi - ${data?.name} dimatikan`,
+      status: false
+    });
   });
 
   agenda.define("penjadwalan-peracikan", async (job: Job) => {

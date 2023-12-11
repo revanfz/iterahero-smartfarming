@@ -19,6 +19,7 @@ const prisma_1 = require("../config/prisma");
 const mqtt_1 = require("../config/mqtt");
 const Sensor_1 = __importDefault(require("../models/Sensor"));
 const SensorLog_1 = __importDefault(require("../models/SensorLog"));
+const AktuatorLog_1 = __importDefault(require("../models/AktuatorLog"));
 exports.agenda = new agenda_1.Agenda({
     db: { address: process.env.MONGODB_URL || "", collection: "penjadwalan" },
 });
@@ -45,44 +46,55 @@ const createPenjadwalan = (target) => __awaiter(void 0, void 0, void 0, function
 exports.createPenjadwalan = createPenjadwalan;
 const createAutomation = (target) => __awaiter(void 0, void 0, void 0, function* () {
     const [hour, minute] = target.startTime.split(":");
+    const menitOff = parseInt(minute) + target.duration;
     let jamJadwal = [];
+    let jamOff = [];
     for (let i = 0; i < target.iterasi; i++) {
         let jam = parseInt(hour);
+        let menit = parseInt(minute);
         jam = jam + i * target.interval;
-        console.log(jam);
+        jamOff.push(jam + Math.floor(menit / 60));
         jamJadwal.push(jam);
         if (jam >= 24) {
-            throw 'Jamnya tidak valid';
+            throw "Jamnya tidak valid";
         }
     }
-    const schedule = exports.agenda.create("automation", {
-        id_aktuator: target.id,
+    // Automasi menyala
+    const jamAutomasi = jamJadwal.sort().join(",");
+    const scheduleAutomation = exports.agenda.create("automation", {
+        id_aktuator: target.aktuatorId,
         durasi: target.duration,
     });
-    const jamAutomasi = jamJadwal.sort().join(",");
-    schedule.repeatEvery(`${minute} ${jamAutomasi} * * *`, {
+    scheduleAutomation.repeatEvery(`${minute} ${jamAutomasi} * * *`, {
         timezone: "Asia/Jakarta",
     });
-    yield schedule.save();
+    yield scheduleAutomation.save();
+    // Automasi mati
+    const jamAutomasiOff = jamOff.sort().join(",");
+    const scheduleOff = exports.agenda.create("automation-off", {
+        id_aktuator: target.aktuatorId,
+    });
+    scheduleOff.repeatEvery(`${menitOff % 60} ${jamAutomasiOff} * * *`, {
+        timezone: "Asia/Jakarta",
+    });
+    yield scheduleOff.save();
 });
 exports.createAutomation = createAutomation;
 const reinitializeSchedule = () => __awaiter(void 0, void 0, void 0, function* () {
     const penjadwalan = yield prisma_1.prisma.penjadwalan.findMany({
         where: {
-            isActive: true
-        }
+            isActive: true,
+        },
     });
     const automation = yield prisma_1.prisma.automationSchedule.findMany({
         where: {
-            isActive: true
+            isActive: true,
         },
     });
-    penjadwalan
-        .forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
+    penjadwalan.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
         yield (0, exports.createPenjadwalan)(item);
     }));
-    automation
-        .forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
+    automation.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
         yield (0, exports.createAutomation)(item);
     }));
 });
@@ -162,12 +174,46 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                 id: id_aktuator,
             },
         });
+        yield prisma_1.prisma.aktuator.update({
+            where: {
+                id: id_aktuator,
+            },
+            data: {
+                status: true,
+            },
+        });
+        yield AktuatorLog_1.default.create({
+            id_aktuator,
+            message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} menyala`,
+            status: true
+        });
         console.log(data === null || data === void 0 ? void 0 : data.name, id_aktuator);
         (0, mqtt_1.publishData)("iterahero2023/kontrol", JSON.stringify({
             pin: data === null || data === void 0 ? void 0 : data.GPIO,
-            state: (data === null || data === void 0 ? void 0 : data.status) ? false : true,
+            state: true,
             durasi,
         }));
+    }));
+    exports.agenda.define("automation-off", (job) => __awaiter(void 0, void 0, void 0, function* () {
+        const { id_automation, id_aktuator } = job.attrs.data;
+        const data = yield prisma_1.prisma.aktuator.findUnique({
+            where: {
+                id: id_aktuator,
+            },
+        });
+        yield prisma_1.prisma.aktuator.update({
+            where: {
+                id: id_aktuator,
+            },
+            data: {
+                status: false,
+            },
+        });
+        yield AktuatorLog_1.default.create({
+            id_aktuator,
+            message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} dimatikan`,
+            status: false
+        });
     }));
     exports.agenda.define("penjadwalan-peracikan", (job) => __awaiter(void 0, void 0, void 0, function* () {
         const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi, createdBy, } = job.attrs.data;

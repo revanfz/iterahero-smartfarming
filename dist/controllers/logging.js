@@ -42,6 +42,7 @@ const getSensorHandler = (request, h) => __awaiter(void 0, void 0, void 0, funct
 });
 exports.getSensorHandler = getSensorHandler;
 const getAktuatorHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b;
     try {
         const id_aktuator = parseInt(request.query.id);
         if (isNaN(id_aktuator)) {
@@ -52,7 +53,7 @@ const getAktuatorHandler = (request, h) => __awaiter(void 0, void 0, void 0, fun
             {
                 $match: {
                     id_aktuator,
-                    message: { $regex: /mati|nyala/i },
+                    status: { $exists: true },
                 },
             },
             {
@@ -61,11 +62,11 @@ const getAktuatorHandler = (request, h) => __awaiter(void 0, void 0, void 0, fun
                         $switch: {
                             branches: [
                                 {
-                                    case: { $regexMatch: { input: "$message", regex: /nyala/i } },
+                                    case: { $eq: ["$status", true] },
                                     then: "on",
                                 },
                                 {
-                                    case: { $regexMatch: { input: "$message", regex: /mati/i } },
+                                    case: { $eq: ["$status", false] },
                                     then: "off",
                                 },
                             ],
@@ -77,8 +78,8 @@ const getAktuatorHandler = (request, h) => __awaiter(void 0, void 0, void 0, fun
             },
         ]);
         const log = {
-            on: counts.length ? counts.find((item) => item._id === "on").count : 0,
-            off: counts.length ? counts.find((item) => item._id === "off").count : 0
+            on: counts.length ? (_a = counts.find((item) => item._id === "on").count) !== null && _a !== void 0 ? _a : 0 : 0,
+            off: counts.length ? (_b = counts.find((item) => item._id === "off").count) !== null && _b !== void 0 ? _b : 0 : 0
         };
         return h.response({
             status: "success",

@@ -45,7 +45,7 @@ export const getAktuatorHandler = async (
       {
         $match: {
           id_aktuator,
-          message: { $regex: /mati|nyala/i },
+          status: { $exists: true },
         },
       },
       {
@@ -54,11 +54,11 @@ export const getAktuatorHandler = async (
             $switch: {
               branches: [
                 {
-                  case: { $regexMatch: { input: "$message", regex: /nyala/i } },
+                  case: { $eq: ["$status", true] }, // Jika status adalah true
                   then: "on",
                 },
                 {
-                  case: { $regexMatch: { input: "$message", regex: /mati/i } },
+                  case: { $eq: ["$status", false] }, // Jika status adalah false
                   then: "off",
                 },
               ],
@@ -69,11 +69,11 @@ export const getAktuatorHandler = async (
         },
       },
     ]);
-
     const log = {
-      on: counts.length ? counts.find((item) => item._id === "on").count : 0,
-      off: counts.length ? counts.find((item) => item._id === "off").count : 0
+      on: counts.length ? counts.find((item) => item._id === "on").count ?? 0 : 0,
+      off: counts.length ? counts.find((item) => item._id === "off").count ?? 0 : 0
     };
+
     return h.response({
       status: "success",
       data,
