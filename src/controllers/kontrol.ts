@@ -32,7 +32,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
   
       publishData(
         "iterahero2023/kontrol",
-        JSON.stringify({ pin: data.GPIO, microcontroller: target?.name })
+        JSON.stringify({ pin: data.GPIO, state: !data.status, microcontroller: target?.name })
       );
   
       return h

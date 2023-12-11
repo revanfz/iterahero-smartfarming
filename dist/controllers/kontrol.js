@@ -41,7 +41,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     status: !data.status
                 }
             });
-            (0, mqtt_1.publishData)("iterahero2023/kontrol", JSON.stringify({ pin: data.GPIO, microcontroller: target === null || target === void 0 ? void 0 : target.name }));
+            (0, mqtt_1.publishData)("iterahero2023/kontrol", JSON.stringify({ pin: data.GPIO, state: !data.status, microcontroller: target === null || target === void 0 ? void 0 : target.name }));
             return h
                 .response({
                 status: "success",

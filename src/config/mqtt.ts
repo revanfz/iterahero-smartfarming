@@ -8,20 +8,20 @@ const clientId = `Iterahero2023_${Math.random().toString().slice(4)}`;
 let broker: mqtt.MqttClient;
 
 export function connectMqtt() {
-  broker = mqtt.connect({
-    host: "c401972c13f24e59b71daf85c5f5a712.s2.eu.hivemq.cloud",
-    port: 8883,
-    username: process.env.MQTT_USERNAME,
-    password: process.env.MQTT_PASSWORD,
-    protocol: "mqtts",
-    clientId
-  });
-
-  // broker = mqtt.connect("ws://broker.hivemq.com:8000/mqtt", {
-  //   protocolId: "MQTT",
-  //   clean: true,
-  //   clientId
+  // broker = mqtt.connect({
+  //   host: "c401972c13f24e59b71daf85c5f5a712.s2.eu.hivemq.cloud",
+  //   port: 8883,
+  //   username: process.env.MQTT_USERNAME,
+  //   password: process.env.MQTT_PASSWORD,
+  //   protocol: "mqtts",
+  //   clientId,
   // });
+
+  broker = mqtt.connect("ws://broker.hivemq.com:8000/mqtt", {
+    protocolId: "MQTT",
+    clean: true,
+    clientId,
+  });
 
   broker.on("connect", () => {
     console.log("Connected to MQTT");
@@ -33,7 +33,21 @@ export function connectMqtt() {
     try {
       const data = JSON.parse(payload.toString());
       console.log({ topic });
-      console.log(data)
+      if (topic.includes("iterahero/status/actuator")) {
+        const id = topic.split("/")[3];
+        const status = data[0].status;
+        await prisma.aktuator.update({
+          where: {
+            id: parseInt(id),
+          },
+          data: {
+            status: status === "online" ? true : false,
+          },
+        });
+      }
+      if (topic.includes("iterahero/respon/actuator")) {
+        console.log(data)
+      }
       if (topic === "iterahero2023/peracikan/info") {
         await prisma.tandon.update({
           where: {
@@ -44,38 +58,56 @@ export function connectMqtt() {
           },
         });
       } else if (topic === "iterahero2023/info") {
-        data.sensor_adc.forEach(async (item: object, index: number) => {
-          const channel = Object.keys(item)[0];
-          const val = Object.values(item)[0];
-          await SensorModel.updateMany(
-            { channel: parseInt(channel) },
-            { $set: { nilai: val, updatedAt: new Date() }}
-          );
-          await prisma.sensor.updateMany({
-            where: {
-              channel: parseInt(channel)
-            },
-            data: {
-              status: true
-            }
-          })
+        const listAutomasiSensor = await prisma.automationSensor.findMany({
+          include: {
+            sensor: true,
+            aktuator: { include: { microcontroller: true } },
+          },
         });
-        data.sensor_non_adc.forEach(async (item: object, index: number) => {
-          const gpio = Object.keys(item)[0];
-          const val = Object.values(item)[0];
-          await SensorModel.updateMany(
-            { gpio: parseInt(gpio) },
-            { $set: { nilai: val, updatedAt: new Date() }}
-          );
-          await prisma.sensor.updateMany({
-            where: {
-              GPIO: parseInt(gpio)
-            },
-            data: {
-              status: true
-            }
-          })
-        });
+
+        const processSensorData = async (sensorData: [], key: string) => {
+          const sensorField = key === "sensor_adc" ? "channel" : "GPIO";
+
+          sensorData.forEach(async (item) => {
+            const field = Object.keys(item)[0];
+            const val = Object.values(item)[1] as number;
+
+            await SensorModel.updateMany(
+              { [sensorField]: parseInt(field) },
+              { $set: { nilai: val, updatedAt: new Date() } }
+            );
+
+            await prisma.sensor.updateMany({
+              where: { [sensorField]: parseInt(field) },
+              data: { status: true },
+            });
+
+            listAutomasiSensor
+              .filter(
+                (automationItem) =>
+                  automationItem.sensor[sensorField] === parseInt(field)
+              )
+              .forEach((automationItem) => {
+                const conditionMet =
+                  automationItem.condition === ">"
+                    ? val > automationItem.constant
+                    : val < automationItem.constant;
+
+                publishData(
+                  "iterahero2023/kontrol",
+                  JSON.stringify({
+                    pin: automationItem.aktuator.GPIO,
+                    state: conditionMet ? automationItem.action : false,
+                    microcontroller:
+                      automationItem.aktuator.microcontroller?.name,
+                  })
+                );
+              });
+          });
+        };
+
+        await processSensorData(data.sensor_adc, "sensor_adc");
+        await processSensorData(data.sensor_non_adc, "sensor_non_adc");
       } else if (topic === "iterahero2023/actuator") {
         data.actuator.forEach(async (item: object, index: number) => {
           const port = Object.keys(item)[0];

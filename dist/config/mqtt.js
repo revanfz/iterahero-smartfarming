@@ -43,19 +43,19 @@ const Sensor_1 = __importDefault(require("../models/Sensor"));
 const clientId = `Iterahero2023_${Math.random().toString().slice(4)}`;
 let broker;
 function connectMqtt() {
-    broker = mqtt.connect({
-        host: "c401972c13f24e59b71daf85c5f5a712.s2.eu.hivemq.cloud",
-        port: 8883,
-        username: process.env.MQTT_USERNAME,
-        password: process.env.MQTT_PASSWORD,
-        protocol: "mqtts",
-        clientId
-    });
-    // broker = mqtt.connect("ws://broker.hivemq.com:8000/mqtt", {
-    //   protocolId: "MQTT",
-    //   clean: true,
-    //   clientId
+    // broker = mqtt.connect({
+    //   host: "c401972c13f24e59b71daf85c5f5a712.s2.eu.hivemq.cloud",
+    //   port: 8883,
+    //   username: process.env.MQTT_USERNAME,
+    //   password: process.env.MQTT_PASSWORD,
+    //   protocol: "mqtts",
+    //   clientId,
     // });
+    broker = mqtt.connect("ws://broker.hivemq.com:8000/mqtt", {
+        protocolId: "MQTT",
+        clean: true,
+        clientId,
+    });
     broker.on("connect", () => {
         console.log("Connected to MQTT");
         broker.subscribe("iterahero2023/#");
@@ -65,7 +65,21 @@ function connectMqtt() {
         try {
             const data = JSON.parse(payload.toString());
             console.log({ topic });
-            console.log(data);
+            if (topic.includes("iterahero/status/actuator")) {
+                const id = topic.split("/")[3];
+                const status = data[0].status;
+                yield prisma_1.prisma.aktuator.update({
+                    where: {
+                        id: parseInt(id),
+                    },
+                    data: {
+                        status: status === "online" ? true : false,
+                    },
+                });
+            }
+            if (topic.includes("iterahero/respon/actuator")) {
+                console.log(data);
+            }
             if (topic === "iterahero2023/peracikan/info") {
                 yield prisma_1.prisma.tandon.update({
                     where: {
@@ -77,32 +91,39 @@ function connectMqtt() {
                 });
             }
             else if (topic === "iterahero2023/info") {
-                data.sensor_adc.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
-                    const channel = Object.keys(item)[0];
-                    const val = Object.values(item)[0];
-                    yield Sensor_1.default.updateMany({ channel: parseInt(channel) }, { $set: { nilai: val, updatedAt: new Date() } });
-                    yield prisma_1.prisma.sensor.updateMany({
-                        where: {
-                            channel: parseInt(channel)
-                        },
-                        data: {
-                            status: true
-                        }
-                    });
-                }));
-                data.sensor_non_adc.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
-                    const gpio = Object.keys(item)[0];
-                    const val = Object.values(item)[0];
-                    yield Sensor_1.default.updateMany({ gpio: parseInt(gpio) }, { $set: { nilai: val, updatedAt: new Date() } });
-                    yield prisma_1.prisma.sensor.updateMany({
-                        where: {
-                            GPIO: parseInt(gpio)
-                        },
-                        data: {
-                            status: true
-                        }
-                    });
-                }));
+                const listAutomasiSensor = yield prisma_1.prisma.automationSensor.findMany({
+                    include: {
+                        sensor: true,
+                        aktuator: { include: { microcontroller: true } },
+                    },
+                });
+                const processSensorData = (sensorData, key) => __awaiter(this, void 0, void 0, function* () {
+                    const sensorField = key === "sensor_adc" ? "channel" : "GPIO";
+                    sensorData.forEach((item) => __awaiter(this, void 0, void 0, function* () {
+                        const field = Object.keys(item)[0];
+                        const val = Object.values(item)[1];
+                        yield Sensor_1.default.updateMany({ [sensorField]: parseInt(field) }, { $set: { nilai: val, updatedAt: new Date() } });
+                        yield prisma_1.prisma.sensor.updateMany({
+                            where: { [sensorField]: parseInt(field) },
+                            data: { status: true },
+                        });
+                        listAutomasiSensor
+                            .filter((automationItem) => automationItem.sensor[sensorField] === parseInt(field))
+                            .forEach((automationItem) => {
+                            var _a;
+                            const conditionMet = automationItem.condition === ">"
+                                ? val > automationItem.constant
+                                : val < automationItem.constant;
+                            publishData("iterahero2023/kontrol", JSON.stringify({
+                                pin: automationItem.aktuator.GPIO,
+                                state: conditionMet ? automationItem.action : false,
+                                microcontroller: (_a = automationItem.aktuator.microcontroller) === null || _a === void 0 ? void 0 : _a.name,
+                            }));
+                        });
+                    }));
+                });
+                yield processSensorData(data.sensor_adc, "sensor_adc");
+                yield processSensorData(data.sensor_non_adc, "sensor_non_adc");
             }
             else if (topic === "iterahero2023/actuator") {
                 data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
