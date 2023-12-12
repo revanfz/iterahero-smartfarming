@@ -68,9 +68,9 @@ function connectMqtt() {
             if (topic.includes("iterahero/status/actuator")) {
                 const id = topic.split("/")[3];
                 const status = data[0].status;
-                yield prisma_1.prisma.aktuator.update({
+                yield prisma_1.prisma.aktuator.updateMany({
                     where: {
-                        id: parseInt(id),
+                        externalId: parseInt(id),
                     },
                     data: {
                         status: status === "online" ? true : false,
@@ -101,7 +101,7 @@ function connectMqtt() {
                     const sensorField = key === "sensor_adc" ? "channel" : "GPIO";
                     sensorData.forEach((item) => __awaiter(this, void 0, void 0, function* () {
                         const field = Object.keys(item)[0];
-                        const val = Object.values(item)[1];
+                        const val = Object.values(item)[0];
                         yield Sensor_1.default.updateMany({ [sensorField]: parseInt(field) }, { $set: { nilai: val, updatedAt: new Date() } });
                         yield prisma_1.prisma.sensor.updateMany({
                             where: { [sensorField]: parseInt(field) },

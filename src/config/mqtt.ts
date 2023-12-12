@@ -36,9 +36,9 @@ export function connectMqtt() {
       if (topic.includes("iterahero/status/actuator")) {
         const id = topic.split("/")[3];
         const status = data[0].status;
-        await prisma.aktuator.update({
+        await prisma.aktuator.updateMany({
           where: {
-            id: parseInt(id),
+            externalId: parseInt(id),
           },
           data: {
             status: status === "online" ? true : false,
@@ -70,8 +70,7 @@ export function connectMqtt() {
 
           sensorData.forEach(async (item) => {
             const field = Object.keys(item)[0];
-            const val = Object.values(item)[1] as number;
-
+            const val = Object.values(item)[0] as number;
             await SensorModel.updateMany(
               { [sensorField]: parseInt(field) },
               { $set: { nilai: val, updatedAt: new Date() } }
@@ -105,7 +104,6 @@ export function connectMqtt() {
               });
           });
         };
-
         await processSensorData(data.sensor_adc, "sensor_adc");
         await processSensorData(data.sensor_non_adc, "sensor_non_adc");
       } else if (topic === "iterahero2023/actuator") {

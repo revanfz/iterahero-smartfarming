@@ -40,6 +40,7 @@ const createPenjadwalan = (target) => __awaiter(void 0, void 0, void 0, function
     const cron_exp = convertToCronExpression(target.waktu, target.hari);
     schedule.repeatEvery(cron_exp, {
         timezone: "Asia/Jakarta",
+        skipImmediate: true
     });
     yield schedule.save();
 });
@@ -67,6 +68,7 @@ const createAutomation = (target) => __awaiter(void 0, void 0, void 0, function*
     });
     scheduleAutomation.repeatEvery(`${minute} ${jamAutomasi} * * *`, {
         timezone: "Asia/Jakarta",
+        skipImmediate: true
     });
     yield scheduleAutomation.save();
     // Automasi mati

@@ -114,6 +114,7 @@ model Sensor {
   type              String
   range_min         Int?
   range_max         Int?
+  externalId        Int?               
   microcontroller   Microcontroller?   @relation(fields: [microcontrollerId], references: [id])
   microcontrollerId Int?
   tandon            Tandon?            @relation(fields: [tandonId], references: [id])
@@ -125,6 +126,8 @@ model Sensor {
   AutomationSensor  AutomationSensor[]
   created_at        DateTime           @default(now())
   updated_at        DateTime?          @updatedAt
+
+  @@index([externalId])
 }
 
 model Aktuator {
@@ -133,6 +136,7 @@ model Aktuator {
   merek               String?
   status              Boolean             @default(false)
   GPIO                Int?
+  externalId          Int?
   microcontroller     Microcontroller?    @relation(fields: [microcontrollerId], references: [id])
   microcontrollerId   Int?
   category            Category            @relation(fields: [type], references: [name])
@@ -150,6 +154,8 @@ model Aktuator {
   AutomationSchedule  AutomationSchedule?
   created_at          DateTime            @default(now())
   updated_at          DateTime?           @updatedAt
+
+  @@index([externalId])
 }
 
 model AutomationSchedule {

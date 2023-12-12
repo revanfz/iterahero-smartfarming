@@ -30,6 +30,7 @@ export const createPenjadwalan = async (target: Penjadwalan) => {
   const cron_exp = convertToCronExpression(target.waktu, target.hari);
   schedule.repeatEvery(cron_exp, {
     timezone: "Asia/Jakarta",
+    skipImmediate: true
   });
   await schedule.save();
 };
@@ -58,6 +59,7 @@ export const createAutomation = async (target: AutomationSchedule) => {
   });
   scheduleAutomation.repeatEvery(`${minute} ${jamAutomasi} * * *`, {
     timezone: "Asia/Jakarta",
+    skipImmediate: true
   });
   await scheduleAutomation.save();
 
