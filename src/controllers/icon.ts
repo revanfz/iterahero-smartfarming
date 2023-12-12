@@ -18,6 +18,6 @@ export const getHandler = async (_: Request, h: ResponseToolkit) => {
         }
     }
     finally {
-        await prisma.$disconnect()
+        // await prisma.$disconnect()
     }
 }

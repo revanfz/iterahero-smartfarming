@@ -77,7 +77,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.internal(e.message);
     }
   } finally {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   }
 };
 
@@ -106,7 +106,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.internal(e.message);
     }
   } finally {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   }
 };
 
@@ -152,7 +152,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.internal(e.message);
     }
   } finally {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   }
 };
 
@@ -190,6 +190,6 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.internal(e.message);
     }
   } finally {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   }
 };

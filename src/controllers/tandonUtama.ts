@@ -42,7 +42,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
       return Boom.internal(e.message);
@@ -99,7 +99,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
     }
   }
   finally {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   }
 }
 
@@ -155,7 +155,7 @@ export const sensorByTandonHandler = async (
     }
   }
   finally {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   }
 };
 
@@ -215,7 +215,7 @@ export const actuatorByTandonHandler = async (
     }
   }
   finally {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   }
 };
 
@@ -291,7 +291,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
     }
   }
   finally {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
   }
 };
 
@@ -331,6 +331,6 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     }
   }
   finally {
-    await prisma.$disconnect()
+    // await prisma.$disconnect()
   }
 }
