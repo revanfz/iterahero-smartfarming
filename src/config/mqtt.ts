@@ -33,6 +33,7 @@ export function connectMqtt() {
     try {
       const data = JSON.parse(payload.toString());
       console.log({ topic });
+      console.log( JSON.stringify(data) )
       if (topic.includes("iterahero/status/actuator")) {
         const id = topic.split("/")[3];
         const status = data[0].status;
@@ -45,8 +46,7 @@ export function connectMqtt() {
           },
         });
       }
-      if (topic.includes("iterahero/respon/actuator")) {
-        console.log(data)
+      if (topic === "iterahero/respon/actuator") {
       }
       if (topic === "iterahero2023/peracikan/info") {
         await prisma.tandon.update({
@@ -57,7 +57,8 @@ export function connectMqtt() {
             status: data.status,
           },
         });
-      } else if (topic === "iterahero2023/info/sensor") {
+      }
+      if (topic === "iterahero2023/info/sensor") {
         const listAutomasiSensor = await prisma.automationSensor.findMany({
           include: {
             sensor: true,
@@ -106,7 +107,9 @@ export function connectMqtt() {
         };
         await processSensorData(data.sensor_adc, "sensor_adc");
         await processSensorData(data.sensor_non_adc, "sensor_non_adc");
-      } else if (topic.match("iterahero2023/info/actuator")) {
+      }
+      if (topic === "iterahero2023/info/actuator" ) {
+        console.log(data)
         data.actuator.forEach(async (item: object, index: number) => {
           const pin = Object.keys(item)[0]
           const status = Boolean(Object.values(item)[0])
@@ -120,7 +123,7 @@ export function connectMqtt() {
           })
         })
       }
-       else if (topic === "iterahero2023/actuator") {
+      if (topic === "iterahero2023/actuator") {
         data.actuator.forEach(async (item: object, index: number) => {
           const port = Object.keys(item)[0];
           const status = Object.values(item)[0];

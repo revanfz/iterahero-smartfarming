@@ -65,6 +65,7 @@ function connectMqtt() {
         try {
             const data = JSON.parse(payload.toString());
             console.log({ topic });
+            console.log(JSON.stringify(data));
             if (topic.includes("iterahero/status/actuator")) {
                 const id = topic.split("/")[3];
                 const status = data[0].status;
@@ -77,8 +78,7 @@ function connectMqtt() {
                     },
                 });
             }
-            if (topic.includes("iterahero/respon/actuator")) {
-                console.log(data);
+            if (topic === "iterahero/respon/actuator") {
             }
             if (topic === "iterahero2023/peracikan/info") {
                 yield prisma_1.prisma.tandon.update({
@@ -90,7 +90,7 @@ function connectMqtt() {
                     },
                 });
             }
-            else if (topic === "iterahero2023/info/sensor") {
+            if (topic === "iterahero2023/info/sensor") {
                 const listAutomasiSensor = yield prisma_1.prisma.automationSensor.findMany({
                     include: {
                         sensor: true,
@@ -125,7 +125,8 @@ function connectMqtt() {
                 yield processSensorData(data.sensor_adc, "sensor_adc");
                 yield processSensorData(data.sensor_non_adc, "sensor_non_adc");
             }
-            else if (topic.match("iterahero2023/info/actuator")) {
+            if (topic === "iterahero2023/info/actuator") {
+                console.log(data);
                 data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
                     const pin = Object.keys(item)[0];
                     const status = Boolean(Object.values(item)[0]);
@@ -139,7 +140,7 @@ function connectMqtt() {
                     });
                 }));
             }
-            else if (topic === "iterahero2023/actuator") {
+            if (topic === "iterahero2023/actuator") {
                 data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
                     const port = Object.keys(item)[0];
                     const status = Object.values(item)[0];

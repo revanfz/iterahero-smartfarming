@@ -27,7 +27,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                     userId: id_user,
                 },
                 orderBy: {
-                    id: 'desc'
+                    id: 'asc'
                 }
             });
         }

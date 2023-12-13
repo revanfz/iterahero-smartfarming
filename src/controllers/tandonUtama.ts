@@ -23,7 +23,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
           userId: id_user,
         },
         orderBy: {
-          id: 'desc'
+          id: 'asc'
         }
       });
     } else {
