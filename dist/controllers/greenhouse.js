@@ -72,7 +72,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         return h.response(res).code(200);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);
@@ -122,7 +122,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         }
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
     }
 });
 exports.postHandler = postHandler;
@@ -171,7 +171,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         }
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
     }
 });
 exports.patchHandler = patchHandler;
@@ -209,7 +209,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         }
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
     }
 });
 exports.deleteHandler = deleteHandler;
@@ -266,7 +266,7 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
         }
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
     }
 });
 exports.sensorByGreenhouseHandler = sensorByGreenhouseHandler;
@@ -323,7 +323,7 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
         }
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
     }
 });
 exports.actuatorByGreenhouseHandler = actuatorByGreenhouseHandler;

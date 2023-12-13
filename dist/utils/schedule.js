@@ -51,8 +51,8 @@ const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
             yield (0, exports.schedulePeracikan)(item.id, item.waktu, item.hari, item.resepId, item.durasi, item.greenhouseId);
         }));
     }))
-        .catch((err) => console.error(err))
-        .finally(() => __awaiter(void 0, void 0, void 0, function* () { return yield prisma_1.prisma.$disconnect(); }));
+        .catch((err) => console.error(err));
+    // .finally(async () => // await prisma.$disconnect());
 });
 exports.initPeracikan = initPeracikan;
 const onOffPeracikan = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -121,7 +121,7 @@ const schedulePeracikan = (id, jam, hari, resep, durasi, id_greenhouse) => __awa
         console.log(e);
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect()
     }
 });
 exports.schedulePeracikan = schedulePeracikan;

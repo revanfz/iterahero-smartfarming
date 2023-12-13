@@ -60,7 +60,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         }
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
     }
 });
 exports.postHandler = postHandler;

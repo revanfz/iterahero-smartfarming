@@ -22,13 +22,17 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         where: {
           userId: id_user,
         },
+        orderBy: {
+          id: 'desc'
+        }
       });
     } else {
       data = await prisma.tandon.findUnique({
         where: {
           id,
         },
-      });
+      },
+      );
     }
 
     if (!data) {

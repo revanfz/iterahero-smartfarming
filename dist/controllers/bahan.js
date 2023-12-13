@@ -36,7 +36,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             .code(200);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);

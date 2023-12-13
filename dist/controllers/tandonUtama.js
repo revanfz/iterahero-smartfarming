@@ -26,6 +26,9 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 where: {
                     userId: id_user,
                 },
+                orderBy: {
+                    id: 'desc'
+                }
             });
         }
         else {
@@ -46,7 +49,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             .code(200);
     }
     catch (e) {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
             return boom_1.default.internal(e.message);
@@ -97,7 +100,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         }
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
     }
 });
 exports.postHandler = postHandler;
@@ -150,7 +153,7 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
         }
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
     }
 });
 exports.sensorByTandonHandler = sensorByTandonHandler;
@@ -206,7 +209,7 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
         }
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
     }
 });
 exports.actuatorByTandonHandler = actuatorByTandonHandler;
@@ -273,7 +276,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         }
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect();
     }
 });
 exports.patchHandler = patchHandler;
@@ -311,7 +314,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         }
     }
     finally {
-        yield prisma_1.prisma.$disconnect();
+        // await prisma.$disconnect()
     }
 });
 exports.deleteHandler = deleteHandler;

@@ -90,7 +90,7 @@ function connectMqtt() {
                     },
                 });
             }
-            else if (topic === "iterahero2023/info") {
+            else if (topic === "iterahero2023/info/sensor") {
                 const listAutomasiSensor = yield prisma_1.prisma.automationSensor.findMany({
                     include: {
                         sensor: true,
@@ -124,6 +124,20 @@ function connectMqtt() {
                 });
                 yield processSensorData(data.sensor_adc, "sensor_adc");
                 yield processSensorData(data.sensor_non_adc, "sensor_non_adc");
+            }
+            else if (topic.match("iterahero2023/info/actuator")) {
+                data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
+                    const pin = Object.keys(item)[0];
+                    const status = Boolean(Object.values(item)[0]);
+                    yield prisma_1.prisma.aktuator.updateMany({
+                        where: {
+                            GPIO: parseInt(pin)
+                        },
+                        data: {
+                            status
+                        }
+                    });
+                }));
             }
             else if (topic === "iterahero2023/actuator") {
                 data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {

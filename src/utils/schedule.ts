@@ -18,7 +18,7 @@ export const initPeracikan = async () => {
         });
     })
     .catch((err) => console.error(err))
-    .finally(async () => // await prisma.$disconnect());
+    // .finally(async () => // await prisma.$disconnect());
 };
 
 export const onOffPeracikan = async (id: number) => {
