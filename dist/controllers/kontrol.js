@@ -18,7 +18,7 @@ const boom_1 = __importDefault(require("@hapi/boom"));
 const mqtt_1 = require("../config/mqtt");
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { id } = request.query;
+        const { id, microcontrollerId } = request.query;
         const data = yield prisma_1.prisma.aktuator.findUnique({
             where: {
                 id: parseInt(id),

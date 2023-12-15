@@ -114,7 +114,7 @@ model Sensor {
   type              String
   range_min         Int?
   range_max         Int?
-  externalId        Int?               
+  externalId        Int?
   microcontroller   Microcontroller?   @relation(fields: [microcontrollerId], references: [id])
   microcontrollerId Int?
   tandon            Tandon?            @relation(fields: [tandonId], references: [id])
@@ -210,6 +210,7 @@ model Tandon {
   ppm               Float               @default(0)
   image             String
   location          String
+  capacity          Float
   sensor            Sensor[]
   aktuator          Aktuator[]
   tandonBahan       TandonBahan[]

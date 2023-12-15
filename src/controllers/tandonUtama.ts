@@ -8,6 +8,7 @@ interface InputTandon {
   name: string,
   image: Readable,
   location: string,
+  capacity: number
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
@@ -59,7 +60,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
     const { id_user } = request.auth.credentials as {
       id_user: number;
     };
-    const { name, image, location } = request.payload as InputTandon;
+    const { name, image, location, capacity } = request.payload as InputTandon;
 
     const isExist = await prisma.tandon.findFirst({
       where: {
@@ -87,6 +88,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         },
         location,
         isOnline: true,
+        capacity
       },
     });
 
@@ -250,7 +252,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
 
     if (edit !== 'rasio') {
       let img_url;
-      const { name, image, location } = request.payload as InputTandon;
+      const { name, image, location, capacity } = request.payload as InputTandon;
       if (name !== target.nama) {
         await renameFile('tandon-' + target.nama, name);
       }
@@ -266,6 +268,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
           nama: name,
           image: img_url?.secure_url ?? target.image,
           location,
+          capacity
         },
       });
       msg = `Tandon ${name ?? target.nama} berhasil diperbarui`

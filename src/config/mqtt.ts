@@ -49,10 +49,7 @@ export function connectMqtt() {
       if (topic === "iterahero/respon/actuator") {
       }
       if (topic === "iterahero2023/peracikan/info") {
-        await prisma.tandon.update({
-          where: {
-            id: 2,
-          },
+        await prisma.tandon.updateMany({
           data: {
             status: data.status,
           },
@@ -73,7 +70,7 @@ export function connectMqtt() {
             const field = Object.keys(item)[0];
             const val = Object.values(item)[0] as number;
             await SensorModel.updateMany(
-              { [sensorField]: parseInt(field) },
+              { [sensorField.toLowerCase()]: parseInt(field) },
               { $set: { nilai: val, updatedAt: new Date() } }
             );
 

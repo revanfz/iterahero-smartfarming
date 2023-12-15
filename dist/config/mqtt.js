@@ -81,10 +81,7 @@ function connectMqtt() {
             if (topic === "iterahero/respon/actuator") {
             }
             if (topic === "iterahero2023/peracikan/info") {
-                yield prisma_1.prisma.tandon.update({
-                    where: {
-                        id: 2,
-                    },
+                yield prisma_1.prisma.tandon.updateMany({
                     data: {
                         status: data.status,
                     },
@@ -102,7 +99,7 @@ function connectMqtt() {
                     sensorData.forEach((item) => __awaiter(this, void 0, void 0, function* () {
                         const field = Object.keys(item)[0];
                         const val = Object.values(item)[0];
-                        yield Sensor_1.default.updateMany({ [sensorField]: parseInt(field) }, { $set: { nilai: val, updatedAt: new Date() } });
+                        yield Sensor_1.default.updateMany({ [sensorField.toLowerCase()]: parseInt(field) }, { $set: { nilai: val, updatedAt: new Date() } });
                         yield prisma_1.prisma.sensor.updateMany({
                             where: { [sensorField]: parseInt(field) },
                             data: { status: true },

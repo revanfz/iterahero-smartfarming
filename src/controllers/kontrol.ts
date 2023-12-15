@@ -5,7 +5,7 @@ import { publishData } from "../config/mqtt";
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
   try {
-    const { id } = request.query;
+    const { id, microcontrollerId } = request.query;
     const data = await prisma.aktuator.findUnique({
       where: {
         id: parseInt(id),

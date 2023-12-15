@@ -1,29 +1,34 @@
-# fly.toml app configuration file generated for iterahero2023 on 2023-11-20T15:22:35+07:00
+# fly.toml app configuration file generated for iterahero2023 on 2023-12-13T17:32:09+07:00
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = "iterahero2023"
 primary_region = "sin"
-kill_signal = "SIGINT"
-kill_timeout = "5s"
 
-[experimental]
-  auto_rollback = true
+[env]
+  DATABASE_URL="postgres://iterahero2023:ISb2xWaDN7ylxz6@iterahero2023-db.flycast:5432/iterahero2023?schema=iterahero&sslmode=disable"
+  MONGODB_URL="mongodb+srv://iterahero2023:Iterahero2023@cluster0.o7tdtlx.mongodb.net/iterahero2023?retryWrites=true&w=majority"
+  CLOUDINARY_CLOUD_NAME="iterahero2023"
+  CLOUDINARY_API_KEY="284755793249341"
+  CLOUDINARY_API_SECRET="6I7cyFbTva3BfULG5_04I5EPlac"
+  HOST="0.0.0.0"
 
-# [build]
-#   builder = "paketobuildpacks/builder:base"
-#   buildpacks = ["gcr.io/paketo-buildpacks/nodejs"]
+  MQTT_CLIENTID="iterahero2023_"
+  MQTT_USERNAME="iterahero2023"
+  MQTT_PASSWORD="Iterahero2023"
+
+  JWT_SECRET="iterahero"
+  JWT_AUD="iterahero"
+  JWT_SUB="smart-farming"
+  JWT_ISS="kedaireka"
 
 [[services]]
-  internal_port = 3000
   protocol = "tcp"
-  auto_stop_machines = true
-  auto_start_machines = true
-  min_machines_running = 0
+  internal_port = 3000
   processes = ["app"]
 
-  [[services.ports]]
+   [[services.ports]]
     port = 80
     handlers = ["http"]
     force_https = true
@@ -41,3 +46,9 @@ kill_timeout = "5s"
     interval = "15s"
     timeout = "2s"
     grace_period = "1s"
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 1024
+
