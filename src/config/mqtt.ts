@@ -32,8 +32,6 @@ export function connectMqtt() {
   broker.on("message", async (topic, payload, packet) => {
     try {
       const data = JSON.parse(payload.toString());
-      console.log({ topic });
-      console.log( JSON.stringify(data) )
       if (topic.includes("iterahero/status/actuator")) {
         const id = topic.split("/")[3];
         const status = data[0].status;
@@ -49,6 +47,7 @@ export function connectMqtt() {
       if (topic === "iterahero/respon/actuator") {
       }
       if (topic === "iterahero2023/peracikan/info") {
+        console.log(JSON.stringify(data));
         await prisma.tandon.updateMany({
           data: {
             status: data.status,
@@ -56,6 +55,7 @@ export function connectMqtt() {
         });
       }
       if (topic === "iterahero2023/info/sensor") {
+        console.log(JSON.stringify(data));
         const listAutomasiSensor = await prisma.automationSensor.findMany({
           include: {
             sensor: true,
@@ -105,22 +105,24 @@ export function connectMqtt() {
         await processSensorData(data.sensor_adc, "sensor_adc");
         await processSensorData(data.sensor_non_adc, "sensor_non_adc");
       }
-      if (topic === "iterahero2023/info/actuator" ) {
-        console.log(data)
+      if (topic === "iterahero2023/info/actuator") {
+        console.log(JSON.stringify(data));
+
         data.actuator.forEach(async (item: object, index: number) => {
-          const pin = Object.keys(item)[0]
-          const status = Boolean(Object.values(item)[0])
+          const pin = Object.keys(item)[0];
+          const status = Boolean(Object.values(item)[0]);
           await prisma.aktuator.updateMany({
             where: {
-              GPIO: parseInt(pin)
+              GPIO: parseInt(pin),
             },
             data: {
-              status
-            }
-          })
-        })
+              status,
+            },
+          });
+        });
       }
       if (topic === "iterahero2023/actuator") {
+        console.log(JSON.stringify(data));
         data.actuator.forEach(async (item: object, index: number) => {
           const port = Object.keys(item)[0];
           const status = Object.values(item)[0];

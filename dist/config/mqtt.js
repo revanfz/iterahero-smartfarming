@@ -64,8 +64,6 @@ function connectMqtt() {
     broker.on("message", (topic, payload, packet) => __awaiter(this, void 0, void 0, function* () {
         try {
             const data = JSON.parse(payload.toString());
-            console.log({ topic });
-            console.log(JSON.stringify(data));
             if (topic.includes("iterahero/status/actuator")) {
                 const id = topic.split("/")[3];
                 const status = data[0].status;
@@ -81,6 +79,7 @@ function connectMqtt() {
             if (topic === "iterahero/respon/actuator") {
             }
             if (topic === "iterahero2023/peracikan/info") {
+                console.log(JSON.stringify(data));
                 yield prisma_1.prisma.tandon.updateMany({
                     data: {
                         status: data.status,
@@ -88,6 +87,7 @@ function connectMqtt() {
                 });
             }
             if (topic === "iterahero2023/info/sensor") {
+                console.log(JSON.stringify(data));
                 const listAutomasiSensor = yield prisma_1.prisma.automationSensor.findMany({
                     include: {
                         sensor: true,
@@ -123,21 +123,22 @@ function connectMqtt() {
                 yield processSensorData(data.sensor_non_adc, "sensor_non_adc");
             }
             if (topic === "iterahero2023/info/actuator") {
-                console.log(data);
+                console.log(JSON.stringify(data));
                 data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
                     const pin = Object.keys(item)[0];
                     const status = Boolean(Object.values(item)[0]);
                     yield prisma_1.prisma.aktuator.updateMany({
                         where: {
-                            GPIO: parseInt(pin)
+                            GPIO: parseInt(pin),
                         },
                         data: {
-                            status
-                        }
+                            status,
+                        },
                     });
                 }));
             }
             if (topic === "iterahero2023/actuator") {
+                console.log(JSON.stringify(data));
                 data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
                     const port = Object.keys(item)[0];
                     const status = Object.values(item)[0];

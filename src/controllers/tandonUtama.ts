@@ -8,7 +8,7 @@ interface InputTandon {
   name: string,
   image: Readable,
   location: string,
-  capacity: number
+  capacity: string
 }
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
@@ -88,7 +88,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         },
         location,
         isOnline: true,
-        capacity
+        capacity: parseFloat(capacity)
       },
     });
 
@@ -268,7 +268,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
           nama: name,
           image: img_url?.secure_url ?? target.image,
           location,
-          capacity
+          capacity: parseFloat(capacity)
         },
       });
       msg = `Tandon ${name ?? target.nama} berhasil diperbarui`

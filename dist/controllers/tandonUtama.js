@@ -60,7 +60,7 @@ exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id_user } = request.auth.credentials;
-        const { name, image, location } = request.payload;
+        const { name, image, location, capacity } = request.payload;
         const isExist = yield prisma_1.prisma.tandon.findFirst({
             where: {
                 nama: name,
@@ -84,6 +84,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 },
                 location,
                 isOnline: true,
+                capacity: parseFloat(capacity)
             },
         });
         return h
@@ -230,7 +231,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         }
         if (edit !== 'rasio') {
             let img_url;
-            const { name, image, location } = request.payload;
+            const { name, image, location, capacity } = request.payload;
             if (name !== target.nama) {
                 yield (0, cloudinary_1.renameFile)('tandon-' + target.nama, name);
             }
@@ -246,6 +247,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
                     nama: name,
                     image: (_c = img_url === null || img_url === void 0 ? void 0 : img_url.secure_url) !== null && _c !== void 0 ? _c : target.image,
                     location,
+                    capacity: parseFloat(capacity)
                 },
             });
             msg = `Tandon ${name !== null && name !== void 0 ? name : target.nama} berhasil diperbarui`;
