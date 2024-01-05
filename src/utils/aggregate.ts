@@ -230,10 +230,6 @@ export const pipelineGrafik = (
           },
           date: {
             $concat: [
-              { $toString: "$_id.hour" },
-              ":00 - ",
-              { $toString: "$_id.hour" },
-              ":59, ",
               { $toString: "$_id.day" },
               "/",
               { $toString: "$_id.month" },
@@ -242,13 +238,10 @@ export const pipelineGrafik = (
             ],
           },
           avg: "$avg",
-          max: "$max",
-          min: "$min",
         },
       },
       { $sort: { date: -1 } },
       { $limit: 24 }, // Ambil data untuk 24 jam terakhir
-      { $sort: { date: 1 } },
     ];
   } else if (timespan === "Week") {
     return [
@@ -276,8 +269,6 @@ export const pipelineGrafik = (
             ],
           },
           avg: "$avg",
-          max: "$max",
-          min: "$min",
         },
       },
       { $sort: { date: -1 } },
@@ -313,8 +304,6 @@ export const pipelineGrafik = (
             ],
           },
           avg: "$avg",
-          max: "$max",
-          min: "$min",
           count: 1,
         },
       },
@@ -336,8 +325,6 @@ export const pipelineGrafik = (
           date: { $toString: "$_id.year" },
           label: "$_id.year",
           avg: "$avg",
-          max: "$max",
-          min: "$min",
           count: 1,
         },
       },

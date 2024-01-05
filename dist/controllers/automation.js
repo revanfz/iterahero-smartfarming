@@ -43,12 +43,15 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         const type = request.query.type;
         if (type) {
             if (type === "bySchedule") {
-                const data = yield prisma_1.prisma.automationSchedule.findUnique({
-                    where: {
-                        id: id_automation,
-                    },
+                const where = id_automation !== 0 ? { id: id_automation } : {};
+                const data = yield prisma_1.prisma.automationSchedule[id_automation !== 0 ? 'findFirst' : 'findMany']({
+                    where,
                     include: {
-                        aktuator: true,
+                        aktuator: {
+                            include: {
+                                greenhouse: true
+                            }
+                        },
                     },
                 });
                 return h.response({

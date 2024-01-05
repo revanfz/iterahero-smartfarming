@@ -25,15 +25,18 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
     const id_aktuator = parseInt(request.query.id);
     const id_automation = parseInt(request.query.id_automation);
     const type = request.query.type;
-
+    
     if (type) {
       if (type === "bySchedule") {
-        const data = await prisma.automationSchedule.findUnique({
-          where: {
-            id: id_automation,
-          },
+        const where = id_automation !== 0 ? { id: id_automation } : {};
+        const data = await prisma.automationSchedule[id_automation !== 0 ? 'findFirst' : 'findMany']({
+          where,
           include: {
-            aktuator: true,
+            aktuator: {
+              include: {
+                greenhouse: true
+              }
+            },
           },
         });
 
