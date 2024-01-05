@@ -38,6 +38,7 @@ const prisma_1 = require("../config/prisma");
 const agenda_1 = require("../utils/agenda");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const { id_user } = request.auth.credentials;
         const id_aktuator = parseInt(request.query.id);
         const id_automation = parseInt(request.query.id_automation);
         const type = request.query.type;
@@ -49,7 +50,15 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                     include: {
                         aktuator: {
                             include: {
-                                greenhouse: true
+                                greenhouse: {
+                                    where: {
+                                        user: {
+                                            every: {
+                                                id: id_user
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         },
                     },

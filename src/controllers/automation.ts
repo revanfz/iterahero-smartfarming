@@ -22,6 +22,9 @@ interface InputAutomation {
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {
   try {
+    const { id_user } = request.auth.credentials as {
+      id_user: number;
+    };
     const id_aktuator = parseInt(request.query.id);
     const id_automation = parseInt(request.query.id_automation);
     const type = request.query.type;
@@ -34,7 +37,15 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
           include: {
             aktuator: {
               include: {
-                greenhouse: true
+                greenhouse: {
+                  where: {
+                    user: {
+                      every: {
+                        id: id_user
+                      }
+                    }
+                  }
+                }
               }
             },
           },
