@@ -12,7 +12,8 @@
     "dev:tsc": "tsc --watch -p .",
     "dev:serve": "nodemon -e js -w dist dist/index.js",
     "dev": "run-p dev:*",
-    "test": "set NODE_ENV=test & mocha -r ts-node/register test/**/*.test.ts"
+    "test": "set NODE_ENV=test & mocha -r ts-node/register test/**/*.test.ts",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "Raven",
