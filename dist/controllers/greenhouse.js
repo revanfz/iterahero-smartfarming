@@ -346,7 +346,7 @@ const ghByIdHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
             .code(200);
     }
     catch (e) {
-        prisma_1.prisma.$disconnect();
+        // prisma.$disconnect();
         if (e instanceof Error) {
             console.error(e);
             return boom_1.default.internal(e.message);

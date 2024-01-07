@@ -361,7 +361,7 @@ export const ghByIdHandler = async (request: Request, h: ResponseToolkit) => {
       })
       .code(200);
   } catch (e) {
-    prisma.$disconnect();
+    // prisma.$disconnect();
     if (e instanceof Error) {
       console.error(e);
       return Boom.internal(e.message);

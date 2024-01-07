@@ -59,13 +59,14 @@ function connectMqtt() {
     broker.on("connect", () => {
         console.log("Connected to MQTT");
         broker.subscribe("iterahero2023/#");
-        broker.subscribe("iterahero/#");
+        // broker.subscribe("iterahero/#");
     });
     broker.on("message", (topic, payload, packet) => __awaiter(this, void 0, void 0, function* () {
         try {
             const data = JSON.parse(payload.toString());
-            if (topic.includes("iterahero/status/actuator")) {
+            if (topic.includes("iterahero/status/actuator/")) {
                 const id = topic.split("/")[3];
+                console.log(id);
                 const status = data[0].status;
                 yield prisma_1.prisma.aktuator.updateMany({
                     where: {
