@@ -125,9 +125,13 @@ export const deleteAutomation = async (id: number) => {
 
 export const agendaInit = async () => {
   agenda.define("logging-sensor", async (job: Job) => {
-    const data = await prisma.sensor.findMany();
+    const data = await prisma.sensor.findMany({
+      include: {
+        microcontroller: true
+      }
+    });
     data
-      .filter((item) => item.status)
+      .filter((item) => item.microcontroller?.status)
       .forEach(async (item) => {
         const target = await Sensor.findOne({ id_sensor: item.id }).sort({
           createdAt: -1,
@@ -137,19 +141,20 @@ export const agendaInit = async () => {
             id_sensor: target.id_sensor,
             nama: target.nama,
             nilai: target.nilai,
+            microcontrollerId: target.microcontrollerId,
             createdAt: new Date(),
           });
         }
       });
   });
 
-  agenda.define("check-sensor", async (job: Job) => {
-    const data = await prisma.sensor.findMany();
+  agenda.define("check-microcontroller", async (job: Job) => {
+    const data = await prisma.microcontroller.findMany();
     data.forEach(async (item) => {
       const now = new Date();
-      const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
-      if (item.updated_at && item.updated_at < oneHourAgo && item.status) {
-        await prisma.sensor.update({
+      const threeMinsAgo = new Date(now.getTime() - 3 * 60 * 1000);
+      if (item.updated_at && item.updated_at < threeMinsAgo && item.status) {
+        await prisma.microcontroller.update({
           where: {
             id: item.id,
           },
@@ -177,7 +182,7 @@ export const agendaInit = async () => {
         id: id_aktuator,
       },
       data: {
-        status: true,
+        isActive: true,
       },
     });
     await AktuatorLog.create({
@@ -192,7 +197,8 @@ export const agendaInit = async () => {
         pin: data?.GPIO,
         state: true,
         durasi,
-      })
+      }),
+      data?.microcontrollerId ?? 0
     );
   });
 
@@ -212,7 +218,7 @@ export const agendaInit = async () => {
         id: id_aktuator,
       },
       data: {
-        status: false,
+        isActive: false,
       },
     });
     await AktuatorLog.create({
@@ -274,7 +280,8 @@ export const agendaInit = async () => {
         lamaPenyiraman: durasi,
         konstanta: rasio,
         aktuator,
-      })
+      }),
+      1
     );
   });
 
@@ -283,7 +290,7 @@ export const agendaInit = async () => {
     .then(() => console.log("Agenda Started"))
     .catch((err) => console.error(err));
 
-  agenda.every("10 minutes", "check-sensor");
+  agenda.every("3 minutes", "check-microcontroller");
   agenda.every("1 hour", "logging-sensor");
   reinitializeSchedule().then(() =>
     console.log("Inisialisasi Penjadwalan Selesai")
@@ -293,7 +300,7 @@ export const agendaInit = async () => {
 async function graceful() {
   await agenda.cancel({
     name: {
-      $in: ["penjadwalan-peracikan", "test", "logging-sensor", "check-sensor"],
+      $in: ["penjadwalan-peracikan", "test", "logging-sensor", "check-microcontroller"],
     },
   });
   console.log("Stopping agenda");

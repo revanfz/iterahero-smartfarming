@@ -51,7 +51,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {
@@ -117,7 +117,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     catch (e) {
         if (e instanceof Error) {
             console.log(e);
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {
@@ -178,7 +178,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     }
     catch (e) {
         if (e instanceof Error) {
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {

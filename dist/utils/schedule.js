@@ -34,7 +34,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.schedulePeracikan = exports.deletePeracikan = exports.onOffPeracikan = exports.initPeracikan = void 0;
 const schedule = __importStar(require("node-schedule"));
-const mqtt_1 = require("../config/mqtt");
 const prisma_1 = require("../config/prisma");
 const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
     schedule
@@ -107,14 +106,22 @@ const schedulePeracikan = (id, jam, hari, resep, durasi, id_greenhouse) => __awa
         });
         if (komposisi && rasio && aktuator) {
             console.log({ komposisi, rasio, aktuator });
-            schedule.scheduleJob(`iterahero2023-peracikan-${id}`, rule, function (resep, durasi, rasio, aktuator) {
-                (0, mqtt_1.publishData)("iterahero2023/penjadwalan-peracikan", JSON.stringify({
-                    komposisi: resep,
-                    lamaPenyiraman: durasi,
-                    konstanta: rasio,
-                    aktuator
-                }));
-            }.bind(null, komposisi, durasi, rasio, aktuator));
+            // schedule.scheduleJob(
+            //   `iterahero2023-peracikan-${id}`,
+            //   rule,
+            //   function (resep: object, durasi: number, rasio: object, aktuator: object) {
+            //     publishData(
+            //       "iterahero2023/penjadwalan-peracikan",
+            //       JSON.stringify({
+            //         komposisi: resep,
+            //         lamaPenyiraman: durasi,
+            //         konstanta: rasio,
+            //         aktuator
+            //       }),
+            //       aktuator.microcontrollerId ?? 0
+            //     );
+            //   }.bind(null, komposisi, durasi, rasio, aktuator)
+            // );
         }
     }
     catch (e) {

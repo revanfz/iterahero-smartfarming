@@ -25,7 +25,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
     catch (e) {
         console.log(e)
         if (e instanceof Error) {
-            return Boom.internal(e.message)
+            return Boom.badImplementation(e.message)
         }
     }
 }

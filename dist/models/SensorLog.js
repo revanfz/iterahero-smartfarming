@@ -28,6 +28,7 @@ const SensorLogSchema = new mongoose_1.Schema({
     id_sensor: { type: Number, required: true },
     nama: { type: String, required: true },
     nilai: { type: Number, default: 0 },
+    microcontrollerId: { type: Number, required: true }
 }, { timestamps: { createdAt: true, updatedAt: false } });
 const SensorLog = mongoose_1.default.model('SensorLog', SensorLogSchema);
 exports.default = SensorLog;

@@ -36,7 +36,7 @@ const getSensorHandler = (request, h) => __awaiter(void 0, void 0, void 0, funct
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            boom_1.default.internal(e.message);
+            boom_1.default.badImplementation(e.message);
         }
     }
 });
@@ -90,7 +90,7 @@ const getAktuatorHandler = (request, h) => __awaiter(void 0, void 0, void 0, fun
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            boom_1.default.internal(e.message);
+            boom_1.default.badImplementation(e.message);
         }
     }
 });

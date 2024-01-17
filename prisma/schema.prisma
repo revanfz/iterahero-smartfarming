@@ -2,15 +2,14 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
   binaryTargets = ["native", "rhel-openssl-1.0.x"]
   // output        = "./generated/client"
-  // binaryTargets = ["native", "debian-openssl-3.0.x"]
 }
 
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
   directUrl = env("DIRECT_URL")
 }
 
@@ -34,6 +33,9 @@ model Microcontroller {
   name       String     @unique
   brand      String
   location   String
+  status     Boolean    @default(true)
+  tandon     Tandon     @relation(fields: [tandonId], references: [id])
+  tandonId   Int        @unique
   sensor     Sensor[]
   aktuator   Aktuator[]
   created_at DateTime   @default(now())
@@ -109,7 +111,6 @@ model Sensor {
   calibration       String?
   brand             String
   unit_measurement  String
-  status            Boolean            @default(false)
   channel           Int?
   GPIO              Int?
   category          Category           @relation(fields: [type], references: [name])
@@ -136,7 +137,7 @@ model Aktuator {
   id                  Int                 @id @default(autoincrement())
   name                String
   merek               String?
-  status              Boolean             @default(false)
+  isActive            Boolean             @default(false)
   GPIO                Int?
   externalId          Int?
   microcontroller     Microcontroller?    @relation(fields: [microcontrollerId], references: [id])
@@ -213,6 +214,7 @@ model Tandon {
   image             String
   location          String
   capacity          Float
+  microcontroller   Microcontroller?
   sensor            Sensor[]
   aktuator          Aktuator[]
   tandonBahan       TandonBahan[]

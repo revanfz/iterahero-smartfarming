@@ -135,9 +135,13 @@ const deleteAutomation = (id) => __awaiter(void 0, void 0, void 0, function* () 
 exports.deleteAutomation = deleteAutomation;
 const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
     exports.agenda.define("logging-sensor", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        const data = yield prisma_1.prisma.sensor.findMany();
+        const data = yield prisma_1.prisma.sensor.findMany({
+            include: {
+                microcontroller: true
+            }
+        });
         data
-            .filter((item) => item.status)
+            .filter((item) => { var _a; return (_a = item.microcontroller) === null || _a === void 0 ? void 0 : _a.status; })
             .forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
             const target = yield Sensor_1.default.findOne({ id_sensor: item.id }).sort({
                 createdAt: -1,
@@ -147,18 +151,19 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                     id_sensor: target.id_sensor,
                     nama: target.nama,
                     nilai: target.nilai,
+                    microcontrollerId: target.microcontrollerId,
                     createdAt: new Date(),
                 });
             }
         }));
     }));
-    exports.agenda.define("check-sensor", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        const data = yield prisma_1.prisma.sensor.findMany();
+    exports.agenda.define("check-microcontroller", (job) => __awaiter(void 0, void 0, void 0, function* () {
+        const data = yield prisma_1.prisma.microcontroller.findMany();
         data.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
             const now = new Date();
-            const oneHourAgo = new Date(now.getTime() - 60 * 60 * 1000);
-            if (item.updated_at && item.updated_at < oneHourAgo && item.status) {
-                yield prisma_1.prisma.sensor.update({
+            const threeMinsAgo = new Date(now.getTime() - 3 * 60 * 1000);
+            if (item.updated_at && item.updated_at < threeMinsAgo && item.status) {
+                yield prisma_1.prisma.microcontroller.update({
                     where: {
                         id: item.id,
                     },
@@ -170,6 +175,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
         }));
     }));
     exports.agenda.define("automation", (job) => __awaiter(void 0, void 0, void 0, function* () {
+        var _a;
         const { id_automation, id_aktuator, durasi } = job.attrs.data;
         const data = yield prisma_1.prisma.aktuator.findUnique({
             where: {
@@ -181,7 +187,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                 id: id_aktuator,
             },
             data: {
-                status: true,
+                isActive: true,
             },
         });
         yield AktuatorLog_1.default.create({
@@ -194,7 +200,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             pin: data === null || data === void 0 ? void 0 : data.GPIO,
             state: true,
             durasi,
-        }));
+        }), (_a = data === null || data === void 0 ? void 0 : data.microcontrollerId) !== null && _a !== void 0 ? _a : 0);
     }));
     exports.agenda.define("automation-off", (job) => __awaiter(void 0, void 0, void 0, function* () {
         const { id_automation, id_aktuator } = job.attrs.data;
@@ -208,7 +214,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                 id: id_aktuator,
             },
             data: {
-                status: false,
+                isActive: false,
             },
         });
         yield AktuatorLog_1.default.create({
@@ -253,13 +259,13 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             lamaPenyiraman: durasi,
             konstanta: rasio,
             aktuator,
-        }));
+        }), 1);
     }));
     exports.agenda
         .start()
         .then(() => console.log("Agenda Started"))
         .catch((err) => console.error(err));
-    exports.agenda.every("10 minutes", "check-sensor");
+    exports.agenda.every("3 minutes", "check-microcontroller");
     exports.agenda.every("1 hour", "logging-sensor");
     (0, exports.reinitializeSchedule)().then(() => console.log("Inisialisasi Penjadwalan Selesai"));
 });
@@ -268,7 +274,7 @@ function graceful() {
     return __awaiter(this, void 0, void 0, function* () {
         yield exports.agenda.cancel({
             name: {
-                $in: ["penjadwalan-peracikan", "test", "logging-sensor", "check-sensor"],
+                $in: ["penjadwalan-peracikan", "test", "logging-sensor", "check-microcontroller"],
             },
         });
         console.log("Stopping agenda");

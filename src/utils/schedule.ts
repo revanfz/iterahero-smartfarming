@@ -81,21 +81,22 @@ export const schedulePeracikan = async (
     })
     if (komposisi && rasio && aktuator) {
       console.log({ komposisi, rasio, aktuator })
-      schedule.scheduleJob(
-        `iterahero2023-peracikan-${id}`,
-        rule,
-        function (resep: object, durasi: number, rasio: object, aktuator: object) {
-          publishData(
-            "iterahero2023/penjadwalan-peracikan",
-            JSON.stringify({
-              komposisi: resep,
-              lamaPenyiraman: durasi,
-              konstanta: rasio,
-              aktuator
-            })
-          );
-        }.bind(null, komposisi, durasi, rasio, aktuator)
-      );
+      // schedule.scheduleJob(
+      //   `iterahero2023-peracikan-${id}`,
+      //   rule,
+      //   function (resep: object, durasi: number, rasio: object, aktuator: object) {
+      //     publishData(
+      //       "iterahero2023/penjadwalan-peracikan",
+      //       JSON.stringify({
+      //         komposisi: resep,
+      //         lamaPenyiraman: durasi,
+      //         konstanta: rasio,
+      //         aktuator
+      //       }),
+      //       aktuator.microcontrollerId ?? 0
+      //     );
+      //   }.bind(null, komposisi, durasi, rasio, aktuator)
+      // );
     }
   } catch (e) {
     console.log(e);

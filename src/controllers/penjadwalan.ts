@@ -1,11 +1,6 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
-import {
-  deletePeracikan,
-  onOffPeracikan,
-  schedulePeracikan
-} from "../utils/schedule";
 import { createPenjadwalan, deletePenjadwalan, onOffPenjadwalan } from "../utils/agenda";
 
 interface InputPenjadwalan {
@@ -51,7 +46,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     console.log(e);
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
   finally {
@@ -127,7 +122,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
   finally {
@@ -193,7 +188,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       .code(200);
   } catch (e) {
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
   finally {

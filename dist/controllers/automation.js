@@ -114,7 +114,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     catch (e) {
         console.error(e);
         if (e instanceof Error) {
-            return Boom.internal(e.message);
+            return Boom.badImplementation(e.message);
         }
     }
     finally {
@@ -194,7 +194,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             },
         });
         if (e instanceof Error) {
-            return Boom.internal(e.message);
+            return Boom.badImplementation(e.message);
         }
         else if (typeof e === "string") {
             return Boom.badRequest(e);
@@ -277,7 +277,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     catch (e) {
         console.error(e);
         if (e instanceof Error) {
-            return Boom.internal(e.message);
+            return Boom.badImplementation(e.message);
         }
     }
     finally {
@@ -356,7 +356,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
     catch (e) {
         console.error(e);
         if (e instanceof Error) {
-            return Boom.internal(e.message);
+            return Boom.badImplementation(e.message);
         }
     }
     finally {
@@ -413,7 +413,7 @@ const putHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            return Boom.internal(e.message);
+            return Boom.badImplementation(e.message);
         }
     }
     finally {

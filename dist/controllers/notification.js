@@ -78,7 +78,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     }
     catch (e) {
         if (e instanceof Error) {
-            return Boom.internal(e.message);
+            return Boom.badImplementation(e.message);
         }
     }
     finally {
@@ -90,7 +90,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     try {
         const { id } = request.payload;
         const updatePromise = id.map((identifier) => {
-            prisma_1.prisma.notification.update({
+            return prisma_1.prisma.notification.update({
                 where: {
                     id: identifier,
                 },
@@ -108,11 +108,8 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            return Boom.internal(e.message);
+            return Boom.badImplementation(e.message);
         }
-    }
-    finally {
-        // await prisma.$disconnect();
     }
 });
 exports.patchHandler = patchHandler;
@@ -136,7 +133,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     catch (e) {
         if (e instanceof Error) {
             console.log(e);
-            return Boom.internal(e.message);
+            return Boom.badImplementation(e.message);
         }
     }
     finally {

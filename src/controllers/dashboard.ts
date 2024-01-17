@@ -24,6 +24,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
             _count: {
               select: {
                 aktuator: true,
+                sensor: true
               },
             },
           },
@@ -59,14 +60,23 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       (temp, a) => temp + a._count.tandonBahan,
       0
     );
-    const jumlahAktuator = target.tandon.reduce(
+    const jumlahAktuatorTandon = target.tandon.reduce(
       (temp, a) => temp + a._count.aktuator,
       0
     );
-    const jumlahSensor = target.tandon.reduce(
+
+    const jumlahAktuatorGreenhouse = target.greenhouse.reduce(
+      (temp, a) => temp + a._count.aktuator, 0
+    );
+
+    const jumlahSensorTandon = target.tandon.reduce(
         (temp, a) => temp + a._count.sensor,
         0
-    ) + target.tandon.reduce((temp, a) => temp + a.tandonBahan.length, 0);
+    );
+
+    const jumlahSensorGreenhouse = target.greenhouse.reduce(
+      (temp, a) => temp + a._count.sensor, 0
+    );
 
     return h
       .response({
@@ -74,16 +84,16 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         data: {
           greenhouse: target._count.greenhouse,
           tandonBahan: jumlahTandon,
-          actuator: jumlahAktuator,
+          actuator: jumlahAktuatorTandon + jumlahAktuatorGreenhouse,
           tandonPeracikan: target._count.tandon,
-          sensor: jumlahSensor
+          sensor: jumlahSensorTandon + jumlahSensorGreenhouse
         },
       })
       .code(200);
   } catch (e) {
     console.log(e);
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
   finally {

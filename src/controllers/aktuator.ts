@@ -31,6 +31,9 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
               satuan: true
             },
           },
+          AutomationSchedule: true,
+          AutomationSensor: true,
+          microcontroller: true
         },
       });
     } else {
@@ -51,6 +54,8 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
               color: true,
             },
           },
+          AutomationSchedule: true,
+          AutomationSensor: true
         },
         skip: cursor ? 1 : 0,
         take: size ? size : 100,
@@ -74,7 +79,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   } finally {
     // await prisma.$disconnect();
@@ -103,7 +108,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     console.log(e);
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   } finally {
     // await prisma.$disconnect();
@@ -149,7 +154,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     console.log(e);
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   } finally {
     // await prisma.$disconnect();
@@ -187,7 +192,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   } finally {
     // await prisma.$disconnect();

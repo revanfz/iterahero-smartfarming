@@ -21,7 +21,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       .code(200);
   } catch (e) {
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
   finally {
@@ -52,7 +52,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     if (e instanceof Error) {
       console.log(e.stack)
-      return Boom.internal(e.stack?.toString());
+      return Boom.badImplementation(e.stack?.toString());
     }
   }
   finally {
@@ -82,7 +82,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);
-      return Boom.internal("ID tidak ditemukan");
+      return Boom.badImplementation("ID tidak ditemukan");
     }
   }
   finally {
@@ -125,7 +125,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   catch (e) {
     if (e instanceof Error) {
       console.log(e)
-      return Boom.internal(e.message)
+      return Boom.badImplementation(e.message)
     }
   }
   finally {

@@ -34,6 +34,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                         _count: {
                             select: {
                                 aktuator: true,
+                                sensor: true
                             },
                         },
                     },
@@ -64,17 +65,19 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             return boom_1.default.notFound("Tidak ada peracikan");
         }
         const jumlahTandon = target.tandon.reduce((temp, a) => temp + a._count.tandonBahan, 0);
-        const jumlahAktuator = target.tandon.reduce((temp, a) => temp + a._count.aktuator, 0);
-        const jumlahSensor = target.tandon.reduce((temp, a) => temp + a._count.sensor, 0) + target.tandon.reduce((temp, a) => temp + a.tandonBahan.length, 0);
+        const jumlahAktuatorTandon = target.tandon.reduce((temp, a) => temp + a._count.aktuator, 0);
+        const jumlahAktuatorGreenhouse = target.greenhouse.reduce((temp, a) => temp + a._count.aktuator, 0);
+        const jumlahSensorTandon = target.tandon.reduce((temp, a) => temp + a._count.sensor, 0);
+        const jumlahSensorGreenhouse = target.greenhouse.reduce((temp, a) => temp + a._count.sensor, 0);
         return h
             .response({
             status: "success",
             data: {
                 greenhouse: target._count.greenhouse,
                 tandonBahan: jumlahTandon,
-                actuator: jumlahAktuator,
+                actuator: jumlahAktuatorTandon + jumlahAktuatorGreenhouse,
                 tandonPeracikan: target._count.tandon,
-                sensor: jumlahSensor
+                sensor: jumlahSensorTandon + jumlahSensorGreenhouse
             },
         })
             .code(200);
@@ -82,7 +85,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {

@@ -35,13 +35,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.publishData = exports.connectMqtt = void 0;
+exports.publishData = exports.connectMqtt = exports.broker = void 0;
 const mqtt = __importStar(require("mqtt"));
 require("dotenv/config");
 const prisma_1 = require("./prisma");
 const Sensor_1 = __importDefault(require("../models/Sensor"));
 const clientId = `Iterahero2023_${Math.random().toString().slice(4)}`;
-let broker;
 function connectMqtt() {
     // broker = mqtt.connect({
     //   host: "c401972c13f24e59b71daf85c5f5a712.s2.eu.hivemq.cloud",
@@ -51,33 +50,35 @@ function connectMqtt() {
     //   protocol: "mqtts",
     //   clientId,
     // });
-    broker = mqtt.connect("ws://broker.hivemq.com:8000/mqtt", {
+    exports.broker = mqtt.connect("ws://broker.hivemq.com:8000/mqtt", {
         protocolId: "MQTT",
         clean: true,
         clientId,
     });
-    broker.on("connect", () => {
+    exports.broker.on("connect", () => {
         console.log("Connected to MQTT");
-        broker.subscribe("iterahero2023/#");
+        exports.broker.subscribe("iterahero2023/#");
         // broker.subscribe("iterahero/#");
     });
-    broker.on("message", (topic, payload, packet) => __awaiter(this, void 0, void 0, function* () {
+    exports.broker.on("message", (topic, payload, packet) => __awaiter(this, void 0, void 0, function* () {
         try {
             const data = JSON.parse(payload.toString());
-            if (topic.includes("iterahero/status/actuator/")) {
-                const id = topic.split("/")[3];
-                console.log(id);
-                const status = data[0].status;
-                yield prisma_1.prisma.aktuator.updateMany({
+            if (topic === "iterahero/respon/actuator") {
+            }
+            if (topic === "iterahero2023/mikrokontroller/status") {
+                const target = yield prisma_1.prisma.microcontroller.findUnique({
                     where: {
-                        externalId: parseInt(id),
+                        name: data.mikrokontroler
+                    }
+                });
+                yield prisma_1.prisma.microcontroller.update({
+                    where: {
+                        id: target === null || target === void 0 ? void 0 : target.id
                     },
                     data: {
-                        status: status === "online" ? true : false,
-                    },
+                        status: true
+                    }
                 });
-            }
-            if (topic === "iterahero/respon/actuator") {
             }
             if (topic === "iterahero2023/peracikan/info") {
                 console.log(JSON.stringify(data));
@@ -101,14 +102,10 @@ function connectMqtt() {
                         const field = Object.keys(item)[0];
                         const val = Object.values(item)[0];
                         yield Sensor_1.default.updateMany({ [sensorField.toLowerCase()]: parseInt(field) }, { $set: { nilai: val, updatedAt: new Date() } });
-                        yield prisma_1.prisma.sensor.updateMany({
-                            where: { [sensorField]: parseInt(field) },
-                            data: { status: true },
-                        });
                         listAutomasiSensor
                             .filter((automationItem) => automationItem.sensor[sensorField] === parseInt(field))
                             .forEach((automationItem) => {
-                            var _a;
+                            var _a, _b, _c;
                             const conditionMet = automationItem.condition === ">"
                                 ? val > automationItem.constant
                                 : val < automationItem.constant;
@@ -116,7 +113,7 @@ function connectMqtt() {
                                 pin: automationItem.aktuator.GPIO,
                                 state: conditionMet ? automationItem.action : false,
                                 microcontroller: (_a = automationItem.aktuator.microcontroller) === null || _a === void 0 ? void 0 : _a.name,
-                            }));
+                            }), (_c = (_b = automationItem.aktuator.microcontroller) === null || _b === void 0 ? void 0 : _b.id) !== null && _c !== void 0 ? _c : 0);
                         });
                     }));
                 });
@@ -127,13 +124,13 @@ function connectMqtt() {
                 console.log(JSON.stringify(data));
                 data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
                     const pin = Object.keys(item)[0];
-                    const status = Boolean(Object.values(item)[0]);
+                    const isActive = Boolean(Object.values(item)[0]);
                     yield prisma_1.prisma.aktuator.updateMany({
                         where: {
                             GPIO: parseInt(pin),
                         },
                         data: {
-                            status,
+                            isActive,
                         },
                     });
                 }));
@@ -142,13 +139,13 @@ function connectMqtt() {
                 console.log(JSON.stringify(data));
                 data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
                     const port = Object.keys(item)[0];
-                    const status = Object.values(item)[0];
+                    const isActive = Object.values(item)[0];
                     yield prisma_1.prisma.aktuator.updateMany({
                         where: {
                             GPIO: parseInt(port),
                         },
                         data: {
-                            status,
+                            isActive,
                         },
                     });
                 }));
@@ -161,15 +158,51 @@ function connectMqtt() {
     }));
 }
 exports.connectMqtt = connectMqtt;
-function publishData(topic, message) {
-    if (broker) {
-        broker.publish(topic, message);
-    }
-    else {
-        console.error("MQTT is not connected");
-    }
+function publishData(topic, message, microcontrollerId) {
+    return new Promise((resolve, reject) => {
+        if (!microcontrollerId) {
+            reject('failed');
+        }
+        exports.broker.subscribe("iterahero2023/respon/kontrol");
+        exports.broker.once("message", (topic, payload, packet) => __awaiter(this, void 0, void 0, function* () {
+            if (topic === "iterahero2023/respon/kontrol/") {
+                const data = JSON.parse(payload.toString());
+                if (data.response) {
+                    resolve('success');
+                }
+                else {
+                    console.error("Mikrokontroller is not responding");
+                    yield prisma_1.prisma.microcontroller.update({
+                        where: {
+                            id: microcontrollerId
+                        },
+                        data: {
+                            status: false
+                        }
+                    });
+                    reject('failed');
+                }
+            }
+        }));
+        // Mengirim pesan ke mikrokontroler
+        exports.broker.publish(topic, message);
+        // Set timeout untuk menangani kasus waktu habis
+        const timeoutId = setTimeout(() => {
+            console.error("Timeout: Mikrokontroller response not received within 3 seconds");
+            reject('timeout');
+        }, 3000);
+        // Menangani hasil balik dari race antara respon atau timeout
+        const handleResult = (result) => {
+            clearTimeout(timeoutId);
+            return result;
+        };
+        Promise.race([
+            new Promise(() => { }),
+            new Promise((_, reject) => setTimeout(() => reject('timeout'), 3000))
+        ]).then(handleResult, handleResult);
+    });
 }
 exports.publishData = publishData;
 process.on("SIGINT", () => {
-    broker.end();
+    exports.broker.end();
 });

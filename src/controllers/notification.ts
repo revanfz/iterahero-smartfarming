@@ -47,7 +47,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       .code(200);
   } catch (e) {
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   } finally {
     // await prisma.$disconnect();
@@ -57,9 +57,9 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   try {
     const { id } = request.payload as { id: number[] };
-
+    
     const updatePromise = id.map((identifier) => {
-      prisma.notification.update({
+      return prisma.notification.update({
         where: {
           id: identifier,
         },
@@ -68,6 +68,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
         },
       });
     });
+
     await Promise.all(updatePromise);
 
     return h.response({
@@ -78,10 +79,8 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     console.log(e);
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
-  } finally {
-    // await prisma.$disconnect();
   }
 };
 
@@ -108,7 +107,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   } finally {
     // await prisma.$disconnect();

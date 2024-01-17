@@ -39,7 +39,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
     }
     catch(e) {
         if (e instanceof Error) {
-            return Boom.internal(e.message);
+            return Boom.badImplementation(e.message);
         }
     }
     // await prisma.$disconnect();

@@ -73,7 +73,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
     // await prisma.$disconnect();
     if (e instanceof Error) {
       console.log(e);
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
 };
@@ -122,7 +122,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     console.log(e);
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
   finally {
@@ -174,7 +174,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
   finally {
@@ -213,7 +213,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
   finally {
@@ -247,6 +247,7 @@ export const sensorByGreenhouseHandler = async (
             satuan: true
           },
         },
+        microcontroller: true
       },
       cursor: cursor ? { id: cursor } : undefined,
       take: size ? size : 100,
@@ -273,7 +274,7 @@ export const sensorByGreenhouseHandler = async (
   } catch (e) {
     if (e instanceof Error) {
       console.error(e);
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
   finally {
@@ -307,6 +308,7 @@ export const actuatorByGreenhouseHandler = async (
             satuan: true
           },
         },
+        microcontroller: true
       },
       take: size ? size : 100,
       skip: cursor ? 1 : 0,
@@ -333,7 +335,7 @@ export const actuatorByGreenhouseHandler = async (
   } catch (e) {
     if (e instanceof Error) {
       console.error(e);
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
   finally {
@@ -364,7 +366,7 @@ export const ghByIdHandler = async (request: Request, h: ResponseToolkit) => {
     // prisma.$disconnect();
     if (e instanceof Error) {
       console.error(e);
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
 };

@@ -14,5 +14,10 @@ exports.notificationRoute = [
         method: "POST",
         path,
         handler: notification_1.postHandler
+    },
+    {
+        method: "PATCH",
+        path,
+        handler: notification_1.patchHandler
     }
 ];

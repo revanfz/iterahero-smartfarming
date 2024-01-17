@@ -5,7 +5,7 @@ import SensorModel from "../models/Sensor";
 
 const clientId = `Iterahero2023_${Math.random().toString().slice(4)}`;
 
-let broker: mqtt.MqttClient;
+export let broker: mqtt.MqttClient;
 
 export function connectMqtt() {
   // broker = mqtt.connect({
@@ -32,20 +32,22 @@ export function connectMqtt() {
   broker.on("message", async (topic, payload, packet) => {
     try {
       const data = JSON.parse(payload.toString());
-      if (topic.includes("iterahero/status/actuator/")) {
-        const id = topic.split("/")[3];
-        console.log(id)
-        const status = data[0].status;
-        await prisma.aktuator.updateMany({
+      if (topic === "iterahero/respon/actuator") {
+      }
+      if (topic === "iterahero2023/mikrokontroller/status") {
+        const target = await prisma.microcontroller.findUnique({
           where: {
-            externalId: parseInt(id),
+            name: data.mikrokontroler
+          }
+        })
+        await prisma.microcontroller.update({
+          where: {
+            id: target?.id
           },
           data: {
-            status: status === "online" ? true : false,
-          },
-        });
-      }
-      if (topic === "iterahero/respon/actuator") {
+            status: true
+          }
+        })
       }
       if (topic === "iterahero2023/peracikan/info") {
         console.log(JSON.stringify(data));
@@ -75,11 +77,6 @@ export function connectMqtt() {
               { $set: { nilai: val, updatedAt: new Date() } }
             );
 
-            await prisma.sensor.updateMany({
-              where: { [sensorField]: parseInt(field) },
-              data: { status: true },
-            });
-
             listAutomasiSensor
               .filter(
                 (automationItem) =>
@@ -98,7 +95,8 @@ export function connectMqtt() {
                     state: conditionMet ? automationItem.action : false,
                     microcontroller:
                       automationItem.aktuator.microcontroller?.name,
-                  })
+                  }),
+                  automationItem.aktuator.microcontroller?.id ?? 0
                 );
               });
           });
@@ -111,13 +109,13 @@ export function connectMqtt() {
 
         data.actuator.forEach(async (item: object, index: number) => {
           const pin = Object.keys(item)[0];
-          const status = Boolean(Object.values(item)[0]);
+          const isActive = Boolean(Object.values(item)[0]);
           await prisma.aktuator.updateMany({
             where: {
               GPIO: parseInt(pin),
             },
             data: {
-              status,
+              isActive,
             },
           });
         });
@@ -126,13 +124,13 @@ export function connectMqtt() {
         console.log(JSON.stringify(data));
         data.actuator.forEach(async (item: object, index: number) => {
           const port = Object.keys(item)[0];
-          const status = Object.values(item)[0];
+          const isActive = Object.values(item)[0];
           await prisma.aktuator.updateMany({
             where: {
               GPIO: parseInt(port),
             },
             data: {
-              status,
+              isActive,
             },
           });
         });
@@ -143,12 +141,53 @@ export function connectMqtt() {
   });
 }
 
-export function publishData(topic: string, message: string) {
-  if (broker) {
+export function publishData(topic: string, message: string, microcontrollerId: number) {
+  return new Promise((resolve, reject) => {
+    if (!microcontrollerId) {
+      reject('failed')
+    }
+    broker.subscribe("iterahero2023/respon/kontrol");
+
+    broker.once("message", async (topic, payload, packet) => {
+      if (topic === "iterahero2023/respon/kontrol/") {
+        const data = JSON.parse(payload.toString());
+        if (data.response) {
+          resolve('success');
+        } else {
+          console.error("Mikrokontroller is not responding");
+          await prisma.microcontroller.update({
+            where: {
+              id: microcontrollerId
+            },
+            data: {
+              status: false
+            }
+          })
+          reject('failed');
+        }
+      }
+    });
+
+    // Mengirim pesan ke mikrokontroler
     broker.publish(topic, message);
-  } else {
-    console.error("MQTT is not connected");
-  }
+
+    // Set timeout untuk menangani kasus waktu habis
+    const timeoutId = setTimeout(() => {
+      console.error("Timeout: Mikrokontroller response not received within 3 seconds");
+      reject('timeout');
+    }, 3000);
+
+    // Menangani hasil balik dari race antara respon atau timeout
+    const handleResult = (result: any) => {
+      clearTimeout(timeoutId);
+      return result;
+    };
+
+    Promise.race([
+      new Promise(() => {}), // Promise ini selalu pending untuk menunggu event "message"
+      new Promise((_, reject) => setTimeout(() => reject('timeout'), 3000))
+    ]).then(handleResult, handleResult);
+  });
 }
 
 process.on("SIGINT", () => {

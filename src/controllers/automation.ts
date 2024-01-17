@@ -104,7 +104,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   } finally {
     // await prisma.$disconnect();
@@ -199,7 +199,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       },
     });
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     } else if (typeof e === "string") {
       return Boom.badRequest(e);
     }
@@ -289,7 +289,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   } finally {
     // await prisma.$disconnect();
@@ -370,7 +370,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {
-      return Boom.internal(e.message);
+      return Boom.badImplementation(e.message);
     }
   } finally {
     // await prisma.$disconnect();
@@ -441,7 +441,7 @@ export const putHandler = async (request: Request, h: ResponseToolkit) => {
   catch (e) {
     console.log(e)
     if (e instanceof Error) {
-      return Boom.internal(e.message)
+      return Boom.badImplementation(e.message)
     }
   }
   finally {

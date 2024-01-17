@@ -52,7 +52,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         // await prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
 });
@@ -97,7 +97,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {
@@ -126,7 +126,8 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
                         logo: true,
                         color: true
                     }
-                }
+                },
+                microcontroller: true
             },
             take: size ? size : 100,
             skip: cursor ? 1 : 0,
@@ -150,7 +151,7 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
     catch (e) {
         if (e instanceof Error) {
             console.error(e);
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {
@@ -180,7 +181,8 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
                         color: true,
                         satuan: true
                     }
-                }
+                },
+                microcontroller: true
             },
             take: size ? size : 100,
             skip: cursor ? 1 : 0,
@@ -206,7 +208,7 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
     catch (e) {
         if (e instanceof Error) {
             console.error(e);
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {
@@ -274,7 +276,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     catch (e) {
         if (e instanceof Error) {
             console.error(e);
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {
@@ -312,7 +314,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {

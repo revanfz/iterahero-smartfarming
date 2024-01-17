@@ -75,7 +75,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         // await prisma.$disconnect();
         if (e instanceof Error) {
             console.log(e);
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
 });
@@ -118,7 +118,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {
@@ -167,7 +167,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     catch (e) {
         if (e instanceof Error) {
             console.log(e);
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {
@@ -205,7 +205,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
     catch (e) {
         if (e instanceof Error) {
             console.log(e);
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {
@@ -237,6 +237,7 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
                         satuan: true
                     },
                 },
+                microcontroller: true
             },
             cursor: cursor ? { id: cursor } : undefined,
             take: size ? size : 100,
@@ -262,7 +263,7 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
     catch (e) {
         if (e instanceof Error) {
             console.error(e);
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {
@@ -294,6 +295,7 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
                         satuan: true
                     },
                 },
+                microcontroller: true
             },
             take: size ? size : 100,
             skip: cursor ? 1 : 0,
@@ -319,7 +321,7 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
     catch (e) {
         if (e instanceof Error) {
             console.error(e);
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
     finally {
@@ -349,7 +351,7 @@ const ghByIdHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         // prisma.$disconnect();
         if (e instanceof Error) {
             console.error(e);
-            return boom_1.default.internal(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
 });

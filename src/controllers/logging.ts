@@ -26,7 +26,7 @@ export const getSensorHandler = async (
   } catch (e) {
     console.log(e);
     if (e instanceof Error) {
-      Boom.internal(e.message);
+      Boom.badImplementation(e.message);
     }
   }
 };
@@ -82,7 +82,7 @@ export const getAktuatorHandler = async (
   } catch (e) {
     console.log(e);
     if (e instanceof Error) {
-      Boom.internal(e.message);
+      Boom.badImplementation(e.message);
     }
   }
 };

@@ -61,7 +61,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     catch (e) {
         console.error(e);
         if (e instanceof Error) {
-            return Boom.internal(e.message);
+            return Boom.badImplementation(e.message);
         }
     }
     finally {
@@ -91,7 +91,7 @@ const downloadHandler = (request, h) => __awaiter(void 0, void 0, void 0, functi
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            return Boom.internal(e.message);
+            return Boom.badImplementation(e.message);
         }
     }
     finally { }
