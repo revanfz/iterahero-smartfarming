@@ -176,6 +176,9 @@ export const agendaInit = async () => {
       where: {
         id: id_aktuator,
       },
+      include: {
+        microcontroller: true
+      }
     });
     await prisma.aktuator.update({
       where: {
@@ -192,11 +195,11 @@ export const agendaInit = async () => {
     });
     console.log(data?.name, id_aktuator);
     publishData(
-      "iterahero2023/kontrol",
+      "iterahero2023/automation",
       JSON.stringify({
         pin: data?.GPIO,
-        state: true,
         durasi,
+        microcontroller: data?.microcontroller?.name
       }),
       data?.microcontrollerId ?? 0
     );
@@ -212,6 +215,9 @@ export const agendaInit = async () => {
       where: {
         id: id_aktuator,
       },
+      include: {
+        microcontroller: true
+      }
     });
     await prisma.aktuator.update({
       where: {
@@ -226,6 +232,14 @@ export const agendaInit = async () => {
       message: `Automasi - ${data?.name} dimatikan`,
       status: false
     });
+    publishData(
+      "iterahero2023/automation",
+      JSON.stringify({
+        pin: data?.GPIO,
+        microcontroller: data?.microcontroller?.name
+      }),
+      data?.microcontrollerId ?? 0
+    );
   });
 
   agenda.define("penjadwalan-peracikan", async (job: Job) => {
@@ -258,6 +272,11 @@ export const agendaInit = async () => {
         rasioA: true,
         rasioB: true,
         ppm: true,
+        microcontroller: {
+          select: {
+            name: true
+          }
+        }
       },
     });
     const aktuator = await prisma.aktuator.findMany({

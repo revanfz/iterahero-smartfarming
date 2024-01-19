@@ -175,12 +175,15 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
         }));
     }));
     exports.agenda.define("automation", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        var _a;
+        var _a, _b;
         const { id_automation, id_aktuator, durasi } = job.attrs.data;
         const data = yield prisma_1.prisma.aktuator.findUnique({
             where: {
                 id: id_aktuator,
             },
+            include: {
+                microcontroller: true
+            }
         });
         yield prisma_1.prisma.aktuator.update({
             where: {
@@ -196,18 +199,22 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             status: true
         });
         console.log(data === null || data === void 0 ? void 0 : data.name, id_aktuator);
-        (0, mqtt_1.publishData)("iterahero2023/kontrol", JSON.stringify({
+        (0, mqtt_1.publishData)("iterahero2023/automation", JSON.stringify({
             pin: data === null || data === void 0 ? void 0 : data.GPIO,
-            state: true,
             durasi,
-        }), (_a = data === null || data === void 0 ? void 0 : data.microcontrollerId) !== null && _a !== void 0 ? _a : 0);
+            microcontroller: (_a = data === null || data === void 0 ? void 0 : data.microcontroller) === null || _a === void 0 ? void 0 : _a.name
+        }), (_b = data === null || data === void 0 ? void 0 : data.microcontrollerId) !== null && _b !== void 0 ? _b : 0);
     }));
     exports.agenda.define("automation-off", (job) => __awaiter(void 0, void 0, void 0, function* () {
+        var _c, _d;
         const { id_automation, id_aktuator } = job.attrs.data;
         const data = yield prisma_1.prisma.aktuator.findUnique({
             where: {
                 id: id_aktuator,
             },
+            include: {
+                microcontroller: true
+            }
         });
         yield prisma_1.prisma.aktuator.update({
             where: {
@@ -222,6 +229,10 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} dimatikan`,
             status: false
         });
+        (0, mqtt_1.publishData)("iterahero2023/automation", JSON.stringify({
+            pin: data === null || data === void 0 ? void 0 : data.GPIO,
+            microcontroller: (_c = data === null || data === void 0 ? void 0 : data.microcontroller) === null || _c === void 0 ? void 0 : _c.name
+        }), (_d = data === null || data === void 0 ? void 0 : data.microcontrollerId) !== null && _d !== void 0 ? _d : 0);
     }));
     exports.agenda.define("penjadwalan-peracikan", (job) => __awaiter(void 0, void 0, void 0, function* () {
         const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi, createdBy, } = job.attrs.data;
@@ -239,6 +250,11 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                 rasioA: true,
                 rasioB: true,
                 ppm: true,
+                microcontroller: {
+                    select: {
+                        name: true
+                    }
+                }
             },
         });
         const aktuator = yield prisma_1.prisma.aktuator.findMany({

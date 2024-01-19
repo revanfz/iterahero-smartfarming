@@ -66,8 +66,10 @@ model TandonPenyimpanan {
 
 model Resep {
   id          Int           @id @default(autoincrement())
-  ppm         Int
-  ph          Float
+  ppm_min     Float
+  ppm_max     Float
+  ph_min      Float
+  ph_max      Float
   volume      Float
   nama        String
   penjadwalan Penjadwalan[]

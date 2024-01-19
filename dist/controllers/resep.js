@@ -39,12 +39,14 @@ exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
-        const { nama, ppm, ph, volume } = request.payload;
+        const { nama, ppm_min, ppm_max, ph_min, ph_max, volume } = request.payload;
         yield prisma_1.prisma.resep.create({
             data: {
                 nama,
-                ppm,
-                ph,
+                ppm_min,
+                ppm_max,
+                ph_min,
+                ph_max,
                 volume,
             },
         });
@@ -98,7 +100,7 @@ exports.deleteHandler = deleteHandler;
 const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = parseInt(request.query.id);
-        const { nama, ppm, ph, volume } = request.payload;
+        const { nama, ppm_min, ppm_max, ph_max, ph_min, volume } = request.payload;
         const data = yield prisma_1.prisma.resep.findUnique({
             where: {
                 id
@@ -112,8 +114,10 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
                 id
             },
             data: {
-                ppm,
-                ph,
+                ppm_min,
+                ppm_max,
+                ph_min,
+                ph_max,
                 volume,
                 nama
             }

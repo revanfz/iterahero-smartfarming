@@ -4,8 +4,10 @@ import Boom from "@hapi/boom";
 
 interface InputResep {
   nama: string;
-  ppm: number;
-  ph: number;
+  ppm_min: number;
+  ppm_max: number;
+  ph_min: number;
+  ph_max: number;
   volume: number;
 }
 
@@ -31,14 +33,16 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
   try {
-    const { nama, ppm, ph, volume} =
+    const { nama, ppm_min, ppm_max, ph_min, ph_max, volume} =
       request.payload as InputResep;
 
     await prisma.resep.create({
       data: {
         nama,
-        ppm,
-        ph,
+        ppm_min,
+        ppm_max,
+        ph_min,
+        ph_max,
         volume,
       },
     });
@@ -93,7 +97,7 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
 export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   try {
     const id = parseInt(request.query.id)
-    const { nama, ppm, ph, volume} =
+    const { nama, ppm_min, ppm_max, ph_max, ph_min, volume} =
       request.payload as InputResep;
     const data = await prisma.resep.findUnique({
       where: {
@@ -110,8 +114,10 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
         id
       },
       data: {
-        ppm,
-        ph,
+        ppm_min,
+        ppm_max,
+        ph_min,
+        ph_max,
         volume,
         nama
       }

@@ -91,6 +91,13 @@ function connectMqtt() {
             if (topic === "iterahero2023/info/sensor") {
                 console.log(JSON.stringify(data));
                 const listAutomasiSensor = yield prisma_1.prisma.automationSensor.findMany({
+                    where: {
+                        aktuator: {
+                            microcontroller: {
+                                name: data.microcontrollerName
+                            }
+                        }
+                    },
                     include: {
                         sensor: true,
                         aktuator: { include: { microcontroller: true } },
