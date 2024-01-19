@@ -149,21 +149,21 @@ export const agendaInit = async () => {
   });
 
   agenda.define("check-microcontroller", async (job: Job) => {
-    const data = await prisma.microcontroller.findMany();
-    data.forEach(async (item) => {
-      const now = new Date();
-      const threeMinsAgo = new Date(now.getTime() - 3 * 60 * 1000);
-      if (item.updated_at && item.updated_at < threeMinsAgo && item.status) {
-        await prisma.microcontroller.update({
-          where: {
-            id: item.id,
-          },
-          data: {
-            status: !item.status,
-          },
-        });
-      }
-    });
+    // const data = await prisma.microcontroller.findMany();
+    // data.forEach(async (item) => {
+    //   const now = new Date();
+    //   const threeMinsAgo = new Date(now.getTime() - 3 * 60 * 1000);
+    //   if (item.updated_at && item.updated_at < threeMinsAgo && item.status) {
+    //     await prisma.microcontroller.update({
+    //       where: {
+    //         id: item.id,
+    //       },
+    //       data: {
+    //         status: !item.status,
+    //       },
+    //     });
+    //   }
+    // });
   });
 
   agenda.define("automation", async (job: Job) => {
@@ -193,7 +193,7 @@ export const agendaInit = async () => {
       message: `Automasi - ${data?.name} menyala`,
       status: true
     });
-    console.log(data?.name, id_aktuator);
+    // console.log(data?.name, id_aktuator);
     publishData(
       "iterahero2023/automation",
       JSON.stringify({

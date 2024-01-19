@@ -90,6 +90,11 @@ function connectMqtt() {
             }
             if (topic === "iterahero2023/info/sensor") {
                 console.log(JSON.stringify(data));
+                let microcontroller = yield prisma_1.prisma.microcontroller.findFirst({
+                    where: {
+                        name: data.microcontrollerName
+                    }
+                });
                 const listAutomasiSensor = yield prisma_1.prisma.automationSensor.findMany({
                     where: {
                         aktuator: {
@@ -108,7 +113,7 @@ function connectMqtt() {
                     sensorData.forEach((item) => __awaiter(this, void 0, void 0, function* () {
                         const field = Object.keys(item)[0];
                         const val = Object.values(item)[0];
-                        yield Sensor_1.default.updateMany({ [sensorField.toLowerCase()]: parseInt(field) }, { $set: { nilai: val, updatedAt: new Date() } });
+                        yield Sensor_1.default.updateMany({ [sensorField.toLowerCase()]: parseInt(field), microcontrollerId: microcontroller === null || microcontroller === void 0 ? void 0 : microcontroller.id }, { $set: { nilai: val, updatedAt: new Date() } });
                         listAutomasiSensor
                             .filter((automationItem) => automationItem.sensor[sensorField] === parseInt(field))
                             .forEach((automationItem) => {

@@ -158,21 +158,21 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
         }));
     }));
     exports.agenda.define("check-microcontroller", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        const data = yield prisma_1.prisma.microcontroller.findMany();
-        data.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
-            const now = new Date();
-            const threeMinsAgo = new Date(now.getTime() - 3 * 60 * 1000);
-            if (item.updated_at && item.updated_at < threeMinsAgo && item.status) {
-                yield prisma_1.prisma.microcontroller.update({
-                    where: {
-                        id: item.id,
-                    },
-                    data: {
-                        status: !item.status,
-                    },
-                });
-            }
-        }));
+        // const data = await prisma.microcontroller.findMany();
+        // data.forEach(async (item) => {
+        //   const now = new Date();
+        //   const threeMinsAgo = new Date(now.getTime() - 3 * 60 * 1000);
+        //   if (item.updated_at && item.updated_at < threeMinsAgo && item.status) {
+        //     await prisma.microcontroller.update({
+        //       where: {
+        //         id: item.id,
+        //       },
+        //       data: {
+        //         status: !item.status,
+        //       },
+        //     });
+        //   }
+        // });
     }));
     exports.agenda.define("automation", (job) => __awaiter(void 0, void 0, void 0, function* () {
         var _a, _b;
@@ -198,7 +198,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} menyala`,
             status: true
         });
-        console.log(data === null || data === void 0 ? void 0 : data.name, id_aktuator);
+        // console.log(data?.name, id_aktuator);
         (0, mqtt_1.publishData)("iterahero2023/automation", JSON.stringify({
             pin: data === null || data === void 0 ? void 0 : data.GPIO,
             durasi,

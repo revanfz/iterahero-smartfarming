@@ -26,7 +26,7 @@ export const getSensorHandler = async (
   } catch (e) {
     console.log(e);
     if (e instanceof Error) {
-      Boom.badImplementation(e.message);
+      return Boom.badImplementation(e.message);
     }
   }
 };

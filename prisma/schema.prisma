@@ -34,8 +34,8 @@ model Microcontroller {
   brand      String
   location   String
   status     Boolean    @default(true)
-  tandon     Tandon     @relation(fields: [tandonId], references: [id])
-  tandonId   Int        @unique
+  tandon     Tandon?    @relation(fields: [tandonId], references: [id])
+  tandonId   Int?
   sensor     Sensor[]
   aktuator   Aktuator[]
   created_at DateTime   @default(now())
@@ -216,7 +216,7 @@ model Tandon {
   image             String
   location          String
   capacity          Float
-  microcontroller   Microcontroller?
+  microcontroller   Microcontroller[]
   sensor            Sensor[]
   aktuator          Aktuator[]
   tandonBahan       TandonBahan[]

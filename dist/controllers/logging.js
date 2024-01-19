@@ -36,7 +36,7 @@ const getSensorHandler = (request, h) => __awaiter(void 0, void 0, void 0, funct
     catch (e) {
         console.log(e);
         if (e instanceof Error) {
-            boom_1.default.badImplementation(e.message);
+            return boom_1.default.badImplementation(e.message);
         }
     }
 });

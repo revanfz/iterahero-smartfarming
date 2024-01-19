@@ -51,6 +51,7 @@ export function connectMqtt() {
       }
       if (topic === "iterahero2023/peracikan/info") {
         console.log(JSON.stringify(data));
+        
         await prisma.tandon.updateMany({
           data: {
             status: data.status,
@@ -59,6 +60,11 @@ export function connectMqtt() {
       }
       if (topic === "iterahero2023/info/sensor") {
         console.log(JSON.stringify(data));
+        let microcontroller = await prisma.microcontroller.findFirst({
+          where: {
+            name: data.microcontrollerName
+          }
+        })
         const listAutomasiSensor = await prisma.automationSensor.findMany({
           where: {
             aktuator: {
@@ -80,7 +86,7 @@ export function connectMqtt() {
             const field = Object.keys(item)[0];
             const val = Object.values(item)[0] as number;
             await SensorModel.updateMany(
-              { [sensorField.toLowerCase()]: parseInt(field) },
+              { [sensorField.toLowerCase()]: parseInt(field), microcontrollerId: microcontroller?.id },
               { $set: { nilai: val, updatedAt: new Date() } }
             );
 
