@@ -41,29 +41,23 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 state: !data.isActive,
                 microcontroller: target === null || target === void 0 ? void 0 : target.name,
             }), target.id)
-                .then(() => {
-                prisma_1.prisma.aktuator
-                    .updateMany({
+                .then(() => __awaiter(void 0, void 0, void 0, function* () {
+                yield prisma_1.prisma.aktuator.updateMany({
                     where: {
                         GPIO: data.GPIO,
-                        microcontrollerId: data.microcontrollerId
+                        microcontrollerId: data.microcontrollerId,
                     },
                     data: {
                         isActive: !data.isActive,
                     },
-                })
-                    .then(() => {
-                    return h
-                        .response({
-                        status: "success",
-                        message: `${data.name} berhasil ${data.isActive ? "dimatikan" : "dinyalakan"}`,
-                    })
-                        .code(200);
-                })
-                    .catch((e) => {
-                    return boom_1.default.badImplementation(e.message);
                 });
-            })
+                return h
+                    .response({
+                    status: "success",
+                    message: `${data.name} berhasil ${data.isActive ? "dimatikan" : "dinyalakan"}`,
+                })
+                    .code(200);
+            }))
                 .catch((error) => {
                 console.error("Error in publish data: ", error);
                 return boom_1.default.serverUnavailable("Mikrokontroller tidak terhubung ke internet");

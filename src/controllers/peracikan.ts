@@ -29,7 +29,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         aktuator: {
           where: {
             name: {
-              contains: "Peracikan",
+              contains: "Selenoid",
             },
           },
           select: {

@@ -53,6 +53,13 @@ export function connectMqtt() {
         console.log(JSON.stringify(data));
         
         await prisma.tandon.updateMany({
+          where: {
+            microcontroller: {
+              every: {
+                name: data.microcontrollerName
+              }
+            }
+          },
           data: {
             status: data.status,
           },
@@ -155,51 +162,14 @@ export function connectMqtt() {
 }
 
 export function publishData(topic: string, message: string, microcontrollerId: number) {
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     if (!microcontrollerId) {
       reject('failed')
     }
-    broker.subscribe("iterahero2023/respon/kontrol");
-
-    broker.once("message", async (topic, payload, packet) => {
-      if (topic === "iterahero2023/respon/kontrol/") {
-        const data = JSON.parse(payload.toString());
-        if (data.response) {
-          resolve('success');
-        } else {
-          console.error("Mikrokontroller is not responding");
-          await prisma.microcontroller.update({
-            where: {
-              id: microcontrollerId
-            },
-            data: {
-              status: false
-            }
-          })
-          reject('failed');
-        }
-      }
-    });
-
-    // Mengirim pesan ke mikrokontroler
-    broker.publish(topic, message);
-
-    // Set timeout untuk menangani kasus waktu habis
-    const timeoutId = setTimeout(() => {
-      console.error("Timeout: Mikrokontroller response not received within 3 seconds");
-      reject('timeout');
-    }, 3000);
-
-    // Menangani hasil balik dari race antara respon atau timeout
-    const handleResult = (result: any) => {
-      clearTimeout(timeoutId);
-      return result;
-    };
-
-    Promise.race([
-      new Promise(() => {}), // Promise ini selalu pending untuk menunggu event "message"
-      new Promise((_, reject) => setTimeout(() => reject('timeout'), 3000))
-    ]).then(handleResult, handleResult);
+    else {
+      resolve('success')
+      broker.publish(topic, message);
+    }
   });
 }
 

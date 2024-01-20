@@ -36,36 +36,32 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         }),
         target.id
       )
-        .then(() => {
-          prisma.aktuator
-            .updateMany({
-              where: {
-                GPIO: data.GPIO,
-                microcontrollerId: data.microcontrollerId
-              },
-              data: {
-                isActive: !data.isActive,
-              },
+        .then(async () => {
+          await prisma.aktuator.updateMany({
+            where: {
+              GPIO: data.GPIO,
+              microcontrollerId: data.microcontrollerId,
+            },
+            data: {
+              isActive: !data.isActive,
+            },
+          });
+          return h
+            .response({
+              status: "success",
+              message: `${data.name} berhasil ${
+                data.isActive ? "dimatikan" : "dinyalakan"
+              }`,
             })
-            .then(() => {
-              return h
-                .response({
-                  status: "success",
-                  message: `${data.name} berhasil ${
-                    data.isActive ? "dimatikan" : "dinyalakan"
-                  }`,
-                })
-                .code(200);
-            })
-            .catch((e) => {
-              return Boom.badImplementation(e.message);
-            });
+            .code(200);
         })
         .catch((error) => {
           console.error("Error in publish data: ", error);
-          return Boom.serverUnavailable("Mikrokontroller tidak terhubung ke internet");
+          return Boom.serverUnavailable(
+            "Mikrokontroller tidak terhubung ke internet"
+          );
         });
-      }
+    }
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);

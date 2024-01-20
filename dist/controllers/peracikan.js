@@ -37,7 +37,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 aktuator: {
                     where: {
                         name: {
-                            contains: "Peracikan",
+                            contains: "Selenoid",
                         },
                     },
                     select: {

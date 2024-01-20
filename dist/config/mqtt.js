@@ -83,6 +83,13 @@ function connectMqtt() {
             if (topic === "iterahero2023/peracikan/info") {
                 console.log(JSON.stringify(data));
                 yield prisma_1.prisma.tandon.updateMany({
+                    where: {
+                        microcontroller: {
+                            every: {
+                                name: data.microcontrollerName
+                            }
+                        }
+                    },
                     data: {
                         status: data.status,
                     },
@@ -171,48 +178,15 @@ function connectMqtt() {
 }
 exports.connectMqtt = connectMqtt;
 function publishData(topic, message, microcontrollerId) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
         if (!microcontrollerId) {
             reject('failed');
         }
-        exports.broker.subscribe("iterahero2023/respon/kontrol");
-        exports.broker.once("message", (topic, payload, packet) => __awaiter(this, void 0, void 0, function* () {
-            if (topic === "iterahero2023/respon/kontrol/") {
-                const data = JSON.parse(payload.toString());
-                if (data.response) {
-                    resolve('success');
-                }
-                else {
-                    console.error("Mikrokontroller is not responding");
-                    yield prisma_1.prisma.microcontroller.update({
-                        where: {
-                            id: microcontrollerId
-                        },
-                        data: {
-                            status: false
-                        }
-                    });
-                    reject('failed');
-                }
-            }
-        }));
-        // Mengirim pesan ke mikrokontroler
-        exports.broker.publish(topic, message);
-        // Set timeout untuk menangani kasus waktu habis
-        const timeoutId = setTimeout(() => {
-            console.error("Timeout: Mikrokontroller response not received within 3 seconds");
-            reject('timeout');
-        }, 3000);
-        // Menangani hasil balik dari race antara respon atau timeout
-        const handleResult = (result) => {
-            clearTimeout(timeoutId);
-            return result;
-        };
-        Promise.race([
-            new Promise(() => { }),
-            new Promise((_, reject) => setTimeout(() => reject('timeout'), 3000))
-        ]).then(handleResult, handleResult);
-    });
+        else {
+            resolve('success');
+            exports.broker.publish(topic, message);
+        }
+    }));
 }
 exports.publishData = publishData;
 process.on("SIGINT", () => {
