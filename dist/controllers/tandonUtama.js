@@ -271,7 +271,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         return h.response({
             status: "success",
             message: `${msg}`,
-        });
+        }).code(201);
     }
     catch (e) {
         if (e instanceof Error) {

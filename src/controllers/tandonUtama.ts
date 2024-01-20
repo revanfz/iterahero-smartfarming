@@ -292,7 +292,7 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
     return h.response({
       status: "success",
       message: `${msg}`,
-    });
+    }).code(201);
   } catch (e) {
     if (e instanceof Error) {
       console.error(e);
