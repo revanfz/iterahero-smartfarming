@@ -260,19 +260,20 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
       }
       if (image) {
         deleteImage(`tandon-${target.nama}`);
-        img_url = await uploadImage(image, 'tandon', name);
+        uploadImage(image, 'tandon', name).then(async (img_url) => {
+          await prisma.tandon.update({
+            where: {
+              id: target.id,
+            },
+            data: {
+              nama: name,
+              image: img_url?.secure_url ?? target.image,
+              location,
+              capacity: parseFloat(capacity)
+            },
+          });
+        });
       }
-      await prisma.tandon.update({
-        where: {
-          id: target.id,
-        },
-        data: {
-          nama: name,
-          image: img_url?.secure_url ?? target.image,
-          location,
-          capacity: parseFloat(capacity)
-        },
-      });
       msg = `Tandon ${name ?? target.nama} berhasil diperbarui`
     } else {
       await prisma.tandon.update({

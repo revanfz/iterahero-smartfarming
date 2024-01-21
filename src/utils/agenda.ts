@@ -319,7 +319,7 @@ export const agendaInit = async () => {
 async function graceful() {
   await agenda.cancel({
     name: {
-      $in: ["penjadwalan-peracikan", "test", "logging-sensor", "check-microcontroller"],
+      $in: ["penjadwalan-peracikan", "logging-sensor", "check-microcontroller"],
     },
   });
   console.log("Stopping agenda");
