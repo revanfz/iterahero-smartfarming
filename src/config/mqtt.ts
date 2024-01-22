@@ -92,7 +92,7 @@ export function connectMqtt() {
           sensorData.forEach(async (item) => {
             const field = Object.keys(item)[0];
             const val = Object.values(item)[0] as number;
-            await SensorModel.updateMany(
+            await SensorModel.updateOne(
               { [sensorField.toLowerCase()]: parseInt(field), microcontrollerId: microcontroller?.id },
               { $set: { nilai: val, updatedAt: new Date() } }
             );

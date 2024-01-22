@@ -217,7 +217,6 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
 });
 exports.actuatorByTandonHandler = actuatorByTandonHandler;
 const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
-    var _c;
     try {
         const id_tandon = parseInt(request.query.id_tandon);
         const { edit } = request.query;
@@ -239,19 +238,21 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
             }
             if (image) {
                 (0, cloudinary_1.deleteImage)(`tandon-${target.nama}`);
-                img_url = yield (0, cloudinary_1.uploadImage)(image, 'tandon', name);
+                (0, cloudinary_1.uploadImage)(image, 'tandon', name).then((img_url) => __awaiter(void 0, void 0, void 0, function* () {
+                    var _c;
+                    yield prisma_1.prisma.tandon.update({
+                        where: {
+                            id: target.id,
+                        },
+                        data: {
+                            nama: name,
+                            image: (_c = img_url === null || img_url === void 0 ? void 0 : img_url.secure_url) !== null && _c !== void 0 ? _c : target.image,
+                            location,
+                            capacity: parseFloat(capacity)
+                        },
+                    });
+                }));
             }
-            yield prisma_1.prisma.tandon.update({
-                where: {
-                    id: target.id,
-                },
-                data: {
-                    nama: name,
-                    image: (_c = img_url === null || img_url === void 0 ? void 0 : img_url.secure_url) !== null && _c !== void 0 ? _c : target.image,
-                    location,
-                    capacity: parseFloat(capacity)
-                },
-            });
             msg = `Tandon ${name !== null && name !== void 0 ? name : target.nama} berhasil diperbarui`;
         }
         else {

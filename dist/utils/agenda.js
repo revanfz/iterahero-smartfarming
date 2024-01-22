@@ -290,7 +290,7 @@ function graceful() {
     return __awaiter(this, void 0, void 0, function* () {
         yield exports.agenda.cancel({
             name: {
-                $in: ["penjadwalan-peracikan", "test", "logging-sensor", "check-microcontroller"],
+                $in: ["penjadwalan-peracikan", "logging-sensor", "check-microcontroller"],
             },
         });
         console.log("Stopping agenda");
