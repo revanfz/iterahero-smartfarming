@@ -6,23 +6,6 @@
 app = "iterahero2023"
 primary_region = "sin"
 
-[env]
-  DATABASE_URL="postgres://iterahero2023:ISb2xWaDN7ylxz6@iterahero2023-db.flycast:5432/iterahero2023?schema=iterahero&sslmode=disable"
-  MONGODB_URL="mongodb+srv://iterahero2023:Iterahero2023@cluster0.o7tdtlx.mongodb.net/iterahero2023?retryWrites=true&w=majority"
-  CLOUDINARY_CLOUD_NAME="iterahero2023"
-  CLOUDINARY_API_KEY="284755793249341"
-  CLOUDINARY_API_SECRET="6I7cyFbTva3BfULG5_04I5EPlac"
-  HOST="0.0.0.0"
-
-  MQTT_CLIENTID="iterahero2023_"
-  MQTT_USERNAME="iterahero2023"
-  MQTT_PASSWORD="Iterahero2023"
-
-  JWT_SECRET="iterahero"
-  JWT_AUD="iterahero"
-  JWT_SUB="smart-farming"
-  JWT_ISS="kedaireka"
-
 [[services]]
   protocol = "tcp"
   internal_port = 3000
