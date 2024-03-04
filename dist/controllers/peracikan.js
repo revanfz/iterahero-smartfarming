@@ -17,7 +17,7 @@ const boom_1 = __importDefault(require("@hapi/boom"));
 const prisma_1 = require("../config/prisma");
 const mqtt_1 = require("../config/mqtt");
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
-    var _a;
+    var _a, _b;
     try {
         const { resep, id_tandon } = request.payload;
         const komposisi = yield prisma_1.prisma.resep.findFirst({
@@ -41,8 +41,14 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                         },
                     },
                     select: {
-                        microcontrollerId: true,
+                        microcontroller: {
+                            select: {
+                                id: true,
+                                name: true
+                            }
+                        },
                     },
+                    take: 1
                 },
             },
         });
@@ -55,7 +61,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         return (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
             komposisi,
             konstanta: rasio,
-        }), (_a = rasio === null || rasio === void 0 ? void 0 : rasio.aktuator[0].microcontrollerId) !== null && _a !== void 0 ? _a : 0)
+        }), (_b = (_a = rasio === null || rasio === void 0 ? void 0 : rasio.aktuator[0].microcontroller) === null || _a === void 0 ? void 0 : _a.id) !== null && _b !== void 0 ? _b : 0)
             .then(() => {
             return h
                 .response({

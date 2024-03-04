@@ -50,7 +50,7 @@ function connectMqtt() {
     //   protocol: "mqtts",
     //   clientId,
     // });
-    exports.broker = mqtt.connect("ws://broker.hivemq.com:8000/mqtt", {
+    exports.broker = mqtt.connect("mqtt://broker.hivemq.com:1883", {
         protocolId: "MQTT",
         clean: true,
         clientId,
@@ -154,21 +154,21 @@ function connectMqtt() {
                     });
                 }));
             }
-            if (topic === "iterahero2023/actuator") {
-                console.log(JSON.stringify(data));
-                data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
-                    const port = Object.keys(item)[0];
-                    const isActive = Object.values(item)[0];
-                    yield prisma_1.prisma.aktuator.updateMany({
-                        where: {
-                            GPIO: parseInt(port),
-                        },
-                        data: {
-                            isActive,
-                        },
-                    });
-                }));
-            }
+            // if (topic === "iterahero2023/actuator") {
+            //   console.log(JSON.stringify(data));
+            //   data.actuator.forEach(async (item: object, index: number) => {
+            //     const port = Object.keys(item)[0];
+            //     const isActive = Object.values(item)[0];
+            //     await prisma.aktuator.updateMany({
+            //       where: {
+            //         GPIO: parseInt(port),
+            //       },
+            //       data: {
+            //         isActive,
+            //       },
+            //     });
+            //   });
+            // }
         }
         catch (e) {
             if (e instanceof Error)

@@ -144,6 +144,7 @@ export const agendaInit = async () => {
             microcontrollerId: target.microcontrollerId,
             createdAt: new Date(),
           });
+          // if target.nilai < item.range_min  
         }
       });
   });

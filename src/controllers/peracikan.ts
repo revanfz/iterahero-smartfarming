@@ -33,8 +33,14 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             },
           },
           select: {
-            microcontrollerId: true,
+            microcontroller: {
+              select: {
+                id: true,
+                name: true
+              }
+            },
           },
+          take: 1
         },
       },
     });
@@ -53,7 +59,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         komposisi,
         konstanta: rasio,
       }),
-      rasio?.aktuator[0].microcontrollerId ?? 0
+      rasio?.aktuator[0].microcontroller?.id ?? 0
     )
       .then(() => {
         return h

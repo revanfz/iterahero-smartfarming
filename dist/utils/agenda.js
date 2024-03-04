@@ -154,6 +154,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                     microcontrollerId: target.microcontrollerId,
                     createdAt: new Date(),
                 });
+                // if target.nilai < item.range_min  
             }
         }));
     }));

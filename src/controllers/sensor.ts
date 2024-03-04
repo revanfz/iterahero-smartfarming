@@ -18,6 +18,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
   const id = parseInt(request.query.id);
   const size = parseInt(request.query.size);
   const cursor = parseInt(request.query.cursor);
+  const filter = request.query.filter;
   try {
     let data;
     if (!isNaN(id)) {
@@ -37,18 +38,36 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
           microcontroller: true
         },
       });
-
-      if (!data) {
-        return Boom.notFound(`Tidak ada sensor dengan id ${id}`);
-      } else {
-        return h
-          .response({
-            status: "success",
-            data,
-          })
-          .code(200);
+    return h
+      .response({
+        status: "success",
+        data,
+      })
+      .code(200);
+    } else if (filter) {
+      if (filter === 'greenhouse') {
+        data = await prisma.sensor.findMany({
+          where: {
+            greenhouseId: {
+              not: null
+            }
+          }
+        })
+      } else if (filter === 'tandon') {
+        data = await prisma.sensor.findMany({
+          where: {
+            tandonId: {
+              not: null
+            }
+          }
+        })
       }
-    } else {
+      return h.response({
+        status: 'success',
+        data,
+      }).code(200)
+    } 
+    else {
       const total = await prisma.sensor.count();
       data = await prisma.sensor.findMany({
         include: {

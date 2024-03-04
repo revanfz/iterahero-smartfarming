@@ -42,10 +42,17 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         const id_aktuator = parseInt(request.query.id);
         const id_automation = parseInt(request.query.id_automation);
         const type = request.query.type;
+        const tandonId = request.query.tandonId;
         if (type) {
             if (type === "bySchedule") {
-                const where = id_automation !== 0 ? { id: id_automation } : {};
-                const data = yield prisma_1.prisma.automationSchedule[id_automation !== 0 ? 'findFirst' : 'findMany']({
+                let where = {};
+                if (id_automation !== 0) {
+                    where.id = id_automation;
+                }
+                if (tandonId) {
+                    where = Object.assign(Object.assign({}, where), { aktuator: { tandonId: parseInt(tandonId) } });
+                }
+                const data = yield prisma_1.prisma.automationSchedule[id_automation !== 0 ? "findFirst" : "findMany"]({
                     where,
                     include: {
                         aktuator: {
@@ -54,15 +61,16 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                                     where: {
                                         user: {
                                             every: {
-                                                id: id_user
-                                            }
-                                        }
-                                    }
-                                }
-                            }
+                                                id: id_user,
+                                            },
+                                        },
+                                    },
+                                },
+                            },
                         },
                     },
                 });
+                console.log(data);
                 return h.response({
                     status: "success",
                     data,
@@ -171,11 +179,11 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             });
             yield prisma_1.prisma.aktuator.update({
                 where: {
-                    id: id_aktuator
+                    id: id_aktuator,
                 },
                 data: {
-                    automation: true
-                }
+                    automation: true,
+                },
             });
             yield (0, agenda_1.createAutomation)(data);
             return h
@@ -253,11 +261,11 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         if (!dataSchedule && !dataSensor) {
             yield prisma_1.prisma.aktuator.update({
                 where: {
-                    id: id_aktuator
+                    id: id_aktuator,
                 },
                 data: {
-                    automation: false
-                }
+                    automation: false,
+                },
             });
             return Boom.notFound(`Tidak ada automasi pada ${target.name}`);
         }
@@ -301,8 +309,8 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
             }
             target = yield prisma_1.prisma.automationSensor.findFirst({
                 where: {
-                    id: id_automation
-                }
+                    id: id_automation,
+                },
             });
             const deletedSensor = yield prisma_1.prisma.automationSensor.deleteMany({
                 where: {
@@ -313,8 +321,8 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         else if (type === "bySchedule") {
             target = yield prisma_1.prisma.automationSchedule.findFirst({
                 where: {
-                    id: id_automation
-                }
+                    id: id_automation,
+                },
             });
             const deletedSchedule = yield prisma_1.prisma.automationSchedule.delete({
                 where: {
@@ -328,28 +336,28 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         }
         const jumlahAutomasiSensor = yield prisma_1.prisma.automationSensor.count({
             where: {
-                aktuatorId: target === null || target === void 0 ? void 0 : target.aktuatorId
-            }
+                aktuatorId: target === null || target === void 0 ? void 0 : target.aktuatorId,
+            },
         });
         const jumlahAutomasiJadwal = yield prisma_1.prisma.automationSchedule.count({
             where: {
-                aktuatorId: target === null || target === void 0 ? void 0 : target.aktuatorId
-            }
+                aktuatorId: target === null || target === void 0 ? void 0 : target.aktuatorId,
+            },
         });
         if (jumlahAutomasiJadwal + jumlahAutomasiSensor === 0) {
             yield prisma_1.prisma.aktuator.update({
                 where: {
-                    id: target === null || target === void 0 ? void 0 : target.aktuatorId
+                    id: target === null || target === void 0 ? void 0 : target.aktuatorId,
                 },
                 data: {
-                    automation: false
-                }
+                    automation: false,
+                },
             });
         }
         return h
             .response({
             status: "success",
-            message: `Automasi ${type === 'bySensor' ? 'sensor' : 'jadwal'} berhasil dihapus`,
+            message: `Automasi ${type === "bySensor" ? "sensor" : "jadwal"} berhasil dihapus`,
         })
             .code(201);
     }
@@ -372,10 +380,10 @@ const putHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         if (isNaN(id_automation)) {
             return Boom.badRequest("ID automation tidak valid");
         }
-        if (type === 'bySensor') {
+        if (type === "bySensor") {
             yield prisma_1.prisma.automationSensor.update({
                 where: {
-                    id: id_automation
+                    id: id_automation,
                 },
                 data: {
                     sensorId: id_sensor,
@@ -388,26 +396,29 @@ const putHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 .response({
                 status: "success",
                 message: `Automasi berdasarkan sensor berhasil diperbarui`,
-            }).code(201);
+            })
+                .code(201);
         }
-        else if (type === 'bySchedule') {
+        else if (type === "bySchedule") {
             const data = yield prisma_1.prisma.automationSchedule.update({
                 where: {
-                    id: id_automation
+                    id: id_automation,
                 },
                 data: {
                     interval,
                     duration,
                     iterasi,
                     startTime,
-                }
+                },
             });
             yield (0, agenda_1.deleteAutomation)(id_aktuator);
             yield (0, agenda_1.createAutomation)(data);
-            return h.response({
-                status: 'success',
-                message: 'Automasi berdasarkan jadwal berhasil diperbarui'
-            }).code(201);
+            return h
+                .response({
+                status: "success",
+                message: "Automasi berdasarkan jadwal berhasil diperbarui",
+            })
+                .code(201);
         }
     }
     catch (e) {

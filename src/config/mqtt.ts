@@ -17,7 +17,7 @@ export function connectMqtt() {
   //   clientId,
   // });
 
-  broker = mqtt.connect("ws://broker.hivemq.com:8000/mqtt", {
+  broker = mqtt.connect("mqtt://broker.hivemq.com:1883", {
     protocolId: "MQTT",
     clean: true,
     clientId,
@@ -140,21 +140,21 @@ export function connectMqtt() {
           });
         });
       }
-      if (topic === "iterahero2023/actuator") {
-        console.log(JSON.stringify(data));
-        data.actuator.forEach(async (item: object, index: number) => {
-          const port = Object.keys(item)[0];
-          const isActive = Object.values(item)[0];
-          await prisma.aktuator.updateMany({
-            where: {
-              GPIO: parseInt(port),
-            },
-            data: {
-              isActive,
-            },
-          });
-        });
-      }
+      // if (topic === "iterahero2023/actuator") {
+      //   console.log(JSON.stringify(data));
+      //   data.actuator.forEach(async (item: object, index: number) => {
+      //     const port = Object.keys(item)[0];
+      //     const isActive = Object.values(item)[0];
+      //     await prisma.aktuator.updateMany({
+      //       where: {
+      //         GPIO: parseInt(port),
+      //       },
+      //       data: {
+      //         isActive,
+      //       },
+      //     });
+      //   });
+      // }
     } catch (e) {
       if (e instanceof Error) console.log(e.message);
     }

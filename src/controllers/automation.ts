@@ -28,11 +28,22 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
     const id_aktuator = parseInt(request.query.id);
     const id_automation = parseInt(request.query.id_automation);
     const type = request.query.type;
-    
+    const tandonId = request.query.tandonId;
+
     if (type) {
       if (type === "bySchedule") {
-        const where = id_automation !== 0 ? { id: id_automation } : {};
-        const data = await prisma.automationSchedule[id_automation !== 0 ? 'findFirst' : 'findMany']({
+        let where: { id?: number; aktuator?: { tandonId: number } } = {};
+
+        if (id_automation !== 0) {
+          where.id = id_automation;
+        }
+
+        if (tandonId) {
+          where = { ...where, aktuator: { tandonId: parseInt(tandonId) } };
+        }
+        const data = await prisma.automationSchedule[
+          id_automation !== 0 ? "findFirst" : "findMany"
+        ]({
           where,
           include: {
             aktuator: {
@@ -41,15 +52,17 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
                   where: {
                     user: {
                       every: {
-                        id: id_user
-                      }
-                    }
-                  }
-                }
-              }
+                        id: id_user,
+                      },
+                    },
+                  },
+                },
+              },
             },
           },
         });
+
+        console.log(data);
 
         return h.response({
           status: "success",
@@ -175,12 +188,12 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 
       await prisma.aktuator.update({
         where: {
-          id: id_aktuator
+          id: id_aktuator,
         },
         data: {
-          automation: true
-        }
-      })
+          automation: true,
+        },
+      });
 
       await createAutomation(data);
 
@@ -262,12 +275,12 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
     if (!dataSchedule && !dataSensor) {
       await prisma.aktuator.update({
         where: {
-          id: id_aktuator
+          id: id_aktuator,
         },
         data: {
-          automation: false
-        }
-      })
+          automation: false,
+        },
+      });
       return Boom.notFound(`Tidak ada automasi pada ${target.name}`);
     }
 
@@ -314,9 +327,9 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
       }
       target = await prisma.automationSensor.findFirst({
         where: {
-          id: id_automation
-        }
-      })
+          id: id_automation,
+        },
+      });
       const deletedSensor = await prisma.automationSensor.deleteMany({
         where: {
           id: id_automation,
@@ -325,9 +338,9 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
     } else if (type === "bySchedule") {
       target = await prisma.automationSchedule.findFirst({
         where: {
-          id: id_automation
-        }
-      })
+          id: id_automation,
+        },
+      });
       const deletedSchedule = await prisma.automationSchedule.delete({
         where: {
           id: id_automation,
@@ -335,38 +348,40 @@ export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
       });
       await deleteAutomation(id_automation);
     } else {
-      return Boom.badRequest("Tipe automasi tidak valid")
+      return Boom.badRequest("Tipe automasi tidak valid");
     }
 
     const jumlahAutomasiSensor = await prisma.automationSensor.count({
       where: {
-        aktuatorId: target?.aktuatorId
-      }
-    })
+        aktuatorId: target?.aktuatorId,
+      },
+    });
 
     const jumlahAutomasiJadwal = await prisma.automationSchedule.count({
       where: {
-        aktuatorId: target?.aktuatorId
-      }
-    })
+        aktuatorId: target?.aktuatorId,
+      },
+    });
 
     if (jumlahAutomasiJadwal + jumlahAutomasiSensor === 0) {
       await prisma.aktuator.update({
         where: {
-          id: target?.aktuatorId
+          id: target?.aktuatorId,
         },
         data: {
-          automation: false
-        }
-      })
+          automation: false,
+        },
+      });
     }
-    
+
     return h
-    .response({
-      status: "success",
-      message: `Automasi ${type === 'bySensor' ? 'sensor' : 'jadwal' } berhasil dihapus`,
-    })
-    .code(201);
+      .response({
+        status: "success",
+        message: `Automasi ${
+          type === "bySensor" ? "sensor" : "jadwal"
+        } berhasil dihapus`,
+      })
+      .code(201);
   } catch (e) {
     console.error(e);
     if (e instanceof Error) {
@@ -392,17 +407,17 @@ export const putHandler = async (request: Request, h: ResponseToolkit) => {
       startTime,
     } = request.payload as InputAutomation;
 
-    const id_automation = parseInt(request.query.id)
+    const id_automation = parseInt(request.query.id);
     const { type } = request.query;
 
     if (isNaN(id_automation)) {
-      return Boom.badRequest("ID automation tidak valid")
+      return Boom.badRequest("ID automation tidak valid");
     }
 
-    if (type === 'bySensor') {
+    if (type === "bySensor") {
       await prisma.automationSensor.update({
         where: {
-          id: id_automation
+          id: id_automation,
         },
         data: {
           sensorId: id_sensor,
@@ -416,35 +431,36 @@ export const putHandler = async (request: Request, h: ResponseToolkit) => {
         .response({
           status: "success",
           message: `Automasi berdasarkan sensor berhasil diperbarui`,
-        }).code(201)
-    } else if (type === 'bySchedule') {
+        })
+        .code(201);
+    } else if (type === "bySchedule") {
       const data = await prisma.automationSchedule.update({
         where: {
-          id: id_automation
+          id: id_automation,
         },
         data: {
           interval,
           duration,
           iterasi,
           startTime,
-        }
-      })
-      await deleteAutomation(id_aktuator)
-      await createAutomation(data)
+        },
+      });
+      await deleteAutomation(id_aktuator);
+      await createAutomation(data);
 
-      return h.response({
-        status: 'success',
-        message: 'Automasi berdasarkan jadwal berhasil diperbarui'
-      }).code(201)
+      return h
+        .response({
+          status: "success",
+          message: "Automasi berdasarkan jadwal berhasil diperbarui",
+        })
+        .code(201);
     }
-  }
-  catch (e) {
-    console.log(e)
+  } catch (e) {
+    console.log(e);
     if (e instanceof Error) {
-      return Boom.badImplementation(e.message)
+      return Boom.badImplementation(e.message);
     }
-  }
-  finally {
+  } finally {
     // await prisma.$disconnect()
   }
-}
+};
