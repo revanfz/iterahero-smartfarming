@@ -42,6 +42,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
           },
           take: 1
         },
+        capacity: true
       },
     });
 
@@ -51,6 +52,10 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.badRequest(
         "Konstanta pupuk belum diatur pada tandon peracikan"
       );
+    } else if (rasio.capacity < komposisi.volume) {
+      return Boom.badRequest(
+        "Volume melebihi kapasitas tandon"
+      )
     }
 
     return publishData(
