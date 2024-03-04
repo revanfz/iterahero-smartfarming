@@ -33,7 +33,7 @@ const createPenjadwalan = (target) => __awaiter(void 0, void 0, void 0, function
         id_penjadwalan: target.id,
         id_resep: target.resepId,
         id_tandon: target.tandonId,
-        id_greenhouse: target.greenhouseId,
+        // id_greenhouse: target.greenhouseId,
         createdBy: target.createdBy,
         durasi: target.durasi,
     });

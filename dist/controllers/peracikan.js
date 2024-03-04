@@ -50,6 +50,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     },
                     take: 1
                 },
+                capacity: true
             },
         });
         if (!komposisi) {
@@ -57,6 +58,9 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         }
         else if (!rasio) {
             return boom_1.default.badRequest("Konstanta pupuk belum diatur pada tandon peracikan");
+        }
+        else if (rasio.capacity < komposisi.volume) {
+            return boom_1.default.badRequest("Volume melebihi kapasitas tandon");
         }
         return (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
             komposisi,

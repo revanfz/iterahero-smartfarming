@@ -25,7 +25,6 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         const data = yield prisma_1.prisma.penjadwalan.findMany({
             include: {
                 resep: true,
-                greenhouse: true
             },
             orderBy: [
                 {
@@ -100,9 +99,9 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     tandonId: id_tandon,
                     isActive: true,
                     hari,
-                    durasi,
+                    // durasi,
                     createdBy: id_user,
-                    greenhouseId: id_greenhouse
+                    // greenhouseId: id_greenhouse
                 },
             });
             yield (0, agenda_1.createPenjadwalan)(schedule);
