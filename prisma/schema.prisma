@@ -50,7 +50,6 @@ model Greenhouse {
   user        User[]
   aktuator    Aktuator[]
   sensor      Sensor[]
-  penjadwalan Penjadwalan[]
   created_at  DateTime      @default(now())
   updated_at  DateTime?     @updatedAt
 }
@@ -87,8 +86,6 @@ model Penjadwalan {
   resepId      Int
   tandon       Tandon     @relation(fields: [tandonId], references: [id])
   tandonId     Int
-  greenhouse   Greenhouse @relation(fields: [greenhouseId], references: [id])
-  greenhouseId Int
   user         User       @relation(fields: [createdBy], references: [id])
   createdBy    Int
   created_at   DateTime   @default(now())

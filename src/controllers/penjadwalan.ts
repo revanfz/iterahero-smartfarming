@@ -104,9 +104,9 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
           tandonId: id_tandon,
           isActive: true,
           hari,
-          durasi,
+          // durasi,
           createdBy: id_user,
-          greenhouseId: id_greenhouse
+          // greenhouseId: id_greenhouse
         },
       });
 
