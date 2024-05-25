@@ -16,6 +16,7 @@ exports.postHandler = void 0;
 const prisma_1 = require("../config/prisma");
 const boom_1 = __importDefault(require("@hapi/boom"));
 const mqtt_1 = require("../config/mqtt");
+const AktuatorLog_1 = __importDefault(require("../models/AktuatorLog"));
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = request.query;
@@ -50,6 +51,11 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     data: {
                         isActive: !data.isActive,
                     },
+                });
+                yield AktuatorLog_1.default.create({
+                    id_aktuator: data.id,
+                    message: `${data.name} ${data.isActive ? 'dimatikan' : 'menyala'}`,
+                    status: !data.isActive
                 });
                 return h
                     .response({

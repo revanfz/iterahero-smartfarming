@@ -9,5 +9,10 @@ exports.peracikanRoute = [
         method: "POST",
         path,
         handler: peracikan_1.postHandler,
+    },
+    {
+        method: "POST",
+        path: `${path}/batal`,
+        handler: peracikan_1.cancelPeracikanHandler,
     }
 ];

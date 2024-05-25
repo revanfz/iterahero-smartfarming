@@ -154,21 +154,6 @@ function connectMqtt() {
                     });
                 }));
             }
-            // if (topic === "iterahero2023/actuator") {
-            //   console.log(JSON.stringify(data));
-            //   data.actuator.forEach(async (item: object, index: number) => {
-            //     const port = Object.keys(item)[0];
-            //     const isActive = Object.values(item)[0];
-            //     await prisma.aktuator.updateMany({
-            //       where: {
-            //         GPIO: parseInt(port),
-            //       },
-            //       data: {
-            //         isActive,
-            //       },
-            //     });
-            //   });
-            // }
         }
         catch (e) {
             if (e instanceof Error)
@@ -183,8 +168,21 @@ function publishData(topic, message, microcontrollerId) {
             reject('failed');
         }
         else {
-            resolve('success');
-            exports.broker.publish(topic, message);
+            const microcontroller = yield prisma_1.prisma.microcontroller.findUnique({
+                where: {
+                    id: microcontrollerId
+                },
+                select: {
+                    status: true
+                }
+            });
+            if (!(microcontroller === null || microcontroller === void 0 ? void 0 : microcontroller.status)) {
+                reject('failed');
+            }
+            else {
+                exports.broker.publish(topic, message);
+                resolve('success');
+            }
         }
     }));
 }

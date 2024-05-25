@@ -12,14 +12,16 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postHandler = void 0;
+exports.cancelPeracikanHandler = exports.postHandler = void 0;
 const boom_1 = __importDefault(require("@hapi/boom"));
 const prisma_1 = require("../config/prisma");
 const mqtt_1 = require("../config/mqtt");
+const AktuatorLog_1 = __importDefault(require("../models/AktuatorLog"));
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;
     try {
         const { resep, id_tandon } = request.payload;
+        const { id_user } = request.auth.credentials;
         const komposisi = yield prisma_1.prisma.resep.findFirst({
             where: {
                 id: resep,
@@ -66,14 +68,37 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             komposisi,
             konstanta: rasio,
         }), (_b = (_a = rasio === null || rasio === void 0 ? void 0 : rasio.aktuator[0].microcontroller) === null || _a === void 0 ? void 0 : _a.id) !== null && _b !== void 0 ? _b : 0)
-            .then(() => {
+            .then(() => __awaiter(void 0, void 0, void 0, function* () {
+            var _c;
+            yield prisma_1.prisma.notification.create({
+                data: {
+                    userId: id_user,
+                    message: `Peracikan ${komposisi.nama} dimulai`,
+                }
+            });
+            const selectedActuator = yield prisma_1.prisma.aktuator.findMany({
+                where: {
+                    microcontrollerId: (_c = rasio.aktuator[0].microcontroller) === null || _c === void 0 ? void 0 : _c.id
+                },
+                select: {
+                    id: true,
+                    name: true
+                }
+            });
+            for (const act in selectedActuator) {
+                yield AktuatorLog_1.default.create({
+                    id_aktuator: selectedActuator[act].id,
+                    message: `${selectedActuator[act].name} menyala`,
+                    status: true
+                });
+            }
             return h
                 .response({
                 status: "success",
                 message: komposisi,
             })
                 .code(200);
-        })
+        }))
             .catch((error) => __awaiter(void 0, void 0, void 0, function* () {
             console.error("Error in publish data: ", error);
             yield prisma_1.prisma.tandon.update({
@@ -82,6 +107,12 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 },
                 data: {
                     isOnline: false
+                }
+            });
+            yield prisma_1.prisma.notification.create({
+                data: {
+                    userId: id_user,
+                    message: "Peracikan gagal dilakukan, mikrokontroller tidak terhubung ke internet",
                 }
             });
             return boom_1.default.serverUnavailable("Mikrokontroller tidak terhubung ke internet");
@@ -94,3 +125,56 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.postHandler = postHandler;
+const cancelPeracikanHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id_user } = request.auth.credentials;
+        const { id_tandon } = request.payload;
+        const tandon = yield prisma_1.prisma.tandon.findUnique({
+            where: {
+                id: id_tandon,
+            },
+            include: {
+                microcontroller: true,
+                aktuator: true
+            }
+        });
+        if (tandon) {
+            (0, mqtt_1.publishData)("iterahero2023/peracikan/cancel", JSON.stringify({
+                microcontroller: tandon.microcontroller[0].id
+            }), tandon.microcontroller[0].id).then(() => __awaiter(void 0, void 0, void 0, function* () {
+                yield prisma_1.prisma.notification.create({
+                    data: {
+                        userId: id_user,
+                        message: "Peracikan dibatalkan",
+                    }
+                });
+                for (const act in tandon.aktuator) {
+                    yield AktuatorLog_1.default.create({
+                        id_aktuator: tandon.aktuator[act].id,
+                        message: `${tandon.aktuator[act].name} dimatikan`,
+                        status: false
+                    });
+                }
+                return h.response({
+                    status: "success",
+                    message: "Peracikan dibatalkan"
+                });
+            })).catch((error) => __awaiter(void 0, void 0, void 0, function* () {
+                console.error("Error in publish data: ", error);
+                yield prisma_1.prisma.notification.create({
+                    data: {
+                        userId: id_user,
+                        message: "Peracikan gagal dibatalkan, mikrokontroller tidak terhubung ke internet",
+                    }
+                });
+                return boom_1.default.serverUnavailable("Mikrokontroller tidak terhubung ke internet");
+            }));
+        }
+    }
+    catch (e) {
+        if (e instanceof Error) {
+            return boom_1.default.badImplementation(e.message);
+        }
+    }
+});
+exports.cancelPeracikanHandler = cancelPeracikanHandler;
