@@ -2,6 +2,7 @@ import { Request, ResponseToolkit } from "@hapi/hapi";
 import { prisma } from "../config/prisma";
 import Boom from "@hapi/boom";
 import { publishData } from "../config/mqtt";
+import AktuatorLog from "../models/AktuatorLog";
 
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
   try {
@@ -46,6 +47,11 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
               isActive: !data.isActive,
             },
           });
+          await AktuatorLog.create({
+            id_aktuator: data.id,
+            message: `${data.name} ${data.isActive ? 'dimatikan' : 'menyala'}`,
+            status: !data.isActive
+          })
           return h
             .response({
               status: "success",

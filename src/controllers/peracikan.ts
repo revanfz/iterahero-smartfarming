@@ -2,6 +2,7 @@ import { Request, ResponseToolkit } from "@hapi/hapi";
 import Boom from "@hapi/boom";
 import { prisma } from "../config/prisma";
 import { publishData } from "../config/mqtt";
+import AktuatorLog from "../models/AktuatorLog";
 
 interface InputResep {
   resep: number;
@@ -11,6 +12,9 @@ interface InputResep {
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
   try {
     const { resep, id_tandon } = request.payload as InputResep;
+    const { id_user } = request.auth.credentials as {
+      id_user: number;
+    };
     const komposisi = await prisma.resep.findFirst({
       where: {
         id: resep,
@@ -66,7 +70,29 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       }),
       rasio?.aktuator[0].microcontroller?.id ?? 0
     )
-      .then(() => {
+      .then(async() => {
+        await prisma.notification.create({
+          data: {
+            userId: id_user,
+            message: `Peracikan ${komposisi.nama} dimulai`,
+          }
+        })
+        const selectedActuator = await prisma.aktuator.findMany({
+          where: {
+            microcontrollerId: rasio.aktuator[0].microcontroller?.id
+          },
+          select: {
+            id: true,
+            name: true
+          }
+        })
+        for (const act in selectedActuator) {
+          await AktuatorLog.create({
+            id_aktuator: selectedActuator[act].id,
+            message: `${selectedActuator[act].name} menyala`,
+            status: true
+          })
+        }
         return h
           .response({
             status: "success",
@@ -84,6 +110,12 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             isOnline: false
           }
         })
+        await prisma.notification.create({
+          data: {
+            userId: id_user,
+            message: "Peracikan gagal dilakukan, mikrokontroller tidak terhubung ke internet",
+          }
+        })
         return Boom.serverUnavailable(
           "Mikrokontroller tidak terhubung ke internet"
         );
@@ -94,3 +126,66 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
     }
   }
 };
+
+export const cancelPeracikanHandler = async (request: Request, h: ResponseToolkit) => {
+  try {
+    const { id_user } = request.auth.credentials as {
+      id_user: number
+    }
+    const { id_tandon } = request.payload as {
+      id_tandon: number
+    }
+    const tandon = await prisma.tandon.findUnique({
+      where: {
+        id: id_tandon,
+      },
+      include: {
+        microcontroller: true,
+        aktuator: true
+      }
+    })
+    if (tandon) {
+      publishData(
+        "iterahero2023/peracikan/cancel",
+        JSON.stringify({
+          microcontroller: tandon.microcontroller[0].id
+        }),
+        tandon.microcontroller[0].id
+      ).then(async () => {
+        await prisma.notification.create({
+          data: {
+            userId: id_user,
+            message: "Peracikan dibatalkan",
+          }
+        })
+        for (const act in tandon.aktuator) {
+          await AktuatorLog.create({
+            id_aktuator: tandon.aktuator[act].id,
+            message: `${tandon.aktuator[act].name} dimatikan`,
+            status: false
+          })
+        }
+        return h.response({
+          status: "success",
+          message: "Peracikan dibatalkan"
+        })
+      }).catch(async (error) => {
+        console.error("Error in publish data: ", error);
+        await prisma.notification.create({
+          data: {
+            userId: id_user,
+            message: "Peracikan gagal dibatalkan, mikrokontroller tidak terhubung ke internet",
+          }
+        })
+        return Boom.serverUnavailable(
+          "Mikrokontroller tidak terhubung ke internet"
+        );
+      })
+    }
+  }
+  catch (e) {
+    if (e instanceof Error) {
+      return Boom.badImplementation(e.message);
+    }
+  }
+}
