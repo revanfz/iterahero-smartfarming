@@ -23,9 +23,7 @@ export const createPenjadwalan = async (target: Penjadwalan) => {
     id_penjadwalan: target.id,
     id_resep: target.resepId,
     id_tandon: target.tandonId,
-    // id_greenhouse: target.greenhouseId,
     createdBy: target.createdBy,
-    durasi: target.durasi,
   });
   const cron_exp = convertToCronExpression(target.waktu, target.hari);
   schedule.repeatEvery(cron_exp, {
@@ -248,15 +246,11 @@ export const agendaInit = async () => {
       id_penjadwalan,
       id_resep,
       id_tandon,
-      id_greenhouse,
-      durasi,
       createdBy,
     } = job.attrs.data as {
       id_penjadwalan: number;
       id_resep: number;
       id_tandon: number;
-      id_greenhouse: number;
-      durasi: number;
       createdBy: number;
     };
     const resep = await prisma.resep.findUnique({
@@ -280,29 +274,35 @@ export const agendaInit = async () => {
         }
       },
     });
-    const aktuator = await prisma.aktuator.findMany({
+    const aktuator = await prisma.aktuator.findFirst({
       where: {
-        greenhouseId: id_greenhouse,
         tandonId: id_tandon,
-      },
-    });
-    await prisma.notification.create({
-      data: {
-        message: `Penjadwalan ${resep?.nama} telah dimulai`,
-        read: false,
-        userId: createdBy,
       },
     });
     publishData(
       "iterahero2023/penjadwalan-peracikan",
       JSON.stringify({
         komposisi: resep,
-        lamaPenyiraman: durasi,
         konstanta: rasio,
-        aktuator,
       }),
-      1
-    );
+      aktuator?.microcontrollerId ?? 0
+    ).then(async () => {
+      await prisma.notification.create({
+        data: {
+          message: `Penjadwalan ${resep?.nama} telah dimulai`,
+          read: false,
+          userId: createdBy,
+        },
+      });
+    }).catch(async (e) => {
+      await prisma.notification.create({
+        data: {
+          message: `Penjadwalan ${resep?.nama} gagal terjadwal`,
+          read: false,
+          userId: createdBy,
+        },
+      });
+    });
   });
 
   agenda

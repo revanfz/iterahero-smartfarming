@@ -33,9 +33,7 @@ const createPenjadwalan = (target) => __awaiter(void 0, void 0, void 0, function
         id_penjadwalan: target.id,
         id_resep: target.resepId,
         id_tandon: target.tandonId,
-        // id_greenhouse: target.greenhouseId,
         createdBy: target.createdBy,
-        durasi: target.durasi,
     });
     const cron_exp = convertToCronExpression(target.waktu, target.hari);
     schedule.repeatEvery(cron_exp, {
@@ -236,7 +234,8 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
         }), (_d = data === null || data === void 0 ? void 0 : data.microcontrollerId) !== null && _d !== void 0 ? _d : 0);
     }));
     exports.agenda.define("penjadwalan-peracikan", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        const { id_penjadwalan, id_resep, id_tandon, id_greenhouse, durasi, createdBy, } = job.attrs.data;
+        var _e;
+        const { id_penjadwalan, id_resep, id_tandon, createdBy, } = job.attrs.data;
         const resep = yield prisma_1.prisma.resep.findUnique({
             where: {
                 id: id_resep,
@@ -258,25 +257,31 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                 }
             },
         });
-        const aktuator = yield prisma_1.prisma.aktuator.findMany({
+        const aktuator = yield prisma_1.prisma.aktuator.findFirst({
             where: {
-                greenhouseId: id_greenhouse,
                 tandonId: id_tandon,
-            },
-        });
-        yield prisma_1.prisma.notification.create({
-            data: {
-                message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} telah dimulai`,
-                read: false,
-                userId: createdBy,
             },
         });
         (0, mqtt_1.publishData)("iterahero2023/penjadwalan-peracikan", JSON.stringify({
             komposisi: resep,
-            lamaPenyiraman: durasi,
             konstanta: rasio,
-            aktuator,
-        }), 1);
+        }), (_e = aktuator === null || aktuator === void 0 ? void 0 : aktuator.microcontrollerId) !== null && _e !== void 0 ? _e : 0).then(() => __awaiter(void 0, void 0, void 0, function* () {
+            yield prisma_1.prisma.notification.create({
+                data: {
+                    message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} telah dimulai`,
+                    read: false,
+                    userId: createdBy,
+                },
+            });
+        })).catch((e) => __awaiter(void 0, void 0, void 0, function* () {
+            yield prisma_1.prisma.notification.create({
+                data: {
+                    message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} gagal terjadwal`,
+                    read: false,
+                    userId: createdBy,
+                },
+            });
+        }));
     }));
     exports.agenda
         .start()
