@@ -34,6 +34,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.schedulePeracikan = exports.deletePeracikan = exports.onOffPeracikan = exports.initPeracikan = void 0;
 const schedule = __importStar(require("node-schedule"));
+const mqtt_1 = require("../config/mqtt");
 const prisma_1 = require("../config/prisma");
 const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
     schedule
@@ -47,11 +48,10 @@ const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
         data
             .filter((item) => item.isActive === true)
             .forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
-            yield (0, exports.schedulePeracikan)(item.id, item.waktu, item.hari, item.resepId, item.durasi, item.greenhouseId);
+            yield (0, exports.schedulePeracikan)(item.id, item.waktu, item.hari, item.resepId, item.tandonId);
         }));
     }))
         .catch((err) => console.error(err));
-    // .finally(async () => // await prisma.$disconnect());
 });
 exports.initPeracikan = initPeracikan;
 const onOffPeracikan = (id) => __awaiter(void 0, void 0, void 0, function* () {
@@ -65,7 +65,7 @@ const onOffPeracikan = (id) => __awaiter(void 0, void 0, void 0, function* () {
             schedule.scheduledJobs[`iterahero2023-peracikan-${id}`].cancel();
         }
         else {
-            yield (0, exports.schedulePeracikan)(data.id, data.waktu, data.hari, data.resepId, data.durasi, data.greenhouseId);
+            yield (0, exports.schedulePeracikan)(data.id, data.waktu, data.hari, data.resepId, data.tandonId);
         }
     }
 });
@@ -74,7 +74,7 @@ const deletePeracikan = (id) => {
     schedule.scheduledJobs[`iterahero2023-peracikan-${id}`].cancel();
 };
 exports.deletePeracikan = deletePeracikan;
-const schedulePeracikan = (id, jam, hari, resep, durasi, id_greenhouse) => __awaiter(void 0, void 0, void 0, function* () {
+const schedulePeracikan = (id, jam, hari, resep, id_tandon) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const waktu = jam.split(":");
         const hour = parseInt(waktu[0]);
@@ -99,36 +99,24 @@ const schedulePeracikan = (id, jam, hari, resep, durasi, id_greenhouse) => __awa
                 ppm: true
             }
         });
-        let aktuator = yield prisma_1.prisma.aktuator.findMany({
+        let aktuator = yield prisma_1.prisma.aktuator.findFirst({
             where: {
-                greenhouseId: id_greenhouse,
+                tandonId: id_tandon,
             }
         });
         if (komposisi && rasio && aktuator) {
-            console.log({ komposisi, rasio, aktuator });
-            // schedule.scheduleJob(
-            //   `iterahero2023-peracikan-${id}`,
-            //   rule,
-            //   function (resep: object, durasi: number, rasio: object, aktuator: object) {
-            //     publishData(
-            //       "iterahero2023/penjadwalan-peracikan",
-            //       JSON.stringify({
-            //         komposisi: resep,
-            //         lamaPenyiraman: durasi,
-            //         konstanta: rasio,
-            //         aktuator
-            //       }),
-            //       aktuator.microcontrollerId ?? 0
-            //     );
-            //   }.bind(null, komposisi, durasi, rasio, aktuator)
-            // );
+            schedule.scheduleJob(`iterahero2023-peracikan-${id}`, rule, function (resep, rasio, aktuator) {
+                var _a;
+                (0, mqtt_1.publishData)("iterahero2023/penjadwalan-peracikan", JSON.stringify({
+                    komposisi: resep,
+                    konstanta: rasio,
+                    aktuator
+                }), (_a = aktuator.microcontrollerId) !== null && _a !== void 0 ? _a : 0);
+            }.bind(null, komposisi, rasio, aktuator));
         }
     }
     catch (e) {
         console.log(e);
-    }
-    finally {
-        // await prisma.$disconnect()
     }
 });
 exports.schedulePeracikan = schedulePeracikan;

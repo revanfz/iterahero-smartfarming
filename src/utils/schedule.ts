@@ -1,6 +1,7 @@
 import * as schedule from "node-schedule";
 import { publishData } from "../config/mqtt";
 import { prisma } from "../config/prisma";
+import { Aktuator, Resep } from "@prisma/client";
 
 export const initPeracikan = async () => {
   schedule
@@ -14,11 +15,10 @@ export const initPeracikan = async () => {
       data
         .filter((item) => item.isActive === true)
         .forEach(async (item) => {
-          await schedulePeracikan(item.id, item.waktu, item.hari, item.resepId, item.durasi, item.greenhouseId);
+          await schedulePeracikan(item.id, item.waktu, item.hari, item.resepId, item.tandonId);
         });
     })
     .catch((err) => console.error(err))
-    // .finally(async () => // await prisma.$disconnect());
 };
 
 export const onOffPeracikan = async (id: number) => {
@@ -31,7 +31,7 @@ export const onOffPeracikan = async (id: number) => {
     if (data.isActive) {
       schedule.scheduledJobs[`iterahero2023-peracikan-${id}`].cancel();
     } else {
-      await schedulePeracikan(data.id, data.waktu, data.hari, data.resepId, data.durasi, data.greenhouseId);
+      await schedulePeracikan(data.id, data.waktu, data.hari, data.resepId, data.tandonId);
     }
   }
 };
@@ -45,8 +45,7 @@ export const schedulePeracikan = async (
   jam: string,
   hari: number[],
   resep: number,
-  durasi: number,
-  id_greenhouse: number
+  id_tandon: number
 ) => {
   try {
     const waktu = jam.split(":");
@@ -74,34 +73,29 @@ export const schedulePeracikan = async (
         ppm: true
       }
     })
-    let aktuator = await prisma.aktuator.findMany({
-      where:{
-        greenhouseId: id_greenhouse,
+    let aktuator = await prisma.aktuator.findFirst({
+      where: {
+        tandonId: id_tandon,
       }
     })
     if (komposisi && rasio && aktuator) {
-      console.log({ komposisi, rasio, aktuator })
-      // schedule.scheduleJob(
-      //   `iterahero2023-peracikan-${id}`,
-      //   rule,
-      //   function (resep: object, durasi: number, rasio: object, aktuator: object) {
-      //     publishData(
-      //       "iterahero2023/penjadwalan-peracikan",
-      //       JSON.stringify({
-      //         komposisi: resep,
-      //         lamaPenyiraman: durasi,
-      //         konstanta: rasio,
-      //         aktuator
-      //       }),
-      //       aktuator.microcontrollerId ?? 0
-      //     );
-      //   }.bind(null, komposisi, durasi, rasio, aktuator)
-      // );
+      schedule.scheduleJob(
+        `iterahero2023-peracikan-${id}`,
+        rule,
+        function (resep: Resep, rasio: object, aktuator: Aktuator) {
+          publishData(
+            "iterahero2023/penjadwalan-peracikan",
+            JSON.stringify({
+              komposisi: resep,
+              konstanta: rasio,
+              aktuator
+            }),
+            aktuator.microcontrollerId ?? 0
+          );
+        }.bind(null, komposisi, rasio, aktuator)
+      );
     }
   } catch (e) {
     console.log(e);
-  }
-  finally {
-    // await prisma.$disconnect()
   }
 };
