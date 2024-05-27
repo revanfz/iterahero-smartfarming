@@ -21,11 +21,13 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       },
     });
 
-    const rasio = await prisma.tandon.findUnique({
+    const tandon = await prisma.tandon.findUnique({
       where: {
         id: id_tandon,
       },
       select: {
+        nama: true,
+        location: true,
         rasioA: true,
         rasioB: true,
         rasioAir: true,
@@ -52,11 +54,11 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
 
     if (!komposisi) {
       return Boom.notFound(`Tidak ada resep dengan nama: ${resep}`);
-    } else if (!rasio) {
+    } else if (!tandon) {
       return Boom.badRequest(
         "Konstanta pupuk belum diatur pada tandon peracikan"
       );
-    } else if (rasio.capacity < komposisi.volume) {
+    } else if (tandon.capacity < komposisi.volume) {
       return Boom.badRequest(
         "Volume melebihi kapasitas tandon"
       )
@@ -66,20 +68,21 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       "iterahero2023/peracikan",
       JSON.stringify({
         komposisi,
-        konstanta: rasio,
+        konstanta: tandon,
       }),
-      rasio?.aktuator[0].microcontroller?.id ?? 0
+      tandon?.aktuator[0].microcontroller?.id ?? 0
     )
       .then(async() => {
         await prisma.notification.create({
           data: {
             userId: id_user,
             message: `Peracikan ${komposisi.nama} dimulai`,
+            loc: tandon.nama + ", " + tandon.location
           }
         })
         const selectedActuator = await prisma.aktuator.findMany({
           where: {
-            microcontrollerId: rasio.aktuator[0].microcontroller?.id
+            microcontrollerId: tandon.aktuator[0].microcontroller?.id
           },
           select: {
             id: true,
@@ -114,6 +117,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
           data: {
             userId: id_user,
             message: "Peracikan gagal dilakukan, mikrokontroller tidak terhubung ke internet",
+            loc: tandon.nama + ", " + tandon.location
           }
         })
         return Boom.serverUnavailable(
@@ -156,6 +160,7 @@ export const cancelPeracikanHandler = async (request: Request, h: ResponseToolki
           data: {
             userId: id_user,
             message: "Peracikan dibatalkan",
+            loc: tandon.nama + "," + tandon.location
           }
         })
         for (const act in tandon.aktuator) {
@@ -175,6 +180,7 @@ export const cancelPeracikanHandler = async (request: Request, h: ResponseToolki
           data: {
             userId: id_user,
             message: "Peracikan gagal dibatalkan, mikrokontroller tidak terhubung ke internet",
+            loc: tandon.nama + ", " + tandon.location
           }
         })
         return Boom.serverUnavailable(

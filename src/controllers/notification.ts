@@ -15,15 +15,15 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
       data = await prisma.notification.findMany({
         where: {
           userId: id_user,
-          read: false
+          read: false,
         },
         orderBy: {
-          created_at: 'desc'
+          created_at: "desc",
         },
         cursor: cursor ? { id: cursor } : undefined,
         take: size ? size : 100,
         skip: cursor ? 1 : 0,
-      })
+      });
     }
 
     data = await prisma.notification.findMany({
@@ -31,7 +31,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
         userId: id_user,
       },
       orderBy: {
-        created_at: 'desc'
+        created_at: "desc",
       },
       cursor: cursor ? { id: cursor } : undefined,
       take: size ? size : 100,
@@ -57,7 +57,7 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
 export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   try {
     const { id } = request.payload as { id: number[] };
-    
+
     const updatePromise = id.map((identifier) => {
       return prisma.notification.update({
         where: {
@@ -71,11 +71,12 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
 
     await Promise.all(updatePromise);
 
-    return h.response({
-      status: 'success',
-      message: 'Notifikasi telah dibaca'
-    }).code(200)
-    
+    return h
+      .response({
+        status: "success",
+        message: "Notifikasi telah dibaca",
+      })
+      .code(200);
   } catch (e) {
     console.log(e);
     if (e instanceof Error) {
@@ -84,32 +85,22 @@ export const patchHandler = async (request: Request, h: ResponseToolkit) => {
   }
 };
 
-export const postHandler = async (request: Request, h: ResponseToolkit) => {
-  const { id_user } = request.auth.credentials as {
-    id_user: number;
-  };
-
+export const deleteHandler = async (request: Request, h: ResponseToolkit) => {
   try {
-    for (let i = 0; i < 3; i++) {
-      await prisma.notification.create({
-        data: {
-          message: `Hello ${i}`,
-          read: false,
-          userId: id_user,
-        },
-      });
-    }
-
+    const { id } = request.query
+    await prisma.notification.delete({
+      where: {
+        id: parseInt(id)
+      }
+    })
     return h.response({
       status: "success",
-      message: "Notif ditambahin",
-    });
+      message: "Notifikasi dihapus",
+    })
   } catch (e) {
     if (e instanceof Error) {
       console.log(e);
-      return Boom.badImplementation(e.message);
+      return Boom.internal("Gagal menghapus notifikasi")
     }
-  } finally {
-    // await prisma.$disconnect();
   }
 };

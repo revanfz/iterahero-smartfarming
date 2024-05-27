@@ -103,6 +103,7 @@ function connectMqtt() {
                             data: {
                                 message: `peracikan ${tandon === null || tandon === void 0 ? void 0 : tandon.nama} dihentikan karena ${reason.join(", ")} bermasalah`,
                                 userId: tandon.userId,
+                                loc: tandon.nama + "," + tandon.location,
                             },
                         });
                     }

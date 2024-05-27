@@ -27,11 +27,13 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 id: resep,
             },
         });
-        const rasio = yield prisma_1.prisma.tandon.findUnique({
+        const tandon = yield prisma_1.prisma.tandon.findUnique({
             where: {
                 id: id_tandon,
             },
             select: {
+                nama: true,
+                location: true,
                 rasioA: true,
                 rasioB: true,
                 rasioAir: true,
@@ -58,27 +60,28 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         if (!komposisi) {
             return boom_1.default.notFound(`Tidak ada resep dengan nama: ${resep}`);
         }
-        else if (!rasio) {
+        else if (!tandon) {
             return boom_1.default.badRequest("Konstanta pupuk belum diatur pada tandon peracikan");
         }
-        else if (rasio.capacity < komposisi.volume) {
+        else if (tandon.capacity < komposisi.volume) {
             return boom_1.default.badRequest("Volume melebihi kapasitas tandon");
         }
         return (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
             komposisi,
-            konstanta: rasio,
-        }), (_b = (_a = rasio === null || rasio === void 0 ? void 0 : rasio.aktuator[0].microcontroller) === null || _a === void 0 ? void 0 : _a.id) !== null && _b !== void 0 ? _b : 0)
+            konstanta: tandon,
+        }), (_b = (_a = tandon === null || tandon === void 0 ? void 0 : tandon.aktuator[0].microcontroller) === null || _a === void 0 ? void 0 : _a.id) !== null && _b !== void 0 ? _b : 0)
             .then(() => __awaiter(void 0, void 0, void 0, function* () {
             var _c;
             yield prisma_1.prisma.notification.create({
                 data: {
                     userId: id_user,
                     message: `Peracikan ${komposisi.nama} dimulai`,
+                    loc: tandon.nama + ", " + tandon.location
                 }
             });
             const selectedActuator = yield prisma_1.prisma.aktuator.findMany({
                 where: {
-                    microcontrollerId: (_c = rasio.aktuator[0].microcontroller) === null || _c === void 0 ? void 0 : _c.id
+                    microcontrollerId: (_c = tandon.aktuator[0].microcontroller) === null || _c === void 0 ? void 0 : _c.id
                 },
                 select: {
                     id: true,
@@ -113,6 +116,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 data: {
                     userId: id_user,
                     message: "Peracikan gagal dilakukan, mikrokontroller tidak terhubung ke internet",
+                    loc: tandon.nama + ", " + tandon.location
                 }
             });
             return boom_1.default.serverUnavailable("Mikrokontroller tidak terhubung ke internet");
@@ -146,6 +150,7 @@ const cancelPeracikanHandler = (request, h) => __awaiter(void 0, void 0, void 0,
                     data: {
                         userId: id_user,
                         message: "Peracikan dibatalkan",
+                        loc: tandon.nama + "," + tandon.location
                     }
                 });
                 for (const act in tandon.aktuator) {
@@ -165,6 +170,7 @@ const cancelPeracikanHandler = (request, h) => __awaiter(void 0, void 0, void 0,
                     data: {
                         userId: id_user,
                         message: "Peracikan gagal dibatalkan, mikrokontroller tidak terhubung ke internet",
+                        loc: tandon.nama + ", " + tandon.location
                     }
                 });
                 return boom_1.default.serverUnavailable("Mikrokontroller tidak terhubung ke internet");

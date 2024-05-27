@@ -32,7 +32,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.postHandler = exports.patchHandler = exports.getHandler = void 0;
+exports.deleteHandler = exports.patchHandler = exports.getHandler = void 0;
 const Boom = __importStar(require("@hapi/boom"));
 const prisma_1 = require("../config/prisma");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
@@ -47,10 +47,10 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             data = yield prisma_1.prisma.notification.findMany({
                 where: {
                     userId: id_user,
-                    read: false
+                    read: false,
                 },
                 orderBy: {
-                    created_at: 'desc'
+                    created_at: "desc",
                 },
                 cursor: cursor ? { id: cursor } : undefined,
                 take: size ? size : 100,
@@ -62,7 +62,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 userId: id_user,
             },
             orderBy: {
-                created_at: 'desc'
+                created_at: "desc",
             },
             cursor: cursor ? { id: cursor } : undefined,
             take: size ? size : 100,
@@ -100,10 +100,12 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
             });
         });
         yield Promise.all(updatePromise);
-        return h.response({
-            status: 'success',
-            message: 'Notifikasi telah dibaca'
-        }).code(200);
+        return h
+            .response({
+            status: "success",
+            message: "Notifikasi telah dibaca",
+        })
+            .code(200);
     }
     catch (e) {
         console.log(e);
@@ -113,31 +115,24 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     }
 });
 exports.patchHandler = patchHandler;
-const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
-    const { id_user } = request.auth.credentials;
+const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        for (let i = 0; i < 3; i++) {
-            yield prisma_1.prisma.notification.create({
-                data: {
-                    message: `Hello ${i}`,
-                    read: false,
-                    userId: id_user,
-                },
-            });
-        }
+        const { id } = request.query;
+        yield prisma_1.prisma.notification.delete({
+            where: {
+                id: parseInt(id)
+            }
+        });
         return h.response({
             status: "success",
-            message: "Notif ditambahin",
+            message: "Notifikasi dihapus",
         });
     }
     catch (e) {
         if (e instanceof Error) {
             console.log(e);
-            return Boom.badImplementation(e.message);
+            return Boom.internal("Gagal menghapus notifikasi");
         }
     }
-    finally {
-        // await prisma.$disconnect();
-    }
 });
-exports.postHandler = postHandler;
+exports.deleteHandler = deleteHandler;

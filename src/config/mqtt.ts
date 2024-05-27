@@ -79,6 +79,7 @@ export function connectMqtt() {
                   tandon?.nama
                 } dihentikan karena ${reason.join(", ")} bermasalah`,
                 userId: tandon.userId,
+                loc: tandon.nama + "," + tandon.location,
               },
             });
           }
@@ -100,7 +101,7 @@ export function connectMqtt() {
         });
       }
       if (topic === "iterahero2023/peracikan/info") {
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
 
         await prisma.tandon.updateMany({
           where: {
@@ -116,7 +117,7 @@ export function connectMqtt() {
         });
       }
       if (topic === "iterahero2023/info/sensor") {
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
         let microcontroller = await prisma.microcontroller.findFirst({
           where: {
             name: data.microcontrollerName,
@@ -178,7 +179,7 @@ export function connectMqtt() {
         await processSensorData(data.sensor_non_adc, "sensor_non_adc");
       }
       if (topic === "iterahero2023/info/actuator") {
-        console.log(JSON.stringify(data));
+        // console.log(JSON.stringify(data));
 
         data.actuator.forEach(async (item: object, index: number) => {
           const pin = Object.keys(item)[0];

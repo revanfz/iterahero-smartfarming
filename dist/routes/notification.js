@@ -11,13 +11,13 @@ exports.notificationRoute = [
         handler: notification_1.getHandler
     },
     {
-        method: "POST",
-        path,
-        handler: notification_1.postHandler
-    },
-    {
         method: "PATCH",
         path,
         handler: notification_1.patchHandler
+    },
+    {
+        method: "DELETE",
+        path,
+        handler: notification_1.deleteHandler
     }
 ];

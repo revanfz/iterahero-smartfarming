@@ -28,7 +28,7 @@ export const createPenjadwalan = async (target: Penjadwalan) => {
   const cron_exp = convertToCronExpression(target.waktu, target.hari);
   schedule.repeatEvery(cron_exp, {
     timezone: "Asia/Jakarta",
-    skipImmediate: true
+    skipImmediate: true,
   });
   await schedule.save();
 };
@@ -57,7 +57,7 @@ export const createAutomation = async (target: AutomationSchedule) => {
   });
   scheduleAutomation.repeatEvery(`${minute} ${jamAutomasi} * * *`, {
     timezone: "Asia/Jakarta",
-    skipImmediate: true
+    skipImmediate: true,
   });
   await scheduleAutomation.save();
 
@@ -125,8 +125,8 @@ export const agendaInit = async () => {
   agenda.define("logging-sensor", async (job: Job) => {
     const data = await prisma.sensor.findMany({
       include: {
-        microcontroller: true
-      }
+        microcontroller: true,
+      },
     });
     data
       .filter((item) => item.microcontroller?.status)
@@ -142,7 +142,7 @@ export const agendaInit = async () => {
             microcontrollerId: target.microcontrollerId,
             createdAt: new Date(),
           });
-          // if target.nilai < item.range_min  
+          // if target.nilai < item.range_min
         }
       });
   });
@@ -176,32 +176,43 @@ export const agendaInit = async () => {
         id: id_aktuator,
       },
       include: {
-        microcontroller: true
-      }
-    });
-    await prisma.aktuator.update({
-      where: {
-        id: id_aktuator,
-      },
-      data: {
-        isActive: true,
+        microcontroller: true,
+        greenhouse: true,
+        tandon: true,
       },
     });
-    await AktuatorLog.create({
-      id_aktuator,
-      message: `Automasi - ${data?.name} menyala`,
-      status: true
-    });
-    // console.log(data?.name, id_aktuator);
     publishData(
       "iterahero2023/automation",
       JSON.stringify({
         pin: data?.GPIO,
         durasi,
-        microcontroller: data?.microcontroller?.name
+        microcontroller: data?.microcontroller?.name,
       }),
       data?.microcontrollerId ?? 0
-    );
+    ).then(async () => {
+      await prisma.aktuator.update({
+        where: {
+          id: id_aktuator,
+        },
+        data: {
+          isActive: true,
+        },
+      });
+      await prisma.notification.create({
+        data: {
+          message: `Automasi - ${data?.name} menyala`,
+          userId: 1,
+          loc:
+            (data?.greenhouse?.name ?? data?.tandon?.nama ?? "") +
+            data?.tandon?.location,
+        },
+      });
+      await AktuatorLog.create({
+        id_aktuator,
+        message: `Automasi - ${data?.name} menyala`,
+        status: true,
+      });
+    });
   });
 
   agenda.define("automation-off", async (job: Job) => {
@@ -215,39 +226,47 @@ export const agendaInit = async () => {
         id: id_aktuator,
       },
       include: {
-        microcontroller: true
-      }
-    });
-    await prisma.aktuator.update({
-      where: {
-        id: id_aktuator,
+        microcontroller: true,
+        greenhouse: true,
+        tandon: true,
       },
-      data: {
-        isActive: false,
-      },
-    });
-    await AktuatorLog.create({
-      id_aktuator,
-      message: `Automasi - ${data?.name} dimatikan`,
-      status: false
     });
     publishData(
       "iterahero2023/automation",
       JSON.stringify({
         pin: data?.GPIO,
-        microcontroller: data?.microcontroller?.name
+        microcontroller: data?.microcontroller?.name,
       }),
       data?.microcontrollerId ?? 0
-    );
+    ).then(async () => {
+      await prisma.aktuator.update({
+        where: {
+          id: id_aktuator,
+        },
+        data: {
+          isActive: false,
+        },
+      });
+      await prisma.notification.create({
+        data: {
+          message: `Automasi - ${data?.name} dimatikan`,
+          userId: 1,
+          loc:
+            (data?.greenhouse?.name ?? data?.tandon?.nama ?? "") +
+            data?.tandon?.location,
+        },
+      });
+      await AktuatorLog.create({
+        id_aktuator,
+        message: `Automasi - ${data?.name} dimatikan`,
+        status: false,
+      });
+    });
   });
 
   agenda.define("penjadwalan-peracikan", async (job: Job) => {
-    const {
-      id_penjadwalan,
-      id_resep,
-      id_tandon,
-      createdBy,
-    } = job.attrs.data as {
+    const { id_penjadwalan, id_resep, id_tandon, createdBy } = job.attrs
+      .data as {
       id_penjadwalan: number;
       id_resep: number;
       id_tandon: number;
@@ -258,20 +277,22 @@ export const agendaInit = async () => {
         id: id_resep,
       },
     });
-    const rasio = await prisma.tandon.findUnique({
+    const tandon = await prisma.tandon.findUnique({
       where: {
         id: id_tandon,
       },
       select: {
+        nama: true,
+        location: true,
         rasioAir: true,
         rasioA: true,
         rasioB: true,
         ppm: true,
         microcontroller: {
           select: {
-            name: true
-          }
-        }
+            name: true,
+          },
+        },
       },
     });
     const aktuator = await prisma.aktuator.findFirst({
@@ -283,26 +304,28 @@ export const agendaInit = async () => {
       "iterahero2023/penjadwalan-peracikan",
       JSON.stringify({
         komposisi: resep,
-        konstanta: rasio,
+        konstanta: tandon,
       }),
       aktuator?.microcontrollerId ?? 0
-    ).then(async () => {
-      await prisma.notification.create({
-        data: {
-          message: `Penjadwalan ${resep?.nama} telah dimulai`,
-          read: false,
-          userId: createdBy,
-        },
+    )
+      .then(async () => {
+        await prisma.notification.create({
+          data: {
+            message: `Penjadwalan ${resep?.nama} telah dimulai`,
+            userId: createdBy,
+            loc: tandon?.nama + ", " + tandon?.location,
+          },
+        });
+      })
+      .catch(async (e) => {
+        await prisma.notification.create({
+          data: {
+            message: `Penjadwalan ${resep?.nama} gagal terjadwal`,
+            userId: createdBy,
+            loc: tandon?.nama + ", " + tandon?.location,
+          },
+        });
       });
-    }).catch(async (e) => {
-      await prisma.notification.create({
-        data: {
-          message: `Penjadwalan ${resep?.nama} gagal terjadwal`,
-          read: false,
-          userId: createdBy,
-        },
-      });
-    });
   });
 
   agenda

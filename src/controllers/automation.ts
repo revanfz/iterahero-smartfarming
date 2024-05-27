@@ -62,8 +62,6 @@ export const getHandler = async (request: Request, h: ResponseToolkit) => {
           },
         });
 
-        console.log(data);
-
         return h.response({
           status: "success",
           data,

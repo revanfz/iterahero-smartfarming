@@ -38,7 +38,7 @@ const createPenjadwalan = (target) => __awaiter(void 0, void 0, void 0, function
     const cron_exp = convertToCronExpression(target.waktu, target.hari);
     schedule.repeatEvery(cron_exp, {
         timezone: "Asia/Jakarta",
-        skipImmediate: true
+        skipImmediate: true,
     });
     yield schedule.save();
 });
@@ -66,7 +66,7 @@ const createAutomation = (target) => __awaiter(void 0, void 0, void 0, function*
     });
     scheduleAutomation.repeatEvery(`${minute} ${jamAutomasi} * * *`, {
         timezone: "Asia/Jakarta",
-        skipImmediate: true
+        skipImmediate: true,
     });
     yield scheduleAutomation.save();
     // Automasi mati
@@ -135,8 +135,8 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
     exports.agenda.define("logging-sensor", (job) => __awaiter(void 0, void 0, void 0, function* () {
         const data = yield prisma_1.prisma.sensor.findMany({
             include: {
-                microcontroller: true
-            }
+                microcontroller: true,
+            },
         });
         data
             .filter((item) => { var _a; return (_a = item.microcontroller) === null || _a === void 0 ? void 0 : _a.status; })
@@ -152,7 +152,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                     microcontrollerId: target.microcontrollerId,
                     createdAt: new Date(),
                 });
-                // if target.nilai < item.range_min  
+                // if target.nilai < item.range_min
             }
         }));
     }));
@@ -181,80 +181,106 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                 id: id_aktuator,
             },
             include: {
-                microcontroller: true
-            }
-        });
-        yield prisma_1.prisma.aktuator.update({
-            where: {
-                id: id_aktuator,
-            },
-            data: {
-                isActive: true,
+                microcontroller: true,
+                greenhouse: true,
+                tandon: true,
             },
         });
-        yield AktuatorLog_1.default.create({
-            id_aktuator,
-            message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} menyala`,
-            status: true
-        });
-        // console.log(data?.name, id_aktuator);
         (0, mqtt_1.publishData)("iterahero2023/automation", JSON.stringify({
             pin: data === null || data === void 0 ? void 0 : data.GPIO,
             durasi,
-            microcontroller: (_a = data === null || data === void 0 ? void 0 : data.microcontroller) === null || _a === void 0 ? void 0 : _a.name
-        }), (_b = data === null || data === void 0 ? void 0 : data.microcontrollerId) !== null && _b !== void 0 ? _b : 0);
+            microcontroller: (_a = data === null || data === void 0 ? void 0 : data.microcontroller) === null || _a === void 0 ? void 0 : _a.name,
+        }), (_b = data === null || data === void 0 ? void 0 : data.microcontrollerId) !== null && _b !== void 0 ? _b : 0).then(() => __awaiter(void 0, void 0, void 0, function* () {
+            var _c, _d, _e, _f, _g;
+            yield prisma_1.prisma.aktuator.update({
+                where: {
+                    id: id_aktuator,
+                },
+                data: {
+                    isActive: true,
+                },
+            });
+            yield prisma_1.prisma.notification.create({
+                data: {
+                    message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} menyala`,
+                    userId: 1,
+                    loc: ((_f = (_d = (_c = data === null || data === void 0 ? void 0 : data.greenhouse) === null || _c === void 0 ? void 0 : _c.name) !== null && _d !== void 0 ? _d : (_e = data === null || data === void 0 ? void 0 : data.tandon) === null || _e === void 0 ? void 0 : _e.nama) !== null && _f !== void 0 ? _f : "") +
+                        ((_g = data === null || data === void 0 ? void 0 : data.tandon) === null || _g === void 0 ? void 0 : _g.location),
+                },
+            });
+            yield AktuatorLog_1.default.create({
+                id_aktuator,
+                message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} menyala`,
+                status: true,
+            });
+        }));
     }));
     exports.agenda.define("automation-off", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        var _c, _d;
+        var _h, _j;
         const { id_automation, id_aktuator } = job.attrs.data;
         const data = yield prisma_1.prisma.aktuator.findUnique({
             where: {
                 id: id_aktuator,
             },
             include: {
-                microcontroller: true
-            }
-        });
-        yield prisma_1.prisma.aktuator.update({
-            where: {
-                id: id_aktuator,
+                microcontroller: true,
+                greenhouse: true,
+                tandon: true,
             },
-            data: {
-                isActive: false,
-            },
-        });
-        yield AktuatorLog_1.default.create({
-            id_aktuator,
-            message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} dimatikan`,
-            status: false
         });
         (0, mqtt_1.publishData)("iterahero2023/automation", JSON.stringify({
             pin: data === null || data === void 0 ? void 0 : data.GPIO,
-            microcontroller: (_c = data === null || data === void 0 ? void 0 : data.microcontroller) === null || _c === void 0 ? void 0 : _c.name
-        }), (_d = data === null || data === void 0 ? void 0 : data.microcontrollerId) !== null && _d !== void 0 ? _d : 0);
+            microcontroller: (_h = data === null || data === void 0 ? void 0 : data.microcontroller) === null || _h === void 0 ? void 0 : _h.name,
+        }), (_j = data === null || data === void 0 ? void 0 : data.microcontrollerId) !== null && _j !== void 0 ? _j : 0).then(() => __awaiter(void 0, void 0, void 0, function* () {
+            var _k, _l, _m, _o, _p;
+            yield prisma_1.prisma.aktuator.update({
+                where: {
+                    id: id_aktuator,
+                },
+                data: {
+                    isActive: false,
+                },
+            });
+            yield prisma_1.prisma.notification.create({
+                data: {
+                    message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} dimatikan`,
+                    userId: 1,
+                    loc: ((_o = (_l = (_k = data === null || data === void 0 ? void 0 : data.greenhouse) === null || _k === void 0 ? void 0 : _k.name) !== null && _l !== void 0 ? _l : (_m = data === null || data === void 0 ? void 0 : data.tandon) === null || _m === void 0 ? void 0 : _m.nama) !== null && _o !== void 0 ? _o : "") +
+                        ((_p = data === null || data === void 0 ? void 0 : data.tandon) === null || _p === void 0 ? void 0 : _p.location),
+                },
+            });
+            yield AktuatorLog_1.default.create({
+                id_aktuator,
+                message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} dimatikan`,
+                status: false,
+            });
+        }));
     }));
     exports.agenda.define("penjadwalan-peracikan", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        var _e;
-        const { id_penjadwalan, id_resep, id_tandon, createdBy, } = job.attrs.data;
+        var _q;
+        const { id_penjadwalan, id_resep, id_tandon, createdBy } = job.attrs
+            .data;
         const resep = yield prisma_1.prisma.resep.findUnique({
             where: {
                 id: id_resep,
             },
         });
-        const rasio = yield prisma_1.prisma.tandon.findUnique({
+        const tandon = yield prisma_1.prisma.tandon.findUnique({
             where: {
                 id: id_tandon,
             },
             select: {
+                nama: true,
+                location: true,
                 rasioAir: true,
                 rasioA: true,
                 rasioB: true,
                 ppm: true,
                 microcontroller: {
                     select: {
-                        name: true
-                    }
-                }
+                        name: true,
+                    },
+                },
             },
         });
         const aktuator = yield prisma_1.prisma.aktuator.findFirst({
@@ -264,21 +290,23 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
         });
         (0, mqtt_1.publishData)("iterahero2023/penjadwalan-peracikan", JSON.stringify({
             komposisi: resep,
-            konstanta: rasio,
-        }), (_e = aktuator === null || aktuator === void 0 ? void 0 : aktuator.microcontrollerId) !== null && _e !== void 0 ? _e : 0).then(() => __awaiter(void 0, void 0, void 0, function* () {
+            konstanta: tandon,
+        }), (_q = aktuator === null || aktuator === void 0 ? void 0 : aktuator.microcontrollerId) !== null && _q !== void 0 ? _q : 0)
+            .then(() => __awaiter(void 0, void 0, void 0, function* () {
             yield prisma_1.prisma.notification.create({
                 data: {
                     message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} telah dimulai`,
-                    read: false,
                     userId: createdBy,
+                    loc: (tandon === null || tandon === void 0 ? void 0 : tandon.nama) + ", " + (tandon === null || tandon === void 0 ? void 0 : tandon.location),
                 },
             });
-        })).catch((e) => __awaiter(void 0, void 0, void 0, function* () {
+        }))
+            .catch((e) => __awaiter(void 0, void 0, void 0, function* () {
             yield prisma_1.prisma.notification.create({
                 data: {
                     message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} gagal terjadwal`,
-                    read: false,
                     userId: createdBy,
+                    loc: (tandon === null || tandon === void 0 ? void 0 : tandon.nama) + ", " + (tandon === null || tandon === void 0 ? void 0 : tandon.location),
                 },
             });
         }));
