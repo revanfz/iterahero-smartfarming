@@ -70,7 +70,6 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                         },
                     },
                 });
-                console.log(data);
                 return h.response({
                     status: "success",
                     data,

@@ -125,7 +125,7 @@ function connectMqtt() {
                 });
             }
             if (topic === "iterahero2023/peracikan/info") {
-                console.log(JSON.stringify(data));
+                // console.log(JSON.stringify(data));
                 yield prisma_1.prisma.tandon.updateMany({
                     where: {
                         microcontroller: {
@@ -140,7 +140,7 @@ function connectMqtt() {
                 });
             }
             if (topic === "iterahero2023/info/sensor") {
-                console.log(JSON.stringify(data));
+                // console.log(JSON.stringify(data));
                 let microcontroller = yield prisma_1.prisma.microcontroller.findFirst({
                     where: {
                         name: data.microcontrollerName,
@@ -187,7 +187,7 @@ function connectMqtt() {
                 yield processSensorData(data.sensor_non_adc, "sensor_non_adc");
             }
             if (topic === "iterahero2023/info/actuator") {
-                console.log(JSON.stringify(data));
+                // console.log(JSON.stringify(data));
                 data.actuator.forEach((item, index) => __awaiter(this, void 0, void 0, function* () {
                     const pin = Object.keys(item)[0];
                     const isActive = Boolean(Object.values(item)[0]);
