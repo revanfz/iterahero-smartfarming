@@ -148,35 +148,6 @@ export const agendaInit = async () => {
       });
   });
 
-  agenda.define("check-microcontroller", async (job: Job) => {
-    const data = await prisma.microcontroller.findMany();
-    data.forEach(async (item) => {
-      const now = new Date();
-      const threeMinsAgo = new Date(now.getTime() - 3 * 60 * 1000);
-      if (item.updated_at && item.updated_at > threeMinsAgo && item.status) {
-        await prisma.microcontroller.update({
-          where: {
-            id: item.id,
-          },
-          data: {
-            status: !item.status,
-          },
-        });
-        await prisma.tandon.updateMany({
-          where: {
-            microcontroller: {
-              every: {
-                id: item.id
-              },
-            }
-          },
-          data: {
-            isOnline: !item.status
-          }
-        })
-      }
-    });
-  });
 
   agenda.define("automation", async (job: Job) => {
     const { id_automation, id_aktuator, durasi } = job.attrs.data as {
@@ -350,7 +321,6 @@ export const agendaInit = async () => {
     .then(() => console.log("Agenda Started"))
     .catch((err) => console.error(err));
 
-  agenda.every("3 minutes", "check-microcontroller");
   agenda.every("1 hour", "logging-sensor");
   reinitializeSchedule().then(() =>
     console.log("Inisialisasi Penjadwalan Selesai")
