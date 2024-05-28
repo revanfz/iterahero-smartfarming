@@ -9,6 +9,7 @@ import AktuatorLog from "../models/AktuatorLog";
 
 export const agenda = new Agenda({
   db: { address: process.env.MONGODB_URL || "", collection: "penjadwalan" },
+  processEvery: "30 seconds",
 });
 
 const convertToCronExpression = (waktu: string, hari: number[]) => {
@@ -84,13 +85,13 @@ export const reinitializeSchedule = async () => {
     },
   });
 
-  penjadwalan.forEach(async (item) => {
-    await createPenjadwalan(item);
-  });
+  for (const jadwal of penjadwalan) {
+    await createPenjadwalan(jadwal);
+  }
 
-  automation.forEach(async (item) => {
-    await createAutomation(item);
-  });
+  for (const automasi of automation) {
+    await createAutomation(automasi);
+  }
 };
 
 export const onOffPenjadwalan = async (id: number, currentStatus: boolean) => {
@@ -152,7 +153,7 @@ export const agendaInit = async () => {
     data.forEach(async (item) => {
       const now = new Date();
       const threeMinsAgo = new Date(now.getTime() - 3 * 60 * 1000);
-      if (item.updated_at && item.updated_at < threeMinsAgo && item.status) {
+      if (item.updated_at && item.updated_at > threeMinsAgo && item.status) {
         await prisma.microcontroller.update({
           where: {
             id: item.id,
@@ -161,6 +162,18 @@ export const agendaInit = async () => {
             status: !item.status,
           },
         });
+        await prisma.tandon.updateMany({
+          where: {
+            microcontroller: {
+              every: {
+                id: item.id
+              },
+            }
+          },
+          data: {
+            isOnline: !item.status
+          }
+        })
       }
     });
   });
@@ -200,6 +213,7 @@ export const agendaInit = async () => {
       });
       await prisma.notification.create({
         data: {
+          header: `Automasi - ${data?.name} menyala`,
           message: `Automasi - ${data?.name} menyala`,
           userId: 1,
           loc:
@@ -249,6 +263,7 @@ export const agendaInit = async () => {
       });
       await prisma.notification.create({
         data: {
+          header: `Automasi - ${data?.name} dimatikan`,
           message: `Automasi - ${data?.name} dimatikan`,
           userId: 1,
           loc:
@@ -301,7 +316,7 @@ export const agendaInit = async () => {
       },
     });
     publishData(
-      "iterahero2023/penjadwalan-peracikan",
+      "iterahero2023/peracikan",
       JSON.stringify({
         komposisi: resep,
         konstanta: tandon,
@@ -311,7 +326,8 @@ export const agendaInit = async () => {
       .then(async () => {
         await prisma.notification.create({
           data: {
-            message: `Penjadwalan ${resep?.nama} telah dimulai`,
+            header: `Penjadwalan ${resep?.nama} telah dimulai`,
+            message: `Penjadwalan ${resep?.nama} telah dimulai. PH target: ${resep?.ph_min} - ${resep?.ph_max}, PPM target ${resep?.ppm_min} - ${resep?.ppm_max}`,
             userId: createdBy,
             loc: tandon?.nama + ", " + tandon?.location,
           },
@@ -320,6 +336,7 @@ export const agendaInit = async () => {
       .catch(async (e) => {
         await prisma.notification.create({
           data: {
+            header: `Penjadwalan ${resep?.nama} gagal terjadwal`,
             message: `Penjadwalan ${resep?.nama} gagal terjadwal`,
             userId: createdBy,
             loc: tandon?.nama + ", " + tandon?.location,
@@ -339,17 +356,3 @@ export const agendaInit = async () => {
     console.log("Inisialisasi Penjadwalan Selesai")
   );
 };
-
-async function graceful() {
-  await agenda.cancel({
-    name: {
-      $in: ["penjadwalan-peracikan", "logging-sensor", "check-microcontroller"],
-    },
-  });
-  console.log("Stopping agenda");
-  await agenda.stop();
-  process.exit(0);
-}
-
-process.on("SIGTERM", graceful);
-process.on("SIGINT", graceful);

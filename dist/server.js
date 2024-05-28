@@ -35,7 +35,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.start = exports.init = void 0;
+exports.graceful = exports.start = exports.init = void 0;
 const JWT = __importStar(require("@hapi/jwt"));
 const HapiSwagger = __importStar(require("hapi-swagger"));
 const Inert = __importStar(require("@hapi/inert"));
@@ -46,6 +46,7 @@ require("dotenv/config");
 const hapi_1 = require("@hapi/hapi");
 const routes_1 = require("./routes/routes");
 const roleAuth_1 = require("./middleware/roleAuth");
+const agenda_1 = require("./utils/agenda");
 let server;
 const init = function () {
     return __awaiter(this, void 0, void 0, function* () {
@@ -58,26 +59,28 @@ const init = function () {
             routes: {
                 cors: {
                     origin: ["*"],
-                }
+                },
             },
         });
         const swaggerOptions = {
             info: {
-                title: "Test API Documentation"
-            }
+                title: "Test API Documentation",
+            },
         };
         const plugins = [
             {
-                plugin: JWT
+                plugin: JWT,
             },
             {
                 plugin: Inert,
-            }, {
-                plugin: Vision
-            }, {
+            },
+            {
+                plugin: Vision,
+            },
+            {
                 plugin: HapiSwagger,
-                options: swaggerOptions
-            }
+                options: swaggerOptions,
+            },
         ];
         yield server.register(plugins);
         server.route(routes_1.routes);
@@ -95,21 +98,22 @@ const init = function () {
             validate: (artifacts, request, h) => {
                 const token = artifacts.token;
                 const { exp } = jwt.decode(token);
-                if (exp > Date.now() / 1000 && jwt.verify(token, process.env.JWT_SECRET)) {
+                if (exp > Date.now() / 1000 &&
+                    jwt.verify(token, process.env.JWT_SECRET)) {
                     return {
                         isValid: true,
-                        credentials: jwt.verify(token, process.env.JWT_SECRET)
+                        credentials: jwt.verify(token, process.env.JWT_SECRET),
                     };
                 }
                 else {
                     return {
-                        isValid: false
+                        isValid: false,
                     };
                 }
-            }
+            },
         });
         server.auth.default("jwt");
-        server.ext('onPreHandler', roleAuth_1.userAuthorization);
+        server.ext("onPreHandler", roleAuth_1.userAuthorization);
         return server;
     });
 };
@@ -125,7 +129,20 @@ process.on("unhandledRejection", (err) => {
     console.error(err);
     process.exit(1);
 });
-process.on("SIGINT", () => {
-    console.log("Stopping server");
-    server.stop({ timeout: 1000 }).then(() => process.exit(1));
-});
+function graceful() {
+    return __awaiter(this, void 0, void 0, function* () {
+        yield agenda_1.agenda.cancel({
+            name: {
+                $in: ["penjadwalan-peracikan", "logging-sensor", "check-microcontroller"],
+            },
+        });
+        console.log("Stopping agenda...");
+        yield agenda_1.agenda.stop();
+        console.log("Stopping server");
+        yield server.stop({ timeout: 1000 });
+        process.exit(0);
+    });
+}
+exports.graceful = graceful;
+process.on("SIGTERM", graceful);
+process.on("SIGINT", graceful);

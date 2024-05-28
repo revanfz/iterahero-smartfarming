@@ -22,6 +22,7 @@ const SensorLog_1 = __importDefault(require("../models/SensorLog"));
 const AktuatorLog_1 = __importDefault(require("../models/AktuatorLog"));
 exports.agenda = new agenda_1.Agenda({
     db: { address: process.env.MONGODB_URL || "", collection: "penjadwalan" },
+    processEvery: "30 seconds",
 });
 const convertToCronExpression = (waktu, hari) => {
     const [jam, menit] = waktu.split(":");
@@ -91,12 +92,12 @@ const reinitializeSchedule = () => __awaiter(void 0, void 0, void 0, function* (
             isActive: true,
         },
     });
-    penjadwalan.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
-        yield (0, exports.createPenjadwalan)(item);
-    }));
-    automation.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
-        yield (0, exports.createAutomation)(item);
-    }));
+    for (const jadwal of penjadwalan) {
+        yield (0, exports.createPenjadwalan)(jadwal);
+    }
+    for (const automasi of automation) {
+        yield (0, exports.createAutomation)(automasi);
+    }
 });
 exports.reinitializeSchedule = reinitializeSchedule;
 const onOffPenjadwalan = (id, currentStatus) => __awaiter(void 0, void 0, void 0, function* () {
@@ -161,7 +162,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
         data.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
             const now = new Date();
             const threeMinsAgo = new Date(now.getTime() - 3 * 60 * 1000);
-            if (item.updated_at && item.updated_at < threeMinsAgo && item.status) {
+            if (item.updated_at && item.updated_at > threeMinsAgo && item.status) {
                 yield prisma_1.prisma.microcontroller.update({
                     where: {
                         id: item.id,
@@ -169,6 +170,18 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                     data: {
                         status: !item.status,
                     },
+                });
+                yield prisma_1.prisma.tandon.updateMany({
+                    where: {
+                        microcontroller: {
+                            every: {
+                                id: item.id
+                            },
+                        }
+                    },
+                    data: {
+                        isOnline: !item.status
+                    }
                 });
             }
         }));
@@ -202,6 +215,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             });
             yield prisma_1.prisma.notification.create({
                 data: {
+                    header: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} menyala`,
                     message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} menyala`,
                     userId: 1,
                     loc: ((_f = (_d = (_c = data === null || data === void 0 ? void 0 : data.greenhouse) === null || _c === void 0 ? void 0 : _c.name) !== null && _d !== void 0 ? _d : (_e = data === null || data === void 0 ? void 0 : data.tandon) === null || _e === void 0 ? void 0 : _e.nama) !== null && _f !== void 0 ? _f : "") +
@@ -243,6 +257,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             });
             yield prisma_1.prisma.notification.create({
                 data: {
+                    header: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} dimatikan`,
                     message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} dimatikan`,
                     userId: 1,
                     loc: ((_o = (_l = (_k = data === null || data === void 0 ? void 0 : data.greenhouse) === null || _k === void 0 ? void 0 : _k.name) !== null && _l !== void 0 ? _l : (_m = data === null || data === void 0 ? void 0 : data.tandon) === null || _m === void 0 ? void 0 : _m.nama) !== null && _o !== void 0 ? _o : "") +
@@ -288,14 +303,15 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                 tandonId: id_tandon,
             },
         });
-        (0, mqtt_1.publishData)("iterahero2023/penjadwalan-peracikan", JSON.stringify({
+        (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({
             komposisi: resep,
             konstanta: tandon,
         }), (_q = aktuator === null || aktuator === void 0 ? void 0 : aktuator.microcontrollerId) !== null && _q !== void 0 ? _q : 0)
             .then(() => __awaiter(void 0, void 0, void 0, function* () {
             yield prisma_1.prisma.notification.create({
                 data: {
-                    message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} telah dimulai`,
+                    header: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} telah dimulai`,
+                    message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} telah dimulai. PH target: ${resep === null || resep === void 0 ? void 0 : resep.ph_min} - ${resep === null || resep === void 0 ? void 0 : resep.ph_max}, PPM target ${resep === null || resep === void 0 ? void 0 : resep.ppm_min} - ${resep === null || resep === void 0 ? void 0 : resep.ppm_max}`,
                     userId: createdBy,
                     loc: (tandon === null || tandon === void 0 ? void 0 : tandon.nama) + ", " + (tandon === null || tandon === void 0 ? void 0 : tandon.location),
                 },
@@ -304,6 +320,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             .catch((e) => __awaiter(void 0, void 0, void 0, function* () {
             yield prisma_1.prisma.notification.create({
                 data: {
+                    header: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} gagal terjadwal`,
                     message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} gagal terjadwal`,
                     userId: createdBy,
                     loc: (tandon === null || tandon === void 0 ? void 0 : tandon.nama) + ", " + (tandon === null || tandon === void 0 ? void 0 : tandon.location),
@@ -320,17 +337,3 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
     (0, exports.reinitializeSchedule)().then(() => console.log("Inisialisasi Penjadwalan Selesai"));
 });
 exports.agendaInit = agendaInit;
-function graceful() {
-    return __awaiter(this, void 0, void 0, function* () {
-        yield exports.agenda.cancel({
-            name: {
-                $in: ["penjadwalan-peracikan", "logging-sensor", "check-microcontroller"],
-            },
-        });
-        console.log("Stopping agenda");
-        yield exports.agenda.stop();
-        process.exit(0);
-    });
-}
-process.on("SIGTERM", graceful);
-process.on("SIGINT", graceful);

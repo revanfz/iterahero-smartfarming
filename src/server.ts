@@ -10,6 +10,7 @@ import "dotenv/config";
 import { Server, AuthArtifacts, Request, ResponseToolkit } from "@hapi/hapi";
 import { routes } from "./routes/routes";
 import { userAuthorization } from "./middleware/roleAuth";
+import { agenda } from "./utils/agenda";
 
 let server: Server;
 
@@ -23,33 +24,33 @@ export const init = async function (): Promise<Server> {
     routes: {
       cors: {
         origin: ["*"],
-      }
+      },
     },
   });
-  
-const swaggerOptions: HapiSwagger.RegisterOptions = {
-  info: {
-    title: "Test API Documentation"
-  }
-}
 
-const plugins = [
-  {
-    plugin: JWT
-  },
-  {
-    plugin: Inert,
-  }, {
-    plugin: Vision
-  }, {
-    plugin: HapiSwagger,
-    options: swaggerOptions
-  }
-]
+  const swaggerOptions: HapiSwagger.RegisterOptions = {
+    info: {
+      title: "Test API Documentation",
+    },
+  };
 
-  await server.register(
-    plugins
-  );
+  const plugins = [
+    {
+      plugin: JWT,
+    },
+    {
+      plugin: Inert,
+    },
+    {
+      plugin: Vision,
+    },
+    {
+      plugin: HapiSwagger,
+      options: swaggerOptions,
+    },
+  ];
+
+  await server.register(plugins);
 
   server.route(routes);
 
@@ -71,24 +72,27 @@ const plugins = [
     ) => {
       const token = artifacts.token as string;
       const { exp } = jwt.decode(token) as {
-        exp: number
+        exp: number;
       };
-      if (exp > Date.now() / 1000 && jwt.verify(token, process.env.JWT_SECRET as string)) {
+      if (
+        exp > Date.now() / 1000 &&
+        jwt.verify(token, process.env.JWT_SECRET as string)
+      ) {
         return {
-            isValid: true,
-            credentials: jwt.verify(token, process.env.JWT_SECRET as string)
-        }
+          isValid: true,
+          credentials: jwt.verify(token, process.env.JWT_SECRET as string),
+        };
       } else {
         return {
-          isValid: false
-        }
+          isValid: false,
+        };
       }
-    }
+    },
   });
 
   server.auth.default("jwt");
 
-  server.ext('onPreHandler', userAuthorization);
+  server.ext("onPreHandler", userAuthorization);
 
   return server;
 };
@@ -105,8 +109,18 @@ process.on("unhandledRejection", (err) => {
   process.exit(1);
 });
 
-process.on("SIGINT", () => {
+export async function graceful() {
+  await agenda.cancel({
+    name: {
+      $in: ["penjadwalan-peracikan", "logging-sensor", "check-microcontroller"],
+    },
+  })
+  console.log("Stopping agenda...");
+  await agenda.stop();
   console.log("Stopping server");
+  await server.stop({ timeout: 1000 });
+  process.exit(0);
+}
 
-  server.stop({ timeout: 1000 }).then(() => process.exit(1));
-})
+process.on("SIGTERM", graceful);
+process.on("SIGINT", graceful);

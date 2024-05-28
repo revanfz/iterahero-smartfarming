@@ -33,7 +33,7 @@ model Microcontroller {
   name       String     @unique
   brand      String
   location   String
-  status     Boolean    @default(true)
+  status     Boolean    @default(false)
   tandon     Tandon?    @relation(fields: [tandonId], references: [id])
   tandonId   Int?
   sensor     Sensor[]
@@ -43,15 +43,15 @@ model Microcontroller {
 }
 
 model Greenhouse {
-  id          Int           @id @default(autoincrement())
-  name        String        @unique
-  image       String
-  location    String
-  user        User[]
-  aktuator    Aktuator[]
-  sensor      Sensor[]
-  created_at  DateTime      @default(now())
-  updated_at  DateTime?     @updatedAt
+  id         Int        @id @default(autoincrement())
+  name       String     @unique
+  image      String
+  location   String
+  user       User[]
+  aktuator   Aktuator[]
+  sensor     Sensor[]
+  created_at DateTime   @default(now())
+  updated_at DateTime?  @updatedAt
 }
 
 model TandonPenyimpanan {
@@ -77,19 +77,19 @@ model Resep {
 }
 
 model Penjadwalan {
-  id           Int        @id @default(autoincrement())
-  waktu        String
-  isActive     Boolean
-  durasi       Int?
-  hari         Int[]
-  resep        Resep      @relation(fields: [resepId], references: [id])
-  resepId      Int
-  tandon       Tandon     @relation(fields: [tandonId], references: [id])
-  tandonId     Int
-  user         User       @relation(fields: [createdBy], references: [id])
-  createdBy    Int
-  created_at   DateTime   @default(now())
-  updated_at   DateTime?  @updatedAt
+  id         Int       @id @default(autoincrement())
+  waktu      String
+  isActive   Boolean
+  durasi     Int?
+  hari       Int[]
+  resep      Resep     @relation(fields: [resepId], references: [id])
+  resepId    Int
+  tandon     Tandon    @relation(fields: [tandonId], references: [id])
+  tandonId   Int
+  user       User      @relation(fields: [createdBy], references: [id])
+  createdBy  Int
+  created_at DateTime  @default(now())
+  updated_at DateTime? @updatedAt
 }
 
 model Category {
@@ -205,7 +205,7 @@ model Tandon {
   user              User                @relation(fields: [userId], references: [id])
   userId            Int
   status            String              @default("Kosong")
-  isOnline          Boolean
+  isOnline          Boolean             @default(false)
   rasioA            Float               @default(0)
   rasioB            Float               @default(0)
   rasioAir          Float               @default(0)
@@ -213,6 +213,7 @@ model Tandon {
   image             String
   location          String
   capacity          Float
+  volume            Float               @default(0)
   microcontroller   Microcontroller[]
   sensor            Sensor[]
   aktuator          Aktuator[]
@@ -227,6 +228,7 @@ model Notification {
   id         Int      @id @default(autoincrement())
   user       User     @relation(fields: [userId], references: [id])
   userId     Int
+  header     String
   message    String
   loc        String
   read       Boolean  @default(false)

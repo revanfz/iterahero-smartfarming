@@ -7,17 +7,32 @@ import AktuatorLog from "../models/AktuatorLog";
 export const postHandler = async (request: Request, h: ResponseToolkit) => {
   try {
     const { id } = request.query;
+    const { id_user } = request.auth.credentials as { id_user: number };
     const data = await prisma.aktuator.findUnique({
       where: {
         id: parseInt(id),
       },
+      include: {
+        tandon: {
+          select: {
+            nama: true,
+            location: true
+          }
+        },
+        greenhouse: {
+          select: {
+            name: true,
+            location: true
+          }
+        }
+      }
     });
 
     if (data?.microcontrollerId) {
       const target = await prisma.microcontroller.findUnique({
         where: {
           id: data?.microcontrollerId,
-        },
+        }
       });
 
       if (!data) {
@@ -61,8 +76,17 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
             })
             .code(200);
         })
-        .catch((error) => {
+        .catch(async (error) => {
           console.error("Error in publish data: ", error);
+          const loc = data.tandonId ? data.tandon?.nama + ", " + data.tandon?.location : data.greenhouse?.name + ", " + data.greenhouse?.location;
+          await prisma.notification.create({
+            data: {
+              userId: id_user,
+              header: "Aktuator " + data.name + " gagal dikontrol",
+              message: "Aktuator " + data.name + " gagal dikontrol, karena microcontroller " + target.name + " tidak terhubung ke internet.",
+              loc: loc
+            }
+          })
           return Boom.serverUnavailable(
             "Mikrokontroller tidak terhubung ke internet"
           );

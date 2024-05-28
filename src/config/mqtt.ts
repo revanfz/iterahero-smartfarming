@@ -34,8 +34,6 @@ export function connectMqtt() {
   broker.on("message", async (topic, payload, packet) => {
     try {
       const data = JSON.parse(payload.toString());
-      if (topic === "iterahero/respon/actuator") {
-      }
       if (topic.match("iterahero2023/peracikan/log")) {
         const target = await prisma.microcontroller.findUnique({
           where: {
@@ -53,29 +51,23 @@ export function connectMqtt() {
             },
           });
           if (data.status == "terminated" && tandon) {
-            await publishData(
-              "iterahero2023/peracikan/cancel",
-              JSON.stringify({
-                microcontroller: target.id,
-              }),
-              target.id
-            );
             const reason: string[] = [];
-            data.aktuator.foreach(async (item: number) => {
-              const aktuator = await prisma.aktuator.findFirst({
+            for (const item in data.sensor) {
+              const gpio = parseInt(data.sensor[item]);
+              const sensor = await prisma.sensor.findFirst({
                 where: {
-                  GPIO: item,
+                  GPIO: gpio,
+                  microcontroller: {
+                    name: target.name,
+                  },
                 },
               });
-              reason.push(`${aktuator?.name})`);
-              await AktuatorLog.create({
-                id_aktuator: aktuator?.id,
-                message: `${aktuator?.name} dimatikan`,
-              })
-            });
+              reason.push(`${sensor?.name}`);
+            }
             await prisma.notification.create({
               data: {
-                message: `peracikan ${
+                header: `Peracikan ${tandon?.nama} dihentikan`,
+                message: `Peracikan ${
                   tandon?.nama
                 } dihentikan karena ${reason.join(", ")} bermasalah`,
                 userId: tandon.userId,
@@ -85,24 +77,57 @@ export function connectMqtt() {
           }
         }
       }
-      if (topic === "iterahero2023/mikrokontroller/status") {
+      if (topic.match("iterahero2023/mikrokontroller/status")) {
         const target = await prisma.microcontroller.findUnique({
           where: {
             name: data.mikrokontroler,
           },
-        });
-        await prisma.microcontroller.update({
-          where: {
-            id: target?.id,
-          },
-          data: {
-            status: true,
+          include: {
+            tandon: true,
           },
         });
+        if (target?.updated_at) {
+          const update_time = new Date(target.updated_at);
+          const now = new Date();
+          const timeDiff =
+            (now.getTime() - update_time.getTime()) / (1000 * 60);
+          if (timeDiff > 5) {
+            publishData(
+              "iterahero2023/tandon/volume",
+              JSON.stringify({
+                mikrokontroler: target.name,
+                volume: target.tandon?.volume,
+              }),
+              target.id
+            )
+              .then(() => {
+                console.log("Volume berhasil diupdate");
+              })
+              .catch(() => {
+                console.log("Volume gagal diupdate");
+              });
+          }
+        }
+        if (target) {
+          await prisma.microcontroller.update({
+            where: {
+              id: target.id,
+            },
+            data: {
+              status: Boolean(data.status),
+            },
+          });
+          await prisma.tandon.update({
+            where: {
+              id: target.tandon?.id,
+            },
+            data: {
+              isOnline: Boolean(data.status),
+            },
+          });
+        }
       }
       if (topic === "iterahero2023/peracikan/info") {
-        // console.log(JSON.stringify(data));
-
         await prisma.tandon.updateMany({
           where: {
             microcontroller: {
@@ -113,11 +138,11 @@ export function connectMqtt() {
           },
           data: {
             status: data.status,
+            volume: data.volume,
           },
         });
       }
       if (topic === "iterahero2023/info/sensor") {
-        // console.log(JSON.stringify(data));
         let microcontroller = await prisma.microcontroller.findFirst({
           where: {
             name: data.microcontrollerName,
@@ -179,8 +204,6 @@ export function connectMqtt() {
         await processSensorData(data.sensor_non_adc, "sensor_non_adc");
       }
       if (topic === "iterahero2023/info/actuator") {
-        // console.log(JSON.stringify(data));
-
         data.actuator.forEach(async (item: object, index: number) => {
           const pin = Object.keys(item)[0];
           const isActive = Boolean(Object.values(item)[0]);
@@ -191,6 +214,17 @@ export function connectMqtt() {
             data: {
               isActive,
             },
+          });
+          const aktuator = await prisma.aktuator.findMany({
+            where: {
+              GPIO: parseInt(pin),
+            },
+          });
+          aktuator.forEach(async (item, idx) => {
+            await AktuatorLog.create({
+              id_aktuator: item.id,
+              message: `${item.name} ${isActive ? "menyala" : "dimatikan"}`,
+            });
           });
         });
       }

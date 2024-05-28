@@ -20,16 +20,31 @@ const AktuatorLog_1 = __importDefault(require("../models/AktuatorLog"));
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = request.query;
+        const { id_user } = request.auth.credentials;
         const data = yield prisma_1.prisma.aktuator.findUnique({
             where: {
                 id: parseInt(id),
             },
+            include: {
+                tandon: {
+                    select: {
+                        nama: true,
+                        location: true
+                    }
+                },
+                greenhouse: {
+                    select: {
+                        name: true,
+                        location: true
+                    }
+                }
+            }
         });
         if (data === null || data === void 0 ? void 0 : data.microcontrollerId) {
             const target = yield prisma_1.prisma.microcontroller.findUnique({
                 where: {
                     id: data === null || data === void 0 ? void 0 : data.microcontrollerId,
-                },
+                }
             });
             if (!data) {
                 return boom_1.default.notFound("Tidak ada aktuator dengan id tersebut");
@@ -64,10 +79,20 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 })
                     .code(200);
             }))
-                .catch((error) => {
+                .catch((error) => __awaiter(void 0, void 0, void 0, function* () {
+                var _a, _b, _c, _d;
                 console.error("Error in publish data: ", error);
+                const loc = data.tandonId ? ((_a = data.tandon) === null || _a === void 0 ? void 0 : _a.nama) + ", " + ((_b = data.tandon) === null || _b === void 0 ? void 0 : _b.location) : ((_c = data.greenhouse) === null || _c === void 0 ? void 0 : _c.name) + ", " + ((_d = data.greenhouse) === null || _d === void 0 ? void 0 : _d.location);
+                yield prisma_1.prisma.notification.create({
+                    data: {
+                        userId: id_user,
+                        header: "Aktuator " + data.name + " gagal dikontrol",
+                        message: "Aktuator " + data.name + " gagal dikontrol, karena microcontroller " + target.name + " tidak terhubung ke internet.",
+                        loc: loc
+                    }
+                });
                 return boom_1.default.serverUnavailable("Mikrokontroller tidak terhubung ke internet");
-            });
+            }));
         }
     }
     catch (e) {
