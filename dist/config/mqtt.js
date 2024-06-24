@@ -51,7 +51,7 @@ function connectMqtt() {
     //   protocol: "mqtts",
     //   clientId,
     // });
-    exports.broker = mqtt.connect("mqtt://broker.hivemq.com:1883", {
+    exports.broker = mqtt.connect("mqtt://broker.emqx.io:1883", {
         protocolId: "MQTT",
         clean: true,
         clientId,
@@ -115,23 +115,6 @@ function connectMqtt() {
                         tandon: true,
                     },
                 });
-                if (target === null || target === void 0 ? void 0 : target.updated_at) {
-                    const update_time = new Date(target.updated_at);
-                    const now = new Date();
-                    const timeDiff = (now.getTime() - update_time.getTime()) / (1000 * 60);
-                    if (timeDiff > 5) {
-                        publishData("iterahero2023/tandon/volume", JSON.stringify({
-                            mikrokontroler: target.name,
-                            volume: (_a = target.tandon) === null || _a === void 0 ? void 0 : _a.volume,
-                        }), target.id)
-                            .then(() => {
-                            console.log("Volume berhasil diupdate");
-                        })
-                            .catch((e) => {
-                            console.log("Volume gagal diupdate");
-                        });
-                    }
-                }
                 if (target) {
                     yield prisma_1.prisma.microcontroller.update({
                         where: {
@@ -143,12 +126,30 @@ function connectMqtt() {
                     });
                     yield prisma_1.prisma.tandon.update({
                         where: {
-                            id: (_b = target.tandon) === null || _b === void 0 ? void 0 : _b.id,
+                            id: (_a = target.tandon) === null || _a === void 0 ? void 0 : _a.id,
                         },
                         data: {
                             isOnline: Boolean(data.status),
                         },
                     });
+                }
+                console.log(target);
+                if (target === null || target === void 0 ? void 0 : target.updated_at) {
+                    const update_time = new Date(target.updated_at);
+                    const now = new Date();
+                    const timeDiff = (now.getTime() - update_time.getTime()) / (1000 * 60);
+                    if (timeDiff > 5) {
+                        publishData("iterahero2023/tandon/volume", JSON.stringify({
+                            mikrokontroler: target.name,
+                            volume: (_b = target.tandon) === null || _b === void 0 ? void 0 : _b.volume,
+                        }), target.id)
+                            .then(() => {
+                            console.log("Volume berhasil diupdate");
+                        })
+                            .catch((e) => {
+                            console.log("Volume gagal diupdate");
+                        });
+                    }
                 }
             }
             if (topic === "iterahero2023/peracikan/info") {

@@ -19,7 +19,7 @@ export function connectMqtt() {
   //   clientId,
   // });
 
-  broker = mqtt.connect("mqtt://broker.hivemq.com:1883", {
+  broker = mqtt.connect("mqtt://broker.emqx.io:1883", {
     protocolId: "MQTT",
     clean: true,
     clientId,
@@ -105,6 +105,7 @@ export function connectMqtt() {
             },
           });
         }
+        console.log(target)
         if (target?.updated_at) {
           const update_time = new Date(target.updated_at);
           const now = new Date();
