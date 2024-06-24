@@ -86,28 +86,7 @@ export function connectMqtt() {
             tandon: true,
           },
         });
-        if (target?.updated_at) {
-          const update_time = new Date(target.updated_at);
-          const now = new Date();
-          const timeDiff =
-            (now.getTime() - update_time.getTime()) / (1000 * 60);
-          if (timeDiff > 5) {
-            publishData(
-              "iterahero2023/tandon/volume",
-              JSON.stringify({
-                mikrokontroler: target.name,
-                volume: target.tandon?.volume,
-              }),
-              target.id
-            )
-              .then(() => {
-                console.log("Volume berhasil diupdate");
-              })
-              .catch(() => {
-                console.log("Volume gagal diupdate");
-              });
-          }
-        }
+        
         if (target) {
           await prisma.microcontroller.update({
             where: {
@@ -125,6 +104,28 @@ export function connectMqtt() {
               isOnline: Boolean(data.status),
             },
           });
+        }
+        if (target?.updated_at) {
+          const update_time = new Date(target.updated_at);
+          const now = new Date();
+          const timeDiff =
+            (now.getTime() - update_time.getTime()) / (1000 * 60);
+          if (timeDiff > 5) {
+            publishData(
+              "iterahero2023/tandon/volume",
+              JSON.stringify({
+                mikrokontroler: target.name,
+                volume: target.tandon?.volume,
+              }),
+              target.id
+            )
+              .then(() => {
+                console.log("Volume berhasil diupdate");
+              })
+              .catch((e) => {
+                console.log("Volume gagal diupdate");
+              });
+          }
         }
       }
       if (topic === "iterahero2023/peracikan/info") {

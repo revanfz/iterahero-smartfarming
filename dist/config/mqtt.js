@@ -127,7 +127,7 @@ function connectMqtt() {
                             .then(() => {
                             console.log("Volume berhasil diupdate");
                         })
-                            .catch(() => {
+                            .catch((e) => {
                             console.log("Volume gagal diupdate");
                         });
                     }

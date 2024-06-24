@@ -157,35 +157,6 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             }
         }));
     }));
-    exports.agenda.define("check-microcontroller", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        const data = yield prisma_1.prisma.microcontroller.findMany();
-        data.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
-            const now = new Date();
-            const threeMinsAgo = new Date(now.getTime() - 3 * 60 * 1000);
-            if (item.updated_at && item.updated_at > threeMinsAgo && item.status) {
-                yield prisma_1.prisma.microcontroller.update({
-                    where: {
-                        id: item.id,
-                    },
-                    data: {
-                        status: !item.status,
-                    },
-                });
-                yield prisma_1.prisma.tandon.updateMany({
-                    where: {
-                        microcontroller: {
-                            every: {
-                                id: item.id
-                            },
-                        }
-                    },
-                    data: {
-                        isOnline: !item.status
-                    }
-                });
-            }
-        }));
-    }));
     exports.agenda.define("automation", (job) => __awaiter(void 0, void 0, void 0, function* () {
         var _a, _b;
         const { id_automation, id_aktuator, durasi } = job.attrs.data;
@@ -332,7 +303,6 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
         .start()
         .then(() => console.log("Agenda Started"))
         .catch((err) => console.error(err));
-    exports.agenda.every("3 minutes", "check-microcontroller");
     exports.agenda.every("1 hour", "logging-sensor");
     (0, exports.reinitializeSchedule)().then(() => console.log("Inisialisasi Penjadwalan Selesai"));
 });
