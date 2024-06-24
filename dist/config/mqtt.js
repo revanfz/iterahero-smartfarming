@@ -133,7 +133,6 @@ function connectMqtt() {
                         },
                     });
                 }
-                console.log(target);
                 if (target === null || target === void 0 ? void 0 : target.updated_at) {
                     const update_time = new Date(target.updated_at);
                     const now = new Date();
