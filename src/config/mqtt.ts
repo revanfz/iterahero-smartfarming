@@ -105,7 +105,6 @@ export function connectMqtt() {
             },
           });
         }
-        console.log(target)
         if (target?.updated_at) {
           const update_time = new Date(target.updated_at);
           const now = new Date();
