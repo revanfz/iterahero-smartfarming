@@ -38,6 +38,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 rasioB: true,
                 rasioAir: true,
                 ppm: true,
+                volume: true,
                 aktuator: {
                     where: {
                         name: {
@@ -63,7 +64,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         else if (!tandon) {
             return boom_1.default.badRequest("Konstanta pupuk belum diatur pada tandon peracikan");
         }
-        else if (tandon.capacity < komposisi.volume) {
+        else if (tandon.capacity < komposisi.volume || tandon.volume + komposisi.volume > tandon.capacity) {
             return boom_1.default.badRequest("Volume melebihi kapasitas tandon");
         }
         return (0, mqtt_1.publishData)("iterahero2023/peracikan", JSON.stringify({

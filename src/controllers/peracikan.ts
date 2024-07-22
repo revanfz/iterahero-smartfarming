@@ -32,6 +32,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
         rasioB: true,
         rasioAir: true,
         ppm: true,
+        volume: true,
         aktuator: {
           where: {
             name: {
@@ -58,7 +59,7 @@ export const postHandler = async (request: Request, h: ResponseToolkit) => {
       return Boom.badRequest(
         "Konstanta pupuk belum diatur pada tandon peracikan"
       );
-    } else if (tandon.capacity < komposisi.volume) {
+    } else if (tandon.capacity < komposisi.volume || tandon.volume + komposisi.volume > tandon.capacity) {
       return Boom.badRequest("Volume melebihi kapasitas tandon");
     }
 

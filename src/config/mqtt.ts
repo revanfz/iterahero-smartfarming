@@ -175,7 +175,7 @@ export function connectMqtt() {
                 microcontrollerId: microcontroller?.id,
               },
               { $set: { nilai: val, updatedAt: new Date() } }
-            );
+            )
 
             listAutomasiSensor
               .filter(
