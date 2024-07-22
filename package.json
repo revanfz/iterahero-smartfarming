@@ -4,7 +4,8 @@
   "description": "",
   "main": "dist/index.js",
   "prisma": {
-    "seed": "ts-node src/config/seed.ts"
+    "seed": "ts-node src/config/seed.ts",
+    "schema": "prisma/schema.prisma"
   },
   "scripts": {
     "start": "node dist/index.js",
