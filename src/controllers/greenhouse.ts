@@ -1,4 +1,4 @@
-import { prisma } from "../config/prisma";
+import prisma from "../config/prisma";
 import { Request, ResponseToolkit } from "@hapi/hapi";
 import Boom from "@hapi/boom";
 import { deleteImage, renameFile, uploadImage } from "../config/cloudinary";

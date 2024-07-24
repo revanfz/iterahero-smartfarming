@@ -1,5 +1,5 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
-import { prisma } from "../config/prisma";
+import prisma from "../config/prisma";
 import Boom from "@hapi/boom";
 import { Readable } from "stream";
 import { uploadImage, renameFile, deleteImage } from "../config/cloudinary";

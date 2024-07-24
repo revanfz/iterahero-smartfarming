@@ -1,5 +1,5 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
-import { prisma } from "../config/prisma";
+import prisma from "../config/prisma";
 import Boom from "@hapi/boom";
 import { createPenjadwalan, deletePenjadwalan, onOffPenjadwalan } from "../utils/agenda";
 

@@ -13,13 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postHandler = void 0;
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const boom_1 = __importDefault(require("@hapi/boom"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, username, password, email } = request.payload;
-        const isRegistered = yield prisma_1.prisma.user.findUnique({
+        const isRegistered = yield prisma_1.default.user.findUnique({
             where: {
                 email
             }
@@ -27,7 +27,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         if (isRegistered) {
             return boom_1.default.forbidden("Username sudah terdaftar");
         }
-        yield prisma_1.prisma.user.create({
+        yield prisma_1.default.user.create({
             data: {
                 name,
                 username,

@@ -31,16 +31,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.schedulePeracikan = exports.deletePeracikan = exports.onOffPeracikan = exports.initPeracikan = void 0;
 const schedule = __importStar(require("node-schedule"));
 const mqtt_1 = require("../config/mqtt");
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
     schedule
         .gracefulShutdown()
         .then(() => __awaiter(void 0, void 0, void 0, function* () {
-        const data = yield prisma_1.prisma.penjadwalan.findMany({
+        const data = yield prisma_1.default.penjadwalan.findMany({
             orderBy: {
                 id: "asc",
             },
@@ -55,7 +58,7 @@ const initPeracikan = () => __awaiter(void 0, void 0, void 0, function* () {
 });
 exports.initPeracikan = initPeracikan;
 const onOffPeracikan = (id) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = yield prisma_1.prisma.penjadwalan.findUnique({
+    const data = yield prisma_1.default.penjadwalan.findUnique({
         where: {
             id,
         },
@@ -83,12 +86,12 @@ const schedulePeracikan = (id, jam, hari, resep, id_tandon) => __awaiter(void 0,
         rule.hour = hour;
         rule.minute = minute;
         rule.dayOfWeek = hari;
-        let komposisi = yield prisma_1.prisma.resep.findUnique({
+        let komposisi = yield prisma_1.default.resep.findUnique({
             where: {
                 id: resep,
             },
         });
-        let rasio = yield prisma_1.prisma.tandon.findUnique({
+        let rasio = yield prisma_1.default.tandon.findUnique({
             where: {
                 id: 1
             },
@@ -99,7 +102,7 @@ const schedulePeracikan = (id, jam, hari, resep, id_tandon) => __awaiter(void 0,
                 ppm: true
             }
         });
-        let aktuator = yield prisma_1.prisma.aktuator.findFirst({
+        let aktuator = yield prisma_1.default.aktuator.findFirst({
             where: {
                 tandonId: id_tandon,
             }

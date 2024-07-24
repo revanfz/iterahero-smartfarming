@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.agendaInit = exports.deleteAutomation = exports.deletePenjadwalan = exports.onOffAutomation = exports.onOffPenjadwalan = exports.reinitializeSchedule = exports.createAutomation = exports.createPenjadwalan = exports.agenda = void 0;
 require("dotenv/config");
 const agenda_1 = require("@hokify/agenda");
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const mqtt_1 = require("../config/mqtt");
 const Sensor_1 = __importDefault(require("../models/Sensor"));
 const SensorLog_1 = __importDefault(require("../models/SensorLog"));
@@ -82,12 +82,12 @@ const createAutomation = (target) => __awaiter(void 0, void 0, void 0, function*
 });
 exports.createAutomation = createAutomation;
 const reinitializeSchedule = () => __awaiter(void 0, void 0, void 0, function* () {
-    const penjadwalan = yield prisma_1.prisma.penjadwalan.findMany({
+    const penjadwalan = yield prisma_1.default.penjadwalan.findMany({
         where: {
             isActive: true,
         },
     });
-    const automation = yield prisma_1.prisma.automationSchedule.findMany({
+    const automation = yield prisma_1.default.automationSchedule.findMany({
         where: {
             isActive: true,
         },
@@ -134,7 +134,7 @@ const deleteAutomation = (id) => __awaiter(void 0, void 0, void 0, function* () 
 exports.deleteAutomation = deleteAutomation;
 const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
     exports.agenda.define("logging-sensor", (job) => __awaiter(void 0, void 0, void 0, function* () {
-        const data = yield prisma_1.prisma.sensor.findMany({
+        const data = yield prisma_1.default.sensor.findMany({
             include: {
                 microcontroller: true,
             },
@@ -160,7 +160,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
     exports.agenda.define("automation", (job) => __awaiter(void 0, void 0, void 0, function* () {
         var _a, _b;
         const { id_automation, id_aktuator, durasi } = job.attrs.data;
-        const data = yield prisma_1.prisma.aktuator.findUnique({
+        const data = yield prisma_1.default.aktuator.findUnique({
             where: {
                 id: id_aktuator,
             },
@@ -176,7 +176,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             microcontroller: (_a = data === null || data === void 0 ? void 0 : data.microcontroller) === null || _a === void 0 ? void 0 : _a.name,
         }), (_b = data === null || data === void 0 ? void 0 : data.microcontrollerId) !== null && _b !== void 0 ? _b : 0).then(() => __awaiter(void 0, void 0, void 0, function* () {
             var _c, _d, _e, _f, _g;
-            yield prisma_1.prisma.aktuator.update({
+            yield prisma_1.default.aktuator.update({
                 where: {
                     id: id_aktuator,
                 },
@@ -184,7 +184,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                     isActive: true,
                 },
             });
-            yield prisma_1.prisma.notification.create({
+            yield prisma_1.default.notification.create({
                 data: {
                     header: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} menyala`,
                     message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} menyala`,
@@ -203,7 +203,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
     exports.agenda.define("automation-off", (job) => __awaiter(void 0, void 0, void 0, function* () {
         var _h, _j;
         const { id_automation, id_aktuator } = job.attrs.data;
-        const data = yield prisma_1.prisma.aktuator.findUnique({
+        const data = yield prisma_1.default.aktuator.findUnique({
             where: {
                 id: id_aktuator,
             },
@@ -218,7 +218,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             microcontroller: (_h = data === null || data === void 0 ? void 0 : data.microcontroller) === null || _h === void 0 ? void 0 : _h.name,
         }), (_j = data === null || data === void 0 ? void 0 : data.microcontrollerId) !== null && _j !== void 0 ? _j : 0).then(() => __awaiter(void 0, void 0, void 0, function* () {
             var _k, _l, _m, _o, _p;
-            yield prisma_1.prisma.aktuator.update({
+            yield prisma_1.default.aktuator.update({
                 where: {
                     id: id_aktuator,
                 },
@@ -226,7 +226,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                     isActive: false,
                 },
             });
-            yield prisma_1.prisma.notification.create({
+            yield prisma_1.default.notification.create({
                 data: {
                     header: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} dimatikan`,
                     message: `Automasi - ${data === null || data === void 0 ? void 0 : data.name} dimatikan`,
@@ -246,12 +246,12 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
         var _q;
         const { id_penjadwalan, id_resep, id_tandon, createdBy } = job.attrs
             .data;
-        const resep = yield prisma_1.prisma.resep.findUnique({
+        const resep = yield prisma_1.default.resep.findUnique({
             where: {
                 id: id_resep,
             },
         });
-        const tandon = yield prisma_1.prisma.tandon.findUnique({
+        const tandon = yield prisma_1.default.tandon.findUnique({
             where: {
                 id: id_tandon,
             },
@@ -269,7 +269,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
                 },
             },
         });
-        const aktuator = yield prisma_1.prisma.aktuator.findFirst({
+        const aktuator = yield prisma_1.default.aktuator.findFirst({
             where: {
                 tandonId: id_tandon,
             },
@@ -279,7 +279,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             konstanta: tandon,
         }), (_q = aktuator === null || aktuator === void 0 ? void 0 : aktuator.microcontrollerId) !== null && _q !== void 0 ? _q : 0)
             .then(() => __awaiter(void 0, void 0, void 0, function* () {
-            yield prisma_1.prisma.notification.create({
+            yield prisma_1.default.notification.create({
                 data: {
                     header: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} telah dimulai`,
                     message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} telah dimulai. PH target: ${resep === null || resep === void 0 ? void 0 : resep.ph_min} - ${resep === null || resep === void 0 ? void 0 : resep.ph_max}, PPM target ${resep === null || resep === void 0 ? void 0 : resep.ppm_min} - ${resep === null || resep === void 0 ? void 0 : resep.ppm_max}`,
@@ -289,7 +289,7 @@ const agendaInit = () => __awaiter(void 0, void 0, void 0, function* () {
             });
         }))
             .catch((e) => __awaiter(void 0, void 0, void 0, function* () {
-            yield prisma_1.prisma.notification.create({
+            yield prisma_1.default.notification.create({
                 data: {
                     header: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} gagal terjadwal`,
                     message: `Penjadwalan ${resep === null || resep === void 0 ? void 0 : resep.nama} gagal terjadwal`,

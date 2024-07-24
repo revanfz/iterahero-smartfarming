@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.postHandler = void 0;
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const boom_1 = __importDefault(require("@hapi/boom"));
 const mqtt_1 = require("../config/mqtt");
 const AktuatorLog_1 = __importDefault(require("../models/AktuatorLog"));
@@ -21,7 +21,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const { id } = request.query;
         const { id_user } = request.auth.credentials;
-        const data = yield prisma_1.prisma.aktuator.findUnique({
+        const data = yield prisma_1.default.aktuator.findUnique({
             where: {
                 id: parseInt(id),
             },
@@ -41,7 +41,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             }
         });
         if (data === null || data === void 0 ? void 0 : data.microcontrollerId) {
-            const target = yield prisma_1.prisma.microcontroller.findUnique({
+            const target = yield prisma_1.default.microcontroller.findUnique({
                 where: {
                     id: data === null || data === void 0 ? void 0 : data.microcontrollerId,
                 }
@@ -58,7 +58,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 microcontroller: target === null || target === void 0 ? void 0 : target.name,
             }), target.id)
                 .then(() => __awaiter(void 0, void 0, void 0, function* () {
-                yield prisma_1.prisma.aktuator.updateMany({
+                yield prisma_1.default.aktuator.updateMany({
                     where: {
                         GPIO: data.GPIO,
                         microcontrollerId: data.microcontrollerId,
@@ -83,7 +83,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                 var _a, _b, _c, _d;
                 console.error("Error in publish data: ", error);
                 const loc = data.tandonId ? ((_a = data.tandon) === null || _a === void 0 ? void 0 : _a.nama) + ", " + ((_b = data.tandon) === null || _b === void 0 ? void 0 : _b.location) : ((_c = data.greenhouse) === null || _c === void 0 ? void 0 : _c.name) + ", " + ((_d = data.greenhouse) === null || _d === void 0 ? void 0 : _d.location);
-                yield prisma_1.prisma.notification.create({
+                yield prisma_1.default.notification.create({
                     data: {
                         userId: id_user,
                         header: "Aktuator " + data.name + " gagal dikontrol",

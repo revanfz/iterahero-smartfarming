@@ -1,5 +1,5 @@
 import { Request, ResponseToolkit } from "@hapi/hapi";
-import { prisma } from "../config/prisma";
+import prisma from "../config/prisma";
 import Boom from "@hapi/boom";
 
 export const getHandler = async (request: Request, h: ResponseToolkit) => {

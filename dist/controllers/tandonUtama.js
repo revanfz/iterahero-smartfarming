@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteHandler = exports.patchHandler = exports.actuatorByTandonHandler = exports.sensorByTandonHandler = exports.postHandler = exports.getHandler = void 0;
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const boom_1 = __importDefault(require("@hapi/boom"));
 const cloudinary_1 = require("../config/cloudinary");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
@@ -22,7 +22,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         const id = parseInt(request.query.id);
         let data;
         if (isNaN(id)) {
-            data = yield prisma_1.prisma.tandon.findMany({
+            data = yield prisma_1.default.tandon.findMany({
                 where: {
                     userId: id_user,
                 },
@@ -32,7 +32,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             });
         }
         else {
-            data = yield prisma_1.prisma.tandon.findUnique({
+            data = yield prisma_1.default.tandon.findUnique({
                 where: {
                     id,
                 },
@@ -61,7 +61,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const { id_user } = request.auth.credentials;
         const { name, image, location, capacity } = request.payload;
-        const isExist = yield prisma_1.prisma.tandon.findFirst({
+        const isExist = yield prisma_1.default.tandon.findFirst({
             where: {
                 nama: name,
             },
@@ -73,7 +73,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         if (!upload) {
             throw Error("Terjadi kesalahan saat mengupload");
         }
-        yield prisma_1.prisma.tandon.create({
+        yield prisma_1.default.tandon.create({
             data: {
                 nama: name,
                 image: upload.secure_url,
@@ -111,12 +111,12 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
     try {
-        const total = yield prisma_1.prisma.sensor.count({
+        const total = yield prisma_1.default.sensor.count({
             where: {
                 tandonId: id
             },
         });
-        const data = yield prisma_1.prisma.sensor.findMany({
+        const data = yield prisma_1.default.sensor.findMany({
             where: {
                 tandonId: id
             },
@@ -141,7 +141,7 @@ const sensorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0, 
             data,
             cursor: (_a = data[data.length - 1]) === null || _a === void 0 ? void 0 : _a.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
-            totalData: yield prisma_1.prisma.sensor.count({
+            totalData: yield prisma_1.default.sensor.count({
                 where: {
                     tandonId: id
                 }
@@ -165,12 +165,12 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
     try {
-        const total = yield prisma_1.prisma.aktuator.count({
+        const total = yield prisma_1.default.aktuator.count({
             where: {
                 tandonId: id,
             },
         });
-        const data = yield prisma_1.prisma.aktuator.findMany({
+        const data = yield prisma_1.default.aktuator.findMany({
             where: {
                 tandonId: id,
             },
@@ -197,7 +197,7 @@ const actuatorByTandonHandler = (request, h) => __awaiter(void 0, void 0, void 0
             data,
             cursor: (_b = data[data.length - 1]) === null || _b === void 0 ? void 0 : _b.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
-            totalData: yield prisma_1.prisma.aktuator.count({
+            totalData: yield prisma_1.default.aktuator.count({
                 where: {
                     tandonId: id
                 }
@@ -222,7 +222,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         const { edit } = request.query;
         const { ppm, rasioA, rasioB, rasioAir } = request.payload;
         let msg;
-        const target = yield prisma_1.prisma.tandon.findUnique({
+        const target = yield prisma_1.default.tandon.findUnique({
             where: {
                 id: id_tandon
             },
@@ -240,7 +240,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
                 (0, cloudinary_1.deleteImage)(`tandon-${target.nama}`);
                 (0, cloudinary_1.uploadImage)(image, 'tandon', name).then((img_url) => __awaiter(void 0, void 0, void 0, function* () {
                     var _c;
-                    yield prisma_1.prisma.tandon.update({
+                    yield prisma_1.default.tandon.update({
                         where: {
                             id: target.id,
                         },
@@ -256,7 +256,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
             msg = `Tandon ${name !== null && name !== void 0 ? name : target.nama} berhasil diperbarui`;
         }
         else {
-            yield prisma_1.prisma.tandon.update({
+            yield prisma_1.default.tandon.update({
                 where: {
                     id: id_tandon,
                 },
@@ -289,7 +289,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
     try {
         const id = parseInt(request.query.id);
         if (!isNaN(id)) {
-            const target = yield prisma_1.prisma.tandon.findUnique({
+            const target = yield prisma_1.default.tandon.findUnique({
                 where: {
                     id,
                 },
@@ -297,7 +297,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
             if (!target) {
                 return boom_1.default.notFound("Tidak ada gh tersebut");
             }
-            yield prisma_1.prisma.tandon.delete({
+            yield prisma_1.default.tandon.delete({
                 where: {
                     id: target.id,
                 },

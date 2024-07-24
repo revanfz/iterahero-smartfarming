@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cancelPeracikanHandler = exports.postHandler = void 0;
 const boom_1 = __importDefault(require("@hapi/boom"));
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const mqtt_1 = require("../config/mqtt");
 const AktuatorLog_1 = __importDefault(require("../models/AktuatorLog"));
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
@@ -22,12 +22,12 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const { resep, id_tandon } = request.payload;
         const { id_user } = request.auth.credentials;
-        const komposisi = yield prisma_1.prisma.resep.findFirst({
+        const komposisi = yield prisma_1.default.resep.findFirst({
             where: {
                 id: resep,
             },
         });
-        const tandon = yield prisma_1.prisma.tandon.findUnique({
+        const tandon = yield prisma_1.default.tandon.findUnique({
             where: {
                 id: id_tandon,
             },
@@ -73,7 +73,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         }), (_b = (_a = tandon === null || tandon === void 0 ? void 0 : tandon.aktuator[0].microcontroller) === null || _a === void 0 ? void 0 : _a.id) !== null && _b !== void 0 ? _b : 0)
             .then(() => __awaiter(void 0, void 0, void 0, function* () {
             var _c;
-            yield prisma_1.prisma.notification.create({
+            yield prisma_1.default.notification.create({
                 data: {
                     userId: id_user,
                     header: `Peracikan ${komposisi.nama} dimulai`,
@@ -81,7 +81,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     loc: tandon.nama + ", " + tandon.location,
                 },
             });
-            const selectedActuator = yield prisma_1.prisma.aktuator.findMany({
+            const selectedActuator = yield prisma_1.default.aktuator.findMany({
                 where: {
                     microcontrollerId: (_c = tandon.aktuator[0].microcontroller) === null || _c === void 0 ? void 0 : _c.id,
                 },
@@ -106,7 +106,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         }))
             .catch((error) => __awaiter(void 0, void 0, void 0, function* () {
             console.error("Error in publish data: ", error);
-            yield prisma_1.prisma.tandon.update({
+            yield prisma_1.default.tandon.update({
                 where: {
                     id: id_tandon,
                 },
@@ -114,7 +114,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
                     isOnline: false,
                 },
             });
-            yield prisma_1.prisma.notification.create({
+            yield prisma_1.default.notification.create({
                 data: {
                     userId: id_user,
                     header: "Peracikan gagal dilakukan",
@@ -135,7 +135,7 @@ exports.postHandler = postHandler;
 const cancelPeracikanHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id_user } = request.auth.credentials;
-        const actor = yield prisma_1.prisma.user.findUnique({
+        const actor = yield prisma_1.default.user.findUnique({
             where: {
                 id: id_user
             },
@@ -144,7 +144,7 @@ const cancelPeracikanHandler = (request, h) => __awaiter(void 0, void 0, void 0,
             }
         });
         const { id_tandon } = request.payload;
-        const tandon = yield prisma_1.prisma.tandon.findUnique({
+        const tandon = yield prisma_1.default.tandon.findUnique({
             where: {
                 id: id_tandon,
             },
@@ -158,7 +158,7 @@ const cancelPeracikanHandler = (request, h) => __awaiter(void 0, void 0, void 0,
                 microcontroller: tandon.microcontroller[0].name,
             }), tandon.microcontroller[0].id)
                 .then(() => __awaiter(void 0, void 0, void 0, function* () {
-                yield prisma_1.prisma.notification.create({
+                yield prisma_1.default.notification.create({
                     data: {
                         userId: id_user,
                         header: "Peracikan dibatalkan",
@@ -180,7 +180,7 @@ const cancelPeracikanHandler = (request, h) => __awaiter(void 0, void 0, void 0,
             }))
                 .catch((error) => __awaiter(void 0, void 0, void 0, function* () {
                 console.error("Error in publish data: ", error);
-                yield prisma_1.prisma.notification.create({
+                yield prisma_1.default.notification.create({
                     data: {
                         userId: id_user,
                         header: "Peracikan gagal dibatalkan",

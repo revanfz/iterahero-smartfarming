@@ -1,6 +1,6 @@
 import * as mqtt from "mqtt";
 import "dotenv/config";
-import { prisma } from "./prisma";
+import prisma from "./prisma";
 import SensorModel from "../models/Sensor";
 import AktuatorLog from "../models/AktuatorLog";
 import { Aktuator } from "@prisma/client";

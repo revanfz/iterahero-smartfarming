@@ -31,13 +31,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getHandler = void 0;
 const Boom = __importStar(require("@hapi/boom"));
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const getHandler = (_, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield prisma_1.prisma.category.findMany();
+        const data = yield prisma_1.default.category.findMany();
         return h.response({
             status: 'success',
             data

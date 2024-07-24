@@ -1,6 +1,6 @@
 import * as schedule from "node-schedule";
 import { publishData } from "../config/mqtt";
-import { prisma } from "../config/prisma";
+import prisma from "../config/prisma";
 import { Aktuator, Resep } from "@prisma/client";
 
 export const initPeracikan = async () => {

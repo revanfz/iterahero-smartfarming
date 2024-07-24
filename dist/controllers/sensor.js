@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteHandler = exports.patchHandler = exports.postHandler = exports.getHandler = void 0;
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -24,7 +24,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     try {
         let data;
         if (!isNaN(id)) {
-            data = yield prisma_1.prisma.sensor.findUnique({
+            data = yield prisma_1.default.sensor.findUnique({
                 where: {
                     id,
                 },
@@ -49,7 +49,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
         }
         else if (filter) {
             if (filter === 'greenhouse') {
-                data = yield prisma_1.prisma.sensor.findMany({
+                data = yield prisma_1.default.sensor.findMany({
                     where: {
                         greenhouseId: {
                             not: null
@@ -58,7 +58,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 });
             }
             else if (filter === 'tandon') {
-                data = yield prisma_1.prisma.sensor.findMany({
+                data = yield prisma_1.default.sensor.findMany({
                     where: {
                         tandonId: {
                             not: null
@@ -72,8 +72,8 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             }).code(200);
         }
         else {
-            const total = yield prisma_1.prisma.sensor.count();
-            data = yield prisma_1.prisma.sensor.findMany({
+            const total = yield prisma_1.default.sensor.count();
+            data = yield prisma_1.default.sensor.findMany({
                 include: {
                     category: {
                         select: {
@@ -112,7 +112,7 @@ exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, brand, calibration, unit_measurement, type, range_min, range_max, id_greenhouse, id_tandon } = request.payload;
-        const sensor = yield prisma_1.prisma.sensor.create({
+        const sensor = yield prisma_1.default.sensor.create({
             data: {
                 greenhouseId: id_greenhouse,
                 tandonId: id_tandon,
@@ -148,7 +148,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
             return boom_1.default.badRequest("ID Sensor tidak valid");
         }
         const { name, brand, calibration, unit_measurement, type, range_min, range_max, } = request.payload;
-        const target = yield prisma_1.prisma.sensor.findUnique({
+        const target = yield prisma_1.default.sensor.findUnique({
             where: {
                 id: id_sensor,
             },
@@ -156,7 +156,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         if (!target) {
             return boom_1.default.notFound("Tidak ada id tersebut");
         }
-        yield prisma_1.prisma.sensor.update({
+        yield prisma_1.default.sensor.update({
             where: {
                 id: id_sensor,
             },
@@ -192,7 +192,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         if (isNaN(id_sensor)) {
             return boom_1.default.badRequest("ID Sensor tidak valid");
         }
-        const target = yield prisma_1.prisma.sensor.findUnique({
+        const target = yield prisma_1.default.sensor.findUnique({
             where: {
                 id: id_sensor,
             },
@@ -200,7 +200,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         if (!target) {
             return boom_1.default.notFound("Tidak ada sensor dengan id tersebut");
         }
-        yield prisma_1.prisma.sensor.delete({
+        yield prisma_1.default.sensor.delete({
             where: {
                 id: id_sensor,
             },

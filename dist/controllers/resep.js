@@ -13,12 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.patchHandler = exports.deleteHandler = exports.postHandler = exports.getHandler = void 0;
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const tipe = request.query.tipe;
-        const data = yield prisma_1.prisma.resep.findMany();
+        const data = yield prisma_1.default.resep.findMany();
         return h
             .response({
             status: "success",
@@ -40,7 +40,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     var _a;
     try {
         const { nama, ppm_min, ppm_max, ph_min, ph_max, volume } = request.payload;
-        yield prisma_1.prisma.resep.create({
+        yield prisma_1.default.resep.create({
             data: {
                 nama,
                 ppm_min,
@@ -74,7 +74,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         if (isNaN(id)) {
             return boom_1.default.badRequest("ID tidak valid");
         }
-        yield prisma_1.prisma.resep.delete({
+        yield prisma_1.default.resep.delete({
             where: {
                 id,
             },
@@ -101,7 +101,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     try {
         const id = parseInt(request.query.id);
         const { nama, ppm_min, ppm_max, ph_max, ph_min, volume } = request.payload;
-        const data = yield prisma_1.prisma.resep.findUnique({
+        const data = yield prisma_1.default.resep.findUnique({
             where: {
                 id
             }
@@ -109,7 +109,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         if (!data) {
             return boom_1.default.notFound("Tidak ada id resep tersebut");
         }
-        yield prisma_1.prisma.resep.update({
+        yield prisma_1.default.resep.update({
             where: {
                 id
             },

@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ghByIdHandler = exports.actuatorByGreenhouseHandler = exports.sensorByGreenhouseHandler = exports.deleteHandler = exports.patchHandler = exports.postHandler = exports.getHandler = void 0;
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const boom_1 = __importDefault(require("@hapi/boom"));
 const cloudinary_1 = require("../config/cloudinary");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
@@ -26,14 +26,14 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const { id_user } = request.auth.credentials;
         if (!Number.isNaN(id)) {
-            data = yield prisma_1.prisma.greenhouse.findUnique({
+            data = yield prisma_1.default.greenhouse.findUnique({
                 where: {
                     id,
                 },
             });
         }
         else {
-            total = yield prisma_1.prisma.greenhouse.count({
+            total = yield prisma_1.default.greenhouse.count({
                 where: {
                     user: {
                         every: {
@@ -42,7 +42,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                     },
                 },
             });
-            data = yield prisma_1.prisma.greenhouse.findMany({
+            data = yield prisma_1.default.greenhouse.findMany({
                 where: {
                     user: {
                         every: {
@@ -84,7 +84,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const { id_user } = request.auth.credentials;
         const { name, image, location } = request.payload;
-        const isExist = yield prisma_1.prisma.greenhouse.findUnique({
+        const isExist = yield prisma_1.default.greenhouse.findUnique({
             where: {
                 name,
             },
@@ -96,7 +96,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         if (!upload) {
             throw Error("Terjadi kesalahan saat mengupload");
         }
-        yield prisma_1.prisma.greenhouse.create({
+        yield prisma_1.default.greenhouse.create({
             data: {
                 name,
                 image: upload.secure_url,
@@ -133,7 +133,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         let img_url;
         const { name, image, location } = request.payload;
         if (!isNaN(id)) {
-            const target = yield prisma_1.prisma.greenhouse.findUnique({
+            const target = yield prisma_1.default.greenhouse.findUnique({
                 where: {
                     id,
                 },
@@ -148,7 +148,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
                 (0, cloudinary_1.deleteImage)(`gh-${target.name}`);
                 img_url = yield (0, cloudinary_1.uploadImage)(image, 'gh', name);
             }
-            yield prisma_1.prisma.greenhouse.update({
+            yield prisma_1.default.greenhouse.update({
                 where: {
                     id: target.id,
                 },
@@ -179,7 +179,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
     try {
         const id = parseInt(request.query.id);
         if (!isNaN(id)) {
-            const target = yield prisma_1.prisma.greenhouse.findUnique({
+            const target = yield prisma_1.default.greenhouse.findUnique({
                 where: {
                     id,
                 },
@@ -187,7 +187,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
             if (!target) {
                 return boom_1.default.notFound("Tidak ada gh tersebut");
             }
-            yield prisma_1.prisma.greenhouse.delete({
+            yield prisma_1.default.greenhouse.delete({
                 where: {
                     id: target.id,
                 },
@@ -219,12 +219,12 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
     const size = parseInt(request.query.size);
     const cursor = parseInt(request.query.cursor);
     try {
-        const total = yield prisma_1.prisma.sensor.count({
+        const total = yield prisma_1.default.sensor.count({
             where: {
                 greenhouseId: id,
             },
         });
-        const data = yield prisma_1.prisma.sensor.findMany({
+        const data = yield prisma_1.default.sensor.findMany({
             where: {
                 greenhouseId: id,
             },
@@ -252,7 +252,7 @@ const sensorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, void
             data,
             cursor: (_c = data[data.length - 1]) === null || _c === void 0 ? void 0 : _c.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
-            totalData: yield prisma_1.prisma.sensor.count({
+            totalData: yield prisma_1.default.sensor.count({
                 where: {
                     greenhouseId: id
                 }
@@ -277,12 +277,12 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
     const cursor = parseInt(request.query.cursor);
     try {
         const id = parseInt(request.params.id);
-        const total = yield prisma_1.prisma.aktuator.count({
+        const total = yield prisma_1.default.aktuator.count({
             where: {
                 greenhouseId: id,
             },
         });
-        const data = yield prisma_1.prisma.aktuator.findMany({
+        const data = yield prisma_1.default.aktuator.findMany({
             where: {
                 greenhouseId: id,
             },
@@ -310,7 +310,7 @@ const actuatorByGreenhouseHandler = (request, h) => __awaiter(void 0, void 0, vo
             data,
             cursor: (_d = data[data.length - 1]) === null || _d === void 0 ? void 0 : _d.id,
             totalPage: size ? Math.ceil(total / size) : Math.ceil(total / 100),
-            totalData: yield prisma_1.prisma.aktuator.count({
+            totalData: yield prisma_1.default.aktuator.count({
                 where: {
                     greenhouseId: id
                 }
@@ -332,7 +332,7 @@ exports.actuatorByGreenhouseHandler = actuatorByGreenhouseHandler;
 const ghByIdHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = parseInt(request.query.id);
-        const data = yield prisma_1.prisma.greenhouse.findUnique({
+        const data = yield prisma_1.default.greenhouse.findUnique({
             where: {
                 id,
             },

@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteHandler = exports.patchHandler = exports.postHandler = exports.getHandler = void 0;
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const boom_1 = __importDefault(require("@hapi/boom"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
@@ -24,7 +24,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     let total = 0;
     try {
         if (id) {
-            data = yield prisma_1.prisma.aktuator.findUnique({
+            data = yield prisma_1.default.aktuator.findUnique({
                 where: {
                     id: id,
                 },
@@ -44,12 +44,12 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
             });
         }
         else {
-            total = yield prisma_1.prisma.aktuator.count({
+            total = yield prisma_1.default.aktuator.count({
                 where: {
                     tandonId: id,
                 },
             });
-            data = yield prisma_1.prisma.aktuator.findMany({
+            data = yield prisma_1.default.aktuator.findMany({
                 where: {
                     tandonId: id,
                 },
@@ -95,7 +95,7 @@ exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { name, merek, id_greenhouse, id_tandon, type } = request.payload;
-        const aktuator = yield prisma_1.prisma.aktuator.create({
+        const aktuator = yield prisma_1.default.aktuator.create({
             data: {
                 name,
                 merek,
@@ -127,7 +127,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
             return boom_1.default.badRequest("ID Sensor tidak valid");
         }
         const { name, merek, type } = request.payload;
-        const target = yield prisma_1.prisma.aktuator.findUnique({
+        const target = yield prisma_1.default.aktuator.findUnique({
             where: {
                 id: id_aktuator,
             },
@@ -135,7 +135,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
         if (!target) {
             return boom_1.default.notFound("Tidak ada id tersebut");
         }
-        yield prisma_1.prisma.aktuator.update({
+        yield prisma_1.default.aktuator.update({
             where: {
                 id: id_aktuator,
             },
@@ -167,7 +167,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         if (isNaN(id_aktuator)) {
             return boom_1.default.badRequest("ID aktuator  tidak valid");
         }
-        const target = yield prisma_1.prisma.aktuator.findUnique({
+        const target = yield prisma_1.default.aktuator.findUnique({
             where: {
                 id: id_aktuator,
             },
@@ -175,7 +175,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
         if (!target) {
             return boom_1.default.notFound("Tidak ada sensor dengan id tersebut");
         }
-        yield prisma_1.prisma.aktuator.delete({
+        yield prisma_1.default.aktuator.delete({
             where: {
                 id: id_aktuator,
             },

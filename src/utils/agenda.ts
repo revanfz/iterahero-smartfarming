@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { Agenda, Job } from "@hokify/agenda";
-import { prisma } from "../config/prisma";
+import prisma from "../config/prisma";
 import { publishData } from "../config/mqtt";
 import { AutomationSchedule, Penjadwalan } from "@prisma/client";
 import Sensor from "../models/Sensor";

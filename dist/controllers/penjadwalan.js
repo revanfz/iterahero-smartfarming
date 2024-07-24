@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.patchHandler = exports.deleteHandler = exports.postHandler = exports.getHandler = void 0;
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const boom_1 = __importDefault(require("@hapi/boom"));
 const agenda_1 = require("../utils/agenda");
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
@@ -21,8 +21,8 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     const size = request.query.size;
     const cursor = request.query.cursor;
     try {
-        const total = yield prisma_1.prisma.penjadwalan.count();
-        const data = yield prisma_1.prisma.penjadwalan.findMany({
+        const total = yield prisma_1.default.penjadwalan.count();
+        const data = yield prisma_1.default.penjadwalan.findMany({
             include: {
                 resep: true,
             },
@@ -62,7 +62,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
     try {
         const { id_user } = request.auth.credentials;
         const { resep, id_tandon, waktu, hari, durasi, id_greenhouse } = request.payload;
-        const resepTarget = yield prisma_1.prisma.resep.findFirst({
+        const resepTarget = yield prisma_1.default.resep.findFirst({
             where: {
                 id: resep,
             },
@@ -70,7 +70,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
         if (!resepTarget) {
             return boom_1.default.notFound("Tidak ada resep yang sesuai");
         }
-        const isJadwalExist = yield prisma_1.prisma.penjadwalan.findFirst({
+        const isJadwalExist = yield prisma_1.default.penjadwalan.findFirst({
             where: {
                 waktu: {
                     in: waktu,
@@ -92,7 +92,7 @@ const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* 
             return error;
         }
         waktu.forEach((item) => __awaiter(void 0, void 0, void 0, function* () {
-            const schedule = yield prisma_1.prisma.penjadwalan.create({
+            const schedule = yield prisma_1.default.penjadwalan.create({
                 data: {
                     resepId: resepTarget.id,
                     waktu: item,
@@ -128,7 +128,7 @@ const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function
     try {
         const id = parseInt(request.query.id);
         yield (0, agenda_1.deletePenjadwalan)(id);
-        yield prisma_1.prisma.penjadwalan.delete({
+        yield prisma_1.default.penjadwalan.delete({
             where: {
                 id,
             },
@@ -153,12 +153,12 @@ exports.deleteHandler = deleteHandler;
 const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = request.payload;
-        const targetWaktu = yield prisma_1.prisma.penjadwalan.findUnique({
+        const targetWaktu = yield prisma_1.default.penjadwalan.findUnique({
             where: { id },
         });
         if (targetWaktu) {
             yield (0, agenda_1.onOffPenjadwalan)(targetWaktu.id, targetWaktu.isActive);
-            yield prisma_1.prisma.penjadwalan.update({
+            yield prisma_1.default.penjadwalan.update({
                 where: { id },
                 data: {
                     isActive: !targetWaktu.isActive,

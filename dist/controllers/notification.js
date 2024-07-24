@@ -31,10 +31,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteHandler = exports.patchHandler = exports.getHandler = void 0;
 const Boom = __importStar(require("@hapi/boom"));
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const size = parseInt(request.query.size);
@@ -44,7 +47,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
     const { id_user } = request.auth.credentials;
     try {
         if (read === "false") {
-            data = yield prisma_1.prisma.notification.findMany({
+            data = yield prisma_1.default.notification.findMany({
                 where: {
                     userId: id_user,
                     read: false,
@@ -57,7 +60,7 @@ const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* (
                 skip: cursor ? 1 : 0,
             });
         }
-        data = yield prisma_1.prisma.notification.findMany({
+        data = yield prisma_1.default.notification.findMany({
             where: {
                 userId: id_user,
             },
@@ -90,7 +93,7 @@ const patchHandler = (request, h) => __awaiter(void 0, void 0, void 0, function*
     try {
         const { id } = request.payload;
         const updatePromise = id.map((identifier) => {
-            return prisma_1.prisma.notification.update({
+            return prisma_1.default.notification.update({
                 where: {
                     id: identifier,
                 },
@@ -118,7 +121,7 @@ exports.patchHandler = patchHandler;
 const deleteHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { id } = request.query;
-        yield prisma_1.prisma.notification.delete({
+        yield prisma_1.default.notification.delete({
             where: {
                 id: parseInt(id)
             }

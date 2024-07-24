@@ -1,7 +1,7 @@
 import { Request, ResponseObject, ResponseToolkit } from "@hapi/hapi";
 import jwt from "jsonwebtoken"
 import "dotenv/config";
-import { prisma } from "../config/prisma";
+import prisma from "../config/prisma";
 import Boom from "@hapi/boom"
 import bcrypt from "bcrypt"
 

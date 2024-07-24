@@ -14,11 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getHandler = void 0;
 const boom_1 = __importDefault(require("@hapi/boom"));
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const getHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {
-        const data = yield prisma_1.prisma.tandonBahan.findMany({
+        const data = yield prisma_1.default.tandonBahan.findMany({
             include: {
                 sensor: true,
             },

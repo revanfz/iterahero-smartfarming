@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.postHandler = exports.getHandler = void 0;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 require("dotenv/config");
-const prisma_1 = require("../config/prisma");
+const prisma_1 = __importDefault(require("../config/prisma"));
 const boom_1 = __importDefault(require("@hapi/boom"));
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const getHandler = (request, h) => {
@@ -28,7 +28,7 @@ exports.getHandler = getHandler;
 const postHandler = (request, h) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { email, password } = request.payload;
-        const user = yield prisma_1.prisma.user.findUnique({
+        const user = yield prisma_1.default.user.findUnique({
             where: {
                 email
             }
